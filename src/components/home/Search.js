@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Search({ handleSearch, isLoading }) {
+function Search({ handleSearch, handleClick, isLoading }) {
   const { t } = useTranslation();
   const classes = useStyles();
   return (
@@ -53,6 +53,7 @@ function Search({ handleSearch, isLoading }) {
         className={classes.iconButton}
         aria-label="directions"
         type="submit"
+        onClick={handleClick}
       >
         <SearchIcon />
       </IconButton>
@@ -62,6 +63,7 @@ function Search({ handleSearch, isLoading }) {
 
 Search.propTypes = {
   handleSearch: PropTypes.func.isRequired,
+  handleClick: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
 };
 
