@@ -51,7 +51,7 @@ const UserHeader = () => {
     <>
       <Avatar
         useAvatar={hooks.useAvatar}
-        alt={username + "'s avatar"}
+        alt={{username} + "'s avatar"}
         className={classes.avatar}
         defaultImage={DEFAULT_MEMBER_THUMBNAIL}
         id={user?.get('id')}
