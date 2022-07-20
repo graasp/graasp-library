@@ -101,7 +101,7 @@ export const CollectionCard = ({ collection = {}, isLoading }) => {
   ) : (
     <Avatar
       useAvatar={hooks.useAvatar}
-      alt={author?.get('name') + "'s avatar"}
+      alt={`${author?.get('name')}'s avatar`}
       className={classes.avatar}
       defaultImage={DEFAULT_MEMBER_THUMBNAIL}
       id={creator}
