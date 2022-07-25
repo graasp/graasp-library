@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import dynamic from 'next/dynamic';
 import { AppBar, Typography, Toolbar } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
-import Link from 'next/link';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   ALL_COLLECTIONS_ROUTE,
@@ -20,6 +19,7 @@ import {
 import { QueryClientContext } from '../QueryClientContext';
 import {
   COLOR_WHITE,
+  COLOR_BLACK,
   DEFAULT_SHADOW_EFFECT,
   HEADER_HEIGHT,
   HEADER_LOGO_HEIGHT,
@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
   },
   link: {
     textDecoration: 'none',
-    color: COLOR_WHITE,
+    color: COLOR_BLACK,
   },
   logo: {
     fill: theme.palette.primary.main,
@@ -87,16 +87,16 @@ function Header() {
     }
 
     return (
-      <Link href={MY_LIST_ROUTE} className={classes.link}>
-        <Typography
-          variant="h6"
-          color="inherit"
-          className={classes.title}
-          id={HEADER_MY_LIST_ID}
-        >
+      <Typography
+        variant="h6"
+        color="inherit"
+        className={classes.title}
+        id={HEADER_MY_LIST_ID}
+      >
+        <a href={MY_LIST_ROUTE} className={classes.link}>
           {t('My Lists')}
-        </Typography>
-      </Link>
+        </a>
+      </Typography>
     );
   };
 
@@ -110,16 +110,16 @@ function Header() {
                 height={HEADER_LOGO_HEIGHT}
                 className={classes.logo}
               />
-              <Link href={HOME_ROUTE} className={classes.link}>
-                <Typography
-                  variant="h6"
-                  color="inherit"
-                  className={classes.title}
-                  id={HEADER_GRAASP_LIBRARY_ID}
-                >
+              <Typography
+                variant="h6"
+                color="inherit"
+                className={classes.title}
+                id={HEADER_GRAASP_LIBRARY_ID}
+              >
+                <a href={HOME_ROUTE} className={classes.link}>
                   Graasp
-                </Typography>
-              </Link>
+                </a>
+              </Typography>
               <Navigation
                 id={APP_NAVIGATION_DROP_DOWN_ID}
                 currentValue={Context.LIBRARY}
@@ -128,7 +128,7 @@ function Header() {
                 buttonClassname={classes.button}
                 triangleClassname={classes.triangle}
               />
-              <Link href={ALL_COLLECTIONS_ROUTE} className={classes.link}>
+              <a href={ALL_COLLECTIONS_ROUTE} className={classes.link}>
                 <Typography
                   variant="h6"
                   color="inherit"
@@ -137,7 +137,7 @@ function Header() {
                 >
                   {t('All Collections')}
                 </Typography>
-              </Link>
+              </a>
               {renderMyList()}
             </div>
             <UserHeader />
