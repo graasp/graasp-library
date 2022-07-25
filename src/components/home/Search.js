@@ -83,7 +83,7 @@ function Search({
           id={HOME_SEARCH_BUTTON_ID}
           color="primary"
           className={classes.iconButton}
-          aria-label="directions"
+          aria-label="search button"
           type="submit"
           onClick={handleClick}
         >
