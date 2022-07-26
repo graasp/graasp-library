@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import IconButton from '@material-ui/core/IconButton';
 import { AccountCircle } from '@material-ui/icons';
 import dynamic from 'next/dynamic';
@@ -23,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const UserHeader = () => {
+  const { t } = useTranslation();
   const { hooks } = useContext(QueryClientContext);
   const { data: user, isLoading, isError } = hooks.useCurrentMember();
   const classes = useStyles();
@@ -51,7 +53,7 @@ const UserHeader = () => {
     <>
       <Avatar
         useAvatar={hooks.useAvatar}
-        alt={`${{ username }}'s avatar`}
+        alt={t(`${username}'s avatar`)}
         className={classes.avatar}
         defaultImage={DEFAULT_MEMBER_THUMBNAIL}
         id={user?.get('id')}
