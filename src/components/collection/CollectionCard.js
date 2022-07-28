@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import dynamic from 'next/dynamic';
+import { useTranslation } from 'react-i18next';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Typography,
@@ -83,6 +84,7 @@ const useStyles = makeStyles((theme) => ({
 export const CollectionCard = ({ collection = {}, isLoading }) => {
   const { name, id, description, creator, views, voteScore, extra } =
     collection;
+  const { t } = useTranslation();
   const descriptionContent = description || 'This item has no description.';
   const classes = useStyles();
   const [flipped, setFlipped] = React.useState(false);
@@ -101,7 +103,7 @@ export const CollectionCard = ({ collection = {}, isLoading }) => {
   ) : (
     <Avatar
       useAvatar={hooks.useAvatar}
-      alt={`${author?.get('name')}'s avatar`}
+      alt={t(`someone's avatar`, { name: author?.get('name') })}
       className={classes.avatar}
       defaultImage={DEFAULT_MEMBER_THUMBNAIL}
       id={creator}

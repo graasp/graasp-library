@@ -33,7 +33,7 @@
     "Category": "Categorie",
     "Tags": "Tags",
     "Search collections using keywords and range options": "Rechercher des collections en utilisant des mots-clés et les champs possibles",
-    "'s avatar": "Avatar de ",
+    "someone's avatar": "Avatar de {{name}}",
     "actions": "actions"
   }
 }

@@ -35,7 +35,7 @@ function Contributors({ contributors, displayContributors }) {
             <Tooltip title={contributorName}>
               <Avatar
                 key={contributorName}
-                alt={t(`${contributorName}'s avatar`)}
+                alt={t(`someone's avatar`, { name: contributorName })}
                 src={avatar}
                 id={buildContributorId(id)}
               />

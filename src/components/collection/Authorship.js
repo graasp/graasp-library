@@ -80,7 +80,7 @@ const Authorship = ({ itemId, author, isLoading }) => {
               ) : (
                 <Avatar
                   useAvatar={hooks.useAvatar}
-                  alt={t(`${authorName}'s avatar`)}
+                  alt={t(`someone's avatar`, { name: authrorName })}
                   defaultImage={DEFAULT_MEMBER_THUMBNAIL}
                   id={author?.get('id')}
                   extra={author?.get('extra')}
