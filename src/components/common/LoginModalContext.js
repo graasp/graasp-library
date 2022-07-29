@@ -10,8 +10,9 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import { useTranslation } from 'react-i18next';
+import { DATA_KEYS } from '@graasp/query-client';
 import { openInNewTab } from '../../utils/helpers';
-import { USER_KEY, SIGN_IN_ROUTE, SIGN_UP_ROUTE } from '../../config/constants';
+import { SIGN_IN_ROUTE, SIGN_UP_ROUTE } from '../../config/constants';
 import { QueryClientContext } from '../QueryClientContext';
 
 const styles = (theme) => ({
@@ -65,7 +66,7 @@ const LoginModalProvider = ({ children }) => {
     // check whether user is signed in each time
     // the user switch to explore tab
     window.addEventListener('focus', () => {
-      queryClient.invalidateQueries(USER_KEY);
+      queryClient.invalidateQueries(DATA_KEYS.CURRENT_MEMBER_KEY);
     });
   }, []);
 

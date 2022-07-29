@@ -1,8 +1,8 @@
-import { configureQueryClient, Api } from '@graasp/query-client';
+import { configureQueryClient, Api, DATA_KEYS } from '@graasp/query-client';
 import PropTypes from 'prop-types';
 
 import * as React from 'react';
-import { buildCollectionKey, buildMemberKey } from '../../src/config/constants';
+import { buildCollectionKey } from '../../src/config/constants';
 import { QUERY_CLIENT_OPTIONS } from '../../src/config/queryClient';
 import Collection from '../../src/components/collection/Collection';
 import Wrapper from '../../src/components/common/Wrapper';
@@ -32,7 +32,7 @@ export async function getServerSideProps({ params }) {
   const author = (await queryClient.getQueryData(collectionKey))?.creator;
 
   if (author) {
-    await queryClient.prefetchQuery(buildMemberKey(author), () =>
+    await queryClient.prefetchQuery(DATA_KEYS.buildMemberKey(author), () =>
       Api.getMember(
         {
           id: author,

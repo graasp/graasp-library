@@ -7,7 +7,9 @@ export const QUERY_CLIENT_OPTIONS = {
   enableWebsocket: false,
   keepPreviousData: true,
   // avoid refetching when same data are closely fetched
-  staleTime: 1000, // ms
+  defaultQueryOptions: {
+    staleTime: 1000, // ms
+  },
   notifier,
   S3_FILES_HOST,
 };
