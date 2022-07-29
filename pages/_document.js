@@ -4,7 +4,7 @@ import { ServerStyleSheets } from '@material-ui/core/styles';
 import theme from '../src/config/theme';
 import { DEFAULT_LANG } from '../src/config/constants';
 
-export default class GraaspExplorerDocument extends Document {
+export default class GraaspLibraryDocument extends Document {
   render() {
     return (
       <Html lang={DEFAULT_LANG}>
@@ -23,7 +23,7 @@ export default class GraaspExplorerDocument extends Document {
 
 // `getInitialProps` belongs to `_document` (instead of `_app`),
 // it's compatible with static-site generation (SSG).
-GraaspExplorerDocument.getInitialProps = async (ctx) => {
+GraaspLibraryDocument.getInitialProps = async (ctx) => {
   // Resolution order
   //
   // On the server:

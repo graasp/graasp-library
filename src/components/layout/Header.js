@@ -4,14 +4,13 @@ import { AppBar, Typography, Toolbar } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
 import { makeStyles } from '@material-ui/core/styles';
-import { Context } from '@graasp/sdk';
 import {
   ALL_COLLECTIONS_ROUTE,
   HOME_ROUTE,
   MY_LIST_ROUTE,
 } from '../../config/routes';
 import UserHeader from './UserHeader';
-import { HOST_MAP } from '../../config/constants';
+import { HOST_MAP, Context } from '../../config/constants';
 import {
   APP_NAVIGATION_DROP_DOWN_ID,
   HEADER_ALL_COLLECTIONS_ID,

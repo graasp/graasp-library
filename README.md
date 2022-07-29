@@ -4,7 +4,7 @@
   </a>
 </p>
 
-<h1 align="center">Graasp Explorer</h1>
+<h1 align="center">Graasp Library</h1>
 
 <p align="center">
   <a href="https://conventionalcommits.org">

@@ -1,10 +1,11 @@
+import { isChildOf } from '@graasp/sdk';
 import { PUBLISHED_ITEMS } from '../../fixtures/items';
 import { buildCollectionRoute } from '../../../src/config/routes';
 import {
   COLLECTION_LOADING_TIME,
   PERMISSION_LEVELS,
 } from '../../support/constants';
-import { isChild } from '../../support/utils';
+
 import { buildPublicAndPrivateEnvironments } from '../../fixtures/environment';
 import { MEMBERS } from '../../fixtures/members';
 import {
@@ -27,7 +28,9 @@ describe('Collection Summary', () => {
       cy.get(`#${ITEM_SUMMARY_TITLE_ID}`).should('have.text', item.name);
 
       // children
-      const children = PUBLISHED_ITEMS.filter(isChild(item.id));
+      const children = PUBLISHED_ITEMS.filter(({ path }) =>
+        isChildOf(path, item.path),
+      );
       cy.get(`#${CHILDREN_ITEMS_GRID_ID}`)
         .children()
         .should('have.length', children.length);

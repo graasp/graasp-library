@@ -1,5 +1,4 @@
 import { ITEM_PUBLISHED_TAG } from '../fixtures/itemTags';
-import { UUID_LENGTH } from './constants';
 
 // use simple id format for tests
 export const ID_FORMAT = '(?=.*[0-9])(?=.*[a-zA-Z])([a-z0-9-]+)';
@@ -89,13 +88,6 @@ export const getParentsIdsFromPath = (path, { ignoreSelf = false } = {}) => {
   const ids = p.replace(/_/g, '-').split('.');
   return ids;
 };
-
-export const isChild = (id) => {
-  const reg = new RegExp(`${transformIdForPath(id)}(?=\\.[^\\.]*$)`);
-  return ({ path }) => path.match(reg);
-};
-
-export const isRootItem = ({ path }) => path.length === UUID_LENGTH;
 
 export const getMemberById = (members, id) =>
   members.find(({ id: thisId }) => id === thisId);

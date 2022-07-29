@@ -10,7 +10,7 @@ on:
 jobs:
   graasp-deploy-ecs-workflow:
     # repository name
-    name: Graasp Explorer
+    name: Graasp Library
     uses: graasp/graasp-deploy/.github/workflows/cdelivery-ecs-explorer.yml@561d696d12551c19bc52173cf46fe272bf2af657
     # ecs-task-definition template file
     with:

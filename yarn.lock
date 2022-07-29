@@ -1820,9 +1820,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/sdk@github:graasp/graasp-sdk.git#20/library":
+"@graasp/sdk@github:graasp/graasp-sdk.git":
   version: 0.1.0
-  resolution: "@graasp/sdk@https://github.com/graasp/graasp-sdk.git#commit=5327e687cfa4482368de749939a4634d33a26485"
+  resolution: "@graasp/sdk@https://github.com/graasp/graasp-sdk.git#commit=50618ca3045c69daa8221210952259378b7488cd"
   dependencies:
     "@fastify/secure-session": 5.2.0
     aws-sdk: 2.1111.0
@@ -1832,7 +1832,7 @@ __metadata:
     qs: 6.11.0
     slonik: 28.1.1
     uuid: 8.3.2
-  checksum: 4e712fb58f662d9cff16b60125c58df559e2fc491613771c5b3fa9d80350065677d8dccef83be9ccc47ef0a699b2e5abfb7cdf28e1aa19c4110956167bb5f9c0
+  checksum: 4dad3572d32190de94665b66c480794982c2841d9dc9237e5c99605b5c1eeafdf6b2514eb43510941e33bfa723d3bbf5d3c6a1fc6b7cec662200d130b867fb9d
   languageName: node
   linkType: hard
 
@@ -1845,11 +1845,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/ui@github:graasp/graasp-ui.git":
+"@graasp/ui@github:graasp/graasp-ui.git#154/navigationLibrary":
   version: 0.2.0
-  resolution: "@graasp/ui@https://github.com/graasp/graasp-ui.git#commit=06aa5e000f898e566d902677d33fbefd7b448e9a"
+  resolution: "@graasp/ui@https://github.com/graasp/graasp-ui.git#commit=bfc5048f16831d4c438bce348ba89453fd04cc15"
   dependencies:
-    "@graasp/utils": "github:graasp/graasp-utils.git"
+    "@graasp/sdk": "github:graasp/graasp-sdk.git"
     clsx: 1.1.1
     http-status-codes: 2.2.0
     immutable: 4.1.0
@@ -1877,17 +1877,23 @@ __metadata:
       optional: true
     ag-grid-react:
       optional: true
-  checksum: 966636c245ab440ab5f4c297ff3657d61d31747fb204c3e9d1735a643af12cd496372235b6036fb6e36d6c5c9be4aa5c487bec51fde788baa499f1dd1e0cd9e0
+  checksum: 8178b01ea61e1df5eb1d4ab468680ed47f414b9e5fde07730a8064768cf59977b1c9f46f5471c09a9b37da117aa27768ebc3eb6fc56783c93e05c865ee02b6d5
   languageName: node
   linkType: hard
 
 "@graasp/utils@github:graasp/graasp-utils.git":
   version: 0.1.0
-  resolution: "@graasp/utils@https://github.com/graasp/graasp-utils.git#commit=f6c9e08e68d6e9a5b9480b8facdfb2f4cc474716"
+  resolution: "@graasp/utils@https://github.com/graasp/graasp-utils.git#commit=50618ca3045c69daa8221210952259378b7488cd"
   dependencies:
+    "@fastify/secure-session": 5.2.0
+    aws-sdk: 2.1111.0
+    fastify: ^3.29.1
+    fluent-json-schema: 3.1.0
     js-cookie: 3.0.1
-    qs: 6.10.3
-  checksum: d6558ef72834eb65fa873d7a51e1e554437721377e7c487171c38b002b925dc04621abf99fa1ea4b29cc8c0c7842929e7cc1065af2e0514ad0bee3fe32bfc351
+    qs: 6.11.0
+    slonik: 28.1.1
+    uuid: 8.3.2
+  checksum: 4f7b5b6550f3c8e11f37681943dc28f98bc735916f9488eee25e130623dd1f6d8aa14309889a826bb35a1963ee695e62519c3372861ce283584e91136c122990
   languageName: node
   linkType: hard
 
@@ -6605,8 +6611,8 @@ __metadata:
     "@commitlint/config-conventional": 16.2.1
     "@cypress/code-coverage": 3.9.12
     "@graasp/query-client": "github:graasp/graasp-query-client.git"
-    "@graasp/sdk": "github:graasp/graasp-sdk.git#20/library"
-    "@graasp/ui": "github:graasp/graasp-ui.git"
+    "@graasp/sdk": "github:graasp/graasp-sdk.git"
+    "@graasp/ui": "github:graasp/graasp-ui.git#154/navigationLibrary"
     "@material-ui/core": 4.12.3
     "@material-ui/icons": 4.11.2
     "@material-ui/lab": 4.0.0-alpha.60

@@ -1,13 +1,13 @@
 import { StatusCodes } from 'http-status-codes';
 import qs from 'querystring';
 import { API_ROUTES } from '@graasp/query-client';
+import { buildPathFromIds, isChildOf } from '@graasp/sdk';
 import { MEMBERS } from '../fixtures/members';
 import {
   DEFAULT_GET,
   ID_FORMAT,
   parseStringToRegExp,
   getItemById,
-  isChild,
   getMemberById,
   getRootPublishedItems,
 } from './utils';
@@ -266,7 +266,9 @@ export const mockGetChildren = ({ items, currentMember }) => {
         return reply({ statusCode: StatusCodes.UNAUTHORIZED, body: null });
       }
 
-      const children = items.filter(isChild(id));
+      const children = items.filter(({ path }) =>
+        isChildOf(path, buildPathFromIds(id)),
+      );
       return reply(children);
     },
   ).as('getChildren');
@@ -286,7 +288,9 @@ export const mockGetPublicChildren = ({ items }) => {
         return reply({ statusCode: StatusCodes.UNAUTHORIZED, body: null });
       }
 
-      const children = items.filter(isChild(id));
+      const children = items.filter(({ path }) =>
+        isChildOf(path, buildPathFromIds(id)),
+      );
       return reply(children);
     },
   ).as('getPublicChildren');

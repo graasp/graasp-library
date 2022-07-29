@@ -1,4 +1,3 @@
-import { Context } from '@graasp/sdk';
 import {
   GRAASP_PERFORM_HOST,
   GRAASP_AUTH_HOST,
@@ -103,8 +102,15 @@ export const MY_LIST_TAB_NAMES = {
   MY_PUBLISHMENTS: 'myPublishments',
 };
 
+// todo: use graasp sdk once we use typescript
+export const Context = {
+  BUILDER: 'builder',
+  LIBRARY: 'library',
+  PLAYER: 'player',
+};
+
 export const HOST_MAP = {
   [Context.BUILDER]: GRAASP_BUILDER_HOST,
-  [Context.EXPLORER]: '/',
+  [Context.LIBRARY]: '/',
   [Context.PLAYER]: GRAASP_PERFORM_HOST,
 };
