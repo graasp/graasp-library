@@ -117,7 +117,7 @@ export const CollectionCard = ({ collection = {}, isLoading }) => {
 
   const action = (
     <>
-      <IconButton aria-label="actions" onClick={handleClick}>
+      <IconButton aria-label={t('Actions')} onClick={handleClick}>
         <InfoIcon />
       </IconButton>
     </>

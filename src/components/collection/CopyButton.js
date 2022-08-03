@@ -65,7 +65,7 @@ const CopyButton = ({ id }) => {
 
     return (
       <Tooltip title={t('Copy')}>
-        <IconButton onClick={onClick} aria-label="copy">
+        <IconButton onClick={onClick} aria-label={t('Copy')}>
           <FileCopyIcon />
         </IconButton>
       </Tooltip>

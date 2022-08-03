@@ -38,7 +38,7 @@ const UserHeader = () => {
     return (
       <IconButton
         edge="end"
-        aria-label="Account"
+        aria-label={t('Account')}
         aria-haspopup="true"
         onClick={onSignedOutIconClick}
         color="inherit"

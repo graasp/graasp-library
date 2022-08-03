@@ -109,7 +109,7 @@ const Collection = ({ id }) => {
           variant="outlined"
           size="large"
           color="primary"
-          aria-label="play"
+          aria-label={t('Play')}
           title={t('play')}
           endIcon={<PlayCircleOutlineIcon />}
           className={classes.playButton}

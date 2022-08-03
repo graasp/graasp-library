@@ -288,7 +288,7 @@ function AllCollections() {
         >
           <IconButton
             color="primary"
-            aria-label="open menu"
+            aria-label={t('Open menu')}
             onClick={openSideBar}
             id={OPEN_MENU_BUTTON_ID}
           >

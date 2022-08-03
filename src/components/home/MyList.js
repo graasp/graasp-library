@@ -46,7 +46,7 @@ function MyList() {
             variant="fullWidth"
             indicatorColor="primary"
             textColor="fff"
-            aria-label="navigation tabs"
+            aria-label={t('Navigation tabs')}
           >
             <Tab
               label={t('My Favorites')}

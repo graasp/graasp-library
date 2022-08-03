@@ -31,13 +31,14 @@ const styles = (theme) => ({
 const LoginModalContext = React.createContext();
 
 const DialogTitle = withStyles(styles)((props) => {
+  const { t } = useTranslation();
   const { children, classes, onClose } = props;
   return (
     <MuiDialogTitle disableTypography className={classes.root}>
       <Typography variant="h6">{children}</Typography>
       {onClose ? (
         <IconButton
-          aria-label="close"
+          aria-label={t('Close')}
           className={classes.closeButton}
           onClick={onClose}
         >

@@ -34,6 +34,12 @@
     "Tags": "Tags",
     "Search collections using keywords and range options": "Rechercher des collections en utilisant des mots-clés et les champs possibles",
     "someone's avatar": "Avatar de {{name}}",
-    "actions": "actions"
+    "My Items": "Mes Eléments",
+    "View item in player": "Voir l'élément dans le player",
+    "Play": "Jouer",
+    "Actions": "Actions",
+    "Close": "Fermer",
+    "Navigation tabs": "Onglets de navigation",
+    "Search button": "Bouton de recherche"
   }
 }
