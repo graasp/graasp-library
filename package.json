@@ -29,7 +29,7 @@
   "dependencies": {
     "@graasp/query-client": "github:graasp/graasp-query-client.git",
     "@graasp/sdk": "github:graasp/graasp-sdk.git",
-    "@graasp/ui": "github:graasp/graasp-ui.git#154/navigationLibrary",
+    "@graasp/ui": "github:graasp/graasp-ui.git",
     "@material-ui/core": "4.12.3",
     "@material-ui/icons": "4.11.2",
     "@material-ui/lab": "4.0.0-alpha.60",
