@@ -1,5 +1,6 @@
 import katex from 'katex';
 import isString from 'lodash.isstring';
+
 import {
   BLOCK_MATH_DIV,
   BLOCK_MATH_INDICATOR,

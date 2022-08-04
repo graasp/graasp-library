@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
+
+import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
+
 import { APP_KEYWORDS, DEFAULT_LANG } from '../../config/constants';
 
 const Seo = ({ lang, title, description, author, image }) => {

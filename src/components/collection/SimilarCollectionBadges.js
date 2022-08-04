@@ -1,9 +1,11 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Badge from '@material-ui/core/Badge';
-import { Favorite, Visibility } from '@material-ui/icons';
 import PropTypes from 'prop-types';
+
+import React from 'react';
+
 import { Grid } from '@material-ui/core';
+import Badge from '@material-ui/core/Badge';
+import { makeStyles } from '@material-ui/core/styles';
+import { Favorite, Visibility } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   badges: {

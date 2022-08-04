@@ -1,25 +1,30 @@
-import { useTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
+
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+
 import {
-  InputBase,
   Divider,
-  Paper,
-  makeStyles,
   FormControl,
-  FormLabel,
-  RadioGroup,
-  Radio,
   FormControlLabel,
+  FormLabel,
   IconButton,
+  InputBase,
+  Paper,
+  Radio,
+  RadioGroup,
+  makeStyles,
 } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
-import PropTypes from 'prop-types';
-import { SEARCH_RANGES } from '../../enums/searchRanges';
+
+import { LIBRARY } from '@graasp/translations';
+
 import {
-  buildSearchRangeOptionId,
   HOME_SEARCH_BUTTON_ID,
   HOME_SEARCH_ID,
+  buildSearchRangeOptionId,
 } from '../../config/selectors';
+import { SEARCH_RANGES } from '../../enums/searchRanges';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -68,12 +73,12 @@ function Search({
           id={HOME_SEARCH_ID}
           disabled={isLoading}
           className={classes.search}
-          placeholder={t('Search collections using keywords and range options')}
+          placeholder={t(LIBRARY.SEARCH_PLACEHOLDER)}
           fullWidth
           margin="none"
           InputLabelProps={{
             shrink: true,
-            ariaLabel: 'search collections',
+            ariaLabel: LIBRARY.SEARCH_ARIA_LABEL,
           }}
           variant="filled"
           onChange={handleSearch}
@@ -83,7 +88,7 @@ function Search({
           id={HOME_SEARCH_BUTTON_ID}
           color="primary"
           className={classes.iconButton}
-          aria-label={t('Search button')}
+          aria-label={t(LIBRARY.SEARCH_BUTTON_ARIA_LABEL)}
           type="submit"
           onClick={handleClick}
         >
@@ -91,7 +96,9 @@ function Search({
         </IconButton>
       </Paper>
       <FormControl component="fieldset" className={classes.searchOptions}>
-        <FormLabel component="legend">{t('Search Range')}</FormLabel>
+        <FormLabel component="legend">
+          {t(LIBRARY.SEARCH_RANGE_LABEL)}
+        </FormLabel>
         <RadioGroup row value={range} onChange={handleRangeChange}>
           {Object.values(SEARCH_RANGES).map((entry) => (
             <FormControlLabel

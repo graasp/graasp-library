@@ -1,14 +1,11 @@
 import {
-  GRAASP_PERFORM_HOST,
+  SHOW_NOTIFICATIONS as ENV_SHOW_NOTIFICATIONS,
   GRAASP_AUTH_HOST,
   GRAASP_BUILDER_HOST,
+  GRAASP_PERFORM_HOST,
   PUBLISHED_TAG_ID,
 } from './env';
-import i18n from './i18n';
 
-export const APP_NAME = 'Graasp Library';
-export const APP_DESCRIPTION =
-  'Graasp Library is an open source platform providing learning resources as collections.';
 export const APP_KEYWORDS = ['graasp', 'library'];
 export const APP_AUTHOR = 'Graasp';
 export const DEFAULT_LANG = 'en';
@@ -34,9 +31,6 @@ export const MIME_TYPES = {
   TEXT: 'text/plain',
 };
 
-export const DEFAULT_LOCALE = 'en';
-export const DEFAULT_MEMBER_NAME = i18n.t('Guest');
-
 export const MEMBER_TYPES = {
   OWNER: 'owner',
   CONTRIBUTOR: 'contributor',
@@ -59,10 +53,6 @@ export const CATEGORY_TYPES = {
   LANGUAGE: 'language',
 };
 
-export const MY_FAVORITES = 'My Favorites';
-export const MY_LIKES = 'My Likes';
-export const MY_PUBLISHMENTS = 'My Publishments';
-
 export const PICTURE_QUALITIES = {
   LARGE: 'large',
   MEDIUM: 'medium',
@@ -75,8 +65,6 @@ export const MAX_COLLECTION_NAME_LENGTH = 100;
 export const ITEMS_KEY = 'items';
 export const PUBLISHED_ITEMS_KEY = [ITEMS_KEY, 'itemTags', PUBLISHED_TAG_ID];
 export const buildCollectionKey = (id) => [ITEMS_KEY, id];
-
-export const SENTRY_FALLBACK_MESSAGE = 'An error has occurred';
 
 export const CLIENT_ERROR_MESSAGE = 'Something went wrong!';
 export const DEFAULT_ITEM_IMAGE_PATH = '/icon.png';
@@ -114,3 +102,8 @@ export const HOST_MAP = {
   [Context.LIBRARY]: '/',
   [Context.PLAYER]: GRAASP_PERFORM_HOST,
 };
+
+export const SHOW_NOTIFICATIONS =
+  ENV_SHOW_NOTIFICATIONS ||
+  process.env.REACT_APP_SHOW_NOTIFICATIONS === 'true' ||
+  false;

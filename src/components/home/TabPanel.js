@@ -1,6 +1,8 @@
-import { Typography, Box } from '@material-ui/core';
 import PropTypes from 'prop-types';
+
 import React from 'react';
+
+import { Box, Typography } from '@material-ui/core';
 
 function TabPanel({ children, value, index }) {
   return (

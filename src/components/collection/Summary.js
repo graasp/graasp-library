@@ -1,32 +1,37 @@
-import React, { useContext, useState } from 'react';
-import dynamic from 'next/dynamic';
-import truncate from 'lodash.truncate';
-import PropTypes from 'prop-types';
 import { Map } from 'immutable';
+import truncate from 'lodash.truncate';
+import dynamic from 'next/dynamic';
+import PropTypes from 'prop-types';
+
+import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Grid, Typography, Chip } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+
+import { Chip, Grid, Typography } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
+import { makeStyles } from '@material-ui/core/styles';
 import Skeleton from '@material-ui/lab/Skeleton';
+
 import { MUTATION_KEYS } from '@graasp/query-client';
-import CardMedia from '../common/CardMediaComponent';
-import { QueryClientContext } from '../QueryClientContext';
-import Authorship from './Authorship';
-import Badges from './Badges';
+import { LIBRARY } from '@graasp/translations';
+
 import {
   CATEGORY_TYPES,
   MAX_COLLECTION_NAME_LENGTH,
   THUMBNAIL_SIZES,
 } from '../../config/constants';
+import { ITEM_SUMMARY_DESCRIPTION_MIN_HEIGHT } from '../../config/cssStyles';
 import {
+  ITEM_SUMMARY_TITLE_ID,
   SUMMARY_CATEGORIES_CONTAINER_ID,
   SUMMARY_CC_LICENSE_CONTAINER_ID,
-  SUMMARY_TAGS_CONTAINER_ID,
-  ITEM_SUMMARY_TITLE_ID,
   SUMMARY_LANGUAGES_CONTAINER_ID,
+  SUMMARY_TAGS_CONTAINER_ID,
 } from '../../config/selectors';
-import { ITEM_SUMMARY_DESCRIPTION_MIN_HEIGHT } from '../../config/cssStyles';
 import { compare } from '../../utils/helpers';
+import { QueryClientContext } from '../QueryClientContext';
+import CardMedia from '../common/CardMediaComponent';
+import Authorship from './Authorship';
+import Badges from './Badges';
 
 const {
   ItemFlagDialog,
@@ -290,7 +295,9 @@ function Summary({
           />
           {languages && (
             <div id={SUMMARY_LANGUAGES_CONTAINER_ID}>
-              <Typography variant="h6">{t('Languages')}</Typography>
+              <Typography variant="h6">
+                {t(LIBRARY.COLLECTION_LANGUAGES_TITLE)}
+              </Typography>
               {languages?.map((entry) => (
                 <Chip label={t(entry.name)} />
               ))}
@@ -298,7 +305,9 @@ function Summary({
           )}
           {(levels || disciplines) && (
             <div id={SUMMARY_CATEGORIES_CONTAINER_ID}>
-              <Typography variant="h6">{t('Categories')}</Typography>
+              <Typography variant="h6">
+                {t(LIBRARY.COLLECTION_CATEGORIES_TITLE)}
+              </Typography>
               {levels?.map((entry) => (
                 <Chip
                   label={t(entry.name)}
@@ -319,7 +328,9 @@ function Summary({
           )}
           {Boolean(tags?.length) && (
             <div id={SUMMARY_TAGS_CONTAINER_ID}>
-              <Typography variant="h6">{t('Tags')}</Typography>
+              <Typography variant="h6">
+                {t(LIBRARY.COLLECTION_TAGS_TITLE)}
+              </Typography>
               {tags?.map((text) => (
                 <Chip label={text} className={classes.chip} />
               ))}
@@ -328,7 +339,7 @@ function Summary({
           {ccLicenseAdaption && (
             <div id={SUMMARY_CC_LICENSE_CONTAINER_ID}>
               <Typography variant="h6">
-                {t('Creative Commons License')}
+                {t(LIBRARY.COLLECTION_CC_LICENSE_TITLE)}
               </Typography>
               <CCLicenseIcon
                 adaption={ccLicenseAdaption}

@@ -1,16 +1,20 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+
+import React from 'react';
 import { useTranslation } from 'react-i18next';
+
+import { Tooltip } from '@material-ui/core';
+import Avatar from '@material-ui/core/Avatar';
+import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
 import { makeStyles } from '@material-ui/core/styles';
-import { Tooltip } from '@material-ui/core';
+
+import { LIBRARY } from '@graasp/translations';
+
 import { formatDate } from '../../utils/date';
-import { DEFAULT_MEMBER_NAME } from '../../config/constants';
 import { getAvatar } from '../../utils/layout';
 
 const useStyles = makeStyles((theme) => ({
@@ -26,7 +30,7 @@ function Comment({ comment, members }) {
   const classes = useStyles();
   const { t } = useTranslation();
 
-  const { name: authorName = t(DEFAULT_MEMBER_NAME), image } =
+  const { name: authorName = t(LIBRARY.GUEST), image } =
     members.find(({ id }) => id === author) || {};
 
   const avatar = getAvatar(image);
@@ -62,7 +66,7 @@ function Comment({ comment, members }) {
         </ListItemAvatar>
         <ListItemText
           primary={PrimaryText}
-          secondary={content || t('The comment was deleted.')}
+          secondary={content || t(LIBRARY.COMMENT_NO_CONTENT_MESSAGE)}
         />
       </ListItem>
       <Divider variant="inset" component="li" />

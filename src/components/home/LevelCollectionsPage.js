@@ -1,10 +1,15 @@
-import Typography from '@material-ui/core/Typography';
-import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+
+import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import CollectionsGrid from '../collection/CollectionsGrid';
-import { QueryClientContext } from '../QueryClientContext';
+
+import Typography from '@material-ui/core/Typography';
+
+import { LIBRARY } from '@graasp/translations';
+
 import { ALL_COLLECTIONS_GRID_ID } from '../../config/selectors';
+import { QueryClientContext } from '../QueryClientContext';
+import CollectionsGrid from '../collection/CollectionsGrid';
 
 const LevelCollectionsPage = ({
   selectedLevels,
@@ -28,10 +33,10 @@ const LevelCollectionsPage = ({
   return (
     <>
       <Typography variant="h3" align="center">
-        {t('Collections in Selected Categories')}
+        {t(LIBRARY.ALL_COLLECTIONS_SELECTION_BY_CATEGORIES_TITLE)}
       </Typography>
       <Typography variant="subtitle2" aligh="left">
-        {t('collectionsCount', { count })}
+        {t(LIBRARY.COLLECTIONS_COUNT_MESSAGE, { count })}
       </Typography>
       <CollectionsGrid
         id={ALL_COLLECTIONS_GRID_ID}

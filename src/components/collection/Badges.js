@@ -1,22 +1,27 @@
-import React, { useEffect, useState } from 'react';
 import truncate from 'lodash.truncate';
+import PropTypes from 'prop-types';
+
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { makeStyles } from '@material-ui/core/styles';
+
+import { Grid, IconButton } from '@material-ui/core';
 import Badge from '@material-ui/core/Badge';
+import { makeStyles } from '@material-ui/core/styles';
 import {
-  Favorite,
-  Visibility,
   Email,
   Facebook,
+  Favorite,
   Twitter,
+  Visibility,
 } from '@material-ui/icons';
-import PropTypes from 'prop-types';
-import { Grid, IconButton } from '@material-ui/core';
-import { openInNewTab } from '../../utils/helpers';
+
+import { LIBRARY } from '@graasp/translations';
+
 import {
   MAIL_BREAK_LINE,
   TWITTER_MESSAGE_MAX_LENGTH,
 } from '../../config/constants';
+import { openInNewTab } from '../../utils/helpers';
 import { removeTagsFromString } from '../../utils/text';
 
 const useStyles = makeStyles((theme) => ({
@@ -45,7 +50,7 @@ function Badges({ views, likes, name, description }) {
 
   const shareOnTwitter = () => {
     const message = truncate(
-      `${t('Check out this collection on Graasp', {
+      `${t(LIBRARY.SHARE_TWITTER_MESSAGE, {
         name,
       })} ${pageLocation} : ${parsedDescription}`,
       { length: TWITTER_MESSAGE_MAX_LENGTH, separator: /,? +/ },
@@ -58,8 +63,8 @@ function Badges({ views, likes, name, description }) {
     openInNewTab(`https://www.facebook.com/sharer/sharer.php?u=${link}`);
   };
 
-  const subject = `${t('Check out this collection on Graasp', { name })}`;
-  const message = `${t('Check out this collection on Graasp', {
+  const subject = `${t(LIBRARY.SHARE_FACEBOOK_SUBJECT, { name })}`;
+  const message = `${t(LIBRARY.SHARE_FACEBOOK_SUBJECT, {
     name,
   })} ${pageLocation}${MAIL_BREAK_LINE}${MAIL_BREAK_LINE}${parsedDescription}`;
   const mailString = `mailto:?subject=${subject}&body=${message}`;

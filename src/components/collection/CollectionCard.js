@@ -1,32 +1,37 @@
-import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import dynamic from 'next/dynamic';
+import PropTypes from 'prop-types';
+
+import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import { makeStyles } from '@material-ui/core/styles';
+
 import {
-  Typography,
   Card,
-  CardHeader,
-  CardContent,
   CardActions,
+  CardContent,
+  CardHeader,
   IconButton,
+  Typography,
 } from '@material-ui/core';
-import Skeleton from '@material-ui/lab/Skeleton';
+import { makeStyles } from '@material-ui/core/styles';
 import InfoIcon from '@material-ui/icons/Info';
-import SimilarCollectionBadges from './SimilarCollectionBadges';
-import { buildCollectionRoute } from '../../config/routes';
+import Skeleton from '@material-ui/lab/Skeleton';
+
+import { LIBRARY } from '@graasp/translations';
+
 import { DEFAULT_MEMBER_THUMBNAIL } from '../../config/constants';
-import { QueryClientContext } from '../QueryClientContext';
-import ViewButton from './ViewButton';
-import CopyButton from './CopyButton';
-import CardMedia from '../common/CardMediaComponent';
-import CopyLinkButton from './CopyLinkButton';
-import DownloadButton from './DownloadButton';
 import {
   COLLECTION_CARD_BORDER_RADIUS,
   COLLECTION_CARD_HEADER_SIZE,
   DEFAULT_SHADOW_EFFECT,
 } from '../../config/cssStyles';
+import { buildCollectionRoute } from '../../config/routes';
+import { QueryClientContext } from '../QueryClientContext';
+import CardMedia from '../common/CardMediaComponent';
+import CopyButton from './CopyButton';
+import CopyLinkButton from './CopyLinkButton';
+import DownloadButton from './DownloadButton';
+import SimilarCollectionBadges from './SimilarCollectionBadges';
+import ViewButton from './ViewButton';
 
 const Avatar = dynamic(() => import('@graasp/ui').then((mod) => mod.Avatar), {
   ssr: false,
@@ -86,7 +91,8 @@ export const CollectionCard = ({ collection = {}, isLoading }) => {
   const { name, id, description, creator, views, voteScore, extra } =
     collection;
   const { t } = useTranslation();
-  const descriptionContent = description || 'This item has no description.';
+  const descriptionContent =
+    description || LIBRARY.COLLECTION_EMPTY_DESCRIPTION_TEXT;
   const classes = useStyles();
   const [flipped, setFlipped] = React.useState(false);
   const { hooks } = useContext(QueryClientContext);
@@ -104,7 +110,7 @@ export const CollectionCard = ({ collection = {}, isLoading }) => {
   ) : (
     <Avatar
       useAvatar={hooks.useAvatar}
-      alt={t(`someone's avatar`, { name: author?.get('name') })}
+      alt={t(LIBRARY.AVATAR_ALT, { name: author?.get('name') })}
       className={classes.avatar}
       defaultImage={DEFAULT_MEMBER_THUMBNAIL}
       id={creator}
@@ -118,7 +124,10 @@ export const CollectionCard = ({ collection = {}, isLoading }) => {
 
   const action = (
     <>
-      <IconButton aria-label={t('Actions')} onClick={handleClick}>
+      <IconButton
+        aria-label={t(LIBRARY.COLLECTION_INFO_BUTTON)}
+        onClick={handleClick}
+      >
         <InfoIcon />
       </IconButton>
     </>

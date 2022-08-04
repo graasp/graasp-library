@@ -1,18 +1,23 @@
-import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+
+import React, { useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
-import { useTranslation } from 'react-i18next';
+import { withStyles } from '@material-ui/core/styles';
+import CloseIcon from '@material-ui/icons/Close';
+
 import { DATA_KEYS } from '@graasp/query-client';
-import { openInNewTab } from '../../utils/helpers';
+import { LIBRARY } from '@graasp/translations';
+
 import { SIGN_IN_ROUTE, SIGN_UP_ROUTE } from '../../config/constants';
+import { openInNewTab } from '../../utils/helpers';
 import { QueryClientContext } from '../QueryClientContext';
 
 const styles = (theme) => ({
@@ -92,24 +97,20 @@ const LoginModalProvider = ({ children }) => {
     setOpen(false);
   };
 
+  const labelId = 'customized-dialog-title';
+
   const renderModal = () => (
     <div>
-      <Dialog
-        onClose={handleClose}
-        aria-labelledby="customized-dialog-title"
-        open={open}
-      >
-        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-          {t('Login Required')}
+      <Dialog onClose={handleClose} aria-labelledby={labelId} open={open}>
+        <DialogTitle id={labelId} onClose={handleClose}>
+          {t(LIBRARY.SIGN_IN_MODAL_TITLE)}
         </DialogTitle>
         <DialogContent dividers>
-          <Typography>
-            {t('In order to proceed, you need to login to Graasp.')}
-          </Typography>
+          <Typography>{t(LIBRARY.SIGN_IN_MODAL_CONTENT)}</Typography>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleSignUp} color="primary">
-            {t('Create an Account')}
+            {t(LIBRARY.SIGN_IN_MODAL_SIGN_UP_BUTTON)}
           </Button>
           <Button
             autoFocus
@@ -117,7 +118,7 @@ const LoginModalProvider = ({ children }) => {
             onClick={handleLogin}
             color="primary"
           >
-            {t('Login')}
+            {t(LIBRARY.SIGN_IN_MODAL_SIGN_IN_BUTTON)}
           </Button>
         </DialogActions>
       </Dialog>

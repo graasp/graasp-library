@@ -1,50 +1,51 @@
+import clsx from 'clsx';
+
+import React, { useContext, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import {
-  makeStyles,
-  IconButton,
-  Divider,
   Button,
+  Divider,
   Drawer,
+  IconButton,
+  makeStyles,
 } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
-import React, { useContext, useState } from 'react';
-import clsx from 'clsx';
-import { useTranslation } from 'react-i18next';
 import { useTheme } from '@material-ui/core/styles';
+import BookmarkIcon from '@material-ui/icons/Bookmark';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
-import BookmarkIcon from '@material-ui/icons/Bookmark';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import Seo from '../common/Seo';
+
+import { LIBRARY } from '@graasp/translations';
+
 import {
   APP_AUTHOR,
-  APP_DESCRIPTION,
-  APP_NAME,
-  LEFT_MENU_WIDTH,
-  GRAASP_BUILDER_URL,
   CATEGORY_TYPES,
+  LEFT_MENU_WIDTH,
 } from '../../config/constants';
-import CollectionsGrid from '../collection/CollectionsGrid';
-import { QueryClientContext } from '../QueryClientContext';
+import { HEADER_HEIGHT } from '../../config/cssStyles';
 import { PUBLISHED_TAG_ID } from '../../config/env';
 import {
-  PLACEHOLDER_COLLECTIONS,
-  filterErrorItems,
-} from '../../utils/collections';
-import { compare } from '../../utils/helpers';
-import LevelCollectionsPage from './LevelCollectionsPage';
-import {
   ALL_COLLECTIONS_GRID_ID,
-  buildEducationLevelOptionId,
   CLEAR_EDUCATION_LEVEL_SELECTION_ID,
   CLOSE_MENU_BUTTON_ID,
   OPEN_MENU_BUTTON_ID,
   SIDEMENU_HEADING_ID,
   SUBTITLE_TEXT_ID,
   TITLE_TEXT_ID,
+  buildEducationLevelOptionId,
 } from '../../config/selectors';
-import { HEADER_HEIGHT } from '../../config/cssStyles';
+import {
+  PLACEHOLDER_COLLECTIONS,
+  filterErrorItems,
+} from '../../utils/collections';
+import { compare } from '../../utils/helpers';
+import { QueryClientContext } from '../QueryClientContext';
+import CollectionsGrid from '../collection/CollectionsGrid';
+import Seo from '../common/Seo';
 import CategorySelection from './CategorySelection';
+import LevelCollectionsPage from './LevelCollectionsPage';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -204,10 +205,6 @@ function AllCollections() {
     setSelectedLanguages,
   );
 
-  const redirectToCompose = () => {
-    window.location.href = GRAASP_BUILDER_URL;
-  };
-
   return (
     <div className={classes.root}>
       <Drawer
@@ -221,7 +218,7 @@ function AllCollections() {
       >
         <div className={classes.drawerHeader}>
           <Typography variant="h5" align="center" id={SIDEMENU_HEADING_ID}>
-            {t('Categories')}
+            {t(LIBRARY.ALL_COLLECTIONS_CATEGORIES_TITLE)}
           </Typography>
           <IconButton onClick={closeSideBar} id={CLOSE_MENU_BUTTON_ID}>
             {theme.direction === 'ltr' ? (
@@ -237,18 +234,10 @@ function AllCollections() {
           startIcon={<BookmarkIcon />}
           onClick={clearSelection()}
         >
-          {t('All Collections')}
-        </Button>
-        <Button
-          variant="outlined"
-          color="primary"
-          startIcon={<AddCircleOutlineIcon />}
-          onClick={redirectToCompose}
-        >
-          {t('Create Your Own')}
+          {t(LIBRARY.ALL_COLLECTIONS_RESET_ALL_BUTTON)}
         </Button>
         <CategorySelection
-          title={t('Education Level')}
+          title={t(LIBRARY.EDUCATION_LEVEL)}
           selectedValues={selectedLevels}
           valueList={levelList}
           handleClick={handleClickForLevel}
@@ -260,7 +249,7 @@ function AllCollections() {
         />
         <Divider />
         <CategorySelection
-          title={t('Discipline')}
+          title={t(LIBRARY.DISCIPLINE)}
           selectedValues={selectedDisciplines}
           valueList={disciplineList}
           handleClick={handleClickForDiscipline}
@@ -270,7 +259,7 @@ function AllCollections() {
         />
         <Divider />
         <CategorySelection
-          title={t('Language')}
+          title={t(LIBRARY.LANGUAGE)}
           selectedValues={selectedLanguages}
           valueList={languageList}
           handleClick={handleClickForLanguage}
@@ -295,11 +284,11 @@ function AllCollections() {
             <MenuOpenIcon />
           </IconButton>
           <Typography variant="body1" display="inline">
-            {t('Open Menu')}
+            {t(LIBRARY.ALL_COLLECTIONS_OPEN_MENU)}
           </Typography>
           <Seo
-            title={APP_NAME}
-            description={APP_DESCRIPTION}
+            title={t(LIBRARY.GRAASP_LIBRARY)}
+            description={t(LIBRARY.GRAASP_LIBRARY_DESCRIPTION)}
             author={APP_AUTHOR}
           />
           {selectedLevels?.length === 0 &&
@@ -307,7 +296,7 @@ function AllCollections() {
           selectedLanguages?.length === 0 ? (
             <>
               <Typography variant="h3" align="center" id={TITLE_TEXT_ID}>
-                {t(`All Collections`)}
+                {t(LIBRARY.ALL_COLLECTIONS_TITLE)}
               </Typography>
               <Typography
                 variant="subtitle2"
@@ -315,7 +304,7 @@ function AllCollections() {
                 id={SUBTITLE_TEXT_ID}
                 className={classes.subtitle}
               >
-                {t('collectionsCount', {
+                {t(LIBRARY.COLLECTIONS_COUNT_MESSAGE, {
                   count: collectionsWithoutErrors?.size,
                 })}
               </Typography>

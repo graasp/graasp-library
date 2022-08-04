@@ -1,11 +1,16 @@
-import React from 'react';
-import { Avatar, Typography, Tooltip } from '@material-ui/core';
 import { List } from 'immutable';
-import AvatarGroup from '@material-ui/lab/AvatarGroup';
-import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import { getAvatar } from '../../utils/layout';
+
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+
+import { Avatar, Tooltip, Typography } from '@material-ui/core';
+import AvatarGroup from '@material-ui/lab/AvatarGroup';
+
+import { LIBRARY } from '@graasp/translations';
+
 import { buildContributorId } from '../../config/selectors';
+import { getAvatar } from '../../utils/layout';
 
 function Contributors({ contributors, displayContributors }) {
   const { t } = useTranslation();
@@ -21,7 +26,7 @@ function Contributors({ contributors, displayContributors }) {
   return (
     <>
       <Typography variant="h5" gutterBottom>
-        {t('Contributors')}
+        {t(LIBRARY.CONTRIBUTORS_TITLE)}
       </Typography>
       <AvatarGroup max={8}>
         {contributors.map((contributor) => {
@@ -35,7 +40,7 @@ function Contributors({ contributors, displayContributors }) {
             <Tooltip title={contributorName}>
               <Avatar
                 key={contributorName}
-                alt={t(`someone's avatar`, { name: contributorName })}
+                alt={t(LIBRARY.AVATAR_ALT, { name: contributorName })}
                 src={avatar}
                 id={buildContributorId(id)}
               />

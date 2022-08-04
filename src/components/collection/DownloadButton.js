@@ -1,8 +1,12 @@
-import React, { useContext, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import PropTypes from 'prop-types';
+
+import React, { useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { MUTATION_KEYS } from '@graasp/query-client';
+import { LIBRARY } from '@graasp/translations';
+
 import { QueryClientContext } from '../QueryClientContext';
 
 const { GraaspDownloadButton } = {
@@ -41,7 +45,7 @@ const DownloadButton = ({ id }) => {
     <GraaspDownloadButton
       isLoading={isLoading}
       handleDownload={handleDownload}
-      title={t('Download')}
+      title={t(LIBRARY.DOWNLOAD_BUTTON_TOOLTIP)}
     />
   );
 };

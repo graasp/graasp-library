@@ -1,15 +1,20 @@
-import React, { useContext } from 'react';
-import { Grid, Typography } from '@material-ui/core';
 import { Map } from 'immutable';
 import dynamic from 'next/dynamic';
-import Skeleton from '@material-ui/lab/Skeleton';
-import { useTranslation } from 'react-i18next';
-import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-import Contributors from './Contributors';
-import { QueryClientContext } from '../QueryClientContext';
+
+import React, { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
+
+import { Grid, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import Skeleton from '@material-ui/lab/Skeleton';
+
+import { LIBRARY } from '@graasp/translations';
+
 import { DEFAULT_MEMBER_THUMBNAIL } from '../../config/constants';
 import { SUMMARY_AUTHOR_CONTAINER_ID } from '../../config/selectors';
+import { QueryClientContext } from '../QueryClientContext';
+import Contributors from './Contributors';
 
 const Avatar = dynamic(() => import('@graasp/ui').then((mod) => mod.Avatar), {
   ssr: false,
@@ -64,7 +69,7 @@ const Authorship = ({ itemId, author, isLoading }) => {
       <Grid container>
         <Grid item xs={12} sm={6}>
           <Typography variant="h5" gutterBottom>
-            {t('Author')}
+            {t(LIBRARY.AUTHORSHIP_AUTHOR_TITLE)}
           </Typography>
           <Grid
             container
@@ -80,7 +85,7 @@ const Authorship = ({ itemId, author, isLoading }) => {
               ) : (
                 <Avatar
                   useAvatar={hooks.useAvatar}
-                  alt={t(`someone's avatar`, { name: authorName })}
+                  alt={t(LIBRARY.AVATAR_ALT, { name: authorName })}
                   defaultImage={DEFAULT_MEMBER_THUMBNAIL}
                   id={author?.get('id')}
                   extra={author?.get('extra')}

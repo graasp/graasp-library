@@ -1,14 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import { ErrorBoundary } from '@sentry/react';
-import 'react-toastify/dist/ReactToastify.css';
+import PropTypes from 'prop-types';
+
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { makeStyles, Divider } from '@material-ui/core';
-import { LoginModalProvider } from './LoginModalContext';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { Divider, makeStyles } from '@material-ui/core';
+
+import { LIBRARY } from '@graasp/translations';
+
 import { QueryClientProvider } from '../QueryClientContext';
-import { SENTRY_FALLBACK_MESSAGE } from '../../config/constants';
-import Header from '../layout/Header';
 import Footer from '../layout/Footer';
+import Header from '../layout/Header';
+import { LoginModalProvider } from './SignInModalContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,7 +31,7 @@ function Wrapper({ dehydratedState, children }) {
   const { t } = useTranslation();
 
   return (
-    <ErrorBoundary fallback={t(SENTRY_FALLBACK_MESSAGE)}>
+    <ErrorBoundary fallback={t(LIBRARY.UNEXPECTED_ERROR_MESSAGE)}>
       <div className={classes.root}>
         <QueryClientProvider dehydratedState={dehydratedState}>
           <LoginModalProvider>

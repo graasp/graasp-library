@@ -1,7 +1,9 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import GraaspQuill from './GraaspQuill';
+
+import React from 'react';
+
 import { hasMath, renderMath } from '../../utils/math';
+import GraaspQuill from './GraaspQuill';
 
 const modules = {
   toolbar: false,

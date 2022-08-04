@@ -1,11 +1,13 @@
-import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import CollectionsGrid from '../collection/CollectionsGrid';
-import { QueryClientContext } from '../QueryClientContext';
+
+import React, { useContext } from 'react';
+
 import { PUBLISHED_TAG_ID } from '../../config/env';
-import { PLACEHOLDER_COLLECTIONS } from '../../utils/collections';
-import TabPanel from './TabPanel';
 import { MY_FAVORITES_COLLECTIONS_ID } from '../../config/selectors';
+import { PLACEHOLDER_COLLECTIONS } from '../../utils/collections';
+import { QueryClientContext } from '../QueryClientContext';
+import CollectionsGrid from '../collection/CollectionsGrid';
+import TabPanel from './TabPanel';
 
 function MyFavorites({ tab, index }) {
   const { hooks } = useContext(QueryClientContext);

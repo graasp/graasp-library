@@ -1,15 +1,18 @@
-import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
-import dynamic from 'next/dynamic';
-import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
-import CardMedia from '@material-ui/core/CardMedia';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import { QueryClientContext } from '../QueryClientContext';
+import PropTypes from 'prop-types';
+
+import React, { useContext } from 'react';
+
+import CardMedia from '@material-ui/core/CardMedia';
+import { makeStyles } from '@material-ui/core/styles';
+
 import {
   DEFAULT_ITEM_IMAGE_PATH,
   DEFAULT_THUMBNAIL_SIZE,
 } from '../../config/constants';
+import { QueryClientContext } from '../QueryClientContext';
 
 const Thumbnail = dynamic(
   () => import('@graasp/ui').then((mod) => mod.Thumbnail),

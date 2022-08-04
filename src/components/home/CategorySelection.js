@@ -1,16 +1,20 @@
+import PropTypes from 'prop-types';
+
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+
 import {
-  makeStyles,
   Button,
   List,
   ListItem,
   ListItemText,
   Typography,
+  makeStyles,
 } from '@material-ui/core';
-import Skeleton from '@material-ui/lab/Skeleton';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
-import React from 'react';
-import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
+import Skeleton from '@material-ui/lab/Skeleton';
+
+import { LIBRARY, namespaces } from '@graasp/translations';
 
 const useStyles = makeStyles((theme) => ({
   sectionHeader: {
@@ -33,6 +37,7 @@ const CategorySelection = ({
   isLoading,
   buildOptionIndex,
 }) => {
+  const { t: translateCategories } = useTranslation(namespaces.categories);
   const { t } = useTranslation();
   const classes = useStyles();
 
@@ -58,7 +63,7 @@ const CategorySelection = ({
               selected={selectedValues.find((value) => value === entry.id)}
               id={buildOptionIndex(index)}
             >
-              <ListItemText primary={t(entry.name)} />
+              <ListItemText primary={translateCategories(entry.name)} />
             </ListItem>
           ))}
         </List>
@@ -71,7 +76,7 @@ const CategorySelection = ({
         onClick={clearSelection(categoryType)}
         id={buttonId}
       >
-        {t('Clear Selection')}
+        {t(LIBRARY.ALL_COLLECTIONS_CLEAR_SELECTION_BUTTON)}
       </Button>
     </>
   );

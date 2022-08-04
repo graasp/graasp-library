@@ -1,9 +1,18 @@
 import React from 'react';
-import { routines } from '@graasp/query-client';
 import { toast } from 'react-toastify';
-import i18n from './i18n';
+
+import { routines } from '@graasp/query-client';
+import {
+  FAILURE_MESSAGES,
+  LIBRARY,
+  SUCCESS_MESSAGES,
+} from '@graasp/translations';
+
 import ToastrWithLink from '../components/common/ToastrWithLink';
-import { buildPlayerViewItemRoute } from './constants';
+import { SHOW_NOTIFICATIONS, buildPlayerViewItemRoute } from './constants';
+import i18n from './i18n';
+
+const t = (value) => i18n.t(value, { ns: 'messages' });
 
 export const COPY_RESOURCE_LINK_TO_CLIPBOARD = {
   SUCESS: 'success',
@@ -12,42 +21,51 @@ export const COPY_RESOURCE_LINK_TO_CLIPBOARD = {
 
 // TODO: use a universal notifier
 const notifier = ({ type, payload }) => {
+  if (!SHOW_NOTIFICATIONS) {
+    return;
+  }
+
+  let message = '';
+
   switch (type) {
-    case routines.copyItemRoutine.FAILURE:
-      toast.error(i18n.t('An error occured while copying the item'));
+    case routines.postItemFlagRoutine.FAILURE:
+    case routines.exportItemRoutine.FAILURE:
+    case routines.copyItemRoutine.FAILURE: {
+      message =
+        payload?.error?.response?.data?.message ??
+        FAILURE_MESSAGES.DEFAULT_FAILURE;
       break;
+    }
+    case routines.postItemFlagRoutine.SUCCESS: {
+      // todo: factor out string
+      message = payload?.message ?? SUCCESS_MESSAGES.DEFAULT_SUCCESS;
+      break;
+    }
     case routines.copyItemRoutine.SUCCESS:
       toast.success(
         <ToastrWithLink
           link={buildPlayerViewItemRoute(payload?.newItem?.id)}
-          text={i18n.t('The item was copied successfully')}
-          linkText={i18n.t('Click here to open the item on Graasp.')}
+          text={t(SUCCESS_MESSAGES.COPY_ITEM)}
+          linkText={i18n.t(LIBRARY.COPY_ITEM_TOASTR_LINK)}
         />,
       );
       break;
-    case routines.postItemFlagRoutine.FAILURE:
-      toast.error(i18n.t('An error occured while flagging the item'));
-      break;
-    case routines.postItemFlagRoutine.SUCCESS:
-      toast.success(i18n.t('The item was successfully flagged.'));
-      break;
     case COPY_RESOURCE_LINK_TO_CLIPBOARD.SUCCESS:
-      toast.success(i18n.t('The item resource was successfully copied.'));
+      toast.success(i18n.t(LIBRARY.COPY_LINK_SUCCESS_MESSAGE));
       break;
     case COPY_RESOURCE_LINK_TO_CLIPBOARD.FAILURE:
-      toast.error(i18n.t('An error occured while copying the resource link.'));
-      break;
-    case routines.exportItemRoutine.FAILURE:
-      toast.error(
-        i18n.t(
-          'An error occured while downloading the item. Please try again later.',
-        ),
-        {
-          variant: 'error',
-        },
-      );
+      toast.error(i18n.t(LIBRARY.COPY_LINK_FAILURE_MESSAGE));
       break;
     default:
+  }
+
+  // error notification
+  if (payload?.error && message) {
+    toast.error(t(message));
+  }
+  // success notification
+  else if (message) {
+    toast.success(t(message));
   }
 };
 export default notifier;

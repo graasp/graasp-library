@@ -65,30 +65,6 @@ export const DEFAULT_PUT = {
 export const getItemById = (items, id) =>
   items.find(({ id: thisId }) => id === thisId);
 
-// eslint-disable-next-line no-useless-escape
-export const transformIdForPath = (id) => id.replace(/\-/g, '_');
-
-export const getParentsIdsFromPath = (path, { ignoreSelf = false } = {}) => {
-  if (!path) {
-    return [];
-  }
-
-  let p = path;
-  // ignore self item in path
-  if (ignoreSelf) {
-    // split path in half parents / self
-    // eslint-disable-next-line no-useless-escape
-    const els = path.split(/\.[^\.]*$/);
-    // if els has only one element, the item has no parent
-    if (els.length <= 1) {
-      return [];
-    }
-    [p] = els;
-  }
-  const ids = p.replace(/_/g, '-').split('.');
-  return ids;
-};
-
 export const getMemberById = (members, id) =>
   members.find(({ id: thisId }) => id === thisId);
 

@@ -1,15 +1,20 @@
-import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
-import IconButton from '@material-ui/core/IconButton';
-import FileCopyIcon from '@material-ui/icons/FileCopy';
-import Tooltip from '@material-ui/core/Tooltip';
-import { MUTATION_KEYS } from '@graasp/query-client';
-import CircularProgress from '@material-ui/core/CircularProgress';
+
+import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import TreeModal from './TreeModal';
-import { LoginModalContext } from '../common/LoginModalContext';
-import { QueryClientContext } from '../QueryClientContext';
+
+import CircularProgress from '@material-ui/core/CircularProgress';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
+import FileCopyIcon from '@material-ui/icons/FileCopy';
+
+import { MUTATION_KEYS } from '@graasp/query-client';
+import { LIBRARY } from '@graasp/translations';
+
 import { ROOT_ID } from '../../config/constants';
+import { QueryClientContext } from '../QueryClientContext';
+import { LoginModalContext } from '../common/SignInModalContext';
+import TreeModal from './TreeModal';
 
 const CopyButton = ({ id }) => {
   const { t } = useTranslation();
@@ -64,8 +69,11 @@ const CopyButton = ({ id }) => {
     }
 
     return (
-      <Tooltip title={t('Copy')}>
-        <IconButton onClick={onClick} aria-label={t('Copy current item')}>
+      <Tooltip title={t(LIBRARY.COPY_BUTTON_TOOLTIP)}>
+        <IconButton
+          onClick={onClick}
+          aria-label={t(LIBRARY.COPY_BUTTON_TOOLTIP)}
+        >
           <FileCopyIcon />
         </IconButton>
       </Tooltip>
@@ -77,8 +85,8 @@ const CopyButton = ({ id }) => {
       {renderButton()}
       {!user?.isEmpty() && (
         <TreeModal
-          description={t('Select one space from the list below')}
-          title={t('Copy Item')}
+          description={t(LIBRARY.COPY_BUTTON_MODAL_DESCRIPTION)}
+          title={t(LIBRARY.COPY_BUTTON_MODAL_TITLE)}
           open={showTreeModal}
           onConfirm={copy}
           itemId={id}

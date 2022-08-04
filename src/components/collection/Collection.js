@@ -1,27 +1,32 @@
-import React, { useContext } from 'react';
-import { validate } from 'uuid';
-import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
-import { makeStyles } from '@material-ui/core/styles';
-import { Divider, Button } from '@material-ui/core';
-import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 import { ErrorBoundary } from '@sentry/react';
-import Error from '../common/Error';
-import Summary from './Summary';
-import Items from './Items';
-import Seo from '../common/Seo';
+import PropTypes from 'prop-types';
+import { validate } from 'uuid';
+
+import React, { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
+
+import { Button, Divider } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
+
+import { LIBRARY } from '@graasp/translations';
+
+import {
+  DEFAULT_ITEM_IMAGE_PATH,
+  ITEM_TYPES,
+  buildPlayerViewItemRoute,
+} from '../../config/constants';
 import {
   ERROR_INVALID_COLLECTION_ID_CODE,
   ERROR_UNEXPECTED_ERROR_CODE,
 } from '../../config/messages';
-import { QueryClientContext } from '../QueryClientContext';
 import { PLACEHOLDER_COLLECTION } from '../../utils/collections';
-import {
-  buildPlayerViewItemRoute,
-  DEFAULT_ITEM_IMAGE_PATH,
-  ITEM_TYPES,
-} from '../../config/constants';
 import { openInNewTab } from '../../utils/helpers';
+import { QueryClientContext } from '../QueryClientContext';
+import Error from '../common/Error';
+import Seo from '../common/Seo';
+import Items from './Items';
+import Summary from './Summary';
 
 // todo: get similar collections in same call
 // import SimilarCollections from './SimilarCollections';
@@ -109,12 +114,12 @@ const Collection = ({ id }) => {
           variant="outlined"
           size="large"
           color="primary"
-          aria-label={t('Play')}
-          title={t('play')}
+          aria-label={t(LIBRARY.COLLECTION_PLAYER_BUTTON)}
+          title={t(LIBRARY.COLLECTION_PLAYER_BUTTON)}
           endIcon={<PlayCircleOutlineIcon />}
           className={classes.playButton}
         >
-          {t('View item in player')}
+          {t(LIBRARY.COLLECTION_PLAYER_BUTTON)}
         </Button>
         {type === ITEM_TYPES.FOLDER && (
           <>

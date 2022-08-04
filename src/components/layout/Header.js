@@ -1,15 +1,26 @@
-import React, { useContext } from 'react';
 import dynamic from 'next/dynamic';
-import { AppBar, Typography, Toolbar } from '@material-ui/core';
+
+import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
+
+import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+
+import { LIBRARY } from '@graasp/translations';
+
+import { Context, HOST_MAP } from '../../config/constants';
+import {
+  COLOR_BLACK,
+  COLOR_WHITE,
+  DEFAULT_SHADOW_EFFECT,
+  HEADER_HEIGHT,
+  HEADER_LOGO_HEIGHT,
+} from '../../config/cssStyles';
 import {
   ALL_COLLECTIONS_ROUTE,
   HOME_ROUTE,
   MY_LIST_ROUTE,
 } from '../../config/routes';
-import UserHeader from './UserHeader';
-import { HOST_MAP, Context } from '../../config/constants';
 import {
   APP_NAVIGATION_DROP_DOWN_ID,
   HEADER_ALL_COLLECTIONS_ID,
@@ -17,13 +28,7 @@ import {
   HEADER_MY_LIST_ID,
 } from '../../config/selectors';
 import { QueryClientContext } from '../QueryClientContext';
-import {
-  COLOR_WHITE,
-  COLOR_BLACK,
-  DEFAULT_SHADOW_EFFECT,
-  HEADER_HEIGHT,
-  HEADER_LOGO_HEIGHT,
-} from '../../config/cssStyles';
+import UserHeader from './UserHeader';
 
 const GraaspLogo = dynamic(
   () => import('@graasp/ui').then((mod) => mod.GraaspLogo),
@@ -94,7 +99,7 @@ function Header() {
         id={HEADER_MY_LIST_ID}
       >
         <a href={MY_LIST_ROUTE} className={classes.link}>
-          {t('My Lists')}
+          {t(LIBRARY.HEADER_MY_LISTS)}
         </a>
       </Typography>
     );
@@ -135,7 +140,7 @@ function Header() {
                   className={classes.title}
                   id={HEADER_ALL_COLLECTIONS_ID}
                 >
-                  {t('All Collections')}
+                  {t(LIBRARY.HEADER_ALL_COLLECTIONS)}
                 </Typography>
               </a>
               {renderMyList()}

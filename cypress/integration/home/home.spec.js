@@ -1,14 +1,14 @@
 import { HOME_ROUTE } from '../../../src/config/routes';
-import { GRAASPER_ITEMS, PUBLISHED_ITEMS } from '../../fixtures/items';
-import { buildPublicAndPrivateEnvironments } from '../../fixtures/environment';
-import { getRootPublishedItems } from '../../support/utils';
-import { ITEM_PUBLISHED_TAG } from '../../fixtures/itemTags';
 import {
   COLLECTIONS_GRID_ID,
   DISCOVER_SECTION_TITLE_ID,
   GRAASP_SELECTION_TITLE_ID,
   TITLE_TEXT_ID,
 } from '../../../src/config/selectors';
+import { buildPublicAndPrivateEnvironments } from '../../fixtures/environment';
+import { ITEM_PUBLISHED_TAG } from '../../fixtures/itemTags';
+import { GRAASPER_ITEMS, PUBLISHED_ITEMS } from '../../fixtures/items';
+import { getRootPublishedItems } from '../../support/utils';
 
 describe('Home Page', () => {
   buildPublicAndPrivateEnvironments().forEach((environment) => {
@@ -18,10 +18,7 @@ describe('Home Page', () => {
         cy.setUpApi(environment);
         cy.visit(HOME_ROUTE);
 
-        cy.get(`#${TITLE_TEXT_ID}`).should(
-          'have.text',
-          'Browse Open Educational Resources',
-        );
+        cy.get(`#${TITLE_TEXT_ID}`).should('be.visible');
         cy.get(`#${DISCOVER_SECTION_TITLE_ID}`)
           .last()
           .should('have.text', 'Discover');
@@ -63,15 +60,12 @@ describe('Home Page', () => {
           cy.wait('@getPublicItemsWithTags').then(
             ({ request: { url }, response: { body } }) => {
               expect(url).to.contain(ITEM_PUBLISHED_TAG.id);
-              cy.get(`#${GRAASP_SELECTION_TITLE_ID}`).should(
-                'have.text',
-                'Graasp Selection',
-              );
+              cy.get(`#${GRAASP_SELECTION_TITLE_ID}`).should('be.visible');
 
               cy.get(`#${COLLECTIONS_GRID_ID}`)
                 .children()
-                .should('have.length', body.length - 2); 
-                // We will change this later anyways so I just hardcode the number of Grassper items here
+                .should('have.length', body.length - 2);
+              // We will change this later anyways so I just hardcode the number of Grassper items here
             },
           );
         });

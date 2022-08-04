@@ -1,13 +1,18 @@
+import dynamic from 'next/dynamic';
+
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
+
+import { Typography, makeStyles } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
-import { AccountCircle } from '@material-ui/icons';
-import dynamic from 'next/dynamic';
 import { grey } from '@material-ui/core/colors';
-import { makeStyles, Typography } from '@material-ui/core';
-import { LoginModalContext } from '../common/LoginModalContext';
-import { QueryClientContext } from '../QueryClientContext';
+import { AccountCircle } from '@material-ui/icons';
+
+import { LIBRARY } from '@graasp/translations';
+
 import { DEFAULT_MEMBER_THUMBNAIL } from '../../config/constants';
+import { QueryClientContext } from '../QueryClientContext';
+import { LoginModalContext } from '../common/SignInModalContext';
 
 const Avatar = dynamic(() => import('@graasp/ui').then((mod) => mod.Avatar), {
   ssr: false,
@@ -38,7 +43,7 @@ const UserHeader = () => {
     return (
       <IconButton
         edge="end"
-        aria-label={t('Account')}
+        aria-label={t(LIBRARY.PROFILE_BUTTON)}
         aria-haspopup="true"
         onClick={onSignedOutIconClick}
         color="inherit"
@@ -53,7 +58,7 @@ const UserHeader = () => {
     <>
       <Avatar
         useAvatar={hooks.useAvatar}
-        alt={t(`someone's avatar`, { name: username })}
+        alt={t(LIBRARY.AVATAR_ALT, { name: username })}
         className={classes.avatar}
         defaultImage={DEFAULT_MEMBER_THUMBNAIL}
         id={user?.get('id')}

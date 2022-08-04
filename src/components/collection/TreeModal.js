@@ -1,18 +1,23 @@
-import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
+
+import React, { useContext, useState } from 'react';
 import { withTranslation } from 'react-i18next';
-import { withStyles } from '@material-ui/core/styles';
-import TreeView from '@material-ui/lab/TreeView';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import TreeItem from '@material-ui/lab/TreeItem';
-import Skeleton from '@material-ui/lab/Skeleton';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
+
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import DialogActions from '@material-ui/core/DialogActions';
 import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Skeleton from '@material-ui/lab/Skeleton';
+import TreeItem from '@material-ui/lab/TreeItem';
+import TreeView from '@material-ui/lab/TreeView';
+
+import { LIBRARY } from '@graasp/translations';
+
 import {
   ITEM_TYPES,
   ROOT_ID,
@@ -95,29 +100,29 @@ const TreeModal = ({
       defaultExpandIcon={<ChevronRightIcon />}
       onNodeSelect={onSelect}
     >
-      <TreeItem nodeId={ROOT_ID} label={t('My Items')}>
+      <TreeItem
+        nodeId={ROOT_ID}
+        label={t(LIBRARY.COPY_BUTTON_MODAL_MY_ITEMS_ROOT)}
+      >
         {renderOwnItems()}
       </TreeItem>
     </TreeView>
   );
 
+  const label = 'simple-dialog-title';
   return (
-    <Dialog
-      onClose={handleClose}
-      aria-labelledby="simple-dialog-title"
-      open={open}
-    >
-      <DialogTitle id="simple-dialog-title">
+    <Dialog onClose={handleClose} aria-labelledby={label} open={open}>
+      <DialogTitle id={label}>
         {title}
         {renderDescription()}
       </DialogTitle>
       <DialogContent>{tree}</DialogContent>
       <DialogActions>
         <Button onClick={handleClose} className={classes.cancelButton}>
-          {t('Cancel')}
+          {t(LIBRARY.TREE_MODAL_CANCEL_BUTTON)}
         </Button>
         <Button onClick={submit} color="primary" disabled={!selectedId}>
-          {t('Confirm')}
+          {t(LIBRARY.TREE_MODAL_CONFIRM_BUTTON)}
         </Button>
       </DialogActions>
     </Dialog>

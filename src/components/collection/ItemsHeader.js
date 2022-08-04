@@ -1,9 +1,12 @@
-import { Tooltip, Typography } from '@material-ui/core';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Info } from '@material-ui/icons';
+
+import { Tooltip, Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
+import { Info } from '@material-ui/icons';
+
+import { LIBRARY } from '@graasp/translations';
 
 const useStyles = makeStyles((theme) => ({
   cell: {
@@ -23,11 +26,11 @@ function ItemsHeader() {
       <Grid container spacing={0} justify="space-between" alignItems="center">
         <Grid item>
           <Typography variant="h3" color="inherit" className={classes.cell}>
-            {t('Items')}
+            {t(LIBRARY.COLLECTION_ITEMS_TITLE)}
           </Typography>
         </Grid>
         <Grid item className={classes.cell}>
-          <Tooltip title={t('These are the items in this collection.')}>
+          <Tooltip title={t(LIBRARY.COLLECTION_ITEMS_TOOLTIP_MESSAGE)}>
             <Info color="primary" />
           </Tooltip>
         </Grid>

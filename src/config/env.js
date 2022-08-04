@@ -20,3 +20,5 @@ export const NODE_ENV = publicRuntimeConfig.NODE_ENV;
 export const NEXT_PUBLIC_GRAASPER_ID =
   publicRuntimeConfig.NEXT_PUBLIC_GRAASPER_ID;
 export const S3_FILES_HOST = publicRuntimeConfig.NEXT_PUBLIC_S3_FILES_HOST;
+export const SHOW_NOTIFICATIONS =
+  publicRuntimeConfig.NEXT_PUBLIC_SHOW_NOTIFICATIONS;

@@ -1,10 +1,13 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
+
+import React from 'react';
+
 import Grid from '@material-ui/core/Grid';
-import CommentsHeader from './CommentsHeader';
+import List from '@material-ui/core/List';
+import { makeStyles } from '@material-ui/core/styles';
+
 import Comment from './Comment';
+import CommentsHeader from './CommentsHeader';
 
 const useStyles = makeStyles((theme) => ({
   root: {

@@ -1,15 +1,20 @@
-import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
 import { List } from 'immutable';
-import Typography from '@material-ui/core/Typography';
+import PropTypes from 'prop-types';
+
+import React, { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+
+import { LIBRARY } from '@graasp/translations';
+
+import { CHILDREN_ITEMS_GRID_ID } from '../../config/selectors';
+import { PLACEHOLDER_COLLECTION } from '../../utils/collections';
+import { QueryClientContext } from '../QueryClientContext';
 import { ChildrenCard } from './ChildrenCard';
 import ItemsHeader from './ItemsHeader';
-import { QueryClientContext } from '../QueryClientContext';
-import { PLACEHOLDER_COLLECTION } from '../../utils/collections';
-import { CHILDREN_ITEMS_GRID_ID } from '../../config/selectors';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,7 +41,7 @@ function Items({ parentId }) {
       {!items?.size ? (
         <div className="Main">
           <Typography variant="h5" color="inherit">
-            {t('This collection is empty.')}
+            {t(LIBRARY.COLLECTION_ITEMS_EMPTY_MESSAGE)}
           </Typography>
         </div>
       ) : (

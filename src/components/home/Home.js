@@ -1,26 +1,31 @@
-import { makeStyles, Typography } from '@material-ui/core';
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { APP_AUTHOR, APP_DESCRIPTION, APP_NAME } from '../../config/constants';
-import { SEARCH_RANGES } from '../../enums/searchRanges';
-import { PUBLISHED_TAG_ID, NEXT_PUBLIC_GRAASPER_ID } from '../../config/env';
-import CollectionsGrid from '../collection/CollectionsGrid';
-import Seo from '../common/Seo';
-import Loader from '../common/Loader';
-import Search from './Search';
-import { QueryClientContext } from '../QueryClientContext';
+
+import { Typography, makeStyles } from '@material-ui/core';
+
+import { LIBRARY } from '@graasp/translations';
+
+import { APP_AUTHOR } from '../../config/constants';
+import { NEXT_PUBLIC_GRAASPER_ID, PUBLISHED_TAG_ID } from '../../config/env';
 import {
-  filterErrorItems,
-  PLACEHOLDER_COLLECTIONS,
-} from '../../utils/collections';
-import {
-  TITLE_TEXT_ID,
-  GRAASP_SELECTION_TITLE_ID,
-  DISCOVER_SECTION_TITLE_ID,
   COLLECTIONS_GRID_ID,
+  DISCOVER_SECTION_TITLE_ID,
+  GRAASP_SELECTION_TITLE_ID,
   SEARCH_RESULTS_GRID_ID,
+  TITLE_TEXT_ID,
 } from '../../config/selectors';
+import { SEARCH_RANGES } from '../../enums/searchRanges';
+import {
+  PLACEHOLDER_COLLECTIONS,
+  filterErrorItems,
+} from '../../utils/collections';
 import { dateComparator } from '../../utils/helpers';
+import { QueryClientContext } from '../QueryClientContext';
+import CollectionsGrid from '../collection/CollectionsGrid';
+import Loader from '../common/Loader';
+import Seo from '../common/Seo';
+import CreateButton from './CreateButton';
+import Search from './Search';
 
 const useStyles = makeStyles((theme) => ({
   wrapper: {
@@ -104,7 +109,7 @@ function Home() {
           id={GRAASP_SELECTION_TITLE_ID}
           className={classes.typographyMargin}
         >
-          {t('Graasp Selection')}
+          {t(LIBRARY.HOME_GRAASPER_COLLECTIONS_TITLE)}
         </Typography>
         <CollectionsGrid
           collections={collectionsGraasper}
@@ -121,7 +126,7 @@ function Home() {
     return (
       <>
         <Typography variant="h3" className={classes.typographyMargin}>
-          {t('Search Results')}
+          {t(LIBRARY.SEARCH_RESULTS_TITLE)}
         </Typography>
         {searchResults.size > 0 ? (
           <CollectionsGrid
@@ -130,7 +135,7 @@ function Home() {
           />
         ) : (
           <Typography variant="body1" className={classes.typographyMargin}>
-            {t('No results found.')}
+            {t(LIBRARY.SEARCH_NO_RESULT_MESSAGE)}
           </Typography>
         )}
       </>
@@ -139,11 +144,18 @@ function Home() {
 
   return (
     <>
-      <Seo title={APP_NAME} description={APP_DESCRIPTION} author={APP_AUTHOR} />
+      <Seo
+        title={t(LIBRARY.GRAASP_LIBRARY)}
+        description={t(LIBRARY.GRAASP_LIBRARY_DESCRIPTION)}
+        author={APP_AUTHOR}
+      />
       <div className={classes.wrapper}>
         <Typography variant="h2" align="center" id={TITLE_TEXT_ID}>
-          {t('Browse Open Educational Resources')}
+          {t(LIBRARY.HOME_TITLE)}
         </Typography>
+
+        <CreateButton />
+
         <Search
           handleSearch={handleKeywordInput}
           handleClick={handleClick}
@@ -158,7 +170,7 @@ function Home() {
           id={DISCOVER_SECTION_TITLE_ID}
           className={classes.typographyMargin}
         >
-          {t('Discover')}
+          {t(LIBRARY.HOME_MORE_COLLECTIONS_TITLE)}
         </Typography>
         <CollectionsGrid
           id={COLLECTIONS_GRID_ID}

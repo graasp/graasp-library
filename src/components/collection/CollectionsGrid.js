@@ -1,18 +1,23 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import { List } from 'immutable';
+import PropTypes from 'prop-types';
+
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import Typography from '@material-ui/core/Typography';
+
 import Grid from '@material-ui/core/Grid';
-import CollectionCard from './CollectionCard';
+import Typography from '@material-ui/core/Typography';
+
+import { LIBRARY } from '@graasp/translations';
+
 import { buildCollectionCardGridId } from '../../config/selectors';
+import CollectionCard from './CollectionCard';
 
 function CollectionsGrid({ collections, isLoading, id, sm, md, lg, xl }) {
   const { t } = useTranslation();
 
   return !collections?.size ? (
     <Typography variant="h5" color="inherit">
-      {t('There are no collections available.')}
+      {t(LIBRARY.EMPTY_COLLECTION_MESSAGE)}
     </Typography>
   ) : (
     <Grid
