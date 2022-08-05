@@ -33,4 +33,5 @@ jobs:
       next-public-graasp-perform-host: ${{ secrets.PLAYER_CLIENT_HOST_PROD }}
       next-public-graasper-id: ${{ secrets.NEXT_PUBLIC_GRAASPER_ID }}
       next-public-published-tag-id: ${{ secrets.NEXT_PUBLIC_PUBLISHED_TAG_ID }}
+      next-public-sentry-dsn: ${{ secrets.SENTRY_DSN }}
       port: ${{ secrets.PORT }}
