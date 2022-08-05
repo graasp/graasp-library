@@ -25,12 +25,12 @@ const beforeEach = (environment) => {
 buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
   describe(`All Collections Page for ${environment.currentMember.name}`, () => {
     // check if title and headings are displayed correctly
-    it('Layout', () => {
+    it.only('Layout', () => {
       beforeEach(environment);
 
       cy.get(`#${TITLE_TEXT_ID}`).should(
         'have.text',
-        LIBRARY.ALL_COLLECTIONS_TITLE,
+        i18n.t(LIBRARY.ALL_COLLECTIONS_TITLE),
       );
 
       cy.get(`#${SUBTITLE_TEXT_ID}`).should(
