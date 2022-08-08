@@ -87,7 +87,7 @@ function Header() {
   const { data: currentMember, isError } = hooks.useCurrentMember();
 
   const renderMyList = () => {
-    if (isError || !currentMember || currentMember.isEmpty()) {
+    if (isError || !currentMember?.id) {
       return null;
     }
 

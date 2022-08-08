@@ -31,13 +31,13 @@ const CopyButton = ({ id }) => {
   useEffect(() => {
     // if the user signs in while the login modal is open
     // switch to copy modal
-    if (showLoginModal && !user?.isEmpty()) {
+    if (showLoginModal && !user?.id) {
       openLoginModal(false);
       setShowTreeModal(true);
     }
     // if user signs out while copying
     // show login modal instead
-    else if (showTreeModal && user?.isEmpty()) {
+    else if (showTreeModal && !user?.id) {
       openLoginModal(true);
       setShowTreeModal(false);
     }
@@ -49,7 +49,7 @@ const CopyButton = ({ id }) => {
 
   const onClick = () => {
     // display sign in modal if the user is not signed in
-    if (!user?.isEmpty()) {
+    if (!user?.id) {
       setShowTreeModal(true);
     } else {
       openLoginModal(true);
@@ -83,7 +83,7 @@ const CopyButton = ({ id }) => {
   return (
     <>
       {renderButton()}
-      {!user?.isEmpty() && (
+      {user?.id && (
         <TreeModal
           description={t(LIBRARY.COPY_BUTTON_MODAL_DESCRIPTION)}
           title={t(LIBRARY.COPY_BUTTON_MODAL_TITLE)}

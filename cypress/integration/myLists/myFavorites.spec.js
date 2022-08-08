@@ -24,9 +24,9 @@ describe('My Favorite Items', () => {
         .should('have.length', favoriteItems.length);
     });
   });
-  describe('Favorite items include non-exist items', () => {
+  describe('Favorite items include non-existent items', () => {
     it('does not throw error', () => {
-      const nonExistItemIds = ['non-exist-id'];
+      const nonExistItemIds = ['non-existent-id'];
       cy.setUpApi({
         currentMember: buildMemberWithFavorites(
           favoriteItems.concat(nonExistItemIds),

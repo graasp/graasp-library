@@ -39,7 +39,7 @@ const UserHeader = () => {
     openLoginModal(true);
   };
 
-  if (isLoading || isError || user?.isEmpty()) {
+  if (isLoading || isError || !user?.id) {
     return (
       <IconButton
         edge="end"
@@ -53,7 +53,7 @@ const UserHeader = () => {
     );
   }
 
-  const username = user?.get('name');
+  const username = user.name;
   return (
     <>
       <Avatar
@@ -61,8 +61,8 @@ const UserHeader = () => {
         alt={t(LIBRARY.AVATAR_ALT, { name: username })}
         className={classes.avatar}
         defaultImage={DEFAULT_MEMBER_THUMBNAIL}
-        id={user?.get('id')}
-        extra={user?.get('extra')}
+        id={user.id}
+        extra={user.extra}
         component="avatar"
       />
       <Typography className={classes.username} variant="body2">
