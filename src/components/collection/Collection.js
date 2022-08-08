@@ -60,7 +60,7 @@ const Collection = ({ id }) => {
     data: member,
     isError: memberIsError,
     isLoading: isLoadingMember,
-  } = hooks.useMember(collection?.get('creator'));
+  } = hooks.useMember(collection?.creator);
   const { data: likeCount } = hooks.useLikeCount(id);
 
   if (!id || !validate(id)) {
@@ -73,27 +73,27 @@ const Collection = ({ id }) => {
 
   const isLoading = isLoadingItem || isLoadingMember;
 
-  const name = collection?.get('name');
+  const name = collection?.name;
   // todo: handle image
   const imageUrl = DEFAULT_ITEM_IMAGE_PATH;
 
-  const parsedDescription = collection?.get('description') || '';
-  const settings = collection?.get('settings');
+  const parsedDescription = collection?.description || '';
+  const settings = collection?.settings;
 
-  const type = collection?.get('type');
+  const type = collection?.type;
   const handlePlay = () => {
     openInNewTab(buildPlayerViewItemRoute(id));
   };
 
   // todo: views don't exist
-  const views = collection?.get('views');
+  const views = collection?.views;
   const likes = likeCount;
   return (
     <ErrorBoundary>
       <Seo
         title={name}
         description={parsedDescription}
-        author={member?.get('name')}
+        author={member?.name}
         image={imageUrl}
       />
       <div id={id} className={classes.root}>

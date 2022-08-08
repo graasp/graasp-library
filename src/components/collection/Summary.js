@@ -326,7 +326,7 @@ function Summary({
               ))}
             </div>
           )}
-          {Boolean(tags?.length) && (
+          {Boolean(tags?.size) && (
             <div id={SUMMARY_TAGS_CONTAINER_ID}>
               <Typography variant="h6">
                 {t(LIBRARY.COLLECTION_TAGS_TITLE)}

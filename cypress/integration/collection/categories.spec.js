@@ -3,7 +3,10 @@ import { buildCollectionRoute } from '../../../src/config/routes';
 import { COLLECTION_LOADING_TIME } from '../../support/constants';
 import { SAMPLE_CATEGORIES } from '../../fixtures/categories';
 import { buildPublicAndPrivateEnvironments } from '../../fixtures/environment';
-import { SUMMARY_CATEGORIES_CONTAINER_ID, SUMMARY_LANGUAGES_CONTAINER_ID } from '../../../src/config/selectors';
+import {
+  SUMMARY_CATEGORIES_CONTAINER_ID,
+  SUMMARY_LANGUAGES_CONTAINER_ID,
+} from '../../../src/config/selectors';
 
 describe('Categories in Summary', () => {
   buildPublicAndPrivateEnvironments().forEach((environment) => {
@@ -16,9 +19,7 @@ describe('Categories in Summary', () => {
 
       cy.get(`#${SUMMARY_LANGUAGES_CONTAINER_ID}`).should('not.exist');
       item.categories.forEach(({ categoryId }) => {
-        const category = SAMPLE_CATEGORIES.find(
-          ({ id }) => id === categoryId,
-        );
+        const category = SAMPLE_CATEGORIES.find(({ id }) => id === categoryId);
         cy.get(`#${SUMMARY_CATEGORIES_CONTAINER_ID}`).should(
           'contain',
           category?.name,
@@ -35,9 +36,7 @@ describe('Categories in Summary', () => {
 
       cy.get(`#${SUMMARY_CATEGORIES_CONTAINER_ID}`).should('not.exist');
       item.categories.forEach(({ categoryId }) => {
-        const category = SAMPLE_CATEGORIES.find(
-          ({ id }) => id === categoryId,
-        );
+        const category = SAMPLE_CATEGORIES.find(({ id }) => id === categoryId);
         cy.get(`#${SUMMARY_LANGUAGES_CONTAINER_ID}`).should(
           'contain',
           category?.name,
