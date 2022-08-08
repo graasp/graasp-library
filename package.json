@@ -28,8 +28,8 @@
   },
   "dependencies": {
     "@graasp/query-client": "github:graasp/graasp-query-client.git",
-    "@graasp/sdk": "github:graasp/graasp-sdk.git",
-    "@graasp/translations": "github:graasp/graasp-translations.git#25/library",
+    "@graasp/sdk": "github:graasp/graasp-sdk.git#29-lang-cookie",
+    "@graasp/translations": "github:graasp/graasp-translations.git",
     "@graasp/ui": "github:graasp/graasp-ui.git",
     "@material-ui/core": "4.12.3",
     "@material-ui/icons": "4.11.2",
@@ -100,5 +100,9 @@
       "pages/api/__coverage__.js"
     ]
   },
-  "packageManager": "yarn@3.2.2"
+  "packageManager": "yarn@3.2.2",
+  "resolutions": {
+    "@graasp/sdk": "portal:/Users/kim/git/graasp-utils",
+    "qs": "6.11.0"
+  }
 }

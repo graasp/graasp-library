@@ -3,6 +3,7 @@ import {
   GRAASP_AUTH_HOST,
   GRAASP_BUILDER_HOST,
   GRAASP_PERFORM_HOST,
+  NEXT_PUBLIC_DOMAIN,
   PUBLISHED_TAG_ID,
 } from './env';
 
@@ -107,3 +108,5 @@ export const SHOW_NOTIFICATIONS =
   ENV_SHOW_NOTIFICATIONS ||
   process.env.REACT_APP_SHOW_NOTIFICATIONS === 'true' ||
   false;
+
+export const DOMAIN = NEXT_PUBLIC_DOMAIN ?? 'localhost';

@@ -2026,9 +2026,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/sdk@github:graasp/graasp-sdk.git":
-  version: 0.1.0
-  resolution: "@graasp/sdk@https://github.com/graasp/graasp-sdk.git#commit=50618ca3045c69daa8221210952259378b7488cd"
+"@graasp/sdk@portal:/Users/kim/git/graasp-utils::locator=graasp-library%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@graasp/sdk@portal:/Users/kim/git/graasp-utils::locator=graasp-library%40workspace%3A."
   dependencies:
     "@fastify/secure-session": 5.2.0
     aws-sdk: 2.1111.0
@@ -2038,9 +2038,8 @@ __metadata:
     qs: 6.11.0
     slonik: 28.1.1
     uuid: 8.3.2
-  checksum: 4dad3572d32190de94665b66c480794982c2841d9dc9237e5c99605b5c1eeafdf6b2514eb43510941e33bfa723d3bbf5d3c6a1fc6b7cec662200d130b867fb9d
   languageName: node
-  linkType: hard
+  linkType: soft
 
 "@graasp/translations@github:graasp/graasp-translations.git":
   version: 0.1.0
@@ -2048,15 +2047,6 @@ __metadata:
   dependencies:
     i18next: 21.6.11
   checksum: bae42e4d5b91b09caa3d84b5568d2394995523ad9d8c80623ace0702ef09bde62f2731741ac4a31a244131ee009360c519d1e10defed4f54eb45de9c0bdc0403
-  languageName: node
-  linkType: hard
-
-"@graasp/translations@github:graasp/graasp-translations.git#25/library":
-  version: 0.1.0
-  resolution: "@graasp/translations@https://github.com/graasp/graasp-translations.git#commit=b57da5c121933fffc915c3bdb0ff62fbee4d95d9"
-  dependencies:
-    i18next: 21.8.1
-  checksum: f6615147c32ea08490c3dcc2c78b1845db7cc064aad329a36433b2536a7192e3e82aed7bff0eb200515678c5165c4472bbfcdbb0fe18319f59d7868495de5a91
   languageName: node
   linkType: hard
 
@@ -6843,8 +6833,8 @@ __metadata:
     "@commitlint/config-conventional": 16.2.1
     "@cypress/code-coverage": 3.9.12
     "@graasp/query-client": "github:graasp/graasp-query-client.git"
-    "@graasp/sdk": "github:graasp/graasp-sdk.git"
-    "@graasp/translations": "github:graasp/graasp-translations.git#25/library"
+    "@graasp/sdk": "github:graasp/graasp-sdk.git#29-lang-cookie"
+    "@graasp/translations": "github:graasp/graasp-translations.git"
     "@graasp/ui": "github:graasp/graasp-ui.git"
     "@material-ui/core": 4.12.3
     "@material-ui/icons": 4.11.2
@@ -9996,28 +9986,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"qs@npm:6.10.3":
-  version: 6.10.3
-  resolution: "qs@npm:6.10.3"
-  dependencies:
-    side-channel: ^1.0.4
-  checksum: 0fac5e6c7191d0295a96d0e83c851aeb015df7e990e4d3b093897d3ac6c94e555dbd0a599739c84d7fa46d7fee282d94ba76943983935cf33bba6769539b8019
-  languageName: node
-  linkType: hard
-
 "qs@npm:6.11.0":
   version: 6.11.0
   resolution: "qs@npm:6.11.0"
   dependencies:
     side-channel: ^1.0.4
   checksum: 6e1f29dd5385f7488ec74ac7b6c92f4d09a90408882d0c208414a34dd33badc1a621019d4c799a3df15ab9b1d0292f97c1dd71dc7c045e69f81a8064e5af7297
-  languageName: node
-  linkType: hard
-
-"qs@npm:~6.5.2":
-  version: 6.5.3
-  resolution: "qs@npm:6.5.3"
-  checksum: 6f20bf08cabd90c458e50855559539a28d00b2f2e7dddcb66082b16a43188418cb3cb77cbd09268bcef6022935650f0534357b8af9eeb29bf0f27ccb17655692
   languageName: node
   linkType: hard
 

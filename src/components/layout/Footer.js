@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { Grid } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
@@ -9,9 +9,13 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
+import { MUTATION_KEYS } from '@graasp/query-client';
+import { setLangCookie } from '@graasp/sdk';
 import { langs } from '@graasp/translations';
 
+import { DOMAIN } from '../../config/constants';
 import i18n from '../../config/i18n';
+import { QueryClientContext } from '../QueryClientContext';
 
 const useStyles = makeStyles(() => ({
   appBar: {
@@ -28,15 +32,22 @@ const useStyles = makeStyles(() => ({
 
 const Footer = () => {
   const classes = useStyles();
+  const { hooks, useMutation } = useContext(QueryClientContext);
+  const { data: member } = hooks.useCurrentMember();
+  const { mutate: editMember } = useMutation(MUTATION_KEYS.EDIT_MEMBER);
 
   const onChangeLanguage = (e) => {
-    // eslint-disable-next-line no-console
-    console.log('e: ', e.target.value);
+    const newLang = e.target.value;
+    i18n.changeLanguage(newLang);
 
     // on signed in: change user language
-    i18n.changeLanguage(e.target.value);
-
+    if (member?.id) {
+      editMember({ extra: { lang: newLang } });
+    }
     // otherwise set cookie
+    else {
+      setLangCookie(newLang, DOMAIN);
+    }
   };
 
   return (
