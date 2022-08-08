@@ -1534,15 +1534,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.12.0":
-  version: 7.18.9
-  resolution: "@babel/runtime@npm:7.18.9"
-  dependencies:
-    regenerator-runtime: ^0.13.4
-  checksum: 36dd736baba7164e82b3cc9d43e081f0cb2d05ff867ad39cac515d99546cee75b7f782018b02a3dcf5f2ef3d27f319faa68965fdfec49d4912c60c6002353a2e
-  languageName: node
-  linkType: hard
-
 "@babel/template@npm:^7.12.13":
   version: 7.18.10
   resolution: "@babel/template@npm:7.18.10"
@@ -2043,10 +2034,10 @@ __metadata:
 
 "@graasp/translations@github:graasp/graasp-translations.git":
   version: 0.1.0
-  resolution: "@graasp/translations@https://github.com/graasp/graasp-translations.git#commit=b5839cf012e2838da6893d5cec9b3ecd5d0d3376"
+  resolution: "@graasp/translations@https://github.com/graasp/graasp-translations.git#commit=bdfce69de5df6fc9761e31ee4f65709efbfd9a51"
   dependencies:
-    i18next: 21.6.11
-  checksum: bae42e4d5b91b09caa3d84b5568d2394995523ad9d8c80623ace0702ef09bde62f2731741ac4a31a244131ee009360c519d1e10defed4f54eb45de9c0bdc0403
+    i18next: 21.8.1
+  checksum: f8d4b86f5f74037f1b278d847dccb004ffd74156caffd7f5af300a44791c779458a20c16607da5a9a49cbf053b61ae926e67c71dda25edaba51e3ff92080c783
   languageName: node
   linkType: hard
 
@@ -7183,15 +7174,6 @@ __metadata:
   version: 1.0.4
   resolution: "hyphenate-style-name@npm:1.0.4"
   checksum: 4f5bf4b055089754924babebaa23c17845937bcca6aee95d5d015f8fa1e6814279002bd6a9e541e3fac2cd02519fc76305396727066c57c8e21a7e73e7a12137
-  languageName: node
-  linkType: hard
-
-"i18next@npm:21.6.11":
-  version: 21.6.11
-  resolution: "i18next@npm:21.6.11"
-  dependencies:
-    "@babel/runtime": ^7.12.0
-  checksum: 42716a7519d6066a8c9400639ab80fba0b568ae02205b1155ec9c4e627704bb2181dd182ff5eb0c91f6c67c8038ddd0754214e1932de5699d488c21ffd617c5e
   languageName: node
   linkType: hard
 

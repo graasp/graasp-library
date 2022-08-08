@@ -43,7 +43,7 @@ const DialogTitle = withStyles(styles)((props) => {
       <Typography variant="h6">{children}</Typography>
       {onClose ? (
         <IconButton
-          aria-label={t('Close')}
+          aria-label={t(LIBRARY.SIGN_IN_MODAL_CLOSE_BUTTON_ARIA_LABEL)}
           className={classes.closeButton}
           onClick={onClose}
         >
@@ -97,7 +97,7 @@ const LoginModalProvider = ({ children }) => {
     setOpen(false);
   };
 
-  const labelId = 'customized-dialog-title';
+  const labelId = 'sign-in-modal';
 
   const renderModal = () => (
     <div>

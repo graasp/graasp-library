@@ -8,6 +8,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 
+import { LIBRARY } from '@graasp/translations';
+
 import { buildCollectionRoute } from '../../config/routes';
 
 const ViewButton = ({ id }) => {
@@ -19,8 +21,8 @@ const ViewButton = ({ id }) => {
   };
 
   return (
-    <Tooltip title={t('View')}>
-      <IconButton onClick={onClick} aria-label={t('View current item')}>
+    <Tooltip title={t(LIBRARY.VIEW_BUTTON_TOOLTIP)}>
+      <IconButton onClick={onClick} aria-label={t(LIBRARY.VIEW_BUTTON_TOOLTIP)}>
         <VisibilityIcon />
       </IconButton>
     </Tooltip>
