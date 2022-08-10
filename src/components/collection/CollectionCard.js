@@ -17,6 +17,7 @@ import SimilarCollectionBadges from './SimilarCollectionBadges';
 import { buildCollectionRoute } from '../../config/routes';
 import { DEFAULT_MEMBER_THUMBNAIL } from '../../config/constants';
 import { QueryClientContext } from '../QueryClientContext';
+import ViewButton from './ViewButton';
 import CopyButton from './CopyButton';
 import CardMedia from '../common/CardMediaComponent';
 import CopyLinkButton from './CopyLinkButton';
@@ -156,6 +157,7 @@ export const CollectionCard = ({ collection = {}, isLoading }) => {
         <CardMedia link={link} name={name} itemId={id} />
       )}
       <CardActions disableSpacing className={classes.actions}>
+        <ViewButton id={id} />
         <CopyButton id={id} />
         <CopyLinkButton id={id} extra={extra} />
         <DownloadButton id={id} />
