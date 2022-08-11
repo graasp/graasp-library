@@ -10,7 +10,7 @@ import { ToastContainer } from 'react-toastify';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 
-import { DEFAULT_LANG } from '@graasp/sdk';
+import { DEFAULT_LANG, getLangCookie } from '@graasp/sdk';
 import { LIBRARY } from '@graasp/translations';
 
 import {
@@ -53,6 +53,12 @@ export default function GraaspLibraryApp(props) {
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
+    }
+
+    // change language
+    const lang = getLangCookie();
+    if (lang) {
+      i18n.changeLanguage(lang);
     }
   }, []);
 

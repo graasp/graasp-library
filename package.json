@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@graasp/query-client": "github:graasp/graasp-query-client.git",
-    "@graasp/sdk": "github:graasp/graasp-sdk.git#29-lang-cookie",
+    "@graasp/sdk": "github:graasp/graasp-sdk.git",
     "@graasp/translations": "github:graasp/graasp-translations.git",
     "@graasp/ui": "github:graasp/graasp-ui.git",
     "@material-ui/core": "4.12.3",
