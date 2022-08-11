@@ -91,6 +91,7 @@
     "istanbul-lib-coverage": "3.2.0",
     "nyc": "15.1.0",
     "prettier": "2.6.1",
+    "qs": "6.11.0",
     "standard-version": "9.5.0",
     "typescript": "4.1.3",
     "wait-on": "6.0.1"
@@ -100,9 +101,5 @@
       "pages/api/__coverage__.js"
     ]
   },
-  "packageManager": "yarn@3.2.2",
-  "resolutions": {
-    "@graasp/sdk": "portal:/Users/kim/git/graasp-utils",
-    "qs": "6.11.0"
-  }
+  "packageManager": "yarn@3.2.2"
 }

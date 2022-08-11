@@ -2017,9 +2017,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/sdk@portal:/Users/kim/git/graasp-utils::locator=graasp-library%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "@graasp/sdk@portal:/Users/kim/git/graasp-utils::locator=graasp-library%40workspace%3A."
+"@graasp/sdk@github:graasp/graasp-sdk.git":
+  version: 0.1.0
+  resolution: "@graasp/sdk@https://github.com/graasp/graasp-sdk.git#commit=9b8bbbfa902c6c6157f4e3255e513c15d398ebe2"
   dependencies:
     "@fastify/secure-session": 5.2.0
     aws-sdk: 2.1111.0
@@ -2029,8 +2029,9 @@ __metadata:
     qs: 6.11.0
     slonik: 28.1.1
     uuid: 8.3.2
+  checksum: 5bd019b105f58ee8ffdff527d9b6110a31d1d82e17101c41ee98e9dae9a75b972547a01e32c3587b8a89458cd738601de2eb48e4eddbc4d6893e01e4845fdbdf
   languageName: node
-  linkType: soft
+  linkType: hard
 
 "@graasp/translations@github:graasp/graasp-translations.git":
   version: 0.1.0
@@ -6865,6 +6866,7 @@ __metadata:
     nyc: 15.1.0
     prettier: 2.6.1
     prop-types: 15.8.1
+    qs: 6.11.0
     react: 17.0.2
     react-dom: 17.0.2
     react-ga: 3.3.0
@@ -9968,12 +9970,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"qs@npm:6.10.3":
+  version: 6.10.3
+  resolution: "qs@npm:6.10.3"
+  dependencies:
+    side-channel: ^1.0.4
+  checksum: 0fac5e6c7191d0295a96d0e83c851aeb015df7e990e4d3b093897d3ac6c94e555dbd0a599739c84d7fa46d7fee282d94ba76943983935cf33bba6769539b8019
+  languageName: node
+  linkType: hard
+
 "qs@npm:6.11.0":
   version: 6.11.0
   resolution: "qs@npm:6.11.0"
   dependencies:
     side-channel: ^1.0.4
   checksum: 6e1f29dd5385f7488ec74ac7b6c92f4d09a90408882d0c208414a34dd33badc1a621019d4c799a3df15ab9b1d0292f97c1dd71dc7c045e69f81a8064e5af7297
+  languageName: node
+  linkType: hard
+
+"qs@npm:~6.5.2":
+  version: 6.5.3
+  resolution: "qs@npm:6.5.3"
+  checksum: 6f20bf08cabd90c458e50855559539a28d00b2f2e7dddcb66082b16a43188418cb3cb77cbd09268bcef6022935650f0534357b8af9eeb29bf0f27ccb17655692
   languageName: node
   linkType: hard
 
