@@ -11,7 +11,7 @@ jobs:
   graasp-deploy-ecs-workflow:
     # repository name
     name: Graasp Library
-    uses: graasp/graasp-deploy/.github/workflows/cdelivery-ecs-explorer.yml@561d696d12551c19bc52173cf46fe272bf2af657
+    uses: graasp/graasp-deploy/.github/workflows/cdelivery-ecs-explorer.yml@24914c9027372799b1305748e1b004862c365ad2
     # ecs-task-definition template file
     with:
       ecs-task-definition: '.aws/graasp-explorer-stage.json'
