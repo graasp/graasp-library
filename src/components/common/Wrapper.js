@@ -2,13 +2,15 @@ import { ErrorBoundary } from '@sentry/react';
 import PropTypes from 'prop-types';
 
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { I18nextProvider, useTranslation } from 'react-i18next';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { Divider, makeStyles } from '@material-ui/core';
 
+import { getLangCookie } from '@graasp/sdk';
 import { LIBRARY } from '@graasp/translations';
 
+import i18n from '../../config/i18n';
 import { QueryClientProvider } from '../QueryClientContext';
 import Footer from '../layout/Footer';
 import Header from '../layout/Header';
@@ -26,25 +28,46 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Wrapper({ dehydratedState, children }) {
+const Content = ({ children }) => {
   const classes = useStyles();
   const { t } = useTranslation();
-
   return (
     <ErrorBoundary fallback={t(LIBRARY.UNEXPECTED_ERROR_MESSAGE)}>
-      <div className={classes.root}>
-        <QueryClientProvider dehydratedState={dehydratedState}>
-          <LoginModalProvider>
-            <Header />
-            {children}
-            <Divider className={classes.divider} />
-            <Footer />
-          </LoginModalProvider>
-        </QueryClientProvider>
-      </div>
+      <LoginModalProvider>
+        <Header />
+        {children}
+        <Divider className={classes.divider} />
+        <Footer />
+      </LoginModalProvider>
     </ErrorBoundary>
   );
-}
+};
+
+Content.propTypes = {
+  children: PropTypes.element.isRequired,
+};
+
+const Wrapper = ({ dehydratedState, children }) => {
+  const classes = useStyles();
+
+  React.useEffect(() => {
+    // change language
+    const lang = getLangCookie();
+    if (lang) {
+      i18n.changeLanguage(lang);
+    }
+  }, []);
+
+  return (
+    <div className={classes.root}>
+      <QueryClientProvider dehydratedState={dehydratedState}>
+        <I18nextProvider i18n={i18n}>
+          <Content>{children}</Content>
+        </I18nextProvider>
+      </QueryClientProvider>
+    </div>
+  );
+};
 
 Wrapper.propTypes = {
   dehydratedState: PropTypes.shape({}).isRequired,

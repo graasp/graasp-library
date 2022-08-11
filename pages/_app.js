@@ -4,13 +4,12 @@ import PropTypes from 'prop-types';
 
 import React, { useEffect } from 'react';
 import ReactGa from 'react-ga';
-import { I18nextProvider, useTranslation } from 'react-i18next';
 import { ToastContainer } from 'react-toastify';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 
-import { DEFAULT_LANG, getLangCookie } from '@graasp/sdk';
+import { DEFAULT_LANG } from '@graasp/sdk';
 import { LIBRARY } from '@graasp/translations';
 
 import {
@@ -46,7 +45,6 @@ if (typeof window !== 'undefined') {
 
 export default function GraaspLibraryApp(props) {
   const { Component, pageProps } = props;
-  const { t } = useTranslation();
 
   // Remove the server-side injected CSS.
   useEffect(() => {
@@ -54,31 +52,23 @@ export default function GraaspLibraryApp(props) {
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
-
-    // change language
-    const lang = getLangCookie();
-    if (lang) {
-      i18n.changeLanguage(lang);
-    }
   }, []);
 
   return (
     <>
       <Head>
-        <title>{t(LIBRARY.GRAASP_LIBRARY)}</title>
+        <title>Graasp Library</title>
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
-      <I18nextProvider i18n={i18n}>
-        <MuiThemeProvider theme={theme}>
-          <CssBaseline />
-          {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-          <Component {...pageProps} />
-          <ToastContainer theme="colored" />
-        </MuiThemeProvider>
-      </I18nextProvider>
+      <MuiThemeProvider theme={theme}>
+        <CssBaseline />
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+        <Component {...pageProps} />
+        <ToastContainer theme="colored" />
+      </MuiThemeProvider>
     </>
   );
 }

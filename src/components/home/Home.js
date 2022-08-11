@@ -68,6 +68,7 @@ function Home() {
       placeholderData: PLACEHOLDER_COLLECTIONS,
     },
   );
+
   // remove errors
   // todo: avoid getting errors from backend
   const collectionsWithoutErrors = filterErrorItems(collections);
@@ -154,8 +155,6 @@ function Home() {
           {t(LIBRARY.HOME_TITLE)}
         </Typography>
 
-        <CreateButton />
-
         <Search
           handleSearch={handleKeywordInput}
           handleClick={handleClick}
@@ -171,6 +170,7 @@ function Home() {
           className={classes.typographyMargin}
         >
           {t(LIBRARY.HOME_MORE_COLLECTIONS_TITLE)}
+          <CreateButton />
         </Typography>
         <CollectionsGrid
           id={COLLECTIONS_GRID_ID}
