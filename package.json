@@ -6,7 +6,7 @@
     "start": "next dev -p 3005",
     "start:test": "NODE_ENV='test' next dev -p 3005",
     "start:ci": "yarn build && yarn start:next",
-    "start:next": "next start -p 3005",
+    "start:next": "next start",
     "start:prod": "NODE_ENV=production node build/server.js",
     "build": "next build",
     "hooks:uninstall": "husky uninstall",
