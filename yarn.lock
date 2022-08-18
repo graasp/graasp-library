@@ -1997,9 +1997,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/query-client@github:graasp/graasp-query-client.git#188/ChangeImmutableImplementationToWorkProperlyWithReactQuery":
+"@graasp/query-client@github:graasp/graasp-query-client.git":
   version: 0.1.0
-  resolution: "@graasp/query-client@https://github.com/graasp/graasp-query-client.git#commit=43903a5a9c8f0da2f50487414a007a97b77adac9"
+  resolution: "@graasp/query-client@https://github.com/graasp/graasp-query-client.git#commit=1872025f2191336c792b31f729d471721d3ae30b"
   dependencies:
     "@graasp/translations": "github:graasp/graasp-translations.git"
     "@graasp/utils": "github:graasp/graasp-utils.git"
@@ -2014,7 +2014,7 @@ __metadata:
     uuid: 8.3.2
   peerDependencies:
     react: ^17.0.0
-  checksum: 544f14a56e50327bcb6adb0fe11fe9f536c13525dfe6db60875ccf8ce9617f5d4af2a347424be1809a2a90f4c0012ca546fafb54059b1c544afca0f696638635
+  checksum: 2f9c83ec4f00edf81993be6a2b1c0a16cd6a0cf4abad876b93aecd42ac8e1da4b9c977a5cd280c8af4dcfc5a6a6acd3234eff13a90bda363620d320381747474
   languageName: node
   linkType: hard
 
@@ -2045,7 +2045,7 @@ __metadata:
 
 "@graasp/ui@github:graasp/graasp-ui.git":
   version: 0.2.0
-  resolution: "@graasp/ui@https://github.com/graasp/graasp-ui.git#commit=a5fb85c4684f848901815e0691ae9d3e3a89ed6e"
+  resolution: "@graasp/ui@https://github.com/graasp/graasp-ui.git#commit=8e38ca1792bc922cfaff872551620ef8a20db7c9"
   dependencies:
     "@graasp/sdk": "github:graasp/graasp-sdk.git"
     clsx: 1.1.1
@@ -2075,7 +2075,7 @@ __metadata:
       optional: true
     ag-grid-react:
       optional: true
-  checksum: 8178b01ea61e1df5eb1d4ab468680ed47f414b9e5fde07730a8064768cf59977b1c9f46f5471c09a9b37da117aa27768ebc3eb6fc56783c93e05c865ee02b6d5
+  checksum: 59d4db944de392c52414a77f3f01b2fda6d5e0782fd6fa3f6b9544439cd160660d406bdb756bbf2755cd10bf4fc1391dcd9cfbf1c83049217dc2e50b62c3f2e2
   languageName: node
   linkType: hard
 
@@ -6825,7 +6825,7 @@ __metadata:
     "@commitlint/cli": 16.2.3
     "@commitlint/config-conventional": 16.2.1
     "@cypress/code-coverage": 3.9.12
-    "@graasp/query-client": "github:graasp/graasp-query-client.git#188/ChangeImmutableImplementationToWorkProperlyWithReactQuery"
+    "@graasp/query-client": "github:graasp/graasp-query-client.git"
     "@graasp/sdk": "github:graasp/graasp-sdk.git"
     "@graasp/translations": "github:graasp/graasp-translations.git"
     "@graasp/ui": "github:graasp/graasp-ui.git"

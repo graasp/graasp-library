@@ -27,7 +27,7 @@
     "cypress:run": "env-cmd -f ./.env.test cypress run --headless --browser chrome --spec \"cypress/**/*.spec.js\""
   },
   "dependencies": {
-    "@graasp/query-client": "github:graasp/graasp-query-client.git#188/ChangeImmutableImplementationToWorkProperlyWithReactQuery",
+    "@graasp/query-client": "github:graasp/graasp-query-client.git",
     "@graasp/sdk": "github:graasp/graasp-sdk.git",
     "@graasp/translations": "github:graasp/graasp-translations.git",
     "@graasp/ui": "github:graasp/graasp-ui.git",
