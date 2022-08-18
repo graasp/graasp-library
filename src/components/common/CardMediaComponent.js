@@ -19,14 +19,7 @@ const Thumbnail = dynamic(
   { ssr: false },
 );
 
-const CardMediaComponent = ({
-  className,
-  name,
-  link,
-  itemId,
-  itemExtra,
-  size,
-}) => {
+const CardMediaComponent = ({ className, name, link, itemId, size }) => {
   const router = useRouter();
   const useStyles = makeStyles(() => ({
     media: {
@@ -45,7 +38,6 @@ const CardMediaComponent = ({
   const { hooks } = useContext(QueryClientContext);
 
   const classes = useStyles();
-
   return (
     <CardMedia
       className={clsx(classes.media, className)}
@@ -63,11 +55,11 @@ const CardMediaComponent = ({
         }}
       >
         <Thumbnail
-          defaultImage={DEFAULT_ITEM_IMAGE_PATH}
+          defaultValue={<img src={DEFAULT_ITEM_IMAGE_PATH} alt="thumbnail" />}
           alt={name}
           useThumbnail={hooks.useItemThumbnail}
           id={itemId}
-          extra={itemExtra}
+          thumbnailSrc={DEFAULT_ITEM_IMAGE_PATH}
           className={classes.image}
           size={size}
         />

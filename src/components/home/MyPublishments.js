@@ -19,7 +19,7 @@ function MyPublishments({ tab, index }) {
     },
   );
   const ownCollections = collections?.filter(
-    (collection) => collection?.creator === member?.get('id'),
+    (collection) => collection?.creator === member?.id,
   );
 
   return (

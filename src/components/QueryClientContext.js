@@ -1,10 +1,9 @@
-import { List, Map } from 'immutable';
-import isObject from 'lodash.isobject';
 import PropTypes from 'prop-types';
 
 import React from 'react';
 
 import { configureQueryClient } from '@graasp/query-client';
+import { convertJs } from '@graasp/sdk';
 
 import { QUERY_CLIENT_OPTIONS } from '../config/queryClient';
 
@@ -17,12 +16,11 @@ const QueryClientProvider = ({ children, dehydratedState }) => {
   // transform queryclient data into immutable data
   // we can't pass immutable from server
   // eslint-disable-next-line no-restricted-syntax
-  for (const query of dehydratedState.queries) {
-    if (Array.isArray(query.state.data)) {
-      query.state.data = List(query.state.data);
-    } else if (isObject(query.state.data)) {
-      query.state.data = Map(query.state.data);
-    }
+  if (convertJs) {
+    dehydratedState.queries.forEach((query) => {
+      // eslint-disable-next-line no-param-reassign
+      query.state.data = convertJs(query.state.data);
+    });
   }
 
   return (

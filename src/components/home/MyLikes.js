@@ -18,7 +18,7 @@ function MyLikes({ tab, index }) {
       placeholderData: PLACEHOLDER_COLLECTIONS,
     },
   );
-  const { data: likedItems } = hooks.useLikedItems(member?.get('id'));
+  const { data: likedItems } = hooks.useLikedItems(member?.id);
   const likedItemsList = likedItems?.map((entry) => entry.itemId);
   const likedCollections = collections?.filter((collection) =>
     likedItemsList?.includes(collection?.id),

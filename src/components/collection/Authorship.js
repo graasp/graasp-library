@@ -43,7 +43,7 @@ const Authorship = ({ itemId, author, isLoading }) => {
         ?.filter(
           ({ permission, memberId }) =>
             (permission === 'write' || permission === 'admin') &&
-            memberId !== author?.get('id'),
+            memberId !== author?.id,
         )
         ?.map(({ memberId }) => memberId),
     ),
@@ -61,7 +61,7 @@ const Authorship = ({ itemId, author, isLoading }) => {
     return null;
   }
 
-  const authorName = author?.get('name');
+  const authorName = author?.name;
 
   return (
     // wrapper div is necessary for grid to apply
@@ -87,8 +87,8 @@ const Authorship = ({ itemId, author, isLoading }) => {
                   useAvatar={hooks.useAvatar}
                   alt={t(LIBRARY.AVATAR_ALT, { name: authorName })}
                   defaultImage={DEFAULT_MEMBER_THUMBNAIL}
-                  id={author?.get('id')}
-                  extra={author?.get('extra')}
+                  id={author?.id}
+                  extra={author?.extra}
                   component="avatar"
                   maxWidth={30}
                   maxHeight={30}
@@ -104,7 +104,7 @@ const Authorship = ({ itemId, author, isLoading }) => {
         <Grid item xs={12} sm={6}>
           <Contributors
             contributors={contributors}
-            displayContributors={item?.get('settings')?.displayCoEditors}
+            displayContributors={item?.settings?.displayCoEditors}
           />
         </Grid>
       </Grid>

@@ -110,11 +110,11 @@ export const CollectionCard = ({ collection = {}, isLoading }) => {
   ) : (
     <Avatar
       useAvatar={hooks.useAvatar}
-      alt={t(LIBRARY.AVATAR_ALT, { name: author?.get('name') })}
+      alt={t(LIBRARY.AVATAR_ALT, { name: author?.name })}
       className={classes.avatar}
       defaultImage={DEFAULT_MEMBER_THUMBNAIL}
       id={creator}
-      extra={author?.get('extra')}
+      extra={author?.extra}
       component="avatar"
       maxWidth={30}
       maxHeight={30}
@@ -141,7 +141,7 @@ export const CollectionCard = ({ collection = {}, isLoading }) => {
         avatar={avatar}
         action={action}
         title={name}
-        subheader={author?.get('name')}
+        subheader={author?.name}
         titleTypographyProps={{ title: name }}
         classes={{
           root: classes.header,

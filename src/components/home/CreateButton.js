@@ -28,7 +28,7 @@ const CreateButton = () => {
   };
 
   // show create button only if logged in
-  if (!user || !user.get('id')) {
+  if (!user || !user.id) {
     return null;
   }
 

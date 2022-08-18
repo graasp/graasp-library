@@ -6,7 +6,7 @@
     "start": "next dev -p 3005",
     "start:test": "NODE_ENV='test' next dev -p 3005",
     "start:ci": "yarn build && yarn start:next",
-    "start:next": "next start",
+    "start:next": "next start -p 3005",
     "start:prod": "NODE_ENV=production node build/server.js",
     "build": "next build",
     "hooks:uninstall": "husky uninstall",
@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@graasp/query-client": "github:graasp/graasp-query-client.git",
-    "@graasp/sdk": "github:graasp/graasp-sdk.git",
+    "@graasp/sdk": "github:graasp/graasp-sdk.git#36-convert-js",
     "@graasp/translations": "github:graasp/graasp-translations.git",
     "@graasp/ui": "github:graasp/graasp-ui.git",
     "@material-ui/core": "4.12.3",

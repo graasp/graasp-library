@@ -162,9 +162,11 @@ function Summary({
 
   const { data: flags } = hooks.useFlags();
 
-  const isFavorite = member?.get('extra')?.favoriteItems?.includes(itemId);
+  const isFavorite = member?.extra?.favoriteItems?.includes(itemId);
 
   const likeEntry = likedItems?.find((itemLike) => itemLike?.itemId === itemId);
+
+  const { id: memberId, extra: memberExtra } = member || {};
 
   const onFlag = () => {
     postFlagItem({
@@ -176,16 +178,16 @@ function Summary({
 
   const handleFavorite = () => {
     addFavoriteItem({
-      memberId: member.get('id'),
-      extra: member?.get('extra'),
+      memberId,
+      extra: memberExtra,
       itemId,
     });
   };
 
   const handleUnfavorite = () => {
     deleteFavoriteItem({
-      memberId: member.get('id'),
-      extra: member?.get('extra'),
+      memberId,
+      extra: memberExtra,
       itemId,
     });
   };
@@ -193,7 +195,7 @@ function Summary({
   const handleLike = () => {
     postItemLike({
       itemId,
-      memberId: member.get('id'),
+      memberId,
     });
   };
 
@@ -201,7 +203,7 @@ function Summary({
     deleteItemLike({
       id: likeEntry?.id,
       itemId,
-      memberId: member.get('id'),
+      memberId,
     });
   };
 

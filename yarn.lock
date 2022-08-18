@@ -2034,6 +2034,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@graasp/sdk@github:graasp/graasp-sdk.git#36-convert-js":
+  version: 0.1.0
+  resolution: "@graasp/sdk@https://github.com/graasp/graasp-sdk.git#commit=a07a80d2a79412aa95f96c313da95ee79e5af840"
+  dependencies:
+    "@fastify/secure-session": 5.2.0
+    aws-sdk: 2.1111.0
+    fastify: ^3.29.1
+    fluent-json-schema: 3.1.0
+    immutable: 4.1.0
+    js-cookie: 3.0.1
+    qs: 6.11.0
+    slonik: 28.1.1
+    uuid: 8.3.2
+  checksum: c2dbb4a4f478429cbc19187f453fe7e181964e9dd53c349ee6f7d2ed0ec4e67c485314a06dc97685faeb7522fb4fded00bc5fdbce59bdb512e1dfff6d7526cfe
+  languageName: node
+  linkType: hard
+
 "@graasp/translations@github:graasp/graasp-translations.git":
   version: 0.1.0
   resolution: "@graasp/translations@https://github.com/graasp/graasp-translations.git#commit=bdfce69de5df6fc9761e31ee4f65709efbfd9a51"
@@ -6826,7 +6843,7 @@ __metadata:
     "@commitlint/config-conventional": 16.2.1
     "@cypress/code-coverage": 3.9.12
     "@graasp/query-client": "github:graasp/graasp-query-client.git"
-    "@graasp/sdk": "github:graasp/graasp-sdk.git"
+    "@graasp/sdk": "github:graasp/graasp-sdk.git#36-convert-js"
     "@graasp/translations": "github:graasp/graasp-translations.git"
     "@graasp/ui": "github:graasp/graasp-ui.git"
     "@material-ui/core": 4.12.3

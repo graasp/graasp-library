@@ -18,7 +18,7 @@ function MyFavorites({ tab, index }) {
       placeholderData: PLACEHOLDER_COLLECTIONS,
     },
   );
-  const favoriteItemsList = member?.get('extra')?.favoriteItems || [];
+  const favoriteItemsList = member?.extra?.favoriteItems || [];
   const favoriteCollections = collections?.filter((collection) =>
     favoriteItemsList?.includes(collection?.id),
   );
