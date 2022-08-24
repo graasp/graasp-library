@@ -48,8 +48,8 @@ const CopyButton = ({ id }) => {
   }
 
   const onClick = () => {
-    // display sign in modal if the user is not signed in
-    if (!user?.id) {
+    // show item tree, otherwise display sign in modal if the user is not signed in
+    if (user?.id) {
       setShowTreeModal(true);
     } else {
       openLoginModal(true);
