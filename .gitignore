@@ -66,5 +66,5 @@ build/*
 
 # nextjs
 .next
-
+next-env.d.ts
 .vscode

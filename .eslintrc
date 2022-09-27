@@ -9,7 +9,8 @@
   },
   "globals": {
     "cy": true,
-    "Cypress": true
+    "Cypress": true,
+    "JSX": true
   },
   "parser": "babel-eslint",
   "rules": {
@@ -32,7 +33,7 @@
     "react/jsx-filename-extension": [
       1,
       {
-        "extensions": [".js", ".jsx"]
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     ],
     "import/no-named-as-default": 0,

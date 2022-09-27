@@ -16,8 +16,10 @@ jobs:
   graasp-deploy-ecs-workflow:
     name: Graasp Library
     # Reference reusable workflow file. Using the commit SHA is the safest for stability and security
-    uses: graasp/graasp-deploy/.github/workflows/cintegration-ecs-explorer.yml@7a11bf6007f0374a81410b8961e929d903d7fa15
+    uses: graasp/graasp-deploy/.github/workflows/cintegration-ecs-explorer.yml@968fd210415ef9c7ba6bab463bf00f7cec2d8f22
     with:
+      app-name: $npm_package_name
+      app-version: $npm_package_version
       ecs-task-definition: '.aws/graasp-explorer-dev.json'
     secrets:
       aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}

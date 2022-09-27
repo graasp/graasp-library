@@ -1,3 +1,4 @@
+import { isImmutable } from 'immutable';
 import PropTypes from 'prop-types';
 
 import React from 'react';
@@ -16,12 +17,12 @@ const QueryClientProvider = ({ children, dehydratedState }) => {
   // transform queryclient data into immutable data
   // we can't pass immutable from server
   // eslint-disable-next-line no-restricted-syntax
-  if (convertJs) {
-    dehydratedState.queries.forEach((query) => {
+  dehydratedState.queries.forEach((query) => {
+    if (!isImmutable(query.state.data)) {
       // eslint-disable-next-line no-param-reassign
       query.state.data = convertJs(query.state.data);
-    });
-  }
+    }
+  });
 
   return (
     <QueryClientContext.Provider value={value}>

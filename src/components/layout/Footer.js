@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 
 import { Grid } from '@material-ui/core';
-import AppBar from '@material-ui/core/AppBar';
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
@@ -18,7 +17,7 @@ import i18n from '../../config/i18n';
 import { QueryClientContext } from '../QueryClientContext';
 
 const useStyles = makeStyles(() => ({
-  appBar: {
+  footer: {
     top: 'auto',
     bottom: 0,
   },
@@ -52,27 +51,25 @@ const Footer = () => {
 
   return (
     <footer>
-      <AppBar position="fixed" color="default" className={classes.appBar}>
-        <Toolbar>
-          <Grid container justifyContent="space-between" alignItems="center">
-            <Grid item>
-              <Typography variant="subtitle1" className={classes.content}>
-                &copy;
-                {`${new Date().getFullYear()} Graasp Association`}
-              </Typography>
-            </Grid>
-            <Grid item>
-              <FormControl className={classes.formControl}>
-                <Select value={i18n.language} onChange={onChangeLanguage}>
-                  {Object.entries(langs).map(([key, lang]) => (
-                    <MenuItem value={key}>{lang}</MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Grid>
+      <Toolbar className={classes.footer}>
+        <Grid container justifyContent="space-between" alignItems="center">
+          <Grid item>
+            <Typography variant="subtitle1" className={classes.content}>
+              &copy;
+              {`${new Date().getFullYear()} Graasp Association`}
+            </Typography>
           </Grid>
-        </Toolbar>
-      </AppBar>
+          <Grid item>
+            <FormControl className={classes.formControl}>
+              <Select value={i18n.language} onChange={onChangeLanguage}>
+                {Object.entries(langs).map(([key, lang]) => (
+                  <MenuItem value={key}>{lang}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+        </Grid>
+      </Toolbar>
     </footer>
   );
 };
