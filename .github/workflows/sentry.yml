@@ -2,14 +2,14 @@ name: sentry release
 on:
   push:
     tags:  
-      - '*'           # Push events to every tag not containing /
+      - '*'      
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: yarn install, build
-        uses: yarn && yarn build
+        run: yarn && yarn build
       - name: Create Sentry release
         uses: getsentry/action-release@v1
         env:
