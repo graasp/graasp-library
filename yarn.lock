@@ -1924,9 +1924,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/ui@github:graasp/graasp-ui.git":
-  version: 0.2.0
-  resolution: "@graasp/ui@https://github.com/graasp/graasp-ui.git#commit=13ae642e8cfbb9e23404a540b168331a32fe6c8a"
+"@graasp/ui@github:graasp/graasp-ui.git#v0.2.1":
+  version: 0.2.1
+  resolution: "@graasp/ui@https://github.com/graasp/graasp-ui.git#commit=c2c71ce50d6e7fe24eb1e46ffcb7a04f5036679e"
   dependencies:
     "@graasp/sdk": "github:graasp/graasp-sdk.git"
     clsx: 1.1.1
@@ -1956,7 +1956,7 @@ __metadata:
       optional: true
     ag-grid-react:
       optional: true
-  checksum: a2a11e834e0ba52be4f4e4c1817e9208e8e6930ed2c3e66daf3b9974459a0d515021c2bf31ee7ac3887e2f1d71bc698a322ecfb682505a3a2b5e60a95b4ae1d4
+  checksum: b0eedf1987ef5d35e3a3970b2707b235e00bb334e624b9c2c62c4a2a0c0a119696015461607b27b98c907b94f1a10690e76a186d7237b844263b0a9e841736dc
   languageName: node
   linkType: hard
 
@@ -6822,7 +6822,7 @@ __metadata:
     "@graasp/query-client": "github:graasp/graasp-query-client.git"
     "@graasp/sdk": "github:graasp/graasp-sdk.git"
     "@graasp/translations": "github:graasp/graasp-translations.git"
-    "@graasp/ui": "github:graasp/graasp-ui.git"
+    "@graasp/ui": "github:graasp/graasp-ui.git#v0.2.1"
     "@material-ui/core": 4.12.3
     "@material-ui/icons": 4.11.2
     "@material-ui/lab": 4.0.0-alpha.60
