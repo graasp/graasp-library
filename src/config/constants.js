@@ -110,3 +110,9 @@ export const SHOW_NOTIFICATIONS =
   false;
 
 export const DOMAIN = NEXT_PUBLIC_DOMAIN ?? 'localhost';
+
+export const ENV = {
+  DEVELOPMENT: 'development',
+  PRODUCTION: 'production',
+  TEST: 'test',
+};

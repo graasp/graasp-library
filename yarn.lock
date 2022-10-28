@@ -1917,10 +1917,10 @@ __metadata:
 
 "@graasp/translations@github:graasp/graasp-translations.git":
   version: 0.1.0
-  resolution: "@graasp/translations@https://github.com/graasp/graasp-translations.git#commit=0f5118b010857128c9ceb19032ceff0e59b5bb41"
+  resolution: "@graasp/translations@https://github.com/graasp/graasp-translations.git#commit=97252587d033d6ba804728107969851ef472c7ab"
   dependencies:
     i18next: 21.8.1
-  checksum: 2c00fc7cff04584a07d66caabcb55d95f2eb2ead9071e28b9053c37b3f055bf056469a40fbd94f63d3091864f549854955ee6bc604c941fe02d397dbc51a6e66
+  checksum: 7c5e398ddab314d77c94fd7e1b6de11c5b383403e89492e40f428c752d580a388e694599a204a2f7e5a27e4eb5ee4aa510fdb11195b101a0988f0842034ef273
   languageName: node
   linkType: hard
 
@@ -6867,7 +6867,7 @@ __metadata:
     qs: 6.11.0
     react: 17.0.2
     react-dom: 17.0.2
-    react-ga: 3.3.0
+    react-ga4: 1.4.1
     react-helmet: 6.1.0
     react-i18next: 11.16.2
     react-query: 3.34.19
@@ -10180,13 +10180,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-ga@npm:3.3.0":
-  version: 3.3.0
-  resolution: "react-ga@npm:3.3.0"
-  peerDependencies:
-    prop-types: ^15.6.0
-    react: ^15.6.2 || ^16.0 || ^17
-  checksum: b4f5b0ed3a5d7ea781397d6a1f8dacae2284fe7f03f72dde330958dd0a64732f8766c6fa26cf0f1a8fb1303fa02aa51f23cf0b261e52981d0275262b831c7fea
+"react-ga4@npm:1.4.1":
+  version: 1.4.1
+  resolution: "react-ga4@npm:1.4.1"
+  checksum: 4c33ecb47dfc26c241a6af8e2b08b29b6c059f40e456e93d1c2b65c995edce18f32d9777295774ec992d968d7c5efdd105eb62398972d85ff2e2b6dad8646a26
   languageName: node
   linkType: hard
 

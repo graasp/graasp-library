@@ -1,15 +1,19 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import * as Sentry from '@sentry/react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 import React, { useEffect } from 'react';
-import ReactGa from 'react-ga';
+import ReactGA from 'react-ga4';
 import { ToastContainer } from 'react-toastify';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 
-import { GOOGLE_ANALYTICS_ID, SENTRY_DSN } from '../src/config/env';
+import { hasAcceptedCookies } from '@graasp/sdk';
+
+import { ENV } from '../src/config/constants';
+import { GA_MEASUREMENT_ID, NODE_ENV, SENTRY_DSN } from '../src/config/env';
 import WHITELISTED_ERRORS from '../src/config/errors';
 import theme from '../src/config/theme';
 
@@ -29,12 +33,6 @@ if (SENTRY_DSN) {
   });
 }
 
-// set up google analytics
-if (typeof window !== 'undefined') {
-  ReactGa.initialize(GOOGLE_ANALYTICS_ID);
-  ReactGa.pageview(window.location.href);
-}
-
 type Props = {
   Component: React.ComponentClass;
   pageProps: any;
@@ -42,6 +40,7 @@ type Props = {
 
 export default function GraaspLibraryApp(props: Props) {
   const { Component, pageProps } = props;
+  const router = useRouter();
 
   // Remove the server-side injected CSS.
   useEffect(() => {
@@ -49,6 +48,25 @@ export default function GraaspLibraryApp(props: Props) {
     if (jssStyles && jssStyles.parentElement) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
+  }, []);
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      // REACTGA
+      // Send pageview with a custom path
+      if (GA_MEASUREMENT_ID && hasAcceptedCookies() && NODE_ENV !== ENV.TEST) {
+        ReactGA.initialize(GA_MEASUREMENT_ID);
+        ReactGA.send('pageview');
+      }
+    };
+
+    router.events.on('routeChangeComplete', handleRouteChange);
+
+    // If the component is unmounted, unsubscribe
+    // from the event with the `off` method:
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
   }, []);
 
   return (

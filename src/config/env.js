@@ -16,6 +16,8 @@ export const GRAASP_PERFORM_HOST =
 export const GRAASP_BUILDER_HOST =
   publicRuntimeConfig.NEXT_PUBLIC_GRAASP_BUILDER_HOST;
 export const NODE_ENV = publicRuntimeConfig.NODE_ENV;
+export const GA_MEASUREMENT_ID =
+  publicRuntimeConfig.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 export const NEXT_PUBLIC_GRAASPER_ID =
   publicRuntimeConfig.NEXT_PUBLIC_GRAASPER_ID;
 export const S3_FILES_HOST = publicRuntimeConfig.NEXT_PUBLIC_S3_FILES_HOST;
