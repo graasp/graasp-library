@@ -40,3 +40,9 @@ export const MY_LIKES_COLLECTIONS_ID = 'likedCollectionsGrid';
 export const MY_PUBLISHMENTS_COLLECTIONS_ID = 'publishmentCollectionsGrid';
 
 export const APP_NAVIGATION_DROP_DOWN_ID = 'appNavigationDropDown';
+
+export const COPY_MODAL_TITLE_ID = 'copyModalTitle';
+export const TREE_MODAL_MY_ITEMS_ID = 'treeModalMyItems';
+export const TREE_MODAL_SHARED_ITEMS_ID = 'treeModalSharedItems';
+export const TREE_MODAL_CONFIRM_BUTTON_ID = 'treeModalConfirmButton';
+export const buildTreeItemId = (id, treeRootId) => `${treeRootId}-${id}`;

@@ -25,20 +25,20 @@ const CopyButton = ({ id }) => {
     MUTATION_KEYS.COPY_PUBLIC_ITEM,
   );
 
-  const { setOpen: openLoginModal, open: showLoginModal } =
+  const { setOpen: setShowLoginModal, open: showLoginModal } =
     useContext(LoginModalContext);
 
   useEffect(() => {
     // if the user signs in while the login modal is open
     // switch to copy modal
     if (showLoginModal && !user?.id) {
-      openLoginModal(false);
+      setShowLoginModal(false);
       setShowTreeModal(true);
     }
     // if user signs out while copying
     // show login modal instead
     else if (showTreeModal && !user?.id) {
-      openLoginModal(true);
+      setShowLoginModal(true);
       setShowTreeModal(false);
     }
   }, [user]);
@@ -52,15 +52,15 @@ const CopyButton = ({ id }) => {
     if (user?.id) {
       setShowTreeModal(true);
     } else {
-      openLoginModal(true);
+      setShowLoginModal(true);
     }
   };
 
   // todo: set notifier for copy
-  const copy = ({ id: toSpace }) => {
+  const copy = ({ to }) => {
     // remove loading icon on callback
     // do not set parent if it is root
-    copyItem({ id, to: toSpace === ROOT_ID ? undefined : toSpace });
+    copyItem({ id, to: to === ROOT_ID ? undefined : to });
   };
 
   const renderButton = () => {
@@ -85,12 +85,11 @@ const CopyButton = ({ id }) => {
       {renderButton()}
       {user?.id && (
         <TreeModal
-          description={t(LIBRARY.COPY_BUTTON_MODAL_DESCRIPTION)}
           title={t(LIBRARY.COPY_BUTTON_MODAL_TITLE)}
           open={showTreeModal}
-          onConfirm={copy}
-          itemId={id}
           onClose={() => setShowTreeModal(false)}
+          onConfirm={copy}
+          itemIds={[id]}
         />
       )}
     </>

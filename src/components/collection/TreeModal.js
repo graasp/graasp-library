@@ -1,127 +1,145 @@
-import PropTypes from 'prop-types';
+import dynamic from 'next/dynamic';
+import PropTypes, { arrayOf } from 'prop-types';
 
 import React, { useContext, useState } from 'react';
-import { withTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Skeleton from '@material-ui/lab/Skeleton';
-import TreeItem from '@material-ui/lab/TreeItem';
-import TreeView from '@material-ui/lab/TreeView';
 
 import { LIBRARY } from '@graasp/translations';
 
 import {
   ITEM_TYPES,
   ROOT_ID,
-  TREE_VIEW_HEIGHT,
-  TREE_VIEW_MIN_WIDTH,
+  TREE_VIEW_MAX_WIDTH,
 } from '../../config/constants';
+import {
+  COPY_MODAL_TITLE_ID,
+  TREE_MODAL_CONFIRM_BUTTON_ID,
+  TREE_MODAL_MY_ITEMS_ID,
+  TREE_MODAL_SHARED_ITEMS_ID,
+  buildTreeItemId,
+} from '../../config/selectors';
 import { QueryClientContext } from '../QueryClientContext';
 
-const styles = () => ({
-  root: {
-    height: TREE_VIEW_HEIGHT,
-    flexGrow: 1,
-    minWidth: TREE_VIEW_MIN_WIDTH,
-  },
-  cancelButton: {
-    color: '#f44336',
-  },
+const Loader = dynamic(() => import('@graasp/ui').then((mod) => mod.Loader), {
+  ssr: false,
 });
+const DynamicTreeView = dynamic(
+  () => import('@graasp/ui').then((mod) => mod.DynamicTreeView),
+  {
+    ssr: false,
+  },
+);
 
-const TreeModal = ({
-  title,
-  classes,
-  open,
-  t,
-  onClose,
-  onConfirm,
-  description,
-}) => {
-  const [selectedId, setSelectedId] = useState(null);
+/*
+  TODO: factor out the behaviour of the component? It is shared with
+  https://github.com/graasp/graasp-builder/blob/8af8a794b687abdd3d0e3ec83a6d16eb72e1e5f6/src/components/main/TreeModal.js
+ */
+const TreeModal = ({ itemIds, open, title, onClose, onConfirm }) => {
   const { hooks } = useContext(QueryClientContext);
-  const { data: ownItems, isLoading } = hooks.useOwnItems();
+  const { useItem, useItems, useOwnItems, useChildren, useSharedItems } = hooks;
+
+  const { t } = useTranslation();
+  const { data: ownItems, isLoading: isOwnItemsLoading } = useOwnItems();
+  // todo: get only shared items with write/admin rights
+  // otherwise choosing an item without the write rights will result in an error
+  const { data: sharedItems, isLoading: isSharedItemsLoading } =
+    useSharedItems();
+  const [selectedId, setSelectedId] = useState(null);
+  const { isItemLoading } = useItems(itemIds);
+
+  if (isOwnItemsLoading || isSharedItemsLoading || isItemLoading) {
+    return <Loader />;
+  }
 
   const handleClose = () => {
-    onClose();
+    onClose({ id: null, open: false });
   };
 
-  const submit = () => {
-    onConfirm({ id: selectedId });
+  const onClickConfirm = () => {
+    onConfirm({ to: selectedId });
     handleClose();
   };
 
-  const onSelect = (e, value) => {
-    setSelectedId(value);
+  const onTreeItemSelect = (nodeId) => {
+    if (selectedId === nodeId) {
+      setSelectedId(null);
+    } else {
+      setSelectedId(nodeId);
+    }
   };
 
-  const renderOwnItems = () => {
-    if (isLoading) {
-      return (
-        <>
-          <Skeleton />
-          <Skeleton />
-          <Skeleton />
-        </>
-      );
-    }
-
-    if (!ownItems || !ownItems.size) {
-      return null;
-    }
-
-    return ownItems
-      .filter((i) => i.type === ITEM_TYPES.FOLDER)
-      .map(({ name, id }) => <TreeItem key={id} nodeId={id} label={name} />);
-  };
-
-  const renderDescription = () => {
-    if (!description) {
-      return null;
-    }
-
-    return <Typography variant="subtitle2">{description}</Typography>;
-  };
+  const isFolder = (i) => i.type === ITEM_TYPES.FOLDER;
 
   // compute tree only when the modal is open
-  // todo: use graasp-ui tree modal
   const tree = !open ? null : (
-    <TreeView
-      className={classes.root}
-      defaultCollapseIcon={<ExpandMoreIcon />}
-      defaultExpandIcon={<ChevronRightIcon />}
-      onNodeSelect={onSelect}
-    >
-      <TreeItem
-        nodeId={ROOT_ID}
-        label={t(LIBRARY.COPY_BUTTON_MODAL_MY_ITEMS_ROOT)}
-      >
-        {renderOwnItems()}
-      </TreeItem>
-    </TreeView>
+    <>
+      <DynamicTreeView
+        id={TREE_MODAL_MY_ITEMS_ID}
+        rootSx={{
+          flexGrow: 1,
+          maxWidth: TREE_VIEW_MAX_WIDTH,
+        }}
+        selectedId={selectedId}
+        initialExpendedItems={[TREE_MODAL_MY_ITEMS_ID]}
+        items={ownItems}
+        onTreeItemSelect={onTreeItemSelect}
+        useChildren={useChildren}
+        useItem={useItem}
+        showCheckbox
+        rootLabel={t(LIBRARY.OWN_ITEMS_LABEL)}
+        rootId={ROOT_ID}
+        rootClassName={buildTreeItemId(TREE_MODAL_MY_ITEMS_ID)}
+        showItemFilter={isFolder}
+        shouldFetchChildrenForItem={isFolder}
+        buildTreeItemId={buildTreeItemId}
+      />
+      <DynamicTreeView
+        id={TREE_MODAL_SHARED_ITEMS_ID}
+        rootSx={{
+          flexGrow: 1,
+          maxWidth: TREE_VIEW_MAX_WIDTH,
+        }}
+        selectedId={selectedId}
+        initialExpendedItems={[TREE_MODAL_SHARED_ITEMS_ID]}
+        items={sharedItems}
+        onTreeItemSelect={onTreeItemSelect}
+        useChildren={useChildren}
+        useItem={useItem}
+        showCheckbox
+        rootLabel={t(LIBRARY.SHARED_ITEMS_LABEL)}
+        rootId="none"
+        rootClassName={buildTreeItemId(TREE_MODAL_SHARED_ITEMS_ID)}
+        showItemFilter={isFolder}
+        shouldFetchChildrenForItem={isFolder}
+        buildTreeItemId={buildTreeItemId}
+      />
+    </>
   );
 
-  const label = 'simple-dialog-title';
   return (
-    <Dialog onClose={handleClose} aria-labelledby={label} open={open}>
-      <DialogTitle id={label}>
-        {title}
-        {renderDescription()}
-      </DialogTitle>
+    <Dialog
+      onClose={handleClose}
+      aria-labelledby={COPY_MODAL_TITLE_ID}
+      open={open}
+      scroll="paper"
+    >
+      <DialogTitle id={COPY_MODAL_TITLE_ID}>{title}</DialogTitle>
       <DialogContent>{tree}</DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} className={classes.cancelButton}>
+        <Button onClick={handleClose} variant="text">
           {t(LIBRARY.TREE_MODAL_CANCEL_BUTTON)}
         </Button>
-        <Button onClick={submit} color="primary" disabled={!selectedId}>
+        <Button
+          onClick={onClickConfirm}
+          disabled={!selectedId}
+          id={TREE_MODAL_CONFIRM_BUTTON_ID}
+        >
           {t(LIBRARY.TREE_MODAL_CONFIRM_BUTTON)}
         </Button>
       </DialogActions>
@@ -130,22 +148,16 @@ const TreeModal = ({
 };
 
 TreeModal.propTypes = {
-  open: PropTypes.bool.isRequired,
-  classes: PropTypes.shape({
-    cancelButton: PropTypes.string.isRequired,
-    root: PropTypes.string.isRequired,
-  }).isRequired,
   onConfirm: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
-  title: PropTypes.string,
-  t: PropTypes.func.isRequired,
-  description: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  itemIds: arrayOf(PropTypes.string),
+  open: PropTypes.bool,
 };
 
 TreeModal.defaultProps = {
-  description: '',
-  title: 'Tree Modal',
+  itemIds: null,
+  open: false,
 };
 
-const TranslatedComponent = withTranslation()(TreeModal);
-export default withStyles(styles, { withTheme: true })(TranslatedComponent);
+export default TreeModal;

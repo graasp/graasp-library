@@ -116,3 +116,5 @@ export const ENV = {
   PRODUCTION: 'production',
   TEST: 'test',
 };
+
+export const TREE_VIEW_MAX_WIDTH = 400;
