@@ -12,11 +12,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 import { LIBRARY } from '@graasp/translations';
 
-import {
-  ITEM_TYPES,
-  ROOT_ID,
-  TREE_VIEW_MAX_WIDTH,
-} from '../../config/constants';
+import { ITEM_TYPES, TREE_VIEW_MAX_WIDTH } from '../../config/constants';
 import {
   COPY_MODAL_TITLE_ID,
   TREE_MODAL_CONFIRM_BUTTON_ID,
@@ -93,7 +89,7 @@ const TreeModal = ({ itemIds, open, title, onClose, onConfirm }) => {
         useItem={useItem}
         showCheckbox
         rootLabel={t(LIBRARY.OWN_ITEMS_LABEL)}
-        rootId={ROOT_ID}
+        rootId={TREE_MODAL_MY_ITEMS_ID}
         rootClassName={buildTreeItemId(TREE_MODAL_MY_ITEMS_ID)}
         showItemFilter={isFolder}
         shouldFetchChildrenForItem={isFolder}
@@ -113,7 +109,7 @@ const TreeModal = ({ itemIds, open, title, onClose, onConfirm }) => {
         useItem={useItem}
         showCheckbox
         rootLabel={t(LIBRARY.SHARED_ITEMS_LABEL)}
-        rootId="none"
+        rootId={TREE_MODAL_SHARED_ITEMS_ID}
         rootClassName={buildTreeItemId(TREE_MODAL_SHARED_ITEMS_ID)}
         showItemFilter={isFolder}
         shouldFetchChildrenForItem={isFolder}

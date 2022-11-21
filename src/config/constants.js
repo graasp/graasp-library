@@ -106,7 +106,7 @@ export const HOST_MAP = {
 
 export const SHOW_NOTIFICATIONS =
   ENV_SHOW_NOTIFICATIONS ||
-  process.env.REACT_APP_SHOW_NOTIFICATIONS === 'true' ||
+  process.env.NEXT_PUBLIC_SHOW_NOTIFICATIONS === 'true' ||
   false;
 
 export const DOMAIN = NEXT_PUBLIC_DOMAIN ?? 'localhost';

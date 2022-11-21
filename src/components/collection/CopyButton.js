@@ -12,6 +12,10 @@ import { MUTATION_KEYS } from '@graasp/query-client';
 import { LIBRARY } from '@graasp/translations';
 
 import { ROOT_ID } from '../../config/constants';
+import {
+  TREE_MODAL_MY_ITEMS_ID,
+  TREE_MODAL_SHARED_ITEMS_ID,
+} from '../../config/selectors';
 import { QueryClientContext } from '../QueryClientContext';
 import { LoginModalContext } from '../common/SignInModalContext';
 import TreeModal from './TreeModal';
@@ -60,7 +64,16 @@ const CopyButton = ({ id }) => {
   const copy = ({ to }) => {
     // remove loading icon on callback
     // do not set parent if it is root
-    copyItem({ id, to: to === ROOT_ID ? undefined : to });
+    copyItem({
+      id,
+      to: [
+        ROOT_ID,
+        TREE_MODAL_MY_ITEMS_ID,
+        TREE_MODAL_SHARED_ITEMS_ID,
+      ].includes(to)
+        ? undefined
+        : to,
+    });
   };
 
   const renderButton = () => {
