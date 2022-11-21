@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.1.7 (2022-11-21)
+
+
+### Features
+
+* add dynamic tree viewer for copy modal ([#200](https://github.com/graasp/graasp-library/issues/200)) ([7f33dd4](https://github.com/graasp/graasp-library/commit/7f33dd4f593e219e068fbaaa0f3ad249f4bf2e44))
+
+### 0.1.6 (2022-11-07)
+
 ### [0.1.5](https://github.com/graasp/graasp-library/compare/v0.1.4...v0.1.5) (2022-08-24)
 
 
