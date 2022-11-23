@@ -18,13 +18,11 @@ jobs:
     uses: graasp/graasp-deploy/.github/workflows/cypress.yml@v1
     with:
       # Test values
-      NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: G-H48F1X7SWK
-      NEXT_PUBLIC_PUBLISHED_TAG_ID: ea9a3b4e-7b67-44c2-a9df-528b6ae5424f
-      NEXT_PUBLIC_API_HOST: http://localhost:3000
-      NEXT_PUBLIC_GRAASP_AUTH_HOST: http://localhost:3001
-      NEXT_PUBLIC_GRAASP_PERFORM_HOST: http://localhost:3112
-      GRAASPER_ID: e890a236-3d45-4042-8a95-c91120f4db73
-      NEXT_PUBLIC_NODE_ENV: test
-    # Insert required secrets based on repository with the following format: ${{ secrets.SECRET_NAME }}
-    secrets:
-      api-host-test: ${{ secrets.REACT_APP_API_HOST }}
+      next-public-google-analytics-id-test: G-H48F1X7SWK
+      next-public-published-tag-id-test: ea9a3b4e-7b67-44c2-a9df-528b6ae5424f
+      next-public-api-host-test: http://localhost:3000
+      next-public-graasp-analytics-host-test: http://localhost:3003
+      next-public-graasp-auth-host-test: http://localhost:3001
+      next-public-graasp-perform-host-test: http://localhost:3112
+      next-public-graasper-id-test: e890a236-3d45-4042-8a95-c91120f4db73
+      next-public-node-env-test: test
