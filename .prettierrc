@@ -3,7 +3,7 @@
   "tabWidth": 2,
   "semi": true,
   "singleQuote": true,
-  "importOrder": ["^react", "^@?material-ui", "^@?graasp", "^[./]"],
+  "importOrder": ["^react", "^@?mui", "^@?graasp", "^[./]"],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true
 }

@@ -4,29 +4,25 @@ import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import InfoIcon from '@mui/icons-material/Info';
 import {
-  Card,
   CardActions,
   CardContent,
   CardHeader,
   IconButton,
   Typography,
-} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import InfoIcon from '@material-ui/icons/Info';
-import Skeleton from '@material-ui/lab/Skeleton';
+  styled,
+} from '@mui/material';
+import Skeleton from '@mui/material/Skeleton';
 
 import { LIBRARY } from '@graasp/translations';
 
 import { DEFAULT_MEMBER_THUMBNAIL } from '../../config/constants';
-import {
-  COLLECTION_CARD_BORDER_RADIUS,
-  COLLECTION_CARD_HEADER_SIZE,
-  DEFAULT_SHADOW_EFFECT,
-} from '../../config/cssStyles';
+import { COLLECTION_CARD_HEADER_SIZE } from '../../config/cssStyles';
 import { buildCollectionRoute } from '../../config/routes';
 import { QueryClientContext } from '../QueryClientContext';
 import CardMedia from '../common/CardMediaComponent';
+import { StyledCard } from '../common/StyledCard';
 import CopyButton from './CopyButton';
 import CopyLinkButton from './CopyLinkButton';
 import DownloadButton from './DownloadButton';
@@ -37,53 +33,43 @@ const Avatar = dynamic(() => import('@graasp/ui').then((mod) => mod.Avatar), {
   ssr: false,
 });
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    height: '100%',
-    display: 'flex',
-    aspectRatio: 1,
-    flexDirection: 'column',
-    borderRadius: COLLECTION_CARD_BORDER_RADIUS,
-    boxShadow: DEFAULT_SHADOW_EFFECT,
+const StyledDescription = styled('p')(({ theme }) => ({
+  margin: theme.spacing(1, 0),
+  overflow: 'hidden',
+  'text-overflow': 'ellipsis',
+  display: '-webkit-box',
+  // number of lines to show
+  '-webkit-line-clamp': '2',
+  '-webkit-box-orient': 'vertical',
+  '& p': {
+    margin: theme.spacing(0),
   },
-  header: {
+  // hide long descriptions splitted in multiple paragraphs
+  '& p:nth-child(1n+2)': {
+    display: 'none',
+  },
+}));
+
+const StyledCardHeader = styled(CardHeader)(() => ({
+  '	.MuiCardHeader-root': {
     height: COLLECTION_CARD_HEADER_SIZE,
     position: 'relative',
   },
-  content: {
-    width: '65%',
-  },
-  title: {
+  '.MuiCardHeader-title': {
     overflow: 'hidden',
-    'text-overflow': 'ellipsis',
+    textOverflow: 'ellipsis',
     display: '-webkit-box',
     // number of lines to show
     '-webkit-line-clamp': '2',
     '-webkit-box-orient': 'vertical',
   },
-  actions: {
-    marginTop: 'auto',
-  },
-  subheader: {
+  '.MuiCardHeader-subheader': {
     textOverflow: 'ellipsis',
     overflow: 'hidden',
     whiteSpace: 'nowrap',
   },
-  description: {
-    margin: theme.spacing(1, 0),
-    overflow: 'hidden',
-    'text-overflow': 'ellipsis',
-    display: '-webkit-box',
-    // number of lines to show
-    '-webkit-line-clamp': '2',
-    '-webkit-box-orient': 'vertical',
-    '& p': {
-      margin: theme.spacing(0),
-    },
-    // hide long descriptions splitted in multiple paragraphs
-    '& p:nth-child(1n+2)': {
-      display: 'none',
-    },
+  '.MuiCardHeader-content': {
+    width: '65%',
   },
 }));
 
@@ -93,7 +79,6 @@ export const CollectionCard = ({ collection = {}, isLoading }) => {
   const { t } = useTranslation();
   const descriptionContent =
     description || LIBRARY.COLLECTION_EMPTY_DESCRIPTION_TEXT;
-  const classes = useStyles();
   const [flipped, setFlipped] = React.useState(false);
   const { hooks } = useContext(QueryClientContext);
   const { data: author } = hooks.useMember(creator);
@@ -111,7 +96,6 @@ export const CollectionCard = ({ collection = {}, isLoading }) => {
     <Avatar
       useAvatar={hooks.useAvatar}
       alt={t(LIBRARY.AVATAR_ALT, { name: author?.name })}
-      className={classes.avatar}
       defaultImage={DEFAULT_MEMBER_THUMBNAIL}
       id={creator}
       extra={author?.extra}
@@ -136,25 +120,18 @@ export const CollectionCard = ({ collection = {}, isLoading }) => {
   const link = buildCollectionRoute(id);
 
   return (
-    <Card className={classes.root}>
-      <CardHeader
+    <StyledCard>
+      <StyledCardHeader
         avatar={avatar}
         action={action}
         title={name}
         subheader={author?.name}
         titleTypographyProps={{ title: name }}
-        classes={{
-          root: classes.header,
-          title: classes.title,
-          subheader: classes.subheader,
-          content: classes.content,
-        }}
       />
       {flipped ? (
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
-            <p
-              className={classes.description}
+            <StyledDescription
               // eslint-disable-next-line react/no-danger
               dangerouslySetInnerHTML={{
                 __html: descriptionContent,
@@ -165,14 +142,14 @@ export const CollectionCard = ({ collection = {}, isLoading }) => {
       ) : (
         <CardMedia link={link} name={name} itemId={id} />
       )}
-      <CardActions disableSpacing className={classes.actions}>
+      <CardActions disableSpacing>
         <ViewButton id={id} />
         <CopyButton id={id} />
         <CopyLinkButton id={id} extra={extra} />
         <DownloadButton id={id} />
         <SimilarCollectionBadges views={views} voteScore={voteScore} />
       </CardActions>
-    </Card>
+    </StyledCard>
   );
 };
 

@@ -21,7 +21,7 @@ export const HEADER_MY_LIST_ID = 'headerMyList';
 export const GRAASP_SELECTION_TITLE_ID = 'graaspSelectionTitleId';
 export const DISCOVER_SECTION_TITLE_ID = 'discoverSectionTitleId';
 
-export const SUMMARY_AUTHOR_CONTAINER_ID = `summaryAuthorContainer`;
+export const SUMMARY_AUTHOR_CONTAINER_ID = 'summaryAuthorContainer';
 export const buildContributorId = (id) => `contributor-${id}`;
 export const SUMMARY_LANGUAGES_CONTAINER_ID = 'summaryLanguagesContainer';
 export const SUMMARY_CATEGORIES_CONTAINER_ID = 'summaryCategoriesContainer';

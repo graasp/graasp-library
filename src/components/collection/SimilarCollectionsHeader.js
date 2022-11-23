@@ -1,46 +1,34 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Tooltip, Typography } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
-import { Info } from '@material-ui/icons';
+import { Info } from '@mui/icons-material';
+import { Box, Tooltip, Typography } from '@mui/material';
+import Grid from '@mui/material/Grid';
 
 import { LIBRARY } from '@graasp/translations';
 
-const useStyles = makeStyles((theme) => ({
-  cell: {
-    display: 'flex',
-  },
-  root: {
-    marginBottom: theme.spacing(2),
-    flexGrow: 1,
-  },
-}));
-
 function SimilarCollectionsHeader() {
   const { t } = useTranslation();
-  const classes = useStyles();
   return (
-    <div className={classes.root}>
+    <Box mb={2} flexGrow={1}>
       <Grid container spacing={0} justify="space-between">
         <Grid item>
           <Typography
             variant="h3"
             color="inherit"
             alignItems="center"
-            className={classes.cell}
+            display="flex"
           >
             {t(LIBRARY.SIMILAR_COLLECTIONS_TITLE)}
           </Typography>
         </Grid>
-        <Grid item alignItems="center" className={classes.cell}>
+        <Grid item alignItems="center">
           <Tooltip title={t(LIBRARY.CONTRIBUTORS_TOOLTIP)}>
             <Info color="primary" />
           </Tooltip>
         </Grid>
       </Grid>
-    </div>
+    </Box>
   );
 }
 

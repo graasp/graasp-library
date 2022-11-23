@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
 
-import { Grid } from '@material-ui/core';
-import FormControl from '@material-ui/core/FormControl';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import { Grid } from '@mui/material';
+import FormControl from '@mui/material/FormControl';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
 
 import { MUTATION_KEYS } from '@graasp/query-client';
 import { setLangCookie } from '@graasp/sdk';
@@ -16,21 +15,7 @@ import { DOMAIN } from '../../config/constants';
 import i18n from '../../config/i18n';
 import { QueryClientContext } from '../QueryClientContext';
 
-const useStyles = makeStyles(() => ({
-  footer: {
-    top: 'auto',
-    bottom: 0,
-  },
-  content: {
-    // fix: typography is strong on first render
-    '& strong': {
-      fontWeight: 400,
-    },
-  },
-}));
-
 const Footer = () => {
-  const classes = useStyles();
   const { hooks, useMutation } = useContext(QueryClientContext);
   const { data: member } = hooks.useCurrentMember();
   const { mutate: editMember } = useMutation(MUTATION_KEYS.EDIT_MEMBER);
@@ -51,19 +36,25 @@ const Footer = () => {
 
   return (
     <footer>
-      <Toolbar className={classes.footer}>
+      <Toolbar top="auto" bottom={0}>
         <Grid container justifyContent="space-between" alignItems="center">
           <Grid item>
-            <Typography variant="subtitle1" className={classes.content}>
+            <Typography variant="subtitle2">
               &copy;
               {`${new Date().getFullYear()} Graasp Association`}
             </Typography>
           </Grid>
           <Grid item>
-            <FormControl className={classes.formControl}>
-              <Select value={i18n.language} onChange={onChangeLanguage}>
+            <FormControl>
+              <Select
+                variant="standard"
+                value={i18n.language}
+                onChange={onChangeLanguage}
+              >
                 {Object.entries(langs).map(([key, lang]) => (
-                  <MenuItem value={key}>{lang}</MenuItem>
+                  <MenuItem value={key} key={key}>
+                    {lang}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>

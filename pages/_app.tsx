@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
+import { CacheProvider, EmotionCache } from '@emotion/react';
 import * as Sentry from '@sentry/react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -7,15 +8,14 @@ import React, { useEffect } from 'react';
 import ReactGA from 'react-ga4';
 import { ToastContainer } from 'react-toastify';
 
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { MuiThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 
 import { hasAcceptedCookies } from '@graasp/sdk';
 
 import { ENV } from '../src/config/constants';
+import createEmotionCache from '../src/config/createEmotionCache';
 import { GA_MEASUREMENT_ID, NODE_ENV, SENTRY_DSN } from '../src/config/env';
 import WHITELISTED_ERRORS from '../src/config/errors';
-import theme from '../src/config/theme';
 
 // set up sentry
 if (SENTRY_DSN) {
@@ -33,13 +33,16 @@ if (SENTRY_DSN) {
   });
 }
 
+const clientSideEmotionCache = createEmotionCache();
+
 type Props = {
   Component: React.ComponentClass;
   pageProps: any;
+  emotionCache?: EmotionCache;
 };
 
-export default function GraaspLibraryApp(props: Props) {
-  const { Component, pageProps } = props;
+const GraaspLibraryApp = (props: Props) => {
+  const { Component, pageProps, emotionCache = clientSideEmotionCache } = props;
   const router = useRouter();
 
   // Remove the server-side injected CSS.
@@ -78,12 +81,14 @@ export default function GraaspLibraryApp(props: Props) {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
-      <MuiThemeProvider theme={theme}>
+      <CacheProvider value={emotionCache}>
         <CssBaseline />
         {/* @ts-ignore */}
         <Component {...pageProps} />
         <ToastContainer theme="colored" />
-      </MuiThemeProvider>
+      </CacheProvider>
     </>
   );
-}
+};
+
+export default GraaspLibraryApp;

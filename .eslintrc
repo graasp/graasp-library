@@ -1,5 +1,5 @@
 {
-  "extends": ["airbnb", "prettier"],
+  "extends": ["airbnb", "airbnb-typescript", "prettier"],
   "plugins": ["import", "jsx-a11y", "react"],
   "env": {
     "browser": true,
@@ -12,10 +12,15 @@
     "Cypress": true,
     "JSX": true
   },
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
   "rules": {
     "no-console": ["error", { "allow": ["warn", "error"] }],
     "curly": "error",
+    "@typescript-eslint/indent":"off",
+    "@typescript-eslint/brace-style": "off",
     "no-underscore-dangle": [
       "error",
       {
@@ -36,7 +41,9 @@
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     ],
+    "react/require-default-props": "off",
     "import/no-named-as-default": 0,
+    // "import/no-unresolved": [".js"],
     "react/static-property-placement": [
       "error",
       "property assignment",
@@ -50,5 +57,6 @@
       }
     ],
     "react/state-in-constructor": ["error", "never"]
-  }
+  },
+  "ignorePatterns": ["node_modules/*"]
 }

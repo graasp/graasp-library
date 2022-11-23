@@ -153,7 +153,7 @@ export const PUBLISHED_ITEMS = [
     categories: [
       {
         categoryId: SAMPLE_CATEGORIES[2].id,
-      }
+      },
     ],
     tags: [
       {

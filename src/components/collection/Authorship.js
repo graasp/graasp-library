@@ -5,9 +5,8 @@ import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Grid, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import Skeleton from '@material-ui/lab/Skeleton';
+import { Grid, Typography } from '@mui/material';
+import Skeleton from '@mui/material/Skeleton';
 
 import { LIBRARY } from '@graasp/translations';
 
@@ -20,19 +19,8 @@ const Avatar = dynamic(() => import('@graasp/ui').then((mod) => mod.Avatar), {
   ssr: false,
 });
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    marginTop: theme.spacing(),
-    display: 'flex',
-  },
-  authorName: {
-    marginLeft: theme.spacing(),
-  },
-}));
-
 const Authorship = ({ itemId, author, isLoading }) => {
   const { t } = useTranslation();
-  const classes = useStyles();
   const { hooks } = useContext(QueryClientContext);
   const { data: item, isLoading: isLoadingItem } = hooks.useItem(itemId);
   const { data: memberships } = hooks.useItemMemberships(itemId);
@@ -96,7 +84,7 @@ const Authorship = ({ itemId, author, isLoading }) => {
                 />
               )}
             </Grid>
-            <Grid item className={classes.authorName}>
+            <Grid item ml={1}>
               <Typography variant="body1">{authorName}</Typography>
             </Grid>
           </Grid>

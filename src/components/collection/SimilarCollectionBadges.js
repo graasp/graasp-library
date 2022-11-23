@@ -2,53 +2,29 @@ import PropTypes from 'prop-types';
 
 import React from 'react';
 
-import { Grid } from '@material-ui/core';
-import Badge from '@material-ui/core/Badge';
-import { makeStyles } from '@material-ui/core/styles';
-import { Favorite, Visibility } from '@material-ui/icons';
+import { Favorite } from '@mui/icons-material';
+import { Grid } from '@mui/material';
+import Badge from '@mui/material/Badge';
 
-const useStyles = makeStyles((theme) => ({
-  badges: {
-    '& > *': {
-      marginRight: theme.spacing(3),
-    },
-  },
-  root: {
-    marginBottom: theme.spacing(),
-  },
-  cell: {
-    display: 'flex',
-  },
-}));
+import BadgeContainer from '../common/BadgeContainer';
+import VisibilityBadge from '../common/VisibilityBadge';
 
 function SimilarCollectionBadges({ views, voteScore }) {
-  const classes = useStyles();
-
   const voteScoreBadge = voteScore ? (
     <Badge badgeContent={voteScore} color="secondary" max={999}>
       <Favorite color="primary" />
     </Badge>
   ) : null;
 
-  const viewBadge = views ? (
-    <Badge badgeContent={views} color="secondary" max={999}>
-      <Visibility color="primary" />
-    </Badge>
-  ) : null;
+  const viewBadge = views ? <VisibilityBadge views={views} /> : null;
 
   return (
-    <Grid container className={classes.root}>
-      <Grid
-        item
-        xs={12}
-        className={classes.cell}
-        justify="flex-start"
-        alignItems="center"
-      >
-        <div className={classes.badges}>
+    <Grid container mb={1}>
+      <Grid item xs={12} justify="flex-start" alignItems="center">
+        <BadgeContainer>
           {voteScoreBadge}
           {viewBadge}
-        </div>
+        </BadgeContainer>
       </Grid>
     </Grid>
   );

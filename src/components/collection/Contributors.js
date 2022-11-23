@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Avatar, Tooltip, Typography } from '@material-ui/core';
-import AvatarGroup from '@material-ui/lab/AvatarGroup';
+import AvatarGroup from '@mui/lab/AvatarGroup';
+import { Avatar, Tooltip, Typography } from '@mui/material';
 
 import { LIBRARY } from '@graasp/translations';
 

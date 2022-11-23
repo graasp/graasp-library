@@ -1,35 +1,25 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Tooltip, Typography } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
-import { Info } from '@material-ui/icons';
+import { Info } from '@mui/icons-material';
+import { Tooltip, Typography } from '@mui/material';
+import Grid from '@mui/material/Grid';
+import { useTheme } from '@mui/material/styles';
 
 import { LIBRARY } from '@graasp/translations';
 
-const useStyles = makeStyles((theme) => ({
-  cell: {
-    display: 'flex',
-  },
-  root: {
-    marginBottom: theme.spacing(2),
-    flexGrow: 1,
-  },
-}));
-
 function CommentsHeader() {
   const { t } = useTranslation();
-  const classes = useStyles();
+  const theme = useTheme();
   return (
-    <div className={classes.root}>
+    <div style={{ marginBottom: theme.spacing(2), flexGrow: 1 }}>
       <Grid container spacing={0} justify="space-between" alignItems="center">
         <Grid item>
-          <Typography variant="h3" color="inherit" className={classes.cell}>
+          <Typography variant="h3" color="inherit" display="flex">
             {t(LIBRARY.COMMENTS_TITLE)}
           </Typography>
         </Grid>
-        <Grid item className={classes.cell}>
+        <Grid item display="flex">
           <Tooltip title={t(LIBRARY.COMMENTS_TOOLTIP)}>
             <Info color="primary" />
           </Tooltip>

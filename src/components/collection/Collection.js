@@ -5,9 +5,8 @@ import { validate } from 'uuid';
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Button, Divider } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
+import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
+import { Box, Button, Divider } from '@mui/material';
 
 import { LIBRARY } from '@graasp/translations';
 
@@ -31,22 +30,7 @@ import Summary from './Summary';
 // todo: get similar collections in same call
 // import SimilarCollections from './SimilarCollections';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    padding: theme.spacing(5),
-  },
-  divider: {
-    margin: theme.spacing(2, 0),
-  },
-  playButton: {
-    display: 'flex',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-  },
-}));
-
 const Collection = ({ id }) => {
-  const classes = useStyles();
   const { t } = useTranslation();
   const { hooks } = useContext(QueryClientContext);
   const {
@@ -96,7 +80,7 @@ const Collection = ({ id }) => {
         author={member?.name}
         image={imageUrl}
       />
-      <div id={id} className={classes.root}>
+      <Box id={id} p={5}>
         <Summary
           itemId={id}
           name={name}
@@ -108,7 +92,7 @@ const Collection = ({ id }) => {
           likes={likes}
           isLoading={isLoading}
         />
-        <Divider className={classes.divider} />
+        <Divider my={2} />
         <Button
           onClick={handlePlay}
           variant="outlined"
@@ -117,18 +101,18 @@ const Collection = ({ id }) => {
           aria-label={t(LIBRARY.COLLECTION_PLAYER_BUTTON)}
           title={t(LIBRARY.COLLECTION_PLAYER_BUTTON)}
           endIcon={<PlayCircleOutlineIcon />}
-          className={classes.playButton}
+          sx={{ display: 'flex', marginLeft: 'auto', marginRight: 'auto' }}
         >
           {t(LIBRARY.COLLECTION_PLAYER_BUTTON)}
         </Button>
         {type === ITEM_TYPES.FOLDER && (
           <>
-            <Divider className={classes.divider} />
+            <Divider my={2} />
             <Items parentId={id} />
           </>
         )}
         {/* <Comments comments={comments} members={members} /> */}
-      </div>
+      </Box>
     </ErrorBoundary>
   );
 };

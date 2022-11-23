@@ -2,3 +2,8 @@ build
 public
 coverage
 cypress/integration/examples
+node_modules
+.yarn/.cache
+.husky
+.nyc_output
+.yarn

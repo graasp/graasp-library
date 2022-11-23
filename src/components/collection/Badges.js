@@ -4,16 +4,8 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Grid, IconButton } from '@material-ui/core';
-import Badge from '@material-ui/core/Badge';
-import { makeStyles } from '@material-ui/core/styles';
-import {
-  Email,
-  Facebook,
-  Favorite,
-  Twitter,
-  Visibility,
-} from '@material-ui/icons';
+import { Email, Facebook, Twitter } from '@mui/icons-material';
+import { Grid, IconButton } from '@mui/material';
 
 import { LIBRARY } from '@graasp/translations';
 
@@ -23,23 +15,11 @@ import {
 } from '../../config/constants';
 import { openInNewTab } from '../../utils/helpers';
 import { removeTagsFromString } from '../../utils/text';
-
-const useStyles = makeStyles((theme) => ({
-  badges: {
-    '& > *': {
-      marginRight: theme.spacing(3),
-    },
-  },
-  root: {
-    marginBottom: theme.spacing(),
-  },
-  cell: {
-    display: 'flex',
-  },
-}));
+import BadgeContainer from '../common/BadgeContainer';
+import FavoriteBadge from '../common/FavoriteBadge';
+import VisibilityBadge from '../common/VisibilityBadge';
 
 function Badges({ views, likes, name, description }) {
-  const classes = useStyles();
   const { t } = useTranslation();
   const [pageLocation, setPageLocation] = useState(null);
   const parsedDescription = removeTagsFromString(description);
@@ -70,23 +50,14 @@ function Badges({ views, likes, name, description }) {
   const mailString = `mailto:?subject=${subject}&body=${message}`;
 
   return (
-    <Grid
-      container
-      justify="space-between"
-      alignItems="center"
-      className={classes.root}
-    >
-      <Grid item className={classes.cell}>
-        <div className={classes.badges}>
-          <Badge badgeContent={likes} color="secondary" max={999}>
-            <Favorite color="primary" fontSize="large" />
-          </Badge>
-          <Badge badgeContent={views} color="secondary" max={999}>
-            <Visibility color="primary" fontSize="large" />
-          </Badge>
-        </div>
+    <Grid container justify="space-between" alignItems="center" mb={1}>
+      <Grid item>
+        <BadgeContainer>
+          <FavoriteBadge likes={likes} />
+          <VisibilityBadge views={views} />
+        </BadgeContainer>
       </Grid>
-      <Grid item className={classes.cell}>
+      <Grid item>
         <IconButton color="primary" onClick={shareOnFacebook}>
           <Facebook fontSize="large" />
         </IconButton>

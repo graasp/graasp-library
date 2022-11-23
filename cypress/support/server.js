@@ -1,18 +1,20 @@
 import { StatusCodes } from 'http-status-codes';
 import qs from 'querystring';
+
 import { API_ROUTES } from '@graasp/query-client';
 import { buildPathFromIds, isChildOf } from '@graasp/sdk';
+
+import { ITEM_PUBLIC_TAG } from '../fixtures/itemTags';
 import { MEMBERS } from '../fixtures/members';
+import { PERMISSION_LEVELS, THUMBNAIL_EXTENSION } from './constants';
 import {
   DEFAULT_GET,
   ID_FORMAT,
-  parseStringToRegExp,
   getItemById,
   getMemberById,
   getRootPublishedItems,
+  parseStringToRegExp,
 } from './utils';
-import { ITEM_PUBLIC_TAG } from '../fixtures/itemTags';
-import { PERMISSION_LEVELS, THUMBNAIL_EXTENSION } from './constants';
 
 const {
   buildGetPublicItemsWithTag,

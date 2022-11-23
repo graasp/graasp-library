@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import CodeIcon from '@material-ui/icons/Code';
+import CodeIcon from '@mui/icons-material/Code';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 
 import { LIBRARY } from '@graasp/translations';
 

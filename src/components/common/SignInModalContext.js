@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import MuiDialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
-import CloseIcon from '@material-ui/icons/Close';
+import CloseIcon from '@mui/icons-material/Close';
+import { styled } from '@mui/material';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import MuiDialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import MuiDialogTitle from '@mui/material/DialogTitle';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
 
 import { DATA_KEYS } from '@graasp/query-client';
 import { LIBRARY } from '@graasp/translations';
@@ -20,42 +20,38 @@ import { SIGN_IN_ROUTE, SIGN_UP_ROUTE } from '../../config/constants';
 import { openInNewTab } from '../../utils/helpers';
 import { QueryClientContext } from '../QueryClientContext';
 
-const styles = (theme) => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(2),
-  },
+const CloseButton = styled(IconButton)(({ theme }) => ({
   closeButton: {
     position: 'absolute',
     right: theme.spacing(1),
     top: theme.spacing(1),
     color: theme.palette.grey[500],
   },
-});
+}));
 
 const LoginModalContext = React.createContext();
 
-const DialogTitle = withStyles(styles)((props) => {
+const DialogTitle = (props) => {
   const { t } = useTranslation();
-  const { children, classes, onClose } = props;
+  // eslint-disable-next-line react/prop-types
+  const { children, onClose } = props;
   return (
-    <MuiDialogTitle disableTypography className={classes.root}>
+    <MuiDialogTitle disableTypography margin={0} p={1}>
       <Typography variant="h6">{children}</Typography>
       {onClose ? (
-        <IconButton
+        <CloseButton
           aria-label={t(LIBRARY.SIGN_IN_MODAL_CLOSE_BUTTON_ARIA_LABEL)}
-          className={classes.closeButton}
           onClick={onClose}
         >
           <CloseIcon />
-        </IconButton>
+        </CloseButton>
       ) : null}
     </MuiDialogTitle>
   );
-});
+};
 
-const DialogActions = withStyles((theme) => ({
-  root: {
+const DialogActions = styled(({ theme }) => ({
+  '	.MuiDialogActions-root': {
     margin: 0,
     padding: theme.spacing(1),
   },

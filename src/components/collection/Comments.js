@@ -2,26 +2,13 @@ import PropTypes from 'prop-types';
 
 import React from 'react';
 
-import Grid from '@material-ui/core/Grid';
-import List from '@material-ui/core/List';
-import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@mui/material/Grid';
+import List from '@mui/material/List';
 
 import Comment from './Comment';
 import CommentsHeader from './CommentsHeader';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    backgroundColor: theme.palette.background.paper,
-  },
-  inline: {
-    display: 'inline',
-  },
-}));
-
 function Comments({ comments, members }) {
-  const classes = useStyles();
-
   if (!comments || !comments.length) {
     return null;
   }
@@ -31,7 +18,11 @@ function Comments({ comments, members }) {
       <CommentsHeader />
       <Grid container>
         <Grid item xs={12}>
-          <List className={classes.root}>
+          <List
+            sx={{
+              width: '100%',
+            }}
+          >
             {comments.map((comment) => {
               const { published } = comment;
               return (

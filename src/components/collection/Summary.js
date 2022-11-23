@@ -6,10 +6,9 @@ import PropTypes from 'prop-types';
 import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Chip, Grid, Typography } from '@material-ui/core';
-import Card from '@material-ui/core/Card';
-import { makeStyles } from '@material-ui/core/styles';
-import Skeleton from '@material-ui/lab/Skeleton';
+import { Chip, Grid, Typography } from '@mui/material';
+import Skeleton from '@mui/material/Skeleton';
+import { styled } from '@mui/material/styles';
 
 import { MUTATION_KEYS } from '@graasp/query-client';
 import { LIBRARY } from '@graasp/translations';
@@ -30,6 +29,7 @@ import {
 import { compare } from '../../utils/helpers';
 import { QueryClientContext } from '../QueryClientContext';
 import CardMedia from '../common/CardMediaComponent';
+import { StyledCard } from '../common/StyledCard';
 import Authorship from './Authorship';
 import Badges from './Badges';
 
@@ -62,44 +62,9 @@ const {
   ),
 };
 
-const useStyles = makeStyles((theme) => ({
-  centeredGridItem: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  card: {
-    width: 'auto',
-    aspectRatio: 1,
-    marginRight: theme.spacing(5),
-    borderRadius: 30,
-  },
-  image: {
-    width: '100%',
-    height: '500px !important',
-  },
-  root: {
-    flexGrow: 1,
-  },
-  title: {
-    fontSize: '4em',
-  },
-  reportButton: {
-    display: 'flex',
-  },
-  favoriteButton: {
-    marginLeft: theme.spacing(0.5),
-  },
-  icon: {
-    marginTop: theme.spacing(1),
-    borderWidth: 0,
-  },
-  description: {
-    minHeight: ITEM_SUMMARY_DESCRIPTION_MIN_HEIGHT,
-  },
-  chip: {
-    marginRight: theme.spacing(0.5),
-  },
+const StyledCardMedia = styled(CardMedia)(() => ({
+  width: '100%',
+  height: '500px !important',
 }));
 
 function Summary({
@@ -118,7 +83,6 @@ function Summary({
   });
   const tags = settings?.tags;
   const ccLicenseAdaption = settings?.ccLicenseAdaption;
-  const classes = useStyles();
   const { t } = useTranslation();
   const { hooks, useMutation } = useContext(QueryClientContext);
   const { data: categoryTypes } = hooks.useCategoryTypes();
@@ -208,27 +172,22 @@ function Summary({
   };
 
   return (
-    <div className={classes.root}>
+    <div>
       <Grid container spacing={2} alignItems="flex-start">
-        <Grid item sm={12} md={4} className={classes.centeredGridItem}>
-          <Card className={classes.card}>
+        <Grid item sm={12} md={4} alignItems="center" justifyContent="center">
+          <StyledCard>
             {isLoading ? (
               <Skeleton variant="rect" width="100%">
-                <CardMedia
-                  itemId={itemId}
-                  name={name}
-                  className={classes.image}
-                />
+                <StyledCardMedia itemId={itemId} name={name} />
               </Skeleton>
             ) : (
-              <CardMedia
+              <StyledCardMedia
                 itemId={itemId}
                 name={name}
-                className={classes.image}
                 size={THUMBNAIL_SIZES.ORIGINAL}
               />
             )}
-          </Card>
+          </StyledCard>
         </Grid>
         <Grid item sm={12} md={8}>
           <Grid
@@ -241,23 +200,22 @@ function Summary({
               <Typography
                 variant="h1"
                 gutterBottom
-                className={classes.title}
+                fontSize="4em"
                 id={ITEM_SUMMARY_TITLE_ID}
               >
                 {truncatedName}
                 <FavoriteButton
                   color="primary"
-                  className={classes.favoriteButton}
                   isFavorite={isFavorite}
                   handleFavorite={handleFavorite}
                   handleUnfavorite={handleUnfavorite}
+                  ml={1}
                 />
               </Typography>
             </Grid>
-            <Grid item className={classes.reportButton}>
+            <Grid item>
               <LikeButton
                 color="primary"
-                className={classes.likeButton}
                 isLiked={Boolean(likeEntry)}
                 handleLike={handleLike}
                 handleUnlike={handleUnlike}
@@ -275,7 +233,7 @@ function Summary({
             variant="body1"
             gutterBottom
             component="div"
-            className={classes.description}
+            minHeight={ITEM_SUMMARY_DESCRIPTION_MIN_HEIGHT}
           >
             {isLoading ? (
               <Skeleton />
@@ -315,7 +273,7 @@ function Summary({
                   label={t(entry.name)}
                   color="primary"
                   variant="outlined"
-                  className={classes.chip}
+                  mr={1}
                 />
               ))}
               {disciplines?.map((entry) => (
@@ -323,7 +281,7 @@ function Summary({
                   label={t(entry.name)}
                   color="secondary"
                   variant="outlined"
-                  className={classes.chip}
+                  mr={1}
                 />
               ))}
             </div>
@@ -334,7 +292,7 @@ function Summary({
                 {t(LIBRARY.COLLECTION_TAGS_TITLE)}
               </Typography>
               {tags?.map((text) => (
-                <Chip label={text} className={classes.chip} />
+                <Chip label={text} mr={1} />
               ))}
             </div>
           )}
@@ -345,7 +303,10 @@ function Summary({
               </Typography>
               <CCLicenseIcon
                 adaption={ccLicenseAdaption}
-                className={classes.icon}
+                sx={{
+                  mt: 1,
+                  borderWidth: 0,
+                }}
               />
             </div>
           )}

@@ -3,31 +3,21 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Tooltip } from '@material-ui/core';
-import Avatar from '@material-ui/core/Avatar';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemText from '@material-ui/core/ListItemText';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import { Tooltip } from '@mui/material';
+import Avatar from '@mui/material/Avatar';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import ListItemText from '@mui/material/ListItemText';
+import Typography from '@mui/material/Typography';
 
 import { LIBRARY } from '@graasp/translations';
 
 import { formatDate } from '../../utils/date';
 import { getAvatar } from '../../utils/layout';
 
-const useStyles = makeStyles((theme) => ({
-  root: {},
-  inline: {
-    display: 'inline',
-    marginRight: theme.spacing(1),
-  },
-}));
-
 function Comment({ comment, members }) {
   const { content, author, published } = comment;
-  const classes = useStyles();
   const { t } = useTranslation();
 
   const { name: authorName = t(LIBRARY.GUEST), image } =
@@ -40,7 +30,8 @@ function Comment({ comment, members }) {
       <Typography
         component="span"
         variant="body1"
-        className={classes.inline}
+        display="inline"
+        mr={1}
         color="textPrimary"
       >
         {authorName}
@@ -48,7 +39,8 @@ function Comment({ comment, members }) {
       <Typography
         component="span"
         variant="body2"
-        className={classes.inline}
+        display="inline"
+        mr={1}
         color="textSecondary"
       >
         {formatDate(published)}

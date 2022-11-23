@@ -1,5 +1,5 @@
-import { blue, grey, orange } from '@material-ui/core/colors';
-import { createTheme, responsiveFontSizes } from '@material-ui/core/styles';
+import { blue, grey, orange } from '@mui/material/colors';
+import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 
 const theme = createTheme({
   palette: {

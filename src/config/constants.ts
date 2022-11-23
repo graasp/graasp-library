@@ -1,7 +1,10 @@
+import { Context } from '@graasp/sdk';
+
 import {
   SHOW_NOTIFICATIONS as ENV_SHOW_NOTIFICATIONS,
   GRAASP_AUTH_HOST,
   GRAASP_BUILDER_HOST,
+  GRAASP_ANALYTICS_HOST,
   GRAASP_PERFORM_HOST,
   NEXT_PUBLIC_DOMAIN,
   PUBLISHED_TAG_ID,
@@ -65,7 +68,7 @@ export const MAX_COLLECTION_NAME_LENGTH = 100;
 // todo: use query client keys
 export const ITEMS_KEY = 'items';
 export const PUBLISHED_ITEMS_KEY = [ITEMS_KEY, 'itemTags', PUBLISHED_TAG_ID];
-export const buildCollectionKey = (id) => [ITEMS_KEY, id];
+export const buildCollectionKey = (id: string) => [ITEMS_KEY, id];
 
 export const CLIENT_ERROR_MESSAGE = 'Something went wrong!';
 export const DEFAULT_ITEM_IMAGE_PATH = '/icon.png';
@@ -91,17 +94,15 @@ export const MY_LIST_TAB_NAMES = {
   MY_PUBLISHMENTS: 'myPublishments',
 };
 
-// todo: use graasp sdk once we use typescript
-export const Context = {
-  BUILDER: 'builder',
-  LIBRARY: 'library',
-  PLAYER: 'player',
-};
-
 export const HOST_MAP = {
   [Context.BUILDER]: GRAASP_BUILDER_HOST,
   [Context.LIBRARY]: '/',
+  [Context.ANALYTICS]: GRAASP_ANALYTICS_HOST,
   [Context.PLAYER]: GRAASP_PERFORM_HOST,
+
+  // TO REMOVE
+  [Context.EXPLORER]: '/',
+  [Context.ANALYZER]: '/',
 };
 
 export const SHOW_NOTIFICATIONS =

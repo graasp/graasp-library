@@ -15,8 +15,8 @@ const hasMath = (input = '') =>
   (input.includes(BLOCK_MATH_INDICATOR) ||
     input.includes(INLINE_MATH_INDICATOR));
 
-const renderToString = (input = '', indicator, regex, div) => {
-  let output = input;
+const renderToString = (input, indicator, regex, div) => {
+  let output = input ?? '';
   if (input.includes(indicator)) {
     const matches = [...input.matchAll(regex)];
     matches.forEach((match) => {
@@ -24,9 +24,7 @@ const renderToString = (input = '', indicator, regex, div) => {
       const matched = match[0];
       const parsed = `<${div} class="ql-formula" data-value="${text}">
           <span contenteditable="false">
-            ${katex.renderToString(text, {
-              throwOnError: false,
-            })}
+          ${katex.renderToString(text, { throwOnError: false })}
           </span>
         </${div}>`;
       output = output.replace(matched, parsed);

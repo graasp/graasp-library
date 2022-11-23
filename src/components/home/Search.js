@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
+import SearchIcon from '@mui/icons-material/Search';
 import {
   Divider,
   FormControl,
@@ -13,9 +14,7 @@ import {
   Paper,
   Radio,
   RadioGroup,
-  makeStyles,
-} from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
+} from '@mui/material';
 
 import { LIBRARY } from '@graasp/translations';
 
@@ -26,30 +25,6 @@ import {
 } from '../../config/selectors';
 import { SEARCH_RANGES } from '../../enums/searchRanges';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    padding: theme.spacing(0.25, 0.5),
-    margin: theme.spacing(3, 'auto'),
-    display: 'flex',
-    alignItems: 'center',
-    width: '100%',
-  },
-  iconButton: {
-    padding: theme.spacing(1),
-  },
-  divider: {
-    height: theme.spacing(3),
-    margin: theme.spacing(0.5),
-  },
-  search: {
-    margin: theme.spacing(1),
-  },
-  searchOptions: {
-    marginLeft: theme.spacing(1),
-    marginBottom: theme.spacing(2),
-  },
-}));
-
 function Search({
   handleSearch,
   handleClick,
@@ -58,7 +33,6 @@ function Search({
   handleRangeChange,
 }) {
   const { t } = useTranslation();
-  const classes = useStyles();
 
   const handleKeyUp = (event) => {
     if (event.keyCode === 13) {
@@ -68,11 +42,22 @@ function Search({
 
   return (
     <>
-      <Paper component="div" className={classes.root} onKeyUp={handleKeyUp}>
+      <Paper
+        component="form"
+        onKeyUp={handleKeyUp}
+        sx={{
+          py: 1,
+          pl: 2,
+          display: 'flex',
+          alignItems: 'center',
+          width: '100%',
+          my: 1,
+        }}
+      >
         <InputBase
           id={HOME_SEARCH_ID}
           disabled={isLoading}
-          className={classes.search}
+          m={1}
           placeholder={t(LIBRARY.SEARCH_PLACEHOLDER)}
           fullWidth
           margin="none"
@@ -83,11 +68,11 @@ function Search({
           variant="filled"
           onChange={handleSearch}
         />
-        <Divider className={classes.divider} orientation="vertical" />
+        <Divider m={1} orientation="vertical" />
         <IconButton
           id={HOME_SEARCH_BUTTON_ID}
           color="primary"
-          className={classes.iconButton}
+          p={1}
           aria-label={t(LIBRARY.SEARCH_BUTTON_ARIA_LABEL)}
           type="submit"
           onClick={handleClick}
@@ -95,7 +80,7 @@ function Search({
           <SearchIcon />
         </IconButton>
       </Paper>
-      <FormControl component="fieldset" className={classes.searchOptions}>
+      <FormControl component="fieldset" ml={1} mb={2}>
         <FormLabel component="legend">
           {t(LIBRARY.SEARCH_RANGE_LABEL)}
         </FormLabel>
