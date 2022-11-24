@@ -65,19 +65,20 @@ const CategorySelection = ({
 
 CategorySelection.propTypes = {
   title: PropTypes.string.isRequired,
-  selectedValues: PropTypes.instanceOf(Array).isRequired,
-  valueList: PropTypes.instanceOf(Array).isRequired,
-  handleClick: PropTypes.instanceOf(Function).isRequired,
-  clearSelection: PropTypes.instanceOf(Function).isRequired,
+  selectedValues: PropTypes.arrayOf(PropTypes.number).isRequired,
+  valueList: PropTypes.arrayOf({}),
+  handleClick: PropTypes.func.isRequired,
+  clearSelection: PropTypes.func.isRequired,
   categoryType: PropTypes.string.isRequired,
   isLoading: PropTypes.bool.isRequired,
   buttonId: PropTypes.string,
-  buildOptionIndex: PropTypes.instanceOf(Function),
+  buildOptionIndex: PropTypes.func,
 };
 
 CategorySelection.defaultProps = {
   buttonId: '',
   buildOptionIndex: () => null,
+  valueList: [],
 };
 
 export default CategorySelection;

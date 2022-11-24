@@ -5,7 +5,7 @@ export const COLLECTIONS_GRID_ID = 'collectionsGrid';
 export const buildEducationLevelOptionId = (index) =>
   `educationLevelOption-${index}`;
 export const CLEAR_EDUCATION_LEVEL_SELECTION_ID = 'clearEducationLevelButton';
-export const CLOSE_MENU_BUTTON_ID = 'closeMenuButton';
+export const MENU_BUTTON_ID = 'menuButton';
 export const OPEN_MENU_BUTTON_ID = 'openMenuButton';
 export const buildCollectionCardGridId = (collectionsGridId, index) =>
   `${collectionsGridId}-collection-${index}`;

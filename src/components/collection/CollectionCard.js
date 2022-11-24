@@ -39,8 +39,8 @@ const StyledDescription = styled('p')(({ theme }) => ({
   'text-overflow': 'ellipsis',
   display: '-webkit-box',
   // number of lines to show
-  '-webkit-line-clamp': '2',
-  '-webkit-box-orient': 'vertical',
+  WebkitLineClamp: '2',
+  WebkitBoxOrient: 'vertical',
   '& p': {
     margin: theme.spacing(0),
   },
@@ -172,7 +172,11 @@ CollectionCard.propTypes = {
     voteScore: PropTypes.number,
     views: PropTypes.number,
   }).isRequired,
-  isLoading: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool,
+};
+
+CollectionCard.defaultProps = {
+  isLoading: false,
 };
 
 export default CollectionCard;

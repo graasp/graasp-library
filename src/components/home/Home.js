@@ -37,7 +37,6 @@ const { Loader } = {
 function Home() {
   const { t } = useTranslation();
   const [searchResults, setSearchResults] = useState(null);
-  const [searchInput, setSearchInput] = useState(null);
   const [range, setRange] = useState(SEARCH_RANGES.ALL.value);
   const [keywords, setKeywords] = useState(null);
   const { hooks } = useContext(QueryClientContext);
@@ -60,14 +59,6 @@ function Home() {
   useEffect(() => {
     setSearchResults(resultCollections);
   }, [resultCollections]);
-
-  const handleKeywordInput = (event) => {
-    setSearchInput(event.target.value.trim().toLowerCase());
-  };
-
-  const handleClick = () => {
-    setKeywords(searchInput);
-  };
 
   const handleRangeChange = (event) => {
     setRange(event.target.value);
@@ -131,8 +122,7 @@ function Home() {
         </Typography>
 
         <Search
-          handleSearch={handleKeywordInput}
-          handleClick={handleClick}
+          handleClick={setKeywords}
           isLoading={isLoading}
           range={range}
           handleRangeChange={handleRangeChange}

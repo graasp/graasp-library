@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { FC, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import AddIcon from '@mui/icons-material/Add';
@@ -11,7 +11,7 @@ import { LIBRARY } from '@graasp/translations';
 import { GRAASP_BUILDER_URL } from '../../config/constants';
 import { QueryClientContext } from '../QueryClientContext';
 
-const CreateButton = () => {
+const CreateButton: FC = () => {
   const { t } = useTranslation();
   const { hooks } = useContext(QueryClientContext);
   const { data: user } = hooks.useCurrentMember();
@@ -28,7 +28,7 @@ const CreateButton = () => {
   return (
     <Tooltip title={t(LIBRARY.CREATE_BUTTON_TOOLTIP)} placement="right">
       <Fab
-        ml={2}
+        sx={{ ml: 2 }}
         size="small"
         color="primary"
         aria-label={t(LIBRARY.CREATE_BUTTON_TOOLTIP)}

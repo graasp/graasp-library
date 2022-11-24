@@ -50,11 +50,11 @@ const HeaderLeftContent: FC<Props> = ({ sx }) => {
     }
 
     return (
-      <a href={MY_LIST_ROUTE}>
-        <Typography variant="h6" color="inherit" mx={2} id={HEADER_MY_LIST_ID}>
-          {t(LIBRARY.HEADER_MY_LISTS)}
-        </Typography>
-      </a>
+      <HeaderLink
+        href={MY_LIST_ROUTE}
+        text={t(LIBRARY.HEADER_MY_LISTS)}
+        id={HEADER_MY_LIST_ID}
+      />
     );
   };
 

@@ -5,8 +5,7 @@ import { ALL_COLLECTIONS_ROUTE } from '../../../src/config/routes';
 import {
   ALL_COLLECTIONS_GRID_ID,
   CLEAR_EDUCATION_LEVEL_SELECTION_ID,
-  CLOSE_MENU_BUTTON_ID,
-  OPEN_MENU_BUTTON_ID,
+  MENU_BUTTON_ID,
   SIDEMENU_HEADING_ID,
   SUBTITLE_TEXT_ID,
   TITLE_TEXT_ID,
@@ -64,13 +63,12 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
 
     it('close side menu and reopen', () => {
       beforeEach(environment);
-      cy.get(`#${CLOSE_MENU_BUTTON_ID}`).click();
-      cy.get(`#${SIDEMENU_HEADING_ID}`).should('not.be.visible');
-      cy.get(`#${OPEN_MENU_BUTTON_ID}`).click();
       cy.get(`#${SIDEMENU_HEADING_ID}`).should(
         'have.text',
         i18n.t(LIBRARY.ALL_COLLECTIONS_CATEGORIES_TITLE),
       );
+      cy.get(`#${MENU_BUTTON_ID}`).click();
+      cy.get(`#${SIDEMENU_HEADING_ID}`).should('not.be.visible');
     });
 
     it('select/unselect categories', () => {

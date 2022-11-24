@@ -1,6 +1,4 @@
 import { HOME_ROUTE } from '../../../src/config/routes';
-import { PUBLISHED_ITEMS } from '../../fixtures/items';
-import { buildPublicAndPrivateEnvironments } from '../../fixtures/environment';
 import {
   HOME_SEARCH_BUTTON_ID,
   HOME_SEARCH_ID,
@@ -8,6 +6,8 @@ import {
   buildSearchRangeOptionId,
 } from '../../../src/config/selectors';
 import { SEARCH_RANGES } from '../../../src/enums/searchRanges';
+import { buildPublicAndPrivateEnvironments } from '../../fixtures/environment';
+import { PUBLISHED_ITEMS } from '../../fixtures/items';
 
 const search = (text, range) => {
   cy.get(`#${HOME_SEARCH_ID}`).type(text);
@@ -23,7 +23,7 @@ describe('Search', () => {
   buildPublicAndPrivateEnvironments().forEach((environment) => {
     describe(`Fetch results for ${environment.currentMember.name}`, () => {
       Object.values(SEARCH_RANGES).forEach((range) => {
-        it.only(range.title, () => {
+        it(range.title, () => {
           cy.setUpApi({ ...environment, searchResultItems });
           cy.visit(HOME_ROUTE);
 

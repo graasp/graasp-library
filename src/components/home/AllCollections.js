@@ -14,6 +14,7 @@ import { PUBLISHED_TAG_ID } from '../../config/env';
 import {
   ALL_COLLECTIONS_GRID_ID,
   CLEAR_EDUCATION_LEVEL_SELECTION_ID,
+  MENU_BUTTON_ID,
   SIDEMENU_HEADING_ID,
   SUBTITLE_TEXT_ID,
   TITLE_TEXT_ID,
@@ -171,7 +172,12 @@ function AllCollections() {
   );
 
   return (
-    <Main open sidebar={sidebar} headerLeftContent={<HeaderLeftContent />}>
+    <Main
+      menuButtonId={MENU_BUTTON_ID}
+      open
+      sidebar={sidebar}
+      headerLeftContent={<HeaderLeftContent />}
+    >
       <Box m={2}>
         <Seo
           title={t(LIBRARY.GRAASP_LIBRARY)}
