@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import React, { FC, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Box, SxProps, Typography } from '@mui/material';
+import { Box, SxProps } from '@mui/material';
 
 import { Context } from '@graasp/sdk';
 import { LIBRARY } from '@graasp/translations';
