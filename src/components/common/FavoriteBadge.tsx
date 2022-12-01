@@ -8,10 +8,10 @@ type Props = {
   fontSize?: 'small' | 'inherit' | 'large' | 'medium' | undefined;
 };
 
-const FavoriteBadges: FC<Props> = ({ likes, fontSize = 'large' }) => (
+const FavoriteBadge: FC<Props> = ({ likes, fontSize = 'large' }) => (
   <Badge badgeContent={likes} color="secondary" max={999}>
     <Favorite color="primary" fontSize={fontSize} />
   </Badge>
 );
 
-export default FavoriteBadges;
+export default FavoriteBadge;

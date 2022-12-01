@@ -39,7 +39,7 @@ function Search({ handleClick, isLoading, range, handleRangeChange }) {
   };
 
   const handleSearchOnClick = (event) => {
-    if (event.keyCode === 13) {
+    if (event.code === 'Enter') {
       handleClick(searchInput);
     }
   };

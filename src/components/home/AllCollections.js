@@ -38,6 +38,8 @@ const { Main } = {
   }),
 };
 
+const gridParams = { sm: 12, md: 6, lg: 4, xl: 4 };
+
 function AllCollections() {
   const { t } = useTranslation();
   const { hooks } = useContext(QueryClientContext);
@@ -71,9 +73,6 @@ function AllCollections() {
   const [selectedLevels, setSelectedLevels] = useState([]);
   const [selectedDisciplines, setSelectedDisciplines] = useState([]);
   const [selectedLanguages, setSelectedLanguages] = useState([]);
-
-  // state variable to control the side menu
-  const [gridParams] = useState({ sm: 12, md: 6, lg: 4, xl: 4 });
 
   const clearSelection = (type) => () => {
     switch (type) {

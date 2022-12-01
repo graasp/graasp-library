@@ -100,8 +100,9 @@ export const HOST_MAP = {
   [Context.ANALYTICS]: GRAASP_ANALYTICS_HOST,
   [Context.PLAYER]: GRAASP_PERFORM_HOST,
 
-  // TO REMOVE
+  /** @deprecated - to remove */
   [Context.EXPLORER]: '/',
+  /** @deprecated - to remove */
   [Context.ANALYZER]: '/',
 };
 

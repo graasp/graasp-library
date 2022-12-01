@@ -51,7 +51,7 @@ const DialogTitle = (props) => {
 };
 
 const DialogActions = styled(({ theme }) => ({
-  '	.MuiDialogActions-root': {
+  '.MuiDialogActions-root': {
     margin: 0,
     padding: theme.spacing(1),
   },

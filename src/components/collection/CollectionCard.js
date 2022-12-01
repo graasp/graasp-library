@@ -44,7 +44,7 @@ const StyledDescription = styled('p')(({ theme }) => ({
   '& p': {
     margin: theme.spacing(0),
   },
-  // hide long descriptions splitted in multiple paragraphs
+  // hide long descriptions split into multiple paragraphs
   '& p:nth-child(1n+2)': {
     display: 'none',
   },

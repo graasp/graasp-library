@@ -19,10 +19,10 @@ jobs:
     with:
       # Test values
       next-public-google-analytics-id-test: G-H48F1X7SWK
-      next-public-published-tag-id-test: ea9a3b4e-7b67-44c2-a9df-528b6ae5424f
+      next-public-published-tag-id-test: 12345678-dead-beef-cafe-123456789abc
       next-public-api-host-test: http://localhost:3000
       next-public-graasp-analytics-host-test: http://localhost:3003
       next-public-graasp-auth-host-test: http://localhost:3001
       next-public-graasp-perform-host-test: http://localhost:3112
-      next-public-graasper-id-test: e890a236-3d45-4042-8a95-c91120f4db73
+      next-public-graasper-id-test: 12345678-dead-beef-cafe-123456789abc
       next-public-node-env-test: test

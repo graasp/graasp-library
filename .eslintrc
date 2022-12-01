@@ -43,7 +43,6 @@
     ],
     "react/require-default-props": "off",
     "import/no-named-as-default": 0,
-    // "import/no-unresolved": [".js"],
     "react/static-property-placement": [
       "error",
       "property assignment",

@@ -110,8 +110,7 @@
     "wait-on": "6.0.1"
   },
   "resolutions": {
-    "@graasp/sdk": "github:graasp/graasp-sdk.git",
-    "@types/react": "^17.0.30"
+    "@graasp/sdk": "github:graasp/graasp-sdk.git"
   },
   "nyc": {
     "exclude": [
