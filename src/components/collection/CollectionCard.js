@@ -140,7 +140,12 @@ export const CollectionCard = ({ collection = {}, isLoading }) => {
           </Typography>
         </CardContent>
       ) : (
-        <CardMedia link={link} name={name} itemId={id} />
+        <CardMedia
+          sx={{ height: '200px' }}
+          link={link}
+          name={name}
+          itemId={id}
+        />
       )}
       <CardActions disableSpacing>
         <ViewButton id={id} />

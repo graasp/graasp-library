@@ -11,21 +11,14 @@ import { ALL_COLLECTIONS_GRID_ID } from '../../config/selectors';
 import { QueryClientContext } from '../QueryClientContext';
 import CollectionsGrid from '../collection/CollectionsGrid';
 
-const LevelCollectionsPage = ({
-  selectedLevels,
-  selectedDisciplines,
-  selectedLanguages,
-  gridParams,
-}) => {
+const LevelCollectionsPage = ({ selected, gridParams }) => {
   const { t } = useTranslation();
   const { hooks } = useContext(QueryClientContext);
 
   // join all selected categories by comma
-  const categoryIds = [
-    selectedDisciplines.join(','),
-    selectedLevels.join(','),
-    selectedLanguages.join(','),
-  ].filter(Boolean);
+  const categoryIds = Object.values(selected)
+    .map((selection) => selection.join(','))
+    .filter(Boolean);
   const { data: collections, isLoading } =
     hooks.useItemsInCategories(categoryIds);
   const count = collections?.size || 0;
@@ -52,9 +45,9 @@ const LevelCollectionsPage = ({
 };
 
 LevelCollectionsPage.propTypes = {
-  selectedLevels: PropTypes.arrayOf(PropTypes.string).isRequired,
-  selectedDisciplines: PropTypes.arrayOf(PropTypes.string).isRequired,
-  selectedLanguages: PropTypes.arrayOf(PropTypes.string).isRequired,
+  selected: PropTypes.shape({
+    discipline: PropTypes.arrayOf(PropTypes.string),
+  }).isRequired,
   gridParams: PropTypes.shape({
     sm: PropTypes.number,
     md: PropTypes.number,

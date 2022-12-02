@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import { ErrorBoundary } from '@sentry/react';
 import PropTypes from 'prop-types';
 
@@ -15,7 +16,6 @@ import i18n from '../../config/i18n';
 import defaultTheme from '../../config/theme';
 import { QueryClientProvider } from '../QueryClientContext';
 import Footer from '../layout/Footer';
-import Header from '../layout/Header';
 import { LoginModalProvider } from './SignInModalContext';
 
 const Content = ({ children }) => {
@@ -23,7 +23,6 @@ const Content = ({ children }) => {
   return (
     <ErrorBoundary fallback={t(LIBRARY.UNEXPECTED_ERROR_MESSAGE)}>
       <LoginModalProvider>
-        <Header />
         {children}
         {/* divider for placeholder at bottom to prevent item be covered by footer, set color to white */}
         <Divider mt={10} />

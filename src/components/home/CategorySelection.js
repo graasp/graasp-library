@@ -65,7 +65,7 @@ const CategorySelection = ({
 
 CategorySelection.propTypes = {
   title: PropTypes.string.isRequired,
-  selectedValues: PropTypes.arrayOf(PropTypes.number).isRequired,
+  selectedValues: PropTypes.arrayOf(PropTypes.string).isRequired,
   valueList: PropTypes.arrayOf({}),
   handleClick: PropTypes.func.isRequired,
   clearSelection: PropTypes.func.isRequired,

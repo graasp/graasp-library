@@ -20,8 +20,6 @@ const Thumbnail = dynamic(
 
 const StyledCardMedia = styled(CardMedia)(({ sx, link }) => ({
   minHeight: '60%',
-  // necessary to trigger content height 100%
-  height: 0,
   '&:hover': {
     cursor: link ? 'pointer' : 'mouse',
   },
@@ -47,6 +45,7 @@ const CardMediaComponent = ({ sx, name, link, itemId, size }) => {
           width: '100%',
           height: '100%',
           overflow: 'hidden',
+          lineHeight: 0,
         }}
       >
         <Thumbnail

@@ -18,7 +18,6 @@ import {
   MAX_COLLECTION_NAME_LENGTH,
   THUMBNAIL_SIZES,
 } from '../../config/constants';
-import { ITEM_SUMMARY_DESCRIPTION_MIN_HEIGHT } from '../../config/cssStyles';
 import {
   ITEM_SUMMARY_TITLE_ID,
   SUMMARY_CATEGORIES_CONTAINER_ID,
@@ -229,12 +228,7 @@ function Summary({
             likes={likes}
             description={description}
           />
-          <Typography
-            variant="body1"
-            gutterBottom
-            component="div"
-            minHeight={ITEM_SUMMARY_DESCRIPTION_MIN_HEIGHT}
-          >
+          <Typography variant="body1" gutterBottom component="div">
             {isLoading ? (
               <Skeleton />
             ) : (

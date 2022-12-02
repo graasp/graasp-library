@@ -24,7 +24,8 @@ export const ChildrenCard = ({ item }) => {
         itemId={id}
         name={name}
         link={link}
-        sx={{ maxHeight: '60%' }}
+        // todo: improve card design
+        sx={{ maxHeight: '60%', height: '150px' }}
       />
 
       <CardContent sx={{ maxHeight: '25%' }}>

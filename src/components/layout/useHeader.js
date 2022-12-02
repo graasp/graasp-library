@@ -12,23 +12,25 @@ const Header = dynamic(() => import('@graasp/ui').then((mod) => mod.Header), {
   ssr: false,
 });
 
-function HeaderComponent() {
+const useHeader = () => {
   const theme = useTheme();
 
-  return (
+  const leftContent = <HeaderLeftContent sx={{ ml: 2 }} />;
+  // eslint-disable-next-line react/jsx-wrap-multilines
+  const rightContent = (
+    <div style={{ marginRight: theme.spacing(2) }}>
+      <UserHeader />
+    </div>
+  );
+
+  const header = (
     <>
-      <Header
-        leftContent={<HeaderLeftContent sx={{ ml: 2 }} />}
-        rightContent={
-          // eslint-disable-next-line react/jsx-wrap-multilines
-          <div style={{ marginRight: theme.spacing(2) }}>
-            <UserHeader />
-          </div>
-        }
-      />
+      <Header leftContent={leftContent} rightContent={rightContent} />
       <div style={{ height: HEADER_LOGO_HEIGHT }} />
     </>
   );
-}
 
-export default HeaderComponent;
+  return { header, leftContent, rightContent };
+};
+
+export default useHeader;
