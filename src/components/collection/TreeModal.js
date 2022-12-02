@@ -82,7 +82,6 @@ const TreeModal = ({ itemIds, open, title, onClose, onConfirm }) => {
           maxWidth: TREE_VIEW_MAX_WIDTH,
         }}
         selectedId={selectedId}
-        initialExpendedItems={[TREE_MODAL_MY_ITEMS_ID]}
         items={ownItems}
         onTreeItemSelect={onTreeItemSelect}
         useChildren={useChildren}
@@ -102,7 +101,6 @@ const TreeModal = ({ itemIds, open, title, onClose, onConfirm }) => {
           maxWidth: TREE_VIEW_MAX_WIDTH,
         }}
         selectedId={selectedId}
-        initialExpendedItems={[TREE_MODAL_SHARED_ITEMS_ID]}
         items={sharedItems}
         onTreeItemSelect={onTreeItemSelect}
         useChildren={useChildren}
