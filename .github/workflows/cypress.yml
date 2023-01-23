@@ -15,7 +15,7 @@ jobs:
     name: Cypress caller template
     # Replace 'main' with the hash of a commit, so it points to an specific version of the reusable workflow that is used
     # Reference reusable workflow file. Using the commit SHA is the safest for stability and security
-    uses: graasp/graasp-deploy/.github/workflows/cypress.yml@118-analytics-in-library
+    uses: graasp/graasp-deploy/.github/workflows/cypress.yml@v1
     with:
       # Test values
       next-public-google-analytics-id-test: G-H48F1X7SWK
