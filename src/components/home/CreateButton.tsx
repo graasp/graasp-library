@@ -8,7 +8,7 @@ import Fab from '@mui/material/Fab';
 import { redirect } from '@graasp/sdk';
 import { LIBRARY } from '@graasp/translations';
 
-import { GRAASP_BUILDER_URL } from '../../config/constants';
+import { GRAASP_BUILDER_HOST } from '../../config/constants';
 import { QueryClientContext } from '../QueryClientContext';
 
 const CreateButton: FC = () => {
@@ -17,7 +17,7 @@ const CreateButton: FC = () => {
   const { data: user } = hooks.useCurrentMember();
 
   const redirectToCompose = () => {
-    redirect(GRAASP_BUILDER_URL);
+    redirect(GRAASP_BUILDER_HOST);
   };
 
   // show create button only if logged in

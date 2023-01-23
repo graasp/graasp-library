@@ -3,7 +3,6 @@ import { Context } from '@graasp/sdk';
 import {
   SHOW_NOTIFICATIONS as ENV_SHOW_NOTIFICATIONS,
   GRAASP_AUTH_HOST,
-  GRAASP_BUILDER_HOST,
   GRAASP_ANALYTICS_HOST,
   GRAASP_PERFORM_HOST,
   NEXT_PUBLIC_DOMAIN,
@@ -23,6 +22,8 @@ export const BLOCK_MATH_INDICATOR = '\\[';
 export const INLINE_MATH_INDICATOR = '\\(';
 export const BLOCK_MATH_REGEX = /(\\\[(.*?)\\])/g;
 export const INLINE_MATH_REGEX = /(\\\((.*?)\\\))/g;
+
+export const GRAASP_BUILDER_HOST = process.env.GRAASP_BUILDER_HOST || 'http://localhost:3111';
 
 export const ITEM_TYPES = {
   APPLICATION: 'Application',
@@ -48,8 +49,6 @@ export const TWITTER_MESSAGE_MAX_LENGTH = 270;
 export const MAIL_BREAK_LINE = '%0D%0A';
 
 export const LEFT_MENU_WIDTH = 300;
-
-export const GRAASP_BUILDER_URL = 'https://builder.graasp.org';
 
 export const CATEGORY_TYPES = {
   LEVEL: 'level',
