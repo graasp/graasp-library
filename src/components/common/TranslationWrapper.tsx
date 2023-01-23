@@ -20,7 +20,7 @@ const TranslationWrapper = ({ children }: Props): JSX.Element => {
     if (lang) {
       i18n.changeLanguage(lang);
     }
-  }, []);
+  }, [member]);
 
   return <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;
 };

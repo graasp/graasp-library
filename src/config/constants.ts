@@ -7,6 +7,7 @@ import {
   GRAASP_PERFORM_HOST,
   NEXT_PUBLIC_DOMAIN,
   PUBLISHED_TAG_ID,
+  GRAASP_BUILDER_HOST as ENV_GRAASP_BUILDER_HOST,
 } from './env';
 
 export const APP_KEYWORDS = ['graasp', 'library'];
@@ -23,7 +24,7 @@ export const INLINE_MATH_INDICATOR = '\\(';
 export const BLOCK_MATH_REGEX = /(\\\[(.*?)\\])/g;
 export const INLINE_MATH_REGEX = /(\\\((.*?)\\\))/g;
 
-export const GRAASP_BUILDER_HOST = process.env.GRAASP_BUILDER_HOST || 'http://localhost:3111';
+export const GRAASP_BUILDER_HOST = ENV_GRAASP_BUILDER_HOST || 'http://localhost:3111';
 
 export const ITEM_TYPES = {
   APPLICATION: 'Application',
