@@ -26,7 +26,10 @@ const Footer = () => {
 
     // on signed in: change user language
     if (member?.id) {
-      editMember({ extra: { lang: newLang } });
+      editMember({
+        id: member.id,
+        extra: { lang: newLang },
+      });
     }
     // otherwise set cookie
     else {

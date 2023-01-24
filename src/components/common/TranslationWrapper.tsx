@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { I18nextProvider } from 'react-i18next';
 
 import { getLangCookie } from '@graasp/sdk';
@@ -14,7 +14,7 @@ const TranslationWrapper = ({ children }: Props): JSX.Element => {
   const { hooks } = useContext(QueryClientContext);
   const { data: member } = hooks.useCurrentMember();
 
-  React.useEffect(() => {
+  useEffect(() => {
     // change language
     const lang = member?.extra?.lang ?? getLangCookie();
     if (lang) {
