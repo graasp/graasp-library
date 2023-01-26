@@ -55,7 +55,7 @@ export const CATEGORY_TYPES = {
   LEVEL: 'level',
   DISCIPLINE: 'discipline',
   LANGUAGE: 'language',
-};
+} as const;
 
 export const PICTURE_QUALITIES = {
   LARGE: 'large',
@@ -121,8 +121,15 @@ export const ENV = {
 
 export const TREE_VIEW_MAX_WIDTH = 400;
 
-export const CATEGORY_COLORS = {
+
+
+// values of CATEGORY_TYPES = "level", "discipline", etc
+type Keys = keyof typeof CATEGORY_TYPES;
+type Values = (typeof CATEGORY_TYPES)[Keys];
+
+export const CATEGORY_COLORS: Record<Values, string> = {
   [CATEGORY_TYPES.DISCIPLINE]: '#bbdefb',
   [CATEGORY_TYPES.LANGUAGE]: 'grey',
   [CATEGORY_TYPES.LEVEL]: '#5050d2',
 };
+
