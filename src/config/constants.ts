@@ -120,3 +120,9 @@ export const ENV = {
 };
 
 export const TREE_VIEW_MAX_WIDTH = 400;
+
+export const CATEGORY_COLORS = {
+  [CATEGORY_TYPES.DISCIPLINE]: '#bbdefb',
+  [CATEGORY_TYPES.LANGUAGE]: 'grey',
+  [CATEGORY_TYPES.LEVEL]: '#5050d2',
+};

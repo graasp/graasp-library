@@ -14,6 +14,7 @@ import { MUTATION_KEYS } from '@graasp/query-client';
 import { LIBRARY } from '@graasp/translations';
 
 import {
+  CATEGORY_COLORS,
   CATEGORY_TYPES,
   MAX_COLLECTION_NAME_LENGTH,
   THUMBNAIL_SIZES,
@@ -253,7 +254,10 @@ function Summary({
                 {t(LIBRARY.COLLECTION_LANGUAGES_TITLE)}
               </Typography>
               {languages?.map((entry) => (
-                <Chip label={t(entry.name)} />
+                <Chip
+                  label={t(entry.name)}
+                  color={CATEGORY_COLORS[CATEGORY_TYPES.LANGUAGE]}
+                />
               ))}
             </div>
           )}
@@ -265,7 +269,7 @@ function Summary({
               {levels?.map((entry) => (
                 <Chip
                   label={t(entry.name)}
-                  color="primary"
+                  color={CATEGORY_COLORS[CATEGORY_TYPES.LEVEL]}
                   variant="outlined"
                   mr={1}
                 />
@@ -273,7 +277,7 @@ function Summary({
               {disciplines?.map((entry) => (
                 <Chip
                   label={t(entry.name)}
-                  color="secondary"
+                  color={CATEGORY_COLORS[CATEGORY_TYPES.DISCIPLINE]}
                   variant="outlined"
                   mr={1}
                 />
