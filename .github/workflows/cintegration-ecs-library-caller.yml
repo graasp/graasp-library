@@ -30,7 +30,7 @@ jobs:
       ecs-cluster: ${{ secrets.ECS_CLUSTER_GRAASP_EXPLORE_DEV }}
       ecs-service: ${{ secrets.ECS_SERVICE_GRAASP_EXPLORE_DEV }}
       next-public-api-host: ${{ secrets.NEXT_PUBLIC_API_HOST_DEV }}
-      next-public-domain: ${{ secrets.DEV_GRAASP_DOMAIN }}
+      next-public-domain: ${{ secrets.REACT_APP_DOMAIN_DEV }}
       next-public-ga-measurement-id: ${{ secrets.REACT_APP_GA_MEASUREMENT_ID_DEV }}
       next-public-graasp-analytics-host: ${{ secrets.ANALYZER_CLIENT_HOST_DEV }}
       next-public-graasp-auth-host: ${{ secrets.NEXT_PUBLIC_GRAASP_AUTH_HOST_DEV }}
