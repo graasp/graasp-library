@@ -4,7 +4,8 @@ name: release-please
 on:
   push:
     branches:
-      - "master"
+      - main
+      - master
 
 jobs:
   release-please:

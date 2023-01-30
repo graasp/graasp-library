@@ -32,7 +32,6 @@ jobs:
       next-public-api-host: ${{ secrets.NEXT_PUBLIC_API_HOST_DEV }}
       next-public-domain: ${{ secrets.DEV_GRAASP_DOMAIN }}
       next-public-ga-measurement-id: ${{ secrets.REACT_APP_GA_MEASUREMENT_ID_DEV }}
-      next-public-google-analytics-id: ${{ secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID }}
       next-public-graasp-analytics-host: ${{ secrets.ANALYZER_CLIENT_HOST_DEV }}
       next-public-graasp-auth-host: ${{ secrets.NEXT_PUBLIC_GRAASP_AUTH_HOST_DEV }}
       next-public-graasp-builder-host: ${{ secrets.BUILDER_CLIENT_HOST_DEV }}
