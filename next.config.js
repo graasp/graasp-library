@@ -12,5 +12,6 @@ module.exports = {
     NODE_ENV: process.env.NODE_ENV,
     NEXT_PUBLIC_GRAASPER_ID: process.env.NEXT_PUBLIC_GRAASPER_ID,
     NEXT_PUBLIC_S3_FILES_HOST: process.env.NEXT_PUBLIC_S3_FILES_HOST,
+    NEXT_PUBLIC_SENTRY_DSN: process.env.NEXT_PUBLIC_SENTRY_DSN,
   },
 };
