@@ -256,7 +256,8 @@ function Summary({
               {languages?.map((entry) => (
                 <Chip
                   label={t(entry.name)}
-                  color={CATEGORY_COLORS[CATEGORY_TYPES.LANGUAGE]}
+                  variant="outlined"
+                  sx={{ color: CATEGORY_COLORS[CATEGORY_TYPES.LANGUAGE] }}
                 />
               ))}
             </div>
@@ -269,15 +270,15 @@ function Summary({
               {levels?.map((entry) => (
                 <Chip
                   label={t(entry.name)}
-                  color={CATEGORY_COLORS[CATEGORY_TYPES.LEVEL]}
                   variant="outlined"
+                  sx={{ color: CATEGORY_COLORS[CATEGORY_TYPES.LEVEL] }}
                   mr={1}
                 />
               ))}
               {disciplines?.map((entry) => (
                 <Chip
                   label={t(entry.name)}
-                  color={CATEGORY_COLORS[CATEGORY_TYPES.DISCIPLINE]}
+                  sx={{ color: CATEGORY_COLORS[CATEGORY_TYPES.DISCIPLINE] }}
                   variant="outlined"
                   mr={1}
                 />
