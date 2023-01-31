@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.2](https://github.com/graasp/graasp-library/compare/v0.2.1...v0.2.2) (2023-01-31)
+
+
+### Bug Fixes
+
+* `domain` env var ([5f396e0](https://github.com/graasp/graasp-library/commit/5f396e026f0b52a0d65dc1703aad954e14ae2766))
+* add sentry var in publicRuntimeConfig ([5f396e0](https://github.com/graasp/graasp-library/commit/5f396e026f0b52a0d65dc1703aad954e14ae2766))
+* ga env vars ([#219](https://github.com/graasp/graasp-library/issues/219)) ([5f396e0](https://github.com/graasp/graasp-library/commit/5f396e026f0b52a0d65dc1703aad954e14ae2766))
+* remove legacy ga env variable ([5f396e0](https://github.com/graasp/graasp-library/commit/5f396e026f0b52a0d65dc1703aad954e14ae2766))
+
 ## [0.2.1](https://github.com/graasp/graasp-library/compare/v0.2.0...v0.2.1) (2023-01-30)
 
 
