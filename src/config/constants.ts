@@ -1,4 +1,4 @@
-import { Context } from '@graasp/sdk';
+import { Context, buildSignInPath } from '@graasp/sdk';
 
 import {
   GRAASP_BUILDER_HOST as ENV_GRAASP_BUILDER_HOST,
@@ -80,6 +80,7 @@ export const buildCollectionKey = (id: string) => [ITEMS_KEY, id];
 export const CLIENT_ERROR_MESSAGE = 'Something went wrong!';
 export const DEFAULT_ITEM_IMAGE_PATH = '/icon.png';
 export const DEFAULT_MEMBER_THUMBNAIL = '/defaultAvatar.png';
+export const AVATAR_ICON_HEIGHT = 30;
 
 export const THUMBNAIL_SIZES = {
   SMALL: 'small',
@@ -137,3 +138,6 @@ export const CATEGORY_COLORS: Record<Values, string> = {
   [CATEGORY_TYPES.LANGUAGE]: '#9A49DE',
   [CATEGORY_TYPES.LEVEL]: '#5050d2',
 };
+
+export const MEMBER_PROFILE_PATH = `${GRAASP_BUILDER_HOST}/profile`;
+export const SIGN_IN_PATH = buildSignInPath({ host: GRAASP_AUTH_HOST });

@@ -2,26 +2,18 @@ import dynamic from 'next/dynamic';
 
 import React from 'react';
 
-import { useTheme } from '@mui/material';
-
 import { HEADER_LOGO_HEIGHT } from '../../config/cssStyles';
 import HeaderLeftContent from './HeaderLeftContent';
-import UserHeader from './UserHeader';
+import UserHeader from './UserSwitchWrapper';
 
 const Header = dynamic(() => import('@graasp/ui').then((mod) => mod.Header), {
   ssr: false,
 });
 
 const useHeader = (id) => {
-  const theme = useTheme();
-
   const leftContent = <HeaderLeftContent id={id} sx={{ ml: 2 }} />;
   // eslint-disable-next-line react/jsx-wrap-multilines
-  const rightContent = (
-    <div style={{ marginRight: theme.spacing(2) }}>
-      <UserHeader />
-    </div>
-  );
+  const rightContent = <UserHeader />;
 
   const header = (
     <>
