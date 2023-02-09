@@ -1,14 +1,17 @@
 import { Context } from '@graasp/sdk';
 
 import {
+  GRAASP_BUILDER_HOST as ENV_GRAASP_BUILDER_HOST,
   SHOW_NOTIFICATIONS as ENV_SHOW_NOTIFICATIONS,
-  GRAASP_AUTH_HOST,
   GRAASP_ANALYTICS_HOST,
+  GRAASP_AUTH_HOST,
   GRAASP_PERFORM_HOST,
   NEXT_PUBLIC_DOMAIN,
   PUBLISHED_TAG_ID,
-  GRAASP_BUILDER_HOST as ENV_GRAASP_BUILDER_HOST,
 } from './env';
+
+export const APP_NAME = 'Graasp';
+export const GRAASP_LOGO_HEADER_HEIGHT = 40;
 
 export const APP_KEYWORDS = ['graasp', 'library'];
 export const APP_AUTHOR = 'Graasp';
@@ -24,7 +27,11 @@ export const INLINE_MATH_INDICATOR = '\\(';
 export const BLOCK_MATH_REGEX = /(\\\[(.*?)\\])/g;
 export const INLINE_MATH_REGEX = /(\\\((.*?)\\\))/g;
 
-export const GRAASP_BUILDER_HOST = ENV_GRAASP_BUILDER_HOST || 'http://localhost:3111';
+export const GRAASP_BUILDER_HOST =
+  ENV_GRAASP_BUILDER_HOST || 'http://localhost:3111';
+
+export const GRAASP_PLAYER_HOST =
+  GRAASP_PERFORM_HOST || 'http://localhost:3112';
 
 export const ITEM_TYPES = {
   APPLICATION: 'Application',
@@ -98,7 +105,7 @@ export const HOST_MAP = {
   [Context.BUILDER]: GRAASP_BUILDER_HOST,
   [Context.LIBRARY]: '/',
   [Context.ANALYTICS]: GRAASP_ANALYTICS_HOST,
-  [Context.PLAYER]: GRAASP_PERFORM_HOST,
+  [Context.PLAYER]: GRAASP_PLAYER_HOST,
 
   /** @deprecated - to remove */
   [Context.EXPLORER]: '/',
@@ -121,15 +128,12 @@ export const ENV = {
 
 export const TREE_VIEW_MAX_WIDTH = 400;
 
-
-
 // values of CATEGORY_TYPES = "level", "discipline", etc
 type Keys = keyof typeof CATEGORY_TYPES;
-type Values = (typeof CATEGORY_TYPES)[Keys];
+type Values = typeof CATEGORY_TYPES[Keys];
 
 export const CATEGORY_COLORS: Record<Values, string> = {
   [CATEGORY_TYPES.DISCIPLINE]: '#4997DE',
   [CATEGORY_TYPES.LANGUAGE]: '#9A49DE',
   [CATEGORY_TYPES.LEVEL]: '#5050d2',
 };
-
