@@ -71,7 +71,7 @@ export function usePlatformNavigation(
     const href = url ?? '#';
     return {
       onClick: () => redirect(href),
-      onMouseDown: (event: MouseEvent) => {
+      onMouseDown: (event: React.MouseEvent) => {
         if (event.button !== 1 || url === undefined) {
           return;
         }
