@@ -3,6 +3,8 @@ import dynamic from 'next/dynamic';
 
 import React, { FC, useContext } from 'react';
 
+import Box from '@mui/material/Box';
+
 import { MUTATION_KEYS } from '@graasp/query-client';
 import { Member } from '@graasp/sdk';
 import { BUILDER } from '@graasp/translations';
@@ -41,26 +43,30 @@ const UserSwitchWrapper: FC<Props> = ({ ButtonContent }) => {
   const renderAvatar = (m: RecordOf<Member>) => <MemberAvatar id={m.id} />;
 
   return (
-    <GraaspUserSwitch
-      ButtonContent={ButtonContent}
-      signOut={signOut}
-      currentMember={member}
-      isCurrentMemberLoading={isLoading}
-      isCurrentMemberSuccess={isSuccessUser}
-      // fix in query client
-      switchMember={switchMember as any}
-      seeProfileText={translateBuilder(BUILDER.USER_SWITCH_PROFILE_BUTTON)}
-      signedOutTooltipText={translateBuilder(
-        BUILDER.USER_SWITCH_SIGNED_OUT_TOOLTIP,
-      )}
-      signOutText={translateBuilder(BUILDER.USER_SWITCH_SIGN_OUT_BUTTON)}
-      switchMemberText={translateBuilder(BUILDER.USER_SWITCH_SWITCH_USER_TEXT)}
-      profilePath={MEMBER_PROFILE_PATH}
-      domain={DOMAIN}
-      redirectPath={SIGN_IN_PATH}
-      useMembers={hooks.useMembers}
-      renderAvatar={renderAvatar as any}
-    />
+    <Box mr={1}>
+      <GraaspUserSwitch
+        ButtonContent={ButtonContent}
+        signOut={signOut}
+        currentMember={member}
+        isCurrentMemberLoading={isLoading}
+        isCurrentMemberSuccess={isSuccessUser}
+        // fix in query client
+        switchMember={switchMember as any}
+        seeProfileText={translateBuilder(BUILDER.USER_SWITCH_PROFILE_BUTTON)}
+        signedOutTooltipText={translateBuilder(
+          BUILDER.USER_SWITCH_SIGNED_OUT_TOOLTIP,
+        )}
+        signOutText={translateBuilder(BUILDER.USER_SWITCH_SIGN_OUT_BUTTON)}
+        switchMemberText={translateBuilder(
+          BUILDER.USER_SWITCH_SWITCH_USER_TEXT,
+        )}
+        profilePath={MEMBER_PROFILE_PATH}
+        domain={DOMAIN}
+        redirectPath={SIGN_IN_PATH}
+        useMembers={hooks.useMembers}
+        renderAvatar={renderAvatar as any}
+      />
+    </Box>
   );
 };
 

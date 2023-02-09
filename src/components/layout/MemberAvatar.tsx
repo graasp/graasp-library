@@ -4,7 +4,11 @@ import React, { useContext } from 'react';
 
 import { COMMON } from '@graasp/translations';
 
-import { AVATAR_ICON_HEIGHT, THUMBNAIL_SIZES } from '../../config/constants';
+import {
+  AVATAR_ICON_HEIGHT,
+  DEFAULT_MEMBER_THUMBNAIL,
+  THUMBNAIL_SIZES,
+} from '../../config/constants';
 import { useCommonTranslation } from '../../config/i18n';
 import { QueryClientContext } from '../QueryClientContext';
 
@@ -35,6 +39,7 @@ const MemberAvatar = ({ id }: Props): JSX.Element => {
     <Avatar
       isLoading={isLoading || isLoadingAvatar || isFetchingAvatar || isFetching}
       alt={member?.name || t(COMMON.AVATAR_DEFAULT_ALT)}
+      defaultImage={DEFAULT_MEMBER_THUMBNAIL}
       component="avatar"
       maxWidth={AVATAR_ICON_HEIGHT}
       maxHeight={AVATAR_ICON_HEIGHT}
