@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import { Box, Typography, styled } from '@mui/material';
 
@@ -95,12 +95,14 @@ export const platformsHostsMap = defaultHostsMapper({
   [Platform.Player]: HOST_MAP.player,
 });
 
-const StyledLink = styled(Link)(() => ({
+const linkStyles = {
   textDecoration: 'none',
   color: 'inherit',
   display: 'flex',
   alignItems: 'center',
-}));
+};
+
+const StyledLink = styled(Link)(() => linkStyles);
 
 interface HeaderNavigationProps {
   rootId?: string;
@@ -120,10 +122,10 @@ export const HeaderNavigation = ({
     },
     [Platform.Player]: {
       id: APP_NAVIGATION_PLATFORM_SWITCH_BUTTON_IDS[Platform.Player],
+      ...getNavigationEvents(Platform.Player),
     },
     [Platform.Library]: {
       id: APP_NAVIGATION_PLATFORM_SWITCH_BUTTON_IDS[Platform.Library],
-      ...getNavigationEvents(Platform.Library),
     },
     [Platform.Analytics]: {
       id: APP_NAVIGATION_PLATFORM_SWITCH_BUTTON_IDS[Platform.Analytics],
@@ -132,15 +134,18 @@ export const HeaderNavigation = ({
   };
   return (
     <Box display="flex" ml={2}>
-      <StyledLink to="/">
-        <GraaspLogo height={HEADER_LOGO_HEIGHT} sx={{ fill: 'white' }} />
-        <Typography variant="h6" color="inherit" mr={2} ml={1}>
-          {APP_NAME}
-        </Typography>
+      <StyledLink href="/" legacyBehavior>
+        { /* eslint-disable-next-line jsx-a11y/anchor-is-valid */ }
+        <a style={linkStyles}>
+          <GraaspLogo height={HEADER_LOGO_HEIGHT} sx={{ fill: 'white' }} />
+          <Typography variant="h6" color="inherit" mr={2} ml={1}>
+            {APP_NAME}
+          </Typography>
+        </a>
       </StyledLink>
       <PlatformSwitch
         id={APP_NAVIGATION_PLATFORM_SWITCH_ID}
-        selected={Platform.Player}
+        selected={Platform.Library}
         platformsProps={platformProps}
         disabledColor="#999"
       />

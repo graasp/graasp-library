@@ -1107,9 +1107,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/ui@npm:0.10.2":
-  version: 0.10.2
-  resolution: "@graasp/ui@npm:0.10.2"
+"@graasp/ui@npm:0.10.3":
+  version: 0.10.3
+  resolution: "@graasp/ui@npm:0.10.3"
   dependencies:
     "@graasp/sdk": 0.2.0
     clsx: 1.1.1
@@ -1142,7 +1142,7 @@ __metadata:
       optional: true
     ag-grid-react:
       optional: true
-  checksum: f3b2c14645facf52bb91fa7b547e8f905ffb93dc43bae8cafcb9a4c6cde1bbc97b84637a7da37b94fe48309246dd1a00c02e8d6e535e52340f6ebe53e95cd1a9
+  checksum: d15bb380c681757440554f75c1670c6943b33664cae6e936526676f43b456559df4145cb2a5cfe0eab705aa2ff923f8eb2c220fc88877e19d3349c1ec3b7f77c
   languageName: node
   linkType: hard
 
@@ -5993,7 +5993,7 @@ __metadata:
     "@graasp/query-client": "github:graasp/graasp-query-client.git"
     "@graasp/sdk": "github:graasp/graasp-sdk.git"
     "@graasp/translations": "github:graasp/graasp-translations.git"
-    "@graasp/ui": 0.10.2
+    "@graasp/ui": 0.10.3
     "@mui/icons-material": 5.10.9
     "@mui/lab": 5.0.0-alpha.104
     "@mui/material": 5.10.12
