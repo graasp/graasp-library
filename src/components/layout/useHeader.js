@@ -12,10 +12,10 @@ const Header = dynamic(() => import('@graasp/ui').then((mod) => mod.Header), {
   ssr: false,
 });
 
-const useHeader = () => {
+const useHeader = (id) => {
   const theme = useTheme();
 
-  const leftContent = <HeaderLeftContent sx={{ ml: 2 }} />;
+  const leftContent = <HeaderLeftContent id={id} sx={{ ml: 2 }} />;
   // eslint-disable-next-line react/jsx-wrap-multilines
   const rightContent = (
     <div style={{ marginRight: theme.spacing(2) }}>

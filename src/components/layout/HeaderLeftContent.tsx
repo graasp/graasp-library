@@ -15,10 +15,11 @@ import HeaderNavigation from '../common/HeaderNavigation';
 import HeaderLink from './HeaderLink';
 
 type Props = {
+  id?: string;
   sx: SxProps;
 };
 
-const HeaderLeftContent: FC<Props> = ({ sx }) => {
+const HeaderLeftContent: FC<Props> = ({ id, sx }) => {
   const { t } = useTranslation();
 
   const { hooks } = useContext(QueryClientContext);
@@ -41,7 +42,7 @@ const HeaderLeftContent: FC<Props> = ({ sx }) => {
 
   return (
     <Box display="flex" alignItems="center" color="white" sx={sx}>
-      <HeaderNavigation />
+      <HeaderNavigation rootId={id} />
       <HeaderLink
         href={ALL_COLLECTIONS_ROUTE}
         id={HEADER_ALL_COLLECTIONS_ID}
