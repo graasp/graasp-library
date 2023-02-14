@@ -43,18 +43,25 @@ export type HostsMapper = Partial<
 export function defaultHostsMapper(
   hostsUrls: Partial<Record<Platform, string>>,
 ): HostsMapper {
-  const transformUrls: Record<string, (origin: string) => string> = {
-    [Platform.Builder]: (origin: string) => `${origin}/items`,
+  const urlBuilders = {
+    [Platform.Builder]: (origin: string, itemId: string) =>
+      `${origin}/items/${itemId}`,
+    [Platform.Player]: (origin: string, itemId: string) =>
+      `${origin}/${itemId}`,
+    [Platform.Library]: (origin: string, itemId: string) =>
+      `${origin}/collections/${itemId}`,
+    [Platform.Analytics]: (origin: string, itemId: string) =>
+      `${origin}/${itemId}`,
   };
 
   return Object.fromEntries(
     Object.entries(hostsUrls).map(([platform, url]) => {
       const { origin } = new URL(url);
-      const path = transformUrls[platform]?.(origin) ?? origin;
       return [
         platform,
         // if passed itemId is undefined, redirect to home page of platform
-        (itemId: string) => (itemId ? `${path}/${itemId}` : origin),
+        (itemId: string) =>
+          itemId ? urlBuilders[platform as Platform](origin, itemId) : origin,
       ];
     }),
   ) as HostsMapper;
@@ -135,7 +142,7 @@ export const HeaderNavigation = ({
   return (
     <Box display="flex" ml={2}>
       <StyledLink href="/" legacyBehavior>
-        { /* eslint-disable-next-line jsx-a11y/anchor-is-valid */ }
+        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
         <a style={linkStyles}>
           <GraaspLogo height={HEADER_LOGO_HEIGHT} sx={{ fill: 'white' }} />
           <Typography variant="h6" color="inherit" mr={2} ml={1}>
