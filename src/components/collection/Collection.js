@@ -61,8 +61,11 @@ const Collection = ({ id }) => {
   } = hooks.useMember(collection?.creator);
   const { data: currentMember } = hooks.useCurrentMember();
   const { data: likeCount } = hooks.useLikeCount(id);
-  const { data: tags, isError: tagsIsError } = hooks.useItemTags(id);
+  const { data: tags } = hooks.useItemTags(id);
   const { leftContent, rightContent } = useHeader(id);
+
+  // if tags could be fetched then user has at least read access
+  const canRead = Boolean(tags);
 
   const canPublish =
     collection && currentMember && collection.creator === currentMember.id;
@@ -79,7 +82,7 @@ const Collection = ({ id }) => {
     );
   }
 
-  if (isError || memberIsError || tagsIsError) {
+  if (isError || memberIsError) {
     return (
       <Main headerLeftContent={leftContent} headerRightContent={rightContent}>
         <Box id={id} p={5}>
@@ -115,26 +118,32 @@ const Collection = ({ id }) => {
         image={imageUrl}
       />
       <Main headerLeftContent={leftContent} headerRightContent={rightContent}>
-        {!isPublished && (
-          <Alert severity="warning">
-            You are viewing this item in Library preview mode. It cannot be
-            viewed publicly.
-            {canPublish && (
-              <>
-                <br />
-                If you&apos;d like to share this collection with everyone, you
-                can publish this item in
-                <BuildIcon
-                  size={18}
-                  sx={{ verticalAlign: 'middle', mr: 0.3 }}
-                  primaryOpacity={0}
-                  secondaryColor="rgb(102, 60, 0)"
-                />
-                Builder.
-              </>
-            )}
-          </Alert>
-        )}
+        {
+          // show alert only if 1. user is logged in, 2. it has at least read access and 3. item is not published
+          currentMember?.id && canRead && !isPublished && (
+            <Alert severity="warning">
+              You are viewing this item in Library preview mode. It cannot be
+              viewed publicly.
+              {
+                // if the user is the admin of the item, also suggest publishing from Buider
+                canPublish && (
+                  <>
+                    <br />
+                    If you&apos;d like to share this collection with everyone,
+                    you can publish this item in
+                    <BuildIcon
+                      size={18}
+                      sx={{ verticalAlign: 'middle', mr: 0.3 }}
+                      primaryOpacity={0}
+                      secondaryColor="rgb(102, 60, 0)"
+                    />
+                    Builder.
+                  </>
+                )
+              }
+            </Alert>
+          )
+        }
         <Box id={id} p={5}>
           <Summary
             itemId={id}
