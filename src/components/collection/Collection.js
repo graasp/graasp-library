@@ -125,7 +125,7 @@ const Collection = ({ id }) => {
               You are viewing this item in Library preview mode. It cannot be
               viewed publicly.
               {
-                // if the user is the admin of the item, also suggest publishing from Buider
+                // if the user is the admin of the item, also suggest publishing from Builder
                 canPublish && (
                   <>
                     <br />
