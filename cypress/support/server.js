@@ -22,6 +22,7 @@ const {
   buildGetPublicChildrenRoute,
   buildGetItemMembershipsForItemsRoute,
   buildGetItemRoute,
+  buildGetItemTagsRoute,
   buildGetMember,
   ITEMS_ROUTE,
   GET_CURRENT_MEMBER_ROUTE,
@@ -178,6 +179,25 @@ export const mockGetItem = ({ items, currentMember }, shouldThrowError) => {
       });
     },
   ).as('getItem');
+};
+
+export const mockGetItemTags = ({ tags }, shouldThrowError) => {
+  cy.intercept(
+    {
+      method: DEFAULT_GET.method,
+      url: new RegExp(`${API_HOST}/${buildGetItemTagsRoute(ID_FORMAT)}$`),
+    },
+    ({ reply }) => {
+      if (shouldThrowError) {
+        return reply({ statusCode: StatusCodes.UNAUTHORIZED, body: null });
+      }
+
+      return reply({
+        body: tags,
+        statusCode: StatusCodes.OK,
+      });
+    },
+  ).as('getItemTags');
 };
 
 export const mockGetPublicItem = ({ items }, shouldThrowError) => {

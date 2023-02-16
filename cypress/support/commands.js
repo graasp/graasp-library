@@ -24,6 +24,7 @@ import {
   mockGetPublicItemsWithTags,
   mockSearch,
   mockGetLikedItems,
+  mockGetItemTags,
 } from './server';
 import { MEMBERS } from '../fixtures/members';
 import {
@@ -33,6 +34,7 @@ import {
 import { SAMPLE_FLAGS } from '../fixtures/flags';
 import { PUBLISHED_ITEMS } from '../fixtures/items';
 import { ITEM_LIKES } from '../fixtures/itemLikes';
+import { DEFAULT_TAGS } from '../fixtures/itemTags';
 
 Cypress.Commands.add(
   'setUpApi',
@@ -50,6 +52,7 @@ Cypress.Commands.add(
     searchError = false,
     itemLikes = ITEM_LIKES,
     getLikedItemsError = false,
+    tags = DEFAULT_TAGS,
   } = {}) => {
     const cachedMembers = JSON.parse(JSON.stringify(members));
 
@@ -71,6 +74,7 @@ Cypress.Commands.add(
 
     mockGetItem({ items, currentMember });
     mockGetPublicItem({ items });
+    mockGetItemTags({ tags });
 
     mockGetAvatar({ members, currentMember });
 
