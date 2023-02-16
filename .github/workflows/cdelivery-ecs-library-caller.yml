@@ -12,6 +12,10 @@ jobs:
     # repository name
     name: Graasp Library
     uses: graasp/graasp-deploy/.github/workflows/cdelivery-ecs-library.yml@v1
+    # abort previous deployment if a newer one is in progress
+    concurrency:
+      group: deploy-staging
+      cancel-in-progress: true
     # ecs-task-definition template file
     with:
       app-name: $npm_package_name
