@@ -1053,9 +1053,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/query-client@github:graasp/graasp-query-client.git":
-  version: 0.1.2
-  resolution: "@graasp/query-client@https://github.com/graasp/graasp-query-client.git#commit=51a1055ad6a4e791b12899d9949d2ab204b23c2d"
+"@graasp/query-client@npm:0.1.5":
+  version: 0.1.5
+  resolution: "@graasp/query-client@npm:0.1.5"
   dependencies:
     "@graasp/sdk": 0.2.0
     "@graasp/translations": 1.1.0
@@ -1068,7 +1068,7 @@ __metadata:
     uuid: 8.3.2
   peerDependencies:
     react: ^17.0.0
-  checksum: e8be95a8f7d301daa79043ea0c5735f4c7c839266a8ed5cc7ba50256a748a51d7d3a5d1748ca0aed800330a0e0b716de43ebea81cd0d256d045b68e62876cc38
+  checksum: cb612d83227a6a677e2ce595ef836736dd56dc0f65efe9007a7a22aec204e79cf417807ddf3fd2275984698e8f841dd96a647f9308f6da54b9199b77ba2711e3
   languageName: node
   linkType: hard
 
@@ -1089,15 +1089,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/translations@github:graasp/graasp-translations.git":
-  version: 1.3.0
-  resolution: "@graasp/translations@https://github.com/graasp/graasp-translations.git#commit=94672e9c144bedd748fc6625e9e14f80f9a04ef6"
-  dependencies:
-    i18next: 21.8.1
-  checksum: c032d1b5059efc6f7651350b8a2960f6a55bead7f830d966c60c3871b436dd317bba846b0adfe1d4af858ee6e568c0854e6dd6955011c05058e96db55ce6b5a9
-  languageName: node
-  linkType: hard
-
 "@graasp/translations@npm:1.1.0":
   version: 1.1.0
   resolution: "@graasp/translations@npm:1.1.0"
@@ -1107,30 +1098,39 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/ui@npm:0.10.4":
-  version: 0.10.4
-  resolution: "@graasp/ui@npm:0.10.4"
+"@graasp/translations@npm:1.4.0":
+  version: 1.4.0
+  resolution: "@graasp/translations@npm:1.4.0"
   dependencies:
-    "@graasp/sdk": 0.2.0
+    i18next: 21.8.1
+  checksum: ca787604906c4531eded20941e968667a13f7c2fb5b4c2c03a149123ce6994ec685d1b5e125e37f420fa5d6b8edf4cbd0bb48452c554cde07d81bc0309b5dc1f
+  languageName: node
+  linkType: hard
+
+"@graasp/ui@npm:0.11.1":
+  version: 0.11.1
+  resolution: "@graasp/ui@npm:0.11.1"
+  dependencies:
+    "@graasp/sdk": 0.4.0
     clsx: 1.1.1
     http-status-codes: 2.2.0
-    immutable: 4.1.0
+    immutable: 4.2.4
     katex: 0.16.0
     lodash.truncate: 4.4.2
-    qs: 6.10.5
+    qs: 6.11.0
     quill-emoji: 0.2.0
     react-cookie-consent: 7.4.1
     react-i18next: 11.17.0
     react-quill: 2.0.0-beta.4
     react-rnd: 10.3.7
     react-text-mask: 5.4.3
-    uuid: 8.3.2
+    uuid: 9.0.0
   peerDependencies:
-    "@emotion/react": 11.10.4
-    "@emotion/styled": 11.10.4
-    "@mui/icons-material": 5.8.3
-    "@mui/lab": ~5.0.0-alpha.85
-    "@mui/material": 5.10.7
+    "@emotion/react": ~11.10.5
+    "@emotion/styled": ~11.10.5
+    "@mui/icons-material": ~5.11.0
+    "@mui/lab": ~5.0.0-alpha.120
+    "@mui/material": ~5.11.9
     ag-grid-community: 28.1.1
     ag-grid-react: 28.1.1
     i18next: ~21.8.9
@@ -1142,7 +1142,7 @@ __metadata:
       optional: true
     ag-grid-react:
       optional: true
-  checksum: 69025015e4ce97caf3d3ae7d9439790d5801d9c9e3e5da9d599eea3593d5be7be065ca435d3d70e3029162fa81850c6a564bf4bc2babfacef50342426ba10efd
+  checksum: 599961399ee145e1a82555e6de86a927ae5408b4e145cc88de4eb0da3a22bc9b896b4145d44982e615a61d680b16c40832034f321d738458ea42266874c11627
   languageName: node
   linkType: hard
 
@@ -5990,10 +5990,10 @@ __metadata:
     "@emotion/react": 11.10.5
     "@emotion/server": 11.10.0
     "@emotion/styled": 11.10.5
-    "@graasp/query-client": "github:graasp/graasp-query-client.git"
-    "@graasp/sdk": "github:graasp/graasp-sdk.git"
-    "@graasp/translations": "github:graasp/graasp-translations.git"
-    "@graasp/ui": 0.10.4
+    "@graasp/query-client": 0.1.5
+    "@graasp/sdk": 0.4.1
+    "@graasp/translations": 1.4.0
+    "@graasp/ui": 0.11.1
     "@mui/icons-material": 5.10.9
     "@mui/lab": 5.0.0-alpha.104
     "@mui/material": 5.10.12
@@ -6386,6 +6386,13 @@ __metadata:
   version: 4.1.0
   resolution: "immutable@npm:4.1.0"
   checksum: b9bc1f14fb18eb382d48339c064b24a1f97ae4cf43102e0906c0a6e186a27afcd18b55ca4a0b63c98eefb58143e2b5ebc7755a5fb4da4a7ad84b7a6096ac5b13
+  languageName: node
+  linkType: hard
+
+"immutable@npm:4.2.4":
+  version: 4.2.4
+  resolution: "immutable@npm:4.2.4"
+  checksum: 3be84eded37b05e65cad57bfba630bc1bf170c498b7472144bc02d2650cc9baef79daf03574a9c2e41d195ebb55a1c12c9b312f41ee324b653927b24ad8bcaa7
   languageName: node
   linkType: hard
 
@@ -9013,15 +9020,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"qs@npm:6.10.5":
-  version: 6.10.5
-  resolution: "qs@npm:6.10.5"
-  dependencies:
-    side-channel: ^1.0.4
-  checksum: b3873189a11bcf48445864b3ba66f7a76db0d9d874955d197779f561addfa604884f7b107971526ce1eca02c99bf7d1e47f28a3e7e6e29204d798fb279164226
-  languageName: node
-  linkType: hard
-
 "qs@npm:6.11.0":
   version: 6.11.0
   resolution: "qs@npm:6.11.0"
@@ -11063,6 +11061,15 @@ __metadata:
   bin:
     uuid: dist/bin/uuid
   checksum: 5575a8a75c13120e2f10e6ddc801b2c7ed7d8f3c8ac22c7ed0c7b2ba6383ec0abda88c905085d630e251719e0777045ae3236f04c812184b7c765f63a70e58df
+  languageName: node
+  linkType: hard
+
+"uuid@npm:9.0.0":
+  version: 9.0.0
+  resolution: "uuid@npm:9.0.0"
+  bin:
+    uuid: dist/bin/uuid
+  checksum: 8dd2c83c43ddc7e1c71e36b60aea40030a6505139af6bee0f382ebcd1a56f6cd3028f7f06ffb07f8cf6ced320b76aea275284b224b002b289f89fe89c389b028
   languageName: node
   linkType: hard
 
