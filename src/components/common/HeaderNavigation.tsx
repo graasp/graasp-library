@@ -113,12 +113,10 @@ const StyledLink = styled(Link)(() => linkStyles);
 
 interface HeaderNavigationProps {
   rootId?: string;
-  topItemName?: string;
 }
 
 export const HeaderNavigation = ({
   rootId,
-  topItemName,
 }: HeaderNavigationProps): JSX.Element => {
   const getNavigationEvents = usePlatformNavigation(platformsHostsMap, rootId);
 
@@ -156,9 +154,6 @@ export const HeaderNavigation = ({
         platformsProps={platformProps}
         disabledColor="#999"
       />
-      <Box display="flex" sx={{ alignItems: 'center', ml: 3 }}>
-        <Typography>{topItemName}</Typography>
-      </Box>
     </Box>
   );
 };
