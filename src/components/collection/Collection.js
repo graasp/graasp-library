@@ -155,6 +155,8 @@ const Collection = ({ id }) => {
             views={views}
             likes={likes}
             isLoading={isLoading}
+            createdAt={collection?.createdAt}
+            lastUpdate={collection?.updatedAt}
           />
           <Divider sx={{ my: 2 }} />
           <Button

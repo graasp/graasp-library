@@ -76,6 +76,8 @@ function Summary({
   likes,
   views,
   isLoading,
+  createdAt,
+  lastUpdate,
 }) {
   const truncatedName = truncate(name, {
     length: MAX_COLLECTION_NAME_LENGTH,
@@ -240,6 +242,27 @@ function Summary({
             )}
           </Typography>
           <Authorship itemId={itemId} author={creator} isLoading={isLoading} />
+          {createdAt && (
+            <div>
+              <Typography variant="h6" gutterBottom>
+                Created At
+              </Typography>
+              <Typography variant="p" gutterBottom>
+                {new Date(createdAt).toLocaleDateString()}
+              </Typography>
+            </div>
+          )}
+          {createdAt && (
+            <div>
+              <Typography variant="h6" gutterBottom>
+                Last Update
+              </Typography>
+              <Typography variant="p" gutterBottom>
+                {new Date(lastUpdate).toLocaleDateString()}
+              </Typography>
+            </div>
+          )}
+
           <ItemFlagDialog
             flags={flags}
             onFlag={onFlag}
@@ -331,6 +354,8 @@ Summary.propTypes = {
   }),
   isLoading: PropTypes.bool.isRequired,
   itemId: PropTypes.string.isRequired,
+  createdAt: PropTypes.string.isRequired,
+  lastUpdate: PropTypes.string.isRequired,
 };
 
 Summary.defaultProps = {
