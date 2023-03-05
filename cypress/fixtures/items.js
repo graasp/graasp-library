@@ -24,7 +24,7 @@ export const PUBLISHED_ITEMS = [
     name: 'parent public item',
     path: 'ecafbd2a_5688_11eb_ae93_0242ac130002',
     createdAt: '2023-02-27T18:20:09.732Z',
-    lastUpdate: '2023-02-28T18:20:09.732Z',
+    updatedAt: '2023-02-28T18:20:09.732Z',
     settings: {
       tags: ['one-tag', 'two-tag'],
       ccLicenseAdaption: 'allow',
@@ -69,7 +69,7 @@ export const PUBLISHED_ITEMS = [
     name: 'child of public item1',
     path: 'ecafbd2a_5688_11eb_ae93_0242ac130002.fdf09f5a_5688_11eb_ae93_0242ac130004.bdf09f5a_5688_11eb_ae93_0242ac130004',
     createdAt: '2023-02-27T18:20:09.732Z',
-    lastUpdate: '2023-02-28T18:20:09.732Z',
+    updatedAt: '2023-02-28T18:20:09.732Z',
     tags: [
       {
         tagId: ITEM_PUBLISHED_TAG.id,
@@ -100,7 +100,7 @@ export const PUBLISHED_ITEMS = [
     name: 'public item1',
     path: 'ecafbd2a_5688_11eb_ae93_0242ac130002.fdf09f5a_5688_11eb_ae93_0242ac130004',
     createdAt: '2023-01-27T18:20:09.732Z',
-    lastUpdate: '2023-01-28T18:20:09.732Z',
+    updatedAt: '2023-01-28T18:20:09.732Z',
 
     tags: [
       {
@@ -131,7 +131,7 @@ export const PUBLISHED_ITEMS = [
     name: 'independant item',
     path: 'egafbd2a_5688_11eb_ae93_0242ac130002',
     createdAt: '2023-02-27T18:20:09.732Z',
-    lastUpdate: '2023-02-28T18:20:09.732Z',
+    updatedAt: '2023-02-28T18:20:09.732Z',
 
     tags: [
       {

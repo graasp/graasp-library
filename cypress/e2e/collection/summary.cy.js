@@ -49,8 +49,8 @@ describe('Collection Summary', () => {
       }
 
       // last update
-      if (item.lastUpdate) {
-        cy.get(`#${SUMMARY_LAST_UPDATE_CONTAINER_ID}`).should('contain', new Date(item.lastUpdate).toLocaleDateString());
+      if (item.updatedAt) {
+        cy.get(`#${SUMMARY_LAST_UPDATE_CONTAINER_ID}`).should('contain', new Date(item.updatedAt).toLocaleDateString());
       }
 
       // contributors
