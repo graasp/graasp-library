@@ -19,23 +19,43 @@ type Props = {
   name: string;
   itemId?: string;
   size?: ThumbnailSizeVariant;
+  svgPadding?: number;
 };
 
 const CardMediaComponent = ({
   name,
   itemId,
   size = ThumbnailSize.Small,
+  svgPadding = 15,
 }: Props) => {
   const { hooks } = useContext(QueryClientContext);
 
   return (
-    <Box title={name} overflow="hidden" lineHeight={0}>
+    <Box
+      title={name}
+      overflow="hidden"
+      lineHeight={0}
+      sx={{
+        aspectRatio: '1 / 1',
+        '& img[src$=".svg"]': {
+          maxHeight: `100%`,
+          maxWidth: `100%`,
+          padding: `${svgPadding}%`,
+        },
+        justifyContent: 'center',
+        alignItems: 'center',
+        display: 'flex',
+      }}
+    >
       <Thumbnail
         alt={name}
         useThumbnail={hooks.useItemThumbnail}
         id={itemId || ''}
         thumbnailSrc={DEFAULT_ITEM_IMAGE_PATH}
-        sx={{ width: '100%', objectFit: 'cover' }}
+        sx={{
+          width: '100%',
+          objectFit: 'cover',
+        }}
         size={size}
       />
     </Box>

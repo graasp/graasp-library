@@ -3,6 +3,7 @@ import { List } from 'immutable';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { Breakpoint } from '@mui/material';
 import Container from '@mui/material/Container';
 import Skeleton from '@mui/material/Skeleton';
 import Typography from '@mui/material/Typography';
@@ -18,9 +19,15 @@ type Props = {
   collections: List<ItemRecord>;
   isLoading: boolean;
   id: string;
+  containerWidth?: Breakpoint | false;
 };
 
-const CollectionsGrid = ({ collections, isLoading, id }: Props) => {
+const CollectionsGrid = ({
+  collections,
+  isLoading,
+  id,
+  containerWidth,
+}: Props) => {
   const { t } = useTranslation();
 
   if (isLoading) {
@@ -32,7 +39,7 @@ const CollectionsGrid = ({ collections, isLoading, id }: Props) => {
       {t(LIBRARY.EMPTY_COLLECTION_MESSAGE)}
     </Typography>
   ) : (
-    <Container maxWidth="xl">
+    <Container maxWidth={containerWidth ?? 'xl'}>
       <Grid
         container
         spacing={4}

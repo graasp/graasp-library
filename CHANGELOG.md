@@ -4,13 +4,11 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [0.7.3](https://github.com/graasp/graasp-library/compare/v0.7.2...v0.7.3) (2023-05-15)
 
-
 ### Bug Fixes
 
 * get publication settings from item itself and not its top-level parent ([#268](https://github.com/graasp/graasp-library/issues/268)) ([bf5f2f9](https://github.com/graasp/graasp-library/commit/bf5f2f97b002ec3c164379d515dcc33ed8ebf5f7))
 
 ## [0.7.2](https://github.com/graasp/graasp-library/compare/v0.7.1...v0.7.2) (2023-05-11)
-
 
 ### Bug Fixes
 
@@ -18,18 +16,15 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [0.7.1](https://github.com/graasp/graasp-library/compare/v0.7.0...v0.7.1) (2023-05-11)
 
-
 ### Bug Fixes
 
 * display children card actions below item ([#264](https://github.com/graasp/graasp-library/issues/264)) ([25a8a93](https://github.com/graasp/graasp-library/commit/25a8a935bbf62cf25e8e81abff6a28383f65c2b7))
 
 ## [0.7.0](https://github.com/graasp/graasp-library/compare/v0.6.0...v0.7.0) (2023-05-09)
 
-
 ### Features
 
 * rework cc display ([#234](https://github.com/graasp/graasp-library/issues/234)) ([83c5167](https://github.com/graasp/graasp-library/commit/83c5167625474d7ab52329cf660fa5d605886d5b))
-
 
 ### Bug Fixes
 
@@ -37,13 +32,11 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [0.6.0](https://github.com/graasp/graasp-library/compare/v0.5.0...v0.6.0) (2023-03-28)
 
-
 ### Features
 
 * add healthcheck endpoint ([#247](https://github.com/graasp/graasp-library/issues/247)) ([b8000be](https://github.com/graasp/graasp-library/commit/b8000be5a4d36446644790ad57bd289512a45b6f))
 
 ## [0.5.0](https://github.com/graasp/graasp-library/compare/v0.4.0...v0.5.0) (2023-03-16)
-
 
 ### Features
 
@@ -51,18 +44,15 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [0.4.0](https://github.com/graasp/graasp-library/compare/v0.3.0...v0.4.0) (2023-03-09)
 
-
 ### Features
 
 * show created at and update at times ([#229](https://github.com/graasp/graasp-library/issues/229)) ([2af1730](https://github.com/graasp/graasp-library/commit/2af17303f434cc16f3599d0474ba2a3513b3d55b))
 
 ## [0.3.0](https://github.com/graasp/graasp-library/compare/v0.2.1...v0.3.0) (2023-02-16)
 
-
 ### Features
 
 * add platform switch to library ([#224](https://github.com/graasp/graasp-library/issues/224)) ([41eadab](https://github.com/graasp/graasp-library/commit/41eadabf8972b8d6b94aeb8589123c69412c6760))
-
 
 ### Bug Fixes
 
@@ -73,20 +63,17 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [0.2.1](https://github.com/graasp/graasp-library/compare/v0.2.0...v0.2.1) (2023-01-30)
 
-
 ### Bug Fixes
 
 * apply fixed colors to category chips ([#215](https://github.com/graasp/graasp-library/issues/215)) ([c4de079](https://github.com/graasp/graasp-library/commit/c4de079d73063c8142ebadacb455b964af56b0a0))
 
 ## [0.2.0](https://github.com/graasp/graasp-library/compare/v0.1.10...v0.2.0) (2023-01-24)
 
-
 ### Features
 
 * use member's lang when signed in ([#212](https://github.com/graasp/graasp-library/issues/212)) ([ff74a62](https://github.com/graasp/graasp-library/commit/ff74a623da6a65ba485e36feb68269412922cb2f))
 
 ### 0.1.10 (2022-12-12)
-
 
 ### Bug Fixes
 
@@ -98,7 +85,6 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### 0.1.7 (2022-11-21)
 
-
 ### Features
 
 * add dynamic tree viewer for copy modal ([#200](https://github.com/graasp/graasp-library/issues/200)) ([7f33dd4](https://github.com/graasp/graasp-library/commit/7f33dd4f593e219e068fbaaa0f3ad249f4bf2e44))
@@ -106,7 +92,6 @@ All notable changes to this project will be documented in this file. See [standa
 ### 0.1.6 (2022-11-07)
 
 ### [0.1.5](https://github.com/graasp/graasp-library/compare/v0.1.4...v0.1.5) (2022-08-24)
-
 
 ### Bug Fixes
 
@@ -120,14 +105,12 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [0.1.1](https://github.com/graasp/graasp-explore/compare/v0.1.0...v0.1.1) (2022-08-05)
 
-
 ### Bug Fixes
 
 * update workflow sha ref ([1de5e42](https://github.com/graasp/graasp-explore/commit/1de5e42a0fd2e04e3c59d5fc1c9ca0f85cfff2af))
 * update workflow sha ref ([f7683ab](https://github.com/graasp/graasp-explore/commit/f7683ab8430e0e5f02946bede7c6d01ef07bb4f6))
 
 ## 0.1.0 (2022-07-21)
-
 
 ### Features
 
@@ -189,7 +172,6 @@ All notable changes to this project will be documented in this file. See [standa
 * update staging versions in graasp deploy ([0cd5bbc](https://github.com/graasp/graasp-explore/commit/0cd5bbcfc5f3d8b6c51ba96f9f0efaa3fb683ce8))
 * use api endpoints ([8e3e348](https://github.com/graasp/graasp-explore/commit/8e3e348dba6c20ed989797a6ce3da06d8de44db2))
 * user icon in header on click sign in ([d263ebe](https://github.com/graasp/graasp-explore/commit/d263ebe3ec4cc961d0ccf895ac1f48aeef0a6fc3))
-
 
 ### Bug Fixes
 
@@ -292,19 +274,16 @@ All notable changes to this project will be documented in this file. See [standa
 * update yarn lock ([42a5e99](https://github.com/graasp/graasp-explore/commit/42a5e99183a6858221d61fcad263256e6becdb35))
 * updated called workflow ref ([7c47fc5](https://github.com/graasp/graasp-explore/commit/7c47fc5a91b824098d2ca8fccfcbffdca05bccd7))
 
-
 ### Documentation
 
 * add readme ([eaafbdf](https://github.com/graasp/graasp-explore/commit/eaafbdf76f409bb199ff2814d0493b83fbd9773c))
 * changed 'command line' to 'command-line' ([7a25be1](https://github.com/graasp/graasp-explore/commit/7a25be1a782bd8e06f508e32d213588c0eafb34e)), closes [#4](https://github.com/graasp/graasp-explore/issues/4)
 * update readme ([86ca1ed](https://github.com/graasp/graasp-explore/commit/86ca1ed263a893ff059e624fa5e2d5a0fcc5a1c7))
 
-
 ### Build System
 
 * update dependencies ([2de3aa1](https://github.com/graasp/graasp-explore/commit/2de3aa1636682fa96e13ae11f4746f3e6a3db24b))
 * update yarn lock ([7d85430](https://github.com/graasp/graasp-explore/commit/7d85430e6b82dfb398feaf5d803d8c7b5e741b1d))
-
 
 ### Tests
 

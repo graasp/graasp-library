@@ -155,8 +155,6 @@ const Collection = ({ id }) => {
             creator={member}
             likes={likes}
             isLoading={isLoading}
-            createdAt={collection?.createdAt}
-            lastUpdate={collection?.updatedAt}
           />
           {/* <Comments comments={comments} members={members} /> */}
         </Box>

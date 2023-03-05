@@ -2,6 +2,8 @@ import dynamic from 'next/dynamic';
 
 import React, { useContext } from 'react';
 
+import { Box } from '@mui/material';
+
 import { COMMON } from '@graasp/translations';
 
 import {
@@ -22,31 +24,38 @@ type Props = {
   id?: string;
 };
 
-const MemberAvatar = ({ id }: Props): JSX.Element => {
-  const { hooks } = useContext(QueryClientContext);
-  const { t } = useCommonTranslation();
-  const { data: member, isLoading, isFetching } = hooks.useMember(id);
-  const {
-    data: thumbnailBlob,
-    isLoading: isLoadingAvatar,
-    isFetching: isFetchingAvatar,
-  } = hooks.useAvatar({
-    id,
-    size: THUMBNAIL_SIZES.SMALL,
-  });
+const MemberAvatar = React.forwardRef<HTMLDivElement, Props>(
+  ({ id, ...otherProps }, ref): JSX.Element => {
+    const { hooks } = useContext(QueryClientContext);
+    const { t } = useCommonTranslation();
+    const { data: member, isLoading, isFetching } = hooks.useMember(id);
+    const {
+      data: thumbnailBlob,
+      isLoading: isLoadingAvatar,
+      isFetching: isFetchingAvatar,
+    } = hooks.useAvatar({
+      id,
+      size: THUMBNAIL_SIZES.SMALL,
+    });
 
-  return (
-    <Avatar
-      isLoading={isLoading || isLoadingAvatar || isFetchingAvatar || isFetching}
-      alt={member?.name || t(COMMON.AVATAR_DEFAULT_ALT)}
-      defaultImage={DEFAULT_MEMBER_THUMBNAIL}
-      component="avatar"
-      maxWidth={AVATAR_ICON_HEIGHT}
-      maxHeight={AVATAR_ICON_HEIGHT}
-      blob={thumbnailBlob}
-      sx={{ mx: 1 }}
-    />
-  );
-};
+    return (
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      <Box ref={ref} {...otherProps}>
+        <Avatar
+          isLoading={
+            isLoading || isLoadingAvatar || isFetchingAvatar || isFetching
+          }
+          alt={member?.name || t(COMMON.AVATAR_DEFAULT_ALT)}
+          defaultImage={DEFAULT_MEMBER_THUMBNAIL}
+          component="avatar"
+          maxWidth={AVATAR_ICON_HEIGHT}
+          maxHeight={AVATAR_ICON_HEIGHT}
+          blob={thumbnailBlob}
+          sx={{ mx: 1 }}
+        />
+      </Box>
+    );
+  },
+);
 
 export default MemberAvatar;
