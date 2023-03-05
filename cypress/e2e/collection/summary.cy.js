@@ -13,6 +13,8 @@ import {
   CHILDREN_ITEMS_GRID_ID,
   ITEM_SUMMARY_TITLE_ID,
   SUMMARY_AUTHOR_CONTAINER_ID,
+  SUMMARY_CREATED_AT_CONTAINER_ID,
+  SUMMARY_LAST_UPDATE_CONTAINER_ID,
 } from '../../../src/config/selectors';
 
 describe('Collection Summary', () => {
@@ -40,6 +42,16 @@ describe('Collection Summary', () => {
         ({ id }) => id === item.creator,
       )?.name;
       cy.get(`#${SUMMARY_AUTHOR_CONTAINER_ID}`).should('contain', authorName);
+
+      // created at
+      if (item.createdAt) {
+        cy.get(`#${SUMMARY_CREATED_AT_CONTAINER_ID}`).should('contain', new Date(item.createdAt).toLocaleDateString());
+      }
+
+      // last update
+      if (item.lastUpdate) {
+        cy.get(`#${SUMMARY_LAST_UPDATE_CONTAINER_ID}`).should('contain', new Date(item.lastUpdate).toLocaleDateString());
+      }
 
       // contributors
       const contributors = item.memberships.filter(

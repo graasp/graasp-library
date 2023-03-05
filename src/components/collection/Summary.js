@@ -23,7 +23,9 @@ import {
   ITEM_SUMMARY_TITLE_ID,
   SUMMARY_CATEGORIES_CONTAINER_ID,
   SUMMARY_CC_LICENSE_CONTAINER_ID,
+  SUMMARY_CREATED_AT_CONTAINER_ID,
   SUMMARY_LANGUAGES_CONTAINER_ID,
+  SUMMARY_LAST_UPDATE_CONTAINER_ID,
   SUMMARY_TAGS_CONTAINER_ID,
 } from '../../config/selectors';
 import { compare } from '../../utils/helpers';
@@ -243,7 +245,7 @@ function Summary({
           </Typography>
           <Authorship itemId={itemId} author={creator} isLoading={isLoading} />
           {createdAt && (
-            <div>
+            <div id={SUMMARY_CREATED_AT_CONTAINER_ID}>
               <Typography variant="h6" gutterBottom>
                 Created At
               </Typography>
@@ -252,8 +254,8 @@ function Summary({
               </Typography>
             </div>
           )}
-          {createdAt && (
-            <div>
+          {lastUpdate && (
+            <div id={SUMMARY_LAST_UPDATE_CONTAINER_ID}>
               <Typography variant="h6" gutterBottom>
                 Last Update
               </Typography>
