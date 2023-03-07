@@ -1,8 +1,8 @@
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 
 import React, { useContext } from 'react';
-import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 
 import InfoIcon from '@mui/icons-material/Info';
@@ -77,9 +77,9 @@ const StyledCardHeader = styled(CardHeader)((link) => ({
 }));
 
 const StyledCardAction = styled(CardActions)((link) => ({
-    '&:hover': {
-      cursor: link ? 'pointer' : 'mouse',
-    },
+  '&:hover': {
+    cursor: link ? 'pointer' : 'mouse',
+  },
 }));
 
 export const CollectionCard = ({ collection = {}, isLoading }) => {
@@ -94,7 +94,7 @@ export const CollectionCard = ({ collection = {}, isLoading }) => {
   const { data: author } = hooks.useMember(creator);
 
   // toggle the value
-  const handleClick = event => {
+  const handleClick = (event) => {
     setFlipped(!flipped);
     event.stopPropagation();
   };
@@ -135,9 +135,7 @@ export const CollectionCard = ({ collection = {}, isLoading }) => {
   };
 
   return (
-    <StyledCard
-      link={link}
-    >
+    <StyledCard link={link}>
       <StyledCardHeader
         onClick={openItem}
         avatar={avatar}
@@ -165,10 +163,7 @@ export const CollectionCard = ({ collection = {}, isLoading }) => {
           itemId={id}
         />
       )}
-      <StyledCardAction 
-        disableSpacing
-        link={link}
-      >
+      <StyledCardAction disableSpacing link={link}>
         <CopyButton id={id} />
         <CopyLinkButton id={id} extra={extra} />
         <DownloadButton id={id} />
