@@ -43,6 +43,7 @@ const DownloadButton = ({ id }) => {
 
   return (
     <GraaspDownloadButton
+      onClick={e => e.stopPropagation()}
       isLoading={isLoading}
       handleDownload={handleDownload}
       title={t(LIBRARY.DOWNLOAD_BUTTON_TOOLTIP)}

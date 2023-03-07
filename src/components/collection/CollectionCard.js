@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic';
 import PropTypes from 'prop-types';
 
 import React, { useContext } from 'react';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 
 import InfoIcon from '@mui/icons-material/Info';
@@ -27,7 +28,6 @@ import CopyButton from './CopyButton';
 import CopyLinkButton from './CopyLinkButton';
 import DownloadButton from './DownloadButton';
 import SimilarCollectionBadges from './SimilarCollectionBadges';
-import ViewButton from './ViewButton';
 
 const Avatar = dynamic(() => import('@graasp/ui').then((mod) => mod.Avatar), {
   ssr: false,
@@ -50,7 +50,7 @@ const StyledDescription = styled('p')(({ theme }) => ({
   },
 }));
 
-const StyledCardHeader = styled(CardHeader)(() => ({
+const StyledCardHeader = styled(CardHeader)((link) => ({
   '	.MuiCardHeader-root': {
     height: COLLECTION_CARD_HEADER_SIZE,
     position: 'relative',
@@ -71,9 +71,19 @@ const StyledCardHeader = styled(CardHeader)(() => ({
   '.MuiCardHeader-content': {
     width: '65%',
   },
+  '&:hover': {
+    cursor: link ? 'pointer' : 'mouse',
+  },
+}));
+
+const StyledCardAction = styled(CardActions)((link) => ({
+    '&:hover': {
+      cursor: link ? 'pointer' : 'mouse',
+    },
 }));
 
 export const CollectionCard = ({ collection = {}, isLoading }) => {
+  const router = useRouter();
   const { name, id, description, creator, views, voteScore, extra } =
     collection;
   const { t } = useTranslation();
@@ -84,8 +94,9 @@ export const CollectionCard = ({ collection = {}, isLoading }) => {
   const { data: author } = hooks.useMember(creator);
 
   // toggle the value
-  const handleClick = () => {
+  const handleClick = event => {
     setFlipped(!flipped);
+    event.stopPropagation();
   };
 
   const avatar = isLoading ? (
@@ -119,9 +130,16 @@ export const CollectionCard = ({ collection = {}, isLoading }) => {
 
   const link = buildCollectionRoute(id);
 
+  const openItem = () => {
+    router.push(link);
+  };
+
   return (
-    <StyledCard>
+    <StyledCard
+      link={link}
+    >
       <StyledCardHeader
+        onClick={openItem}
         avatar={avatar}
         action={action}
         title={name}
@@ -147,13 +165,15 @@ export const CollectionCard = ({ collection = {}, isLoading }) => {
           itemId={id}
         />
       )}
-      <CardActions disableSpacing>
-        <ViewButton id={id} />
+      <StyledCardAction 
+        disableSpacing
+        link={link}
+      >
         <CopyButton id={id} />
         <CopyLinkButton id={id} extra={extra} />
         <DownloadButton id={id} />
         <SimilarCollectionBadges views={views} voteScore={voteScore} />
-      </CardActions>
+      </StyledCardAction>
     </StyledCard>
   );
 };

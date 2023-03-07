@@ -51,13 +51,14 @@ const CopyButton = ({ id }) => {
     return null;
   }
 
-  const onClick = () => {
+  const onClick = event => {
     // show item tree, otherwise display sign in modal if the user is not signed in
     if (user?.id) {
       setShowTreeModal(true);
     } else {
       setShowLoginModal(true);
     }
+    event.stopPropagation();
   };
 
   // todo: set notifier for copy

@@ -20,7 +20,7 @@ export const buildPlayerLink = (id) => `${GRAASP_PERFORM_HOST}/${id}`;
 const CopyLinkButton = ({ id, extra }) => {
   const { t } = useTranslation();
 
-  const onClick = () => {
+  const onClick = (event) => {
     const link =
       extra?.embeddedLink?.url ?? extra?.app?.url ?? buildPlayerLink(id);
 
@@ -38,6 +38,8 @@ const CopyLinkButton = ({ id, extra }) => {
         });
       },
     });
+
+    event.stopPropagation();
   };
 
   return (

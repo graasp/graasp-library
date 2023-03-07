@@ -53,8 +53,8 @@ function Badges({ views, likes, name, description }) {
     <Grid container justify="space-between" alignItems="center" mb={1}>
       <Grid item>
         <BadgeContainer>
-          <FavoriteBadge likes={likes} />
-          <VisibilityBadge views={views} />
+          <FavoriteBadge likes={likes.toString()} />
+          <VisibilityBadge views={views.toString()} />
         </BadgeContainer>
       </Grid>
       <Grid item>

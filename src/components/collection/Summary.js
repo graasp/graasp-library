@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+
+
 import { Chip, Grid, Typography } from '@mui/material';
 import Skeleton from '@mui/material/Skeleton';
 import { styled } from '@mui/material/styles';
@@ -34,6 +36,9 @@ import CardMedia from '../common/CardMediaComponent';
 import { StyledCard } from '../common/StyledCard';
 import Authorship from './Authorship';
 import Badges from './Badges';
+import CopyButton from './CopyButton';
+import CopyLinkButton from './CopyLinkButton';
+import DownloadButton from './DownloadButton';
 
 const {
   ItemFlagDialog,
@@ -80,6 +85,7 @@ function Summary({
   isLoading,
   createdAt,
   lastUpdate,
+  extra,
 }) {
   const truncatedName = truncate(name, {
     length: MAX_COLLECTION_NAME_LENGTH,
@@ -233,6 +239,11 @@ function Summary({
             likes={likes}
             description={description}
           />
+          <div>
+            <CopyButton id={itemId} />
+            <CopyLinkButton id={itemId} extra={extra} />
+            <DownloadButton id={itemId} />
+          </div>
           <Typography variant="body1" gutterBottom component="div">
             {isLoading ? (
               <Skeleton />
@@ -358,6 +369,14 @@ Summary.propTypes = {
   itemId: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
   lastUpdate: PropTypes.string.isRequired,
+  extra: PropTypes.shape({
+    embeddedLink: PropTypes.shape({
+      url: PropTypes.string,
+    }),
+    app: PropTypes.shape({
+      url: PropTypes.string,
+    }),
+  }),
 };
 
 Summary.defaultProps = {

@@ -157,6 +157,7 @@ const Collection = ({ id }) => {
             isLoading={isLoading}
             createdAt={collection?.createdAt}
             lastUpdate={collection?.updatedAt}
+            extra={collection?.extra}
           />
           <Divider sx={{ my: 2 }} />
           <Button
