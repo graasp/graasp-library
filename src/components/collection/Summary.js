@@ -251,7 +251,10 @@ function Summary({
                 Created At
               </Typography>
               <Typography variant="p" gutterBottom>
-                {DateTime.fromISO(createdAt).toLocaleString(DateTime.DATE_FULL)}
+                {DateTime.fromISO(createdAt).toLocaleString(
+                  DateTime.DATE_FULL,
+                  { locale: member?.extra?.lang },
+                )}
               </Typography>
             </div>
           )}
@@ -263,6 +266,7 @@ function Summary({
               <Typography variant="p" gutterBottom>
                 {DateTime.fromISO(lastUpdate).toLocaleString(
                   DateTime.DATE_FULL,
+                  { locale: member?.extra?.lang },
                 )}
               </Typography>
             </div>
