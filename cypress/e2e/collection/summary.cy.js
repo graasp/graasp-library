@@ -1,4 +1,5 @@
 import { isChildOf } from '@graasp/sdk';
+import { DateTime } from 'luxon';
 import { PUBLISHED_ITEMS } from '../../fixtures/items';
 import { buildCollectionRoute } from '../../../src/config/routes';
 import {
@@ -45,12 +46,12 @@ describe('Collection Summary', () => {
 
       // created at
       if (item.createdAt) {
-        cy.get(`#${SUMMARY_CREATED_AT_CONTAINER_ID}`).should('contain', new Date(item.createdAt).toLocaleDateString());
+        cy.get(`#${SUMMARY_CREATED_AT_CONTAINER_ID}`).should('contain', DateTime.fromISO(item.createdAt).toLocaleString(DateTime.DATE_FULL));
       }
 
       // last update
       if (item.updatedAt) {
-        cy.get(`#${SUMMARY_LAST_UPDATE_CONTAINER_ID}`).should('contain', new Date(item.updatedAt).toLocaleDateString());
+        cy.get(`#${SUMMARY_LAST_UPDATE_CONTAINER_ID}`).should('contain', DateTime.fromISO(item.updatedAt).toLocaleString(DateTime.DATE_FULL));
       }
 
       // contributors
