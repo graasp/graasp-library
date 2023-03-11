@@ -1,5 +1,6 @@
 import { Map } from 'immutable';
 import truncate from 'lodash.truncate';
+import { DateTime } from 'luxon';
 import dynamic from 'next/dynamic';
 import PropTypes from 'prop-types';
 
@@ -259,7 +260,10 @@ function Summary({
                 Created At
               </Typography>
               <Typography variant="p" gutterBottom>
-                {new Date(createdAt).toLocaleDateString()}
+                {DateTime.fromISO(createdAt).toLocaleString(
+                  DateTime.DATE_FULL,
+                  { locale: member?.extra?.lang },
+                )}
               </Typography>
             </div>
           )}
@@ -269,7 +273,10 @@ function Summary({
                 Last Update
               </Typography>
               <Typography variant="p" gutterBottom>
-                {new Date(lastUpdate).toLocaleDateString()}
+                {DateTime.fromISO(lastUpdate).toLocaleString(
+                  DateTime.DATE_FULL,
+                  { locale: member?.extra?.lang },
+                )}
               </Typography>
             </div>
           )}
