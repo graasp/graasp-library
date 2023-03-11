@@ -92,6 +92,7 @@ export const CollectionCard = ({ collection = {}, isLoading }) => {
   const [flipped, setFlipped] = React.useState(false);
   const { hooks } = useContext(QueryClientContext);
   const { data: author } = hooks.useMember(creator);
+  const { data: member } = hooks.useCurrentMember();
 
   // toggle the value
   const handleClick = (event) => {
@@ -164,7 +165,7 @@ export const CollectionCard = ({ collection = {}, isLoading }) => {
         />
       )}
       <StyledCardAction disableSpacing link={link}>
-        <CopyButton id={id} />
+        {member?.id && <CopyButton id={id} />}
         <CopyLinkButton id={id} extra={extra} />
         <DownloadButton id={id} />
         <SimilarCollectionBadges views={views} voteScore={voteScore} />

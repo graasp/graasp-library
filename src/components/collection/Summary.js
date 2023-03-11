@@ -179,7 +179,6 @@ function Summary({
       memberId,
     });
   };
-
   return (
     <div>
       <Grid container spacing={2} alignItems="flex-start">
@@ -239,7 +238,7 @@ function Summary({
             description={description}
           />
           <div>
-            <CopyButton id={itemId} />
+            {member?.id && <CopyButton id={itemId} />}
             <CopyLinkButton id={itemId} extra={extra} />
             <DownloadButton id={itemId} />
           </div>
