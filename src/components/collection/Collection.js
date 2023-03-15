@@ -4,16 +4,25 @@ import PropTypes from 'prop-types';
 import { validate } from 'uuid';
 
 import React, { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 
-import { Alert, Box, Divider } from '@mui/material';
+import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
+import { Alert, Box, Button, Divider } from '@mui/material';
 
-import { DEFAULT_ITEM_IMAGE_PATH, ITEM_TYPES } from '../../config/constants';
+import { LIBRARY } from '@graasp/translations';
+
+import {
+  DEFAULT_ITEM_IMAGE_PATH,
+  ITEM_TYPES,
+  buildPlayerViewItemRoute,
+} from '../../config/constants';
 import { PUBLISHED_TAG_ID } from '../../config/env';
 import {
   ERROR_INVALID_COLLECTION_ID_CODE,
   ERROR_UNEXPECTED_ERROR_CODE,
 } from '../../config/messages';
 import { PLACEHOLDER_COLLECTION } from '../../utils/collections';
+import { openInNewTab } from '../../utils/helpers';
 import { QueryClientContext } from '../QueryClientContext';
 import Error from '../common/Error';
 import Seo from '../common/Seo';
@@ -36,6 +45,7 @@ const { BuildIcon } = {
 };
 
 const Collection = ({ id }) => {
+  const { t } = useTranslation();
   const { hooks } = useContext(QueryClientContext);
   const {
     data: collection,
@@ -92,6 +102,9 @@ const Collection = ({ id }) => {
   const settings = collection?.settings;
 
   const type = collection?.type;
+  const handlePlay = () => {
+    openInNewTab(buildPlayerViewItemRoute(id));
+  };
 
   // todo: views don't exist
   const views = collection?.views;
@@ -146,9 +159,22 @@ const Collection = ({ id }) => {
             lastUpdate={collection?.updatedAt}
             extra={collection?.extra}
           />
+          <Divider sx={{ my: 2 }} />
+          <Button
+            onClick={handlePlay}
+            variant="outlined"
+            size="large"
+            color="primary"
+            aria-label={t(LIBRARY.COLLECTION_PLAYER_BUTTON)}
+            title={t(LIBRARY.COLLECTION_PLAYER_BUTTON)}
+            endIcon={<PlayCircleOutlineIcon />}
+            sx={{ display: 'flex', mx: 'auto', my: 2 }}
+          >
+            {t(LIBRARY.COLLECTION_PLAYER_BUTTON)}
+          </Button>
           {type === ITEM_TYPES.FOLDER && (
             <>
-              <Divider sx={{ my: 4 }} />
+              <Divider />
               <Items parentId={id} />
             </>
           )}
