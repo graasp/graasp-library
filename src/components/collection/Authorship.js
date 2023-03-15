@@ -19,7 +19,7 @@ const Avatar = dynamic(() => import('@graasp/ui').then((mod) => mod.Avatar), {
   ssr: false,
 });
 
-const Authorship = ({ itemId, author, isLoading }) => {
+const Authorship = ({ itemId, author, isLoading, showTitle }) => {
   const { t } = useTranslation();
   const { hooks } = useContext(QueryClientContext);
   const { data: item, isLoading: isLoadingItem } = hooks.useItem(itemId);
@@ -56,13 +56,16 @@ const Authorship = ({ itemId, author, isLoading }) => {
     <div>
       <Grid container>
         <Grid item xs={12} sm={6}>
-          <Typography variant="h5" gutterBottom>
-            {t(LIBRARY.AUTHORSHIP_AUTHOR_TITLE)}
-          </Typography>
+          {showTitle && (
+            <Typography variant="h5" gutterBottom>
+              {t(LIBRARY.AUTHORSHIP_AUTHOR_TITLE)}
+            </Typography>
+          )}
           <Grid
             container
             alignItems="center"
             justify="flex-start"
+            flexWrap="nowrap"
             id={SUMMARY_AUTHOR_CONTAINER_ID}
           >
             <Grid item>
@@ -104,6 +107,7 @@ Authorship.propTypes = {
   author: PropTypes.instanceOf(Map),
   isLoading: PropTypes.bool.isRequired,
   itemId: PropTypes.string.isRequired,
+  showTitle: PropTypes.bool.isRequired,
 };
 
 Authorship.defaultProps = {

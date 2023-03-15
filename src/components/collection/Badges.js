@@ -49,14 +49,18 @@ function Badges({ views, likes, name, description }) {
   })} ${pageLocation}${MAIL_BREAK_LINE}${MAIL_BREAK_LINE}${parsedDescription}`;
   const mailString = `mailto:?subject=${subject}&body=${message}`;
 
+  const shouldShowLikesAndViews = likes !== undefined || views !== undefined;
+
   return (
     <Grid container justify="space-between" alignItems="center" mb={1}>
-      <Grid item>
-        <BadgeContainer>
-          <FavoriteBadge likes={likes.toString()} />
-          <VisibilityBadge views={views.toString()} />
-        </BadgeContainer>
-      </Grid>
+      {shouldShowLikesAndViews && (
+        <Grid item>
+          <BadgeContainer>
+            <FavoriteBadge likes={likes.toString()} />
+            <VisibilityBadge views={views.toString()} />
+          </BadgeContainer>
+        </Grid>
+      )}
       <Grid item>
         <IconButton color="primary" onClick={shareOnFacebook}>
           <Facebook fontSize="large" />
@@ -81,9 +85,9 @@ Badges.propTypes = {
   description: PropTypes.string.isRequired,
 };
 
-Badges.defaultProps = {
-  views: 0,
-  likes: 0,
-};
+// Badges.defaultProps = {
+//   views: 0,
+//   likes: 0,
+// };
 
 export default Badges;

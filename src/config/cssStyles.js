@@ -7,7 +7,7 @@ export const DEFAULT_SHADOW_EFFECT =
 export const HEADER_LOGO_HEIGHT = 40;
 
 // collectionCard
-export const COLLECTION_CARD_BORDER_RADIUS = 35;
+export const COLLECTION_CARD_BORDER_RADIUS = 16;
 export const COLLECTION_CARD_HEADER_SIZE = '20%';
 
 // item summary

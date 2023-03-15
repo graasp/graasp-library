@@ -7,7 +7,18 @@ import PropTypes from 'prop-types';
 import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Chip, Grid, Typography } from '@mui/material';
+import { CopyAll, Download, Favorite, Visibility } from '@mui/icons-material';
+import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
+import {
+  Button,
+  Chip,
+  Divider,
+  Grid,
+  Tooltip,
+  Typography,
+} from '@mui/material';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
 import Skeleton from '@mui/material/Skeleton';
 import { styled } from '@mui/material/styles';
 
@@ -19,6 +30,7 @@ import {
   CATEGORY_TYPES,
   MAX_COLLECTION_NAME_LENGTH,
   THUMBNAIL_SIZES,
+  buildPlayerViewItemRoute,
 } from '../../config/constants';
 import {
   ITEM_SUMMARY_TITLE_ID,
@@ -29,7 +41,7 @@ import {
   SUMMARY_LAST_UPDATE_CONTAINER_ID,
   SUMMARY_TAGS_CONTAINER_ID,
 } from '../../config/selectors';
-import { compare } from '../../utils/helpers';
+import { compare, openInNewTab } from '../../utils/helpers';
 import { QueryClientContext } from '../QueryClientContext';
 import CardMedia from '../common/CardMediaComponent';
 import { StyledCard } from '../common/StyledCard';
@@ -45,6 +57,7 @@ const {
   FavoriteButton,
   LikeButton,
   CCLicenseIcon,
+  CreativeCommons,
 } = {
   ItemFlagDialog: dynamic(
     () => import('@graasp/ui').then((mod) => mod.ItemFlagDialog),
@@ -66,11 +79,19 @@ const {
     () => import('@graasp/ui').then((mod) => mod.CCLicenseIcon),
     { ssr: false },
   ),
+  CreativeCommons: dynamic(
+    () => import('@graasp/ui').then((mod) => mod.CreativeCommons),
+    { ssr: false },
+  ),
 };
 
-const StyledCardMedia = styled(CardMedia)(() => ({
-  width: '100%',
-  height: '500px !important',
+const StyledCardMedia = styled(CardMedia)(() => ({}));
+
+const DetailCard = styled(Box)(() => ({
+  border: '1px solid #ddd',
+  borderRadius: 7,
+  padding: 20,
+  margin: '10 0',
 }));
 
 function Summary({
@@ -179,6 +200,332 @@ function Summary({
       memberId,
     });
   };
+
+  const handlePlay = () => {
+    openInNewTab(buildPlayerViewItemRoute(itemId));
+  };
+
+  return (
+    <div>
+      <Container maxWidth="lg">
+        <Grid container spacing={10} alignItems="center">
+          <Grid
+            item
+            sm={12}
+            md={4}
+            mb={4}
+            alignItems="center"
+            justifyContent="center"
+          >
+            <StyledCard>
+              {isLoading ? (
+                <Skeleton variant="rect" width="100%">
+                  <StyledCardMedia itemId={itemId} name={name} />
+                </Skeleton>
+              ) : (
+                <StyledCardMedia
+                  itemId={itemId}
+                  name={name}
+                  size={THUMBNAIL_SIZES.ORIGINAL}
+                />
+              )}
+            </StyledCard>
+          </Grid>
+          <Grid item sm={12} md={8}>
+            <Grid item>
+              <Typography
+                variant="h1"
+                fontSize="2em"
+                id={ITEM_SUMMARY_TITLE_ID}
+              >
+                {truncatedName}
+
+                <FavoriteButton
+                  color="primary"
+                  isFavorite={isFavorite}
+                  handleFavorite={handleFavorite}
+                  handleUnfavorite={handleUnfavorite}
+                  ml={1}
+                />
+                <LikeButton
+                  color="primary"
+                  isLiked={Boolean(likeEntry)}
+                  handleLike={handleLike}
+                  handleUnlike={handleUnlike}
+                />
+                <FlagItemButton setOpen={setOpen} />
+              </Typography>
+            </Grid>
+            <Grid item>
+              {Boolean(tags?.size) && (
+                <div id={SUMMARY_TAGS_CONTAINER_ID}>
+                  {false && (
+                    <Typography variant="h6">
+                      {t(LIBRARY.COLLECTION_TAGS_TITLE)}
+                    </Typography>
+                  )}
+                  {tags?.map((text) => (
+                    <Chip label={text} mr={1} />
+                  ))}
+                </div>
+              )}
+            </Grid>
+            <Grid item>
+              <Typography variant="body1" gutterBottom component="div">
+                {isLoading ? (
+                  <Skeleton />
+                ) : (
+                  <div
+                    // eslint-disable-next-line react/no-danger
+                    dangerouslySetInnerHTML={{ __html: description }}
+                  />
+                )}
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Grid container spacing={3}>
+                <Grid item display="flex" alignItems="center">
+                  <Authorship
+                    itemId={itemId}
+                    author={creator}
+                    isLoading={isLoading}
+                  />
+                </Grid>
+                <Grid item>
+                  <Divider orientation="vertical" />
+                </Grid>
+                <Grid item display="flex" alignItems="center">
+                  <Grid item justifyContent="row" marginLeft={1} marginTop={0}>
+                    <Typography
+                      fontWeight="bold"
+                      display="flex"
+                      alignItems="center"
+                      color="primary"
+                    >
+                      <Tooltip title="Views" arrow placement="top">
+                        <span style={{ display: 'flex', alignItems: 'center' }}>
+                          {views}
+                          <Visibility
+                            color="primary"
+                            style={{ marginLeft: 5 }}
+                          />
+                        </span>
+                      </Tooltip>
+                      <span style={{ margin: '0 10px' }}>
+                        {String.fromCharCode(183)}
+                      </span>
+                      <Tooltip title="Likes" arrow placement="top">
+                        <span style={{ display: 'flex', alignItems: 'center' }}>
+                          {likes}
+                          <Favorite color="primary" style={{ marginLeft: 5 }} />
+                        </span>
+                      </Tooltip>
+                    </Typography>
+                  </Grid>
+                </Grid>
+                <Grid item>
+                  <Divider orientation="vertical" />
+                </Grid>
+                <Grid item>
+                  <Badges name={name} description={description} />
+                </Grid>
+              </Grid>
+            </Grid>
+            {/*
+              <Grid item marginY={1}>
+                <div>
+                  {member?.id && <CopyButton id={itemId} />}
+                  <CopyLinkButton id={itemId} extra={extra} />
+                  <DownloadButton id={itemId} />
+                </div>
+              </Grid>
+                */}
+          </Grid>
+        </Grid>
+      </Container>
+      <Divider sx={{ my: 4 }} />
+      <Container display="flex" flexDirection="row">
+        <Box display="flex">
+          <Button
+            onClick={handlePlay}
+            variant="outlined"
+            size="large"
+            color="primary"
+            aria-label={t(LIBRARY.COLLECTION_PLAYER_BUTTON)}
+            title={t(LIBRARY.COLLECTION_PLAYER_BUTTON)}
+            endIcon={<Download />}
+            sx={{ display: 'flex', mx: 'auto', my: 2 }}
+          >
+            DOWNLOAD
+          </Button>
+          <Button
+            onClick={handlePlay}
+            variant="outlined"
+            size="large"
+            color="primary"
+            aria-label={t(LIBRARY.COLLECTION_PLAYER_BUTTON)}
+            title={t(LIBRARY.COLLECTION_PLAYER_BUTTON)}
+            endIcon={<PlayCircleOutlineIcon />}
+            sx={{ display: 'flex', mx: 'auto', my: 2 }}
+          >
+            {t(LIBRARY.COLLECTION_PLAYER_BUTTON)}
+          </Button>
+          {member?.id && (
+            <Button
+              onClick={handlePlay}
+              variant="outlined"
+              size="large"
+              color="primary"
+              aria-label={t(LIBRARY.COLLECTION_PLAYER_BUTTON)}
+              title={t(LIBRARY.COLLECTION_PLAYER_BUTTON)}
+              endIcon={<CopyAll />}
+              sx={{ display: 'flex', mx: 'auto', my: 2 }}
+            >
+              COPY IN LIBRARY
+            </Button>
+          )}
+        </Box>
+      </Container>
+      <Divider sx={{ my: 4 }} />
+      {/*
+        <Container maxWidth='lg'>
+        <Grid container spacing={5} alignItems="flex-start">
+          <Grid item sm={12} md={12} alignItems="center" justifyContent="center">
+            <Typography variant="h4">
+              Description
+            </Typography>
+          </Grid>
+        </Grid>
+      </Container>
+      <Divider sx={{ my: 2 }} />
+          */}
+      <Container maxWidth="lg">
+        <Typography variant="h4" gutterBottom>
+          Details
+        </Typography>
+
+        <Container maxWidth="md">
+          <Grid container spacing={2}>
+            <Grid item sm={6} md={6}>
+              <DetailCard>
+                {createdAt && (
+                  <div id={SUMMARY_CREATED_AT_CONTAINER_ID}>
+                    <Typography variant="body1" fontWeight="bold">
+                      Created
+                    </Typography>
+                    <Typography variant="p" gutterBottom>
+                      {DateTime.fromISO(createdAt).toLocaleString(
+                        DateTime.DATE_FULL,
+                        { locale: member?.extra?.lang },
+                      )}
+                    </Typography>
+                  </div>
+                )}
+              </DetailCard>
+            </Grid>
+            <Grid item sm={6} md={6}>
+              <DetailCard>
+                {lastUpdate && (
+                  <div id={SUMMARY_LAST_UPDATE_CONTAINER_ID}>
+                    <Typography variant="body1" fontWeight="bold">
+                      Updated
+                    </Typography>
+                    <Typography variant="p" gutterBottom>
+                      {DateTime.fromISO(lastUpdate).toLocaleString(
+                        DateTime.DATE_FULL,
+                        { locale: member?.extra?.lang },
+                      )}
+                    </Typography>
+                  </div>
+                )}
+              </DetailCard>
+            </Grid>
+            <Grid item sm={6} md={6}>
+              <DetailCard>
+                {isLoading || !languages ? (
+                  <Skeleton>
+                    <Typography variant="body1" fontWeight="bold">
+                      {t(LIBRARY.COLLECTION_LANGUAGES_TITLE)}
+                    </Typography>
+                    <Chip
+                      label=""
+                      variant="outlined"
+                      sx={{
+                        color: CATEGORY_COLORS[CATEGORY_TYPES.LANGUAGE],
+                      }}
+                    />
+                  </Skeleton>
+                ) : (
+                  languages && (
+                    <div id={SUMMARY_LANGUAGES_CONTAINER_ID}>
+                      <Typography variant="body1" fontWeight="bold">
+                        {t(LIBRARY.COLLECTION_LANGUAGES_TITLE)}
+                      </Typography>
+                      {languages?.map((entry) => (
+                        <Chip
+                          label={t(entry.name)}
+                          variant="outlined"
+                          sx={{
+                            color: CATEGORY_COLORS[CATEGORY_TYPES.LANGUAGE],
+                          }}
+                        />
+                      ))}
+                    </div>
+                  )
+                )}
+              </DetailCard>
+            </Grid>
+            <Grid item sm={6} md={6}>
+              <DetailCard>
+                {(levels || disciplines) && (
+                  <div id={SUMMARY_CATEGORIES_CONTAINER_ID}>
+                    <Typography variant="body1" fontWeight="bold">
+                      {t(LIBRARY.COLLECTION_CATEGORIES_TITLE)}
+                    </Typography>
+                    {levels?.map((entry) => (
+                      <Chip
+                        label={t(entry.name)}
+                        variant="outlined"
+                        sx={{ color: CATEGORY_COLORS[CATEGORY_TYPES.LEVEL] }}
+                        mr={1}
+                      />
+                    ))}
+                    {disciplines?.map((entry) => (
+                      <Chip
+                        label={t(entry.name)}
+                        sx={{
+                          color: CATEGORY_COLORS[CATEGORY_TYPES.DISCIPLINE],
+                        }}
+                        variant="outlined"
+                        mr={1}
+                      />
+                    ))}
+                  </div>
+                )}
+              </DetailCard>
+            </Grid>
+
+            <Grid item sm={12} md={12}>
+              <DetailCard>
+                <Typography variant="body1" fontWeight="bold">
+                  License
+                  <CreativeCommons
+                    allowSharedAdaptation={1}
+                    allowCommercialUse={false}
+                    requireAccreditation
+                    iconSize={64}
+                    borderWith={0}
+                  />
+                </Typography>
+              </DetailCard>
+            </Grid>
+          </Grid>
+        </Container>
+      </Container>
+    </div>
+  );
+
+  // eslint-disable-next-line no-unreachable
   return (
     <div>
       <Grid container spacing={2} alignItems="flex-start">
