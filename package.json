@@ -33,7 +33,7 @@
     "@emotion/server": "11.10.0",
     "@emotion/styled": "11.10.5",
     "@graasp/query-client": "0.1.5",
-    "@graasp/sdk": "0.4.1",
+    "@graasp/sdk": "github:graasp/graasp-sdk#110-fix-core",
     "@graasp/translations": "1.4.0",
     "@graasp/ui": "0.11.1",
     "@mui/icons-material": "5.10.9",
