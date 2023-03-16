@@ -1016,16 +1016,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fastify/cookie@npm:^7.0.0":
-  version: 7.4.0
-  resolution: "@fastify/cookie@npm:7.4.0"
-  dependencies:
-    cookie: ^0.5.0
-    fastify-plugin: ^4.0.0
-  checksum: cf710f8fcf07d1655bdd76b86076e32d343fdea9291534e0b87b909d978520333663c2aed63609f84c2eec46ac0e9068f462a4b63b5d124e3d31c873adaa66d7
-  languageName: node
-  linkType: hard
-
 "@fastify/cookie@npm:^8.0.0":
   version: 8.3.0
   resolution: "@fastify/cookie@npm:8.3.0"
@@ -1040,19 +1030,6 @@ __metadata:
   version: 2.0.0
   resolution: "@fastify/error@npm:2.0.0"
   checksum: ecf0834966b2bfb33ff834e3d55fe4dc04cbe9f822fda6c937b12cce4f162be4f8b0577ee665bc856d7012b1640c12472a1829a22ae38d287342c90b0f33a595
-  languageName: node
-  linkType: hard
-
-"@fastify/secure-session@npm:5.2.0":
-  version: 5.2.0
-  resolution: "@fastify/secure-session@npm:5.2.0"
-  dependencies:
-    "@fastify/cookie": ^7.0.0
-    fastify-plugin: ^3.0.0
-    sodium-native: ^3.0.0
-  bin:
-    secure-session: genkey.js
-  checksum: 3366155760af949e677cf41ad37863e49cac60ab98c519767c6aeafcce7147c2cb2594909ea03513885ff758b082db3f4ccd00ec5906af09a4a4ceabca3f7852
   languageName: node
   linkType: hard
 
@@ -1076,45 +1053,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/query-client@npm:0.1.5":
-  version: 0.1.5
-  resolution: "@graasp/query-client@npm:0.1.5"
+"@graasp/query-client@npm:0.3.2":
+  version: 0.3.2
+  resolution: "@graasp/query-client@npm:0.3.2"
   dependencies:
-    "@graasp/sdk": 0.2.0
-    "@graasp/translations": 1.1.0
+    "@graasp/sdk": 0.8.1
+    "@graasp/translations": 1.8.0
     axios: 0.27.2
     crypto-js: 4.1.1
     http-status-codes: 2.2.0
-    immutable: 4.0.0
-    qs: 6.10.3
-    react-query: 3.34.19
-    uuid: 8.3.2
+    immutable: 4.2.4
+    qs: 6.11.0
+    react-query: 3.39.3
+    uuid: 9.0.0
   peerDependencies:
     react: ^17.0.0
-  checksum: cb612d83227a6a677e2ce595ef836736dd56dc0f65efe9007a7a22aec204e79cf417807ddf3fd2275984698e8f841dd96a647f9308f6da54b9199b77ba2711e3
+  checksum: 454c0e8e943efccb75e740995376dc713bdf0b8d7f619f59f1df35e4b4d7dc12c24430491f431494f94942356ac743c968bffd364275f73d531b67e30795d41f
   languageName: node
   linkType: hard
 
-"@graasp/sdk@npm:0.2.0":
-  version: 0.2.0
-  resolution: "@graasp/sdk@npm:0.2.0"
-  dependencies:
-    "@fastify/secure-session": 5.2.0
-    aws-sdk: 2.1111.0
-    fastify: 3.29.1
-    fluent-json-schema: 3.1.0
-    immutable: 4.1.0
-    js-cookie: 3.0.1
-    qs: 6.11.0
-    slonik: 28.1.1
-    uuid: 8.3.2
-  checksum: 95a76c69dd4577f8a0eb51197d83fdb5c61c58c1c6a7c895e7ca543d4883603bc7deb534fd5b7bc4f61b5f15cd0b6c403bf165e6a6a4a756707f9ad877961339
-  languageName: node
-  linkType: hard
-
-"@graasp/sdk@npm:0.4.0":
-  version: 0.4.0
-  resolution: "@graasp/sdk@npm:0.4.0"
+"@graasp/sdk@npm:0.8.1":
+  version: 0.8.1
+  resolution: "@graasp/sdk@npm:0.8.1"
   dependencies:
     "@fastify/secure-session": 5.3.0
     aws-sdk: 2.1310.0
@@ -1125,13 +1085,13 @@ __metadata:
     qs: 6.11.0
     slonik: 28.1.1
     uuid: 9.0.0
-  checksum: cf57c9e782b00c6406fbd4563e56b797bd78e8928cc4e1624601968541f6f72b7784c9d9e66bbcc46180030a7ff31f8089d8aca4ae393e57d3d5f1e8e6c614d6
+  checksum: b2e8dec4aa624faef523e3452d117d6d565c474b5a51edbd4c98de0d1d0cf515fa067d5e47ffe57ac84a76668e15b473363df181cfcdf07cd0942f82a2c9281e
   languageName: node
   linkType: hard
 
-"@graasp/sdk@npm:0.4.1":
-  version: 0.4.1
-  resolution: "@graasp/sdk@npm:0.4.1"
+"@graasp/sdk@npm:0.9.1":
+  version: 0.9.1
+  resolution: "@graasp/sdk@npm:0.9.1"
   dependencies:
     "@fastify/secure-session": 5.3.0
     aws-sdk: 2.1310.0
@@ -1142,33 +1102,24 @@ __metadata:
     qs: 6.11.0
     slonik: 28.1.1
     uuid: 9.0.0
-  checksum: dc65bdad6db5d8647c5753fa03c7d88cd894b3e3dc9da55c19e92da4bbc77cd85b542beb93ec5db46b75a8a7ac65ba8901258a667a3bedccb8fdfa6b4f13df14
+  checksum: 28498b43bb23a4844aaea9e42301e97ce90758a338a6e54c3cb85f023ffff92e99f976728dd7670a09643b162ad912786e483e0d4a31066b9ea1afc821f389c2
   languageName: node
   linkType: hard
 
-"@graasp/translations@npm:1.1.0":
-  version: 1.1.0
-  resolution: "@graasp/translations@npm:1.1.0"
+"@graasp/translations@npm:1.8.0":
+  version: 1.8.0
+  resolution: "@graasp/translations@npm:1.8.0"
   dependencies:
     i18next: 21.8.1
-  checksum: 1d6fabce21ef205146c4f74b9b4b5dafc5969cf13a78cd7c4947a9b882cb22d48f3832ad6e20c21cc905b41b4809a1c2efa7ba629b12cd79bd2067df6ebd2f22
+  checksum: 61c99573820d08f675b9294c075c0995bc2589c1aac962c2eb140b73de45125b28131e5712848b416c8e8a7694f7b6381d903b9e8fd6f4db9cb41ab553352c52
   languageName: node
   linkType: hard
 
-"@graasp/translations@npm:1.4.0":
-  version: 1.4.0
-  resolution: "@graasp/translations@npm:1.4.0"
+"@graasp/ui@npm:2.1.0":
+  version: 2.1.0
+  resolution: "@graasp/ui@npm:2.1.0"
   dependencies:
-    i18next: 21.8.1
-  checksum: ca787604906c4531eded20941e968667a13f7c2fb5b4c2c03a149123ce6994ec685d1b5e125e37f420fa5d6b8edf4cbd0bb48452c554cde07d81bc0309b5dc1f
-  languageName: node
-  linkType: hard
-
-"@graasp/ui@npm:0.11.1":
-  version: 0.11.1
-  resolution: "@graasp/ui@npm:0.11.1"
-  dependencies:
-    "@graasp/sdk": 0.4.0
+    "@graasp/sdk": 0.8.1
     clsx: 1.1.1
     http-status-codes: 2.2.0
     immutable: 4.2.4
@@ -1183,9 +1134,9 @@ __metadata:
     react-text-mask: 5.4.3
     uuid: 9.0.0
   peerDependencies:
-    "@emotion/react": ~11.10.5
-    "@emotion/styled": ~11.10.5
-    "@mui/icons-material": ~5.11.0
+    "@emotion/react": ~11.10.6
+    "@emotion/styled": ~11.10.6
+    "@mui/icons-material": ~5.11.9
     "@mui/lab": ~5.0.0-alpha.120
     "@mui/material": ~5.11.9
     ag-grid-community: 28.1.1
@@ -1199,7 +1150,7 @@ __metadata:
       optional: true
     ag-grid-react:
       optional: true
-  checksum: 599961399ee145e1a82555e6de86a927ae5408b4e145cc88de4eb0da3a22bc9b896b4145d44982e615a61d680b16c40832034f321d738458ea42266874c11627
+  checksum: 569a01f77d9a5b9b7bf28930b60f0199e2dadb911e831d709f04b40c7a46cc0f32392085e3edb0447d1eb16684d0e1e6a2556dcb0787b5fdfb348e158e41d34d
   languageName: node
   linkType: hard
 
@@ -2921,23 +2872,6 @@ __metadata:
     fastq: ^1.6.1
     queue-microtask: ^1.1.2
   checksum: 9a0aa7208441f5abe49c12741ad7f127283ec749b25f0b941a1c84e8f41e958b86b56a1c6baff5a7b5ae5e713a919f1128702dbcf80a6b17e7dc5b095c85b3bd
-  languageName: node
-  linkType: hard
-
-"aws-sdk@npm:2.1111.0":
-  version: 2.1111.0
-  resolution: "aws-sdk@npm:2.1111.0"
-  dependencies:
-    buffer: 4.9.2
-    events: 1.1.1
-    ieee754: 1.1.13
-    jmespath: 0.16.0
-    querystring: 0.2.0
-    sax: 1.2.1
-    url: 0.10.3
-    uuid: 3.3.2
-    xml2js: 0.4.19
-  checksum: 1e918377e23704b1656aa5b9072ef8d8166198b14a4cdfd313745f7d4a3f826e3c14f4806e5b985fd67139a2a4cf30d65a0024cec16fbb6daa3ae99287951b76
   languageName: node
   linkType: hard
 
@@ -5314,40 +5248,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fastify-plugin@npm:^3.0.0":
-  version: 3.0.1
-  resolution: "fastify-plugin@npm:3.0.1"
-  checksum: 131ba0a388f777829c3fb0fd5b75cf057688ce6d0ca354fb1ebf829767a8c853b0825762b9185b5200097454df0ede2f3095da2efe1aa1b3736d07f194e6d374
-  languageName: node
-  linkType: hard
-
 "fastify-plugin@npm:^4.0.0":
   version: 4.5.0
   resolution: "fastify-plugin@npm:4.5.0"
   checksum: 3cc36a43ec72ee9974d3cd1989027e77b277b0994e4fc02ed4e6492aabd83a0be66f14fdec56e60d9a41911ea1ff1ea70c9d957a87e46bcdb8fedd859f4988fe
-  languageName: node
-  linkType: hard
-
-"fastify@npm:3.29.1":
-  version: 3.29.1
-  resolution: "fastify@npm:3.29.1"
-  dependencies:
-    "@fastify/ajv-compiler": ^1.0.0
-    "@fastify/error": ^2.0.0
-    abstract-logging: ^2.0.0
-    avvio: ^7.1.2
-    fast-json-stringify: ^2.5.2
-    find-my-way: ^4.5.0
-    flatstr: ^1.0.12
-    light-my-request: ^4.2.0
-    pino: ^6.13.0
-    process-warning: ^1.0.0
-    proxy-addr: ^2.0.7
-    rfdc: ^1.1.4
-    secure-json-parse: ^2.0.0
-    semver: ^7.3.2
-    tiny-lru: ^8.0.1
-  checksum: 8f9e9c9f837135b82c58f4bf8d0ddfad703275ff48827e37eccdb0f8b0366e043a2111da4ee8d35ae1bc78512b52ac15140790bbe314b51deced535cff9fefe5
   languageName: node
   linkType: hard
 
@@ -6001,10 +5905,10 @@ __metadata:
     "@emotion/react": 11.10.5
     "@emotion/server": 11.10.0
     "@emotion/styled": 11.10.5
-    "@graasp/query-client": 0.1.5
-    "@graasp/sdk": 0.4.1
-    "@graasp/translations": 1.4.0
-    "@graasp/ui": 0.11.1
+    "@graasp/query-client": 0.3.2
+    "@graasp/sdk": 0.9.1
+    "@graasp/translations": 1.8.0
+    "@graasp/ui": 2.1.0
     "@mui/icons-material": 5.10.9
     "@mui/lab": 5.0.0-alpha.104
     "@mui/material": 5.10.12
@@ -6387,13 +6291,6 @@ __metadata:
   version: 4.0.0
   resolution: "immutable@npm:4.0.0"
   checksum: 4b5e9181e4d5fa06728a481835ec09c86367e5d03268666c95b522b7644ab891098022e4479a43c4c81a68f2ed82f10751ce5d33e208d7b873b6e7f9dfaf4d87
-  languageName: node
-  linkType: hard
-
-"immutable@npm:4.1.0":
-  version: 4.1.0
-  resolution: "immutable@npm:4.1.0"
-  checksum: b9bc1f14fb18eb382d48339c064b24a1f97ae4cf43102e0906c0a6e186a27afcd18b55ca4a0b63c98eefb58143e2b5ebc7755a5fb4da4a7ad84b7a6096ac5b13
   languageName: node
   linkType: hard
 
@@ -8953,15 +8850,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"qs@npm:6.10.3":
-  version: 6.10.3
-  resolution: "qs@npm:6.10.3"
-  dependencies:
-    side-channel: ^1.0.4
-  checksum: 0fac5e6c7191d0295a96d0e83c851aeb015df7e990e4d3b093897d3ac6c94e555dbd0a599739c84d7fa46d7fee282d94ba76943983935cf33bba6769539b8019
-  languageName: node
-  linkType: hard
-
 "qs@npm:6.11.0":
   version: 6.11.0
   resolution: "qs@npm:6.11.0"
@@ -9204,6 +9092,24 @@ __metadata:
     react-native:
       optional: true
   checksum: 765bec81e521a78ef04a8feb6710041ce838ef82bf6e1d35c7e9327cc242b232b242fd89f3604adf6747dce2df055d12b15e8e4208687cc5eb493c1c0bf71d34
+  languageName: node
+  linkType: hard
+
+"react-query@npm:3.39.3":
+  version: 3.39.3
+  resolution: "react-query@npm:3.39.3"
+  dependencies:
+    "@babel/runtime": ^7.5.5
+    broadcast-channel: ^3.4.1
+    match-sorter: ^6.0.2
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  peerDependenciesMeta:
+    react-dom:
+      optional: true
+    react-native:
+      optional: true
+  checksum: d2de6a0992dbf039ff2de564de1ae6361f8ac7310159dae42ec16f833b79c05caedced187235c42373ac331cc5f2fe9e2b31b14ae75a815e86d86e30ca9887ad
   languageName: node
   linkType: hard
 
@@ -10901,15 +10807,6 @@ __metadata:
   version: 1.1.0
   resolution: "uuid-parse@npm:1.1.0"
   checksum: e522c23c2c348eacd880ec78a832f59c1feaccce6c062a5c7127af2f9e7d6cb079d3f06f059fd7e4779cd332091aa038a3bfa26c35d06d23c6f58be21b6461d5
-  languageName: node
-  linkType: hard
-
-"uuid@npm:3.3.2":
-  version: 3.3.2
-  resolution: "uuid@npm:3.3.2"
-  bin:
-    uuid: ./bin/uuid
-  checksum: 8793629d2799f500aeea9fcd0aec6c4e9fbcc4d62ed42159ad96be345c3fffac1bbf61a23e18e2782600884fee05e6d4012ce4b70d0037c8e987533ae6a77870
   languageName: node
   linkType: hard
 
