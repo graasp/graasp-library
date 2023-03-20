@@ -7,7 +7,6 @@ import {
   GRAASP_AUTH_HOST,
   GRAASP_PERFORM_HOST,
   NEXT_PUBLIC_DOMAIN,
-  PUBLISHED_TAG_ID,
 } from './env';
 
 export const APP_NAME = 'Graasp';

@@ -9,7 +9,7 @@ import { Context } from '@graasp/sdk';
 import { LIBRARY } from '@graasp/translations';
 
 import { APP_AUTHOR } from '../../config/constants';
-import { NEXT_PUBLIC_GRAASPER_ID, PUBLISHED_TAG_ID } from '../../config/env';
+import { NEXT_PUBLIC_GRAASPER_ID } from '../../config/env';
 import {
   COLLECTIONS_GRID_ID,
   DISCOVER_SECTION_TITLE_ID,
@@ -18,10 +18,7 @@ import {
   TITLE_TEXT_ID,
 } from '../../config/selectors';
 import { SEARCH_RANGES } from '../../enums/searchRanges';
-import {
-  PLACEHOLDER_COLLECTIONS,
-  filterErrorItems,
-} from '../../utils/collections';
+import { filterErrorItems } from '../../utils/collections';
 import { dateComparator } from '../../utils/helpers';
 import { QueryClientContext } from '../QueryClientContext';
 import CollectionsGrid from '../collection/CollectionsGrid';
@@ -45,12 +42,7 @@ function Home() {
   const [range, setRange] = useState(SEARCH_RANGES.ALL.value);
   const [keywords, setKeywords] = useState(null);
   const { hooks } = useContext(QueryClientContext);
-  const { data: collections, isLoading } = hooks.usePublicItemsWithTag(
-    PUBLISHED_TAG_ID,
-    {
-      placeholderData: PLACEHOLDER_COLLECTIONS,
-    },
-  );
+  const { data: collections, isLoading } = hooks.useAllPublishedItems();
   const { leftContent, rightContent } = useHeader();
 
   // remove errors
