@@ -1,4 +1,3 @@
-import getConfig from 'next/config';
 import PropTypes from 'prop-types';
 
 import * as React from 'react';
@@ -22,11 +21,10 @@ AllCollectionsPage.propTypes = {
 };
 
 export async function getServerSideProps() {
-  const { publicRuntimeConfig } = getConfig();
   const { queryClient, dehydrate } = configureQueryClient(QUERY_CLIENT_OPTIONS);
 
   await queryClient.prefetchQuery(DATA_KEYS.buildPublishedItemsKey(), () =>
-    Api.getAllPublishedItems(args, QUERY_CLIENT_OPTIONS).then((data) => data),
+    Api.getAllPublishedItems({}, QUERY_CLIENT_OPTIONS).then((data) => data),
   );
 
   // Pass data to the page via props

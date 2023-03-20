@@ -1,4 +1,4 @@
-import { Map } from 'immutable';
+import { List, Map } from 'immutable';
 import truncate from 'lodash.truncate';
 import { DateTime } from 'luxon';
 import dynamic from 'next/dynamic';
@@ -15,21 +15,17 @@ import { MUTATION_KEYS } from '@graasp/query-client';
 import { LIBRARY } from '@graasp/translations';
 
 import {
-  CATEGORY_COLORS,
-  CATEGORY_TYPES,
+  // CATEGORY_COLORS,
   MAX_COLLECTION_NAME_LENGTH,
   THUMBNAIL_SIZES,
 } from '../../config/constants';
 import {
-  ITEM_SUMMARY_TITLE_ID,
-  SUMMARY_CATEGORIES_CONTAINER_ID,
+  ITEM_SUMMARY_TITLE_ID, // SUMMARY_CATEGORIES_CONTAINER_ID,
   SUMMARY_CC_LICENSE_CONTAINER_ID,
-  SUMMARY_CREATED_AT_CONTAINER_ID,
-  SUMMARY_LANGUAGES_CONTAINER_ID,
+  SUMMARY_CREATED_AT_CONTAINER_ID, // SUMMARY_LANGUAGES_CONTAINER_ID,
   SUMMARY_LAST_UPDATE_CONTAINER_ID,
   SUMMARY_TAGS_CONTAINER_ID,
 } from '../../config/selectors';
-import { compare } from '../../utils/helpers';
 import { QueryClientContext } from '../QueryClientContext';
 import CardMedia from '../common/CardMediaComponent';
 import { StyledCard } from '../common/StyledCard';
@@ -90,7 +86,6 @@ function Summary({
   const ccLicenseAdaption = settings?.ccLicenseAdaption;
   const { t } = useTranslation();
   const { hooks, useMutation } = useContext(QueryClientContext);
-  const { data: categoryTypes } = hooks.useCategoryTypes();
   const { data: itemCategories } = hooks.useItemCategories(itemId);
   const { data: categories } = hooks.useCategories();
   const selectedCategories = categories
@@ -98,18 +93,9 @@ function Summary({
       itemCategories?.map((entry) => entry.categoryId)?.includes(category.id),
     )
     ?.groupBy((entry) => entry.type);
-  const levels = selectedCategories?.get(
-    categoryTypes?.find((type) => type.name === CATEGORY_TYPES.LEVEL)?.id,
-  );
-  const disciplines = selectedCategories
-    ?.get(
-      categoryTypes?.find((type) => type.name === CATEGORY_TYPES.DISCIPLINE)
-        ?.id,
-    )
-    ?.sort(compare);
-  const languages = selectedCategories?.get(
-    categoryTypes?.find((type) => type.name === CATEGORY_TYPES.LANGUAGE)?.id,
-  );
+
+  // eslint-disable-next-line no-console
+  console.log(selectedCategories, List(selectedCategories));
 
   const { data: member } = hooks.useCurrentMember();
   const { data: likedItems } = hooks.useLikedItems(member?.get('id'));
@@ -280,7 +266,10 @@ function Summary({
             selectedFlag={selectedFlag}
             setSelectedFlag={setSelectedFlag}
           />
-          {languages && (
+
+          {/* {List(selectedCategories).map(() => {})} */}
+
+          {/* {languages && (
             <div id={SUMMARY_LANGUAGES_CONTAINER_ID}>
               <Typography variant="h6">
                 {t(LIBRARY.COLLECTION_LANGUAGES_TITLE)}
@@ -316,7 +305,7 @@ function Summary({
                 />
               ))}
             </div>
-          )}
+          )} */}
           {Boolean(tags?.size) && (
             <div id={SUMMARY_TAGS_CONTAINER_ID}>
               <Typography variant="h6">

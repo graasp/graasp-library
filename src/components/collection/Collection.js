@@ -17,7 +17,6 @@ import {
   ITEM_TYPES,
   buildPlayerViewItemRoute,
 } from '../../config/constants';
-import { PUBLISHED_TAG_ID } from '../../config/env';
 import {
   ERROR_INVALID_COLLECTION_ID_CODE,
   ERROR_UNEXPECTED_ERROR_CODE,
@@ -64,14 +63,16 @@ const Collection = ({ id }) => {
   const { data: likeCount } = hooks.useLikeCount(id);
   const { data: tags } = hooks.useItemTags(id);
   const { leftContent, rightContent } = useHeader(id);
+  // get item published
+  const { data: itemPublishEntry } = hooks.useItemPublishedInformation({
+    itemId: id,
+  });
 
   // if tags could be fetched then user has at least read access
   const canRead = Boolean(tags);
 
   const canPublish =
     collection && currentMember && collection.creator === currentMember.id;
-
-  const isPublished = tags?.some((tag) => tag.tagId === PUBLISHED_TAG_ID);
 
   if (!id || !validate(id)) {
     return (
@@ -133,7 +134,7 @@ const Collection = ({ id }) => {
       >
         {
           // show alert only if 1. user is logged in, 2. it has at least read access and 3. item is not published
-          currentMember?.id && canRead && !isPublished && (
+          currentMember?.id && canRead && !itemPublishEntry && (
             <Alert severity="warning">
               You are viewing this item in Library preview mode. It cannot be
               viewed publicly.

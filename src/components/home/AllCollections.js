@@ -11,17 +11,13 @@ import { Context } from '@graasp/sdk';
 import { LIBRARY } from '@graasp/translations';
 
 import { APP_AUTHOR } from '../../config/constants';
-import { PUBLISHED_TAG_ID } from '../../config/env';
 import {
   ALL_COLLECTIONS_GRID_ID,
   MENU_BUTTON_ID,
   SUBTITLE_TEXT_ID,
   TITLE_TEXT_ID,
 } from '../../config/selectors';
-import {
-  PLACEHOLDER_COLLECTIONS,
-  filterErrorItems,
-} from '../../utils/collections';
+import { filterErrorItems } from '../../utils/collections';
 import { QueryClientContext } from '../QueryClientContext';
 import CollectionsGrid from '../collection/CollectionsGrid';
 import Seo from '../common/Seo';
