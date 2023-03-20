@@ -20,7 +20,7 @@ const LevelCollectionsPage = ({ selected, gridParams }) => {
     .map((selection) => selection.join(','))
     .filter(Boolean);
   const { data: collections, isLoading } =
-    hooks.useItemsInCategories(categoryIds);
+    hooks.useAllPublishedItems(categoryIds);
   const count = collections?.size || 0;
 
   return (

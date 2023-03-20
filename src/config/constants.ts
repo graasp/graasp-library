@@ -71,11 +71,6 @@ export const PICTURE_QUALITIES = {
 export const DEFAULT_PICTURE_QUALITY = PICTURE_QUALITIES.LARGE;
 export const MAX_COLLECTION_NAME_LENGTH = 100;
 
-// Cache Keys
-// todo: use query client keys
-export const ITEMS_KEY = 'items';
-export const PUBLISHED_ITEMS_KEY = [ITEMS_KEY, 'itemTags', PUBLISHED_TAG_ID];
-export const buildCollectionKey = (id: string) => [ITEMS_KEY, id];
 
 export const CLIENT_ERROR_MESSAGE = 'Something went wrong!';
 export const DEFAULT_ITEM_IMAGE_PATH = '/icon.png';

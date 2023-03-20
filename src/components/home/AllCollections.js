@@ -38,12 +38,7 @@ const gridParams = { sm: 12, md: 6, lg: 4, xl: 4 };
 function AllCollections() {
   const { t } = useTranslation();
   const { hooks } = useContext(QueryClientContext);
-  const { data: collections, isLoading } = hooks.usePublicItemsWithTag(
-    PUBLISHED_TAG_ID,
-    {
-      placeholderData: PLACEHOLDER_COLLECTIONS,
-    },
-  );
+  const { data: collections, isLoading } = hooks.useAllPublishedItems();
   const collectionsWithoutErrors = filterErrorItems(collections);
 
   const { sidebar, selected } = useCategoryTypesSidebar();
