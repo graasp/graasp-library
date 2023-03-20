@@ -27,10 +27,10 @@ const MemberAvatar = ({ id }: Props): JSX.Element => {
   const { t } = useCommonTranslation();
   const { data: member, isLoading, isFetching } = hooks.useMember(id);
   const {
-    data: thumbnailBlob,
+    data: thumbnailUrl,
     isLoading: isLoadingAvatar,
     isFetching: isFetchingAvatar,
-  } = hooks.useAvatar({
+  } = hooks.useAvatarUrl({
     id,
     size: THUMBNAIL_SIZES.SMALL,
   });
@@ -39,11 +39,10 @@ const MemberAvatar = ({ id }: Props): JSX.Element => {
     <Avatar
       isLoading={isLoading || isLoadingAvatar || isFetchingAvatar || isFetching}
       alt={member?.name || t(COMMON.AVATAR_DEFAULT_ALT)}
-      defaultImage={DEFAULT_MEMBER_THUMBNAIL}
       component="avatar"
       maxWidth={AVATAR_ICON_HEIGHT}
       maxHeight={AVATAR_ICON_HEIGHT}
-      blob={thumbnailBlob}
+      url={thumbnailUrl ?? DEFAULT_MEMBER_THUMBNAIL}
       sx={{ mx: 1 }}
     />
   );

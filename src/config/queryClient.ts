@@ -14,5 +14,6 @@ export const QUERY_CLIENT_OPTIONS = {
     cacheTime: 1000, // ms
   },
   DOMAIN,
-  notifier,
+  // TODO: improve
+  notifier: notifier as (e: unknown) => void,
 };

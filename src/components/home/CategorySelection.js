@@ -1,3 +1,4 @@
+import { List as ImmutableList } from 'immutable';
 import dynamic from 'next/dynamic';
 import PropTypes from 'prop-types';
 
@@ -66,7 +67,7 @@ const CategorySelection = ({
 CategorySelection.propTypes = {
   title: PropTypes.string.isRequired,
   selectedValues: PropTypes.arrayOf(PropTypes.string).isRequired,
-  valueList: PropTypes.arrayOf({}),
+  valueList: PropTypes.instanceOf(ImmutableList),
   handleClick: PropTypes.func.isRequired,
   clearSelection: PropTypes.func.isRequired,
   categoryType: PropTypes.string.isRequired,

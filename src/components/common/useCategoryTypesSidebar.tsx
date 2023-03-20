@@ -5,6 +5,7 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import { Button, Divider } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
+import { CategoryType } from '@graasp/sdk';
 import { CATEGORIES, LIBRARY, namespaces } from '@graasp/translations';
 
 import { CATEGORY_TYPES } from '../../config/constants';
@@ -13,7 +14,6 @@ import {
   SIDEMENU_HEADING_ID,
   buildEducationLevelOptionId,
 } from '../../config/selectors';
-import { compare } from '../../utils/helpers';
 import { QueryClientContext } from '../QueryClientContext';
 import CategorySelection from '../home/CategorySelection';
 
@@ -24,28 +24,10 @@ const useCategoryTypesSidebar = () => {
 
   // get categories in each type
   // todo: improve typing
-  const { data: categoryTypes } = hooks.useCategoryTypes();
   const { data: categories, isLoading: isCategoriesLoading } =
     hooks.useCategories();
   const allCategories = categories?.groupBy(
     (entry: { type: string }) => entry.type,
-  );
-  const levelList = allCategories?.get(
-    categoryTypes?.find(
-      (type: { name: string }) => type.name === CATEGORY_TYPES.LEVEL,
-    )?.id,
-  );
-  const disciplineList = allCategories
-    ?.get(
-      categoryTypes?.find(
-        (type: { name: string }) => type.name === CATEGORY_TYPES.DISCIPLINE,
-      )?.id,
-    )
-    ?.sort(compare);
-  const languageList = allCategories?.get(
-    categoryTypes?.find(
-      (type: { name: string }) => type.name === CATEGORY_TYPES.LANGUAGE,
-    )?.id,
   );
 
   // state variable to record selected options
@@ -126,7 +108,7 @@ const useCategoryTypesSidebar = () => {
       <CategorySelection
         title={translateCategories(CATEGORIES.EDUCATION_LEVEL)}
         selectedValues={selectedLevels}
-        valueList={levelList}
+        valueList={allCategories?.get(CategoryType.LEVEL)}
         handleClick={handleClickForLevel}
         isLoading={isCategoriesLoading}
         buildOptionIndex={buildEducationLevelOptionId}
@@ -138,7 +120,7 @@ const useCategoryTypesSidebar = () => {
       <CategorySelection
         title={translateCategories(CATEGORIES.DISCIPLINE)}
         selectedValues={selectedDisciplines}
-        valueList={disciplineList}
+        valueList={allCategories?.get(CategoryType.DISCIPLINE)}
         handleClick={handleClickForDiscipline}
         isLoading={isCategoriesLoading}
         clearSelection={clearSelection}
@@ -148,7 +130,7 @@ const useCategoryTypesSidebar = () => {
       <CategorySelection
         title={translateCategories(CATEGORIES.LANGUAGE)}
         selectedValues={selectedLanguages}
-        valueList={languageList}
+        valueList={allCategories?.get(CategoryType.LANGUAGE)}
         handleClick={handleClickForLanguage}
         isLoading={isCategoriesLoading}
         clearSelection={clearSelection}

@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -8,7 +6,6 @@ import CircularProgress from '@mui/material/CircularProgress';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
-import { MUTATION_KEYS } from '@graasp/query-client';
 import { LIBRARY } from '@graasp/translations';
 
 import { ROOT_ID } from '../../config/constants';
@@ -20,14 +17,16 @@ import { QueryClientContext } from '../QueryClientContext';
 import { LoginModalContext } from '../common/SignInModalContext';
 import TreeModal from './TreeModal';
 
-const CopyButton = ({ id }) => {
+type Props = {
+  id: string;
+};
+
+const CopyButton = ({ id }: Props): JSX.Element | null => {
   const { t } = useTranslation();
   const [showTreeModal, setShowTreeModal] = useState(false);
-  const { hooks, useMutation } = useContext(QueryClientContext);
+  const { hooks, mutations } = useContext(QueryClientContext);
   const { data: user, isLoading } = hooks.useCurrentMember();
-  const { mutate: copyItem, isLoading: isCopying } = useMutation(
-    MUTATION_KEYS.COPY_PUBLIC_ITEM,
-  );
+  const { mutate: copyItems, isLoading: isCopying } = mutations.useCopyItems();
 
   const { setOpen: setShowLoginModal, open: showLoginModal } =
     useContext(LoginModalContext);
@@ -61,19 +60,22 @@ const CopyButton = ({ id }) => {
   };
 
   // todo: set notifier for copy
-  const copy = ({ to }) => {
+  const copy = ({ to }: { to: string }) => {
     // remove loading icon on callback
     // do not set parent if it is root
-    copyItem({
-      id,
-      to: [
-        ROOT_ID,
-        TREE_MODAL_MY_ITEMS_ID,
-        TREE_MODAL_SHARED_ITEMS_ID,
-      ].includes(to)
-        ? undefined
-        : to,
-    });
+    const payload: Parameters<typeof copyItems>[0] = {
+      ids: [id],
+    };
+
+    payload.to = [
+      ROOT_ID,
+      TREE_MODAL_MY_ITEMS_ID,
+      TREE_MODAL_SHARED_ITEMS_ID,
+    ].includes(to)
+      ? undefined
+      : to;
+
+    copyItems(payload);
   };
 
   const renderButton = () => {
@@ -107,10 +109,6 @@ const CopyButton = ({ id }) => {
       )}
     </>
   );
-};
-
-CopyButton.propTypes = {
-  id: PropTypes.string.isRequired,
 };
 
 export default CopyButton;

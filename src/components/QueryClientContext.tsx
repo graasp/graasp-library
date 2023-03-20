@@ -1,5 +1,4 @@
 import { isImmutable } from 'immutable';
-import PropTypes from 'prop-types';
 
 import React from 'react';
 
@@ -8,16 +7,30 @@ import { convertJs } from '@graasp/sdk';
 
 import { QUERY_CLIENT_OPTIONS } from '../config/queryClient';
 
-const QueryClientContext = React.createContext();
+type Props = {
+  children: JSX.Element;
+  dehydratedState?: {
+    queries: { state: { data: unknown } }[];
+  };
+};
 
-const QueryClientProvider = ({ children, dehydratedState }) => {
+type QueryClientData = ReturnType<typeof configureQueryClient>;
+
+const QueryClientContext = React.createContext<QueryClientData>(
+  configureQueryClient(QUERY_CLIENT_OPTIONS),
+);
+
+const QueryClientProvider = ({
+  children,
+  dehydratedState,
+}: Props): JSX.Element => {
   const value = configureQueryClient(QUERY_CLIENT_OPTIONS);
   const { QueryClientProvider: Provider, queryClient, Hydrate } = value;
 
   // transform queryclient data into immutable data
   // we can't pass immutable from server
   // eslint-disable-next-line no-restricted-syntax
-  dehydratedState.queries.forEach((query) => {
+  dehydratedState?.queries?.forEach((query) => {
     if (!isImmutable(query.state.data)) {
       // eslint-disable-next-line no-param-reassign
       query.state.data = convertJs(query.state.data);
@@ -31,18 +44,6 @@ const QueryClientProvider = ({ children, dehydratedState }) => {
       </Provider>
     </QueryClientContext.Provider>
   );
-};
-
-QueryClientProvider.propTypes = {
-  children: PropTypes.element,
-  dehydratedState: PropTypes.shape({
-    queries: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  }),
-};
-
-QueryClientProvider.defaultProps = {
-  children: null,
-  dehydratedState: null,
 };
 
 export { QueryClientProvider, QueryClientContext };

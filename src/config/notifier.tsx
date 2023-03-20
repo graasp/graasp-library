@@ -12,7 +12,7 @@ import ToastrWithLink from '../components/common/ToastrWithLink';
 import { SHOW_NOTIFICATIONS, buildPlayerViewItemRoute } from './constants';
 import i18n from './i18n';
 
-const t = (value) => i18n.t(value, { ns: 'messages' });
+const t = (value: string) => i18n.t(value, { ns: 'messages' });
 
 export const COPY_RESOURCE_LINK_TO_CLIPBOARD = {
   SUCESS: 'success',
@@ -20,7 +20,16 @@ export const COPY_RESOURCE_LINK_TO_CLIPBOARD = {
 };
 
 // TODO: use a universal notifier
-const notifier = ({ type, payload }) => {
+const notifier = ({
+  type,
+  payload,
+}: {
+  type: string;
+  payload: {
+    message: string;
+    error: { response: { data: { message: string } } };
+  };
+}) => {
   if (!SHOW_NOTIFICATIONS) {
     return;
   }
@@ -41,18 +50,18 @@ const notifier = ({ type, payload }) => {
       message = payload?.message ?? SUCCESS_MESSAGES.DEFAULT_SUCCESS;
       break;
     }
-    case routines.copyItemRoutine.SUCCESS:
-      toast.success(
-        <ToastrWithLink
-          link={buildPlayerViewItemRoute(payload?.newItem?.id)}
-          text={t(SUCCESS_MESSAGES.COPY_ITEM)}
-          linkText={i18n.t(LIBRARY.COPY_ITEM_TOASTR_LINK)}
-        />,
-      );
-      break;
-    case COPY_RESOURCE_LINK_TO_CLIPBOARD.SUCCESS:
-      toast.success(i18n.t(LIBRARY.COPY_LINK_SUCCESS_MESSAGE));
-      break;
+    // case routines.copyItemRoutine.SUCCESS:
+    //   toast.success(
+    //     <ToastrWithLink
+    //       link={buildPlayerViewItemRoute(payload?.newItem?.id)}
+    //       text={t(SUCCESS_MESSAGES.COPY_ITEM)}
+    //       linkText={i18n.t(LIBRARY.COPY_ITEM_TOASTR_LINK)}
+    //     />,
+    //   );
+    //   break;
+    // case COPY_RESOURCE_LINK_TO_CLIPBOARD.SUCCESS:
+    //   toast.success(i18n.t(LIBRARY.COPY_LINK_SUCCESS_MESSAGE));
+    //   break;
     case COPY_RESOURCE_LINK_TO_CLIPBOARD.FAILURE:
       toast.error(i18n.t(LIBRARY.COPY_LINK_FAILURE_MESSAGE));
       break;
