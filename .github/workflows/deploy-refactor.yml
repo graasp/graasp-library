@@ -19,6 +19,8 @@ jobs:
       cancel-in-progress: true
 
     with:
+      app-name: $npm_package_name
+      app-version: $npm_package_version
       # workflow config
       ecs-task-definition: '.aws/refactor.json'
       environment: refactor               
