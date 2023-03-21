@@ -157,9 +157,7 @@ export const CollectionCard = ({
         <CopyButton id={id} />
         <CopyLinkButton id={id} extra={extra} />
         <DownloadButton id={id} />
-        <SimilarCollectionBadges
-        // views={views} voteScore={voteScore}
-        />
+        <SimilarCollectionBadges />
       </CardActions>
     </StyledCard>
   );
