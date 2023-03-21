@@ -1,4 +1,4 @@
-import { Context, buildSignInPath } from '@graasp/sdk';
+import { Context, buildSignInPath, ThumbnailSize, CategoryType } from '@graasp/sdk';
 
 import {
   GRAASP_BUILDER_HOST as ENV_GRAASP_BUILDER_HOST,
@@ -82,7 +82,7 @@ export const THUMBNAIL_SIZES = {
   LARGE: 'large',
   ORIGINAL: 'original',
 };
-export const DEFAULT_THUMBNAIL_SIZE = THUMBNAIL_SIZES.MEDIUM;
+export const DEFAULT_THUMBNAIL_SIZE = ThumbnailSize.Medium;
 
 export const SIGN_IN_ROUTE = `${GRAASP_AUTH_HOST}/signIn`;
 export const SIGN_UP_ROUTE = `${GRAASP_AUTH_HOST}/signUp`;
@@ -123,14 +123,10 @@ export const ENV = {
 
 export const TREE_VIEW_MAX_WIDTH = 400;
 
-// values of CATEGORY_TYPES = "level", "discipline", etc
-type Keys = keyof typeof CATEGORY_TYPES;
-type Values = typeof CATEGORY_TYPES[Keys];
-
-export const CATEGORY_COLORS: Record<Values, string> = {
-  [CATEGORY_TYPES.DISCIPLINE]: '#4997DE',
-  [CATEGORY_TYPES.LANGUAGE]: '#9A49DE',
-  [CATEGORY_TYPES.LEVEL]: '#5050d2',
+export const CATEGORY_COLORS: Record<CategoryType, string> = {
+  [CategoryType.DISCIPLINE]: '#4997DE',
+  [CategoryType.LANGUAGE]: '#9A49DE',
+  [CategoryType.LEVEL]: '#5050d2',
 };
 
 export const MEMBER_PROFILE_PATH = `${GRAASP_BUILDER_HOST}/profile`;

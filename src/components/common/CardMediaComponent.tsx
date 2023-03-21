@@ -1,11 +1,13 @@
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import PropTypes from 'prop-types';
 
 import React, { useContext } from 'react';
 
-import { styled } from '@mui/material';
+import { SxProps } from '@mui/material';
 import CardMedia from '@mui/material/CardMedia';
+
+import { UUID } from '@graasp/sdk';
+import { ThumbnailSizeVariant } from '@graasp/sdk/frontend';
 
 import {
   DEFAULT_ITEM_IMAGE_PATH,
@@ -18,25 +20,40 @@ const Thumbnail = dynamic(
   { ssr: false },
 );
 
-const StyledCardMedia = styled(CardMedia)(({ sx, link }) => ({
-  minHeight: '60%',
-  '&:hover': {
-    cursor: link ? 'pointer' : 'mouse',
-  },
-  ...sx,
-}));
+type Props = {
+  sx?: SxProps;
+  name: string;
+  link?: string;
+  itemId: UUID;
+  size?: ThumbnailSizeVariant;
+};
 
-const CardMediaComponent = ({ sx, name, link, itemId, size }) => {
+const CardMediaComponent = ({
+  sx,
+  name,
+  link,
+  itemId,
+  size = DEFAULT_THUMBNAIL_SIZE,
+}: Props): JSX.Element => {
   const router = useRouter();
   const { hooks } = useContext(QueryClientContext);
+  const { data: thumbnailUrl, isLoading: isThumbnailLoading } =
+    hooks.useItemThumbnailUrl({ id: itemId });
 
   return (
-    <StyledCardMedia
-      sx={sx}
-      link={link}
+    <CardMedia
       title={name}
       onClick={() => {
-        router.push(link);
+        if (link) {
+          router.push(link);
+        }
+      }}
+      sx={{
+        minHeight: '60%',
+        '&:hover': {
+          cursor: link ? 'pointer' : 'mouse',
+        },
+        ...((sx ?? {}) as any), // TODO: fix type
       }}
     >
       <div
@@ -49,33 +66,16 @@ const CardMediaComponent = ({ sx, name, link, itemId, size }) => {
         }}
       >
         <Thumbnail
-          defaultValue={<img src={DEFAULT_ITEM_IMAGE_PATH} alt="thumbnail" />}
           alt={name}
-          useThumbnail={hooks.useItemThumbnail}
+          isLoading={isThumbnailLoading}
+          url={thumbnailUrl ?? DEFAULT_ITEM_IMAGE_PATH}
           id={itemId}
-          thumbnailSrc={DEFAULT_ITEM_IMAGE_PATH}
           sx={{ width: '100%', objectFit: 'cover' }}
           size={size}
         />
       </div>
-    </StyledCardMedia>
+    </CardMedia>
   );
-};
-
-CardMediaComponent.propTypes = {
-  itemId: PropTypes.string.isRequired,
-  sx: PropTypes.shape({}),
-  name: PropTypes.string.isRequired,
-  link: PropTypes.string,
-  itemExtra: PropTypes.shape({}),
-  size: PropTypes.string,
-};
-
-CardMediaComponent.defaultProps = {
-  sx: {},
-  link: null,
-  itemExtra: null,
-  size: DEFAULT_THUMBNAIL_SIZE,
 };
 
 export default CardMediaComponent;

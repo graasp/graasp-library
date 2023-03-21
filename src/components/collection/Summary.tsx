@@ -1,8 +1,7 @@
-import { List, Map } from 'immutable';
+import { List } from 'immutable';
 import truncate from 'lodash.truncate';
 import { DateTime } from 'luxon';
 import dynamic from 'next/dynamic';
-import PropTypes from 'prop-types';
 
 import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -11,18 +10,19 @@ import { Chip, Grid, Typography } from '@mui/material';
 import Skeleton from '@mui/material/Skeleton';
 import { styled } from '@mui/material/styles';
 
-import { MUTATION_KEYS } from '@graasp/query-client';
+import { FlagType, MemberExtra, ThumbnailSize } from '@graasp/sdk';
+import { MemberRecord } from '@graasp/sdk/frontend';
 import { LIBRARY } from '@graasp/translations';
 
 import {
-  // CATEGORY_COLORS,
+  CATEGORY_COLORS,
   MAX_COLLECTION_NAME_LENGTH,
-  THUMBNAIL_SIZES,
 } from '../../config/constants';
 import {
-  ITEM_SUMMARY_TITLE_ID, // SUMMARY_CATEGORIES_CONTAINER_ID,
+  ITEM_SUMMARY_TITLE_ID,
   SUMMARY_CC_LICENSE_CONTAINER_ID,
-  SUMMARY_CREATED_AT_CONTAINER_ID, // SUMMARY_LANGUAGES_CONTAINER_ID,
+  SUMMARY_CREATED_AT_CONTAINER_ID,
+  SUMMARY_LANGUAGES_CONTAINER_ID,
   SUMMARY_LAST_UPDATE_CONTAINER_ID,
   SUMMARY_TAGS_CONTAINER_ID,
 } from '../../config/selectors';
@@ -44,7 +44,7 @@ const {
     { ssr: false },
   ),
   FlagItemButton: dynamic(
-    () => import('@graasp/ui').then((mod) => mod.FlagItemButton),
+    () => import('@graasp/ui').then((mod) => mod.ItemFlagButton),
     { ssr: false },
   ),
   FavoriteButton: dynamic(
@@ -66,99 +66,133 @@ const StyledCardMedia = styled(CardMedia)(() => ({
   height: '500px !important',
 }));
 
-function Summary({
+type Props = {
+  name: string;
+  description?: string;
+  settings?: {
+    tags?: List<string>;
+    ccLicenseAdaption?: string;
+  };
+  creator: MemberRecord;
+  likes: number;
+  views: number;
+  isLoading: boolean;
+  itemId: string;
+  createdAt: string;
+  lastUpdate: string;
+};
+
+const Summary = ({
   itemId,
   name,
   creator,
   description,
-  settings,
-  likes,
-  views,
   isLoading,
   createdAt,
   lastUpdate,
-}) {
+  settings,
+  views = 0,
+  likes = 0,
+}: Props): JSX.Element => {
   const truncatedName = truncate(name, {
     length: MAX_COLLECTION_NAME_LENGTH,
     separator: /,? +/,
   });
   const tags = settings?.tags;
   const ccLicenseAdaption = settings?.ccLicenseAdaption;
+  const [open, setOpen] = useState(false);
   const { t } = useTranslation();
-  const { hooks, useMutation } = useContext(QueryClientContext);
+  const { hooks, mutations } = useContext(QueryClientContext);
+
+  // categories
   const { data: itemCategories } = hooks.useItemCategories(itemId);
   const { data: categories } = hooks.useCategories();
-  const selectedCategories = categories
-    ?.filter((category) =>
-      itemCategories?.map((entry) => entry.categoryId)?.includes(category.id),
-    )
-    ?.groupBy((entry) => entry.type);
+  const selectedCategories = List(
+    categories
+      ?.filter((category) =>
+        itemCategories
+          ?.map((entry) => entry.category.id)
+          ?.includes(category.id),
+      )
+      ?.groupBy((entry) => entry.type),
+  );
 
-  // eslint-disable-next-line no-console
-  console.log(selectedCategories, List(selectedCategories));
-
+  // member
   const { data: member } = hooks.useCurrentMember();
-  const { data: likedItems } = hooks.useLikedItems(member?.get('id'));
-
-  const { mutate: postFlagItem } = useMutation(MUTATION_KEYS.POST_ITEM_FLAG);
-  const { mutate: addFavoriteItem } = useMutation(
-    MUTATION_KEYS.ADD_FAVORITE_ITEM,
-  );
-  const { mutate: deleteFavoriteItem } = useMutation(
-    MUTATION_KEYS.DELETE_FAVORITE_ITEM,
-  );
-  const { mutate: postItemLike } = useMutation(MUTATION_KEYS.POST_ITEM_LIKE);
-  const { mutate: deleteItemLike } = useMutation(
-    MUTATION_KEYS.DELETE_ITEM_LIKE,
-  );
-
-  const [open, setOpen] = useState(false);
-  const [selectedFlag, setSelectedFlag] = useState(false);
-
-  const { data: flags } = hooks.useFlags();
-
   const isFavorite = member?.extra?.favoriteItems?.includes(itemId);
 
-  const likeEntry = likedItems?.find((itemLike) => itemLike?.itemId === itemId);
+  // flags
+  const { data: flags } = hooks.useFlags();
+
+  // liked entries
+  const { data: likedItems } = hooks.useLikedItems(member?.id);
+  // TODO: fix type
+  const likeEntry = likedItems?.find(
+    (itemLike: any) => itemLike?.itemId === itemId,
+  );
+
+  const { mutate: postFlagItem } = mutations.usePostItemFlag();
+  const { mutate: addFavoriteItem } = mutations.useAddFavoriteItem();
+  const { mutate: deleteFavoriteItem } = mutations.useDeleteFavoriteItem();
+  const { mutate: postItemLike } = mutations.usePostItemLike();
+  const { mutate: deleteItemLike } = mutations.useDeleteItemLike();
 
   const { id: memberId, extra: memberExtra } = member || {};
 
-  const onFlag = () => {
+  const onFlag = (selectedFlag?: FlagType) => {
+    if (!selectedFlag) {
+      return console.error(`memberId '${selectedFlag}' is undefined`);
+    }
     postFlagItem({
-      flagId: selectedFlag.id,
+      flagId: selectedFlag,
       itemId,
     });
-    setOpen(false);
+    return setOpen(false);
   };
 
   const handleFavorite = () => {
-    addFavoriteItem({
+    if (!memberId || !memberExtra || !itemId) {
+      return console.error(
+        `memberId '${memberId}' or memberExtra '${memberExtra}' or itemId '${itemId}' is undefined`,
+      );
+    }
+    return addFavoriteItem({
       memberId,
-      extra: memberExtra,
+      // TODO: fix types
+      extra: memberExtra.toJS() as MemberExtra,
       itemId,
     });
   };
 
   const handleUnfavorite = () => {
-    deleteFavoriteItem({
+    if (!memberId || !memberExtra || !itemId) {
+      return console.error(
+        `memberId '${memberId}' or memberExtra '${memberExtra}' or itemId '${itemId}' is undefined`,
+      );
+    }
+    return deleteFavoriteItem({
       memberId,
-      extra: memberExtra,
+      // TODO: fix types
+      extra: memberExtra.toJS() as MemberExtra,
       itemId,
     });
   };
 
   const handleLike = () => {
-    postItemLike({
+    if (!itemId) {
+      return console.error(`itemId '${itemId}' is undefined`);
+    }
+    return postItemLike({
       itemId,
-      memberId,
     });
   };
 
   const handleUnlike = () => {
-    deleteItemLike({
+    if (!likeEntry?.id) {
+      return console.error(`like entry id '${likeEntry?.id}' is undefined`);
+    }
+    return deleteItemLike({
       id: likeEntry?.id,
-      itemId,
-      memberId,
     });
   };
 
@@ -168,25 +202,20 @@ function Summary({
         <Grid item sm={12} md={4} alignItems="center" justifyContent="center">
           <StyledCard>
             {isLoading ? (
-              <Skeleton variant="rect" width="100%">
+              <Skeleton variant="rectangular" width="100%">
                 <StyledCardMedia itemId={itemId} name={name} />
               </Skeleton>
             ) : (
               <StyledCardMedia
                 itemId={itemId}
                 name={name}
-                size={THUMBNAIL_SIZES.ORIGINAL}
+                size={ThumbnailSize.Original}
               />
             )}
           </StyledCard>
         </Grid>
         <Grid item sm={12} md={8}>
-          <Grid
-            container
-            spacing={0}
-            justify="space-between"
-            alignItems="center"
-          >
+          <Grid container spacing={0}>
             <Grid item>
               <Typography
                 variant="h1"
@@ -200,7 +229,6 @@ function Summary({
                   isFavorite={isFavorite}
                   handleFavorite={handleFavorite}
                   handleUnfavorite={handleUnfavorite}
-                  ml={1}
                 />
               </Typography>
             </Grid>
@@ -210,6 +238,7 @@ function Summary({
                 isLiked={Boolean(likeEntry)}
                 handleLike={handleLike}
                 handleUnlike={handleUnlike}
+                ariaLabel="like"
               />
               <FlagItemButton setOpen={setOpen} />
             </Grid>
@@ -226,7 +255,7 @@ function Summary({
             ) : (
               <div
                 // eslint-disable-next-line react/no-danger
-                dangerouslySetInnerHTML={{ __html: description }}
+                dangerouslySetInnerHTML={{ __html: description ?? '' }}
               />
             )}
           </Typography>
@@ -236,7 +265,7 @@ function Summary({
               <Typography variant="h6" gutterBottom>
                 Created At
               </Typography>
-              <Typography variant="p" gutterBottom>
+              <Typography variant="body1" gutterBottom>
                 {DateTime.fromISO(createdAt).toLocaleString(
                   DateTime.DATE_FULL,
                   { locale: member?.extra?.lang },
@@ -249,7 +278,7 @@ function Summary({
               <Typography variant="h6" gutterBottom>
                 Last Update
               </Typography>
-              <Typography variant="p" gutterBottom>
+              <Typography variant="body1" gutterBottom>
                 {DateTime.fromISO(lastUpdate).toLocaleString(
                   DateTime.DATE_FULL,
                   { locale: member?.extra?.lang },
@@ -262,57 +291,37 @@ function Summary({
             flags={flags}
             onFlag={onFlag}
             open={open}
-            setOpen={setOpen}
-            selectedFlag={selectedFlag}
-            setSelectedFlag={setSelectedFlag}
+            onClose={() => {
+              setOpen(false);
+            }}
           />
 
-          {/* {List(selectedCategories).map(() => {})} */}
+          {selectedCategories.map(([categoryType, categoryList]) => {
+            // eslint-disable-next-line no-console
+            console.log(categoryList);
+            return (
+              <div id={SUMMARY_LANGUAGES_CONTAINER_ID}>
+                <Typography variant="h6" sx={{ textTransform: 'capitalize' }}>
+                  {t(categoryType)}
+                </Typography>
+                {categoryList?.map((entry) => (
+                  <Chip
+                    label={t(entry.name)}
+                    variant="outlined"
+                    sx={{ color: CATEGORY_COLORS[categoryType] }}
+                  />
+                ))}
+              </div>
+            );
+          })}
 
-          {/* {languages && (
-            <div id={SUMMARY_LANGUAGES_CONTAINER_ID}>
-              <Typography variant="h6">
-                {t(LIBRARY.COLLECTION_LANGUAGES_TITLE)}
-              </Typography>
-              {languages?.map((entry) => (
-                <Chip
-                  label={t(entry.name)}
-                  variant="outlined"
-                  sx={{ color: CATEGORY_COLORS[CATEGORY_TYPES.LANGUAGE] }}
-                />
-              ))}
-            </div>
-          )}
-          {(levels || disciplines) && (
-            <div id={SUMMARY_CATEGORIES_CONTAINER_ID}>
-              <Typography variant="h6">
-                {t(LIBRARY.COLLECTION_CATEGORIES_TITLE)}
-              </Typography>
-              {levels?.map((entry) => (
-                <Chip
-                  label={t(entry.name)}
-                  variant="outlined"
-                  sx={{ color: CATEGORY_COLORS[CATEGORY_TYPES.LEVEL] }}
-                  mr={1}
-                />
-              ))}
-              {disciplines?.map((entry) => (
-                <Chip
-                  label={t(entry.name)}
-                  sx={{ color: CATEGORY_COLORS[CATEGORY_TYPES.DISCIPLINE] }}
-                  variant="outlined"
-                  mr={1}
-                />
-              ))}
-            </div>
-          )} */}
           {Boolean(tags?.size) && (
             <div id={SUMMARY_TAGS_CONTAINER_ID}>
               <Typography variant="h6">
                 {t(LIBRARY.COLLECTION_TAGS_TITLE)}
               </Typography>
               {tags?.map((text) => (
-                <Chip label={text} mr={1} />
+                <Chip label={text} />
               ))}
             </div>
           )}
@@ -322,7 +331,7 @@ function Summary({
                 {t(LIBRARY.COLLECTION_CC_LICENSE_TITLE)}
               </Typography>
               <CCLicenseIcon
-                adaption={ccLicenseAdaption}
+                adaption={ccLicenseAdaption as any}
                 sx={{
                   mt: 1,
                   borderWidth: 0,
@@ -334,39 +343,6 @@ function Summary({
       </Grid>
     </div>
   );
-}
-
-Summary.propTypes = {
-  name: PropTypes.string,
-  description: PropTypes.string,
-  settings: PropTypes.shape({
-    tags: PropTypes.arrayOf(PropTypes.string),
-    ccLicenseAdaption: PropTypes.string,
-  }),
-  creator: PropTypes.instanceOf(Map),
-  likes: PropTypes.number,
-  views: PropTypes.number,
-  rating: PropTypes.shape({
-    value: PropTypes.number,
-    count: PropTypes.number,
-  }),
-  isLoading: PropTypes.bool.isRequired,
-  itemId: PropTypes.string.isRequired,
-  createdAt: PropTypes.string.isRequired,
-  lastUpdate: PropTypes.string.isRequired,
-};
-
-Summary.defaultProps = {
-  name: PropTypes.string,
-  description: PropTypes.string,
-  settings: {},
-  views: 0,
-  likes: 0,
-  rating: {
-    count: 0,
-    value: 0,
-  },
-  creator: null,
 };
 
 export default Summary;

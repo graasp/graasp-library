@@ -1,6 +1,4 @@
-import { Map } from 'immutable';
 import dynamic from 'next/dynamic';
-import PropTypes from 'prop-types';
 
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -8,6 +6,8 @@ import { useTranslation } from 'react-i18next';
 import { Grid, Typography } from '@mui/material';
 import Skeleton from '@mui/material/Skeleton';
 
+import { PermissionLevel, UUID } from '@graasp/sdk';
+import { MemberRecord } from '@graasp/sdk/frontend';
 import { LIBRARY } from '@graasp/translations';
 
 import { DEFAULT_MEMBER_THUMBNAIL } from '../../config/constants';
@@ -19,30 +19,28 @@ const Avatar = dynamic(() => import('@graasp/ui').then((mod) => mod.Avatar), {
   ssr: false,
 });
 
-const Authorship = ({ itemId, author, isLoading }) => {
+type Props = {
+  author: MemberRecord;
+  isLoading: boolean;
+  itemId: UUID;
+};
+
+const Authorship = ({
+  itemId,
+  author,
+  isLoading,
+}: Props): JSX.Element | null => {
   const { t } = useTranslation();
   const { hooks } = useContext(QueryClientContext);
   const { data: item, isLoading: isLoadingItem } = hooks.useItem(itemId);
-  const { data: memberships } = hooks.useItemMemberships(itemId);
+  const { data: memberships, isLoading: isLoadingItemMemberships } =
+    hooks.useItemMemberships(itemId);
+  const { data: avatarUrl } = hooks.useAvatarUrl({ id: author.id });
 
-  const memberIds = [
-    ...new Set(
-      memberships
-        ?.filter(
-          ({ permission, memberId }) =>
-            (permission === 'write' || permission === 'admin') &&
-            memberId !== author?.id,
-        )
-        ?.map(({ memberId }) => memberId),
-    ),
-  ];
-  const { data: contributors, isLoading: isLoadingContributors } =
-    hooks.useMembers(memberIds);
-
-  const isAnyLoading = isLoadingItem || isLoading || isLoadingContributors;
+  const isAnyLoading = isLoadingItem || isLoading || isLoadingItemMemberships;
 
   if (isAnyLoading) {
-    return <Skeleton variant="rect" height={50} />;
+    return <Skeleton variant="rectangular" height={50} />;
   }
 
   if (!author && !isLoading) {
@@ -50,6 +48,11 @@ const Authorship = ({ itemId, author, isLoading }) => {
   }
 
   const authorName = author?.name;
+  const contributors = memberships
+    ?.filter(({ permission }) =>
+      [PermissionLevel.Write, PermissionLevel.Admin].includes(permission),
+    )
+    ?.map(({ member }) => member);
 
   return (
     // wrapper div is necessary for grid to apply
@@ -59,28 +62,21 @@ const Authorship = ({ itemId, author, isLoading }) => {
           <Typography variant="h5" gutterBottom>
             {t(LIBRARY.AUTHORSHIP_AUTHOR_TITLE)}
           </Typography>
-          <Grid
-            container
-            alignItems="center"
-            justify="flex-start"
-            id={SUMMARY_AUTHOR_CONTAINER_ID}
-          >
+          <Grid container id={SUMMARY_AUTHOR_CONTAINER_ID}>
             <Grid item>
               {isLoading ? (
                 <Skeleton>
-                  <Avatar />
+                  <Avatar alt={t(LIBRARY.AVATAR_ALT, { name: authorName })} />
                 </Skeleton>
               ) : (
                 <Avatar
-                  useAvatar={hooks.useAvatar}
+                  url={avatarUrl ?? DEFAULT_MEMBER_THUMBNAIL}
                   alt={t(LIBRARY.AVATAR_ALT, { name: authorName })}
-                  defaultImage={DEFAULT_MEMBER_THUMBNAIL}
                   id={author?.id}
-                  extra={author?.extra}
                   component="avatar"
                   maxWidth={30}
                   maxHeight={30}
-                  variant="circle"
+                  variant="circular"
                 />
               )}
             </Grid>
@@ -92,22 +88,12 @@ const Authorship = ({ itemId, author, isLoading }) => {
         <Grid item xs={12} sm={6}>
           <Contributors
             contributors={contributors}
-            displayContributors={item?.settings?.displayCoEditors}
+            displayContributors={Boolean(item?.settings?.displayCoEditors)}
           />
         </Grid>
       </Grid>
     </div>
   );
-};
-
-Authorship.propTypes = {
-  author: PropTypes.instanceOf(Map),
-  isLoading: PropTypes.bool.isRequired,
-  itemId: PropTypes.string.isRequired,
-};
-
-Authorship.defaultProps = {
-  author: null,
 };
 
 export default Authorship;

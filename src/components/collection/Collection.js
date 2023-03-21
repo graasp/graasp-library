@@ -54,11 +54,6 @@ const Collection = ({ id }) => {
   } = hooks.useItem(id, {
     placeholderData: PLACEHOLDER_COLLECTION,
   });
-  const {
-    data: member,
-    isError: memberIsError,
-    isLoading: isLoadingMember,
-  } = hooks.useMember(collection?.creator);
   const { data: currentMember } = hooks.useCurrentMember();
   const { data: likeCount } = hooks.useLikeCount(id);
   const { data: tags } = hooks.useItemTags(id);
@@ -72,7 +67,7 @@ const Collection = ({ id }) => {
   const canRead = Boolean(tags);
 
   const canPublish =
-    collection && currentMember && collection.creator === currentMember.id;
+    collection && currentMember && collection.creator.id === currentMember.id;
 
   if (!id || !validate(id)) {
     return (
@@ -88,7 +83,7 @@ const Collection = ({ id }) => {
     );
   }
 
-  if (isError || memberIsError) {
+  if (isError) {
     return (
       <Main
         context={Context.LIBRARY}
@@ -102,7 +97,7 @@ const Collection = ({ id }) => {
     );
   }
 
-  const isLoading = isLoadingItem || isLoadingMember;
+  const isLoading = isLoadingItem;
 
   const name = collection?.name;
   // todo: handle image
@@ -124,7 +119,7 @@ const Collection = ({ id }) => {
       <Seo
         title={name}
         description={parsedDescription}
-        author={member?.name}
+        author={collection?.creator?.name}
         image={imageUrl}
       />
       <Main
@@ -165,7 +160,7 @@ const Collection = ({ id }) => {
             image={imageUrl}
             description={parsedDescription}
             settings={settings}
-            creator={member}
+            creator={collection?.creator}
             views={views}
             likes={likes}
             isLoading={isLoading}

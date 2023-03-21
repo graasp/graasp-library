@@ -1,5 +1,4 @@
 import dynamic from 'next/dynamic';
-import PropTypes from 'prop-types';
 
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -15,6 +14,7 @@ import {
 } from '@mui/material';
 import Skeleton from '@mui/material/Skeleton';
 
+import { ItemRecord } from '@graasp/sdk/frontend';
 import { LIBRARY } from '@graasp/translations';
 
 import { DEFAULT_MEMBER_THUMBNAIL } from '../../config/constants';
@@ -73,15 +73,22 @@ const StyledCardHeader = styled(CardHeader)(() => ({
   },
 }));
 
-export const CollectionCard = ({ collection = {}, isLoading }) => {
-  const { name, id, description, creator, views, voteScore, extra } =
-    collection;
+type Props = {
+  collection: ItemRecord;
+  isLoading: boolean;
+};
+
+export const CollectionCard = ({
+  collection,
+  isLoading,
+}: Props): JSX.Element => {
+  const { name, id, description, creator, extra } = collection;
   const { t } = useTranslation();
   const descriptionContent =
     description || LIBRARY.COLLECTION_EMPTY_DESCRIPTION_TEXT;
   const [flipped, setFlipped] = React.useState(false);
   const { hooks } = useContext(QueryClientContext);
-  const { data: author } = hooks.useMember(creator);
+  const { data: avatarUrl } = hooks.useAvatarUrl({ id: creator?.id });
 
   // toggle the value
   const handleClick = () => {
@@ -90,19 +97,17 @@ export const CollectionCard = ({ collection = {}, isLoading }) => {
 
   const avatar = isLoading ? (
     <Skeleton>
-      <Avatar />
+      <Avatar alt={t(LIBRARY.AVATAR_ALT, { name: creator?.name })} />
     </Skeleton>
   ) : (
     <Avatar
-      useAvatar={hooks.useAvatar}
-      alt={t(LIBRARY.AVATAR_ALT, { name: author?.name })}
-      defaultImage={DEFAULT_MEMBER_THUMBNAIL}
-      id={creator}
-      extra={author?.extra}
+      url={avatarUrl ?? DEFAULT_MEMBER_THUMBNAIL}
+      alt={t(LIBRARY.AVATAR_ALT, { name: creator?.name })}
+      id={creator?.id}
       component="avatar"
       maxWidth={30}
       maxHeight={30}
-      variant="circle"
+      variant="circular"
     />
   );
 
@@ -125,7 +130,7 @@ export const CollectionCard = ({ collection = {}, isLoading }) => {
         avatar={avatar}
         action={action}
         title={name}
-        subheader={author?.name}
+        subheader={creator?.name}
         titleTypographyProps={{ title: name }}
       />
       {flipped ? (
@@ -152,36 +157,12 @@ export const CollectionCard = ({ collection = {}, isLoading }) => {
         <CopyButton id={id} />
         <CopyLinkButton id={id} extra={extra} />
         <DownloadButton id={id} />
-        <SimilarCollectionBadges views={views} voteScore={voteScore} />
+        <SimilarCollectionBadges
+        // views={views} voteScore={voteScore}
+        />
       </CardActions>
     </StyledCard>
   );
-};
-
-CollectionCard.propTypes = {
-  collection: PropTypes.shape({
-    name: PropTypes.string,
-    id: PropTypes.string.isRequired,
-    image: PropTypes.shape({
-      pictureId: PropTypes.string.isRequired,
-      thumbnailUrl: PropTypes.string,
-    }),
-    description: PropTypes.string,
-    author: PropTypes.shape({
-      name: PropTypes.string,
-      image: PropTypes.shape({
-        gravatarUrl: PropTypes.string,
-        thumbnailUrl: PropTypes.string,
-      }),
-    }),
-    voteScore: PropTypes.number,
-    views: PropTypes.number,
-  }).isRequired,
-  isLoading: PropTypes.bool,
-};
-
-CollectionCard.defaultProps = {
-  isLoading: false,
 };
 
 export default CollectionCard;

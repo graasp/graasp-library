@@ -78,7 +78,7 @@ Badges.propTypes = {
   views: PropTypes.number,
   likes: PropTypes.number,
   name: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  description: PropTypes.string,
 };
 
 Badges.defaultProps = {
