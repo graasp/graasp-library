@@ -8,7 +8,7 @@ import { DEFAULT_TAGS } from '../fixtures/itemTags';
 import { PUBLISHED_ITEMS } from '../fixtures/items';
 import { MEMBERS } from '../fixtures/members';
 import {
-  mockGetAvatar,
+  mockGetAvatarUrl,
   mockGetCategories,
   mockGetCategoryTypes,
   mockGetChildren,
@@ -18,7 +18,7 @@ import {
   mockGetItemCategories,
   mockGetItemMembershipsForItem,
   mockGetItemTags,
-  mockGetItemThumbnail,
+  mockGetItemThumbnailUrl,
   mockGetLikedItems,
   mockGetMember,
   mockGetMembers,
@@ -66,9 +66,9 @@ Cypress.Commands.add(
 
     mockGetItemTags({ tags });
 
-    mockGetAvatar({ members, currentMember });
+    mockGetAvatarUrl({ members, currentMember });
 
-    mockGetItemThumbnail({ items, currentMember });
+    mockGetItemThumbnailUrl({ items, currentMember });
 
     mockSignInRedirection();
 

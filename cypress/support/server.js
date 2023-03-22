@@ -3,6 +3,7 @@ import qs from 'querystring';
 
 import { API_ROUTES } from '@graasp/query-client';
 import { buildPathFromIds, isChildOf } from '@graasp/sdk';
+import { FAILURE_MESSAGES } from '@graasp/translations';
 
 import { MEMBERS } from '../fixtures/members';
 import { PERMISSION_LEVELS, THUMBNAIL_EXTENSION } from './constants';
@@ -95,12 +96,15 @@ export const mockGetCurrentMember = (
   ).as('getCurrentMember');
 };
 
-export const mockGetAvatar = ({ members, currentMember }, shouldThrowError) => {
+export const mockGetAvatarUrl = (
+  { members, currentMember },
+  shouldThrowError,
+) => {
   cy.intercept(
     {
       method: DEFAULT_GET.method,
       url: new RegExp(
-        `${API_HOST}/members/avatars/${ID_FORMAT}\\?size\\=small`,
+        `${API_HOST}/members/${ID_FORMAT}/avatar/small\\?repluyUrl\\=true`,
       ),
     },
     ({ reply, url }) => {
@@ -120,7 +124,7 @@ export const mockGetAvatar = ({ members, currentMember }, shouldThrowError) => {
       if (!thumbnails) {
         return reply({ statusCode: StatusCodes.NOT_FOUND });
       }
-
+      // TODO: return url
       return reply({
         fixture: `${thumbnails}/${size}`,
         headers: { 'content-type': THUMBNAIL_EXTENSION },
@@ -183,7 +187,7 @@ export const mockGetItemTags = ({ tags }, shouldThrowError) => {
   ).as('getItemTags');
 };
 
-export const mockGetItemThumbnail = (
+export const mockGetItemThumbnailUrl = (
   { items, currentMember },
   shouldThrowError,
 ) => {
@@ -191,7 +195,7 @@ export const mockGetItemThumbnail = (
     {
       method: DEFAULT_GET.method,
       url: new RegExp(
-        `${API_HOST}/${ITEMS_ROUTE}/thumbnails/${ID_FORMAT}\\?size\\=medium`,
+        `${API_HOST}/${ITEMS_ROUTE}/${ID_FORMAT}/thumbnails/medium\\?replyUrl\\=true`,
       ),
     },
     ({ reply, url }) => {
@@ -214,7 +218,7 @@ export const mockGetItemThumbnail = (
       if (!thumbnails) {
         return reply({ statusCode: StatusCodes.NOT_FOUND });
       }
-
+      // TODO: return URL
       return reply({
         fixture: `${thumbnails}/${size}`,
         headers: { 'content-type': THUMBNAIL_EXTENSION },
@@ -278,9 +282,7 @@ export const mockGetMembers = ({ members, currentMember }) => {
   cy.intercept(
     {
       method: DEFAULT_GET.method,
-      url: new RegExp(
-        `${API_HOST}/${parseStringToRegExp(buildGetMembersRoute(['']))}`,
-      ),
+      url: `${API_HOST}/${buildGetMembersRoute([''])}*`,
     },
     ({ url, reply }) => {
       if (!currentMember) {
@@ -288,19 +290,29 @@ export const mockGetMembers = ({ members, currentMember }) => {
       }
 
       let { id: memberIds } = qs.parse(url.slice(url.indexOf('?') + 1));
-      if (typeof memberIds === 'string') {
+      if (!Array.isArray(memberIds)) {
         memberIds = [memberIds];
       }
-      const allMembers = memberIds?.map((id) => getMemberById(members, id));
-      // member does not exist in db
-      if (!allMembers) {
-        return reply({
-          statusCode: StatusCodes.NOT_FOUND,
-        });
-      }
+
+      const result = {
+        data: {},
+        errors: [],
+      };
+
+      memberIds?.forEach((id) => {
+        const m = getMemberById(members, id);
+        if (!m) {
+          result.errors.push({
+            statusCode: StatusCodes.NOT_FOUND,
+            name: FAILURE_MESSAGES.MEMBER_NOT_FOUND,
+          });
+        } else {
+          result.data[m.id] = m;
+        }
+      });
 
       return reply({
-        body: allMembers,
+        body: result,
         statusCode: StatusCodes.OK,
       });
     },

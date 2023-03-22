@@ -1,4 +1,3 @@
-import React from 'react';
 import { toast } from 'react-toastify';
 
 import { routines } from '@graasp/query-client';
@@ -8,8 +7,10 @@ import {
   SUCCESS_MESSAGES,
 } from '@graasp/translations';
 
-import ToastrWithLink from '../components/common/ToastrWithLink';
-import { SHOW_NOTIFICATIONS, buildPlayerViewItemRoute } from './constants';
+// import ToastrWithLink from '../components/common/ToastrWithLink';
+import {
+  SHOW_NOTIFICATIONS, //  buildPlayerViewItemRoute
+} from './constants';
 import i18n from './i18n';
 
 const t = (value: string) => i18n.t(value, { ns: 'messages' });
