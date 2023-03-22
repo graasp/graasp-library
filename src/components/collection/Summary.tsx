@@ -125,10 +125,10 @@ const Summary = ({
   const { data: flags } = hooks.useFlags();
 
   // liked entries
-  const { data: likedItems } = hooks.useLikedItems(member?.id);
+  const { data: likedItems } = hooks.useLikesForMember(member?.id);
   // TODO: fix type
   const likeEntry = likedItems?.find(
-    (itemLike: any) => itemLike?.itemId === itemId,
+    (itemLike: any) => itemLike?.item?.id === itemId,
   );
 
   const { mutate: postFlagItem } = mutations.usePostItemFlag();

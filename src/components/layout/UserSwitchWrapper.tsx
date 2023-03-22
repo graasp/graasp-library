@@ -1,11 +1,10 @@
-import { RecordOf } from 'immutable';
 import dynamic from 'next/dynamic';
 
 import React, { FC, useContext } from 'react';
 
 import Box from '@mui/material/Box';
 
-import { Member } from '@graasp/sdk';
+import { MemberRecord } from '@graasp/sdk/frontend';
 import { BUILDER } from '@graasp/translations';
 
 import {
@@ -39,7 +38,7 @@ const UserSwitchWrapper: FC<Props> = ({ ButtonContent }) => {
   const { mutateAsync: signOut } = mutations.useSignOut();
   const { mutate: switchMember } = mutations.useSwitchMember();
 
-  const renderAvatar = (m: RecordOf<Member>) => <MemberAvatar id={m.id} />;
+  const renderAvatar = (m?: MemberRecord) => <MemberAvatar id={m?.id} />;
 
   return (
     <Box mr={1}>
@@ -63,7 +62,7 @@ const UserSwitchWrapper: FC<Props> = ({ ButtonContent }) => {
         domain={DOMAIN}
         redirectPath={SIGN_IN_PATH}
         useMembers={hooks.useMembers}
-        renderAvatar={renderAvatar as any}
+        renderAvatar={renderAvatar}
       />
     </Box>
   );
