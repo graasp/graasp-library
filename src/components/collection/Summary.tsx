@@ -144,7 +144,7 @@ const Summary = ({
       return console.error(`memberId '${selectedFlag}' is undefined`);
     }
     postFlagItem({
-      flagId: selectedFlag,
+      type: selectedFlag,
       itemId,
     });
     return setOpen(false);
