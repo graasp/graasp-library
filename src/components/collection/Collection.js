@@ -55,7 +55,7 @@ const Collection = ({ id }) => {
     placeholderData: PLACEHOLDER_COLLECTION,
   });
   const { data: currentMember } = hooks.useCurrentMember();
-  const { data: likeCount } = hooks.useLikeCount(id);
+  const { data: likes } = hooks.useLikesForItem(id);
   const { data: tags } = hooks.useItemTags(id);
   const { leftContent, rightContent } = useHeader(id);
   // get item published
@@ -113,7 +113,7 @@ const Collection = ({ id }) => {
 
   // todo: views don't exist
   const views = collection?.views;
-  const likes = likeCount;
+  const likeCount = likes.size;
   return (
     <ErrorBoundary>
       <Seo
@@ -162,7 +162,7 @@ const Collection = ({ id }) => {
             settings={settings}
             creator={collection?.creator}
             views={views}
-            likes={likes}
+            likes={likeCount}
             isLoading={isLoading}
             createdAt={collection?.createdAt}
             lastUpdate={collection?.updatedAt}
