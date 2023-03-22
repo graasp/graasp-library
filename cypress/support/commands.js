@@ -1,40 +1,33 @@
 import {
-  mockGetChildren,
-  mockGetMember,
-  mockGetCurrentMember,
-  mockSignInRedirection,
-  mockSignOut,
-  mockGetCategoryTypes,
-  mockGetCategories,
-  mockGetItemCategories,
-  mockGetPublishedItemsInCategories,
-  mockGetAvatar,
-  mockGetItemThumbnail,
-  mockGetItem,
-  mockGetMembers,
-  mockGetItemMembershipsForItem,
-  mockGetPublicItemMembershipsForItem,
-  mockGetPublicItem,
-  mockGetOwnItems,
-  mockGetPublicMembers,
-  mockGetPublicMember,
-  mockGetPublicChildren,
-  mockGetPublicItemCategories,
-  mockGetFlags,
-  mockGetPublicItemsWithTags,
-  mockSearch,
-  mockGetLikedItems,
-  mockGetItemTags,
-} from './server';
-import { MEMBERS } from '../fixtures/members';
-import {
   SAMPLE_CATEGORIES,
   SAMPLE_CATEGORY_TYPES,
 } from '../fixtures/categories';
 import { SAMPLE_FLAGS } from '../fixtures/flags';
-import { PUBLISHED_ITEMS } from '../fixtures/items';
 import { ITEM_LIKES } from '../fixtures/itemLikes';
 import { DEFAULT_TAGS } from '../fixtures/itemTags';
+import { PUBLISHED_ITEMS } from '../fixtures/items';
+import { MEMBERS } from '../fixtures/members';
+import {
+  mockGetAvatar,
+  mockGetCategories,
+  mockGetCategoryTypes,
+  mockGetChildren,
+  mockGetCurrentMember,
+  mockGetFlags,
+  mockGetItem,
+  mockGetItemCategories,
+  mockGetItemMembershipsForItem,
+  mockGetItemTags,
+  mockGetItemThumbnail,
+  mockGetLikedItems,
+  mockGetMember,
+  mockGetMembers,
+  mockGetOwnItems,
+  mockGetPublishedItemsInCategories,
+  mockSearch,
+  mockSignInRedirection,
+  mockSignOut,
+} from './server';
 
 Cypress.Commands.add(
   'setUpApi',
@@ -63,17 +56,14 @@ Cypress.Commands.add(
     mockGetOwnItems({ items, currentMember });
 
     mockGetChildren({ items, currentMember });
-    mockGetPublicChildren({ items });
 
     mockGetMember({ members: cachedMembers, currentMember });
-    mockGetPublicMember({ members: cachedMembers });
     mockGetMembers({ members: cachedMembers, currentMember });
-    mockGetPublicMembers({ members: cachedMembers });
 
     mockGetCurrentMember(currentMember, getCurrentMemberError);
 
     mockGetItem({ items, currentMember });
-    mockGetPublicItem({ items });
+
     mockGetItemTags({ tags });
 
     mockGetAvatar({ members, currentMember });
@@ -89,13 +79,10 @@ Cypress.Commands.add(
     mockGetCategories(categories, getCategoriesError);
 
     mockGetItemCategories({ items, currentMember }, getItemCategoriesError);
-    mockGetPublicItemCategories({ items }, getItemCategoriesError);
 
     mockGetPublishedItemsInCategories({ items });
-    mockGetPublicItemsWithTags({ items });
 
     mockGetItemMembershipsForItem({ items, currentMember });
-    mockGetPublicItemMembershipsForItem({ items });
 
     mockGetFlags({ flags, currentMember });
     mockSearch({ searchResultItems }, searchError);
