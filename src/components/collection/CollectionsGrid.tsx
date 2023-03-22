@@ -1,5 +1,4 @@
 import { List } from 'immutable';
-import PropTypes from 'prop-types';
 
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -7,12 +6,31 @@ import { useTranslation } from 'react-i18next';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
+import { ItemRecord } from '@graasp/sdk/frontend';
 import { LIBRARY } from '@graasp/translations';
 
 import { buildCollectionCardGridId } from '../../config/selectors';
 import CollectionCard from './CollectionCard';
 
-function CollectionsGrid({ collections, isLoading, id, sm, md, lg, xl }) {
+type Props = {
+  id?: string;
+  collections?: List<ItemRecord>;
+  isLoading: boolean;
+  sm?: number;
+  md?: number;
+  lg?: number;
+  xl?: number;
+};
+
+const CollectionsGrid = ({
+  isLoading,
+  id = '',
+  collections = List(),
+  sm = 6,
+  md = 4,
+  lg = 3,
+  xl = 3,
+}: Props): JSX.Element => {
   const { t } = useTranslation();
 
   return !collections?.size ? (
@@ -43,25 +61,6 @@ function CollectionsGrid({ collections, isLoading, id, sm, md, lg, xl }) {
       ))}
     </Grid>
   );
-}
-
-CollectionsGrid.propTypes = {
-  id: PropTypes.string,
-  collections: PropTypes.instanceOf(List),
-  isLoading: PropTypes.bool.isRequired,
-  sm: PropTypes.number,
-  md: PropTypes.number,
-  lg: PropTypes.number,
-  xl: PropTypes.number,
-};
-
-CollectionsGrid.defaultProps = {
-  id: '',
-  collections: [],
-  sm: 6,
-  md: 4,
-  lg: 3,
-  xl: 3,
 };
 
 export default CollectionsGrid;

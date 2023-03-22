@@ -1064,7 +1064,7 @@ __metadata:
 
 "@graasp/query-client@github:graasp/graasp-query-client#typeorm":
   version: 0.4.0
-  resolution: "@graasp/query-client@https://github.com/graasp/graasp-query-client.git#commit=98421ee858b599996d05cf23c607795fd421cdd1"
+  resolution: "@graasp/query-client@https://github.com/graasp/graasp-query-client.git#commit=3f79d6ad051dfbaa91a7531e62a6d93812c28890"
   dependencies:
     "@graasp/sdk": "github:graasp/graasp-sdk#typeorm"
     "@graasp/translations": "github:graasp/graasp-translations#89-email"
@@ -1077,13 +1077,13 @@ __metadata:
     uuid: 9.0.0
   peerDependencies:
     react: ^17.0.0
-  checksum: bcc51228f00c7f2905ca7159b1f592cc170bffaefdeca3f4819eb279a10fa1e1f3effd89e1592466124aee81d61f57f7a0eb5b21eb0d53a70053a9cd00ce068d
+  checksum: e5b7e779d8841206874d6748a7e44121d1221204094f33cf8ac8fb2be01362b4263f5c6fdbb4059cb200e7d40950b5f41c3fa33495842d441fd9b7e54458a4fb
   languageName: node
   linkType: hard
 
 "@graasp/sdk@github:graasp/graasp-sdk#typeorm":
   version: 0.9.2
-  resolution: "@graasp/sdk@https://github.com/graasp/graasp-sdk.git#commit=877ef688f2f4d53e5d9313b466c3fd439d936b50"
+  resolution: "@graasp/sdk@https://github.com/graasp/graasp-sdk.git#commit=d18cb9727b15bce30b8df64bf60a13578f6a7e00"
   dependencies:
     "@fastify/secure-session": 5.3.0
     aws-sdk: 2.1310.0
@@ -1095,7 +1095,7 @@ __metadata:
     slonik: 28.1.1
     typeorm: 0.3.12
     uuid: 9.0.0
-  checksum: 2b8afe185ccab60183e9ef20b90001d152b171b6e2e7d5e7c8f6accb2b35e9b7075f134d288bdd57b9900eeb3ff474676c66c91587f34cf732a4e51370568f4c
+  checksum: 867085ecc937c7788d3c410ea23b360e36a57c33ca18facc52a9dc4054ea5757df40de2825262eda985dfc423eb40d36145b0869056fa1a60cfa6ee9912d6b15
   languageName: node
   linkType: hard
 

@@ -113,7 +113,7 @@ const Collection = ({ id }) => {
 
   // todo: views don't exist
   const views = collection?.views;
-  const likeCount = likes.size;
+  const likeCount = likes?.size;
   return (
     <ErrorBoundary>
       <Seo

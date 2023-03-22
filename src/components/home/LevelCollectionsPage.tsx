@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -11,7 +9,19 @@ import { ALL_COLLECTIONS_GRID_ID } from '../../config/selectors';
 import { QueryClientContext } from '../QueryClientContext';
 import CollectionsGrid from '../collection/CollectionsGrid';
 
-const LevelCollectionsPage = ({ selected, gridParams }) => {
+type Props = {
+  selected: {
+    discipline: string[];
+  };
+  gridParams: {
+    sm?: number;
+    md?: number;
+    lg?: number;
+    xl?: number;
+  };
+};
+
+const LevelCollectionsPage = ({ selected, gridParams }: Props): JSX.Element => {
   const { t } = useTranslation();
   const { hooks } = useContext(QueryClientContext);
 
@@ -43,18 +53,6 @@ const LevelCollectionsPage = ({ selected, gridParams }) => {
       />
     </>
   );
-};
-
-LevelCollectionsPage.propTypes = {
-  selected: PropTypes.shape({
-    discipline: PropTypes.arrayOf(PropTypes.string),
-  }).isRequired,
-  gridParams: PropTypes.shape({
-    sm: PropTypes.number,
-    md: PropTypes.number,
-    lg: PropTypes.number,
-    xl: PropTypes.number,
-  }).isRequired,
 };
 
 export default LevelCollectionsPage;

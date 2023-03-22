@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 import React, { useContext } from 'react';
 
 import { MY_LIKES_COLLECTIONS_ID } from '../../config/selectors';
@@ -7,12 +5,17 @@ import { QueryClientContext } from '../QueryClientContext';
 import CollectionsGrid from '../collection/CollectionsGrid';
 import TabPanel from './TabPanel';
 
-function MyLikes({ tab, index }) {
+type Props = {
+  tab: number;
+  index: number;
+};
+
+const MyLikes = ({ tab, index }: Props): JSX.Element => {
   const { hooks } = useContext(QueryClientContext);
   const { data: member } = hooks.useCurrentMember();
   const { data: collections, isLoading } = hooks.useAllPublishedItems();
-  const { data: likedItems } = hooks.useLikedItems(member?.id);
-  const likedItemsList = likedItems?.map((entry) => entry.itemId);
+  const { data: likes } = hooks.useLikesForMember(member?.id);
+  const likedItemsList = likes?.map((entry) => entry.item.id);
   const likedCollections = collections?.filter((collection) =>
     likedItemsList?.includes(collection?.id),
   );
@@ -26,11 +29,6 @@ function MyLikes({ tab, index }) {
       />
     </TabPanel>
   );
-}
-
-MyLikes.propTypes = {
-  tab: PropTypes.number.isRequired,
-  index: PropTypes.number.isRequired,
 };
 
 export default MyLikes;
