@@ -24,33 +24,35 @@ function MyList() {
   };
 
   return (
-    <Box display="flex" flexGrow={1} mt={10}>
-      <AppBar position="static" color="default" mb={5} boxShadow={0}>
-        <Tabs
-          value={tab}
-          onChange={handleChange}
-          variant="fullWidth"
-          indicatorColor="primary"
-          textColor="fff"
-          aria-label={t(LIBRARY.MY_LISTS_TAB_ARIA_LABEL)}
-        >
-          <Tab
-            label={t(LIBRARY.MY_LISTS_MY_FAVORITES_TAB)}
-            icon={<StarBorderIcon />}
-            id={buildMyListNavigationTabId(MY_LIST_TAB_NAMES.MY_FAVORITES)}
-          />
-          <Tab
-            label={t(LIBRARY.MY_LISTS_MY_LIKES_TAB)}
-            icon={<FavoriteBorderIcon />}
-            id={buildMyListNavigationTabId(MY_LIST_TAB_NAMES.MY_LIKES)}
-          />
-          <Tab
-            label={t(LIBRARY.MY_LISTS_MY_PUBLISHMENTS_TAB)}
-            icon={<PublishIcon />}
-            id={buildMyListNavigationTabId(MY_LIST_TAB_NAMES.MY_PUBLISHMENTS)}
-          />
-        </Tabs>
-      </AppBar>
+    <Box sx={{ width: '100%' }}>
+      <Box display="flex" flexGrow={1} mt={10}>
+        <AppBar position="static" color="default" mb={5} boxShadow={0}>
+          <Tabs
+            value={tab}
+            onChange={handleChange}
+            variant="fullWidth"
+            indicatorColor="primary"
+            textColor="fff"
+            aria-label={t(LIBRARY.MY_LISTS_TAB_ARIA_LABEL)}
+          >
+            <Tab
+              label={t(LIBRARY.MY_LISTS_MY_FAVORITES_TAB)}
+              icon={<StarBorderIcon />}
+              id={buildMyListNavigationTabId(MY_LIST_TAB_NAMES.MY_FAVORITES)}
+            />
+            <Tab
+              label={t(LIBRARY.MY_LISTS_MY_LIKES_TAB)}
+              icon={<FavoriteBorderIcon />}
+              id={buildMyListNavigationTabId(MY_LIST_TAB_NAMES.MY_LIKES)}
+            />
+            <Tab
+              label={t(LIBRARY.MY_LISTS_MY_PUBLISHMENTS_TAB)}
+              icon={<PublishIcon />}
+              id={buildMyListNavigationTabId(MY_LIST_TAB_NAMES.MY_PUBLISHMENTS)}
+            />
+          </Tabs>
+        </AppBar>
+      </Box>
       <MyFavorites tab={tab} index={0} />
       <MyLikes tab={tab} index={1} />
       <MyPublishments tab={tab} index={2} />

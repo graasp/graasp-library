@@ -74,7 +74,6 @@ type Props = {
     ccLicenseAdaption?: string;
   };
   creator: MemberRecord;
-  likes: number;
   views: number;
   isLoading: boolean;
   itemId: string;
@@ -92,7 +91,6 @@ const Summary = ({
   lastUpdate,
   settings,
   views = 0,
-  likes = 0,
 }: Props): JSX.Element => {
   const truncatedName = truncate(name, {
     length: MAX_COLLECTION_NAME_LENGTH,
@@ -244,9 +242,9 @@ const Summary = ({
             </Grid>
           </Grid>
           <Badges
+            itemId={itemId}
             name={name}
             views={views}
-            likes={likes}
             description={description}
           />
           <Typography variant="body1" gutterBottom component="div">
@@ -296,24 +294,20 @@ const Summary = ({
             }}
           />
 
-          {selectedCategories.map(([categoryType, categoryList]) => {
-            // eslint-disable-next-line no-console
-            console.log(categoryList);
-            return (
-              <div id={SUMMARY_LANGUAGES_CONTAINER_ID}>
-                <Typography variant="h6" sx={{ textTransform: 'capitalize' }}>
-                  {t(categoryType)}
-                </Typography>
-                {categoryList?.map((entry) => (
-                  <Chip
-                    label={t(entry.name)}
-                    variant="outlined"
-                    sx={{ color: CATEGORY_COLORS[categoryType] }}
-                  />
-                ))}
-              </div>
-            );
-          })}
+          {selectedCategories.map(([categoryType, categoryList]) => (
+            <div id={SUMMARY_LANGUAGES_CONTAINER_ID} key={categoryType}>
+              <Typography variant="h6" sx={{ textTransform: 'capitalize' }}>
+                {t(categoryType)}
+              </Typography>
+              {categoryList?.map((entry) => (
+                <Chip
+                  label={t(entry.name)}
+                  variant="outlined"
+                  sx={{ color: CATEGORY_COLORS[categoryType] }}
+                />
+              ))}
+            </div>
+          ))}
 
           {Boolean(tags?.size) && (
             <div id={SUMMARY_TAGS_CONTAINER_ID}>

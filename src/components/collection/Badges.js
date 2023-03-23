@@ -19,7 +19,7 @@ import BadgeContainer from '../common/BadgeContainer';
 import FavoriteBadge from '../common/FavoriteBadge';
 import VisibilityBadge from '../common/VisibilityBadge';
 
-function Badges({ views, likes, name, description }) {
+function Badges({ views, itemId, name, description }) {
   const { t } = useTranslation();
   const [pageLocation, setPageLocation] = useState(null);
   const parsedDescription = removeTagsFromString(description);
@@ -53,7 +53,7 @@ function Badges({ views, likes, name, description }) {
     <Grid container justify="space-between" alignItems="center" mb={1}>
       <Grid item>
         <BadgeContainer>
-          <FavoriteBadge likes={likes} />
+          <FavoriteBadge itemId={itemId} />
           <VisibilityBadge views={views} />
         </BadgeContainer>
       </Grid>
@@ -76,14 +76,13 @@ function Badges({ views, likes, name, description }) {
 
 Badges.propTypes = {
   views: PropTypes.number,
-  likes: PropTypes.number,
+  itemId: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   description: PropTypes.string,
 };
 
 Badges.defaultProps = {
   views: 0,
-  likes: 0,
 };
 
 export default Badges;

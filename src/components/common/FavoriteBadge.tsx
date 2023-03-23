@@ -1,17 +1,26 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 
 import { Favorite } from '@mui/icons-material';
 import Badge from '@mui/material/Badge';
 
+import { UUID } from '@graasp/sdk';
+
+import { QueryClientContext } from '../QueryClientContext';
+
 type Props = {
-  likes: number;
+  itemId: UUID;
   fontSize?: 'small' | 'inherit' | 'large' | 'medium' | undefined;
 };
 
-const FavoriteBadge: FC<Props> = ({ likes, fontSize = 'large' }) => (
-  <Badge badgeContent={likes} color="secondary" max={999}>
-    <Favorite color="primary" fontSize={fontSize} />
-  </Badge>
-);
+const FavoriteBadge = ({ itemId, fontSize = 'large' }: Props): JSX.Element => {
+  const { hooks } = useContext(QueryClientContext);
+  const { data: likes } = hooks.useLikesForItem(itemId);
+
+  return (
+    <Badge badgeContent={likes?.size} color="error" max={999}>
+      <Favorite color="primary" fontSize={fontSize} />
+    </Badge>
+  );
+};
 
 export default FavoriteBadge;

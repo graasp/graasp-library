@@ -12,7 +12,7 @@ function MyPublishments({ tab, index }) {
   const { data: member } = hooks.useCurrentMember();
   const { data: collections, isLoading } = hooks.useAllPublishedItems();
   const ownCollections = collections?.filter(
-    (collection) => collection?.creator === member?.id,
+    (collection) => collection?.creator?.id === member?.id,
   );
 
   return (
