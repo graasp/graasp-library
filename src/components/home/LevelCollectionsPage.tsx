@@ -39,7 +39,7 @@ const LevelCollectionsPage = ({ selected, gridParams }: Props): JSX.Element => {
       <Typography variant="h3" align="center">
         {t(LIBRARY.ALL_COLLECTIONS_SELECTION_BY_CATEGORIES_TITLE)}
       </Typography>
-      <Typography variant="subtitle2" aligh="left">
+      <Typography variant="subtitle2" align="left">
         {t(LIBRARY.COLLECTIONS_COUNT_MESSAGE, { count })}
       </Typography>
       <CollectionsGrid
