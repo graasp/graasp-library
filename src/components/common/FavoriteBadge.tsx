@@ -1,4 +1,4 @@
-import React, { FC, useContext } from 'react';
+import React, { useContext } from 'react';
 
 import { Favorite } from '@mui/icons-material';
 import Badge from '@mui/material/Badge';
