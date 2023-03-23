@@ -87,8 +87,8 @@ const Summary: React.FC<SummaryProps> = ({
 
   const { t } = useTranslation();
   const { hooks } = useContext(QueryClientContext);
-  const { data: categoryTypes } = hooks.useCategoryTypes() as { data?: CategoryType[] };
-  const { data: itemCategories } = hooks.useItemCategories(itemId) as { data?: Immutable.List<ItemCategory> };
+  const { data: categoryTypes } = hooks.useCategoryTypes() as { data: CategoryType[] };
+  const { data: itemCategories } = hooks.useItemCategories(itemId) as { data: Immutable.List<ItemCategory> };
   const { data: categories } = hooks.useCategories() as { data: Immutable.List<Category> };
   const selectedCategories = categories
     ?.filter((category) =>
@@ -96,16 +96,16 @@ const Summary: React.FC<SummaryProps> = ({
     )
     ?.groupBy((entry) => entry.type);
   const levels = selectedCategories?.get(
-    categoryTypes?.find((ctype) => ctype.name === CATEGORY_TYPES.LEVEL)?.id,
+    categoryTypes?.find((ctype) => ctype.name === CATEGORY_TYPES.LEVEL)?.id ?? '',
   );
   const disciplines = selectedCategories
     ?.get(
       categoryTypes?.find((ctype) => ctype.name === CATEGORY_TYPES.DISCIPLINE)
-        ?.id,
+        ?.id ?? '',
     )
     ?.sort(compare);
   const languages = selectedCategories?.get(
-    categoryTypes?.find((ctype) => ctype.name === CATEGORY_TYPES.LANGUAGE)?.id,
+    categoryTypes?.find((ctype) => ctype.name === CATEGORY_TYPES.LANGUAGE)?.id ?? '',
   );
 
   const { data: member } = hooks.useCurrentMember();
@@ -259,12 +259,12 @@ const Summary: React.FC<SummaryProps> = ({
         <SummaryDetails
           ccLicenseAdaption={ccLicenseAdaption}
           createdAt={createdAt}
-          disciplines={disciplines}
+          disciplines={disciplines as any}
           isLoading={isLoading}
           lang={member?.extra?.lang}
-          languages={languages}
+          languages={languages as any}
           lastUpdate={lastUpdate}
-          levels={levels}
+          levels={levels as any}
         />       
       </Container>
     </div>
