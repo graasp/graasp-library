@@ -83,7 +83,7 @@ const CopyButton = ({ id }) => {
     }
 
     return (
-      <Tooltip title={t(LIBRARY.COPY_BUTTON_TOOLTIP)}>
+      <Tooltip title={t(LIBRARY.COPY_BUTTON_TOOLTIP)} placement="top">
         <IconButton
           onClick={onClick}
           aria-label={t(LIBRARY.COPY_BUTTON_TOOLTIP)}

@@ -62,6 +62,7 @@ export const CATEGORY_TYPES = {
   LEVEL: 'level',
   DISCIPLINE: 'discipline',
   LANGUAGE: 'language',
+  LICENSE: 'license',
 } as const;
 
 export const PICTURE_QUALITIES = {

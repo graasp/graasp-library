@@ -5,9 +5,9 @@ import { validate } from 'uuid';
 
 import React, { useContext } from 'react';
 
-import { Alert, Box, Divider } from '@mui/material';
+import { Alert, Box } from '@mui/material';
 
-import { DEFAULT_ITEM_IMAGE_PATH, ITEM_TYPES } from '../../config/constants';
+import { DEFAULT_ITEM_IMAGE_PATH } from '../../config/constants';
 import { PUBLISHED_TAG_ID } from '../../config/env';
 import {
   ERROR_INVALID_COLLECTION_ID_CODE,
@@ -18,7 +18,6 @@ import { QueryClientContext } from '../QueryClientContext';
 import Error from '../common/Error';
 import Seo from '../common/Seo';
 import useHeader from '../layout/useHeader';
-import Items from './Items';
 import Summary from './Summary';
 
 // todo: get similar collections in same call
@@ -91,7 +90,7 @@ const Collection = ({ id }) => {
   const parsedDescription = collection?.description || '';
   const settings = collection?.settings;
 
-  const type = collection?.type;
+  // const type = collection?.type;
 
   // todo: views don't exist
   const views = collection?.views;
@@ -145,13 +144,8 @@ const Collection = ({ id }) => {
             createdAt={collection?.createdAt}
             lastUpdate={collection?.updatedAt}
             extra={collection?.extra}
+            type={collection?.type}
           />
-          {type === ITEM_TYPES.FOLDER && (
-            <>
-              <Divider sx={{ my: 4 }} />
-              <Items parentId={id} />
-            </>
-          )}
           {/* <Comments comments={comments} members={members} /> */}
         </Box>
       </Main>
