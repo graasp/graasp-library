@@ -1,4 +1,4 @@
-import { CategoryType, ItemCategory } from '@graasp/sdk';
+import { Category, CategoryType, ItemCategory } from '@graasp/sdk';
 
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -89,7 +89,7 @@ const Summary: React.FC<SummaryProps> = ({
   const { hooks } = useContext(QueryClientContext);
   const { data: categoryTypes } = hooks.useCategoryTypes() as { data?: CategoryType[] };
   const { data: itemCategories } = hooks.useItemCategories(itemId) as { data?: Immutable.List<ItemCategory> };
-  const { data: categories } = hooks.useCategories() as { data: Immutable.List<ItemCategory> };
+  const { data: categories } = hooks.useCategories() as { data: Immutable.List<Category> };
   const selectedCategories = categories
     ?.filter((category) =>
       itemCategories?.map((entry) => entry.categoryId)?.includes(category.id),
