@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.6.0](https://github.com/graasp/graasp-library/compare/v0.5.0...v0.6.0) (2023-03-28)
+
+
+### Features
+
+* add healthcheck endpoint ([#247](https://github.com/graasp/graasp-library/issues/247)) ([b8000be](https://github.com/graasp/graasp-library/commit/b8000be5a4d36446644790ad57bd289512a45b6f))
+
 ## [0.5.0](https://github.com/graasp/graasp-library/compare/v0.4.0...v0.5.0) (2023-03-16)
 
 
