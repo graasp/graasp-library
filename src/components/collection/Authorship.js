@@ -88,7 +88,9 @@ const Authorship = ({ itemId, author, isLoading, showTitle }) => {
               )}
             </Grid>
             <Grid item ml={1}>
-              <Typography variant="body1">{authorName}</Typography>
+              <Typography variant="body1">
+                {isLoading ? <Skeleton /> : authorName}
+              </Typography>
             </Grid>
           </Grid>
         </Grid>

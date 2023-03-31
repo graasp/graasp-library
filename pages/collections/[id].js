@@ -28,14 +28,14 @@ export async function getServerSideProps({ params }) {
   await queryClient.prefetchQuery(collectionKey, () =>
     Api.getItem(id, QUERY_CLIENT_OPTIONS).then((data) => data),
   );
+  
+  const { creator, path } = (await queryClient.getQueryData(collectionKey));
 
-  const author = (await queryClient.getQueryData(collectionKey))?.creator;
-
-  if (author) {
-    await queryClient.prefetchQuery(DATA_KEYS.buildMemberKey(author), () =>
+  if (creator) {
+    await queryClient.prefetchQuery(DATA_KEYS.buildMemberKey(creator), () =>
       Api.getMember(
         {
-          id: author,
+          id: creator,
         },
         QUERY_CLIENT_OPTIONS,
       )
@@ -45,6 +45,9 @@ export async function getServerSideProps({ params }) {
         ),
     );
   }
+
+  await queryClient.prefetchQuery(DATA_KEYS.buildItemParentsKey(id),  () => 
+    Api.getParents({ path }).then((data) => data));
 
   // Pass data to the page via props
   return { props: { id, dehydratedState: dehydrate(queryClient) } };

@@ -15,6 +15,8 @@ export const StyledCard = styled(Card)(() => ({
 
   borderRadius: COLLECTION_CARD_BORDER_RADIUS,
   boxShadow: DEFAULT_SHADOW_EFFECT,
+
+  padding: 0,
 }));
 
 export default StyledCard;

@@ -41,15 +41,15 @@ type SummaryDetailsProps = {
   createdAt: string;
   lastUpdate: string;
   lang: string;
-  languages: {
+  languages: Immutable.List<{
     name: string;
-  }[];
-  levels: {
+  }>;
+  levels: Immutable.List<{
     name: string;
-  }[];
-  disciplines: {
+  }>;
+  disciplines: Immutable.List<{
     name: string;
-  }[];
+  }>;
   isLoading: boolean;
   ccLicenseAdaption: string | undefined;
 };
@@ -118,72 +118,70 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
         <DetailCard>
-          {isLoading || !languages ? (
-            <Skeleton>
-              <Typography variant="body1" fontWeight="bold">
-                {t(LIBRARY.COLLECTION_LANGUAGES_TITLE)}
-              </Typography>
-              <Chip
-                label=""
-                variant="outlined"
-                sx={{
-                  color: CATEGORY_COLORS[CATEGORY_TYPES.LANGUAGE],
-                }}
-              />
-            </Skeleton>
+          <Typography variant="body1" fontWeight="bold">
+            {t(LIBRARY.COLLECTION_LANGUAGES_TITLE)}
+          </Typography>
+          {isLoading && (
+            <Skeleton />
+          )}
+          {languages?.size ? (
+            <div id={SUMMARY_LANGUAGES_CONTAINER_ID}>
+              {languages?.map((entry) => (
+                <Chip
+                  label={t(entry.name)}
+                  variant="outlined"
+                  sx={{
+                    color: CATEGORY_COLORS[CATEGORY_TYPES.LANGUAGE],
+                  }}
+                />
+              ))}
+            </div>
           ) : (
-            languages && (
-              <div id={SUMMARY_LANGUAGES_CONTAINER_ID}>
-                <Typography variant="body1" fontWeight="bold">
-                  {t(LIBRARY.COLLECTION_LANGUAGES_TITLE)}
-                </Typography>
-                {languages?.map((entry) => (
-                  <Chip
-                    label={t(entry.name)}
-                    variant="outlined"
-                    sx={{
-                      color: CATEGORY_COLORS[CATEGORY_TYPES.LANGUAGE],
-                    }}
-                  />
-                ))}
-              </div>
-            )
+            <Typography>
+              This item has no defined language.
+            </Typography>
           )}
         </DetailCard>
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
         <DetailCard>
-          {(levels || disciplines) && (
-            <div id={SUMMARY_CATEGORIES_CONTAINER_ID}>
-              <Typography variant="body1" fontWeight="bold">
-                {t(LIBRARY.COLLECTION_CATEGORIES_TITLE)}
+          <div id={SUMMARY_CATEGORIES_CONTAINER_ID}>
+            <Typography variant="body1" fontWeight="bold">
+              {t(LIBRARY.COLLECTION_CATEGORIES_TITLE)}
+            </Typography>
+            {levels?.size || disciplines?.size ? (
+              <>
+                {levels?.map((entry) => (
+                  <Chip
+                    label={t(entry.name)}
+                    variant="outlined"
+                    component={Typography}
+                    sx={{ color: CATEGORY_COLORS[CATEGORY_TYPES.LEVEL] }}
+                    mr={1}
+                  />
+                ))}
+                {disciplines?.map((entry) => (
+                  <Chip
+                    label={t(entry.name)}
+                    sx={{
+                      color: CATEGORY_COLORS[CATEGORY_TYPES.DISCIPLINE],
+                    }}
+                    variant="outlined"
+                    component={Typography}
+                    mr={1}
+                  />
+                ))}
+              </>
+            ) : (
+              <Typography>
+                This item has no categories
               </Typography>
-              {levels?.map((entry) => (
-                <Chip
-                  label={t(entry.name)}
-                  variant="outlined"
-                  component={Typography}
-                  sx={{ color: CATEGORY_COLORS[CATEGORY_TYPES.LEVEL] }}
-                  mr={1}
-                />
-              ))}
-              {disciplines?.map((entry) => (
-                <Chip
-                  label={t(entry.name)}
-                  sx={{
-                    color: CATEGORY_COLORS[CATEGORY_TYPES.DISCIPLINE],
-                  }}
-                  variant="outlined"
-                  component={Typography}
-                  mr={1}
-                />
-              ))}
-            </div>
-          )}
+            )}
+          </div>
         </DetailCard>
       </Grid>
 
-      <Grid item xs={12} sm={6} md={8}>
+      <Grid item xs={12} sm={12} md={8}>
         <DetailCard>
           <Typography variant="body1" fontWeight="bold">
             License

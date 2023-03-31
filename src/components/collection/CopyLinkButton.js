@@ -17,12 +17,10 @@ import { copyToClipboard } from '../../utils/clipboard';
 
 export const buildPlayerLink = (id) => `${GRAASP_PERFORM_HOST}/${id}`;
 
-const CopyLinkButton = ({ id, extra }) => {
-  const { t } = useTranslation();
-
-  const onClick = (event) => {
+export const useEmbedAction = (itemId, extra) => {
+  const startEmbed = (event) => {
     const link =
-      extra?.embeddedLink?.url ?? extra?.app?.url ?? buildPlayerLink(id);
+      extra?.embeddedLink?.url ?? extra?.app?.url ?? buildPlayerLink(itemId);
 
     copyToClipboard(link, {
       onSuccess: () => {
@@ -41,11 +39,20 @@ const CopyLinkButton = ({ id, extra }) => {
 
     event.stopPropagation();
   };
+  return {
+    startEmbed,
+  };
+};
+
+const CopyLinkButton = ({ id, extra }) => {
+  const { t } = useTranslation();
+
+  const { startEmbed } = useEmbedAction(id, extra);
 
   return (
     <Tooltip title={t(LIBRARY.COPY_LINK_BUTTON_TOOLTIP)} placement="top">
       <IconButton
-        onClick={onClick}
+        onClick={startEmbed}
         aria-label={t(LIBRARY.COPY_LINK_BUTTON_TOOLTIP)}
       >
         <CodeIcon />

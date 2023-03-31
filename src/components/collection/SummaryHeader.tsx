@@ -1,3 +1,4 @@
+
 import { Favorite, Visibility } from '@mui/icons-material';
 import { Skeleton } from '@mui/lab';
 import {
@@ -18,6 +19,7 @@ import CardMedia from '../common/CardMediaComponent';
 import { StyledCard } from '../common/StyledCard';
 import Authorship from './Authorship';
 import Badges from './Badges';
+import SummaryActionButtons from './SummaryActionButtons';
 
 const {
   LikeButton,
@@ -38,11 +40,14 @@ type SummaryHeaderProps = {
   creator: Immutable.Map<string, string> | null;
   views: number;
   likes: number;
+  isLogged: boolean;
+  extra: any;
 };
 
 const DESCRIPTION_MAX_LENGTH = 300;
 
 const SummaryHeader: React.FC<SummaryHeaderProps> = ({
+  isLogged,
   isLoading,
   itemId,
   name,
@@ -52,6 +57,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
   creator,
   views,
   likes,
+  extra,
   // eslint-disable-next-line arrow-body-style
 }) => {
   // const { t } = useTranslation();
@@ -66,7 +72,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
 
   return (
     <Container maxWidth="lg">
-      <Grid container spacing={10} alignItems="center">
+      <Grid container columnSpacing={10} alignItems="center">
         <Grid
           item
           sm={12}
@@ -90,7 +96,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
           </StyledCard>
         </Grid>
         <Grid item sm={12} md={8}>
-          <Grid item>
+          <Grid item justifyContent='space-between' flexDirection='row' display='flex' alignItems='end'>
             <Typography
               variant="h1"
               fontSize="2em"
@@ -106,15 +112,20 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
                 handleUnlike={() => { }}
               />
             </Typography>
+            <SummaryActionButtons
+              itemId={itemId}
+              isLogged={isLogged}
+              extra={extra}
+            />
           </Grid>
           <Grid item>
-            {Boolean(tags?.size) && (
+            {tags?.size ? (
               <div id={SUMMARY_TAGS_CONTAINER_ID}>
                 {tags?.map((text) => (
                   <Chip label={text} component={Typography} mr={1} />
                 ))}
               </div>
-            )}
+            ) : <div style={{ marginTop: 12 }} />}
           </Grid>
           <Grid item>
             <Typography variant="body1" gutterBottom component="div">

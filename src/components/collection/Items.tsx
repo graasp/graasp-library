@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box/Box';
-import { Button } from '@mui/material';
+import { Button, Grow } from '@mui/material';
 
 import { LIBRARY } from '@graasp/translations';
 import { ItemRecord } from '@graasp/sdk/dist/frontend/types';
@@ -24,7 +24,7 @@ type CollapsibleItemCategoryProps = {
   children: (item: ItemRecord) => JSX.Element;
 };
 
-const DEFAULT_ITEM_SHOWN_COUNT = 4;
+const DEFAULT_ITEM_SHOWN_COUNT = 8;
 
 const CollapsibleItemCategory: React.FC<CollapsibleItemCategoryProps> = ({
   items,
@@ -60,9 +60,11 @@ const CollapsibleItemCategory: React.FC<CollapsibleItemCategoryProps> = ({
       </Box>
       <Grid container spacing={2} id={CHILDREN_ITEMS_GRID_ID} marginBottom={3}>
         {shownItems.map((item) => (
-          <Grid key={item.id} item xs={12} sm={12} md={6} lg={4} xl={3}>
-            {children(item)}
-          </Grid>
+          <Grow in>
+            <Grid key={item.id} item xs={12} sm={12} md={6} lg={4} xl={3}>
+              {children(item)}
+            </Grid>
+          </Grow>
         ))}
       </Grid>
     </>
@@ -81,9 +83,6 @@ const Items: React.FC<ItemsProps> = ({ parentId, lang }) => {
     placeholderData: List(PLACEHOLDER_COLLECTION.children),
   }) as { data: Immutable.List<ItemRecord> };
 
-  const folders = React.useMemo(() => items.filter(item => item.type === ITEM_TYPES.FOLDER), [items]);
-  const files = React.useMemo(() => items.filter(item => item.type !== ITEM_TYPES.FOLDER), [items]);
-
   return (
     <div style={{ flexGrow: 1 }}>
       {false && <ItemsHeader />}
@@ -97,21 +96,13 @@ const Items: React.FC<ItemsProps> = ({ parentId, lang }) => {
         <>
           {items.size > 0 && (
             <CollapsibleItemCategory
-              title='Folders'
-              items={folders}
+              title='Content'
+              items={items}
             >
               {(item) => (
-                <FolderChildrenCard key={item.id} item={item} />
-              )}
-            </CollapsibleItemCategory>
-          )}
-          {files.size > 0 && (
-            <CollapsibleItemCategory
-              title='Files'
-              items={files}
-            >
-              {(item) => (
-                <FileChildrenCard key={item.id} item={item} lang={lang} />
+                item.type === ITEM_TYPES.FOLDER ?
+                  <FolderChildrenCard key={item.id} item={item} /> :
+                  <FileChildrenCard key={item.id} item={item} lang={lang} />
               )}
             </CollapsibleItemCategory>
           )}
