@@ -7,6 +7,9 @@ export const DEFAULT_FOLDER_ITEM = {
   extra: {},
   creator: CURRENT_USER.id,
   type: ITEM_TYPES.FOLDER,
+  settings: {
+    ccLicenseAdaption: 'CC BY',
+  },
 };
 
 export const CREATED_ITEM = {
@@ -27,7 +30,7 @@ export const PUBLISHED_ITEMS = [
     updatedAt: '2023-02-28T18:20:09.732Z',
     settings: {
       tags: ['one-tag', 'two-tag'],
-      ccLicenseAdaption: 'allow',
+      ccLicenseAdaption: 'CC BY-NC-ND',
       displayCoEditors: true,
     },
     tags: [
@@ -195,6 +198,9 @@ export const GRAASPER_ITEMS = [
         itemPath: 'edafbd2d_5688_11eb_ae93_0242ac130002',
       },
     ],
+    settings: {
+      ccLicenseAdaption: 'CC0',
+    },
     memberships: [
       {
         itemPath: 'edafbd2d_5688_11eb_ae93_0242ac130002',

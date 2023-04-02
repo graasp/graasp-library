@@ -8,9 +8,11 @@ import {
   Chip,
   Divider,
   Tooltip,
+  Button,
+  Grow,
 } from '@mui/material';
 import dynamic from 'next/dynamic';
-import React from 'react';
+import React, { useState } from 'react';
 // import { useTranslation } from 'react-i18next';
 import { THUMBNAIL_SIZES } from '../../config/constants';
 import { ITEM_SUMMARY_TITLE_ID, SUMMARY_TAGS_CONTAINER_ID } from '../../config/selectors';
@@ -44,7 +46,7 @@ type SummaryHeaderProps = {
   extra: any;
 };
 
-const DESCRIPTION_MAX_LENGTH = 300;
+const DESCRIPTION_MAX_LENGTH = 250;
 
 const SummaryHeader: React.FC<SummaryHeaderProps> = ({
   isLogged,
@@ -62,13 +64,72 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
 }) => {
   // const { t } = useTranslation();
 
+  const [collapsedDescription, setCollapsedDescription] = useState(true);
+
+  const handleShowMoreButton = () => {
+    setCollapsedDescription(!collapsedDescription);
+  };
+
   const shortDescription = React.useMemo(() => {
-    const strippedDescription = new DOMParser().parseFromString(description, 'text/html').body.textContent ?? '';
-    if (strippedDescription.length > DESCRIPTION_MAX_LENGTH) {
-      return `${strippedDescription?.substring(0, DESCRIPTION_MAX_LENGTH)}...`;
+    if (!collapsedDescription) {
+      return description;
     }
-    return strippedDescription;
-  }, [description]);
+
+    // Can't use DOMParser during SSR.
+    if (typeof window !== 'undefined') {
+      const strippedDescription = new DOMParser().parseFromString(description, 'text/html').body.textContent ?? '';
+      if (strippedDescription.length > DESCRIPTION_MAX_LENGTH) {
+        return `${strippedDescription?.substring(0, DESCRIPTION_MAX_LENGTH)}...`;
+      }
+      return strippedDescription;
+    }
+    return description;
+  }, [description, collapsedDescription]);
+
+  const descriptionElement = React.useMemo(() => {
+    if (isLoading) {
+      return <Skeleton />;
+    }
+
+    if (shortDescription.length) {
+      // Case distinction to allow the show more button to be rendered inline.
+      return collapsedDescription ? (
+        <div>
+          {shortDescription}
+          <Button
+            sx={{ display: 'inline-block' }}
+            size='small'
+            onClick={handleShowMoreButton}
+          >
+            Show More
+          </Button>
+        </div>
+      ) : (
+        <Grow in>
+          <div>
+            <div
+              /* eslint-disable-next-line react/no-danger */
+              dangerouslySetInnerHTML={{ __html: shortDescription }}
+              style={{ display: 'inline-block' }}
+            />
+            <Button
+              sx={{ display: 'inline-block' }}
+              size='small'
+              onClick={handleShowMoreButton}
+            >
+              Show less
+            </Button>
+          </div>
+        </Grow>
+      );
+    }
+
+    return (
+      <Typography sx={{ fontStyle: 'italic' }} variant='body2'>
+        This item does not have a description.
+      </Typography>
+    );
+  }, [isLoading, shortDescription]);
 
   return (
     <Container maxWidth="lg">
@@ -103,7 +164,6 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
               id={ITEM_SUMMARY_TITLE_ID}
             >
               {truncatedName}
-
               <LikeButton
                 ariaLabel=''
                 color="primary"
@@ -125,21 +185,11 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
                   <Chip label={text} component={Typography} mr={1} />
                 ))}
               </div>
-            ) : <div style={{ marginTop: 12 }} />}
+            ) : <div style={{ marginTop: 22 }} />}
           </Grid>
           <Grid item>
             <Typography variant="body1" gutterBottom component="div">
-              {isLoading ? (
-                <Skeleton />
-              ) : (
-                <div>
-                  {shortDescription}
-                  { /* <div
-                  // eslint-disable-next-line react/no-danger
-                  dangerouslySetInnerHTML={{ __html: description }}
-                  /> */ }
-                </div>
-              )}
+              {descriptionElement}
             </Typography>
           </Grid>
           <Grid item>

@@ -29,7 +29,10 @@ export async function getServerSideProps({ params }) {
     Api.getItem(id, QUERY_CLIENT_OPTIONS).then((data) => data),
   );
   
-  const { creator, path } = (await queryClient.getQueryData(collectionKey));
+  const queryData = await queryClient.getQueryData(collectionKey);
+
+  const creator = queryData?.creator;
+  const path = queryData?.path;
 
   if (creator) {
     await queryClient.prefetchQuery(DATA_KEYS.buildMemberKey(creator), () =>

@@ -15,6 +15,7 @@ import { LIBRARY } from '@graasp/translations';
 
 import {
   SUMMARY_CATEGORIES_CONTAINER_ID,
+  SUMMARY_CC_LICENSE_CONTAINER_ID,
   SUMMARY_CREATED_AT_CONTAINER_ID,
   SUMMARY_LANGUAGES_CONTAINER_ID,
   SUMMARY_LAST_UPDATE_CONTAINER_ID,
@@ -187,15 +188,32 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
             License
           </Typography>
           <Box justifyContent="center" display="flex">
-            <Box maxWidth={600}>
-              <CreativeCommons
-                allowSharedAdaptation={allowSharing}
-                allowCommercialUse={allowCommercialUse}
-                requireAccreditation={requireAccreditation}
-                iconSize={48}
-                sx={{ marginY: 0, paddingY: 0 }}
-              />
-            </Box>
+            {!ccLicenseAdaption ? (
+              <Skeleton>
+                <Box maxWidth={600}>
+                  <CreativeCommons
+                    allowCommercialUse
+                    allowSharedAdaptation='yes'
+                    iconSize={48}
+                    sx={{ marginY: 0, paddingY: 0 }}
+                  />
+                </Box>
+              </Skeleton>
+            ) : (
+              <Box
+                maxWidth={600}
+                className={ccLicenseAdaption}
+                id={SUMMARY_CC_LICENSE_CONTAINER_ID}
+              >
+                <CreativeCommons
+                  allowSharedAdaptation={allowSharing}
+                  allowCommercialUse={allowCommercialUse}
+                  requireAccreditation={requireAccreditation}
+                  iconSize={48}
+                  sx={{ marginY: 0, paddingY: 0 }}
+                />
+              </Box>
+            )}
           </Box>
         </DetailCard>
       </Grid>

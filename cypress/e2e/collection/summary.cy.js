@@ -14,6 +14,7 @@ import {
   CHILDREN_ITEMS_GRID_ID,
   ITEM_SUMMARY_TITLE_ID,
   SUMMARY_AUTHOR_CONTAINER_ID,
+  SUMMARY_CC_LICENSE_CONTAINER_ID,
   SUMMARY_CREATED_AT_CONTAINER_ID,
   SUMMARY_LAST_UPDATE_CONTAINER_ID,
 } from '../../../src/config/selectors';
@@ -69,6 +70,21 @@ describe('Collection Summary', () => {
       contributors.forEach(({ memberId }) => {
         cy.get(`#${buildContributorId(memberId)}`).should('exist');
       });
+    });
+
+    
+    it('CC license matches top level element', () => {
+      cy.setUpApi(environment);
+
+      const parentItem = PUBLISHED_ITEMS[0];
+      const child = PUBLISHED_ITEMS.filter(({ path }) =>
+        isChildOf(path, parentItem.path),
+      )[0];
+
+      cy.visit(buildCollectionRoute(child.id));
+      cy.wait(COLLECTION_LOADING_TIME);
+
+      cy.get(`#${SUMMARY_CC_LICENSE_CONTAINER_ID}`).should('have.class', parentItem.settings.ccLicenseAdaption);
     });
 
     it('Hide co-editor', () => {

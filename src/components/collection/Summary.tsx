@@ -47,6 +47,7 @@ type SummaryProps = {
     };
   };
   type: string;
+  path: string;
 };
 
 const Summary: React.FC<SummaryProps> = ({
@@ -68,14 +69,14 @@ const Summary: React.FC<SummaryProps> = ({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   extra,
   type,
+  path,
 }) => {
   const truncatedName = truncate(name, {
     length: MAX_COLLECTION_NAME_LENGTH,
     separator: /,? +/,
   });
   const tags = settings?.tags;
-  const ccLicenseAdaption = settings?.ccLicenseAdaption;
-
+  
   const { hooks } = useContext(QueryClientContext);
   const { data: categoryTypes } = hooks.useCategoryTypes();
   const { data: itemCategories } = hooks.useItemCategories(itemId);
@@ -98,6 +99,14 @@ const Summary: React.FC<SummaryProps> = ({
   const languages = selectedCategories?.get(
     categoryTypes?.find((ctype: CategoryType) => ctype.name === CATEGORY_TYPES.LANGUAGE)?.id ?? '',
   );
+
+  const { data: parents } = hooks.useParents({
+    id: itemId,
+    path,
+    enabled: true,
+  });
+
+  const ccLicenseAdaption = parents?.get(0)?.settings?.ccLicenseAdaption;
 
   const { data: member } = hooks.useCurrentMember();
 
