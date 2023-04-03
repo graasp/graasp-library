@@ -145,6 +145,7 @@ const Collection = ({ id }) => {
             lastUpdate={collection?.updatedAt}
             extra={collection?.extra}
             type={collection?.type}
+            path={collection?.path}
           />
           {/* <Comments comments={comments} members={members} /> */}
         </Box>

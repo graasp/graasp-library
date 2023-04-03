@@ -76,11 +76,22 @@ const Summary: React.FC<SummaryProps> = ({
     separator: /,? +/,
   });
   const tags = settings?.tags;
-  
+
   const { hooks } = useContext(QueryClientContext);
+  
+  const { data: parents } = hooks.useParents({
+    id: itemId,
+    path,
+    enabled: true,
+  });
+
+  const topLevelParent = parents?.get(0);
+  
   const { data: categoryTypes } = hooks.useCategoryTypes();
-  const { data: itemCategories } = hooks.useItemCategories(itemId);
+  const { data: itemCategories } = hooks.useItemCategories(topLevelParent?.id ?? itemId);
   const { data: categories } = hooks.useCategories();
+
+
   const selectedCategories = categories
     ?.filter((category: Category) =>
       itemCategories?.map((entry: ItemCategory) => entry.categoryId)?.includes(category.id),
@@ -100,13 +111,7 @@ const Summary: React.FC<SummaryProps> = ({
     categoryTypes?.find((ctype: CategoryType) => ctype.name === CATEGORY_TYPES.LANGUAGE)?.id ?? '',
   );
 
-  const { data: parents } = hooks.useParents({
-    id: itemId,
-    path,
-    enabled: true,
-  });
-
-  const ccLicenseAdaption = parents?.get(0)?.settings?.ccLicenseAdaption;
+  const ccLicenseAdaption = topLevelParent ? topLevelParent.settings?.ccLicenseAdaption : settings?.ccLicenseAdaption;
 
   const { data: member } = hooks.useCurrentMember();
 
