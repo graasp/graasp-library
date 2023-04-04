@@ -2,6 +2,9 @@ import { Category, CategoryType, ItemCategory } from '@graasp/sdk';
 
 import React, { useContext } from 'react';
 
+import { LIBRARY } from '@graasp/translations';
+import { useTranslation } from 'react-i18next';
+
 import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -17,8 +20,6 @@ import Items from './Items';
 import SummaryDetails from './SummaryDetails';
 import SummaryHeader from './SummaryHeader';
 import ItemBreadcrumb from './ItemBreadcrumb';
-import { LIBRARY } from '@graasp/translations';
-import { useTranslation } from 'react-i18next';
 
 const truncate = require('lodash.truncate');
 

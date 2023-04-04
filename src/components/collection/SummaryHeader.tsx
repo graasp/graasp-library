@@ -8,11 +8,9 @@ import {
   Chip,
   Divider,
   Tooltip,
-  Button,
-  Grow,
 } from '@mui/material';
 import dynamic from 'next/dynamic';
-import React, { useState } from 'react';
+import React from 'react';
 // import { useTranslation } from 'react-i18next';
 import { THUMBNAIL_SIZES } from '../../config/constants';
 import { ITEM_SUMMARY_TITLE_ID, SUMMARY_TAGS_CONTAINER_ID } from '../../config/selectors';

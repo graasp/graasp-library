@@ -139,7 +139,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
             </div>
           ) : (
             <Typography>
-              { t(LIBRARY.SUMMARY_DETAILS_NO_DEFINED_LANGUAGES) }
+              { t(LIBRARY.SUMMARY_DETAILS_NO_LANGUAGES) }
             </Typography>
           )}
         </DetailCard>

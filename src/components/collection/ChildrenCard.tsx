@@ -2,6 +2,9 @@ import React, { useContext } from 'react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
+import { useTranslation } from 'react-i18next';
+import { LIBRARY } from '@graasp/translations';
+
 import { Grid, styled } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
@@ -16,8 +19,6 @@ import { COLLECTION_CARD_BORDER_RADIUS } from '../../config/cssStyles';
 import { QueryClientContext } from '../QueryClientContext';
 import { DEFAULT_ITEM_IMAGE_PATH } from '../../config/constants';
 import { buildCollectionRoute } from '../../config/routes';
-import { useTranslation } from 'react-i18next';
-import { LIBRARY } from '@graasp/translations';
 
 const { DateTime } = require('luxon');
 
