@@ -22,6 +22,7 @@ import { StyledCard } from '../common/StyledCard';
 import Authorship from './Authorship';
 import Badges from './Badges';
 import SummaryActionButtons from './SummaryActionButtons';
+import Description from './SummaryDescription';
 
 const {
   LikeButton,
@@ -63,74 +64,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
   // eslint-disable-next-line arrow-body-style
 }) => {
   // const { t } = useTranslation();
-
-  const [collapsedDescription, setCollapsedDescription] = useState(true);
-
-  const handleShowMoreButton = () => {
-    setCollapsedDescription(!collapsedDescription);
-  };
-
-  const shortDescription = React.useMemo(() => {
-    if (!collapsedDescription) {
-      return description;
-    }
-
-    // Can't use DOMParser during SSR.
-    if (typeof window !== 'undefined') {
-      const strippedDescription = new DOMParser().parseFromString(description, 'text/html').body.textContent ?? '';
-      if (strippedDescription.length > DESCRIPTION_MAX_LENGTH) {
-        return `${strippedDescription?.substring(0, DESCRIPTION_MAX_LENGTH)}...`;
-      }
-      return strippedDescription;
-    }
-    return description;
-  }, [description, collapsedDescription]);
-
-  const descriptionElement = React.useMemo(() => {
-    if (isLoading) {
-      return <Skeleton />;
-    }
-
-    if (shortDescription.length) {
-      // Case distinction to allow the show more button to be rendered inline.
-      return collapsedDescription ? (
-        <div>
-          {shortDescription}
-          <Button
-            sx={{ display: 'inline-block' }}
-            size='small'
-            onClick={handleShowMoreButton}
-          >
-            Show More
-          </Button>
-        </div>
-      ) : (
-        <Grow in>
-          <div>
-            <div
-              /* eslint-disable-next-line react/no-danger */
-              dangerouslySetInnerHTML={{ __html: shortDescription }}
-              style={{ display: 'inline-block' }}
-            />
-            <Button
-              sx={{ display: 'inline-block' }}
-              size='small'
-              onClick={handleShowMoreButton}
-            >
-              Show less
-            </Button>
-          </div>
-        </Grow>
-      );
-    }
-
-    return (
-      <Typography sx={{ fontStyle: 'italic' }} variant='body2'>
-        This item does not have a description.
-      </Typography>
-    );
-  }, [isLoading, shortDescription]);
-
+  
   return (
     <Container maxWidth="lg">
       <Grid container columnSpacing={10} alignItems="center">
@@ -189,7 +123,11 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
           </Grid>
           <Grid item>
             <Typography variant="body1" gutterBottom component="div">
-              {descriptionElement}
+              <Description
+                isLoading={isLoading}
+                description={description}
+                maxLength={DESCRIPTION_MAX_LENGTH}
+              />
             </Typography>
           </Grid>
           <Grid item>

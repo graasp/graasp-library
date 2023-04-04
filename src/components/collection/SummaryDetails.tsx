@@ -88,7 +88,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
           {createdAt && (
             <div id={SUMMARY_CREATED_AT_CONTAINER_ID}>
               <Typography variant="body1" fontWeight="bold">
-                Created
+                { t(LIBRARY.SUMMARY_DETAILS_CREATED_AT_TITLE) }
               </Typography>
               <Typography variant="body1" gutterBottom>
                 {DateTime.fromISO(createdAt).toLocaleString(
@@ -105,7 +105,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
           {lastUpdate && (
             <div id={SUMMARY_LAST_UPDATE_CONTAINER_ID}>
               <Typography variant="body1" fontWeight="bold">
-                Updated
+                { t(LIBRARY.SUMMARY_DETAILS_UPDATED_AT_TITLE) }
               </Typography>
               <Typography variant="body1" gutterBottom>
                 {DateTime.fromISO(lastUpdate).toLocaleString(
@@ -139,7 +139,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
             </div>
           ) : (
             <Typography>
-              This item has no defined language.
+              { t(LIBRARY.SUMMARY_DETAILS_NO_DEFINED_LANGUAGES) }
             </Typography>
           )}
         </DetailCard>
@@ -175,7 +175,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
               </>
             ) : (
               <Typography>
-                This item has no categories
+                { t(LIBRARY.SUMMARY_DETAILS_NO_CATEGORIES) }
               </Typography>
             )}
           </div>
@@ -185,7 +185,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
       <Grid item xs={12} sm={12} md={8}>
         <DetailCard>
           <Typography variant="body1" fontWeight="bold">
-            License
+            { t(LIBRARY.SUMMARY_DETAILS_LICENSE_TITLE) }
           </Typography>
           <Box justifyContent="center" display="flex">
             {!ccLicenseAdaption ? (

@@ -31,6 +31,8 @@ const CollapsibleItemCategory: React.FC<CollapsibleItemCategoryProps> = ({
   title,
   children,
 }) => {
+  const { t } = useTranslation();
+
   const [showMoreItems, setShowMoreItems] = useState<boolean>(false);
 
   const shownItems = React.useMemo(() => {
@@ -44,6 +46,8 @@ const CollapsibleItemCategory: React.FC<CollapsibleItemCategoryProps> = ({
     setShowMoreItems(!showMoreItems);
   };
 
+  const additionalItemsCount = items.size - DEFAULT_ITEM_SHOWN_COUNT;
+
   return (
     <>
       <Box display='flex' justifyContent='space-between'>
@@ -53,8 +57,8 @@ const CollapsibleItemCategory: React.FC<CollapsibleItemCategoryProps> = ({
         {items.size > DEFAULT_ITEM_SHOWN_COUNT && (
           <Button onClick={handleShowMoreItems}>
             {showMoreItems ?
-              `- Hide ${items.size - DEFAULT_ITEM_SHOWN_COUNT} items` :
-              `+ View ${items.size - DEFAULT_ITEM_SHOWN_COUNT} more`}
+              t(LIBRARY.SUMMARY_ITEMS_SHOW_LESS, { count: additionalItemsCount }) :
+              t(LIBRARY.SUMMARY_ITEMS_SHOW_MORE, { count: additionalItemsCount })}
           </Button>
         )}
       </Box>

@@ -16,6 +16,8 @@ import { COLLECTION_CARD_BORDER_RADIUS } from '../../config/cssStyles';
 import { QueryClientContext } from '../QueryClientContext';
 import { DEFAULT_ITEM_IMAGE_PATH } from '../../config/constants';
 import { buildCollectionRoute } from '../../config/routes';
+import { useTranslation } from 'react-i18next';
+import { LIBRARY } from '@graasp/translations';
 
 const { DateTime } = require('luxon');
 
@@ -47,6 +49,9 @@ type FileChildrenCardProps = {
 };
 
 export const FileChildrenCard: React.FC<FileChildrenCardProps> = ({ item, lang }) => {
+
+  const { t } = useTranslation();
+
   const { name, id, extra } = item;
 
   const { hooks } = useContext(QueryClientContext);
@@ -61,12 +66,12 @@ export const FileChildrenCard: React.FC<FileChildrenCardProps> = ({ item, lang }
   };
 
   return (
-    <StyleFolderBox 
+    <StyleFolderBox
       id={id}
       onClick={onClick}
     >
       <Grid container>
-        <Grid item xs={12} display='flex' alignItems='center' justifyContent='space-between'> 
+        <Grid item xs={12} display='flex' alignItems='center' justifyContent='space-between'>
           <Thumbnail
             defaultValue={<img src={DEFAULT_ITEM_IMAGE_PATH} alt="thumbnail" />}
             alt={name}
@@ -88,10 +93,12 @@ export const FileChildrenCard: React.FC<FileChildrenCardProps> = ({ item, lang }
         </Grid>
         <Grid item xs={12}>
           <Typography variant='body1' color='GrayText'>
-            {`Updated ${DateTime.fromISO(item.updatedAt).toLocaleString(
-              DateTime.DATE_FULL,
-              { locale: lang },
-            )}`}
+            {t(LIBRARY.SUMMARY_BROWSE_FILE_UPDATED, {
+              date: DateTime.fromISO(item.updatedAt).toLocaleString(
+                DateTime.DATE_FULL,
+                { locale: lang },
+              ),
+            })}
           </Typography>
         </Grid>
       </Grid>
@@ -111,13 +118,15 @@ type FolderChildrenCardProps = {
 
 export const FolderChildrenCard: React.FC<FolderChildrenCardProps> = ({ item }) => {
 
+  const { t } = useTranslation();
+
   const { name, id, extra } = item;
 
   const { hooks } = useContext(QueryClientContext);
-  const { data: items } = hooks.useChildren(id) as { data: Immutable.List<ItemRecord> };
+  const { data: items } = hooks.useChildren(id);
   const { data: member } = hooks.useCurrentMember();
 
-  
+
   const link = buildCollectionRoute(id);
 
   const router = useRouter();
@@ -127,7 +136,7 @@ export const FolderChildrenCard: React.FC<FolderChildrenCardProps> = ({ item }) 
   };
 
   return (
-    <StyleFolderBox 
+    <StyleFolderBox
       id={id}
       onClick={onClick}
     >
@@ -148,9 +157,11 @@ export const FolderChildrenCard: React.FC<FolderChildrenCardProps> = ({ item }) 
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <Typography variant='body1' color='GrayText'>
-            {items?.size ? `${items.size.toLocaleString()} Files` : 'Empty Folder'}
-          </Typography>
+          {items && (
+            <Typography variant='body1' color='GrayText'>
+              {t(LIBRARY.SUMMARY_BROWSE_FOLDER_CONTAINS, { count: items.size })}
+            </Typography>
+          )}
         </Grid>
       </Grid>
     </StyleFolderBox>

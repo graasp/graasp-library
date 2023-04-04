@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { LIBRARY } from '@graasp/translations';
+import { useTranslation } from 'react-i18next';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import {
   Button,
@@ -33,7 +35,7 @@ const SummaryActionButtons: React.FC<SummaryActionButtonsProps> = ({
   isLogged,
   extra,
 }) => {
-  // const { t } = useTranslation();
+  const { t } = useTranslation();
 
   const { 
     isCopying,
@@ -82,7 +84,7 @@ const SummaryActionButtons: React.FC<SummaryActionButtonsProps> = ({
           sx={{ display: 'flex', mx: 'auto' }}
           onClick={handlePlay}
         >
-          PREVIEW CONTENT
+          {t(LIBRARY.SUMMARY_ACTIONS_PREVIEW_CONTENT)}
         </Button>
         <Button
           size="small"
@@ -124,7 +126,7 @@ const SummaryActionButtons: React.FC<SummaryActionButtonsProps> = ({
                     onClick={startDownload}
                     startIcon={<Download />}
                   >
-                    DOWNLOAD
+                    {t(LIBRARY.SUMMARY_ACTIONS_DOWNLOAD)}
                   </StyledButton>
                   {isLogged && (
                     <StyledButton
@@ -132,7 +134,7 @@ const SummaryActionButtons: React.FC<SummaryActionButtonsProps> = ({
                       onClick={startCopy}
                       startIcon={isCopying ? <CircularProgress color='secondary' size={20} /> : <CopyAll />}
                     >
-                      COPY
+                      {t(LIBRARY.SUMMARY_ACTIONS_COPY)}
                     </StyledButton>
                   )}
                   <StyledButton
@@ -140,7 +142,7 @@ const SummaryActionButtons: React.FC<SummaryActionButtonsProps> = ({
                     onClick={startEmbed}
                     startIcon={<Code />}
                   >
-                    EMBED
+                    {t(LIBRARY.SUMMARY_ACTIONS_EMBED)}
                   </StyledButton>
                 </ButtonGroup>
               </ClickAwayListener>

@@ -17,6 +17,8 @@ import Items from './Items';
 import SummaryDetails from './SummaryDetails';
 import SummaryHeader from './SummaryHeader';
 import ItemBreadcrumb from './ItemBreadcrumb';
+import { LIBRARY } from '@graasp/translations';
+import { useTranslation } from 'react-i18next';
 
 const truncate = require('lodash.truncate');
 
@@ -71,6 +73,8 @@ const Summary: React.FC<SummaryProps> = ({
   type,
   path,
 }) => {
+  const { t } = useTranslation();
+
   const truncatedName = truncate(name, {
     length: MAX_COLLECTION_NAME_LENGTH,
     separator: /,? +/,
@@ -144,7 +148,7 @@ const Summary: React.FC<SummaryProps> = ({
       <Box sx={{ my: 6 }} />
       <Container maxWidth="lg">
         <Typography variant='h6' fontWeight='bold'>
-          Details
+          {t(LIBRARY.SUMMARY_DETAILS_TITLE)}
         </Typography>
         <SummaryDetails
           ccLicenseAdaption={ccLicenseAdaption}
