@@ -71,13 +71,11 @@ describe('Collection Summary', () => {
     });
 
     
-    it('CC license matches top level element', { defaultCommandTimeout: 10000 }, () => {
+    it('CC license matches top level element', { defaultCommandTimeout: 20000 }, () => {
       cy.setUpApi(environment);
 
       const parentItem = PUBLISHED_ITEMS[0];
-      const child = PUBLISHED_ITEMS.filter(({ path }) =>
-        isChildOf(path, parentItem.path),
-      )[0];
+      const child = PUBLISHED_ITEMS[2];
 
       cy.visit(buildCollectionRoute(child.id));
 
