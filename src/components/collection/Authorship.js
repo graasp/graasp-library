@@ -1,4 +1,4 @@
-import { Map } from 'immutable';
+import { Record } from 'immutable';
 import dynamic from 'next/dynamic';
 import PropTypes from 'prop-types';
 
@@ -97,7 +97,7 @@ const Authorship = ({ itemId, author, isLoading, showTitle }) => {
         <Grid item xs={12} sm={6}>
           <Contributors
             contributors={contributors}
-            displayContributors={item?.settings?.displayCoEditors}
+            displayContributors={item?.settings?.displayCoEditors ?? false}
           />
         </Grid>
       </Grid>
@@ -106,7 +106,7 @@ const Authorship = ({ itemId, author, isLoading, showTitle }) => {
 };
 
 Authorship.propTypes = {
-  author: PropTypes.instanceOf(Map),
+  author: PropTypes.instanceOf(Record),
   isLoading: PropTypes.bool.isRequired,
   itemId: PropTypes.string.isRequired,
   showTitle: PropTypes.bool.isRequired,

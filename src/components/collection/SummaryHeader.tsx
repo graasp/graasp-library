@@ -114,7 +114,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
             {tags?.size ? (
               <div id={SUMMARY_TAGS_CONTAINER_ID}>
                 {tags?.map((text) => (
-                  <Chip label={text} component={Typography} mr={1} />
+                  <Chip key={text} label={text} component={Typography} mr={1} />
                 ))}
               </div>
             ) : <div style={{ marginTop: 22 }} />}
@@ -134,7 +134,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
                 <Authorship
                   showTitle={false}
                   itemId={itemId}
-                  author={creator}
+                  author={creator ?? ''}
                   isLoading={isLoading}
                 />
               </Grid>

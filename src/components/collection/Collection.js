@@ -100,7 +100,7 @@ const Collection = ({ id }) => {
       <Seo
         title={name}
         description={parsedDescription}
-        author={member?.name}
+        author={member?.name ?? ''}
         image={imageUrl}
       />
       <Main headerLeftContent={leftContent} headerRightContent={rightContent}>

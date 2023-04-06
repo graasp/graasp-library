@@ -64,8 +64,8 @@ const CollapsibleItemCategory: React.FC<CollapsibleItemCategoryProps> = ({
       </Box>
       <Grid container spacing={2} id={CHILDREN_ITEMS_GRID_ID} marginBottom={3}>
         {shownItems.map((item) => (
-          <Grow in>
-            <Grid key={item.id} item xs={12} sm={12} md={6} lg={4} xl={3}>
+          <Grow in key={item.id}>
+            <Grid item xs={12} sm={12} md={6} lg={4} xl={3}>
               {children(item)}
             </Grid>
           </Grow>

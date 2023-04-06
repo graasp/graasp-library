@@ -127,6 +127,14 @@ export const PUBLISHED_ITEMS = [
         memberId: MEMBERS.BOB.id,
       },
     ],
+    categories: [
+      {
+        categoryId: SAMPLE_CATEGORIES[1].id,
+      },
+      {
+        categoryId: SAMPLE_CATEGORIES[0].id,
+      },
+    ],
   },
   {
     ...DEFAULT_FOLDER_ITEM,

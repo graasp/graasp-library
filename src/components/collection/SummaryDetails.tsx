@@ -88,7 +88,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
           {createdAt && (
             <div id={SUMMARY_CREATED_AT_CONTAINER_ID}>
               <Typography variant="body1" fontWeight="bold">
-                { t(LIBRARY.SUMMARY_DETAILS_CREATED_AT_TITLE) }
+                {t(LIBRARY.SUMMARY_DETAILS_CREATED_AT_TITLE)}
               </Typography>
               <Typography variant="body1" gutterBottom>
                 {DateTime.fromISO(createdAt).toLocaleString(
@@ -105,7 +105,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
           {lastUpdate && (
             <div id={SUMMARY_LAST_UPDATE_CONTAINER_ID}>
               <Typography variant="body1" fontWeight="bold">
-                { t(LIBRARY.SUMMARY_DETAILS_UPDATED_AT_TITLE) }
+                {t(LIBRARY.SUMMARY_DETAILS_UPDATED_AT_TITLE)}
               </Typography>
               <Typography variant="body1" gutterBottom>
                 {DateTime.fromISO(lastUpdate).toLocaleString(
@@ -119,15 +119,15 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
         <DetailCard>
-          <Typography variant="body1" fontWeight="bold">
-            {t(LIBRARY.COLLECTION_LANGUAGES_TITLE)}
-          </Typography>
-          {isLoading && (
-            <Skeleton />
-          )}
-          {languages?.size ? (
-            <div id={SUMMARY_LANGUAGES_CONTAINER_ID}>
-              {languages?.map((entry) => (
+          <div id={SUMMARY_LANGUAGES_CONTAINER_ID}>
+            <Typography variant="body1" fontWeight="bold">
+              {t(LIBRARY.COLLECTION_LANGUAGES_TITLE)}
+            </Typography>
+            {isLoading && (
+              <Skeleton />
+            )}
+            {languages?.size ? (
+              languages?.map((entry) => (
                 <Chip
                   label={t(entry.name)}
                   variant="outlined"
@@ -135,13 +135,13 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
                     color: CATEGORY_COLORS[CATEGORY_TYPES.LANGUAGE],
                   }}
                 />
-              ))}
-            </div>
-          ) : (
-            <Typography>
-              { t(LIBRARY.SUMMARY_DETAILS_NO_LANGUAGES) }
-            </Typography>
-          )}
+              ))
+            ) : (
+              <Typography>
+                {t(LIBRARY.SUMMARY_DETAILS_NO_LANGUAGES)}
+              </Typography>
+            )}
+          </div>
         </DetailCard>
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
@@ -154,6 +154,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
               <>
                 {levels?.map((entry) => (
                   <Chip
+                    key={entry.name}
                     label={t(entry.name)}
                     variant="outlined"
                     component={Typography}
@@ -163,6 +164,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
                 ))}
                 {disciplines?.map((entry) => (
                   <Chip
+                    key={entry.name}
                     label={t(entry.name)}
                     sx={{
                       color: CATEGORY_COLORS[CATEGORY_TYPES.DISCIPLINE],
@@ -175,7 +177,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
               </>
             ) : (
               <Typography>
-                { t(LIBRARY.SUMMARY_DETAILS_NO_CATEGORIES) }
+                {t(LIBRARY.SUMMARY_DETAILS_NO_CATEGORIES)}
               </Typography>
             )}
           </div>
@@ -185,7 +187,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
       <Grid item xs={12} sm={12} md={8}>
         <DetailCard>
           <Typography variant="body1" fontWeight="bold">
-            { t(LIBRARY.SUMMARY_DETAILS_LICENSE_TITLE) }
+            {t(LIBRARY.SUMMARY_DETAILS_LICENSE_TITLE)}
           </Typography>
           <Box justifyContent="center" display="flex">
             {!ccLicenseAdaption ? (
