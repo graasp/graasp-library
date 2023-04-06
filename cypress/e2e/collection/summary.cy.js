@@ -3,7 +3,6 @@ import { DateTime } from 'luxon';
 import { PUBLISHED_ITEMS } from '../../fixtures/items';
 import { buildCollectionRoute } from '../../../src/config/routes';
 import {
-  COLLECTION_LOADING_TIME,
   PERMISSION_LEVELS,
 } from '../../support/constants';
 
@@ -21,12 +20,11 @@ import {
 
 describe('Collection Summary', () => {
   buildPublicAndPrivateEnvironments().forEach((environment) => {
-    it('Layout', () => {
+    it('Layout', { defaultCommandTimeout: 10000 }, () => {
       cy.setUpApi(environment);
 
       const item = PUBLISHED_ITEMS[0];
       cy.visit(buildCollectionRoute(item.id));
-      cy.wait(COLLECTION_LOADING_TIME);
 
       // current member
       const member = Object.values(MEMBERS).find(
@@ -73,7 +71,7 @@ describe('Collection Summary', () => {
     });
 
     
-    it('CC license matches top level element', () => {
+    it('CC license matches top level element', { defaultCommandTimeout: 10000 }, () => {
       cy.setUpApi(environment);
 
       const parentItem = PUBLISHED_ITEMS[0];
@@ -82,17 +80,15 @@ describe('Collection Summary', () => {
       )[0];
 
       cy.visit(buildCollectionRoute(child.id));
-      cy.wait(COLLECTION_LOADING_TIME);
 
       cy.get(`#${SUMMARY_CC_LICENSE_CONTAINER_ID}`).should('have.class', parentItem.settings.ccLicenseAdaption);
     });
 
-    it('Hide co-editor', () => {
+    it('Hide co-editor', { defaultCommandTimeout: 10000 }, () => {
       cy.setUpApi(environment);
 
       const item = PUBLISHED_ITEMS[1];
       cy.visit(buildCollectionRoute(item.id));
-      cy.wait(COLLECTION_LOADING_TIME);
 
       // author
       const authorName = Object.values(MEMBERS).find(

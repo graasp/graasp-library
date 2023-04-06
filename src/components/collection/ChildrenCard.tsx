@@ -8,7 +8,7 @@ import { LIBRARY } from '@graasp/translations';
 import { Grid, styled } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { Folder } from '@mui/icons-material';
+import { Folder, InsertDriveFile } from '@mui/icons-material';
 import { ItemRecord } from '@graasp/sdk/dist/frontend/types';
 
 // import { buildCollectionRoute } from '../../config/routes';
@@ -44,6 +44,9 @@ const StyleFolderBox = styled(Box)(() => ({
   },
 }));
 
+const THUMBNAIL_SIZE = 50;
+const THUMBNAIL_DIMENSIONS = { width: THUMBNAIL_SIZE, height: THUMBNAIL_SIZE };
+
 type FileChildrenCardProps = {
   item: ItemRecord;
   lang: string | undefined;
@@ -66,6 +69,26 @@ export const FileChildrenCard: React.FC<FileChildrenCardProps> = ({ item, lang }
     router.push(link);
   };
 
+  const {
+    data: thumbnailData,
+  } = hooks.useItemThumbnail({ id: item.id, size: THUMBNAIL_SIZE });
+
+  const thumbnail = React.useMemo(() =>
+    thumbnailData ? (
+      <Thumbnail
+        defaultValue={<img style={THUMBNAIL_DIMENSIONS} src={DEFAULT_ITEM_IMAGE_PATH} alt="thumbnail" />}
+        alt={name}
+        useThumbnail={hooks.useItemThumbnail}
+        id={id}
+        thumbnailSrc={DEFAULT_ITEM_IMAGE_PATH}
+        sx={{ objectFit: 'cover', overflow: 'hidden', borderRadius: 1, ...THUMBNAIL_DIMENSIONS }}
+      />
+    ) : (
+      <div style={THUMBNAIL_DIMENSIONS}>
+        <InsertDriveFile fontSize='large' color='primary' />
+      </div>
+    ), [thumbnailData]);
+
   return (
     <StyleFolderBox
       id={id}
@@ -73,14 +96,7 @@ export const FileChildrenCard: React.FC<FileChildrenCardProps> = ({ item, lang }
     >
       <Grid container>
         <Grid item xs={12} display='flex' alignItems='center' justifyContent='space-between'>
-          <Thumbnail
-            defaultValue={<img src={DEFAULT_ITEM_IMAGE_PATH} alt="thumbnail" />}
-            alt={name}
-            useThumbnail={hooks.useItemThumbnail}
-            id={id}
-            thumbnailSrc={DEFAULT_ITEM_IMAGE_PATH}
-            sx={{ objectFit: 'cover', overflow: 'hidden', borderRadius: 1, width: 50, height: 50 }}
-          />
+          {thumbnail}
           <div className='actions'>
             {member?.id && <CopyButton id={id} />}
             <CopyLinkButton id={id} extra={extra} />
@@ -94,12 +110,12 @@ export const FileChildrenCard: React.FC<FileChildrenCardProps> = ({ item, lang }
         </Grid>
         <Grid item xs={12}>
           <Typography variant='body1' color='GrayText'>
-            {t(LIBRARY.SUMMARY_BROWSE_FILE_UPDATED, {
+            {item.updatedAt ? t(LIBRARY.SUMMARY_BROWSE_FILE_UPDATED, {
               date: DateTime.fromISO(item.updatedAt).toLocaleString(
                 DateTime.DATE_FULL,
                 { locale: lang },
               ),
-            })}
+            }) : '...'}
           </Typography>
         </Grid>
       </Grid>
@@ -143,7 +159,7 @@ export const FolderChildrenCard: React.FC<FolderChildrenCardProps> = ({ item }) 
     >
       <Grid container>
         <Grid item xs={12} display='flex' alignItems='center' justifyContent='space-between'>
-          <div style={{ width: 50, height: 50 }}>
+          <div style={THUMBNAIL_DIMENSIONS}>
             <Folder fontSize='large' color='primary' />
           </div>
           <div className='actions'>
@@ -158,11 +174,9 @@ export const FolderChildrenCard: React.FC<FolderChildrenCardProps> = ({ item }) 
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          {items && (
-            <Typography variant='body1' color='GrayText'>
-              {t(LIBRARY.SUMMARY_BROWSE_FOLDER_CONTAINS, { count: items.size })}
-            </Typography>
-          )}
+          <Typography variant='body1' color='GrayText'>
+            {items ? t(LIBRARY.SUMMARY_BROWSE_FOLDER_CONTAINS, { count: items.size }) : '...'}
+          </Typography>
         </Grid>
       </Grid>
     </StyleFolderBox>

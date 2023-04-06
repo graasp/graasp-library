@@ -85,7 +85,7 @@ const Items: React.FC<ItemsProps> = ({ parentId, lang }) => {
   const { hooks } = useContext(QueryClientContext);
   const { data: items } = hooks.useChildren(parentId, {
     placeholderData: List(PLACEHOLDER_COLLECTION.children),
-  }) as { data: Immutable.List<ItemRecord> };
+  });
 
   return (
     <div style={{ flexGrow: 1 }}>
