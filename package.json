@@ -1,6 +1,6 @@
 {
   "name": "graasp-library",
-  "version": "0.4.0",
+  "version": "0.6.0",
   "license": "AGPL-3.0-only",
   "scripts": {
     "start": "next dev -p 3005",
@@ -32,8 +32,8 @@
     "@emotion/react": "11.10.5",
     "@emotion/server": "11.10.0",
     "@emotion/styled": "11.10.5",
-    "@graasp/query-client": "0.1.5",
-    "@graasp/sdk": "0.4.1",
+    "@graasp/query-client": "0.3.2",
+    "@graasp/sdk": "0.9.1",
     "@graasp/translations": "https://github.com/graasp/graasp-translations.git#138-cc-translation",
     "@graasp/ui": "https://github.com/graasp/graasp-ui.git#280-creative-commons",
     "@mui/icons-material": "5.10.9",

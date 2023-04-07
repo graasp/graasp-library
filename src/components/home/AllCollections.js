@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
+import { Context } from '@graasp/sdk';
 import { LIBRARY } from '@graasp/translations';
 
 import { APP_AUTHOR } from '../../config/constants';
@@ -57,6 +58,7 @@ function AllCollections() {
       />
       {/* todo: allow main to get custom header */}
       <Main
+        context={Context.LIBRARY}
         menuButtonId={MENU_BUTTON_ID}
         open
         sidebar={sidebar}

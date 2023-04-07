@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { Box, Typography } from '@mui/material';
 
+import { Context } from '@graasp/sdk';
 import { LIBRARY } from '@graasp/translations';
 
 import { APP_AUTHOR } from '../../config/constants';
@@ -122,7 +123,11 @@ function Home() {
         author={APP_AUTHOR}
       />
 
-      <Main headerLeftContent={leftContent} headerRightContent={rightContent}>
+      <Main
+        context={Context.LIBRARY}
+        headerLeftContent={leftContent}
+        headerRightContent={rightContent}
+      >
         <Box p={4}>
           <Typography variant="h2" align="center" id={TITLE_TEXT_ID}>
             {t(LIBRARY.HOME_TITLE)}

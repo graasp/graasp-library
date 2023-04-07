@@ -8,6 +8,8 @@ import React, { useContext } from 'react';
 import { Alert, Box } from '@mui/material';
 
 import { DEFAULT_ITEM_IMAGE_PATH } from '../../config/constants';
+import { Context } from '@graasp/sdk';
+import { LIBRARY } from '@graasp/translations';
 import { PUBLISHED_TAG_ID } from '../../config/env';
 import {
   ERROR_INVALID_COLLECTION_ID_CODE,
@@ -63,7 +65,11 @@ const Collection = ({ id }) => {
 
   if (!id || !validate(id)) {
     return (
-      <Main headerLeftContent={leftContent} headerRightContent={rightContent}>
+      <Main
+        context={Context.LIBRARY}
+        headerLeftContent={leftContent}
+        headerRightContent={rightContent}
+      >
         <Box id={id} p={5}>
           <Error code={ERROR_INVALID_COLLECTION_ID_CODE} />
         </Box>
@@ -73,7 +79,11 @@ const Collection = ({ id }) => {
 
   if (isError || memberIsError) {
     return (
-      <Main headerLeftContent={leftContent} headerRightContent={rightContent}>
+      <Main
+        context={Context.LIBRARY}
+        headerLeftContent={leftContent}
+        headerRightContent={rightContent}
+      >
         <Box id={id} p={5}>
           <Error code={ERROR_UNEXPECTED_ERROR_CODE} />
         </Box>
@@ -103,7 +113,11 @@ const Collection = ({ id }) => {
         author={member?.name ?? ''}
         image={imageUrl}
       />
-      <Main headerLeftContent={leftContent} headerRightContent={rightContent}>
+      <Main
+        context={Context.LIBRARY}
+        headerLeftContent={leftContent}
+        headerRightContent={rightContent}
+      >
         {
           // show alert only if 1. user is logged in, 2. it has at least read access and 3. item is not published
           currentMember?.id && canRead && !isPublished && (
