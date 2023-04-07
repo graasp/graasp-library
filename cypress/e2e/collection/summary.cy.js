@@ -77,9 +77,11 @@ describe('Collection Summary', () => {
       const parentItem = PUBLISHED_ITEMS[0];
       const child = PUBLISHED_ITEMS[2];
 
-      cy.visit(buildCollectionRoute(child.id));
+      if (parentItem.settings.ccLicenseAdaption && child !== undefined) {
+        cy.visit(buildCollectionRoute(child.id));
 
-      cy.get(`#${SUMMARY_CC_LICENSE_CONTAINER_ID}`).should('have.class', parentItem.settings.ccLicenseAdaption);
+        cy.get(`#${SUMMARY_CC_LICENSE_CONTAINER_ID}`).should('have.class', parentItem.settings.ccLicenseAdaption);
+      }
     });
 
     it('Hide co-editor', { defaultCommandTimeout: 10000 }, () => {

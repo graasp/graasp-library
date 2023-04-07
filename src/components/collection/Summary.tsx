@@ -23,6 +23,30 @@ import ItemBreadcrumb from './ItemBreadcrumb';
 
 const truncate = require('lodash.truncate');
 
+export const getParentsIdsFromPath = (
+  path: string,
+  { ignoreSelf = false } = {},
+) => {
+  if (!path) {
+    return [];
+  }
+
+  let p = path;
+  // ignore self item in path
+  if (ignoreSelf) {
+    // split path in half parents / self
+    // eslint-disable-next-line no-useless-escape
+    const els = path.split(/\.[^\.]*$/);
+    // if els has only one element, the item has no parent
+    if (els.length <= 1) {
+      return [];
+    }
+    [p] = els;
+  }
+  const ids = p.replace(/_/g, '-').split('.');
+  return ids;
+};
+
 type SummaryProps = {
   name: string;
   description: string;
@@ -84,13 +108,17 @@ const Summary: React.FC<SummaryProps> = ({
 
   const { hooks } = useContext(QueryClientContext);
   
+  /*
   const { data: parents } = hooks.useParents({
     id: itemId,
     path,
     enabled: true,
   });
+  */
 
-  const topLevelParent = parents?.get(0);
+  const parents = getParentsIdsFromPath(path);
+
+  const { data: topLevelParent } = hooks.useItem(parents[0] ?? itemId);
   
   const { data: categoryTypes } = hooks.useCategoryTypes();
   const { data: itemCategories } = hooks.useItemCategories(topLevelParent?.id ?? itemId);

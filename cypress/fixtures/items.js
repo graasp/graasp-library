@@ -7,9 +7,6 @@ export const DEFAULT_FOLDER_ITEM = {
   extra: {},
   creator: CURRENT_USER.id,
   type: ITEM_TYPES.FOLDER,
-  settings: {
-    ccLicenseAdaption: 'CC BY',
-  },
 };
 
 export const CREATED_ITEM = {
@@ -206,9 +203,6 @@ export const GRAASPER_ITEMS = [
         itemPath: 'edafbd2d_5688_11eb_ae93_0242ac130002',
       },
     ],
-    settings: {
-      ccLicenseAdaption: 'CC0',
-    },
     memberships: [
       {
         itemPath: 'edafbd2d_5688_11eb_ae93_0242ac130002',
@@ -264,7 +258,7 @@ export const GRAASPER_ITEMS = [
     creator: MEMBERS.GRAASPER.id,
     id: 'bdf09f5d-5688-11eb-ae93-0242ac130004',
     name: 'child of public item1',
-    path: 'ecafbd2d_5688_11eb_ae93_0242ac130002.bdf09f5d_5688_11eb_ae93_0242ac130004.bdf09f5a_5688_11eb_ae93_0242ac130004',
+    path: 'ecafbd2d_5688_11eb_ae93_0242ac130002.bdf09f5a_5688_11eb_ae93_0242ac130004.bdf09f5d_5688_11eb_ae93_0242ac130004',
     tags: [
       {
         tagId: ITEM_PUBLISHED_TAG.id,

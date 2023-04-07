@@ -190,7 +190,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
             {t(LIBRARY.SUMMARY_DETAILS_LICENSE_TITLE)}
           </Typography>
           <Box justifyContent="center" display="flex">
-            {!ccLicenseAdaption ? (
+            {isLoading ? (
               <Skeleton>
                 <Box maxWidth={600}>
                   <CreativeCommons
@@ -207,13 +207,15 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
                 className={ccLicenseAdaption}
                 id={SUMMARY_CC_LICENSE_CONTAINER_ID}
               >
-                <CreativeCommons
-                  allowSharedAdaptation={allowSharing}
-                  allowCommercialUse={allowCommercialUse}
-                  requireAccreditation={requireAccreditation}
-                  iconSize={48}
-                  sx={{ marginY: 0, paddingY: 0 }}
-                />
+                {ccLicenseAdaption && (
+                  <CreativeCommons
+                    allowSharedAdaptation={allowSharing}
+                    allowCommercialUse={allowCommercialUse}
+                    requireAccreditation={requireAccreditation}
+                    iconSize={48}
+                    sx={{ marginY: 0, paddingY: 0 }}
+                  />
+                )}
               </Box>
             )}
           </Box>
