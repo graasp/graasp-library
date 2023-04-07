@@ -1102,6 +1102,23 @@ __metadata:
     qs: 6.11.0
     slonik: 28.1.1
     uuid: 9.0.0
+  checksum: 28498b43bb23a4844aaea9e42301e97ce90758a338a6e54c3cb85f023ffff92e99f976728dd7670a09643b162ad912786e483e0d4a31066b9ea1afc821f389c2
+  languageName: node
+  linkType: hard
+
+"@graasp/sdk@npm:0.9.2":
+  version: 0.9.2
+  resolution: "@graasp/sdk@npm:0.9.2"
+  dependencies:
+    "@fastify/secure-session": 5.3.0
+    aws-sdk: 2.1310.0
+    fastify: 3.29.5
+    fluent-json-schema: 3.1.0
+    immutable: 4.2.4
+    js-cookie: 3.0.1
+    qs: 6.11.0
+    slonik: 28.1.1
+    uuid: 9.0.0
   checksum: 49daf48b8877b1a0bdd0612c5a88be22860de4e94c494978732add26d38b5d0a6784df8eb8caedd7972b2767c78258c056c89889c73eeeb3971f2ff989a7f1e0
   languageName: node
   linkType: hard
@@ -1115,12 +1132,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/translations@npm:1.1.0":
-  version: 1.1.0
-  resolution: "@graasp/translations@npm:1.1.0"
+"@graasp/translations@npm:1.8.0":
+  version: 1.8.0
+  resolution: "@graasp/translations@npm:1.8.0"
   dependencies:
     i18next: 21.8.1
-  checksum: 1d6fabce21ef205146c4f74b9b4b5dafc5969cf13a78cd7c4947a9b882cb22d48f3832ad6e20c21cc905b41b4809a1c2efa7ba629b12cd79bd2067df6ebd2f22
+  checksum: 61c99573820d08f675b9294c075c0995bc2589c1aac962c2eb140b73de45125b28131e5712848b416c8e8a7694f7b6381d903b9e8fd6f4db9cb41ab553352c52
   languageName: node
   linkType: hard
 

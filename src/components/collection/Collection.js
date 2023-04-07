@@ -7,9 +7,9 @@ import React, { useContext } from 'react';
 
 import { Alert, Box } from '@mui/material';
 
-import { DEFAULT_ITEM_IMAGE_PATH } from '../../config/constants';
 import { Context } from '@graasp/sdk';
-import { LIBRARY } from '@graasp/translations';
+
+import { DEFAULT_ITEM_IMAGE_PATH } from '../../config/constants';
 import { PUBLISHED_TAG_ID } from '../../config/env';
 import {
   ERROR_INVALID_COLLECTION_ID_CODE,
