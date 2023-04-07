@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
+import { ItemRecord } from '@graasp/sdk/dist/frontend/types';
 import { useRouter } from 'next/router';
-import { ItemRecord } from '@graasp/sdk';
 import { Breadcrumbs, Button, Typography } from '@mui/material';
 import { QueryClientContext } from '../QueryClientContext';
 import { buildCollectionRoute } from '../../config/routes';
