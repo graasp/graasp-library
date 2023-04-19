@@ -1,4 +1,9 @@
-import { Context, buildSignInPath, ThumbnailSize, CategoryType } from '@graasp/sdk';
+import {
+  CategoryType,
+  Context,
+  ThumbnailSize,
+  buildSignInPath,
+} from '@graasp/sdk';
 
 import {
   GRAASP_BUILDER_HOST as ENV_GRAASP_BUILDER_HOST,
@@ -70,7 +75,6 @@ export const PICTURE_QUALITIES = {
 export const DEFAULT_PICTURE_QUALITY = PICTURE_QUALITIES.LARGE;
 export const MAX_COLLECTION_NAME_LENGTH = 100;
 
-
 export const CLIENT_ERROR_MESSAGE = 'Something went wrong!';
 export const DEFAULT_ITEM_IMAGE_PATH = '/icon.png';
 export const DEFAULT_MEMBER_THUMBNAIL = '/defaultAvatar.png';
@@ -101,11 +105,6 @@ export const HOST_MAP = {
   [Context.LIBRARY]: '/',
   [Context.ANALYTICS]: GRAASP_ANALYTICS_HOST,
   [Context.PLAYER]: GRAASP_PLAYER_HOST,
-
-  /** @deprecated - to remove */
-  [Context.EXPLORER]: '/',
-  /** @deprecated - to remove */
-  [Context.ANALYZER]: '/',
 };
 
 export const SHOW_NOTIFICATIONS =
