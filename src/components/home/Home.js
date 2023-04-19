@@ -52,7 +52,9 @@ function Home() {
     ?.filter((collection) => collection?.creator !== NEXT_PUBLIC_GRAASPER_ID)
     ?.sort(dateComparator);
 
-  const { data: resultCollections } = hooks.useKeywordSearch(range, keywords);
+  const { data: resultCollections } = hooks.useKeywordSearch({
+    [range]: keywords,
+  });
 
   useEffect(() => {
     setSearchResults(resultCollections);

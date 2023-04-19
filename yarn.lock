@@ -1064,7 +1064,7 @@ __metadata:
 
 "@graasp/query-client@github:graasp/graasp-query-client#typeorm":
   version: 0.4.0
-  resolution: "@graasp/query-client@https://github.com/graasp/graasp-query-client.git#commit=3f79d6ad051dfbaa91a7531e62a6d93812c28890"
+  resolution: "@graasp/query-client@https://github.com/graasp/graasp-query-client.git#commit=ce59c56aa40759b9c162cf90919f10c50c04e43b"
   dependencies:
     "@graasp/sdk": "github:graasp/graasp-sdk#typeorm"
     "@graasp/translations": "github:graasp/graasp-translations#89-email"
@@ -1077,34 +1077,34 @@ __metadata:
     uuid: 9.0.0
   peerDependencies:
     react: ^17.0.0
-  checksum: e5b7e779d8841206874d6748a7e44121d1221204094f33cf8ac8fb2be01362b4263f5c6fdbb4059cb200e7d40950b5f41c3fa33495842d441fd9b7e54458a4fb
+  checksum: cc5a27b57aa064d60d95c5e53779a350aefbfecdd872094e430bee07d32494da7ab2d63cb8a05de695aa927af1efacf6005861996b2f3aaefe3efdde3c4f5adb
   languageName: node
   linkType: hard
 
 "@graasp/sdk@github:graasp/graasp-sdk#typeorm":
-  version: 0.9.2
-  resolution: "@graasp/sdk@https://github.com/graasp/graasp-sdk.git#commit=d18cb9727b15bce30b8df64bf60a13578f6a7e00"
+  version: 0.10.1
+  resolution: "@graasp/sdk@https://github.com/graasp/graasp-sdk.git#commit=fdf08eb7c6c52b760a63bbc23bad04da84ab5aa8"
   dependencies:
     "@fastify/secure-session": 5.3.0
-    aws-sdk: 2.1310.0
+    aws-sdk: 2.1356.0
     fastify: 3.29.5
     fluent-json-schema: 3.1.0
-    immutable: 4.2.4
+    immutable: 4.3.0
     js-cookie: 3.0.1
-    qs: 6.11.0
+    qs: 6.11.1
     slonik: 28.1.1
     typeorm: 0.3.12
     uuid: 9.0.0
-  checksum: 867085ecc937c7788d3c410ea23b360e36a57c33ca18facc52a9dc4054ea5757df40de2825262eda985dfc423eb40d36145b0869056fa1a60cfa6ee9912d6b15
+  checksum: 221c30115f345f768d33795bb767cbee0c2e34379d6c42eee1e976a62c01133bcfd1fdeeddb1da0ab78348d0ee8dc732c99c2f6b8b001599b9b8da097fae123b
   languageName: node
   linkType: hard
 
 "@graasp/translations@github:graasp/graasp-translations#89-email":
   version: 1.8.0
-  resolution: "@graasp/translations@https://github.com/graasp/graasp-translations.git#commit=012b8d7736690c7bd468fe1a0ef0c5bcbdd1be30"
+  resolution: "@graasp/translations@https://github.com/graasp/graasp-translations.git#commit=78159907fdb6546628aa22ab7938837eebb331a7"
   dependencies:
     i18next: 21.8.1
-  checksum: 9c321d949c43450c401a329d4bb4e7bf1c38006aeb17e566f5b8c08c76193c12f8e05c1ebeb819d6834de87773dec711393449dd9cccd1f5b8f1be437bd980bf
+  checksum: 4e035238857280dc80292f68c79adc84f82e467530c12957b39994323e44afded9ac4eca1374c1cf74520f4547d82214d5a67aa363e5cdec8b169ca590862953
   languageName: node
   linkType: hard
 
@@ -2911,9 +2911,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-sdk@npm:2.1310.0":
-  version: 2.1310.0
-  resolution: "aws-sdk@npm:2.1310.0"
+"aws-sdk@npm:2.1356.0":
+  version: 2.1356.0
+  resolution: "aws-sdk@npm:2.1356.0"
   dependencies:
     buffer: 4.9.2
     events: 1.1.1
@@ -2924,8 +2924,8 @@ __metadata:
     url: 0.10.3
     util: ^0.12.4
     uuid: 8.0.0
-    xml2js: 0.4.19
-  checksum: 648141461eaaaac1bcd8a2f1df460bb4603176541a28ed0aa7c344cc9fe19d69b2a463cb975c767bfb913ebc462103474fcd0315d07918c5fa35b0fef5f00f56
+    xml2js: 0.5.0
+  checksum: 5e7c2f1c339305e95247d31ef012c5be02129d9688ac68465b8af6a3039c6bad86075e2a2f8582f0da80b31a0a8ffe99e043c0f23b9a136e1fe3de505859046d
   languageName: node
   linkType: hard
 
@@ -6371,6 +6371,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"immutable@npm:4.3.0":
+  version: 4.3.0
+  resolution: "immutable@npm:4.3.0"
+  checksum: bbd7ea99e2752e053323543d6ff1cc71a4b4614fa6121f321ca766db2bd2092f3f1e0a90784c5431350b7344a4f792fa002eac227062d59b9377b6c09063b58b
+  languageName: node
+  linkType: hard
+
 "import-fresh@npm:^3.0.0, import-fresh@npm:^3.2.1":
   version: 3.3.0
   resolution: "import-fresh@npm:3.3.0"
@@ -8983,6 +8990,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"qs@npm:6.11.1":
+  version: 6.11.1
+  resolution: "qs@npm:6.11.1"
+  dependencies:
+    side-channel: ^1.0.4
+  checksum: 82ee78ef12a16f3372fae5b64f76f8aedecb000feea882bbff1af146c147f6eb66b08f9c3f34d7e076f28563586956318b9b2ca41141846cdd6d5ad6f241d52f
+  languageName: node
+  linkType: hard
+
 "qs@npm:~6.10.3":
   version: 6.10.4
   resolution: "qs@npm:6.10.4"
@@ -11272,13 +11288,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"xml2js@npm:0.4.19":
-  version: 0.4.19
-  resolution: "xml2js@npm:0.4.19"
+"xml2js@npm:0.5.0":
+  version: 0.5.0
+  resolution: "xml2js@npm:0.5.0"
   dependencies:
     sax: ">=0.6.0"
-    xmlbuilder: ~9.0.1
-  checksum: ca8b2fee430d450a18947786bfd7cd1a353ee00fc6fd550acbc8a8e65f1b4df5e9786fcb2990c1a5514ecd554d445fb74e1d716b3a4fcfffc10554aeb5db482b
+    xmlbuilder: ~11.0.0
+  checksum: 1aa71d62e5bc2d89138e3929b9ea46459157727759cbc62ef99484b778641c0cd21fb637696c052d901a22f82d092a3e740a16b4ce218e81ac59b933535124ea
   languageName: node
   linkType: hard
 
@@ -11296,13 +11312,6 @@ __metadata:
   version: 11.0.1
   resolution: "xmlbuilder@npm:11.0.1"
   checksum: 7152695e16f1a9976658215abab27e55d08b1b97bca901d58b048d2b6e106b5af31efccbdecf9b07af37c8377d8e7e821b494af10b3a68b0ff4ae60331b415b0
-  languageName: node
-  linkType: hard
-
-"xmlbuilder@npm:~9.0.1":
-  version: 9.0.7
-  resolution: "xmlbuilder@npm:9.0.7"
-  checksum: 8193bb323806a002764f013bea0c6e9ff2dc26fd29109408761b16b59a8ad2214c2abe8e691755fd8b525586e3a0e1efeb92335947d7b0899032b779f1705a53
   languageName: node
   linkType: hard
 

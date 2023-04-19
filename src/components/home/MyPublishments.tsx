@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 import React, { useContext } from 'react';
 
 import { MY_PUBLISHMENTS_COLLECTIONS_ID } from '../../config/selectors';
@@ -7,28 +5,27 @@ import { QueryClientContext } from '../QueryClientContext';
 import CollectionsGrid from '../collection/CollectionsGrid';
 import TabPanel from './TabPanel';
 
-function MyPublishments({ tab, index }) {
+type Props = {
+  tab: number;
+  index: number;
+};
+
+const MyPublishments = ({ tab, index }: Props): JSX.Element => {
   const { hooks } = useContext(QueryClientContext);
   const { data: member } = hooks.useCurrentMember();
-  const { data: collections, isLoading } = hooks.useAllPublishedItems();
-  const ownCollections = collections?.filter(
-    (collection) => collection?.creator?.id === member?.id,
+  const { data: myCollections, isLoading } = hooks.usePublishedItemsForMember(
+    member?.id,
   );
 
   return (
     <TabPanel value={tab} index={index}>
       <CollectionsGrid
         id={MY_PUBLISHMENTS_COLLECTIONS_ID}
-        collections={ownCollections}
+        collections={myCollections}
         isLoading={isLoading}
       />
     </TabPanel>
   );
-}
-
-MyPublishments.propTypes = {
-  tab: PropTypes.number.isRequired,
-  index: PropTypes.number.isRequired,
 };
 
 export default MyPublishments;
