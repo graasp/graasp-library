@@ -39,7 +39,7 @@ const { Loader, Main } = {
 function Home() {
   const { t } = useTranslation();
   const [searchResults, setSearchResults] = useState(null);
-  const [range, setRange] = useState(SEARCH_RANGES.ALL.value);
+  const [range, setRange] = useState(SEARCH_RANGES.TITLE.value);
   const [keywords, setKeywords] = useState(null);
   const { hooks } = useContext(QueryClientContext);
   const { data: collections, isLoading } = hooks.useAllPublishedItems();
