@@ -129,6 +129,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
             {languages?.size ? (
               languages?.map((entry) => (
                 <Chip
+                  key={entry.name}
                   label={t(entry.name)}
                   variant="outlined"
                   sx={{

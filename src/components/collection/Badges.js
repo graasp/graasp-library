@@ -85,9 +85,4 @@ Badges.propTypes = {
   description: PropTypes.string.isRequired,
 };
 
-// Badges.defaultProps = {
-//   views: 0,
-//   likes: 0,
-// };
-
 export default Badges;

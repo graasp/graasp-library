@@ -1,7 +1,9 @@
 import { List } from 'immutable';
 
-import React, { Fragment, useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
+import { Add, Remove } from '@mui/icons-material';
 
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
@@ -15,7 +17,6 @@ import { CHILDREN_ITEMS_GRID_ID } from '../../config/selectors';
 import { PLACEHOLDER_COLLECTION } from '../../utils/collections';
 import { QueryClientContext } from '../QueryClientContext';
 import { FileChildrenCard, FolderChildrenCard } from './ChildrenCard';
-import ItemsHeader from './ItemsHeader';
 import { ITEM_TYPES } from '../../config/constants';
 
 type CollapsibleItemCategoryProps = {
@@ -43,7 +44,7 @@ const CollapsibleItemCategory: React.FC<CollapsibleItemCategoryProps> = ({
   }, [items, showMoreItems]);
 
   const handleShowMoreItems = () => {
-    setShowMoreItems(!showMoreItems);
+    setShowMoreItems((prevValue) => !prevValue);
   };
 
   const additionalItemsCount = items.size - DEFAULT_ITEM_SHOWN_COUNT;
@@ -55,7 +56,7 @@ const CollapsibleItemCategory: React.FC<CollapsibleItemCategoryProps> = ({
           {title}
         </Typography>
         {items.size > DEFAULT_ITEM_SHOWN_COUNT && (
-          <Button onClick={handleShowMoreItems}>
+          <Button onClick={handleShowMoreItems} startIcon={showMoreItems ? <Remove /> : <Add />}>
             {showMoreItems ?
               t(LIBRARY.SUMMARY_ITEMS_SHOW_LESS, { count: additionalItemsCount }) :
               t(LIBRARY.SUMMARY_ITEMS_SHOW_MORE, { count: additionalItemsCount })}
@@ -89,7 +90,6 @@ const Items: React.FC<ItemsProps> = ({ parentId, lang }) => {
 
   return (
     <div style={{ flexGrow: 1 }}>
-      {false && <ItemsHeader />}
       {!items?.size ? (
         <div className="Main">
           <Typography variant="h5" color="inherit">
@@ -100,7 +100,7 @@ const Items: React.FC<ItemsProps> = ({ parentId, lang }) => {
         <>
           {items.size > 0 && (
             <CollapsibleItemCategory
-              title='Content'
+              title={t(LIBRARY.SUMMARY_CONTENT_TITLE)}
               items={items}
             >
               {(item) => (

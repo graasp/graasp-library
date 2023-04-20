@@ -48,57 +48,28 @@ export const getParentsIdsFromPath = (
 };
 
 type SummaryProps = {
-  name: string;
-  description: string;
-  settings: {
-    tags: Immutable.List<string>;
-    ccLicenseAdaption: string;
-  };
+  // TODO: find the type of a collection
+  collection: any;
   creator: Immutable.Map<string, string>;
   likes: number;
-  views: number;
-  rating: {
-    value: number;
-    count: number;
-  };
   isLoading: boolean;
-  itemId: string;
-  createdAt: string;
-  lastUpdate: string;
-  extra: {
-    embeddedLink: {
-      url: string;
-    };
-    app: {
-      url: string;
-    };
-  };
-  type: string;
-  path: string;
 };
 
-const Summary: React.FC<SummaryProps> = ({
-  itemId,
-  name = '',
-  creator = null,
-  description,
-  settings,
-  likes = 0,
-  views = 0,
-  isLoading,
-  createdAt,
-  lastUpdate,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  rating = {
-    count: 0,
-    value: 0,
-  },
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  extra,
-  type,
-  path,
-}) => {
+const Summary: React.FC<SummaryProps> = ({ collection, likes = 0, isLoading, creator }) => {
   const { t } = useTranslation();
+
+  const {
+    id: itemId,
+    name = '',
+    description,
+    settings,
+    createdAt,
+    updatedAt: lastUpdate,
+    extra,
+    type,
+    path,
+    views = 0,
+  } = collection;
 
   const truncatedName = truncate(name, {
     length: MAX_COLLECTION_NAME_LENGTH,
@@ -107,14 +78,6 @@ const Summary: React.FC<SummaryProps> = ({
   const tags = settings?.tags;
 
   const { hooks } = useContext(QueryClientContext);
-  
-  /*
-  const { data: parents } = hooks.useParents({
-    id: itemId,
-    path,
-    enabled: true,
-  });
-  */
 
   const parents = getParentsIdsFromPath(path);
 

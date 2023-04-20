@@ -11,7 +11,6 @@ import Box from '@mui/material/Box';
 import { Folder, InsertDriveFile } from '@mui/icons-material';
 import { ItemRecord } from '@graasp/sdk/dist/frontend/types';
 
-// import { buildCollectionRoute } from '../../config/routes';
 import CopyButton from './CopyButton';
 import CopyLinkButton from './CopyLinkButton';
 import DownloadButton from './DownloadButton';
@@ -47,47 +46,27 @@ const StyleFolderBox = styled(Box)(() => ({
 const THUMBNAIL_SIZE = 50;
 const THUMBNAIL_DIMENSIONS = { width: THUMBNAIL_SIZE, height: THUMBNAIL_SIZE };
 
-type FileChildrenCardProps = {
+type SubItemCardProps = {
   item: ItemRecord;
-  lang: string | undefined;
+  thumbnail: React.ReactNode;
+  subtext: string;
 };
 
-export const FileChildrenCard: React.FC<FileChildrenCardProps> = ({ item, lang }) => {
+export const SubItemCard: React.FC<SubItemCardProps> = ({ item, thumbnail, subtext }) => {
 
-  const { t } = useTranslation();
+  const router = useRouter();
+
+  const { hooks } = useContext(QueryClientContext);
+
+  const { data: member } = hooks.useCurrentMember();
 
   const { name, id, extra } = item;
 
-  const { hooks } = useContext(QueryClientContext);
-  const { data: member } = hooks.useCurrentMember();
-
   const link = buildCollectionRoute(id);
-
-  const router = useRouter();
 
   const onClick = () => {
     router.push(link);
   };
-
-  const {
-    data: thumbnailData,
-  } = hooks.useItemThumbnail({ id: item.id, size: THUMBNAIL_SIZE });
-
-  const thumbnail = React.useMemo(() =>
-    thumbnailData ? (
-      <Thumbnail
-        defaultValue={<img style={THUMBNAIL_DIMENSIONS} src={DEFAULT_ITEM_IMAGE_PATH} alt="thumbnail" />}
-        alt={name}
-        useThumbnail={hooks.useItemThumbnail}
-        id={id}
-        thumbnailSrc={DEFAULT_ITEM_IMAGE_PATH}
-        sx={{ objectFit: 'cover', overflow: 'hidden', borderRadius: 1, ...THUMBNAIL_DIMENSIONS }}
-      />
-    ) : (
-      <div style={THUMBNAIL_DIMENSIONS}>
-        <InsertDriveFile fontSize='large' color='primary' />
-      </div>
-    ), [thumbnailData]);
 
   return (
     <StyleFolderBox
@@ -110,12 +89,7 @@ export const FileChildrenCard: React.FC<FileChildrenCardProps> = ({ item, lang }
         </Grid>
         <Grid item xs={12}>
           <Typography variant='body1' color='GrayText'>
-            {item.updatedAt ? t(LIBRARY.SUMMARY_BROWSE_FILE_UPDATED, {
-              date: DateTime.fromISO(item.updatedAt).toLocaleString(
-                DateTime.DATE_FULL,
-                { locale: lang },
-              ),
-            }) : '...'}
+            {subtext}
           </Typography>
         </Grid>
       </Grid>
@@ -123,62 +97,69 @@ export const FileChildrenCard: React.FC<FileChildrenCardProps> = ({ item, lang }
   );
 };
 
+type FileChildrenCardProps = {
+  item: ItemRecord;
+  lang?: string;
+};
+
+export const FileChildrenCard: React.FC<FileChildrenCardProps> = ({ item, lang }) => {
+
+  const { t } = useTranslation();
+
+  const { name, id } = item;
+
+  const { hooks } = useContext(QueryClientContext);
+
+  const {
+    data: thumbnailData,
+  } = hooks.useItemThumbnail({ id: item.id, size: THUMBNAIL_SIZE });
+
+  const subtext = item.updatedAt ? t(LIBRARY.SUMMARY_BROWSE_FILE_UPDATED, {
+    date: DateTime.fromISO(item.updatedAt).toLocaleString(
+      DateTime.DATE_FULL,
+      { locale: lang },
+    ),
+  }) : '...';
+
+  const thumbnail = React.useMemo(() =>
+    thumbnailData ? (
+      <Thumbnail
+        defaultValue={<img style={THUMBNAIL_DIMENSIONS} src={DEFAULT_ITEM_IMAGE_PATH} alt="thumbnail" />}
+        alt={name}
+        useThumbnail={hooks.useItemThumbnail}
+        id={id}
+        thumbnailSrc={DEFAULT_ITEM_IMAGE_PATH}
+        sx={{ objectFit: 'cover', overflow: 'hidden', borderRadius: 1, ...THUMBNAIL_DIMENSIONS }}
+      />
+    ) : (
+      <div style={THUMBNAIL_DIMENSIONS}>
+        <InsertDriveFile fontSize='large' color='primary' />
+      </div>
+    ), [thumbnailData]);
+
+  return <SubItemCard item={item} thumbnail={thumbnail} subtext={subtext} />;
+};
+
 type FolderChildrenCardProps = {
-  item: {
-    description: string;
-    id: string;
-    name: string;
-    type: string;
-    extra: any;
-  }
+  item: ItemRecord;
 };
 
 export const FolderChildrenCard: React.FC<FolderChildrenCardProps> = ({ item }) => {
 
   const { t } = useTranslation();
 
-  const { name, id, extra } = item;
+  const { id } = item;
 
   const { hooks } = useContext(QueryClientContext);
   const { data: items } = hooks.useChildren(id);
-  const { data: member } = hooks.useCurrentMember();
 
+  const subtext = items ? t(LIBRARY.SUMMARY_BROWSE_FOLDER_CONTAINS, { count: items.size }) : '...';
 
-  const link = buildCollectionRoute(id);
-
-  const router = useRouter();
-
-  const onClick = () => {
-    router.push(link);
-  };
-
-  return (
-    <StyleFolderBox
-      id={id}
-      onClick={onClick}
-    >
-      <Grid container>
-        <Grid item xs={12} display='flex' alignItems='center' justifyContent='space-between'>
-          <div style={THUMBNAIL_DIMENSIONS}>
-            <Folder fontSize='large' color='primary' />
-          </div>
-          <div className='actions'>
-            {member?.id && <CopyButton id={id} />}
-            <CopyLinkButton id={id} extra={extra} />
-            <DownloadButton id={id} />
-          </div>
-        </Grid>
-        <Grid item xs={12}>
-          <Typography maxHeight="100%" noWrap variant="h6" component="h2" fontWeight='bold' marginTop={1}>
-            {name}
-          </Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <Typography variant='body1' color='GrayText'>
-            {items ? t(LIBRARY.SUMMARY_BROWSE_FOLDER_CONTAINS, { count: items.size }) : '...'}
-          </Typography>
-        </Grid>
-      </Grid>
-    </StyleFolderBox>
+  const thumbnail = (
+    <div style={THUMBNAIL_DIMENSIONS}>
+      <Folder fontSize='large' color='primary' />
+    </div>
   );
+
+  return <SubItemCard item={item} subtext={subtext} thumbnail={thumbnail} />;
 };

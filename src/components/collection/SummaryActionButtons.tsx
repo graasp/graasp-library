@@ -44,7 +44,6 @@ const SummaryActionButtons: React.FC<SummaryActionButtonsProps> = ({
   } = useCopyAction(itemId);
 
   const {
-    // isDownloading,
     startDownload,
   } = useDownloadAction(itemId);
 

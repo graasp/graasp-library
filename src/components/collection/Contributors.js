@@ -37,7 +37,7 @@ function Contributors({ contributors, displayContributors }) {
           } = contributor;
           const avatar = getAvatar(contributorAvatar);
           return (
-            <Tooltip title={contributorName} key={contributorName}>
+            <Tooltip title={contributorName} key={id}>
               <Avatar
                 alt={t(LIBRARY.AVATAR_ALT, { name: contributorName })}
                 src={avatar}

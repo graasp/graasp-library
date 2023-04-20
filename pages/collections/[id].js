@@ -31,8 +31,7 @@ export async function getServerSideProps({ params }) {
   
   const queryData = await queryClient.getQueryData(collectionKey);
 
-  const creator = queryData?.creator;
-  const path = queryData?.path;
+  const { creator, path } = { ...queryData };
 
   if (creator) {
     await queryClient.prefetchQuery(DATA_KEYS.buildMemberKey(creator), () =>

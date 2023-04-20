@@ -12,10 +12,8 @@ type ItemBreadcrumbProps = {
 const ItemBreadcrumb: React.FC<ItemBreadcrumbProps> = ({ itemId }) => {
   const { hooks } = useContext(QueryClientContext);
 
-  // const { data: tags } = hooks.useItemTags(itemId) as { data: Immutable.List<ItemTagRecord> };
   const { data: item } = hooks.useItem(itemId);
 
-  // const data = hooks.useItems(item?.path.split('.'));
   const parents = hooks.useParents({
     id: item?.id,
     path: item?.path,

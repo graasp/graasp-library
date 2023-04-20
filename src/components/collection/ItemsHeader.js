@@ -14,8 +14,7 @@ function ItemsHeader() {
       <Grid container spacing={0} justify="space-between" alignItems="center">
         <Grid item>
           <Typography variant="h4" color="inherit" display="flex">
-            Content
-            {/* t(LIBRARY.COLLECTION_ITEMS_TITLE) */}
+            {t(LIBRARY.COLLECTION_ITEMS_TITLE)}
           </Typography>
         </Grid>
         <Grid item>

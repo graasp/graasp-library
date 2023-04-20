@@ -1,6 +1,6 @@
 export const COLOR_WHITE = '#ffffff';
 export const COLOR_BLACK = '#000000';
-export const DEFAULT_SHADOW_EFFECT = '0 10px 30px rgba(0, 0, 0, .3)';
+export const DEFAULT_SHADOW_EFFECT = '0 10px 30px rgba(0, 0, 0, .15)';
 
 // header
 export const HEADER_LOGO_HEIGHT = 40;

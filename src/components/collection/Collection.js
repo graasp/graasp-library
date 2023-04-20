@@ -98,13 +98,10 @@ const Collection = ({ id }) => {
   const imageUrl = DEFAULT_ITEM_IMAGE_PATH;
 
   const parsedDescription = collection?.description || '';
-  const settings = collection?.settings;
-
-  // const type = collection?.type;
 
   // todo: views don't exist
-  const views = collection?.views;
   const likes = likeCount;
+
   return (
     <ErrorBoundary>
       <Seo
@@ -146,20 +143,10 @@ const Collection = ({ id }) => {
         }
         <Box id={id} p={5}>
           <Summary
-            itemId={id}
-            name={name}
-            image={imageUrl}
-            description={parsedDescription}
-            settings={settings}
+            collection={collection}
             creator={member}
-            views={views}
             likes={likes}
             isLoading={isLoading}
-            createdAt={collection?.createdAt}
-            lastUpdate={collection?.updatedAt}
-            extra={collection?.extra}
-            type={collection?.type}
-            path={collection?.path}
           />
           {/* <Comments comments={comments} members={members} /> */}
         </Box>
