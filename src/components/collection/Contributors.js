@@ -24,8 +24,10 @@ function Contributors({ contributors, displayContributors }) {
   }
 
   return (
-    <>
-      <Typography variant="h5" gutterBottom>
+    <div
+      style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}
+    >
+      <Typography variant="subtitle2" mx={2} color="primary" fontWeight="bold">
         {t(LIBRARY.CONTRIBUTORS_TITLE)}
       </Typography>
       <AvatarGroup max={8}>
@@ -37,7 +39,7 @@ function Contributors({ contributors, displayContributors }) {
           } = contributor;
           const avatar = getAvatar(contributorAvatar);
           return (
-            <Tooltip title={contributorName} key={id}>
+            <Tooltip title={contributorName} key={id} arrow>
               <Avatar
                 alt={t(LIBRARY.AVATAR_ALT, { name: contributorName })}
                 src={avatar}
@@ -47,7 +49,7 @@ function Contributors({ contributors, displayContributors }) {
           );
         })}
       </AvatarGroup>
-    </>
+    </div>
   );
 }
 

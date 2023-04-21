@@ -1,5 +1,6 @@
 import { LIBRARY } from '@graasp/translations';
 import { Button, Grow, Skeleton, Typography } from '@mui/material';
+import { Interweave } from 'interweave';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -40,7 +41,7 @@ const Description: React.FC<DescriptionProps> = ({ description, maxLength, isLoa
     return <Skeleton />;
   }
 
-  if (shortDescription.length) {
+  if (shortDescription && shortDescription.length) {
     // Case distinction to allow the show more button to be rendered inline.
     return collapsedDescription ? (
       <div>
@@ -56,10 +57,8 @@ const Description: React.FC<DescriptionProps> = ({ description, maxLength, isLoa
     ) : (
       <Grow in>
         <div>
-          <div
-            /* eslint-disable-next-line react/no-danger */
-            dangerouslySetInnerHTML={{ __html: shortDescription }}
-            style={{ display: 'inline-block' }}
+          <Interweave
+            content={shortDescription}
           />
           <Button
             sx={{ display: 'inline-block' }}

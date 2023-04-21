@@ -48,6 +48,7 @@
     "http-status-codes": "2.2.0",
     "i18next": "21.8.1",
     "immutable": "4.0.0",
+    "interweave": "13.1.0",
     "katex": "0.15.3",
     "lodash": "4.17.21",
     "lodash.isobject": "3.0.2",

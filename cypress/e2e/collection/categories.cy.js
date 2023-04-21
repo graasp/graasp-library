@@ -5,6 +5,7 @@ import { buildPublicAndPrivateEnvironments } from '../../fixtures/environment';
 import {
   SUMMARY_CATEGORIES_CONTAINER_ID,
 } from '../../../src/config/selectors';
+import { COLLECTION_LOADING_TIME } from '../../support/constants';
 
 describe('Categories in Summary', () => {
   buildPublicAndPrivateEnvironments().forEach((environment) => {
@@ -22,7 +23,7 @@ describe('Categories in Summary', () => {
         );
       });
     });
-    /*
+    
     it(`Child shows parent's categories ${environment.currentMember.name}`, () => {
       cy.setUpApi(environment);
 
@@ -40,6 +41,6 @@ describe('Categories in Summary', () => {
         categoryContainer.should('contain', category?.name);
       });
     });
-    */
+    
   });
 });

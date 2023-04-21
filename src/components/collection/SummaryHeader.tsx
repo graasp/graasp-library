@@ -1,6 +1,7 @@
 
 import { Favorite, Visibility } from '@mui/icons-material';
 import { Skeleton } from '@mui/lab';
+import { MemberRecord } from '@graasp/sdk/dist/frontend/types';
 import {
   Container,
   Grid,
@@ -8,6 +9,8 @@ import {
   Chip,
   Divider,
   Tooltip,
+  Stack,
+  Box,
 } from '@mui/material';
 import dynamic from 'next/dynamic';
 import React from 'react';
@@ -37,7 +40,7 @@ type SummaryHeaderProps = {
   truncatedName: string;
   tags: Immutable.List<string> | undefined;
   description: string;
-  creator: Immutable.Map<string, string> | null;
+  creator: MemberRecord;
   views: number;
   likes: number;
   isLogged: boolean;
@@ -128,19 +131,19 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
             </Typography>
           </Grid>
           <Grid item>
-            <Grid container spacing={3}>
-              <Grid item display="flex" alignItems="center">
+            <Stack
+              spacing={2}
+              direction="row"
+              divider={<Divider orientation="vertical" flexItem />}
+            >
+              <Box display="flex" alignItems="center">
                 <Authorship
-                  showTitle={false}
                   itemId={itemId}
                   author={creator}
                   isLoading={isLoading}
                 />
-              </Grid>
-              <Grid item>
-                <Divider orientation="vertical" />
-              </Grid>
-              <Grid item display="flex" alignItems="center">
+              </Box>
+              <Box display="flex" alignItems="center">
                 <Grid item justifyContent="row" marginLeft={1} marginTop={0}>
                   <Typography
                     fontWeight="bold"
@@ -168,14 +171,11 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
                     </Tooltip>
                   </Typography>
                 </Grid>
-              </Grid>
-              <Grid item>
-                <Divider orientation="vertical" />
-              </Grid>
-              <Grid item>
+              </Box>
+              <Box>
                 <Badges name={name} description={description} />
-              </Grid>
-            </Grid>
+              </Box>
+            </Stack>
           </Grid>
         </Grid>
       </Grid>
