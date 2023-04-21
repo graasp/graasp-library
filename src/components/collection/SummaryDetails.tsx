@@ -16,6 +16,7 @@ import { LIBRARY } from '@graasp/translations';
 import {
   SUMMARY_CATEGORIES_CONTAINER_ID,
   SUMMARY_CC_LICENSE_CONTAINER_ID,
+  SUMMARY_CC_LICENSE_NO_LICENCE_ID,
   SUMMARY_CREATED_AT_CONTAINER_ID,
   SUMMARY_LANGUAGES_CONTAINER_ID,
   SUMMARY_LAST_UPDATE_CONTAINER_ID,
@@ -208,7 +209,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
                 className={ccLicenseAdaption}
                 id={SUMMARY_CC_LICENSE_CONTAINER_ID}
               >
-                {ccLicenseAdaption && (
+                {ccLicenseAdaption ? (
                   <CreativeCommons
                     allowSharedAdaptation={allowSharing}
                     allowCommercialUse={allowCommercialUse}
@@ -216,6 +217,10 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
                     iconSize={48}
                     sx={{ marginY: 0, paddingY: 0 }}
                   />
+                ) : (
+                  <Typography variant='body1' id={SUMMARY_CC_LICENSE_NO_LICENCE_ID}>
+                    {t(LIBRARY.SUMMARY_DETAILS_EMPTY_LICENCE_TEXT)}
+                  </Typography>
                 )}
               </Box>
             )}

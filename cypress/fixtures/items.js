@@ -182,6 +182,50 @@ export const PUBLISHED_ITEMS = [
       },
     ],
   },
+  {
+    ...DEFAULT_FOLDER_ITEM,
+    id: 'ecafcc2c-5688-11eb-ae93-0242ac130002',
+    name: 'Item Without Licence',
+    path: 'ecafbd2a_5688_11eb_ae93_0242ac130002',
+    createdAt: '2023-02-27T18:20:09.732Z',
+    updatedAt: '2023-02-28T18:20:09.732Z',
+    settings: {
+      tags: ['one-tag', 'two-tag'],
+      displayCoEditors: true,
+    },
+    tags: [
+      {
+        id: 'ecbfbd2a-5688-11eb-ae93-0242ac130002',
+        tagId: ITEM_PUBLIC_TAG.id,
+        itemPath: 'ecafbd2a_5688_11eb_ae93_0242ac130002',
+      },
+      {
+        id: 'ecbfbd2a-5688-12eb-ae93-0242ac130002',
+        tagId: ITEM_PUBLISHED_TAG.id,
+        itemPath: 'ecafbd2a_5688_11eb_ae93_0242ac130002',
+      },
+    ],
+    memberships: [
+      {
+        itemPath: 'fdf09f5a_5688_11eb_ae93_0242ac130002',
+        permission: PERMISSION_LEVELS.ADMIN,
+        memberId: MEMBERS.ANNA.id,
+      },
+      {
+        itemPath: 'fdf09f5a_5688_11eb_ae93_0242ac130002',
+        permission: PERMISSION_LEVELS.ADMIN,
+        memberId: MEMBERS.BOB.id,
+      },
+    ],
+    categories: [
+      {
+        categoryId: SAMPLE_CATEGORIES[1].id,
+      },
+      {
+        categoryId: SAMPLE_CATEGORIES[0].id,
+      },
+    ],
+  },
 ];
 
 export const GRAASPER_ITEMS = [

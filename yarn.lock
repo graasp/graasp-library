@@ -1125,10 +1125,10 @@ __metadata:
 
 "@graasp/translations@https://github.com/graasp/graasp-translations.git#138-cc-translation":
   version: 1.9.0
-  resolution: "@graasp/translations@https://github.com/graasp/graasp-translations.git#commit=b8477fe6b76b5937d8bb1047904ca524c8327ef3"
+  resolution: "@graasp/translations@https://github.com/graasp/graasp-translations.git#commit=e1e827770134c5f60e22727e46178954bb6ad599"
   dependencies:
     i18next: 21.8.1
-  checksum: 4d70557cd73f6612dde954eaa9842ac33144b8225c0a11da62a648c9eb2b0d539f6e8313cad9d86fc0620a8294a4cf95bb181f7ae28c24ec4d4953dc2003f5b9
+  checksum: 634aa187340a2a8daa489ca265a306c1f407c715d58eaf8da56a3611b50d03d91af40549d6eb507191222a119695c3496062da630216aa6b898508e4a1136b45
   languageName: node
   linkType: hard
 
@@ -4565,6 +4565,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"escape-html@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "escape-html@npm:1.0.3"
+  checksum: 6213ca9ae00d0ab8bccb6d8d4e0a98e76237b2410302cf7df70aaa6591d509a2a37ce8998008cbecae8fc8ffaadf3fb0229535e6a145f3ce0b211d060decbb24
+  languageName: node
+  linkType: hard
+
 "escape-string-regexp@npm:^1.0.5":
   version: 1.0.5
   resolution: "escape-string-regexp@npm:1.0.5"
@@ -5968,6 +5975,7 @@ __metadata:
     husky: ^7.0.4
     i18next: 21.8.1
     immutable: 4.0.0
+    interweave: 13.1.0
     istanbul-lib-coverage: 3.2.0
     katex: 0.15.3
     lodash: 4.17.21
@@ -6404,6 +6412,17 @@ __metadata:
     has: ^1.0.3
     side-channel: ^1.0.4
   checksum: 8974588d06bab4f675573a3b52975370facf6486df51bc0567a982c7024fa29495f10b76c0d4dc742dd951d1b72024fdc1e31bb0bedf1678dc7aacacaf5a4f73
+  languageName: node
+  linkType: hard
+
+"interweave@npm:13.1.0":
+  version: 13.1.0
+  resolution: "interweave@npm:13.1.0"
+  dependencies:
+    escape-html: ^1.0.3
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 8ddc82177bb81adc1148087b38763eee8cae3a64a41e07c73f705670b4b49fdd55f30095823a119b6a2f39ee9d2365211bd0220840a2c1aa61a6ca3b85f576a1
   languageName: node
   linkType: hard
 

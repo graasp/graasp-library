@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
+import { ItemRecord, MemberRecord } from '@graasp/sdk/dist/frontend/types';
 
 import {
   CATEGORY_TYPES,
@@ -48,14 +49,14 @@ export const getParentsIdsFromPath = (
 };
 
 type SummaryProps = {
-  // TODO: find the type of a collection
-  collection: any;
-  creator: Immutable.Map<string, string>;
+  collection: ItemRecord;
+  creator: MemberRecord;
   likes: number;
   isLoading: boolean;
+  views: number,
 };
 
-const Summary: React.FC<SummaryProps> = ({ collection, likes = 0, isLoading, creator }) => {
+const Summary: React.FC<SummaryProps> = ({ collection, likes = 0, views = 0, isLoading, creator }) => {
   const { t } = useTranslation();
 
   const {
@@ -68,14 +69,13 @@ const Summary: React.FC<SummaryProps> = ({ collection, likes = 0, isLoading, cre
     extra,
     type,
     path,
-    views = 0,
   } = collection;
 
   const truncatedName = truncate(name, {
     length: MAX_COLLECTION_NAME_LENGTH,
     separator: /,? +/,
   });
-  const tags = settings?.tags;
+  const tags = settings?.tags as any;
 
   const { hooks } = useContext(QueryClientContext);
 
