@@ -186,7 +186,7 @@ export const PUBLISHED_ITEMS = [
     ...DEFAULT_FOLDER_ITEM,
     id: 'ecafcc2c-5688-11eb-ae93-0242ac130002',
     name: 'Item Without Licence',
-    path: 'ecafbd2a_5688_11eb_ae93_0242ac130002',
+    path: 'ecafcc2c_5688_11eb_ae93_0242ac130002',
     createdAt: '2023-02-27T18:20:09.732Z',
     updatedAt: '2023-02-28T18:20:09.732Z',
     settings: {

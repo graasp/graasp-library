@@ -209,7 +209,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
                 className={ccLicenseAdaption}
                 id={SUMMARY_CC_LICENSE_CONTAINER_ID}
               >
-                {ccLicenseAdaption ? (
+                {ccLicenseAdaption && ccLicenseAdaption.length > 0 ? (
                   <CreativeCommons
                     allowSharedAdaptation={allowSharing}
                     allowCommercialUse={allowCommercialUse}

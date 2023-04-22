@@ -1,7 +1,8 @@
 
 import { Favorite, Visibility } from '@mui/icons-material';
 import { Skeleton } from '@mui/lab';
-import { MemberRecord } from '@graasp/sdk/dist/frontend/types';
+import { ItemLikeRecord, MemberRecord } from '@graasp/sdk/dist/frontend/types';
+import { MUTATION_KEYS } from '@graasp/query-client';
 import {
   Container,
   Grid,
@@ -13,7 +14,7 @@ import {
   Box,
 } from '@mui/material';
 import dynamic from 'next/dynamic';
-import React from 'react';
+import React, { useContext } from 'react';
 import { THUMBNAIL_SIZES } from '../../config/constants';
 import { ITEM_SUMMARY_TITLE_ID, SUMMARY_TAGS_CONTAINER_ID } from '../../config/selectors';
 
@@ -23,6 +24,7 @@ import Authorship from './Authorship';
 import Badges from './Badges';
 import SummaryActionButtons from './SummaryActionButtons';
 import Description from './SummaryDescription';
+import { QueryClientContext } from '../QueryClientContext';
 
 const {
   LikeButton,
@@ -61,9 +63,33 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
   views,
   likes,
   extra,
-  // eslint-disable-next-line arrow-body-style
 }) => {
-  // const { t } = useTranslation();
+  const { hooks, useMutation } = useContext(QueryClientContext);
+
+  const { data: member } = hooks.useCurrentMember();
+  const { data: likedItems } = hooks.useLikedItems(member?.get('id'));
+
+  const { mutate: postItemLike } = useMutation(MUTATION_KEYS.POST_ITEM_LIKE);
+  const { mutate: deleteItemLike } = useMutation(
+    MUTATION_KEYS.DELETE_ITEM_LIKE,
+  );
+
+  const likeEntry = likedItems?.find((itemLike: ItemLikeRecord) => itemLike?.itemId === itemId);
+  
+  const handleLike = () => {
+    postItemLike({
+      itemId,
+      memberId: member?.id,
+    });
+  };
+
+  const handleUnlike = () => {
+    deleteItemLike({
+      id: likeEntry?.id,
+      itemId,
+      memberId: member?.id,
+    });
+  };
   
   return (
     <Container maxWidth="lg">
@@ -102,8 +128,8 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
                 ariaLabel=''
                 color="primary"
                 isLiked={false}
-                handleLike={() => { }}
-                handleUnlike={() => { }}
+                handleLike={handleLike}
+                handleUnlike={handleUnlike}
               />
             </Typography>
             <SummaryActionButtons
