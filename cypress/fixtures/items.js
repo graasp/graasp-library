@@ -189,21 +189,12 @@ export const PUBLISHED_ITEMS = [
     path: 'ecafcc2c_5688_11eb_ae93_0242ac130002',
     createdAt: '2023-02-27T18:20:09.732Z',
     updatedAt: '2023-02-28T18:20:09.732Z',
+    creator: MEMBERS.BOB.id,
     settings: {
       tags: ['one-tag', 'two-tag'],
       displayCoEditors: true,
     },
     tags: [
-      {
-        id: 'ecbfbd2a-5688-11eb-ae93-0242ac130002',
-        tagId: ITEM_PUBLIC_TAG.id,
-        itemPath: 'ecafbd2a_5688_11eb_ae93_0242ac130002',
-      },
-      {
-        id: 'ecbfbd2a-5688-12eb-ae93-0242ac130002',
-        tagId: ITEM_PUBLISHED_TAG.id,
-        itemPath: 'ecafbd2a_5688_11eb_ae93_0242ac130002',
-      },
     ],
     memberships: [
       {
