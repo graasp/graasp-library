@@ -2123,6 +2123,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/lodash.truncate@npm:4.4.7":
+  version: 4.4.7
+  resolution: "@types/lodash.truncate@npm:4.4.7"
+  dependencies:
+    "@types/lodash": "*"
+  checksum: d95ed373b514d63535f07a523244c6513bdbf4512f6b96cac28fde408be5a1212d9f5de847614c521508752a4cc150cc470b1295ad543ee31b79cb0bd310e716
+  languageName: node
+  linkType: hard
+
+"@types/lodash@npm:*":
+  version: 4.14.194
+  resolution: "@types/lodash@npm:4.14.194"
+  checksum: 113f34831c461469d91feca2dde737f88487732898b4d25e9eb23b087bb193985f864d1e1e0f3b777edc5022e460443588b6000a3b2348c966f72d17eedc35ea
+  languageName: node
+  linkType: hard
+
 "@types/minimist@npm:^1.2.0":
   version: 1.2.2
   resolution: "@types/minimist@npm:1.2.2"
@@ -5951,6 +5967,7 @@ __metadata:
     "@testing-library/react": 12.1.4
     "@testing-library/user-event": 14.0.0
     "@trivago/prettier-plugin-sort-imports": 3.2.0
+    "@types/lodash.truncate": 4.4.7
     "@types/next": 9.0.0
     "@types/node": 18.7.1
     "@types/react": 17.0.30

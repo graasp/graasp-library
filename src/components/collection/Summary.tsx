@@ -2,6 +2,8 @@ import { Category, CategoryType, ItemCategory } from '@graasp/sdk';
 
 import React, { useContext } from 'react';
 
+import truncate from 'lodash.truncate';
+
 import { LIBRARY } from '@graasp/translations';
 import { useTranslation } from 'react-i18next';
 
@@ -22,7 +24,6 @@ import SummaryDetails from './SummaryDetails';
 import SummaryHeader from './SummaryHeader';
 import ItemBreadcrumb from './ItemBreadcrumb';
 
-const truncate = require('lodash.truncate');
 
 export const getParentsIdsFromPath = (
   path: string,

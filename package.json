@@ -78,6 +78,7 @@
     "@commitlint/cli": "16.2.3",
     "@commitlint/config-conventional": "16.2.1",
     "@cypress/code-coverage": "3.10.0",
+    "@types/lodash.truncate": "4.4.7",
     "@types/next": "9.0.0",
     "@types/node": "18.7.1",
     "@types/react": "17.0.30",
