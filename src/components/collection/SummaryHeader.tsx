@@ -75,7 +75,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
   );
 
   const likeEntry = likedItems?.find((itemLike: ItemLikeRecord) => itemLike?.itemId === itemId);
-  
+
   const handleLike = () => {
     postItemLike({
       itemId,
@@ -90,7 +90,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
       memberId: member?.id,
     });
   };
-  
+
   return (
     <Container maxWidth="lg">
       <Grid container columnSpacing={10} alignItems="center">
@@ -117,10 +117,17 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
           </StyledCard>
         </Grid>
         <Grid item sm={12} md={8}>
-          <Grid item justifyContent='space-between' flexDirection='row' display='flex' alignItems='end'>
+          <Grid
+            marginBottom={{ xs: 3, sm: 0 }}
+            item
+            justifyContent='space-between'
+            flexDirection={{ xs: 'column', sm: 'row' }}
+            display='flex'
+            alignItems={{ xs: 'start', sm: 'end' }}
+          >
             <Typography
               variant="h1"
-              fontSize="2em"
+              fontSize={{ xs: '1.7em', sm: '2em' }}
               id={ITEM_SUMMARY_TITLE_ID}
             >
               {truncatedName}

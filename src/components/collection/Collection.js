@@ -141,7 +141,15 @@ const Collection = ({ id }) => {
             </Alert>
           )
         }
-        <Box id={id} p={5}>
+        <Box
+          id={id}
+          px={{
+            xs: 0,
+            sm: 2,
+            md: 5,
+          }}
+          py={5}
+        >
           <Summary
             collection={collection}
             creator={member}

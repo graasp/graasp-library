@@ -8,7 +8,7 @@ import { Add, Remove } from '@mui/icons-material';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box/Box';
-import { Button, Grow } from '@mui/material';
+import { Button, Grow, useMediaQuery, useTheme } from '@mui/material';
 
 import { LIBRARY } from '@graasp/translations';
 import { ItemRecord } from '@graasp/sdk/dist/frontend/types';
@@ -19,18 +19,24 @@ import { QueryClientContext } from '../QueryClientContext';
 import { FileChildrenCard, FolderChildrenCard } from './ChildrenCard';
 import { ITEM_TYPES } from '../../config/constants';
 
+const DEFAULT_ITEM_SHOWN_COUNT = {
+  xs: 4,
+  sm: 4,
+  md: 6,
+  lg: 6,
+  xl: 8,
+};
+
 type CollapsibleItemCategoryProps = {
-  title: string;
   items: Immutable.List<ItemRecord>;
+  defaultItemCount: number;
   children: (item: ItemRecord) => JSX.Element;
 };
 
-const DEFAULT_ITEM_SHOWN_COUNT = 8;
-
 const CollapsibleItemCategory: React.FC<CollapsibleItemCategoryProps> = ({
   items,
-  title,
   children,
+  defaultItemCount,
 }) => {
   const { t } = useTranslation();
 
@@ -40,22 +46,19 @@ const CollapsibleItemCategory: React.FC<CollapsibleItemCategoryProps> = ({
     if (showMoreItems) {
       return items;
     }
-    return items.slice(0, DEFAULT_ITEM_SHOWN_COUNT);
-  }, [items, showMoreItems]);
+    return items.slice(0, defaultItemCount);
+  }, [items, showMoreItems, defaultItemCount]);
 
   const handleShowMoreItems = () => {
     setShowMoreItems((prevValue) => !prevValue);
   };
 
-  const additionalItemsCount = items.size - DEFAULT_ITEM_SHOWN_COUNT;
+  const additionalItemsCount = items.size - defaultItemCount;
 
   return (
     <>
       <Box display='flex' justifyContent='space-between'>
-        <Typography variant='h6' fontWeight='bold'>
-          {title}
-        </Typography>
-        {items.size > DEFAULT_ITEM_SHOWN_COUNT && (
+        {items.size > defaultItemCount && (
           <Button onClick={handleShowMoreItems} startIcon={showMoreItems ? <Remove /> : <Add />}>
             {showMoreItems ?
               t(LIBRARY.SUMMARY_ITEMS_SHOW_LESS, { count: additionalItemsCount }) :
@@ -88,11 +91,39 @@ const Items: React.FC<ItemsProps> = ({ parentId, lang }) => {
     placeholderData: List(PLACEHOLDER_COLLECTION.children),
   });
 
+  const theme = useTheme();
+
+  const extraSmall = useMediaQuery(theme.breakpoints.down('sm'));
+  const small = useMediaQuery(theme.breakpoints.down('md'));
+  const medium = useMediaQuery(theme.breakpoints.down('lg'));
+  const large = useMediaQuery(theme.breakpoints.down('xl'));
+
+  const itemToShow = React.useMemo(() => {
+    if (extraSmall) {
+      return DEFAULT_ITEM_SHOWN_COUNT.xs;
+    }
+    if (small) {
+      return DEFAULT_ITEM_SHOWN_COUNT.sm;
+    }
+    if (medium) {
+      return DEFAULT_ITEM_SHOWN_COUNT.md;
+    }
+    if (large) {
+      return DEFAULT_ITEM_SHOWN_COUNT.lg;
+    }
+    return DEFAULT_ITEM_SHOWN_COUNT.xl;
+  }, [small, medium, large]);
+
   return (
     <div style={{ flexGrow: 1 }}>
+
+      <Typography variant='h6' fontWeight='bold'>
+        {t(LIBRARY.SUMMARY_CONTENT_TITLE)}
+      </Typography>
+
       {!items?.size ? (
         <div className="Main">
-          <Typography variant="h5" color="inherit">
+          <Typography variant="body1" mx={1} color="inherit">
             {t(LIBRARY.COLLECTION_ITEMS_EMPTY_MESSAGE)}
           </Typography>
         </div>
@@ -100,7 +131,7 @@ const Items: React.FC<ItemsProps> = ({ parentId, lang }) => {
         <>
           {items.size > 0 && (
             <CollapsibleItemCategory
-              title={t(LIBRARY.SUMMARY_CONTENT_TITLE)}
+              defaultItemCount={itemToShow}
               items={items}
             >
               {(item) => (
