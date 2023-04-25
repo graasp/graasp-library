@@ -1,3 +1,4 @@
+import { useTheme } from '@emotion/react';
 import truncate from 'lodash.truncate';
 import PropTypes from 'prop-types';
 
@@ -18,7 +19,6 @@ import { removeTagsFromString } from '../../utils/text';
 import BadgeContainer from '../common/BadgeContainer';
 import FavoriteBadge from '../common/FavoriteBadge';
 import VisibilityBadge from '../common/VisibilityBadge';
-import { useTheme } from '@emotion/react';
 
 function Badges({ views, likes, name, description }) {
   const { t } = useTranslation();
