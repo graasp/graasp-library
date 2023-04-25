@@ -57,7 +57,7 @@ const CollapsibleItemCategory: React.FC<CollapsibleItemCategoryProps> = ({
 
   return (
     <>
-      <Box display='flex' justifyContent='space-between'>
+      <Box display='flex' justifyContent='flex-end'>
         {items.size > defaultItemCount && (
           <Button onClick={handleShowMoreItems} startIcon={showMoreItems ? <Remove /> : <Add />}>
             {showMoreItems ?
@@ -112,7 +112,7 @@ const Items: React.FC<ItemsProps> = ({ parentId, lang }) => {
       return DEFAULT_ITEM_SHOWN_COUNT.lg;
     }
     return DEFAULT_ITEM_SHOWN_COUNT.xl;
-  }, [small, medium, large]);
+  }, [extraSmall, small, medium, large]);
 
   return (
     <div style={{ flexGrow: 1 }}>

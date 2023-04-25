@@ -93,7 +93,11 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
 
   return (
     <Container maxWidth="lg">
-      <Grid container columnSpacing={10} alignItems="center">
+      <Grid 
+        container 
+        columnSpacing={6} 
+        alignItems="start"
+      >
         <Grid
           item
           sm={12}
@@ -123,7 +127,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
             justifyContent='space-between'
             flexDirection={{ xs: 'column', sm: 'row' }}
             display='flex'
-            alignItems={{ xs: 'start', sm: 'end' }}
+            alignItems={{ xs: 'start', sm: 'start' }}
           >
             <Typography
               variant="h1"
@@ -166,7 +170,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
           <Grid item>
             <Stack
               spacing={2}
-              direction="row"
+              direction='row'
               divider={<Divider orientation="vertical" flexItem />}
             >
               <Box display="flex" alignItems="center">

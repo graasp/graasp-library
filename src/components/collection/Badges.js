@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Email, Facebook, Twitter } from '@mui/icons-material';
-import { Grid, IconButton } from '@mui/material';
+import { Grid, IconButton, useMediaQuery } from '@mui/material';
 
 import { LIBRARY } from '@graasp/translations';
 
@@ -18,6 +18,7 @@ import { removeTagsFromString } from '../../utils/text';
 import BadgeContainer from '../common/BadgeContainer';
 import FavoriteBadge from '../common/FavoriteBadge';
 import VisibilityBadge from '../common/VisibilityBadge';
+import { useTheme } from '@emotion/react';
 
 function Badges({ views, likes, name, description }) {
   const { t } = useTranslation();
@@ -51,6 +52,11 @@ function Badges({ views, likes, name, description }) {
 
   const shouldShowLikesAndViews = likes !== undefined || views !== undefined;
 
+  const theme = useTheme();
+  const isSm = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const iconSize = isSm ? 'medium' : 'large';
+
   return (
     <Grid container justify="space-between" alignItems="center" mb={1}>
       {shouldShowLikesAndViews && (
@@ -63,14 +69,14 @@ function Badges({ views, likes, name, description }) {
       )}
       <Grid item>
         <IconButton color="primary" onClick={shareOnFacebook}>
-          <Facebook fontSize="large" />
+          <Facebook fontSize={iconSize} />
         </IconButton>
         <IconButton color="primary" onClick={shareOnTwitter}>
-          <Twitter fontSize="large" />
+          <Twitter fontSize={iconSize} />
         </IconButton>
         <a href={mailString}>
           <IconButton color="primary">
-            <Email fontSize="large" />
+            <Email fontSize={iconSize} />
           </IconButton>
         </a>
       </Grid>

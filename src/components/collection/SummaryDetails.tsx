@@ -188,7 +188,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
 
       <Grid item xs={12} sm={12} md={8}>
         <DetailCard>
-          <Typography variant="body1" fontWeight="bold">
+          <Typography variant="body1" fontWeight="bold" gutterBottom>
             {t(LIBRARY.SUMMARY_DETAILS_LICENSE_TITLE)}
           </Typography>
           <Box justifyContent="center" display="flex">
