@@ -41,7 +41,7 @@ const Description: React.FC<DescriptionProps> = ({ description, maxLength, isLoa
     return <Skeleton />;
   }
 
-  if (shortDescription && shortDescription.length) {
+  if (description && shortDescription && shortDescription.length) {
     // Case distinction to allow the show more button to be rendered inline.
     return collapsedDescription ? (
       <div>

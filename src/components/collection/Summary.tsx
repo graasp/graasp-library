@@ -134,7 +134,11 @@ const Summary: React.FC<SummaryProps> = ({ collection, likes = 0, views = 0, isL
         <>
           <Box sx={{ my: 4 }} />
           <Container maxWidth='lg'>
-            <Items parentId={itemId} lang={member?.extra?.lang} />
+            <Items 
+              parentId={itemId} 
+              lang={member?.extra?.lang} 
+              isTopLevel={path.indexOf('.') < 0}
+            />
           </Container>
         </>
       )}

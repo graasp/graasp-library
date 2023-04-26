@@ -82,9 +82,10 @@ const CollapsibleItemCategory: React.FC<CollapsibleItemCategoryProps> = ({
 type ItemsProps = {
   parentId: string;
   lang: string | undefined;
+  isTopLevel: boolean;
 };
 
-const Items: React.FC<ItemsProps> = ({ parentId, lang }) => {
+const Items: React.FC<ItemsProps> = ({ parentId, lang, isTopLevel }) => {
   const { t } = useTranslation();
   const { hooks } = useContext(QueryClientContext);
   const { data: items } = hooks.useChildren(parentId, {
@@ -114,6 +115,9 @@ const Items: React.FC<ItemsProps> = ({ parentId, lang }) => {
     return DEFAULT_ITEM_SHOWN_COUNT.xl;
   }, [extraSmall, small, medium, large]);
 
+  const emptyMessage = isTopLevel ? t(LIBRARY.COLLECTION_ITEMS_EMPTY_MESSAGE) : 
+    t(LIBRARY.COLLECTION_ITEMS_EMPTY_FOLDER_MESSAGE);
+
   return (
     <div style={{ flexGrow: 1 }}>
 
@@ -124,7 +128,7 @@ const Items: React.FC<ItemsProps> = ({ parentId, lang }) => {
       {!items?.size ? (
         <div className="Main">
           <Typography variant="body1" mx={1} color="inherit">
-            {t(LIBRARY.COLLECTION_ITEMS_EMPTY_MESSAGE)}
+            {emptyMessage}
           </Typography>
         </div>
       ) : (
