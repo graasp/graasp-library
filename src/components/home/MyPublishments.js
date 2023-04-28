@@ -9,7 +9,7 @@ import { QueryClientContext } from '../QueryClientContext';
 import CollectionsGrid from '../collection/CollectionsGrid';
 import TabPanel from './TabPanel';
 
-function MyPublishments({ tab, index }) {
+const MyPublishments = ({ tab, index }) => {
   const { hooks } = useContext(QueryClientContext);
   const { data: member } = hooks.useCurrentMember();
   const { data: collections, isLoading } = hooks.usePublicItemsWithTag(
@@ -31,7 +31,7 @@ function MyPublishments({ tab, index }) {
       />
     </TabPanel>
   );
-}
+};
 
 MyPublishments.propTypes = {
   tab: PropTypes.number.isRequired,

@@ -14,7 +14,7 @@ import MyFavorites from './MyFavorites';
 import MyLikes from './MyLikes';
 import MyPublishments from './MyPublishments';
 
-function MyList() {
+const MyList = () => {
   const { t } = useTranslation();
 
   const [tab, setTab] = useState(0);
@@ -56,6 +56,6 @@ function MyList() {
       <MyPublishments tab={tab} index={2} />
     </Box>
   );
-}
+};
 
 export default MyList;

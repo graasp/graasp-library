@@ -7,14 +7,12 @@ import { Box } from '@mui/material';
 import CollectionsGrid from './CollectionsGrid';
 import SimilarCollectionsHeader from './SimilarCollectionsHeader';
 
-function SimilarCollections({ similarCollections }) {
-  return (
-    <Box flexGrow={1}>
-      <SimilarCollectionsHeader />
-      <CollectionsGrid collections={similarCollections} />
-    </Box>
-  );
-}
+const SimilarCollections = ({ similarCollections }) => (
+  <Box flexGrow={1}>
+    <SimilarCollectionsHeader />
+    <CollectionsGrid collections={similarCollections} />
+  </Box>
+);
 
 SimilarCollections.propTypes = {
   similarCollections: PropTypes.arrayOf(

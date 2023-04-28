@@ -8,7 +8,7 @@ import List from '@mui/material/List';
 import Comment from './Comment';
 import CommentsHeader from './CommentsHeader';
 
-function Comments({ comments, members }) {
+const Comments = ({ comments, members }) => {
   if (!comments || !comments.length) {
     return null;
   }
@@ -34,7 +34,7 @@ function Comments({ comments, members }) {
       </Grid>
     </>
   );
-}
+};
 
 Comments.propTypes = {
   comments: PropTypes.arrayOf(

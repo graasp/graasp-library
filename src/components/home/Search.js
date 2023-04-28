@@ -25,7 +25,7 @@ import {
 } from '../../config/selectors';
 import { SEARCH_RANGES } from '../../enums/searchRanges';
 
-function Search({ handleClick, isLoading, range, handleRangeChange }) {
+const Search = ({ handleClick, isLoading, range, handleRangeChange }) => {
   const [searchInput, setSearchInput] = useState(null);
 
   const { t } = useTranslation();
@@ -97,8 +97,8 @@ function Search({ handleClick, isLoading, range, handleRangeChange }) {
             />
           ))}
           {/*
-            TODO: prompt users hints about how to use multiple keywords 
-            <Tooltip title="Use | or & for union/intersection of multiple keywords if choose 'Tag' or 'All'"> 
+            TODO: prompt users hints about how to use multiple keywords
+            <Tooltip title="Use | or & for union/intersection of multiple keywords if choose 'Tag' or 'All'">
             <IconButton>
               <HelpIcon />
             </IconButton>
@@ -108,7 +108,7 @@ function Search({ handleClick, isLoading, range, handleRangeChange }) {
       </FormControl>
     </>
   );
-}
+};
 
 Search.propTypes = {
   handleClick: PropTypes.func.isRequired,

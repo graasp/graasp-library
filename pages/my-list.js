@@ -10,13 +10,11 @@ import MyList from '../src/components/home/MyList';
 import { PUBLISHED_ITEMS_KEY } from '../src/config/constants';
 import { QUERY_CLIENT_OPTIONS } from '../src/config/queryClient';
 
-function MyListPage({ dehydratedState }) {
-  return (
-    <Wrapper dehydratedState={dehydratedState}>
-      <MyList />
-    </Wrapper>
-  );
-}
+const MyListPage = ({ dehydratedState }) => (
+  <Wrapper dehydratedState={dehydratedState}>
+    <MyList />
+  </Wrapper>
+);
 
 MyListPage.propTypes = {
   dehydratedState: PropTypes.shape({}).isRequired,

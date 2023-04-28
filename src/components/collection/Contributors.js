@@ -12,7 +12,7 @@ import { LIBRARY } from '@graasp/translations';
 import { buildContributorId } from '../../config/selectors';
 import { getAvatar } from '../../utils/layout';
 
-function Contributors({ contributors, displayContributors }) {
+const Contributors = ({ contributors, displayContributors }) => {
   const { t } = useTranslation();
 
   if (!contributors || contributors.isEmpty()) {
@@ -51,7 +51,7 @@ function Contributors({ contributors, displayContributors }) {
       </AvatarGroup>
     </div>
   );
-}
+};
 
 Contributors.propTypes = {
   contributors: PropTypes.instanceOf(List),

@@ -10,13 +10,11 @@ import Home from '../src/components/home/Home';
 import { PUBLISHED_ITEMS_KEY } from '../src/config/constants';
 import { QUERY_CLIENT_OPTIONS } from '../src/config/queryClient';
 
-function HomePage({ dehydratedState }) {
-  return (
-    <Wrapper dehydratedState={dehydratedState}>
-      <Home />
-    </Wrapper>
-  );
-}
+const HomePage = ({ dehydratedState }) => (
+  <Wrapper dehydratedState={dehydratedState}>
+    <Home />
+  </Wrapper>
+);
 
 HomePage.propTypes = {
   dehydratedState: PropTypes.shape({}).isRequired,
