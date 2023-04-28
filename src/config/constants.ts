@@ -79,7 +79,7 @@ export const PUBLISHED_ITEMS_KEY = [ITEMS_KEY, 'itemTags', PUBLISHED_TAG_ID];
 export const buildCollectionKey = (id: string) => [ITEMS_KEY, id];
 
 export const CLIENT_ERROR_MESSAGE = 'Something went wrong!';
-export const DEFAULT_ITEM_IMAGE_PATH = '/icon.png';
+export const DEFAULT_ITEM_IMAGE_PATH = '/libraryDefault.svg';
 export const DEFAULT_MEMBER_THUMBNAIL = '/defaultAvatar.png';
 export const AVATAR_ICON_HEIGHT = 30;
 

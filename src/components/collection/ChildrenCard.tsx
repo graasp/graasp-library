@@ -78,7 +78,7 @@ export const SubItemCard: React.FC<SubItemCardProps> = ({ item, thumbnail, subte
       <Grid container>
         <Grid item xs={12} display='flex' alignItems='center' justifyContent='space-between'>
           {thumbnail}
-          <div className={forceShowActions ? ' actions-shown' : 'actions'}>
+          <div className={forceShowActions ? ' actionsShown' : 'actions'}>
             {member?.id && <CopyButton id={id} />}
             <CopyLinkButton id={id} extra={extra} />
             <DownloadButton id={id} />
