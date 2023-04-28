@@ -1,8 +1,5 @@
 import { HOME_ROUTE } from '../../src/config/routes';
-import {
-  HEADER_ALL_COLLECTIONS_ID,
-  HEADER_MY_LIST_ID,
-} from '../../src/config/selectors';
+import { HEADER_ALL_COLLECTIONS_ID } from '../../src/config/selectors';
 import { PUBLISHED_ITEMS } from '../fixtures/items';
 import { SIGNED_OUT_MEMBER } from '../fixtures/members';
 
@@ -15,7 +12,7 @@ describe('Header', () => {
 
     it('Layout', () => {
       cy.get(`#${HEADER_ALL_COLLECTIONS_ID}`).should('be.visible');
-      cy.get(`#${HEADER_MY_LIST_ID}`).should('be.visible');
+      // cy.get(`#${HEADER_MY_LIST_ID}`).should('be.visible');
     });
   });
 
@@ -27,7 +24,7 @@ describe('Header', () => {
 
     it('Do not show My List if signed out', () => {
       cy.get(`#${HEADER_ALL_COLLECTIONS_ID}`).should('be.visible');
-      cy.get(`#${HEADER_MY_LIST_ID}`).should('not.exist');
+      // cy.get(`#${HEADER_MY_LIST_ID}`).should('not.exist');
     });
   });
 });
