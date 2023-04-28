@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { Divider, ThemeProvider, createTheme } from '@mui/material';
+import { Box, Divider, ThemeProvider, createTheme } from '@mui/material';
 
 import { LIBRARY } from '@graasp/translations';
 import '@graasp/ui/dist/bundle.css';
@@ -46,13 +46,13 @@ const Wrapper = ({ dehydratedState, children }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <div sx={{ flexGrow: 1, height: '100%' }}>
+      <Box sx={{ flexGrow: 1, height: '100%' }}>
         <QueryClientProvider dehydratedState={dehydratedState}>
           <TranslationWrapper>
             <Content>{children}</Content>
           </TranslationWrapper>
         </QueryClientProvider>
-      </div>
+      </Box>
     </ThemeProvider>
   );
 };

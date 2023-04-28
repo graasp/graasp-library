@@ -16,9 +16,9 @@ import {
 } from '@mui/material';
 
 import { MUTATION_KEYS } from '@graasp/query-client';
+import { ThumbnailSize } from '@graasp/sdk';
 import { ItemLikeRecord, MemberRecord } from '@graasp/sdk/dist/frontend/types';
 
-import { THUMBNAIL_SIZES } from '../../config/constants';
 import {
   ITEM_SUMMARY_TITLE_ID,
   SUMMARY_TAGS_CONTAINER_ID,
@@ -116,7 +116,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
               <CardMedia
                 itemId={itemId}
                 name={name}
-                size={THUMBNAIL_SIZES.ORIGINAL}
+                size={ThumbnailSize.Original}
               />
             )}
           </StyledCard>

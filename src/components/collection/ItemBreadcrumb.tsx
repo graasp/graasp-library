@@ -4,7 +4,7 @@ import React, { useContext } from 'react';
 
 import { Breadcrumbs, Button, Typography } from '@mui/material';
 
-import { ItemRecord } from '@graasp/sdk/dist/frontend/types';
+import { ItemRecord } from '@graasp/sdk/frontend';
 
 import { buildCollectionRoute } from '../../config/routes';
 import { QueryClientContext } from '../QueryClientContext';

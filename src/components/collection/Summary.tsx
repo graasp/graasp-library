@@ -8,7 +8,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 
 import { Category, CategoryType, ItemCategory } from '@graasp/sdk';
-import { ItemRecord, MemberRecord } from '@graasp/sdk/dist/frontend/types';
+import { ItemRecord, MemberRecord } from '@graasp/sdk/frontend';
 import { LIBRARY } from '@graasp/translations';
 
 import {

@@ -9,7 +9,7 @@ import { Grid, styled } from '@mui/material';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
-import { ItemRecord } from '@graasp/sdk/dist/frontend/types';
+import { ItemRecord } from '@graasp/sdk/frontend';
 import { LIBRARY } from '@graasp/translations';
 
 import {
