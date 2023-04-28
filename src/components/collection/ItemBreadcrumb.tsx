@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 import React, { useContext } from 'react';
 
@@ -28,16 +28,10 @@ const ItemBreadcrumb: React.FC<ItemBreadcrumbProps> = ({ itemId }) => {
     return null;
   }
 
-  const router = useRouter();
-
   return (
     <Breadcrumbs>
       {parents.data.map((parent: ItemRecord) => (
-        <Button
-          onClick={() => {
-            router.push(buildCollectionRoute(parent.id));
-          }}
-        >
+        <Button component={Link} href={buildCollectionRoute(parent.id)}>
           {parent.name}
         </Button>
       ))}
