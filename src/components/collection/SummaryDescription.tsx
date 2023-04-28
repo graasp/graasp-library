@@ -1,8 +1,11 @@
-import { LIBRARY } from '@graasp/translations';
-import { Button, Grow, Skeleton, Typography } from '@mui/material';
 import { Interweave } from 'interweave';
+
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
+import { Button, Grow, Skeleton, Typography } from '@mui/material';
+
+import { LIBRARY } from '@graasp/translations';
 
 type DescriptionProps = {
   isLoading: boolean;
@@ -10,8 +13,11 @@ type DescriptionProps = {
   maxLength: number;
 };
 
-const Description: React.FC<DescriptionProps> = ({ description, maxLength, isLoading }) => {
-
+const Description: React.FC<DescriptionProps> = ({
+  description,
+  maxLength,
+  isLoading,
+}) => {
   const { t } = useTranslation();
 
   const [collapsedDescription, setCollapsedDescription] = useState(true);
@@ -30,7 +36,9 @@ const Description: React.FC<DescriptionProps> = ({ description, maxLength, isLoa
       return description;
     }
 
-    const strippedDescription = new DOMParser().parseFromString(description, 'text/html').body.textContent ?? '';
+    const strippedDescription =
+      new DOMParser().parseFromString(description, 'text/html').body
+        .textContent ?? '';
     if (strippedDescription.length > maxLength) {
       return `${strippedDescription?.substring(0, maxLength)}...`;
     }
@@ -48,7 +56,7 @@ const Description: React.FC<DescriptionProps> = ({ description, maxLength, isLoa
         {shortDescription}
         <Button
           sx={{ display: 'inline-block' }}
-          size='small'
+          size="small"
           onClick={handleShowMoreButton}
         >
           {t(LIBRARY.SUMMARY_DESCRIPTION_SHOW_MORE)}
@@ -57,12 +65,10 @@ const Description: React.FC<DescriptionProps> = ({ description, maxLength, isLoa
     ) : (
       <Grow in>
         <div>
-          <Interweave
-            content={shortDescription}
-          />
+          <Interweave content={shortDescription} />
           <Button
             sx={{ display: 'inline-block' }}
-            size='small'
+            size="small"
             onClick={handleShowMoreButton}
           >
             {t(LIBRARY.SUMMARY_DESCRIPTION_SHOW_LESS)}
@@ -73,7 +79,7 @@ const Description: React.FC<DescriptionProps> = ({ description, maxLength, isLoa
   }
 
   return (
-    <Typography sx={{ fontStyle: 'italic' }} variant='body2'>
+    <Typography sx={{ fontStyle: 'italic' }} variant="body2">
       {t(LIBRARY.COLLECTION_EMPTY_DESCRIPTION_TEXT)}
     </Typography>
   );

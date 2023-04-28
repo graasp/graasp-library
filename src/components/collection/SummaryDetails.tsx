@@ -1,18 +1,13 @@
-import {
-  Box,
-  Chip,
-  Grid,
-  Skeleton,
-  styled,
-  Typography,
-} from '@mui/material';
+import dynamic from 'next/dynamic';
 
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import dynamic from 'next/dynamic';
+
+import { Box, Chip, Grid, Skeleton, Typography, styled } from '@mui/material';
 
 import { LIBRARY } from '@graasp/translations';
 
+import { CATEGORY_COLORS, CATEGORY_TYPES } from '../../config/constants';
 import {
   SUMMARY_CATEGORIES_CONTAINER_ID,
   SUMMARY_CC_LICENSE_CONTAINER_ID,
@@ -21,7 +16,6 @@ import {
   SUMMARY_LANGUAGES_CONTAINER_ID,
   SUMMARY_LAST_UPDATE_CONTAINER_ID,
 } from '../../config/selectors';
-import { CATEGORY_COLORS, CATEGORY_TYPES } from '../../config/constants';
 
 const { DateTime } = require('luxon');
 
@@ -124,9 +118,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
             <Typography variant="body1" fontWeight="bold">
               {t(LIBRARY.COLLECTION_LANGUAGES_TITLE)}
             </Typography>
-            {isLoading && (
-              <Skeleton />
-            )}
+            {isLoading && <Skeleton />}
             {languages?.size ? (
               languages?.map((entry) => (
                 <Chip
@@ -139,9 +131,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
                 />
               ))
             ) : (
-              <Typography>
-                {t(LIBRARY.SUMMARY_DETAILS_NO_LANGUAGES)}
-              </Typography>
+              <Typography>{t(LIBRARY.SUMMARY_DETAILS_NO_LANGUAGES)}</Typography>
             )}
           </div>
         </DetailCard>
@@ -197,7 +187,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
                 <Box maxWidth={600}>
                   <CreativeCommons
                     allowCommercialUse
-                    allowSharedAdaptation='yes'
+                    allowSharedAdaptation="yes"
                     iconSize={48}
                     sx={{ marginY: 0, paddingY: 0 }}
                   />
@@ -218,7 +208,10 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
                     sx={{ marginY: 0, paddingY: 0 }}
                   />
                 ) : (
-                  <Typography variant='body1' id={SUMMARY_CC_LICENSE_NO_LICENSE_ID}>
+                  <Typography
+                    variant="body1"
+                    id={SUMMARY_CC_LICENSE_NO_LICENSE_ID}
+                  >
                     {t(LIBRARY.SUMMARY_DETAILS_EMPTY_LICENSE_TEXT)}
                   </Typography>
                 )}

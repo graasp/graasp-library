@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { LIBRARY } from '@graasp/translations';
 import { useTranslation } from 'react-i18next';
+
+import { Code, CopyAll, Download, MoreVert } from '@mui/icons-material';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import {
   Button,
@@ -11,12 +12,14 @@ import {
   Popper,
   styled,
 } from '@mui/material';
+
 import { UnknownExtra } from '@graasp/sdk';
-import { Code, CopyAll, Download, MoreVert } from '@mui/icons-material';
+import { LIBRARY } from '@graasp/translations';
+
 import { buildPlayerViewItemRoute } from '../../config/constants';
 import { openInNewTab } from '../../utils/helpers';
-import { useEmbedAction } from './CopyLinkButton';
 import { useCopyAction } from './CopyButton';
+import { useEmbedAction } from './CopyLinkButton';
 import { useDownloadAction } from './DownloadButton';
 
 const StyledButton = styled(Button)(() => ({
@@ -37,19 +40,11 @@ const SummaryActionButtons: React.FC<SummaryActionButtonsProps> = ({
 }) => {
   const { t } = useTranslation();
 
-  const { 
-    isCopying,
-    startCopy,
-    treeModal,
-  } = useCopyAction(itemId);
+  const { isCopying, startCopy, treeModal } = useCopyAction(itemId);
 
-  const {
-    startDownload,
-  } = useDownloadAction(itemId);
+  const { startDownload } = useDownloadAction(itemId);
 
-  const {
-    startEmbed,
-  } = useEmbedAction(itemId, extra);
+  const { startEmbed } = useEmbedAction(itemId, extra);
 
   const [open, setOpen] = useState(false);
   const anchorRef = React.useRef<HTMLDivElement>(null);
@@ -75,7 +70,11 @@ const SummaryActionButtons: React.FC<SummaryActionButtonsProps> = ({
 
   return (
     <>
-      <ButtonGroup variant="contained" aria-label="split button" ref={anchorRef}>
+      <ButtonGroup
+        variant="contained"
+        aria-label="split button"
+        ref={anchorRef}
+      >
         <Button
           size="large"
           color="primary"
@@ -104,7 +103,7 @@ const SummaryActionButtons: React.FC<SummaryActionButtonsProps> = ({
         anchorEl={anchorRef.current}
         open={open}
         role={undefined}
-        placement='bottom'
+        placement="bottom"
         transition
         disablePortal
       >
@@ -113,15 +112,18 @@ const SummaryActionButtons: React.FC<SummaryActionButtonsProps> = ({
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...TransitionProps}
             style={{
-              transformOrigin:
-                placement === 'bottom' ? 'top' : 'bottom',
+              transformOrigin: placement === 'bottom' ? 'top' : 'bottom',
             }}
           >
             <div>
               <ClickAwayListener onClickAway={handleClose}>
-                <ButtonGroup variant='contained' orientation='vertical' fullWidth>
+                <ButtonGroup
+                  variant="contained"
+                  orientation="vertical"
+                  fullWidth
+                >
                   <StyledButton
-                    color='secondary'
+                    color="secondary"
                     onClick={startDownload}
                     startIcon={<Download />}
                   >
@@ -129,15 +131,21 @@ const SummaryActionButtons: React.FC<SummaryActionButtonsProps> = ({
                   </StyledButton>
                   {isLogged && (
                     <StyledButton
-                      color='secondary'
+                      color="secondary"
                       onClick={startCopy}
-                      startIcon={isCopying ? <CircularProgress color='secondary' size={20} /> : <CopyAll />}
+                      startIcon={
+                        isCopying ? (
+                          <CircularProgress color="secondary" size={20} />
+                        ) : (
+                          <CopyAll />
+                        )
+                      }
                     >
                       {t(LIBRARY.SUMMARY_ACTIONS_COPY)}
                     </StyledButton>
                   )}
                   <StyledButton
-                    color='secondary'
+                    color="secondary"
                     onClick={startEmbed}
                     startIcon={<Code />}
                   >
@@ -155,4 +163,3 @@ const SummaryActionButtons: React.FC<SummaryActionButtonsProps> = ({
 };
 
 export default SummaryActionButtons;
-

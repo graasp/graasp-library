@@ -1128,7 +1128,7 @@ __metadata:
   resolution: "@graasp/translations@https://github.com/graasp/graasp-translations.git#commit=6e59421abd76ab7a0fb27d8cf926ec5d0e729d97"
   dependencies:
     i18next: 21.8.1
-  checksum: 48b11fad3367781a3703f685d6c8e875c87164a6f6697fd7bb86b942355b9dba36d1029cbff3e59c297f9c5e18949681b1c28807090d091daf9ba63f38d198ba
+  checksum: 6bac428730099d9859a9cef10cd173ac9d0d60f9d7323d88ff9c6fa3cfd398d9ed794bed80f3a4bd91f152f937d029e674e37f23cff9a82cc0f1288bdd464940
   languageName: node
   linkType: hard
 
@@ -1176,7 +1176,7 @@ __metadata:
       optional: true
     ag-grid-react:
       optional: true
-  checksum: 123ac867acf081b601e67991d881f7189a134e6f61e1e52550667703860f4b6f720e363d8085de22b5d35a0baf6156cda7388f1e7fe312f178c5886097053b1d
+  checksum: c34b705831717dd120109899be2fb60627c8b476faecb565bdc51e11dcf9d7f0062abf3384680744aab64637c981e488c5e92ce386e24fce87f5885f6bd101d2
   languageName: node
   linkType: hard
 
@@ -4669,14 +4669,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-prettier@npm:7.2.0":
-  version: 7.2.0
-  resolution: "eslint-config-prettier@npm:7.2.0"
+"eslint-config-prettier@npm:8.8.0":
+  version: 8.8.0
+  resolution: "eslint-config-prettier@npm:8.8.0"
   peerDependencies:
     eslint: ">=7.0.0"
   bin:
     eslint-config-prettier: bin/cli.js
-  checksum: e3f7bba98e743bf62e937518104d3eb1dbbd17e8aef2b64ac4683c0e6d0643aca678b9f7321d1da79e7a4fd8c65b8836a20a8b0721647cb81787fd2caa046361
+  checksum: 1e94c3882c4d5e41e1dcfa2c368dbccbfe3134f6ac7d40101644d3bfbe3eb2f2ffac757f3145910b5eacf20c0e85e02b91293d3126d770cbf3dc390b3564681c
   languageName: node
   linkType: hard
 
@@ -4844,6 +4844,21 @@ __metadata:
   peerDependencies:
     eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8
   checksum: f166dd5fe7257c7b891c6692e6a3ede6f237a14043ae3d97581daf318fc5833ddc6b4871aa34ab7656187430170500f6d806895747ea17ecdf8231a666c3c2fd
+  languageName: node
+  linkType: hard
+
+"eslint-plugin-prettier@npm:4.2.1":
+  version: 4.2.1
+  resolution: "eslint-plugin-prettier@npm:4.2.1"
+  dependencies:
+    prettier-linter-helpers: ^1.0.0
+  peerDependencies:
+    eslint: ">=7.28.0"
+    prettier: ">=2.0.0"
+  peerDependenciesMeta:
+    eslint-config-prettier:
+      optional: true
+  checksum: b9e839d2334ad8ec7a5589c5cb0f219bded260839a857d7a486997f9870e95106aa59b8756ff3f37202085ebab658de382b0267cae44c3a7f0eb0bcc03a4f6d6
   languageName: node
   linkType: hard
 
@@ -5225,6 +5240,13 @@ __metadata:
   version: 1.1.2
   resolution: "fast-diff@npm:1.1.2"
   checksum: 2ef726603e22a89ef27225bfaef24c17e3aec188df24da4629d5f012b23a884e09a0c7299ff37a0aec7aa788755bd554f5801f698de4deeffce83308bd11405d
+  languageName: node
+  linkType: hard
+
+"fast-diff@npm:^1.1.2":
+  version: 1.2.0
+  resolution: "fast-diff@npm:1.2.0"
+  checksum: 1b5306eaa9e826564d9e5ffcd6ebd881eb5f770b3f977fcbf38f05c824e42172b53c79920e8429c54eb742ce15a0caf268b0fdd5b38f6de52234c4a8368131ae
   languageName: node
   linkType: hard
 
@@ -5982,10 +6004,11 @@ __metadata:
     eslint: 7.32.0
     eslint-config-airbnb: 18.2.1
     eslint-config-airbnb-typescript: 17.0.0
-    eslint-config-prettier: 7.2.0
+    eslint-config-prettier: 8.8.0
     eslint-import-resolver-typescript: 3.5.2
     eslint-plugin-import: 2.25.4
     eslint-plugin-jsx-a11y: 6.5.1
+    eslint-plugin-prettier: 4.2.1
     eslint-plugin-react: 7.28.0
     eslint-plugin-react-app: 6.2.2
     http-status-codes: 2.2.0
@@ -8758,6 +8781,15 @@ __metadata:
   version: 1.2.1
   resolution: "prelude-ls@npm:1.2.1"
   checksum: cd192ec0d0a8e4c6da3bb80e4f62afe336df3f76271ac6deb0e6a36187133b6073a19e9727a1ff108cd8b9982e4768850d413baa71214dd80c7979617dca827a
+  languageName: node
+  linkType: hard
+
+"prettier-linter-helpers@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "prettier-linter-helpers@npm:1.0.0"
+  dependencies:
+    fast-diff: ^1.1.2
+  checksum: 00ce8011cf6430158d27f9c92cfea0a7699405633f7f1d4a45f07e21bf78e99895911cbcdc3853db3a824201a7c745bd49bfea8abd5fb9883e765a90f74f8392
   languageName: node
   linkType: hard
 

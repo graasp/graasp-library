@@ -1,14 +1,14 @@
 import { MY_LIST_ROUTE } from '../../../src/config/routes';
 import {
-  getNumberOfOwnPublishedItems,
-  PUBLISHED_ITEMS,
-} from '../../fixtures/items';
-import { ITEM_PUBLISHED_TAG } from '../../fixtures/itemTags';
-import { CURRENT_USER } from '../../fixtures/members';
-import {
-  buildMyListNavigationTabId,
   MY_PUBLISHMENTS_COLLECTIONS_ID,
+  buildMyListNavigationTabId,
 } from '../../../src/config/selectors';
+import { ITEM_PUBLISHED_TAG } from '../../fixtures/itemTags';
+import {
+  PUBLISHED_ITEMS,
+  getNumberOfOwnPublishedItems,
+} from '../../fixtures/items';
+import { CURRENT_USER } from '../../fixtures/members';
 
 describe('My Published Items', () => {
   describe('Current user', () => {
@@ -18,9 +18,7 @@ describe('My Published Items', () => {
       cy.visit(MY_LIST_ROUTE);
 
       // click my publishment tab
-      cy.get(
-        `#${buildMyListNavigationTabId('myPublishments')}`,
-      ).click();
+      cy.get(`#${buildMyListNavigationTabId('myPublishments')}`).click();
 
       cy.wait('@getPublicItemsWithTags').then(({ request: { url } }) => {
         expect(url).to.contain(ITEM_PUBLISHED_TAG.id);

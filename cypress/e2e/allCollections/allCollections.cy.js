@@ -19,8 +19,7 @@ import { getRootPublishedItems } from '../../support/utils';
 buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
   describe(`All Collections Page for ${environment.currentMember.name}`, () => {
     // check if title and headings are displayed correctly
-    beforeEach(()=>
-    {
+    beforeEach(() => {
       cy.setUpApi(environment);
       if (environment.currentMember?.extra?.lang) {
         i18n.changeLanguage(environment.currentMember?.extra?.lang);
@@ -29,7 +28,6 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
     });
 
     it('Layout', () => {
-
       cy.get(`#${TITLE_TEXT_ID}`).should(
         'have.text',
         i18n.t(LIBRARY.ALL_COLLECTIONS_TITLE),
@@ -56,7 +54,6 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
     });
 
     it('display menu options', () => {
-
       cy.get(buildEducationLevelOptionSelector(0)).should(
         'have.text',
         SAMPLE_CATEGORIES[0].name,

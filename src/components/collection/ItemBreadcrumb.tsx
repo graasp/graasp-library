@@ -1,9 +1,13 @@
-import React, { useContext } from 'react';
-import { ItemRecord } from '@graasp/sdk/dist/frontend/types';
 import { useRouter } from 'next/router';
+
+import React, { useContext } from 'react';
+
 import { Breadcrumbs, Button, Typography } from '@mui/material';
-import { QueryClientContext } from '../QueryClientContext';
+
+import { ItemRecord } from '@graasp/sdk/dist/frontend/types';
+
 import { buildCollectionRoute } from '../../config/routes';
+import { QueryClientContext } from '../QueryClientContext';
 
 type ItemBreadcrumbProps = {
   itemId: string;
@@ -34,13 +38,10 @@ const ItemBreadcrumb: React.FC<ItemBreadcrumbProps> = ({ itemId }) => {
             router.push(buildCollectionRoute(parent.id));
           }}
         >
-          
           {parent.name}
         </Button>
       ))}
-      <Typography color="text.primary">
-        {item?.name}
-      </Typography>
+      <Typography color="text.primary">{item?.name}</Typography>
     </Breadcrumbs>
   );
 };

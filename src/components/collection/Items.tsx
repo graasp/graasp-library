@@ -4,20 +4,19 @@ import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Add, Remove } from '@mui/icons-material';
-
+import { Button, Grow, useMediaQuery, useTheme } from '@mui/material';
+import Box from '@mui/material/Box/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box/Box';
-import { Button, Grow, useMediaQuery, useTheme } from '@mui/material';
 
-import { LIBRARY } from '@graasp/translations';
 import { ItemRecord } from '@graasp/sdk/dist/frontend/types';
+import { LIBRARY } from '@graasp/translations';
 
+import { ITEM_TYPES } from '../../config/constants';
 import { CHILDREN_ITEMS_GRID_ID } from '../../config/selectors';
 import { PLACEHOLDER_COLLECTION } from '../../utils/collections';
 import { QueryClientContext } from '../QueryClientContext';
 import { FileChildrenCard, FolderChildrenCard } from './ChildrenCard';
-import { ITEM_TYPES } from '../../config/constants';
 
 const DEFAULT_ITEM_SHOWN_COUNT = {
   xs: 4,
@@ -57,12 +56,19 @@ const CollapsibleItemCategory: React.FC<CollapsibleItemCategoryProps> = ({
 
   return (
     <>
-      <Box display='flex' justifyContent='flex-end'>
+      <Box display="flex" justifyContent="flex-end">
         {items.size > defaultItemCount && (
-          <Button onClick={handleShowMoreItems} startIcon={showMoreItems ? <Remove /> : <Add />}>
-            {showMoreItems ?
-              t(LIBRARY.SUMMARY_ITEMS_SHOW_LESS, { count: additionalItemsCount }) :
-              t(LIBRARY.SUMMARY_ITEMS_SHOW_MORE, { count: additionalItemsCount })}
+          <Button
+            onClick={handleShowMoreItems}
+            startIcon={showMoreItems ? <Remove /> : <Add />}
+          >
+            {showMoreItems
+              ? t(LIBRARY.SUMMARY_ITEMS_SHOW_LESS, {
+                  count: additionalItemsCount,
+                })
+              : t(LIBRARY.SUMMARY_ITEMS_SHOW_MORE, {
+                  count: additionalItemsCount,
+                })}
           </Button>
         )}
       </Box>
@@ -115,13 +121,13 @@ const Items: React.FC<ItemsProps> = ({ parentId, lang, isTopLevel }) => {
     return DEFAULT_ITEM_SHOWN_COUNT.xl;
   }, [extraSmall, small, medium, large]);
 
-  const emptyMessage = isTopLevel ? t(LIBRARY.COLLECTION_ITEMS_EMPTY_MESSAGE) : 
-    t(LIBRARY.COLLECTION_ITEMS_EMPTY_FOLDER_MESSAGE);
+  const emptyMessage = isTopLevel
+    ? t(LIBRARY.COLLECTION_ITEMS_EMPTY_MESSAGE)
+    : t(LIBRARY.COLLECTION_ITEMS_EMPTY_FOLDER_MESSAGE);
 
   return (
     <div style={{ flexGrow: 1 }}>
-
-      <Typography variant='h6' fontWeight='bold'>
+      <Typography variant="h6" fontWeight="bold">
         {t(LIBRARY.SUMMARY_CONTENT_TITLE)}
       </Typography>
 
@@ -138,11 +144,13 @@ const Items: React.FC<ItemsProps> = ({ parentId, lang, isTopLevel }) => {
               defaultItemCount={itemToShow}
               items={items}
             >
-              {(item) => (
-                item.type === ITEM_TYPES.FOLDER ?
-                  <FolderChildrenCard key={item.id} item={item} /> :
+              {(item) =>
+                item.type === ITEM_TYPES.FOLDER ? (
+                  <FolderChildrenCard key={item.id} item={item} />
+                ) : (
                   <FileChildrenCard key={item.id} item={item} lang={lang} />
-              )}
+                )
+              }
             </CollapsibleItemCategory>
           )}
         </>

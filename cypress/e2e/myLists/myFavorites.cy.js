@@ -1,7 +1,7 @@
 import { MY_LIST_ROUTE } from '../../../src/config/routes';
 import { MY_FAVORITES_COLLECTIONS_ID } from '../../../src/config/selectors';
-import { PUBLISHED_ITEMS } from '../../fixtures/items';
 import { ITEM_PUBLISHED_TAG } from '../../fixtures/itemTags';
+import { PUBLISHED_ITEMS } from '../../fixtures/items';
 import { buildMemberWithFavorites } from '../../fixtures/members';
 
 describe('My Favorite Items', () => {

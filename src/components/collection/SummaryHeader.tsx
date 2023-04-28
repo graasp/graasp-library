@@ -1,34 +1,37 @@
+import dynamic from 'next/dynamic';
+
+import React, { useContext } from 'react';
 
 import { Favorite, Visibility } from '@mui/icons-material';
 import { Skeleton } from '@mui/lab';
-import { ItemLikeRecord, MemberRecord } from '@graasp/sdk/dist/frontend/types';
-import { MUTATION_KEYS } from '@graasp/query-client';
 import {
-  Container,
-  Grid,
-  Typography,
-  Chip,
-  Divider,
-  Tooltip,
-  Stack,
   Box,
+  Chip,
+  Container,
+  Divider,
+  Grid,
+  Stack,
+  Tooltip,
+  Typography,
 } from '@mui/material';
-import dynamic from 'next/dynamic';
-import React, { useContext } from 'react';
-import { THUMBNAIL_SIZES } from '../../config/constants';
-import { ITEM_SUMMARY_TITLE_ID, SUMMARY_TAGS_CONTAINER_ID } from '../../config/selectors';
 
+import { MUTATION_KEYS } from '@graasp/query-client';
+import { ItemLikeRecord, MemberRecord } from '@graasp/sdk/dist/frontend/types';
+
+import { THUMBNAIL_SIZES } from '../../config/constants';
+import {
+  ITEM_SUMMARY_TITLE_ID,
+  SUMMARY_TAGS_CONTAINER_ID,
+} from '../../config/selectors';
+import { QueryClientContext } from '../QueryClientContext';
 import CardMedia from '../common/CardMediaComponent';
 import { StyledCard } from '../common/StyledCard';
 import Authorship from './Authorship';
 import Badges from './Badges';
 import SummaryActionButtons from './SummaryActionButtons';
 import Description from './SummaryDescription';
-import { QueryClientContext } from '../QueryClientContext';
 
-const {
-  LikeButton,
-} = {
+const { LikeButton } = {
   LikeButton: dynamic(
     () => import('@graasp/ui').then((mod) => mod.LikeButton),
     { ssr: false },
@@ -74,7 +77,9 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
     MUTATION_KEYS.DELETE_ITEM_LIKE,
   );
 
-  const likeEntry = likedItems?.find((itemLike: ItemLikeRecord) => itemLike?.itemId === itemId);
+  const likeEntry = likedItems?.find(
+    (itemLike: ItemLikeRecord) => itemLike?.itemId === itemId,
+  );
 
   const handleLike = () => {
     postItemLike({
@@ -93,11 +98,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
 
   return (
     <Container maxWidth="lg">
-      <Grid 
-        container 
-        columnSpacing={6} 
-        alignItems="start"
-      >
+      <Grid container columnSpacing={6} alignItems="start">
         <Grid
           item
           sm={12}
@@ -124,9 +125,9 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
           <Grid
             marginBottom={{ xs: 3, sm: 0 }}
             item
-            justifyContent='space-between'
+            justifyContent="space-between"
             flexDirection={{ xs: 'column', sm: 'row' }}
-            display='flex'
+            display="flex"
             alignItems={{ xs: 'start', sm: 'start' }}
           >
             <Typography
@@ -136,7 +137,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
             >
               {truncatedName}
               <LikeButton
-                ariaLabel=''
+                ariaLabel=""
                 color="primary"
                 isLiked={false}
                 handleLike={handleLike}
@@ -156,7 +157,9 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
                   <Chip key={text} label={text} component={Typography} mr={1} />
                 ))}
               </div>
-            ) : <div style={{ marginTop: 22 }} />}
+            ) : (
+              <div style={{ marginTop: 22 }} />
+            )}
           </Grid>
           <Grid item>
             <Typography variant="body1" gutterBottom component="div">
@@ -170,7 +173,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
           <Grid item>
             <Stack
               spacing={2}
-              direction='row'
+              direction="row"
               divider={<Divider orientation="vertical" flexItem />}
             >
               <Box display="flex" alignItems="center">
@@ -191,10 +194,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
                     <Tooltip title="Views" arrow placement="bottom">
                       <span style={{ display: 'flex', alignItems: 'center' }}>
                         {views}
-                        <Visibility
-                          color="primary"
-                          style={{ marginLeft: 5 }}
-                        />
+                        <Visibility color="primary" style={{ marginLeft: 5 }} />
                       </span>
                     </Tooltip>
                     <span style={{ margin: '0 10px' }}>

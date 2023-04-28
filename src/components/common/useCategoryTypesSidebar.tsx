@@ -19,8 +19,8 @@ import CategorySelection from '../home/CategorySelection';
 
 const licenseList = [
   { name: 'Accreditation', id: 'ac' },
-  { name: 'Noncommercial', id:'nc' },
-  { name: 'CC0', id:'cc0' },
+  { name: 'Noncommercial', id: 'nc' },
+  { name: 'CC0', id: 'cc0' },
 ];
 
 const useCategoryTypesSidebar = () => {
@@ -172,7 +172,7 @@ const useCategoryTypesSidebar = () => {
       />
       <Divider />
       <CategorySelection
-        title='License'
+        title="License"
         selectedValues={selectedLicenses}
         valueList={licenseList}
         handleClick={handleClickForLicense}

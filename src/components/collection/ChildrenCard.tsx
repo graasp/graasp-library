@@ -1,23 +1,27 @@
-import React, { useContext } from 'react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
+import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
+
+import { Folder, InsertDriveFile } from '@mui/icons-material';
+import { Grid, styled } from '@mui/material';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+
+import { ItemRecord } from '@graasp/sdk/dist/frontend/types';
 import { LIBRARY } from '@graasp/translations';
 
-import { Grid, styled } from '@mui/material';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import { Folder, InsertDriveFile } from '@mui/icons-material';
-import { ItemRecord } from '@graasp/sdk/dist/frontend/types';
-
+import {
+  DEFAULT_ITEM_IMAGE_PATH,
+  THUMBNAIL_SIZES,
+} from '../../config/constants';
+import { COLLECTION_CARD_BORDER_RADIUS } from '../../config/cssStyles';
+import { buildCollectionRoute } from '../../config/routes';
+import { QueryClientContext } from '../QueryClientContext';
 import CopyButton from './CopyButton';
 import CopyLinkButton from './CopyLinkButton';
 import DownloadButton from './DownloadButton';
-import { COLLECTION_CARD_BORDER_RADIUS } from '../../config/cssStyles';
-import { QueryClientContext } from '../QueryClientContext';
-import { DEFAULT_ITEM_IMAGE_PATH } from '../../config/constants';
-import { buildCollectionRoute } from '../../config/routes';
 
 const { DateTime } = require('luxon');
 
@@ -52,8 +56,11 @@ type SubItemCardProps = {
   subtext: string;
 };
 
-export const SubItemCard: React.FC<SubItemCardProps> = ({ item, thumbnail, subtext }) => {
-
+export const SubItemCard: React.FC<SubItemCardProps> = ({
+  item,
+  thumbnail,
+  subtext,
+}) => {
   const router = useRouter();
 
   const { hooks } = useContext(QueryClientContext);
@@ -71,12 +78,15 @@ export const SubItemCard: React.FC<SubItemCardProps> = ({ item, thumbnail, subte
   const forceShowActions = window && window.matchMedia('(hover: none)').matches;
 
   return (
-    <StyleFolderBox
-      id={id}
-      onClick={onClick}
-    >
+    <StyleFolderBox id={id} onClick={onClick}>
       <Grid container>
-        <Grid item xs={12} display='flex' alignItems='center' justifyContent='space-between'>
+        <Grid
+          item
+          xs={12}
+          display="flex"
+          alignItems="center"
+          justifyContent="space-between"
+        >
           {thumbnail}
           <div className={forceShowActions ? ' actions-shown' : 'actions'}>
             {member?.id && <CopyButton id={id} />}
@@ -85,12 +95,19 @@ export const SubItemCard: React.FC<SubItemCardProps> = ({ item, thumbnail, subte
           </div>
         </Grid>
         <Grid item xs={12}>
-          <Typography maxHeight="100%" noWrap variant="h6" component="h2" fontWeight='bold' marginTop={1}>
+          <Typography
+            maxHeight="100%"
+            noWrap
+            variant="h6"
+            component="h2"
+            fontWeight="bold"
+            marginTop={1}
+          >
             {name}
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <Typography variant='body1' color='GrayText'>
+          <Typography variant="body1" color="GrayText">
             {subtext}
           </Typography>
         </Grid>
@@ -104,40 +121,59 @@ type FileChildrenCardProps = {
   lang?: string;
 };
 
-export const FileChildrenCard: React.FC<FileChildrenCardProps> = ({ item, lang }) => {
-
+export const FileChildrenCard: React.FC<FileChildrenCardProps> = ({
+  item,
+  lang,
+}) => {
   const { t } = useTranslation();
 
   const { name, id } = item;
 
   const { hooks } = useContext(QueryClientContext);
 
-  const {
-    data: thumbnailData,
-  } = hooks.useItemThumbnail({ id: item.id, size: THUMBNAIL_SIZE });
+  const { data: thumbnailData } = hooks.useItemThumbnail({
+    id: item.id,
+    size: THUMBNAIL_SIZES.SMALL,
+  });
 
-  const subtext = item.updatedAt ? t(LIBRARY.SUMMARY_BROWSE_FILE_UPDATED, {
-    date: DateTime.fromISO(item.updatedAt).toLocaleString(
-      DateTime.DATE_FULL,
-      { locale: lang },
-    ),
-  }) : '...';
+  const subtext = item.updatedAt
+    ? t(LIBRARY.SUMMARY_BROWSE_FILE_UPDATED, {
+        date: DateTime.fromISO(item.updatedAt).toLocaleString(
+          DateTime.DATE_FULL,
+          { locale: lang },
+        ),
+      })
+    : '...';
 
-  const thumbnail = React.useMemo(() =>
-    thumbnailData ? (
-      <Thumbnail
-        defaultValue={<img style={THUMBNAIL_DIMENSIONS} src={DEFAULT_ITEM_IMAGE_PATH} alt="thumbnail" />}
-        alt={name}
-        useThumbnail={hooks.useItemThumbnail}
-        id={id}
-        thumbnailSrc={DEFAULT_ITEM_IMAGE_PATH}
-        sx={{ objectFit: 'cover', overflow: 'hidden', borderRadius: 1, ...THUMBNAIL_DIMENSIONS }}
-      />
-    ) : (
-      <div style={THUMBNAIL_DIMENSIONS}>
-        <InsertDriveFile fontSize='large' color='primary' />
-      </div>
-    ), [thumbnailData]);
+  const thumbnail = React.useMemo(
+    () =>
+      thumbnailData ? (
+        <Thumbnail
+          defaultValue={
+            <img
+              style={THUMBNAIL_DIMENSIONS}
+              src={DEFAULT_ITEM_IMAGE_PATH}
+              alt="thumbnail"
+            />
+          }
+          alt={name}
+          useThumbnail={hooks.useItemThumbnail}
+          id={id}
+          thumbnailSrc={DEFAULT_ITEM_IMAGE_PATH}
+          sx={{
+            objectFit: 'cover',
+            overflow: 'hidden',
+            borderRadius: 1,
+            ...THUMBNAIL_DIMENSIONS,
+          }}
+        />
+      ) : (
+        <div style={THUMBNAIL_DIMENSIONS}>
+          <InsertDriveFile fontSize="large" color="primary" />
+        </div>
+      ),
+    [thumbnailData],
+  );
 
   return <SubItemCard item={item} thumbnail={thumbnail} subtext={subtext} />;
 };
@@ -146,8 +182,9 @@ type FolderChildrenCardProps = {
   item: ItemRecord;
 };
 
-export const FolderChildrenCard: React.FC<FolderChildrenCardProps> = ({ item }) => {
-
+export const FolderChildrenCard: React.FC<FolderChildrenCardProps> = ({
+  item,
+}) => {
   const { t } = useTranslation();
 
   const { id } = item;
@@ -155,11 +192,13 @@ export const FolderChildrenCard: React.FC<FolderChildrenCardProps> = ({ item }) 
   const { hooks } = useContext(QueryClientContext);
   const { data: items } = hooks.useChildren(id);
 
-  const subtext = items ? t(LIBRARY.SUMMARY_BROWSE_FOLDER_CONTAINS, { count: items.size }) : '...';
+  const subtext = items
+    ? t(LIBRARY.SUMMARY_BROWSE_FOLDER_CONTAINS, { count: items.size })
+    : '...';
 
   const thumbnail = (
     <div style={THUMBNAIL_DIMENSIONS}>
-      <Folder fontSize='large' color='primary' />
+      <Folder fontSize="large" color="primary" />
     </div>
   );
 
