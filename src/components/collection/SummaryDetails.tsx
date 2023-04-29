@@ -33,6 +33,31 @@ const DetailCard = styled(Box)(() => ({
   height: '100%',
 }));
 
+const convertLicense = (ccLicenseAdaption: string) => {
+  // Legacy licenses.
+  if (['alike', 'allow'].includes(ccLicenseAdaption)) {
+    return {
+      requireAccreditation: true,
+      allowCommercialUse: true,
+      allowSharing: ccLicenseAdaption === 'alike' ? 'alike' : 'yes',
+    };
+  }
+
+  return {
+    requireAccreditation: ccLicenseAdaption?.includes('BY'),
+    allowCommercialUse: !ccLicenseAdaption?.includes('NC'),
+    allowSharing: (() => {
+      if (!ccLicenseAdaption || !ccLicenseAdaption.length) {
+        return '';
+      }
+      if (ccLicenseAdaption?.includes('SA')) {
+        return 'alike';
+      }
+      return ccLicenseAdaption?.includes('ND') ? 'no' : 'yes';
+    })(),
+  };
+};
+
 type SummaryDetailsProps = {
   createdAt: string;
   lastUpdate: string;
@@ -62,14 +87,11 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
 }) => {
   const { t } = useTranslation();
 
-  const requireAccreditation = ccLicenseAdaption?.includes('BY');
-  const allowCommercialUse = !ccLicenseAdaption?.includes('NC');
-  const allowSharing = (() => {
-    if (ccLicenseAdaption?.includes('SA')) {
-      return 'alike';
-    }
-    return ccLicenseAdaption?.includes('ND') ? 'no' : 'yes';
-  })();
+  const { allowSharing, allowCommercialUse, requireAccreditation } =
+    React.useMemo(
+      () => convertLicense(ccLicenseAdaption ?? ''),
+      [ccLicenseAdaption],
+    );
 
   return (
     <Grid

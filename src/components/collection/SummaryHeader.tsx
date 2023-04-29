@@ -16,7 +16,7 @@ import {
 } from '@mui/material';
 
 import { MUTATION_KEYS } from '@graasp/query-client';
-import { ItemLikeRecord, MemberRecord } from '@graasp/sdk/dist/frontend/types';
+import { ItemLikeRecord, MemberRecord } from '@graasp/sdk/frontend';
 
 import { THUMBNAIL_SIZES } from '../../config/constants';
 import {

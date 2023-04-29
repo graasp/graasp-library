@@ -5,7 +5,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import AvatarGroup from '@mui/lab/AvatarGroup';
-import { Avatar, Tooltip, Typography } from '@mui/material';
+import { Avatar, Box, Tooltip, Typography } from '@mui/material';
 
 import { LIBRARY } from '@graasp/translations';
 
@@ -24,7 +24,7 @@ function Contributors({ contributors, displayContributors }) {
   }
 
   return (
-    <div
+    <Box
       style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}
     >
       <Typography variant="subtitle2" mx={2} color="primary" fontWeight="bold">
@@ -49,7 +49,7 @@ function Contributors({ contributors, displayContributors }) {
           );
         })}
       </AvatarGroup>
-    </div>
+    </Box>
   );
 }
 
