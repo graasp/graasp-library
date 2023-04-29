@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { Box, Chip, Grid, Skeleton, Typography, styled } from '@mui/material';
 
 import { LIBRARY } from '@graasp/translations';
+import { CCSharingVariant } from '@graasp/ui';
 
 import { CATEGORY_COLORS, CATEGORY_TYPES } from '../../config/constants';
 import {
@@ -46,7 +47,7 @@ const convertLicense = (ccLicenseAdaption: string) => {
   return {
     requireAccreditation: ccLicenseAdaption?.includes('BY'),
     allowCommercialUse: !ccLicenseAdaption?.includes('NC'),
-    allowSharing: (() => {
+    allowSharing: ((): CCSharingVariant => {
       if (!ccLicenseAdaption || !ccLicenseAdaption.length) {
         return '';
       }
