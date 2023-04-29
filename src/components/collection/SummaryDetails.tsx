@@ -47,7 +47,7 @@ const convertLicense = (ccLicenseAdaption: string) => {
   return {
     requireAccreditation: ccLicenseAdaption?.includes('BY'),
     allowCommercialUse: !ccLicenseAdaption?.includes('NC'),
-    allowSharing: ((): CCSharingVariant => {
+    allowSharing: (() => {
       if (!ccLicenseAdaption || !ccLicenseAdaption.length) {
         return '';
       }
@@ -224,7 +224,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
               >
                 {ccLicenseAdaption && ccLicenseAdaption.length > 0 ? (
                   <CreativeCommons
-                    allowSharedAdaptation={allowSharing}
+                    allowSharedAdaptation={allowSharing as CCSharingVariant}
                     allowCommercialUse={allowCommercialUse}
                     requireAccreditation={requireAccreditation}
                     iconSize={48}
