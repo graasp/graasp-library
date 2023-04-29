@@ -16,9 +16,9 @@ import {
 } from '@mui/material';
 
 import { MUTATION_KEYS } from '@graasp/query-client';
+import { ThumbnailSize } from '@graasp/sdk';
 import { ItemLikeRecord, MemberRecord } from '@graasp/sdk/frontend';
 
-import { THUMBNAIL_SIZES } from '../../config/constants';
 import {
   ITEM_SUMMARY_TITLE_ID,
   SUMMARY_TAGS_CONTAINER_ID,
@@ -52,7 +52,7 @@ type SummaryHeaderProps = {
   extra: any;
 };
 
-const DESCRIPTION_MAX_LENGTH = 250;
+// const DESCRIPTION_MAX_LENGTH = 250;
 
 const SummaryHeader: React.FC<SummaryHeaderProps> = ({
   isLogged,
@@ -110,13 +110,13 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
           <StyledCard>
             {isLoading ? (
               <Skeleton variant="rectangular" width="100%">
-                <CardMedia itemId={itemId} name={name} />
+                <CardMedia name={name} />
               </Skeleton>
             ) : (
               <CardMedia
                 itemId={itemId}
                 name={name}
-                size={THUMBNAIL_SIZES.ORIGINAL}
+                size={ThumbnailSize.Original}
               />
             )}
           </StyledCard>
@@ -162,13 +162,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
             )}
           </Grid>
           <Grid item>
-            <Typography variant="body1" gutterBottom component="div">
-              <Description
-                isLoading={isLoading}
-                description={description}
-                maxLength={DESCRIPTION_MAX_LENGTH}
-              />
-            </Typography>
+            <Description isLoading={isLoading} description={description} />
           </Grid>
           <Grid item>
             <Stack

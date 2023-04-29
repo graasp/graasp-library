@@ -14,6 +14,25 @@ import { QueryClientContext } from '../QueryClientContext';
 import HeaderNavigation from '../common/HeaderNavigation';
 import HeaderLink from './HeaderLink';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const MyListHeaderLink = () => {
+  const { t } = useTranslation();
+  const { hooks } = useContext(QueryClientContext);
+  const { data: currentMember, isError } = hooks.useCurrentMember();
+
+  if (isError || !currentMember?.id) {
+    return null;
+  }
+
+  return (
+    <HeaderLink
+      href={MY_LIST_ROUTE}
+      text={t(LIBRARY.HEADER_MY_LISTS)}
+      id={HEADER_MY_LIST_ID}
+    />
+  );
+};
+
 type Props = {
   id?: string;
   sx: SxProps;
@@ -21,24 +40,6 @@ type Props = {
 
 const HeaderLeftContent: FC<Props> = ({ id, sx }) => {
   const { t } = useTranslation();
-
-  const { hooks } = useContext(QueryClientContext);
-
-  const { data: currentMember, isError } = hooks.useCurrentMember();
-
-  const renderMyList = () => {
-    if (isError || !currentMember?.id) {
-      return null;
-    }
-
-    return (
-      <HeaderLink
-        href={MY_LIST_ROUTE}
-        text={t(LIBRARY.HEADER_MY_LISTS)}
-        id={HEADER_MY_LIST_ID}
-      />
-    );
-  };
 
   return (
     <Box display="flex" alignItems="center" color="white" sx={sx}>
@@ -48,7 +49,8 @@ const HeaderLeftContent: FC<Props> = ({ id, sx }) => {
         id={HEADER_ALL_COLLECTIONS_ID}
         text={t(LIBRARY.HEADER_ALL_COLLECTIONS)}
       />
-      {renderMyList()}
+      {/* // todo: put back once the page looks better */}
+      {/* <MyListHeaderLink/> */}
     </Box>
   );
 };

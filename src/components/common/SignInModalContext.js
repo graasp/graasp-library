@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import CloseIcon from '@mui/icons-material/Close';
@@ -121,8 +121,10 @@ const LoginModalProvider = ({ children }) => {
     </div>
   );
 
+  const contextValue = useMemo(() => ({ setOpen, open }), [open]);
+
   return (
-    <LoginModalContext.Provider value={{ setOpen, open }}>
+    <LoginModalContext.Provider value={contextValue}>
       {renderModal()}
       {children}
     </LoginModalContext.Provider>

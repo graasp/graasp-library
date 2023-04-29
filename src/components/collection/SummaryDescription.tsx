@@ -3,19 +3,45 @@ import { Interweave } from 'interweave';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Button, Grow, Skeleton, Typography } from '@mui/material';
+import { Box, Button, Skeleton, Typography } from '@mui/material';
 
 import { LIBRARY } from '@graasp/translations';
 
+export const CollapsibleDescription = ({
+  collapsed,
+  numberOfLinesToShow = 1,
+  children,
+}: {
+  collapsed: boolean;
+  numberOfLinesToShow?: number;
+  children: JSX.Element;
+}) =>
+  collapsed ? (
+    <Box
+      sx={{
+        display: '-webkit-box',
+        overflow: 'hidden',
+        // number of lines to show
+        WebkitLineClamp: numberOfLinesToShow,
+        WebkitBoxOrient: 'vertical',
+        '& > p': {
+          margin: 0,
+        },
+      }}
+    >
+      {children}
+    </Box>
+  ) : (
+    children
+  );
+
 type DescriptionProps = {
   isLoading: boolean;
-  description: string;
-  maxLength: number;
+  description: string | null;
 };
 
 const Description: React.FC<DescriptionProps> = ({
   description,
-  maxLength,
   isLoading,
 }) => {
   const { t } = useTranslation();
@@ -26,55 +52,28 @@ const Description: React.FC<DescriptionProps> = ({
     setCollapsedDescription(!collapsedDescription);
   };
 
-  const shortDescription = React.useMemo(() => {
-    if (!collapsedDescription) {
-      return description;
-    }
-
-    // Can't use DOMParser during SSR.
-    if (typeof window === 'undefined') {
-      return description;
-    }
-
-    const strippedDescription =
-      new DOMParser().parseFromString(description, 'text/html').body
-        .textContent ?? '';
-    if (strippedDescription.length > maxLength) {
-      return `${strippedDescription?.substring(0, maxLength)}...`;
-    }
-    return strippedDescription;
-  }, [description, collapsedDescription]);
-
   if (isLoading) {
     return <Skeleton />;
   }
 
-  if (description && shortDescription && shortDescription.length) {
+  if (description) {
+    const renderedDescription = <Interweave noWrap content={description} />;
     // Case distinction to allow the show more button to be rendered inline.
-    return collapsedDescription ? (
-      <div>
-        {shortDescription}
+    return (
+      <>
+        <CollapsibleDescription collapsed={collapsedDescription}>
+          {renderedDescription}
+        </CollapsibleDescription>
         <Button
-          sx={{ display: 'inline-block' }}
+          sx={{ minWidth: 'max-content' }}
           size="small"
           onClick={handleShowMoreButton}
         >
-          {t(LIBRARY.SUMMARY_DESCRIPTION_SHOW_MORE)}
+          {collapsedDescription
+            ? t(LIBRARY.SUMMARY_DESCRIPTION_SHOW_MORE)
+            : t(LIBRARY.SUMMARY_DESCRIPTION_SHOW_LESS)}
         </Button>
-      </div>
-    ) : (
-      <Grow in>
-        <div>
-          <Interweave content={shortDescription} />
-          <Button
-            sx={{ display: 'inline-block' }}
-            size="small"
-            onClick={handleShowMoreButton}
-          >
-            {t(LIBRARY.SUMMARY_DESCRIPTION_SHOW_LESS)}
-          </Button>
-        </div>
-      </Grow>
+      </>
     );
   }
 

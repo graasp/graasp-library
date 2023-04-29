@@ -7,7 +7,7 @@ import Grid from '@mui/material/Grid';
 
 import { LIBRARY } from '@graasp/translations';
 
-function SimilarCollectionsHeader() {
+const SimilarCollectionsHeader = () => {
   const { t } = useTranslation();
   return (
     <Box mb={2} flexGrow={1}>
@@ -30,6 +30,6 @@ function SimilarCollectionsHeader() {
       </Grid>
     </Box>
   );
-}
+};
 
 export default SimilarCollectionsHeader;

@@ -9,7 +9,7 @@ import Badge from '@mui/material/Badge';
 import BadgeContainer from '../common/BadgeContainer';
 import VisibilityBadge from '../common/VisibilityBadge';
 
-function SimilarCollectionBadges({ views, voteScore }) {
+const SimilarCollectionBadges = ({ views, voteScore }) => {
   const voteScoreBadge = voteScore ? (
     <Badge badgeContent={voteScore} color="secondary" max={999}>
       <Favorite color="primary" />
@@ -28,7 +28,7 @@ function SimilarCollectionBadges({ views, voteScore }) {
       </Grid>
     </Grid>
   );
-}
+};
 
 SimilarCollectionBadges.propTypes = {
   voteScore: PropTypes.number,

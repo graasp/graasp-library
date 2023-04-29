@@ -5,6 +5,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import Grid from '@mui/material/Grid';
+import Skeleton from '@mui/material/Skeleton';
 import Typography from '@mui/material/Typography';
 
 import { LIBRARY } from '@graasp/translations';
@@ -12,8 +13,12 @@ import { LIBRARY } from '@graasp/translations';
 import { buildCollectionCardGridId } from '../../config/selectors';
 import CollectionCard from './CollectionCard';
 
-function CollectionsGrid({ collections, isLoading, id, sm, md, lg, xl }) {
+const CollectionsGrid = ({ collections, isLoading, id, sm, md, lg, xl }) => {
   const { t } = useTranslation();
+
+  if (isLoading) {
+    return <Skeleton />;
+  }
 
   return !collections?.size ? (
     <Typography variant="h5" color="inherit">
@@ -38,12 +43,12 @@ function CollectionsGrid({ collections, isLoading, id, sm, md, lg, xl }) {
           xl={xl}
           id={buildCollectionCardGridId(id, index)}
         >
-          <CollectionCard collection={collection} isLoading={isLoading} />
+          <CollectionCard collection={collection} />
         </Grid>
       ))}
     </Grid>
   );
-}
+};
 
 CollectionsGrid.propTypes = {
   id: PropTypes.string,

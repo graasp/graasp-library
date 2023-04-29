@@ -20,7 +20,7 @@ import BadgeContainer from '../common/BadgeContainer';
 import FavoriteBadge from '../common/FavoriteBadge';
 import VisibilityBadge from '../common/VisibilityBadge';
 
-function Badges({ views, likes, name, description }) {
+const Badges = ({ views, likes, name, description }) => {
   const { t } = useTranslation();
   const [pageLocation, setPageLocation] = useState(null);
   const parsedDescription = removeTagsFromString(description);
@@ -82,7 +82,7 @@ function Badges({ views, likes, name, description }) {
       </Grid>
     </Grid>
   );
-}
+};
 
 Badges.propTypes = {
   views: PropTypes.number,

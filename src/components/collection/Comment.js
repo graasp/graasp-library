@@ -16,7 +16,7 @@ import { LIBRARY } from '@graasp/translations';
 import { formatDate } from '../../utils/date';
 import { getAvatar } from '../../utils/layout';
 
-function Comment({ comment, members }) {
+const Comment = ({ comment, members }) => {
   const { content, author, published } = comment;
   const { t } = useTranslation();
 
@@ -64,7 +64,7 @@ function Comment({ comment, members }) {
       <Divider variant="inset" component="li" />
     </>
   );
-}
+};
 
 Comment.propTypes = {
   comment: PropTypes.shape({

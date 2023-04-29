@@ -2,17 +2,12 @@ import Link from 'next/link';
 
 import React, { useContext } from 'react';
 
-import { Breadcrumbs, Typography, styled } from '@mui/material';
+import { Breadcrumbs, Button, Typography } from '@mui/material';
 
 import { ItemRecord } from '@graasp/sdk/frontend';
 
 import { buildCollectionRoute } from '../../config/routes';
 import { QueryClientContext } from '../QueryClientContext';
-
-/* Next's link can't be styled directly. Even using Mui's Link as wrapper. */
-const StyledText = styled(Typography)(() => ({
-  cursor: 'pointer',
-}));
 
 type ItemBreadcrumbProps = {
   itemId: string;
@@ -36,11 +31,9 @@ const ItemBreadcrumb: React.FC<ItemBreadcrumbProps> = ({ itemId }) => {
   return (
     <Breadcrumbs>
       {parents.data.map((parent: ItemRecord) => (
-        <Link prefetch={false} href={buildCollectionRoute(parent.id)}>
-          <StyledText variant="button" color="primary">
-            {parent.name}
-          </StyledText>
-        </Link>
+        <Button component={Link} href={buildCollectionRoute(parent.id)}>
+          {parent.name}
+        </Button>
       ))}
       <Typography color="text.primary">{item?.name}</Typography>
     </Breadcrumbs>

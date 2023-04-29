@@ -138,22 +138,17 @@ const Items: React.FC<ItemsProps> = ({ parentId, lang, isTopLevel }) => {
           </Typography>
         </div>
       ) : (
-        <>
-          {items.size > 0 && (
-            <CollapsibleItemCategory
-              defaultItemCount={itemToShow}
-              items={items}
-            >
-              {(item) =>
-                item.type === ITEM_TYPES.FOLDER ? (
-                  <FolderChildrenCard key={item.id} item={item} />
-                ) : (
-                  <FileChildrenCard key={item.id} item={item} lang={lang} />
-                )
-              }
-            </CollapsibleItemCategory>
-          )}
-        </>
+        items.size > 0 && (
+          <CollapsibleItemCategory defaultItemCount={itemToShow} items={items}>
+            {(item) =>
+              item.type === ITEM_TYPES.FOLDER ? (
+                <FolderChildrenCard key={item.id} item={item} />
+              ) : (
+                <FileChildrenCard key={item.id} item={item} lang={lang} />
+              )
+            }
+          </CollapsibleItemCategory>
+        )
       )}
     </div>
   );

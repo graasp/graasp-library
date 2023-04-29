@@ -10,13 +10,11 @@ import AllCollections from '../src/components/home/AllCollections';
 import { PUBLISHED_ITEMS_KEY } from '../src/config/constants';
 import { QUERY_CLIENT_OPTIONS } from '../src/config/queryClient';
 
-function AllCollectionsPage({ dehydratedState }) {
-  return (
-    <Wrapper dehydratedState={dehydratedState}>
-      <AllCollections />
-    </Wrapper>
-  );
-}
+const AllCollectionsPage = ({ dehydratedState }) => (
+  <Wrapper dehydratedState={dehydratedState}>
+    <AllCollections />
+  </Wrapper>
+);
 
 AllCollectionsPage.propTypes = {
   dehydratedState: PropTypes.shape({}).isRequired,
