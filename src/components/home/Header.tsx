@@ -1,4 +1,4 @@
-import { Box, Container, Stack, Typography } from '@mui/material';
+import { Box, Container, Grid, Stack, Typography } from '@mui/material';
 import React from 'react';
 import Search from './Search';
 
@@ -7,11 +7,11 @@ type PopularSearchItemProps = {
 };
 
 const PopularSearchItem: React.FC<PopularSearchItemProps> = ({ text }) => (
-  <div style={{ border: '1px solid white', padding: '4px 12px', borderRadius: 12 }}>
+  <Box style={{ border: '1px solid white', padding: '4px 12px', borderRadius: 12 }}>
     <Typography color='white'>
       {text.toUpperCase()}
     </Typography>
-  </div>
+  </Box>
 );
 
 type HeaderProps = {
@@ -30,10 +30,28 @@ const Header: React.FC<HeaderProps> = () => {
 
   return (
     <Container maxWidth='md'>
-      <Stack direction='column' alignItems='center' py={10} spacing={4}>
+      <Stack
+        direction='column'
+        alignItems='center'
+        paddingBottom={{
+          xs: 0,
+          md: 6,
+        }}
+        paddingTop={14}
+        spacing={4}
+      >
         <Box display="flex" flexDirection="row" alignItems="center">
-          <img src='./homePageIcon.png' alt="Graasp icon" width={100} />
-          <Typography color="white" variant='h1' marginLeft={4}>
+          <img src='./homePageIcon.png' alt="Graasp icon" width={100} style={{ maxWidth: '30%' }} />
+          <Typography
+            color="white"
+            variant='h1'
+            marginLeft={4}
+            fontSize={{
+              xs: '2.5rem',
+              sm: '4rem',
+              md: '4.5rem',
+            }}
+          >
             Graasp
           </Typography>
         </Box>
@@ -44,8 +62,8 @@ const Header: React.FC<HeaderProps> = () => {
         </Box>
         <Box width='100%'>
           <Search
-            handleClick={() => {}}
-            handleRangeChange={() => {}}
+            handleClick={() => { }}
+            handleRangeChange={() => { }}
             isLoading={false}
             range='12'
             showFilters={false}
@@ -55,9 +73,13 @@ const Header: React.FC<HeaderProps> = () => {
           <Typography color='white' variant='h6' gutterBottom>
             POPULAR SEARCHES
           </Typography>
-          <Stack direction='row' spacing={2}>
-            {popularSearches.map(term => <PopularSearchItem text={term} key={term} />)}
-          </Stack>
+          <Grid container spacing={2}>
+            {popularSearches.map(term => (
+              <Grid item>
+                <PopularSearchItem text={term} key={term} />
+              </Grid>
+            ))}
+          </Grid>
         </Box>
       </Stack>
     </Container>

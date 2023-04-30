@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import { Context } from '@graasp/sdk';
 import { Explore } from '@mui/icons-material';
 
-import { Button, Container } from '@mui/material';
+import { Box, Button, styled } from '@mui/material';
 import Seo from '../common/Seo';
 import { APP_AUTHOR } from '../../config/constants';
 import { QueryClientContext } from '../QueryClientContext';
@@ -15,11 +15,19 @@ import { PLACEHOLDER_COLLECTIONS } from '../../utils/collections';
 import Header from './Header';
 import ItemCollection from './ItemCollection';
 
+const GRAASP_COLOR = '#504FD2';
+
 const { Main } = {
   Main: dynamic(() => import('@graasp/ui').then((mod) => mod.Main), {
     ssr: false,
   }),
 };
+
+const DiscoverButton = styled(Button)(() => ({
+  color: GRAASP_COLOR,
+  fontSize: '1.2rem',
+  padding: '20px 50px',
+}));
 
 type HomeProps = {
 
@@ -41,7 +49,7 @@ const Home: React.FC<HomeProps> = () => {
 
   return (
     <>
-      <div style={{ backgroundColor: '#504FD2' }}>
+      <div style={{ backgroundColor: GRAASP_COLOR }}>
         <Seo
           title={/* t(LIBRARY.GRAASP_LIBRARY) */ 'title'}
           description={/* t(LIBRARY.GRAASP_LIBRARY_DESCRIPTION) */ 'description'}
@@ -58,16 +66,16 @@ const Home: React.FC<HomeProps> = () => {
           <ItemCollection collections={collections} title='Graasp Selection' />
           <ItemCollection collections={collections} title='Most liked' />
 
-          <Container maxWidth='lg'>
-            <Button
-              startIcon={<Explore />}
+          <Box textAlign='center' marginBottom={20} marginTop={20}>
+            <DiscoverButton
+              startIcon={<Explore fontSize='large' />}
               color='secondary'
               variant='contained'
               size="large"
             >
               View more in the library
-            </Button>
-          </Container>
+            </DiscoverButton>
+          </Box>
         </Main>
       </div>
     </>

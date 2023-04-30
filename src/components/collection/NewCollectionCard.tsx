@@ -10,6 +10,9 @@ import { DEFAULT_ITEM_IMAGE_PATH, DEFAULT_MEMBER_THUMBNAIL } from '../../config/
 import { QueryClientContext } from '../QueryClientContext';
 import ViewsAndLikes from '../common/ViewsAndLikes';
 import { buildCollectionRoute } from '../../config/routes';
+import CopyLinkButton from './CopyLinkButton';
+import CopyButton from './CopyButton';
+import DownloadButton from './DownloadButton';
 
 const RECENT_DAYS = 4;
 
@@ -68,7 +71,19 @@ const ItemTag: React.FC<ItemTagProps> = ({ createdAt, updatedAt }) => {
 
 const StyledCollectionCard = styled(Box)(() => ({
   position: 'relative',
+  display: 'block',
   cursor: 'pointer',
+
+  ':focus-visible': {
+    outline: 'none',
+    ' > .MuiCard-root': {
+      borderColor: '#444',
+    },
+  },
+
+  ':focus > .MuiCard-root': {
+    transform: 'scale(1.08)',
+  },
 
   ' > .MuiCard-root': {
     transition: '0.2s ease-in-out',
@@ -85,6 +100,7 @@ const StyledCollectionCard = styled(Box)(() => ({
 
   ' img': {
     /* borderRadius: COLLECTION_CARD_BORDER_RADIUS, */
+    objectFit: 'scale-down',
   },
 
   ' h5': {
@@ -105,17 +121,18 @@ const StyledCollectionCard = styled(Box)(() => ({
 
 type NewCollectionCardProps = {
   collection: ItemRecord;
-  dimmension?: { x: number; y: number };
+  dimmension?: { x?: number; y?: number };
 };
 
 const NewCollectionCard: React.FC<NewCollectionCardProps> = ({ collection, dimmension }) => {
-  const { x: width = 400, y: height = 400 } = { ...dimmension };
+  const { x: width, y: height } = { ...dimmension };
 
   const { hooks } = useContext(QueryClientContext);
 
   const { t } = useTranslation();
 
   const { data: author } = hooks.useMember(collection.creator);
+  const { data: member } = hooks.useCurrentMember();
 
   const description = React.useMemo(() => {
     if (typeof window === 'undefined') {
@@ -124,6 +141,7 @@ const NewCollectionCard: React.FC<NewCollectionCardProps> = ({ collection, dimme
     return new DOMParser().parseFromString(collection.description, 'text/html').body.textContent ?? '';
   }, [collection]);
 
+  // Doesn't typecheck
   const likes = 0; // collection.voteScore ?? 0;
   const views = 0; // collection.views ?? 0;
 
@@ -142,10 +160,16 @@ const NewCollectionCard: React.FC<NewCollectionCardProps> = ({ collection, dimme
                 defaultValue={<img src={DEFAULT_ITEM_IMAGE_PATH} alt="thumbnail" />}
                 useThumbnail={hooks.useItemThumbnail}
                 thumbnailSrc={DEFAULT_ITEM_IMAGE_PATH}
-                maxWidth={width - 200}
+                maxWidth={width ? width * 0.55 : '45%'}
               />
               <Box width='90%' marginTop={4}>
-                <Typography variant='h4'>
+                <Typography
+                  variant='h4'
+                  fontSize={{
+                    md: 24,
+                    xs: 18,
+                  }}
+                >
                   {collection.name}
                 </Typography>
                 {description && description.length > 0 && (
@@ -167,7 +191,12 @@ const NewCollectionCard: React.FC<NewCollectionCardProps> = ({ collection, dimme
                       {author?.name}
                     </Typography>
                   </Stack>
-                  <ViewsAndLikes likes={likes} views={views} />
+                  {false && <ViewsAndLikes likes={likes} views={views} />}
+                  <Box>
+                    {member?.id && <CopyButton id={collection.id} />}
+                    <CopyLinkButton id={collection.id} extra={collection.extra} />
+                    <DownloadButton id={collection.id} />
+                  </Box>
                 </Stack>
               </Box>
             </Stack>
