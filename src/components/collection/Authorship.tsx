@@ -1,6 +1,5 @@
-import { Record } from 'immutable';
+import { List } from 'immutable';
 import dynamic from 'next/dynamic';
-import PropTypes from 'prop-types';
 
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -8,6 +7,12 @@ import { useTranslation } from 'react-i18next';
 import { Typography } from '@mui/material';
 import Skeleton from '@mui/material/Skeleton';
 
+import { ThumbnailSize } from '@graasp/sdk';
+import {
+  ItemMembershipRecord,
+  ItemRecord,
+  MemberRecord,
+} from '@graasp/sdk/frontend';
 import { LIBRARY } from '@graasp/translations';
 
 import { DEFAULT_MEMBER_THUMBNAIL } from '../../config/constants';
@@ -19,15 +24,25 @@ const Avatar = dynamic(() => import('@graasp/ui').then((mod) => mod.Avatar), {
   ssr: false,
 });
 
-const Authorship = ({ itemId, author, isLoading }) => {
+type Props = {
+  itemId: ItemRecord['id'];
+  author: MemberRecord;
+  isLoading: boolean;
+};
+
+const Authorship = ({ itemId, author, isLoading }: Props) => {
   const { t } = useTranslation();
   const { hooks } = useContext(QueryClientContext);
   const { data: item, isLoading: isLoadingItem } = hooks.useItem(itemId);
   const { data: memberships } = hooks.useItemMemberships(itemId);
+  const { data: authorBlob, isLoading: isLoadingAuthor } = hooks.useAvatar({
+    id: author.id,
+    size: ThumbnailSize.Small,
+  });
 
-  const memberIds = [
+  const memberIds: string[] = [
     ...new Set(
-      memberships
+      (memberships as List<ItemMembershipRecord> | undefined)
         ?.filter(
           ({ permission, memberId }) =>
             (permission === 'write' || permission === 'admin') &&
@@ -39,10 +54,11 @@ const Authorship = ({ itemId, author, isLoading }) => {
   const { data: contributors, isLoading: isLoadingContributors } =
     hooks.useMembers(memberIds);
 
-  const isAnyLoading = isLoadingItem || isLoading || isLoadingContributors;
+  const isAnyLoading =
+    isLoadingItem || isLoading || isLoadingContributors || isLoadingAuthor;
 
   if (isAnyLoading) {
-    return <Skeleton variant="rect" height={50} />;
+    return <Skeleton variant="rectangular" height={50} />;
   }
 
   if (!author && !isLoading) {
@@ -58,23 +74,16 @@ const Authorship = ({ itemId, author, isLoading }) => {
         id={SUMMARY_AUTHOR_CONTAINER_ID}
         style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}
       >
-        {isLoading ? (
-          <Skeleton>
-            <Avatar />
-          </Skeleton>
-        ) : (
-          <Avatar
-            useAvatar={hooks.useAvatar}
-            alt={t(LIBRARY.AVATAR_ALT, { name: authorName })}
-            defaultImage={DEFAULT_MEMBER_THUMBNAIL}
-            id={author?.id}
-            extra={author?.extra}
-            component="avatar"
-            maxWidth={30}
-            maxHeight={30}
-            variant="circle"
-          />
-        )}
+        <Avatar
+          blob={authorBlob}
+          alt={t(LIBRARY.AVATAR_ALT, { name: authorName })}
+          defaultImage={DEFAULT_MEMBER_THUMBNAIL}
+          isLoading={isLoadingAuthor}
+          component="avatar"
+          maxWidth={30}
+          maxHeight={30}
+          variant="circular"
+        />
         <Typography variant="body1" marginLeft={1}>
           {isLoading ? <Skeleton /> : authorName}
         </Typography>
@@ -86,16 +95,6 @@ const Authorship = ({ itemId, author, isLoading }) => {
       </div>
     </div>
   );
-};
-
-Authorship.propTypes = {
-  author: PropTypes.instanceOf(Record),
-  isLoading: PropTypes.bool.isRequired,
-  itemId: PropTypes.string.isRequired,
-};
-
-Authorship.defaultProps = {
-  author: null,
 };
 
 export default Authorship;

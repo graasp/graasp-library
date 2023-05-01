@@ -52,8 +52,6 @@ type SummaryHeaderProps = {
   extra: any;
 };
 
-// const DESCRIPTION_MAX_LENGTH = 250;
-
 const SummaryHeader: React.FC<SummaryHeaderProps> = ({
   isLogged,
   isLoading,
