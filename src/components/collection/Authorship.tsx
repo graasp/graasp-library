@@ -36,7 +36,7 @@ const Authorship = ({ itemId, author, isLoading }: Props) => {
   const { data: item, isLoading: isLoadingItem } = hooks.useItem(itemId);
   const { data: memberships } = hooks.useItemMemberships(itemId);
   const { data: authorBlob, isLoading: isLoadingAuthor } = hooks.useAvatar({
-    id: author.id,
+    id: author?.id,
     size: ThumbnailSize.Small,
   });
 

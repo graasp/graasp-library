@@ -1,4 +1,3 @@
-import { Interweave } from 'interweave';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
@@ -19,14 +18,15 @@ import { LIBRARY } from '@graasp/translations';
 
 import { DEFAULT_MEMBER_THUMBNAIL } from '../../config/constants';
 import { buildCollectionRoute } from '../../config/routes';
+import { buildCollectionCardGridId } from '../../config/selectors';
 import { QueryClientContext } from '../QueryClientContext';
 import CardMediaComponent from '../common/CardMediaComponent';
 import { StyledCard } from '../common/StyledCard';
+import ContentDescription from './ContentDescription';
 import CopyButton from './CopyButton';
 import CopyLinkButton from './CopyLinkButton';
 import DownloadButton from './DownloadButton';
 import SimilarCollectionBadges from './SimilarCollectionBadges';
-import { CollapsibleDescription } from './SummaryDescription';
 
 const Avatar = dynamic(() => import('@graasp/ui').then((mod) => mod.Avatar), {
   ssr: false,
@@ -63,7 +63,7 @@ export const CollectionCard = ({ collection }: Props) => {
   const link = buildCollectionRoute(id);
 
   return (
-    <StyledCard>
+    <StyledCard id={buildCollectionCardGridId(collection?.id)}>
       <CardActionArea component={Link} href={link}>
         <CardMediaComponent
           itemId={id}
@@ -74,7 +74,15 @@ export const CollectionCard = ({ collection }: Props) => {
           avatar={avatar}
           title={name}
           subheader={author?.name}
-          titleTypographyProps={{ title: name }}
+          sx={{ '.MuiCardHeader-content	': { minWidth: '0px' } }}
+          titleTypographyProps={{
+            title: name,
+            noWrap: true,
+          }}
+          subheaderTypographyProps={{
+            title: author?.name,
+            noWrap: true,
+          }}
         />
         <CardContent sx={{ pt: 0 }}>
           <Typography
@@ -82,9 +90,7 @@ export const CollectionCard = ({ collection }: Props) => {
             fontStyle={description ? 'inherit' : 'italic'}
           >
             {description ? (
-              <CollapsibleDescription collapsed>
-                <Interweave noWrap content={description} />
-              </CollapsibleDescription>
+              <ContentDescription content={description} />
             ) : (
               t(LIBRARY.COLLECTION_EMPTY_DESCRIPTION_TEXT)
             )}

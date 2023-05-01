@@ -1,11 +1,11 @@
-import { Interweave } from 'interweave';
-
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Box, Button, Skeleton, Typography } from '@mui/material';
 
 import { LIBRARY } from '@graasp/translations';
+
+import ContentDescription from './ContentDescription';
 
 export const CollapsibleDescription = ({
   collapsed,
@@ -57,13 +57,14 @@ const Description: React.FC<DescriptionProps> = ({
   }
 
   if (description) {
-    const renderedDescription = <Interweave noWrap content={description} />;
     // Case distinction to allow the show more button to be rendered inline.
     return (
       <>
-        <CollapsibleDescription collapsed={collapsedDescription}>
-          {renderedDescription}
-        </CollapsibleDescription>
+        <ContentDescription
+          content={description}
+          collapsed={collapsedDescription}
+        />
+
         <Button
           sx={{ minWidth: 'max-content' }}
           size="small"

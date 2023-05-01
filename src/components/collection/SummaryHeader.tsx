@@ -99,7 +99,8 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
       <Grid container columnSpacing={6} alignItems="start">
         <Grid
           item
-          sm={12}
+          xs={12}
+          sm={4}
           md={4}
           mb={4}
           alignItems="center"
@@ -119,7 +120,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
             )}
           </StyledCard>
         </Grid>
-        <Grid item sm={12} md={8}>
+        <Grid item xs={12} sm={8}>
           <Grid
             marginBottom={{ xs: 3, sm: 0 }}
             item
