@@ -1153,10 +1153,10 @@ __metadata:
 
 "@graasp/translations@https://github.com/graasp/graasp-translations.git#138-cc-translation":
   version: 1.9.0
-  resolution: "@graasp/translations@https://github.com/graasp/graasp-translations.git#commit=6e59421abd76ab7a0fb27d8cf926ec5d0e729d97"
+  resolution: "@graasp/translations@https://github.com/graasp/graasp-translations.git#commit=aac3442cf9e30178b253cc1245104e135f4eaa9a"
   dependencies:
     i18next: 21.8.1
-  checksum: 48b11fad3367781a3703f685d6c8e875c87164a6f6697fd7bb86b942355b9dba36d1029cbff3e59c297f9c5e18949681b1c28807090d091daf9ba63f38d198ba
+  checksum: e902bea5bb8284bf33ff239cd0b219f39abf87c35e525b0bc68b1cd5d50932b15907f01fef813e726172c035b0e6e39321d49f146831ecd06e86255ac2e43ff7
   languageName: node
   linkType: hard
 
@@ -1204,7 +1204,7 @@ __metadata:
       optional: true
     ag-grid-react:
       optional: true
-  checksum: b9aa5da62f79ded4714050417b8766c0d715c6328aa323dd3b88654ffa9bcf31b2e53bb8667d558f61660adea316adadc04f352a89b44b65ad8bc678f3287a8a
+  checksum: fc8634480870b32b6bd15504f4b788927abd42dade7a2f88806669c798a5a1542994a22bb8c5bd3e4e72ef4ab3317023b7661532c70bf60dd0491282b1e94903
   languageName: node
   linkType: hard
 
