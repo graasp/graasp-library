@@ -33,7 +33,7 @@ export async function getServerSideProps({ params }) {
 
   const queryData = await queryClient.getQueryData(collectionKey);
 
-  const { creator, path } = { ...queryData };
+  const { creator /* path */ } = { ...queryData };
 
   if (creator) {
     await queryClient.prefetchQuery(DATA_KEYS.buildMemberKey(creator), () =>
@@ -50,9 +50,11 @@ export async function getServerSideProps({ params }) {
     );
   }
 
-  await queryClient.prefetchQuery(DATA_KEYS.buildItemParentsKey(id), () =>
-    Api.getParents({ path }).then((data) => data),
-  );
+  // TODO: Prefetch items for breadcrumb.
+  // const parents = path.replaceAll('_', '-').split('.');
+  // await queryClient.prefetchQuery(DATA_KEYS.buildItemsKey(parents), () => {
+  //   Api.getItems(parents).then(data => data).catch(() => ({}))
+  // });
 
   // Pass data to the page via props
   return { props: { id, dehydratedState: dehydrate(queryClient) } };
