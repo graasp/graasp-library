@@ -60,6 +60,7 @@ function Search({
           alignItems: 'center',
           width: '100%',
           my: 1,
+          borderRadius: 2,
         }}
       >
         <InputBase

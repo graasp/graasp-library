@@ -47,6 +47,10 @@ const ItemCollection: React.FC<ItemCollectionProps> = ({ title, collections }) =
     return ITEM_CARD_SIZE.xl;
   }, [extraSmall, small, medium, large]);
 
+  if (!collections || !collections.size) {
+    return null;
+  }
+
   return (
     <StyledContainer my={12}>
       <Container maxWidth='xl'>

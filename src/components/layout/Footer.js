@@ -40,7 +40,12 @@ const Footer = () => {
   return (
     <footer>
       <Toolbar top="auto" bottom={0}>
-        <Grid container justifyContent="space-between" alignItems="center">
+        <Grid
+          container
+          justifyContent="space-between"
+          alignItems="center"
+          my={2}
+        >
           <Grid item>
             <Typography variant="subtitle2">
               &copy;
@@ -50,7 +55,7 @@ const Footer = () => {
           <Grid item>
             <FormControl>
               <Select
-                variant="standard"
+                variant="outlined"
                 value={i18n.language}
                 onChange={onChangeLanguage}
               >

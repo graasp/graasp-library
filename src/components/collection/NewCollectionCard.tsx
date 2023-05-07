@@ -1,5 +1,5 @@
 import { ItemRecord } from '@graasp/sdk/dist/frontend/types';
-import { Box, Card, CardContent, Stack, Typography, styled } from '@mui/material';
+import { Box, Card, CardContent, Skeleton, Stack, Typography, styled } from '@mui/material';
 import React, { useContext } from 'react';
 import dynamic from 'next/dynamic';
 import { LIBRARY } from '@graasp/translations';
@@ -77,7 +77,7 @@ const StyledCollectionCard = styled(Box)(() => ({
   ':focus-visible': {
     outline: 'none',
     ' > .MuiCard-root': {
-      borderColor: '#444',
+      borderColor: '#777',
     },
   },
 
@@ -131,7 +131,7 @@ const NewCollectionCard: React.FC<NewCollectionCardProps> = ({ collection, dimme
 
   const { t } = useTranslation();
 
-  const { data: author } = hooks.useMember(collection.creator);
+  const { data: author, isLoading: isLoadingAuthor } = hooks.useMember(collection.creator);
   const { data: member } = hooks.useCurrentMember();
 
   const description = React.useMemo(() => {
@@ -148,7 +148,7 @@ const NewCollectionCard: React.FC<NewCollectionCardProps> = ({ collection, dimme
   const link = buildCollectionRoute(collection.id);
 
   return (
-    <StyledCollectionCard width={width} height={height}>
+    <StyledCollectionCard width={width} height={height} tabIndex={0}>
       <Link href={link}>
         <Card variant="outlined">
           <CardContent>
@@ -179,17 +179,33 @@ const NewCollectionCard: React.FC<NewCollectionCardProps> = ({ collection, dimme
                 )}
                 <Stack direction='row' width='100%' justifyContent='space-between'>
                   <Stack direction='row' alignItems='center'>
-                    <Avatar
-                      alt={t(LIBRARY.AVATAR_ALT, { name: author?.name })}
-                      defaultImage={DEFAULT_MEMBER_THUMBNAIL}
-                      component="avatar"
-                      maxWidth={30}
-                      maxHeight={30}
-                      variant="circular"
-                    />
-                    <Typography variant="body2" color='GrayText' marginLeft={1}>
-                      {author?.name}
-                    </Typography>
+                    {isLoadingAuthor ? (
+                      <Skeleton>
+                        <Avatar
+                          alt={t(LIBRARY.AVATAR_ALT, { name: author?.name })}
+                          defaultImage={DEFAULT_MEMBER_THUMBNAIL}
+                          component="avatar"
+                          maxWidth={30}
+                          maxHeight={30}
+                          variant="circular"
+                        />
+                        <Typography variant="body2" color='GrayText' marginLeft={1} />
+                      </Skeleton>
+                    ) : (
+                      <>
+                        <Avatar
+                          alt={t(LIBRARY.AVATAR_ALT, { name: author?.name })}
+                          defaultImage={DEFAULT_MEMBER_THUMBNAIL}
+                          component="avatar"
+                          maxWidth={30}
+                          maxHeight={30}
+                          variant="circular"
+                        />
+                        <Typography variant="body2" color='GrayText' marginLeft={1}>
+                          {author?.name}
+                        </Typography>
+                      </>
+                    )}
                   </Stack>
                   {false && <ViewsAndLikes likes={likes} views={views} />}
                   <Box>

@@ -20,11 +20,11 @@ const ItemBreadcrumb: React.FC<ItemBreadcrumbProps> = ({ itemId }) => {
     enabled: true,
   });
 
+  const router = useRouter();
+
   if (!parents?.data?.size) {
     return null;
   }
-
-  const router = useRouter();
 
   return (
     <Breadcrumbs>
@@ -34,7 +34,6 @@ const ItemBreadcrumb: React.FC<ItemBreadcrumbProps> = ({ itemId }) => {
             router.push(buildCollectionRoute(parent.id));
           }}
         >
-          
           {parent.name}
         </Button>
       ))}

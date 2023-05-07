@@ -15,7 +15,7 @@ import { PLACEHOLDER_COLLECTIONS } from '../../utils/collections';
 import Header from './Header';
 import ItemCollection from './ItemCollection';
 
-const GRAASP_COLOR = '#504FD2';
+export const GRAASP_COLOR = '#504FD2';
 
 const { Main } = {
   Main: dynamic(() => import('@graasp/ui').then((mod) => mod.Main), {

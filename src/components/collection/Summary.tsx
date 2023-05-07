@@ -25,6 +25,7 @@ import SummaryHeader from './SummaryHeader';
 import ItemBreadcrumb from './ItemBreadcrumb';
 
 
+// TODO: To be removed / moved to SDK.
 export const getParentsIdsFromPath = (
   path: string,
   { ignoreSelf = false } = {},
