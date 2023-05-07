@@ -17,12 +17,6 @@ import { compare } from '../../utils/helpers';
 import { QueryClientContext } from '../QueryClientContext';
 import CategorySelection from '../home/CategorySelection';
 
-const licenseList = [
-  { name: 'Accreditation', id: 'ac' },
-  { name: 'Noncommercial', id:'nc' },
-  { name: 'CC0', id:'cc0' },
-];
-
 const useCategoryTypesSidebar = () => {
   const { t } = useTranslation();
   const { t: translateCategories } = useTranslation(namespaces.categories);
@@ -58,7 +52,6 @@ const useCategoryTypesSidebar = () => {
   const [selectedLevels, setSelectedLevels] = useState<string[]>([]);
   const [selectedDisciplines, setSelectedDisciplines] = useState<string[]>([]);
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>([]);
-  const [selectedLicenses, setSelectedLicenses] = useState<string[]>([]);
 
   const clearSelection = (type?: string) => () => {
     switch (type) {
@@ -72,10 +65,6 @@ const useCategoryTypesSidebar = () => {
       }
       case CATEGORY_TYPES.LANGUAGE: {
         setSelectedLanguages([]);
-        break;
-      }
-      case CATEGORY_TYPES.LICENSE: {
-        setSelectedLicenses([]);
         break;
       }
       default: {
@@ -114,16 +103,11 @@ const useCategoryTypesSidebar = () => {
     selectedLanguages,
     setSelectedLanguages,
   );
-  const handleClickForLicense = buildHandleClick(
-    selectedLicenses,
-    setSelectedLicenses,
-  );
 
   const selected = {
     level: selectedLevels,
     disciplines: selectedDisciplines,
     languages: selectedLanguages,
-    licenses: selectedLicenses,
   };
 
   const sidebar = (
@@ -171,16 +155,6 @@ const useCategoryTypesSidebar = () => {
         categoryType={CATEGORY_TYPES.LANGUAGE}
       />
       <Divider />
-      <CategorySelection
-        title='License'
-        selectedValues={selectedLicenses}
-        valueList={licenseList}
-        handleClick={handleClickForLicense}
-        isLoading={isCategoriesLoading}
-        clearSelection={clearSelection}
-        categoryType={CATEGORY_TYPES.LICENSE}
-      />
-      <Divider sx={{ mb: 10 }} />
     </>
   );
 

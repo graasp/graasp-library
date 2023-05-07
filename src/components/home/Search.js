@@ -25,13 +25,7 @@ import {
 } from '../../config/selectors';
 import { SEARCH_RANGES } from '../../enums/searchRanges';
 
-function Search({
-  handleClick,
-  isLoading,
-  range,
-  handleRangeChange,
-  showFilters = true,
-}) {
+const Search = ({ handleClick, isLoading, range, handleRangeChange }) => {
   const [searchInput, setSearchInput] = useState(null);
 
   const { t } = useTranslation();
@@ -90,41 +84,38 @@ function Search({
           <SearchIcon />
         </IconButton>
       </Paper>
-      {showFilters && (
-        <FormControl component="fieldset" ml={1} mb={2}>
-          <FormLabel component="legend">
-            {t(LIBRARY.SEARCH_RANGE_LABEL)}
-          </FormLabel>
-          <RadioGroup row value={range} onChange={handleRangeChange}>
-            {Object.values(SEARCH_RANGES).map((entry) => (
-              <FormControlLabel
-                value={entry.value}
-                control={<Radio color="primary" />}
-                label={t(entry.title)}
-                id={buildSearchRangeOptionId(entry.value)}
-              />
-            ))}
-            {/*
-            TODO: prompt users hints about how to use multiple keywords 
-            <Tooltip title="Use | or & for union/intersection of multiple keywords if choose 'Tag' or 'All'"> 
+      <FormControl component="fieldset" ml={1} mb={2}>
+        <FormLabel component="legend">
+          {t(LIBRARY.SEARCH_RANGE_LABEL)}
+        </FormLabel>
+        <RadioGroup row value={range} onChange={handleRangeChange}>
+          {Object.values(SEARCH_RANGES).map((entry) => (
+            <FormControlLabel
+              value={entry.value}
+              control={<Radio color="primary" />}
+              label={t(entry.title)}
+              id={buildSearchRangeOptionId(entry.value)}
+            />
+          ))}
+          {/*
+            TODO: prompt users hints about how to use multiple keywords
+            <Tooltip title="Use | or & for union/intersection of multiple keywords if choose 'Tag' or 'All'">
             <IconButton>
               <HelpIcon />
             </IconButton>
           </Tooltip>
           */}
-          </RadioGroup>
-        </FormControl>
-      )}
+        </RadioGroup>
+      </FormControl>
     </>
   );
-}
+};
 
 Search.propTypes = {
   handleClick: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
   range: PropTypes.string.isRequired,
   handleRangeChange: PropTypes.func.isRequired,
-  showFilters: PropTypes.bool.isRequired,
 };
 
 export default Search;

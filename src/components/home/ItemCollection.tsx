@@ -1,6 +1,17 @@
-import { Box, Container, Grid, useTheme, Typography, styled, useMediaQuery } from '@mui/material';
-import { ItemRecord } from '@graasp/sdk/dist/frontend/types';
 import React from 'react';
+
+import {
+  Box,
+  Container,
+  Grid,
+  Typography,
+  styled,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
+
+import { ItemRecord } from '@graasp/sdk/dist/frontend/types';
+
 import NewCollectionCard from '../collection/NewCollectionCard';
 
 const ITEM_CARD_SIZE = {
@@ -23,7 +34,10 @@ type ItemCollectionProps = {
   collections: Immutable.List<ItemRecord>;
 };
 
-const ItemCollection: React.FC<ItemCollectionProps> = ({ title, collections }) => {
+const ItemCollection: React.FC<ItemCollectionProps> = ({
+  title,
+  collections,
+}) => {
   const theme = useTheme();
 
   const extraSmall = useMediaQuery(theme.breakpoints.down('sm'));
@@ -53,12 +67,12 @@ const ItemCollection: React.FC<ItemCollectionProps> = ({ title, collections }) =
 
   return (
     <StyledContainer my={12}>
-      <Container maxWidth='xl'>
-        <Typography variant='h4' marginBottom={3}>
+      <Container maxWidth="xl">
+        <Typography variant="h4" marginBottom={3}>
           {title}
         </Typography>
 
-        <Grid 
+        <Grid
           container
           spacing={{
             xs: 4,
@@ -68,23 +82,26 @@ const ItemCollection: React.FC<ItemCollectionProps> = ({ title, collections }) =
             xl: 8,
           }}
         >
-          {collections?.concat(collections).concat(collections).map(collection => (
-            <Grid
-              item
-              xs={12}
-              sm={6}
-              md={4}
-              alignItems='center'
-              justifyContent='center'
-              display='flex'
-            >
-              <NewCollectionCard
-                key={collection.id}
-                collection={collection}
-                dimmension={{ x: itemSize, y: itemSize }}
-              />
-            </Grid>
-          ))}
+          {collections
+            ?.concat(collections)
+            .concat(collections)
+            .map((collection) => (
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                md={4}
+                alignItems="center"
+                justifyContent="center"
+                display="flex"
+              >
+                <NewCollectionCard
+                  key={collection.id}
+                  collection={collection}
+                  dimmension={{ x: itemSize, y: itemSize }}
+                />
+              </Grid>
+            ))}
         </Grid>
       </Container>
     </StyledContainer>

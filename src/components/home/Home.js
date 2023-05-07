@@ -39,7 +39,7 @@ const { Loader, Main } = {
   }),
 };
 
-function Home() {
+const Home = () => {
   const { t } = useTranslation();
   const [searchResults, setSearchResults] = useState(null);
   const [range, setRange] = useState(SEARCH_RANGES.ALL.value);
@@ -154,6 +154,6 @@ function Home() {
       </Main>
     </>
   );
-}
+};
 
 export default Home;

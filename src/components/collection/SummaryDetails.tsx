@@ -1,18 +1,14 @@
-import {
-  Box,
-  Chip,
-  Grid,
-  Skeleton,
-  styled,
-  Typography,
-} from '@mui/material';
+import dynamic from 'next/dynamic';
 
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import dynamic from 'next/dynamic';
+
+import { Box, Chip, Grid, Skeleton, Typography, styled } from '@mui/material';
 
 import { LIBRARY } from '@graasp/translations';
+import { CCSharingVariant } from '@graasp/ui';
 
+import { CATEGORY_COLORS, CATEGORY_TYPES } from '../../config/constants';
 import {
   SUMMARY_CATEGORIES_CONTAINER_ID,
   SUMMARY_CC_LICENSE_CONTAINER_ID,
@@ -21,7 +17,6 @@ import {
   SUMMARY_LANGUAGES_CONTAINER_ID,
   SUMMARY_LAST_UPDATE_CONTAINER_ID,
 } from '../../config/selectors';
-import { CATEGORY_COLORS, CATEGORY_TYPES } from '../../config/constants';
 
 const { DateTime } = require('luxon');
 
@@ -38,6 +33,31 @@ const DetailCard = styled(Box)(() => ({
   padding: 20,
   height: '100%',
 }));
+
+const convertLicense = (ccLicenseAdaption: string) => {
+  // Legacy licenses.
+  if (['alike', 'allow'].includes(ccLicenseAdaption)) {
+    return {
+      requireAccreditation: true,
+      allowCommercialUse: true,
+      allowSharing: ccLicenseAdaption === 'alike' ? 'alike' : 'yes',
+    };
+  }
+
+  return {
+    requireAccreditation: ccLicenseAdaption?.includes('BY'),
+    allowCommercialUse: !ccLicenseAdaption?.includes('NC'),
+    allowSharing: (() => {
+      if (!ccLicenseAdaption || !ccLicenseAdaption.length) {
+        return '';
+      }
+      if (ccLicenseAdaption?.includes('SA')) {
+        return 'alike';
+      }
+      return ccLicenseAdaption?.includes('ND') ? 'no' : 'yes';
+    })(),
+  };
+};
 
 type SummaryDetailsProps = {
   createdAt: string;
@@ -68,14 +88,11 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
 }) => {
   const { t } = useTranslation();
 
-  const requireAccreditation = ccLicenseAdaption?.includes('BY');
-  const allowCommercialUse = !ccLicenseAdaption?.includes('NC');
-  const allowSharing = (() => {
-    if (ccLicenseAdaption?.includes('SA')) {
-      return 'alike';
-    }
-    return ccLicenseAdaption?.includes('ND') ? 'no' : 'yes';
-  })();
+  const { allowSharing, allowCommercialUse, requireAccreditation } =
+    React.useMemo(
+      () => convertLicense(ccLicenseAdaption ?? ''),
+      [ccLicenseAdaption],
+    );
 
   return (
     <Grid
@@ -124,9 +141,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
             <Typography variant="body1" fontWeight="bold">
               {t(LIBRARY.COLLECTION_LANGUAGES_TITLE)}
             </Typography>
-            {isLoading && (
-              <Skeleton />
-            )}
+            {isLoading && <Skeleton />}
             {languages?.size ? (
               languages?.map((entry) => (
                 <Chip
@@ -139,9 +154,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
                 />
               ))
             ) : (
-              <Typography>
-                {t(LIBRARY.SUMMARY_DETAILS_NO_LANGUAGES)}
-              </Typography>
+              <Typography>{t(LIBRARY.SUMMARY_DETAILS_NO_LANGUAGES)}</Typography>
             )}
           </div>
         </DetailCard>
@@ -197,7 +210,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
                 <Box maxWidth={600}>
                   <CreativeCommons
                     allowCommercialUse
-                    allowSharedAdaptation='yes'
+                    allowSharedAdaptation="yes"
                     iconSize={48}
                     sx={{ marginY: 0, paddingY: 0 }}
                   />
@@ -211,14 +224,17 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
               >
                 {ccLicenseAdaption && ccLicenseAdaption.length > 0 ? (
                   <CreativeCommons
-                    allowSharedAdaptation={allowSharing}
+                    allowSharedAdaptation={allowSharing as CCSharingVariant}
                     allowCommercialUse={allowCommercialUse}
                     requireAccreditation={requireAccreditation}
                     iconSize={48}
                     sx={{ marginY: 0, paddingY: 0 }}
                   />
                 ) : (
-                  <Typography variant='body1' id={SUMMARY_CC_LICENSE_NO_LICENSE_ID}>
+                  <Typography
+                    variant="body1"
+                    id={SUMMARY_CC_LICENSE_NO_LICENSE_ID}
+                  >
                     {t(LIBRARY.SUMMARY_DETAILS_EMPTY_LICENSE_TEXT)}
                   </Typography>
                 )}

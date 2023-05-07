@@ -1,5 +1,7 @@
-import { Box, Container, Grid, Stack, Typography } from '@mui/material';
 import React from 'react';
+
+import { Box, Container, Grid, Stack, Typography } from '@mui/material';
+
 import Search from './Search';
 
 type PopularSearchItemProps = {
@@ -7,32 +9,24 @@ type PopularSearchItemProps = {
 };
 
 const PopularSearchItem: React.FC<PopularSearchItemProps> = ({ text }) => (
-  <Box style={{ border: '1px solid white', padding: '4px 12px', borderRadius: 12 }}>
-    <Typography color='white'>
-      {text.toUpperCase()}
-    </Typography>
+  <Box
+    style={{ border: '1px solid white', padding: '4px 12px', borderRadius: 12 }}
+  >
+    <Typography color="white">{text.toUpperCase()}</Typography>
   </Box>
 );
 
-type HeaderProps = {
-
-};
+type HeaderProps = {};
 
 const Header: React.FC<HeaderProps> = () => {
-
   // TODO: Feed from real data.
-  const popularSearches = [
-    'Climate',
-    'Biology',
-    'Science',
-    'Education',
-  ];
+  const popularSearches = ['Climate', 'Biology', 'Science', 'Education'];
 
   return (
-    <Container maxWidth='md'>
+    <Container maxWidth="md">
       <Stack
-        direction='column'
-        alignItems='center'
+        direction="column"
+        alignItems="center"
         paddingBottom={{
           xs: 0,
           md: 6,
@@ -41,10 +35,15 @@ const Header: React.FC<HeaderProps> = () => {
         spacing={4}
       >
         <Box display="flex" flexDirection="row" alignItems="center">
-          <img src='./homePageIcon.png' alt="Graasp icon" width={100} style={{ maxWidth: '30%' }} />
+          <img
+            src="./homePageIcon.png"
+            alt="Graasp icon"
+            width={100}
+            style={{ maxWidth: '30%' }}
+          />
           <Typography
             color="white"
-            variant='h1'
+            variant="h1"
             marginLeft={4}
             fontSize={{
               xs: '2.5rem',
@@ -56,25 +55,25 @@ const Header: React.FC<HeaderProps> = () => {
           </Typography>
         </Box>
         <Box>
-          <Typography color="white" variant='h5' textAlign='center'>
+          <Typography color="white" variant="h5" textAlign="center">
             Library of OER resources lorem ipsum dolor sit
           </Typography>
         </Box>
-        <Box width='100%'>
+        <Box width="100%">
           <Search
-            handleClick={() => { }}
-            handleRangeChange={() => { }}
+            handleClick={() => {}}
+            handleRangeChange={() => {}}
             isLoading={false}
-            range='12'
+            range="12"
             showFilters={false}
           />
         </Box>
-        <Box width='100%'>
-          <Typography color='white' variant='h6' gutterBottom>
+        <Box width="100%">
+          <Typography color="white" variant="h6" gutterBottom>
             POPULAR SEARCHES
           </Typography>
           <Grid container spacing={2}>
-            {popularSearches.map(term => (
+            {popularSearches.map((term) => (
               <Grid item>
                 <PopularSearchItem text={term} key={term} />
               </Grid>

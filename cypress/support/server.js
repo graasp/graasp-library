@@ -612,12 +612,12 @@ export const mockGetItemMembershipsForItem = ({ items, currentMember }) => {
           const defaultMembership =
             creator === currentMember?.id
               ? [
-                {
-                  permission: PERMISSION_LEVELS.ADMIN,
-                  memberId: creator,
-                  itemId: id,
-                },
-              ]
+                  {
+                    permission: PERMISSION_LEVELS.ADMIN,
+                    memberId: creator,
+                    itemId: id,
+                  },
+                ]
               : { statusCode: StatusCodes.UNAUTHORIZED };
 
           // if the defined memberships does not contain currentMember, it should throw

@@ -1,11 +1,13 @@
-import { configureQueryClient, Api, DATA_KEYS } from '@graasp/query-client';
 import PropTypes from 'prop-types';
 
 import * as React from 'react';
-import { buildCollectionKey } from '../../src/config/constants';
-import { QUERY_CLIENT_OPTIONS } from '../../src/config/queryClient';
+
+import { Api, DATA_KEYS, configureQueryClient } from '@graasp/query-client';
+
 import Collection from '../../src/components/collection/Collection';
 import Wrapper from '../../src/components/common/Wrapper';
+import { buildCollectionKey } from '../../src/config/constants';
+import { QUERY_CLIENT_OPTIONS } from '../../src/config/queryClient';
 
 const CollectionPage = ({ dehydratedState, id }) => (
   <Wrapper dehydratedState={dehydratedState}>
@@ -28,10 +30,10 @@ export async function getServerSideProps({ params }) {
   await queryClient.prefetchQuery(collectionKey, () =>
     Api.getItem(id, QUERY_CLIENT_OPTIONS).then((data) => data),
   );
-  
+
   const queryData = await queryClient.getQueryData(collectionKey);
 
-  const { creator, path } = { ...queryData };
+  const { creator /* path */ } = { ...queryData };
 
   if (creator) {
     await queryClient.prefetchQuery(DATA_KEYS.buildMemberKey(creator), () =>
@@ -48,8 +50,11 @@ export async function getServerSideProps({ params }) {
     );
   }
 
-  await queryClient.prefetchQuery(DATA_KEYS.buildItemParentsKey(id),  () => 
-    Api.getParents({ path }).then((data) => data));
+  // TODO: Prefetch items for breadcrumb.
+  // const parents = path.replaceAll('_', '-').split('.');
+  // await queryClient.prefetchQuery(DATA_KEYS.buildItemsKey(parents), () => {
+  //   Api.getItems(parents).then(data => data).catch(() => ({}))
+  // });
 
   // Pass data to the page via props
   return { props: { id, dehydratedState: dehydrate(queryClient) } };

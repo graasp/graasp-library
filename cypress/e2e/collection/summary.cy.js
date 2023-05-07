@@ -1,22 +1,21 @@
-import { isChildOf } from '@graasp/sdk';
 import { DateTime } from 'luxon';
-import { PUBLISHED_ITEMS } from '../../fixtures/items';
+
+import { isChildOf } from '@graasp/sdk';
+
 import { buildCollectionRoute } from '../../../src/config/routes';
 import {
-  PERMISSION_LEVELS,
-} from '../../support/constants';
-
-import { buildPublicAndPrivateEnvironments } from '../../fixtures/environment';
-import { MEMBERS } from '../../fixtures/members';
-import {
-  buildContributorId,
   CHILDREN_ITEMS_GRID_ID,
   ITEM_SUMMARY_TITLE_ID,
   SUMMARY_AUTHOR_CONTAINER_ID,
   SUMMARY_CC_LICENSE_CONTAINER_ID,
   SUMMARY_CREATED_AT_CONTAINER_ID,
   SUMMARY_LAST_UPDATE_CONTAINER_ID,
+  buildContributorId,
 } from '../../../src/config/selectors';
+import { buildPublicAndPrivateEnvironments } from '../../fixtures/environment';
+import { PUBLISHED_ITEMS } from '../../fixtures/items';
+import { MEMBERS } from '../../fixtures/members';
+import { PERMISSION_LEVELS } from '../../support/constants';
 
 describe('Collection Summary', () => {
   buildPublicAndPrivateEnvironments().forEach((environment) => {
@@ -50,14 +49,22 @@ describe('Collection Summary', () => {
 
       // created at
       if (item.createdAt) {
-        cy.get(`#${SUMMARY_CREATED_AT_CONTAINER_ID}`).should('contain', 
-            DateTime.fromISO(item.createdAt).toLocaleString(DateTime.DATE_FULL, { locale: member?.extra?.lang }));
+        cy.get(`#${SUMMARY_CREATED_AT_CONTAINER_ID}`).should(
+          'contain',
+          DateTime.fromISO(item.createdAt).toLocaleString(DateTime.DATE_FULL, {
+            locale: member?.extra?.lang,
+          }),
+        );
       }
 
       // last update
       if (item.updatedAt) {
-        cy.get(`#${SUMMARY_LAST_UPDATE_CONTAINER_ID}`).should('contain', 
-            DateTime.fromISO(item.updatedAt).toLocaleString(DateTime.DATE_FULL, { locale: member?.extra?.lang }));
+        cy.get(`#${SUMMARY_LAST_UPDATE_CONTAINER_ID}`).should(
+          'contain',
+          DateTime.fromISO(item.updatedAt).toLocaleString(DateTime.DATE_FULL, {
+            locale: member?.extra?.lang,
+          }),
+        );
       }
 
       // contributors
@@ -70,19 +77,25 @@ describe('Collection Summary', () => {
       });
     });
 
-    
-    it('CC license matches top level element', { defaultCommandTimeout: 20000 }, () => {
-      cy.setUpApi(environment);
+    it(
+      'CC license matches top level element',
+      { defaultCommandTimeout: 20000 },
+      () => {
+        cy.setUpApi(environment);
 
-      const parentItem = PUBLISHED_ITEMS[0];
-      const child = PUBLISHED_ITEMS[2];
+        const parentItem = PUBLISHED_ITEMS[0];
+        const child = PUBLISHED_ITEMS[2];
 
-      if (parentItem.settings.ccLicenseAdaption && child !== undefined) {
-        cy.visit(buildCollectionRoute(child.id));
+        if (parentItem.settings.ccLicenseAdaption && child !== undefined) {
+          cy.visit(buildCollectionRoute(child.id));
 
-        cy.get(`#${SUMMARY_CC_LICENSE_CONTAINER_ID}`).should('have.class', parentItem.settings.ccLicenseAdaption);
-      }
-    });
+          cy.get(`#${SUMMARY_CC_LICENSE_CONTAINER_ID}`).should(
+            'have.class',
+            parentItem.settings.ccLicenseAdaption,
+          );
+        }
+      },
+    );
 
     it('Hide co-editor', { defaultCommandTimeout: 10000 }, () => {
       cy.setUpApi(environment);

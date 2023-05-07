@@ -35,7 +35,7 @@ const Main = dynamic(() => import('@graasp/ui').then((mod) => mod.Main), {
 
 const gridParams = { sm: 12, md: 6, lg: 4, xl: 4 };
 
-function AllCollections() {
+const AllCollections = () => {
   const { t } = useTranslation();
   const { hooks } = useContext(QueryClientContext);
   const { data: collections, isLoading } = hooks.usePublicItemsWithTag(
@@ -98,7 +98,7 @@ function AllCollections() {
       </Main>
     </>
   );
-}
+};
 
 AllCollections.propTypes = {
   selected: PropTypes.shape({}).isRequired,

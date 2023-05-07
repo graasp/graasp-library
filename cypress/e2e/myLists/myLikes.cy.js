@@ -1,12 +1,12 @@
 import { MY_LIST_ROUTE } from '../../../src/config/routes';
-import { PUBLISHED_ITEMS } from '../../fixtures/items';
-import { ITEM_PUBLISHED_TAG } from '../../fixtures/itemTags';
-import { CURRENT_USER } from '../../fixtures/members';
 import {
-  buildMyListNavigationTabId,
   MY_LIKES_COLLECTIONS_ID,
+  buildMyListNavigationTabId,
 } from '../../../src/config/selectors';
 import { ITEM_LIKES } from '../../fixtures/itemLikes';
+import { ITEM_PUBLISHED_TAG } from '../../fixtures/itemTags';
+import { PUBLISHED_ITEMS } from '../../fixtures/items';
+import { CURRENT_USER } from '../../fixtures/members';
 
 describe('My Liked Items', () => {
   describe('Current user', () => {
@@ -16,9 +16,7 @@ describe('My Liked Items', () => {
       cy.visit(MY_LIST_ROUTE);
 
       // click my likes tab
-      cy.get(
-        `#${buildMyListNavigationTabId('myLikes')}`,
-      ).click();
+      cy.get(`#${buildMyListNavigationTabId('myLikes')}`).click();
 
       // liked items query both item-like table and published items
       cy.wait('@getPublicItemsWithTags').then(({ request: { url } }) => {

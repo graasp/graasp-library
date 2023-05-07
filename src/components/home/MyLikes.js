@@ -9,7 +9,7 @@ import { QueryClientContext } from '../QueryClientContext';
 import CollectionsGrid from '../collection/CollectionsGrid';
 import TabPanel from './TabPanel';
 
-function MyLikes({ tab, index }) {
+const MyLikes = ({ tab, index }) => {
   const { hooks } = useContext(QueryClientContext);
   const { data: member } = hooks.useCurrentMember();
   const { data: collections, isLoading } = hooks.usePublicItemsWithTag(
@@ -33,7 +33,7 @@ function MyLikes({ tab, index }) {
       />
     </TabPanel>
   );
-}
+};
 
 MyLikes.propTypes = {
   tab: PropTypes.number.isRequired,

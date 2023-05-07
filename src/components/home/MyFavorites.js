@@ -9,7 +9,7 @@ import { QueryClientContext } from '../QueryClientContext';
 import CollectionsGrid from '../collection/CollectionsGrid';
 import TabPanel from './TabPanel';
 
-function MyFavorites({ tab, index }) {
+const MyFavorites = ({ tab, index }) => {
   const { hooks } = useContext(QueryClientContext);
   const { data: member } = hooks.useCurrentMember();
   const { data: collections, isLoading } = hooks.usePublicItemsWithTag(
@@ -32,7 +32,7 @@ function MyFavorites({ tab, index }) {
       />
     </TabPanel>
   );
-}
+};
 
 MyFavorites.propTypes = {
   tab: PropTypes.number.isRequired,

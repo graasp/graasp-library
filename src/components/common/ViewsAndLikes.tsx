@@ -1,6 +1,7 @@
+import React from 'react';
+
 import { Favorite, Visibility } from '@mui/icons-material';
 import { Tooltip, Typography } from '@mui/material';
-import React from 'react';
 
 type ViewsAndLikesProps = {
   views: number;
@@ -17,15 +18,10 @@ const ViewsAndLikes: React.FC<ViewsAndLikesProps> = ({ views, likes }) => (
     <Tooltip title="Views" arrow placement="bottom">
       <span style={{ display: 'flex', alignItems: 'center' }}>
         {views}
-        <Visibility
-          color="primary"
-          style={{ marginLeft: 5 }}
-        />
+        <Visibility color="primary" style={{ marginLeft: 5 }} />
       </span>
     </Tooltip>
-    <span style={{ margin: '0 10px' }}>
-      {String.fromCharCode(183)}
-    </span>
+    <span style={{ margin: '0 10px' }}>{String.fromCharCode(183)}</span>
     <Tooltip title="Likes" arrow placement="bottom">
       <span style={{ display: 'flex', alignItems: 'center' }}>
         {likes}

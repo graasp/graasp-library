@@ -194,8 +194,7 @@ export const PUBLISHED_ITEMS = [
       tags: ['one-tag', 'two-tag'],
       displayCoEditors: true,
     },
-    tags: [
-    ],
+    tags: [],
     memberships: [
       {
         itemPath: 'fdf09f5a_5688_11eb_ae93_0242ac130002',

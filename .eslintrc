@@ -1,6 +1,6 @@
 {
   "extends": ["airbnb", "airbnb-typescript", "prettier"],
-  "plugins": ["import", "jsx-a11y", "react"],
+  "plugins": ["import", "jsx-a11y", "react", "prettier"],
   "env": {
     "browser": true,
     "node": true,
@@ -17,9 +17,14 @@
     "project": "./tsconfig.json"
   },
   "rules": {
+    "prettier/prettier": "error",
     "no-console": ["error", { "allow": ["warn", "error"] }],
+    "react/function-component-definition": [
+      2,
+      { "namedComponents": "arrow-function" }
+    ],
     "curly": "error",
-    "@typescript-eslint/indent":"off",
+    "@typescript-eslint/indent": "off",
     "@typescript-eslint/brace-style": "off",
     "no-underscore-dangle": [
       "error",

@@ -8,7 +8,7 @@ import { useTheme } from '@mui/material/styles';
 
 import { LIBRARY } from '@graasp/translations';
 
-function CommentsHeader() {
+const CommentsHeader = () => {
   const { t } = useTranslation();
   const theme = useTheme();
   return (
@@ -27,6 +27,6 @@ function CommentsHeader() {
       </Grid>
     </div>
   );
-}
+};
 
 export default CommentsHeader;
