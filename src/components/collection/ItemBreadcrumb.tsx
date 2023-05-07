@@ -4,7 +4,7 @@ import React, { useContext } from 'react';
 
 import { Breadcrumbs, Button, Typography } from '@mui/material';
 
-import { ItemRecord } from '@graasp/sdk/frontend';
+import { ItemRecord, ItemTagRecord } from '@graasp/sdk/frontend';
 
 import { PUBLISHED_TAG_ID } from '../../config/env';
 import { buildCollectionRoute } from '../../config/routes';
@@ -34,7 +34,7 @@ const ItemBreadcrumb: React.FC<ItemBreadcrumbProps> = ({ itemId }) => {
   const { data: tags } = hooks.useItemTags(itemId);
 
   const topPublicParentPath = tags?.find(
-    (t: ItemRecord) => t.tagId === PUBLISHED_TAG_ID,
+    (t: ItemTagRecord) => t.tagId === PUBLISHED_TAG_ID,
   )?.itemPath;
 
   const publicParentsIds = getPublicParents(
