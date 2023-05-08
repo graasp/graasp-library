@@ -65,9 +65,8 @@ const Search = ({ handleClick, isLoading, range, handleRangeChange }) => {
           placeholder={t(LIBRARY.SEARCH_PLACEHOLDER)}
           fullWidth
           margin="none"
-          InputLabelProps={{
-            shrink: true,
-            ariaLabel: LIBRARY.SEARCH_ARIA_LABEL,
+          inputProps={{
+            'aria-label': LIBRARY.SEARCH_ARIA_LABEL,
           }}
           variant="filled"
           onChange={handleChange}
@@ -90,6 +89,7 @@ const Search = ({ handleClick, isLoading, range, handleRangeChange }) => {
         <RadioGroup row value={range} onChange={handleRangeChange}>
           {Object.values(SEARCH_RANGES).map((entry) => (
             <FormControlLabel
+              key={entry.title}
               value={entry.value}
               control={<Radio color="primary" />}
               label={t(entry.title)}

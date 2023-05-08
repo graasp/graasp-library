@@ -9,6 +9,7 @@ import {
   CardActions,
   CardContent,
   CardHeader,
+  Stack,
   Typography,
 } from '@mui/material';
 
@@ -54,6 +55,7 @@ export const CollectionCard = ({ collection }: Props) => {
       defaultImage={DEFAULT_MEMBER_THUMBNAIL}
       isLoading={isLoadingAvatar}
       component="avatar"
+      sx={{ width: 30, height: 30 }}
       maxWidth={30}
       maxHeight={30}
       variant="circular"
@@ -71,9 +73,14 @@ export const CollectionCard = ({ collection }: Props) => {
           size={ThumbnailSize.Original}
         />
         <CardHeader
-          avatar={avatar}
+          // avatar={avatar}
           title={name}
-          subheader={author?.name}
+          subheader={
+            <Stack direction="row" alignItems="center" spacing={1}>
+              {avatar}
+              <Typography noWrap>{author?.name}</Typography>
+            </Stack>
+          }
           sx={{ '.MuiCardHeader-content	': { minWidth: '0px' } }}
           titleTypographyProps={{
             title: name,

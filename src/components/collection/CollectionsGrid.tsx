@@ -36,16 +36,16 @@ const CollectionsGrid = ({ collections, isLoading, id }: Props) => {
       <Grid
         container
         spacing={4}
-        alignItems="center"
+        alignItems="stretch"
         justifyContent="flex-start"
         id={id}
       >
         {collections?.map((collection) => (
           <Grid
-            key={collection?.id}
-            xs={12}
-            sm={6}
-            md={4}
+            key={collection.id}
+            xs={6}
+            sm={4}
+            md={3}
             lg={3}
             xl={2}
             id={buildCollectionCardGridId(collection.id)}
