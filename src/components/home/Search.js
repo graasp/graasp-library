@@ -4,28 +4,13 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import SearchIcon from '@mui/icons-material/Search';
-import {
-  Divider,
-  FormControl,
-  FormControlLabel,
-  FormLabel,
-  IconButton,
-  InputBase,
-  Paper,
-  Radio,
-  RadioGroup,
-} from '@mui/material';
+import { Divider, IconButton, InputBase, Paper } from '@mui/material';
 
 import { LIBRARY } from '@graasp/translations';
 
-import {
-  HOME_SEARCH_BUTTON_ID,
-  HOME_SEARCH_ID,
-  buildSearchRangeOptionId,
-} from '../../config/selectors';
-import { SEARCH_RANGES } from '../../enums/searchRanges';
+import { HOME_SEARCH_BUTTON_ID, HOME_SEARCH_ID } from '../../config/selectors';
 
-const Search = ({ handleClick, isLoading, range, handleRangeChange }) => {
+const Search = ({ handleClick, isLoading }) => {
   const [searchInput, setSearchInput] = useState(null);
 
   const { t } = useTranslation();
@@ -84,6 +69,7 @@ const Search = ({ handleClick, isLoading, range, handleRangeChange }) => {
           <SearchIcon />
         </IconButton>
       </Paper>
+      {/*
       <FormControl component="fieldset" ml={1} mb={2}>
         <FormLabel component="legend">
           {t(LIBRARY.SEARCH_RANGE_LABEL)}
@@ -104,9 +90,9 @@ const Search = ({ handleClick, isLoading, range, handleRangeChange }) => {
               <HelpIcon />
             </IconButton>
           </Tooltip>
-          */}
         </RadioGroup>
       </FormControl>
+      */}
     </>
   );
 };
@@ -114,8 +100,8 @@ const Search = ({ handleClick, isLoading, range, handleRangeChange }) => {
 Search.propTypes = {
   handleClick: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  range: PropTypes.string.isRequired,
-  handleRangeChange: PropTypes.func.isRequired,
+  /* range: PropTypes.string.isRequired,
+  handleRangeChange: PropTypes.func.isRequired, */
 };
 
 export default Search;

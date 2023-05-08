@@ -59,9 +59,21 @@ const Home: React.FC<HomeProps> = () => {
       >
         <Header />
 
-        <ItemCollection collections={collections} title="Popular this week" />
-        <ItemCollection collections={collections} title="Graasp Selection" />
-        <ItemCollection collections={collections} title="Most liked" />
+        <ItemCollection
+          collections={collections}
+          title="Popular this week"
+          sx={{ backgroundColor: 'white' }}
+        />
+        <ItemCollection
+          collections={collections}
+          title="Graasp Selection"
+          sx={{ backgroundColor: '#fafafa' }}
+        />
+        <ItemCollection
+          collections={collections}
+          title="Most liked"
+          sx={{ backgroundColor: 'white' }}
+        />
 
         <Box textAlign="center" marginBottom={20} marginTop={20}>
           <DiscoverButton

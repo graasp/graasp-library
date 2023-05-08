@@ -30,6 +30,7 @@ const Header: React.FC<HeaderProps> = () => {
         paddingBottom={{
           xs: 0,
           md: 6,
+          lg: 15,
         }}
         paddingTop={14}
         spacing={4}

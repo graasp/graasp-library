@@ -106,19 +106,30 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
           alignItems="center"
           justifyContent="center"
         >
-          <StyledCard>
-            {isLoading ? (
-              <Skeleton variant="rectangular" width="100%">
-                <CardMedia name={name} />
-              </Skeleton>
-            ) : (
-              <CardMedia
-                itemId={itemId}
-                name={name}
-                size={ThumbnailSize.Original}
-              />
-            )}
-          </StyledCard>
+          <Box
+            sx={{
+              '& .MuiPaper-root:has(img[src$=".svg"])': {
+                borderRadius: 0,
+                border: 'none',
+                boxShadow: 'none',
+              },
+            }}
+          >
+            <StyledCard>
+              {isLoading ? (
+                <Skeleton variant="rectangular" width="100%">
+                  <CardMedia name={name} />
+                </Skeleton>
+              ) : (
+                <CardMedia
+                  itemId={itemId}
+                  name={name}
+                  size={ThumbnailSize.Original}
+                  imageSize={80}
+                />
+              )}
+            </StyledCard>
+          </Box>
         </Grid>
         <Grid item xs={12} sm={8}>
           <Grid
