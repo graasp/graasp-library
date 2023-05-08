@@ -125,7 +125,6 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
                   itemId={itemId}
                   name={name}
                   size={ThumbnailSize.Original}
-                  imageSize={80}
                 />
               )}
             </StyledCard>

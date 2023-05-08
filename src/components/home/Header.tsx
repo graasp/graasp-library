@@ -61,13 +61,7 @@ const Header: React.FC<HeaderProps> = () => {
           </Typography>
         </Box>
         <Box width="100%">
-          <Search
-            handleClick={() => {}}
-            handleRangeChange={() => {}}
-            isLoading={false}
-            range="12"
-            showFilters={false}
-          />
+          <Search handleClick={() => {}} isLoading={false} />
         </Box>
         <Box width="100%">
           <Typography color="white" variant="h6" gutterBottom>
