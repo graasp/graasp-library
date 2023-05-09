@@ -5,8 +5,6 @@ import React from 'react';
 
 import { Box, Typography, styled } from '@mui/material';
 
-import { redirect } from '@graasp/sdk';
-
 import { APP_NAME, HOST_MAP } from '../../config/constants';
 import { HEADER_LOGO_HEIGHT } from '../../config/cssStyles';
 
@@ -77,13 +75,7 @@ export function usePlatformNavigation(
     const url = hostsMapper[platform]?.(itemId);
     const href = url ?? '#';
     return {
-      onClick: () => redirect(href),
-      onMouseDown: (event: React.MouseEvent) => {
-        if (event.button !== 1 || url === undefined) {
-          return;
-        }
-        window.open(href, '_blank');
-      },
+      href,
     };
   };
 }
