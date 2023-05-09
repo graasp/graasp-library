@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.7.0](https://github.com/graasp/graasp-library/compare/v0.6.0...v0.7.0) (2023-05-09)
+
+
+### Features
+
+* rework cc display ([#234](https://github.com/graasp/graasp-library/issues/234)) ([83c5167](https://github.com/graasp/graasp-library/commit/83c5167625474d7ab52329cf660fa5d605886d5b))
+
+
+### Bug Fixes
+
+* navigation using href ([#262](https://github.com/graasp/graasp-library/issues/262)) ([e68aa50](https://github.com/graasp/graasp-library/commit/e68aa507e550b13ed35911b5ca07969453136b57))
+
 ## [0.6.0](https://github.com/graasp/graasp-library/compare/v0.5.0...v0.6.0) (2023-03-28)
 
 
