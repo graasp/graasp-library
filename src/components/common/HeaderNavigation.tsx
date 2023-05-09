@@ -47,7 +47,7 @@ export function defaultHostsMapper(
     [Platform.Player]: (origin: string, itemId: string) =>
       `${origin}/${itemId}`,
     [Platform.Library]: (origin: string, itemId: string) =>
-      `${origin}/collections/${itemId}`,
+      origin,
     [Platform.Analytics]: (origin: string, itemId: string) =>
       `${origin}/${itemId}`,
   };
