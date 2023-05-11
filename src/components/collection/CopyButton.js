@@ -41,7 +41,7 @@ export const useCopyAction = (itemId) => {
     // remove loading icon on callback
     // do not set parent if it is root
     copyItem({
-      itemId,
+      id: itemId,
       to: [
         ROOT_ID,
         TREE_MODAL_MY_ITEMS_ID,
