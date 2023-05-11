@@ -84,14 +84,8 @@ const Summary: React.FC<SummaryProps> = ({
 
   const { hooks } = useContext(QueryClientContext);
 
-  const parents = getParentsIdsFromPath(path);
-
-  const { data: topLevelParent } = hooks.useItem(parents[0] ?? itemId);
-
   const { data: categoryTypes } = hooks.useCategoryTypes();
-  const { data: itemCategories } = hooks.useItemCategories(
-    topLevelParent?.id ?? itemId,
-  );
+  const { data: itemCategories } = hooks.useItemCategories(itemId);
   const { data: categories } = hooks.useCategories();
 
   const selectedCategories = categories
@@ -120,9 +114,7 @@ const Summary: React.FC<SummaryProps> = ({
     )?.id ?? '',
   );
 
-  const ccLicenseAdaption = topLevelParent
-    ? topLevelParent.settings?.ccLicenseAdaption
-    : settings?.ccLicenseAdaption;
+  const ccLicenseAdaption = settings?.ccLicenseAdaption as string | undefined;
 
   const { data: member } = hooks.useCurrentMember();
 
