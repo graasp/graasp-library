@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.7.1](https://github.com/graasp/graasp-library/compare/v0.7.0...v0.7.1) (2023-05-11)
+
+
+### Bug Fixes
+
+* display children card actions below item ([#264](https://github.com/graasp/graasp-library/issues/264)) ([25a8a93](https://github.com/graasp/graasp-library/commit/25a8a935bbf62cf25e8e81abff6a28383f65c2b7))
+
 ## [0.7.0](https://github.com/graasp/graasp-library/compare/v0.6.0...v0.7.0) (2023-05-09)
 
 
