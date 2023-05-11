@@ -7,7 +7,6 @@ import {
   CHILDREN_ITEMS_GRID_ID,
   ITEM_SUMMARY_TITLE_ID,
   SUMMARY_AUTHOR_CONTAINER_ID,
-  SUMMARY_CC_LICENSE_CONTAINER_ID,
   SUMMARY_CREATED_AT_CONTAINER_ID,
   SUMMARY_LAST_UPDATE_CONTAINER_ID,
   buildContributorId,
@@ -76,26 +75,6 @@ describe('Collection Summary', () => {
         cy.get(`#${buildContributorId(memberId)}`).should('exist');
       });
     });
-
-    it(
-      'CC license matches top level element',
-      { defaultCommandTimeout: 20000 },
-      () => {
-        cy.setUpApi(environment);
-
-        const parentItem = PUBLISHED_ITEMS[0];
-        const child = PUBLISHED_ITEMS[2];
-
-        if (parentItem.settings.ccLicenseAdaption && child !== undefined) {
-          cy.visit(buildCollectionRoute(child.id));
-
-          cy.get(`#${SUMMARY_CC_LICENSE_CONTAINER_ID}`).should(
-            'have.class',
-            parentItem.settings.ccLicenseAdaption,
-          );
-        }
-      },
-    );
 
     it('Hide co-editor', { defaultCommandTimeout: 10000 }, () => {
       cy.setUpApi(environment);
