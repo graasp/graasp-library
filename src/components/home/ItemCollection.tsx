@@ -38,13 +38,13 @@ const ItemCollection: React.FC<ItemCollectionProps> = ({
   return (
     <StyledContainer sx={sx}>
       <Container maxWidth="xl">
-        <Typography variant="h4" marginBottom={3}>
+        <Typography variant="h4" marginBottom={5}>
           {title}
         </Typography>
       </Container>
 
       <CollectionsGrid
-        collections={collections}
+        collections={collections.concat(collections).concat(collections)}
         id="foobar"
         isLoading={false}
       />

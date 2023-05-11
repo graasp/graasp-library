@@ -35,8 +35,6 @@ const DiscoverButton = styled(Button)(() => ({
 type HomeProps = {};
 
 const Home: React.FC<HomeProps> = () => {
-  // const { t } = useTranslation();
-
   const { leftContent, rightContent } = useHeader();
 
   const { hooks } = useContext(QueryClientContext);
@@ -67,12 +65,17 @@ const Home: React.FC<HomeProps> = () => {
         <ItemCollection
           collections={collections}
           title="Graasp Selection"
-          sx={{ backgroundColor: '#fafafa' }}
+          sx={{ backgroundColor: '#F8F7FE' }}
+        />
+        <ItemCollection
+          collections={collections}
+          title="Most Viewed"
+          sx={{ backgroundColor: 'white' }}
         />
         <ItemCollection
           collections={collections}
           title="Most liked"
-          sx={{ backgroundColor: 'white' }}
+          sx={{ backgroundColor: '#F8F7FE' }}
         />
 
         <Box textAlign="center" marginBottom={20} marginTop={20}>

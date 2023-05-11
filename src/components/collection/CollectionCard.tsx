@@ -10,6 +10,7 @@ import {
   CardActions,
   CardContent,
   CardHeader,
+  Stack,
   Typography,
   styled,
 } from '@mui/material';
@@ -72,7 +73,7 @@ const ItemTag: React.FC<ItemTagProps> = ({ createdAt, updatedAt }) => {
   const recentlyCreated =
     Date.now() - Date.parse(createdAt) < RECENT_DAYS * MS_PER_DAY;
 
-  const color = recentlyCreated ? '#84F05E' : '#F08D55';
+  const color = recentlyCreated ? '#84E05E' : '#ffaa50';
   const text = recentlyCreated ? 'NEW' : 'UPDATED';
 
   if (recentlyCreated || recentlyUpdated) {
@@ -104,10 +105,12 @@ export const CollectionCard = ({ collection }: Props) => {
   return (
     <StyledCard id={buildCollectionCardGridId(collection?.id)}>
       <CardActionArea component={Link} href={link}>
-        <ItemTag
-          createdAt={collection.createdAt}
-          updatedAt={collection.updatedAt}
-        />
+        {false && (
+          <ItemTag
+            createdAt={collection.createdAt}
+            updatedAt={collection.updatedAt}
+          />
+        )}
         <Box>
           <CardMediaComponent
             itemId={id}
@@ -142,32 +145,54 @@ export const CollectionCard = ({ collection }: Props) => {
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions disableSpacing sx={{ pt: 0, paddingX: 2 }}>
-        <Avatar
-          alt={t(LIBRARY.AVATAR_ALT, { name: author?.name })}
-          defaultImage={DEFAULT_MEMBER_THUMBNAIL}
-          component="avatar"
-          maxWidth={30}
-          maxHeight={30}
-          variant="circular"
-          isLoading={isLoadingAvatar}
-          blob={userAvatar}
+      <CardActions
+        disableSpacing
+        sx={{
+          px: 2,
+          pb: 2,
+          pt: 1,
+          justifyContent: 'space-between',
+        }}
+      >
+        <Stack direction="row" alignItems="center">
+          <Avatar
+            alt={t(LIBRARY.AVATAR_ALT, { name: author?.name })}
+            defaultImage={DEFAULT_MEMBER_THUMBNAIL}
+            component="avatar"
+            maxWidth={30}
+            maxHeight={30}
+            variant="circular"
+            isLoading={isLoadingAvatar}
+            blob={userAvatar}
+            sx={{
+              maxWidth: 30,
+              maxHeight: 30,
+            }}
+          />
+          <Typography
+            variant="body2"
+            color="GrayText"
+            marginLeft={1}
+            fontSize={12}
+          >
+            {author?.name}
+          </Typography>
+        </Stack>
+        <Box
+          className="cardActions"
           sx={{
-            maxWidth: 30,
-            maxHeight: 30,
+            ' .MuiButtonBase-root': {
+              padding: '3px',
+            },
+            ' .MuiSvgIcon-root': {
+              width: '22px',
+            },
           }}
-        />
-        <Typography
-          variant="body2"
-          color="GrayText"
-          marginLeft={1}
-          fontSize={12}
         >
-          {author?.name}
-        </Typography>
-        <DownloadButton id={id} />
-        {member?.id && <CopyButton id={id} />}
-        <CopyLinkButton id={id} extra={extra} />
+          <DownloadButton id={id} />
+          {member?.id && <CopyButton id={id} />}
+          <CopyLinkButton id={id} extra={extra} />
+        </Box>
       </CardActions>
     </StyledCard>
   );

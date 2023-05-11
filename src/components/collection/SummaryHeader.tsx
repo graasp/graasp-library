@@ -109,8 +109,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
           <Box
             sx={{
               '& .MuiPaper-root:has(img[src$=".svg"])': {
-                borderRadius: 0,
-                border: 'none',
+                border: '1px solid #ddd',
                 boxShadow: 'none',
               },
             }}

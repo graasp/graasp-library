@@ -14,9 +14,18 @@ export const StyledCard = styled(Card)(() => ({
   transition: '0.2s ease-in-out',
   border: '1px solid #eee',
 
-  '&:hover': {
+  ':hover': {
     transform: 'scale(1.05)',
     border: '1px solid #ddd',
+
+    '.cardActions': {
+      opacity: 1,
+    },
+  },
+
+  '.cardActions': {
+    transition: 'opacity 0.2s ease-in-out',
+    opacity: 0,
   },
 
   '& img[src$=".svg"]': {

@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { Box, Divider, ThemeProvider, createTheme } from '@mui/material';
+import { Box, ThemeProvider, createTheme } from '@mui/material';
 
 import { LIBRARY } from '@graasp/translations';
 import '@graasp/ui/dist/bundle.css';
@@ -22,10 +22,20 @@ const Content = ({ children }) => {
   return (
     <ErrorBoundary fallback={t(LIBRARY.UNEXPECTED_ERROR_MESSAGE)}>
       <LoginModalProvider>
-        {children}
-        {/* divider for placeholder at bottom to prevent item be covered by footer, set color to white */}
-        <Divider mt={10} />
-        <Footer />
+        <Box
+          sx={{
+            flexGrow: 1,
+            height: '100%',
+            minHeight: '100vh',
+            justifyContent: 'space-between',
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
+          {children}
+          {/* divider for placeholder at bottom to prevent item be covered by footer, set color to white */}
+          <Footer />
+        </Box>
       </LoginModalProvider>
     </ErrorBoundary>
   );
@@ -46,7 +56,13 @@ const Wrapper = ({ dehydratedState, children }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ flexGrow: 1, height: '100%' }}>
+      <Box
+        sx={{
+          flexGrow: 1,
+          height: '100%',
+          minHeight: '100vh',
+        }}
+      >
         <QueryClientProvider dehydratedState={dehydratedState}>
           <TranslationWrapper>
             <Content>{children}</Content>

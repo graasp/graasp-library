@@ -51,8 +51,9 @@ const ContentDescription = ({
   >
     <Interweave
       content={content}
-      onAfterParse={(arr) => [arr.join(' ')]}
-      noHtml
+      onAfterParse={(arr) => (collapsed ? [arr.join(' ')] : arr)}
+      // disable html output when description is collapsed
+      noHtml={collapsed}
     />
   </CollapsibleDescription>
 );

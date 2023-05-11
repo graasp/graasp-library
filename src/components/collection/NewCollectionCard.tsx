@@ -32,8 +32,6 @@ import CopyButton from './CopyButton';
 import CopyLinkButton from './CopyLinkButton';
 import DownloadButton from './DownloadButton';
 
-const RECENT_DAYS = 4;
-
 const { Avatar, Thumbnail } = {
   Avatar: dynamic(() => import('@graasp/ui').then((mod) => mod.Avatar), {
     ssr: false,
@@ -41,51 +39,6 @@ const { Avatar, Thumbnail } = {
   Thumbnail: dynamic(() => import('@graasp/ui').then((mod) => mod.Thumbnail), {
     ssr: false,
   }),
-};
-
-const StyledItemTag = styled(Box)<{ tagColor: string }>(({ tagColor }) => ({
-  position: 'absolute',
-  right: 20,
-  top: 20,
-
-  ' > p': {
-    verticalAlign: 'center',
-    borderRadius: 12,
-    border: `2px solid ${tagColor}`,
-    padding: '2px 12px',
-    display: 'inline-block',
-    fontWeight: 'bold',
-    color: tagColor,
-  },
-}));
-
-type ItemTagProps = {
-  createdAt: string;
-  updatedAt: string;
-};
-
-const ItemTag: React.FC<ItemTagProps> = ({ createdAt, updatedAt }) => {
-  const MS_PER_DAY = 1000 * 60 * 60 * 24;
-
-  const recentlyUpdated =
-    Date.now() - Date.parse(updatedAt) < RECENT_DAYS * MS_PER_DAY;
-  const recentlyCreated =
-    Date.now() - Date.parse(createdAt) < RECENT_DAYS * MS_PER_DAY;
-
-  const color = recentlyCreated ? '#84F05E' : '#F08D55';
-  const text = recentlyCreated ? 'NEW' : 'UPDATED';
-
-  if (recentlyCreated || recentlyUpdated) {
-    return (
-      <StyledItemTag tagColor={color}>
-        <Typography variant="body2" fontSize={14}>
-          {text.toUpperCase()}
-        </Typography>
-      </StyledItemTag>
-    );
-  }
-
-  return null;
 };
 
 const StyledCollectionCard = styled(Box)(() => ({
@@ -179,10 +132,6 @@ const NewCollectionCard: React.FC<NewCollectionCardProps> = ({
       <Link href={link}>
         <Card variant="outlined">
           <CardContent>
-            <ItemTag
-              createdAt={collection.createdAt}
-              updatedAt={collection.updatedAt}
-            />
             <Stack direction="column" alignItems="center">
               <Thumbnail
                 id={collection.id}

@@ -30,10 +30,12 @@ export const useCopyAction = (itemId) => {
   );
 
   const startCopy = (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+
     if (user?.id) {
       setShowTreeModal(true);
     }
-    event.stopPropagation();
   };
 
   // todo: set notifier for copy
@@ -94,7 +96,16 @@ const CopyButton = ({ id }) => {
   return (
     <>
       {renderButton()}
-      {treeModal}
+      {
+        // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+        <span
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
+          {treeModal}
+        </span>
+      }
     </>
   );
 };

@@ -36,8 +36,11 @@ export const useDownloadAction = (itemId) => {
     }
   }, [data, isSuccess]);
 
-  const startDownload = () => {
+  const startDownload = (event) => {
     exportZip({ id: itemId });
+
+    event.preventDefault();
+    event.stopPropagation();
   };
 
   return {

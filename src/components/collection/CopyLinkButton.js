@@ -38,6 +38,7 @@ export const useEmbedAction = (itemId, extra) => {
     });
 
     event.stopPropagation();
+    event.preventDefault();
   };
   return {
     startEmbed,
