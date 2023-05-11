@@ -50,7 +50,7 @@ const CopyLinkButton = ({ id, extra }) => {
   const { startEmbed } = useEmbedAction(id, extra);
 
   return (
-    <Tooltip title={t(LIBRARY.COPY_LINK_BUTTON_TOOLTIP)} placement="top">
+    <Tooltip title={t(LIBRARY.COPY_LINK_BUTTON_TOOLTIP)}>
       <IconButton
         onClick={startEmbed}
         aria-label={t(LIBRARY.COPY_LINK_BUTTON_TOOLTIP)}

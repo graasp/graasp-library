@@ -1,12 +1,18 @@
 import dynamic from 'next/dynamic';
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Folder, InsertDriveFile } from '@mui/icons-material';
-import { Grid, styled } from '@mui/material';
-import Box from '@mui/material/Box';
+import { Folder } from '@mui/icons-material';
+import {
+  Card,
+  CardActionArea,
+  CardActions,
+  CardContent,
+  Grid,
+  styled,
+} from '@mui/material';
 import Typography from '@mui/material/Typography';
 
 import { ItemRecord } from '@graasp/sdk/frontend';
@@ -29,23 +35,35 @@ const Thumbnail = dynamic(
   () => import('@graasp/ui').then((mod) => mod.Thumbnail),
   { ssr: false },
 );
+const ItemIcon = dynamic(
+  () => import('@graasp/ui').then((mod) => mod.ItemIcon),
+  { ssr: false },
+);
 
-const StyleFolderBox = styled(Box)(() => ({
+const StyledCardBox = styled(Card)(() => ({
   border: '1px solid #ddd',
   borderRadius: COLLECTION_CARD_BORDER_RADIUS,
   overflow: 'hidden',
-  padding: 20,
-  '&:hover': {
-    cursor: 'pointer',
-    '& .actions': {
-      opacity: 1,
-    },
-  },
-  '& .actions': {
-    opacity: 0,
-    transition: '0.2s ease-in-out',
-  },
 }));
+
+const ChildrenCard = ({
+  children,
+  actions,
+  id,
+  href,
+}: {
+  children: JSX.Element;
+  actions: JSX.Element;
+  id: string;
+  href: string;
+}): JSX.Element => (
+  <StyledCardBox id={id} elevation={0}>
+    <CardActionArea component={Link} href={href}>
+      <CardContent>{children}</CardContent>
+    </CardActionArea>
+    <CardActions disableSpacing>{actions}</CardActions>
+  </StyledCardBox>
+);
 
 const THUMBNAIL_SIZE = 50;
 const THUMBNAIL_DIMENSIONS = { width: THUMBNAIL_SIZE, height: THUMBNAIL_SIZE };
@@ -61,8 +79,6 @@ export const SubItemCard: React.FC<SubItemCardProps> = ({
   thumbnail,
   subtext,
 }) => {
-  const router = useRouter();
-
   const { hooks } = useContext(QueryClientContext);
 
   const { data: member } = hooks.useCurrentMember();
@@ -71,14 +87,18 @@ export const SubItemCard: React.FC<SubItemCardProps> = ({
 
   const link = buildCollectionRoute(id);
 
-  const onClick = () => {
-    router.push(link);
-  };
-
-  const forceShowActions = window && window.matchMedia('(hover: none)').matches;
-
   return (
-    <StyleFolderBox id={id} onClick={onClick}>
+    <ChildrenCard
+      id={id}
+      href={link}
+      actions={
+        <>
+          {member?.id && <CopyButton id={id} />}
+          <CopyLinkButton id={id} extra={extra} />
+          <DownloadButton id={id} />
+        </>
+      }
+    >
       <Grid container>
         <Grid
           item
@@ -88,11 +108,6 @@ export const SubItemCard: React.FC<SubItemCardProps> = ({
           justifyContent="space-between"
         >
           {thumbnail}
-          <div className={forceShowActions ? ' actions-shown' : 'actions'}>
-            {member?.id && <CopyButton id={id} />}
-            <CopyLinkButton id={id} extra={extra} />
-            <DownloadButton id={id} />
-          </div>
         </Grid>
         <Grid item xs={12}>
           <Typography
@@ -112,7 +127,7 @@ export const SubItemCard: React.FC<SubItemCardProps> = ({
           </Typography>
         </Grid>
       </Grid>
-    </StyleFolderBox>
+    </ChildrenCard>
   );
 };
 
@@ -169,7 +184,13 @@ export const FileChildrenCard: React.FC<FileChildrenCardProps> = ({
         />
       ) : (
         <div style={THUMBNAIL_DIMENSIONS}>
-          <InsertDriveFile fontSize="large" color="primary" />
+          <ItemIcon
+            alt={item.type}
+            type={item.type}
+            extra={item.extra}
+            // TODO: replace with theme values
+            sx={{ fontSize: '2.1875rem', color: '#5050d2' }}
+          />
         </div>
       ),
     [thumbnailData],
