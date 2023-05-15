@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.7.3](https://github.com/graasp/graasp-library/compare/v0.7.2...v0.7.3) (2023-05-15)
+
+
+### Bug Fixes
+
+* get publication settings from item itself and not its top-level parent ([#268](https://github.com/graasp/graasp-library/issues/268)) ([bf5f2f9](https://github.com/graasp/graasp-library/commit/bf5f2f97b002ec3c164379d515dcc33ed8ebf5f7))
+
 ## [0.7.2](https://github.com/graasp/graasp-library/compare/v0.7.1...v0.7.2) (2023-05-11)
 
 
