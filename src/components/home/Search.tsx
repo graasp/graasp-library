@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -10,29 +8,43 @@ import { LIBRARY } from '@graasp/translations';
 
 import { HOME_SEARCH_BUTTON_ID, HOME_SEARCH_ID } from '../../config/selectors';
 
-const Search = ({ handleClick, isLoading }) => {
-  const [searchInput, setSearchInput] = useState(null);
+type SearchProps = {
+  handleClick: (input: string) => void;
+  isLoading: boolean;
+};
+
+const Search: React.FC<SearchProps> = ({ handleClick, isLoading }) => {
+  const [searchInput, setSearchInput] = useState<string>('');
 
   const { t } = useTranslation();
 
-  const handleChange = (event) => {
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     setSearchInput(event.target.value.trim().toLowerCase());
   };
 
   const handleSearch = () => {
-    handleClick(searchInput);
-  };
-
-  const handleSearchOnClick = (event) => {
-    if (event.code === 'Enter') {
+    if (handleClick) {
       handleClick(searchInput);
     }
   };
+
+  /*
+  const handleSearchOnClick = (
+    event: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    if (event.code === 'Enter') {
+      handleClick(searchInput);
+    }
+  }; 
+  */
 
   return (
     <>
       <Paper
         sx={{
+          boxShadow: 'none',
           py: 1,
           pl: 2,
           display: 'flex',
@@ -44,7 +56,7 @@ const Search = ({ handleClick, isLoading }) => {
       >
         <InputBase
           // search on click
-          onKeyUp={handleSearchOnClick}
+          onKeyUp={handleSearch}
           id={HOME_SEARCH_ID}
           disabled={isLoading}
           m={1}
@@ -95,13 +107,6 @@ const Search = ({ handleClick, isLoading }) => {
       */}
     </>
   );
-};
-
-Search.propTypes = {
-  handleClick: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-  /* range: PropTypes.string.isRequired,
-  handleRangeChange: PropTypes.func.isRequired, */
 };
 
 export default Search;
