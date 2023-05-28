@@ -1,12 +1,10 @@
 import dynamic from 'next/dynamic';
 
 import React, { useContext, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { Box, Container } from '@mui/material';
 
 import { Context } from '@graasp/sdk';
-import { LIBRARY } from '@graasp/translations';
 
 import { APP_AUTHOR } from '../../config/constants';
 import { PUBLISHED_TAG_ID } from '../../config/env';
@@ -28,7 +26,6 @@ const Main = dynamic(() => import('@graasp/ui').then((mod) => mod.Main), {
 type AllCollectionsProps = {};
 
 const AllCollections: React.FC<AllCollectionsProps> = () => {
-  const { t } = useTranslation();
   const { hooks } = useContext(QueryClientContext);
   const { data: collections } = hooks.usePublicItemsWithTag(PUBLISHED_TAG_ID, {
     placeholderData: PLACEHOLDER_COLLECTIONS,
@@ -48,8 +45,11 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
   return (
     <>
       <Seo
-        title={t(LIBRARY.GRAASP_LIBRARY)}
-        description={t(LIBRARY.GRAASP_LIBRARY_DESCRIPTION)}
+        // TODO: The keys aren't defined.
+        // title={t(LIBRARY.GRAASP_LIBRARY)}
+        // description={t(LIBRARY.GRAASP_LIBRARY_DESCRIPTION)}
+        title="Graasp Library"
+        description="Graasp Library Description"
         author={APP_AUTHOR}
       />
       {/* todo: allow main to get custom header */}

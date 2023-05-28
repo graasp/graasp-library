@@ -59,21 +59,20 @@ const Search: React.FC<SearchProps> = ({ handleClick, isLoading }) => {
           onKeyUp={handleSearch}
           id={HOME_SEARCH_ID}
           disabled={isLoading}
-          m={1}
+          sx={{ m: 1 }}
           placeholder={t(LIBRARY.SEARCH_PLACEHOLDER)}
           fullWidth
           margin="none"
           inputProps={{
             'aria-label': LIBRARY.SEARCH_ARIA_LABEL,
           }}
-          variant="filled"
           onChange={handleChange}
         />
-        <Divider m={1} orientation="vertical" />
+        <Divider sx={{ m: 1 }} orientation="vertical" />
         <IconButton
           id={HOME_SEARCH_BUTTON_ID}
           color="primary"
-          p={1}
+          sx={{ p: 1 }}
           aria-label={t(LIBRARY.SEARCH_BUTTON_ARIA_LABEL)}
           onClick={handleSearch}
         >
