@@ -1,5 +1,3 @@
-// import { useTranslation } from 'react-i18next';
-// import { LIBRARY } from '@graasp/translations';
 import dynamic from 'next/dynamic';
 
 import React, { useContext } from 'react';
@@ -46,51 +44,47 @@ const Home: React.FC<HomeProps> = () => {
   });
 
   return (
-    <>
-      <div style={{ backgroundColor: GRAASP_COLOR }}>
-        <Seo
-          title={/* t(LIBRARY.GRAASP_LIBRARY) */ 'title'}
-          description={
-            /* t(LIBRARY.GRAASP_LIBRARY_DESCRIPTION) */ 'description'
-          }
-          author={APP_AUTHOR}
+    <div style={{ backgroundColor: GRAASP_COLOR }}>
+      <Seo
+        title={/* t(LIBRARY.GRAASP_LIBRARY) */ 'title'}
+        description={/* t(LIBRARY.GRAASP_LIBRARY_DESCRIPTION) */ 'description'}
+        author={APP_AUTHOR}
+      />
+      <Main
+        context={Context.LIBRARY}
+        headerLeftContent={leftContent}
+        headerRightContent={rightContent}
+      >
+        <Header />
+
+        <ItemCollection
+          collections={collections}
+          title="Popular this week"
+          sx={{ backgroundColor: 'white' }}
         />
-        <Main
-          context={Context.LIBRARY}
-          headerLeftContent={leftContent}
-          headerRightContent={rightContent}
-        >
-          <Header />
+        <ItemCollection
+          collections={collections}
+          title="Graasp Selection"
+          sx={{ backgroundColor: '#fafafa' }}
+        />
+        <ItemCollection
+          collections={collections}
+          title="Most liked"
+          sx={{ backgroundColor: 'white' }}
+        />
 
-          <ItemCollection
-            collections={collections}
-            title="Popular this week"
-            sx={{ backgroundColor: 'white' }}
-          />
-          <ItemCollection
-            collections={collections}
-            title="Graasp Selection"
-            sx={{ backgroundColor: '#fafafa' }}
-          />
-          <ItemCollection
-            collections={collections}
-            title="Most liked"
-            sx={{ backgroundColor: 'white' }}
-          />
-
-          <Box textAlign="center" marginBottom={20} marginTop={20}>
-            <DiscoverButton
-              startIcon={<Explore fontSize="large" />}
-              color="secondary"
-              variant="contained"
-              size="large"
-            >
-              View more in the library
-            </DiscoverButton>
-          </Box>
-        </Main>
-      </div>
-    </>
+        <Box textAlign="center" marginBottom={20} marginTop={20}>
+          <DiscoverButton
+            startIcon={<Explore fontSize="large" />}
+            color="secondary"
+            variant="contained"
+            size="large"
+          >
+            View more in the library
+          </DiscoverButton>
+        </Box>
+      </Main>
+    </div>
   );
 };
 export default Home;

@@ -1,17 +1,35 @@
-import { ItemRecord } from '@graasp/sdk/dist/frontend/types';
-import { Box, Card, CardContent, Skeleton, Stack, Typography, styled } from '@mui/material';
-import React, { useContext } from 'react';
 import dynamic from 'next/dynamic';
-import { LIBRARY } from '@graasp/translations';
 import Link from 'next/link';
+
+import { FC, useContext, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { COLLECTION_CARD_BORDER_RADIUS, DEFAULT_SHADOW_EFFECT } from '../../config/cssStyles';
-import { DEFAULT_ITEM_IMAGE_PATH, DEFAULT_MEMBER_THUMBNAIL } from '../../config/constants';
+
+import {
+  Box,
+  Card,
+  CardContent,
+  Skeleton,
+  Stack,
+  Typography,
+  styled,
+} from '@mui/material';
+
+import { ItemRecord } from '@graasp/sdk/dist/frontend/types';
+import { LIBRARY } from '@graasp/translations';
+
+import {
+  DEFAULT_ITEM_IMAGE_PATH,
+  DEFAULT_MEMBER_THUMBNAIL,
+} from '../../config/constants';
+import {
+  COLLECTION_CARD_BORDER_RADIUS,
+  DEFAULT_SHADOW_EFFECT,
+} from '../../config/cssStyles';
+import { buildCollectionRoute } from '../../config/routes';
 import { QueryClientContext } from '../QueryClientContext';
 import ViewsAndLikes from '../common/ViewsAndLikes';
-import { buildCollectionRoute } from '../../config/routes';
-import CopyLinkButton from './CopyLinkButton';
 import CopyButton from './CopyButton';
+import CopyLinkButton from './CopyLinkButton';
 import DownloadButton from './DownloadButton';
 
 const RECENT_DAYS = 4;
@@ -39,7 +57,6 @@ const StyledItemTag = styled(Box)<{ tagColor: string }>(({ tagColor }) => ({
     fontWeight: 'bold',
     color: tagColor,
   },
-
 }));
 
 type ItemTagProps = {
@@ -47,11 +64,13 @@ type ItemTagProps = {
   updatedAt: string;
 };
 
-const ItemTag: React.FC<ItemTagProps> = ({ createdAt, updatedAt }) => {
+const ItemTag: FC<ItemTagProps> = ({ createdAt, updatedAt }) => {
   const MS_PER_DAY = 1000 * 60 * 60 * 24;
 
-  const recentlyUpdated = Date.now() - Date.parse(updatedAt) < RECENT_DAYS * MS_PER_DAY;
-  const recentlyCreated = Date.now() - Date.parse(createdAt) < RECENT_DAYS * MS_PER_DAY;
+  const recentlyUpdated =
+    Date.now() - Date.parse(updatedAt) < RECENT_DAYS * MS_PER_DAY;
+  const recentlyCreated =
+    Date.now() - Date.parse(createdAt) < RECENT_DAYS * MS_PER_DAY;
 
   const color = recentlyCreated ? '#84F05E' : '#F08D55';
   const text = recentlyCreated ? 'NEW' : 'UPDATED';
@@ -59,7 +78,7 @@ const ItemTag: React.FC<ItemTagProps> = ({ createdAt, updatedAt }) => {
   if (recentlyCreated || recentlyUpdated) {
     return (
       <StyledItemTag tagColor={color}>
-        <Typography variant='body2' fontSize={14}>
+        <Typography variant="body2" fontSize={14}>
           {text.toUpperCase()}
         </Typography>
       </StyledItemTag>
@@ -124,21 +143,29 @@ type NewCollectionCardProps = {
   dimmension?: { x?: number; y?: number };
 };
 
-const NewCollectionCard: React.FC<NewCollectionCardProps> = ({ collection, dimmension }) => {
+const NewCollectionCard: FC<NewCollectionCardProps> = ({
+  collection,
+  dimmension,
+}) => {
   const { x: width, y: height } = { ...dimmension };
 
   const { hooks } = useContext(QueryClientContext);
 
   const { t } = useTranslation();
 
-  const { data: author, isLoading: isLoadingAuthor } = hooks.useMember(collection.creator);
+  const { data: author, isLoading: isLoadingAuthor } = hooks.useMember(
+    collection.creator,
+  );
   const { data: member } = hooks.useCurrentMember();
 
-  const description = React.useMemo(() => {
+  const description = useMemo(() => {
     if (typeof window === 'undefined') {
       return collection.description;
     }
-    return new DOMParser().parseFromString(collection.description, 'text/html').body.textContent ?? '';
+    return (
+      new DOMParser().parseFromString(collection.description, 'text/html').body
+        .textContent ?? ''
+    );
   }, [collection]);
 
   // Doesn't typecheck
@@ -152,19 +179,24 @@ const NewCollectionCard: React.FC<NewCollectionCardProps> = ({ collection, dimme
       <Link href={link}>
         <Card variant="outlined">
           <CardContent>
-            <ItemTag createdAt={collection.createdAt} updatedAt={collection.updatedAt} />
-            <Stack direction='column' alignItems='center'>
+            <ItemTag
+              createdAt={collection.createdAt}
+              updatedAt={collection.updatedAt}
+            />
+            <Stack direction="column" alignItems="center">
               <Thumbnail
                 id={collection.id}
                 alt={collection.name}
-                defaultValue={<img src={DEFAULT_ITEM_IMAGE_PATH} alt="thumbnail" />}
+                defaultValue={
+                  <img src={DEFAULT_ITEM_IMAGE_PATH} alt="thumbnail" />
+                }
                 useThumbnail={hooks.useItemThumbnail}
                 thumbnailSrc={DEFAULT_ITEM_IMAGE_PATH}
                 maxWidth={width ? width * 0.55 : '45%'}
               />
-              <Box width='90%' marginTop={4}>
+              <Box width="90%" marginTop={4}>
                 <Typography
-                  variant='h4'
+                  variant="h4"
                   fontSize={{
                     md: 24,
                     xs: 18,
@@ -173,12 +205,21 @@ const NewCollectionCard: React.FC<NewCollectionCardProps> = ({ collection, dimme
                   {collection.name}
                 </Typography>
                 {description && description.length > 0 && (
-                  <Typography variant='body2' color='GrayText' className='description' gutterBottom>
+                  <Typography
+                    variant="body2"
+                    color="GrayText"
+                    className="description"
+                    gutterBottom
+                  >
                     {description}
                   </Typography>
                 )}
-                <Stack direction='row' width='100%' justifyContent='space-between'>
-                  <Stack direction='row' alignItems='center'>
+                <Stack
+                  direction="row"
+                  width="100%"
+                  justifyContent="space-between"
+                >
+                  <Stack direction="row" alignItems="center">
                     {isLoadingAuthor ? (
                       <Skeleton>
                         <Avatar
@@ -189,7 +230,11 @@ const NewCollectionCard: React.FC<NewCollectionCardProps> = ({ collection, dimme
                           maxHeight={30}
                           variant="circular"
                         />
-                        <Typography variant="body2" color='GrayText' marginLeft={1} />
+                        <Typography
+                          variant="body2"
+                          color="GrayText"
+                          marginLeft={1}
+                        />
                       </Skeleton>
                     ) : (
                       <>
@@ -201,7 +246,11 @@ const NewCollectionCard: React.FC<NewCollectionCardProps> = ({ collection, dimme
                           maxHeight={30}
                           variant="circular"
                         />
-                        <Typography variant="body2" color='GrayText' marginLeft={1}>
+                        <Typography
+                          variant="body2"
+                          color="GrayText"
+                          marginLeft={1}
+                        >
                           {author?.name}
                         </Typography>
                       </>
@@ -210,7 +259,10 @@ const NewCollectionCard: React.FC<NewCollectionCardProps> = ({ collection, dimme
                   {false && <ViewsAndLikes likes={likes} views={views} />}
                   <Box>
                     {member?.id && <CopyButton id={collection.id} />}
-                    <CopyLinkButton id={collection.id} extra={collection.extra} />
+                    <CopyLinkButton
+                      id={collection.id}
+                      extra={collection.extra}
+                    />
                     <DownloadButton id={collection.id} />
                   </Box>
                 </Stack>
