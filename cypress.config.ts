@@ -4,7 +4,7 @@ import { defineConfig } from 'cypress';
 export default defineConfig({
   video: false,
   retries: {
-    runMode: 2,
+    runMode: 1,
   },
   chromeWebSecurity: false,
   env: {

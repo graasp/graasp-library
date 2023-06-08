@@ -1,5 +1,8 @@
 module.exports = {
-  experimental: { newNextLinkBehavior: true },
+  experimental: {
+    newNextLinkBehavior: true,
+    swcPlugins: ['swc-plugin-coverage-instrument'],
+  },
   productionBrowserSourceMaps: true,
   publicRuntimeConfig: {
     NEXT_PUBLIC_API_HOST: process.env.NEXT_PUBLIC_API_HOST,

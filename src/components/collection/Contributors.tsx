@@ -13,7 +13,7 @@ import { buildContributorId } from '../../config/selectors';
 import { getAvatar } from '../../utils/layout';
 
 type Props = {
-  contributors: List<MemberRecord>;
+  contributors?: List<MemberRecord>;
   displayContributors: boolean;
 };
 

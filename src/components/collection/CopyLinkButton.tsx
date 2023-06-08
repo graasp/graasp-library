@@ -1,26 +1,35 @@
-import PropTypes from 'prop-types';
-
-import React from 'react';
+import React, { MouseEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import CodeIcon from '@mui/icons-material/Code';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
+import { ItemType, getAppExtra, getEmbeddedLinkExtra } from '@graasp/sdk';
+import { ItemRecord } from '@graasp/sdk/frontend';
 import { LIBRARY } from '@graasp/translations';
 
-import { GRAASP_PERFORM_HOST } from '../../config/env';
 import notifier, {
   COPY_RESOURCE_LINK_TO_CLIPBOARD,
 } from '../../config/notifier';
+import { buildPlayerViewItemRoute } from '../../config/paths';
 import { copyToClipboard } from '../../utils/clipboard';
 
-export const buildPlayerLink = (id) => `${GRAASP_PERFORM_HOST}/${id}`;
-
-export const useEmbedAction = (itemId, extra) => {
-  const startEmbed = (event) => {
-    const link =
-      extra?.embeddedLink?.url ?? extra?.app?.url ?? buildPlayerLink(itemId);
+export const useEmbedAction = (item?: ItemRecord) => {
+  const startEmbed = (event: MouseEvent<HTMLButtonElement>) => {
+    let link = buildPlayerViewItemRoute(item?.id);
+    if (item?.type === ItemType.LINK) {
+      const embeddedLinkUrl = getEmbeddedLinkExtra(item?.extra)?.url;
+      if (embeddedLinkUrl) {
+        link = embeddedLinkUrl;
+      }
+    }
+    if (item?.type === ItemType.APP) {
+      const appUrl = getAppExtra(item?.extra)?.url;
+      if (appUrl) {
+        link = appUrl;
+      }
+    }
 
     copyToClipboard(link, {
       onSuccess: () => {
@@ -43,11 +52,14 @@ export const useEmbedAction = (itemId, extra) => {
     startEmbed,
   };
 };
+type CopyLinkButtonProps = {
+  item: ItemRecord;
+};
 
-const CopyLinkButton = ({ id, extra }) => {
+const CopyLinkButton = ({ item }: CopyLinkButtonProps) => {
   const { t } = useTranslation();
 
-  const { startEmbed } = useEmbedAction(id, extra);
+  const { startEmbed } = useEmbedAction(item);
 
   return (
     <Tooltip title={t(LIBRARY.COPY_LINK_BUTTON_TOOLTIP)} placement="top">
@@ -59,22 +71,6 @@ const CopyLinkButton = ({ id, extra }) => {
       </IconButton>
     </Tooltip>
   );
-};
-
-CopyLinkButton.propTypes = {
-  id: PropTypes.string.isRequired,
-  extra: PropTypes.shape({
-    embeddedLink: PropTypes.shape({
-      url: PropTypes.string,
-    }),
-    app: PropTypes.shape({
-      url: PropTypes.string,
-    }),
-  }),
-};
-
-CopyLinkButton.defaultProps = {
-  extra: {},
 };
 
 export default CopyLinkButton;

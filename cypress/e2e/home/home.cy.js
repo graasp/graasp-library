@@ -3,7 +3,7 @@ import {
   COLLECTIONS_GRID_ID,
   DISCOVER_SECTION_TITLE_ID,
   GRAASP_SELECTION_TITLE_ID,
-  TITLE_TEXT_ID,
+  HOME_PAGE_TITLE_TEXT_ID,
 } from '../../../src/config/selectors';
 import { buildPublicAndPrivateEnvironments } from '../../fixtures/environment';
 import { ITEM_PUBLISHED_TAG } from '../../fixtures/itemTags';
@@ -18,7 +18,9 @@ describe('Home Page', () => {
         cy.setUpApi(environment);
         cy.visit(HOME_ROUTE);
 
-        cy.get(`#${TITLE_TEXT_ID}`).should('be.visible');
+        cy.get(`#${HOME_PAGE_TITLE_TEXT_ID}`)
+          .should('be.visible')
+          .and('have.text', 'Graasp');
         cy.get(`#${DISCOVER_SECTION_TITLE_ID}`)
           .last()
           .should('have.text', 'Discover');

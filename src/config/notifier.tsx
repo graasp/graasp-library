@@ -1,7 +1,8 @@
 import React from 'react';
 import { toast } from 'react-toastify';
 
-import { routines } from '@graasp/query-client';
+import { Notifier, routines } from '@graasp/query-client';
+import { ItemRecord } from '@graasp/sdk/frontend';
 import {
   FAILURE_MESSAGES,
   LIBRARY,
@@ -9,18 +10,21 @@ import {
 } from '@graasp/translations';
 
 import ToastrWithLink from '../components/common/ToastrWithLink';
-import { SHOW_NOTIFICATIONS, buildPlayerViewItemRoute } from './constants';
+import { SHOW_NOTIFICATIONS } from './env';
 import i18n from './i18n';
+import { buildPlayerViewItemRoute } from './paths';
 
-const t = (value) => i18n.t(value, { ns: 'messages' });
+const t = (value: string) => i18n.t(value, { ns: 'messages' });
 
 export const COPY_RESOURCE_LINK_TO_CLIPBOARD = {
-  SUCESS: 'success',
+  SUCCESS: 'success',
   FAILURE: 'failure',
 };
 
 // TODO: use a universal notifier
-const notifier = ({ type, payload }) => {
+// TODO: improve the type when upgrading query-client
+// @ts-ignore
+const notifier: Notifier = ({ type, payload }) => {
   if (!SHOW_NOTIFICATIONS) {
     return;
   }
@@ -32,8 +36,11 @@ const notifier = ({ type, payload }) => {
     case routines.exportItemRoutine.FAILURE:
     case routines.copyItemRoutine.FAILURE: {
       message =
-        payload?.error?.response?.data?.message ??
-        FAILURE_MESSAGES.DEFAULT_FAILURE;
+        (
+          payload?.error as
+            | { response: { data: { message: string } } }
+            | undefined
+        )?.response?.data?.message ?? FAILURE_MESSAGES.DEFAULT_FAILURE;
       break;
     }
     case routines.postItemFlagRoutine.SUCCESS: {
@@ -44,7 +51,9 @@ const notifier = ({ type, payload }) => {
     case routines.copyItemRoutine.SUCCESS:
       toast.success(
         <ToastrWithLink
-          link={buildPlayerViewItemRoute(payload?.newItem?.id)}
+          link={buildPlayerViewItemRoute(
+            (payload?.newItem as ItemRecord | undefined)?.id,
+          )}
           text={t(SUCCESS_MESSAGES.COPY_ITEM)}
           linkText={i18n.t(LIBRARY.COPY_ITEM_TOASTR_LINK)}
         />,

@@ -83,7 +83,7 @@ export const SubItemCard: React.FC<SubItemCardProps> = ({
 
   const { data: member } = hooks.useCurrentMember();
 
-  const { name, id, extra } = item;
+  const { name, id } = item;
 
   const link = buildCollectionRoute(id);
 
@@ -94,7 +94,7 @@ export const SubItemCard: React.FC<SubItemCardProps> = ({
       actions={
         <>
           {member?.id && <CopyButton id={id} />}
-          <CopyLinkButton id={id} extra={extra} />
+          <CopyLinkButton item={item} />
           <DownloadButton id={id} />
         </>
       }

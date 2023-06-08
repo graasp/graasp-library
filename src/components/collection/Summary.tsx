@@ -8,8 +8,8 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 
 import { Category, CategoryType, ItemCategory } from '@graasp/sdk';
-import { ItemRecord, MemberRecord } from '@graasp/sdk/frontend';
-import { LIBRARY } from '@graasp/translations';
+import { ItemRecord } from '@graasp/sdk/frontend';
+import { DEFAULT_LANG, LIBRARY } from '@graasp/translations';
 
 import {
   CATEGORY_TYPES,
@@ -25,7 +25,7 @@ import SummaryHeader from './SummaryHeader';
 
 // TODO: To be removed / moved to SDK.
 export const getParentsIdsFromPath = (
-  path: string,
+  path?: string,
   { ignoreSelf = false } = {},
 ) => {
   if (!path) {
@@ -49,11 +49,10 @@ export const getParentsIdsFromPath = (
 };
 
 type SummaryProps = {
-  collection: ItemRecord;
-  creator: MemberRecord;
-  likes: number;
+  collection?: ItemRecord;
+  likes?: number;
   isLoading: boolean;
-  views: number;
+  views?: number;
 };
 
 const Summary: React.FC<SummaryProps> = ({
@@ -61,39 +60,20 @@ const Summary: React.FC<SummaryProps> = ({
   likes = 0,
   views = 0,
   isLoading,
-  creator,
 }) => {
   const { t } = useTranslation();
-
-  const {
-    id: itemId,
-    name = '',
-    description,
-    settings,
-    createdAt,
-    updatedAt: lastUpdate,
-    extra,
-    type,
-    path,
-  } = collection;
-
-  const truncatedName = truncate(name, {
-    length: MAX_COLLECTION_NAME_LENGTH,
-    separator: /,? +/,
-  });
-  const tags = settings?.tags as any;
-
   const { hooks } = useContext(QueryClientContext);
-
-  const parents = getParentsIdsFromPath(path);
-
-  const { data: topLevelParent } = hooks.useItem(parents[0] ?? itemId);
-
-  const { data: categoryTypes } = hooks.useCategoryTypes();
-  const { data: itemCategories } = hooks.useItemCategories(
-    topLevelParent?.id ?? itemId,
-  );
+  const { data: member } = hooks.useCurrentMember();
   const { data: categories } = hooks.useCategories();
+  const { data: categoryTypes } = hooks.useCategoryTypes();
+
+  const parents = getParentsIdsFromPath(collection?.path);
+  const { data: topLevelParent } = hooks.useItem(parents[0] ?? collection?.id);
+  const { data: itemCategories } = hooks.useItemCategories(
+    topLevelParent?.id ?? collection?.id,
+  );
+
+  const tags = collection?.settings?.tags as any;
 
   const selectedCategories = categories
     ?.filter((category: Category) =>
@@ -121,38 +101,39 @@ const Summary: React.FC<SummaryProps> = ({
     )?.id ?? '',
   );
 
-  const ccLicenseAdaption = topLevelParent
-    ? topLevelParent.settings?.ccLicenseAdaption
-    : settings?.ccLicenseAdaption;
+  // todo: remove cast after refactor
+  const ccLicenseAdaption = (
+    topLevelParent
+      ? topLevelParent.settings?.ccLicenseAdaption
+      : collection?.settings?.ccLicenseAdaption
+  ) as string;
 
-  const { data: member } = hooks.useCurrentMember();
-
+  const truncatedName = truncate(collection?.name, {
+    length: MAX_COLLECTION_NAME_LENGTH,
+    separator: /,? +/,
+  });
   return (
     <div>
       <Container maxWidth="lg" sx={{ my: 2 }}>
-        <ItemBreadcrumb itemId={itemId} />
+        <ItemBreadcrumb itemId={collection?.id} />
       </Container>
       <SummaryHeader
-        extra={extra}
+        collection={collection}
         isLogged={member?.id !== undefined}
-        creator={creator}
-        description={description}
         isLoading={isLoading}
-        itemId={itemId}
         likes={likes}
-        name={name}
         tags={tags}
         truncatedName={truncatedName}
         views={views}
       />
-      {type === ITEM_TYPES.FOLDER && (
+      {collection?.type === ITEM_TYPES.FOLDER && (
         <>
           <Box sx={{ my: 4 }} />
           <Container maxWidth="lg">
             <Items
-              parentId={itemId}
+              parentId={collection?.id}
               lang={member?.extra?.lang}
-              isTopLevel={path.indexOf('.') < 0}
+              isTopLevel={collection?.path.indexOf('.') < 0}
             />
           </Container>
         </>
@@ -164,12 +145,12 @@ const Summary: React.FC<SummaryProps> = ({
         </Typography>
         <SummaryDetails
           ccLicenseAdaption={ccLicenseAdaption}
-          createdAt={createdAt}
-          disciplines={disciplines}
+          createdAt={collection?.createdAt}
+          lastUpdate={collection?.updatedAt}
           isLoading={isLoading}
-          lang={member?.extra?.lang}
+          lang={member?.extra?.lang || DEFAULT_LANG}
+          disciplines={disciplines}
           languages={languages}
-          lastUpdate={lastUpdate}
           levels={levels}
         />
       </Container>

@@ -1,28 +1,24 @@
 import getConfig from 'next/config';
-import PropTypes from 'prop-types';
 
 import * as React from 'react';
-
-import { Box } from '@mui/material';
+import { DehydratedState } from 'react-query';
 
 import { Api, configureQueryClient } from '@graasp/query-client';
 
 import Wrapper from '../src/components/common/Wrapper';
-import AllCollections from '../src/components/home/AllCollections';
-import { PUBLISHED_ITEMS_KEY } from '../src/config/constants';
+import Home from '../src/components/home/NewHome';
 import { QUERY_CLIENT_OPTIONS } from '../src/config/queryClient';
+import { PUBLISHED_ITEMS_KEY } from '../src/config/queryKeys';
 
-const AllCollectionsPage = ({ dehydratedState }) => (
-  <Box style={{ backgroundColor: '#F8F7FE' }}>
-    <Wrapper dehydratedState={dehydratedState}>
-      <AllCollections />
-    </Wrapper>
-  </Box>
+const HomePage = ({
+  dehydratedState,
+}: {
+  dehydratedState: DehydratedState;
+}) => (
+  <Wrapper dehydratedState={dehydratedState}>
+    <Home />
+  </Wrapper>
 );
-
-AllCollectionsPage.propTypes = {
-  dehydratedState: PropTypes.shape({}).isRequired,
-};
 
 export async function getServerSideProps() {
   const { publicRuntimeConfig } = getConfig();
@@ -41,4 +37,4 @@ export async function getServerSideProps() {
   return { props: { dehydratedState: dehydrate(queryClient) } };
 }
 
-export default AllCollectionsPage;
+export default HomePage;

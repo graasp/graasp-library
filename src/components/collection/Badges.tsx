@@ -1,12 +1,10 @@
-import { useTheme } from '@emotion/react';
 import truncate from 'lodash.truncate';
-import PropTypes from 'prop-types';
 
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Email, Facebook, Twitter } from '@mui/icons-material';
-import { Grid, IconButton, useMediaQuery } from '@mui/material';
+import { Grid, IconButton, useMediaQuery, useTheme } from '@mui/material';
 
 import { LIBRARY } from '@graasp/translations';
 
@@ -20,9 +18,16 @@ import BadgeContainer from '../common/BadgeContainer';
 import FavoriteBadge from '../common/FavoriteBadge';
 import VisibilityBadge from '../common/VisibilityBadge';
 
-const Badges = ({ views, likes, name, description }) => {
+type Props = {
+  views?: number;
+  likes?: number;
+  name?: string;
+  description?: string;
+};
+
+const Badges = ({ views, likes, name, description }: Props) => {
   const { t } = useTranslation();
-  const [pageLocation, setPageLocation] = useState(null);
+  const [pageLocation, setPageLocation] = useState<string>();
   const parsedDescription = removeTagsFromString(description);
 
   useEffect(() => {
@@ -58,12 +63,12 @@ const Badges = ({ views, likes, name, description }) => {
   const iconSize = isSm ? 'medium' : 'large';
 
   return (
-    <Grid container justify="space-between" alignItems="center" mb={1}>
+    <Grid container justifyItems="space-between" alignItems="center" mb={1}>
       {shouldShowLikesAndViews && (
         <Grid item>
           <BadgeContainer>
-            <FavoriteBadge likes={likes.toString()} />
-            <VisibilityBadge views={views.toString()} />
+            <FavoriteBadge likes={likes || 0} />
+            <VisibilityBadge views={views || 0} />
           </BadgeContainer>
         </Grid>
       )}
@@ -82,13 +87,6 @@ const Badges = ({ views, likes, name, description }) => {
       </Grid>
     </Grid>
   );
-};
-
-Badges.propTypes = {
-  views: PropTypes.number,
-  likes: PropTypes.number,
-  name: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
 };
 
 export default Badges;

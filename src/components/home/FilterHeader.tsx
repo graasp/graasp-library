@@ -1,6 +1,6 @@
 ﻿import Immutable, { List } from 'immutable';
 
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { FC, useContext, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { ExpandMoreRounded } from '@mui/icons-material';
@@ -15,10 +15,16 @@ import {
   styled,
 } from '@mui/material';
 
+import { convertJs } from '@graasp/sdk';
 import { CategoryRecord } from '@graasp/sdk/frontend';
-import { CATEGORIES, namespaces } from '@graasp/translations';
+import { CATEGORIES, LIBRARY, namespaces } from '@graasp/translations';
 
 import { CATEGORY_TYPES } from '../../config/constants';
+import {
+  ALL_COLLECTIONS_TITLE_ID,
+  buildSearchFilterCategoryId,
+  buildSearchFilterPopperButtonId,
+} from '../../config/selectors';
 import { compare } from '../../utils/helpers';
 import { QueryClientContext } from '../QueryClientContext';
 import FilterPopper from './FilterPopper';
@@ -26,6 +32,7 @@ import { GRAASP_COLOR } from './NewHome';
 import Search from './Search';
 
 type FilterProps = {
+  category: string;
   title: string;
   options?: Immutable.List<CategoryRecord>;
   // IDs of selected options.
@@ -35,6 +42,7 @@ type FilterProps = {
 };
 
 const Filter: React.FC<FilterProps> = ({
+  category,
   title,
   onOptionChange,
   options,
@@ -95,6 +103,7 @@ const Filter: React.FC<FilterProps> = ({
     <Skeleton width="100%" />
   ) : (
     <Button
+      id={buildSearchFilterPopperButtonId(category)}
       onClick={togglePopper}
       variant="text"
       fullWidth
@@ -134,7 +143,14 @@ const Filter: React.FC<FilterProps> = ({
   );
 
   return (
-    <Stack flexGrow={1} ref={popperAnchor} flex={1} flexBasis={0} width={0}>
+    <Stack
+      id={buildSearchFilterCategoryId(category)}
+      flexGrow={1}
+      ref={popperAnchor}
+      flex={1}
+      flexBasis={0}
+      width={0}
+    >
       <Typography variant="body2" color="#7A7A7A">
         {title}
       </Typography>
@@ -190,8 +206,9 @@ type FilterHeaderProps = {
   onFiltersChanged: (selectedFilters: string[]) => void;
 };
 
-const FilterHeader: React.FC<FilterHeaderProps> = ({ onFiltersChanged }) => {
+const FilterHeader: FC<FilterHeaderProps> = ({ onFiltersChanged }) => {
   const { t: translateCategories } = useTranslation(namespaces.categories);
+  const { t } = useTranslation();
 
   const { hooks } = useContext(QueryClientContext);
   const { data: categoryTypes } = hooks.useCategoryTypes();
@@ -199,24 +216,23 @@ const FilterHeader: React.FC<FilterHeaderProps> = ({ onFiltersChanged }) => {
     hooks.useCategories();
   const allCategories = categories?.groupBy((entry: Category) => entry.type);
   const levelList = allCategories?.get(
-    categoryTypes?.find((type: Category) => type.name === CATEGORY_TYPES.LEVEL)
-      ?.id,
-  );
-  const disciplineList = allCategories
-    ?.get(
-      categoryTypes?.find(
-        (type: Category) => type.name === CATEGORY_TYPES.DISCIPLINE,
-      )?.id,
-    )
-    ?.sort(compare);
+    // @ts-ignore
+    categoryTypes.find((type) => type.name === CATEGORY_TYPES.LEVEL)?.id,
+  ) as List<CategoryRecord>;
+  const disciplineList = (
+    allCategories?.get(
+      // @ts-ignore
+      categoryTypes?.find((type) => type.name === CATEGORY_TYPES.DISCIPLINE)
+        ?.id,
+    ) as List<CategoryRecord>
+  )?.sort(compare);
   const languageList = allCategories?.get(
-    categoryTypes?.find(
-      (type: Category) => type.name === CATEGORY_TYPES.LANGUAGE,
-    )?.id,
-  );
+    // @ts-ignore
+    categoryTypes?.find((type) => type.name === CATEGORY_TYPES.LANGUAGE)?.id,
+  ) as List<CategoryRecord>;
 
   // TODO: Replace with real values.
-  const licenseList: Immutable.List<CategoryRecord> = Immutable.List.of(
+  const licenseList: List<CategoryRecord> = convertJs([
     {
       id: '3f811e5f-5221-4d22-a20c-1086af809bda',
       name: 'Public Domain (CC0)',
@@ -232,7 +248,7 @@ const FilterHeader: React.FC<FilterHeaderProps> = ({ onFiltersChanged }) => {
       name: 'Derivable',
       type: '3f811e5f-5221-4d22-a20c-1086af809bd0',
     },
-  ) as Immutable.List<CategoryRecord>;
+  ]);
 
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
 
@@ -284,6 +300,7 @@ const FilterHeader: React.FC<FilterHeaderProps> = ({ onFiltersChanged }) => {
 
   const filters = [
     <Filter
+      category={CATEGORY_TYPES.LEVEL}
       title={translateCategories(CATEGORIES.EDUCATION_LEVEL)}
       options={levelList}
       selectedOptions={selectedFilters}
@@ -291,6 +308,7 @@ const FilterHeader: React.FC<FilterHeaderProps> = ({ onFiltersChanged }) => {
       isLoading={isCategoriesLoading}
     />,
     <Filter
+      category={CATEGORY_TYPES.DISCIPLINE}
       title={translateCategories(CATEGORIES.DISCIPLINE)}
       options={disciplineList}
       selectedOptions={selectedFilters}
@@ -298,6 +316,7 @@ const FilterHeader: React.FC<FilterHeaderProps> = ({ onFiltersChanged }) => {
       isLoading={isCategoriesLoading}
     />,
     <Filter
+      category={CATEGORY_TYPES.LANGUAGE}
       title={translateCategories(CATEGORIES.LANGUAGE)}
       options={languageList}
       selectedOptions={selectedFilters}
@@ -305,6 +324,7 @@ const FilterHeader: React.FC<FilterHeaderProps> = ({ onFiltersChanged }) => {
       isLoading={isCategoriesLoading}
     />,
     <Filter
+      category={CATEGORY_TYPES.LICENSE}
       title="License"
       options={licenseList}
       selectedOptions={selectedFilters}
@@ -344,12 +364,13 @@ const FilterHeader: React.FC<FilterHeaderProps> = ({ onFiltersChanged }) => {
         justifyContent="space-between"
         width="100%"
       >
-        <Typography variant="h4" width="100%">
-          Search Graasp
+        <Typography variant="h4" width="100%" id={ALL_COLLECTIONS_TITLE_ID}>
+          {t(LIBRARY.SEARCH_PAGE_TITLE)}
         </Typography>
         <Search isLoading={false} handleClick={() => {}} />
       </Stack>
       <StyledFilterContainer
+        id="not-sticky"
         ref={filterContainer}
         mt={2}
         spacing={2}

@@ -13,10 +13,10 @@ import {
   styled,
 } from '@mui/material';
 
-import { UnknownExtra } from '@graasp/sdk';
+import { ItemRecord } from '@graasp/sdk/frontend';
 import { LIBRARY } from '@graasp/translations';
 
-import { buildPlayerViewItemRoute } from '../../config/constants';
+import { buildPlayerViewItemRoute } from '../../config/paths';
 import { openInNewTab } from '../../utils/helpers';
 import { useCopyAction } from './CopyButton';
 import { useEmbedAction } from './CopyLinkButton';
@@ -28,23 +28,21 @@ const StyledButton = styled(Button)(() => ({
 }));
 
 type SummaryActionButtonsProps = {
-  itemId: string;
+  item?: ItemRecord;
   isLogged: boolean;
-  extra: UnknownExtra | undefined;
 };
 
 const SummaryActionButtons: React.FC<SummaryActionButtonsProps> = ({
-  itemId,
+  item,
   isLogged,
-  extra,
 }) => {
   const { t } = useTranslation();
 
-  const { isCopying, startCopy, treeModal } = useCopyAction(itemId);
+  const { isCopying, startCopy, treeModal } = useCopyAction(item?.id);
 
-  const { startDownload } = useDownloadAction(itemId);
+  const { startDownload } = useDownloadAction(item?.id);
 
-  const { startEmbed } = useEmbedAction(itemId, extra);
+  const { startEmbed } = useEmbedAction(item);
 
   const [open, setOpen] = useState(false);
   const anchorRef = React.useRef<HTMLDivElement>(null);
@@ -65,7 +63,7 @@ const SummaryActionButtons: React.FC<SummaryActionButtonsProps> = ({
   };
 
   const handlePlay = () => {
-    openInNewTab(buildPlayerViewItemRoute(itemId));
+    openInNewTab(buildPlayerViewItemRoute(item?.id));
   };
 
   return (
@@ -135,7 +133,11 @@ const SummaryActionButtons: React.FC<SummaryActionButtonsProps> = ({
                       onClick={startCopy}
                       startIcon={
                         isCopying ? (
-                          <CircularProgress color="secondary" size={20} />
+                          <CircularProgress
+                            id="copyButtonInSummaryActions"
+                            color="secondary"
+                            size={20}
+                          />
                         ) : (
                           <CopyAll />
                         )

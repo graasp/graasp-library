@@ -1,8 +1,10 @@
+import { CATEGORY_TYPES } from '../../src/config/constants';
+
 // we cannot use constants.ts because next/config is not loaded correctly in cypress
 export const SAMPLE_CATEGORY_TYPES = [
   {
     id: '3f7b79e2-7e78-4aea-b697-2b6a6ba92e91',
-    name: 'level',
+    name: CATEGORY_TYPES.LEVEL,
   },
   {
     id: 'c344bf4f-19e0-4674-b2a2-06bb5ac6e11c',

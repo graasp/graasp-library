@@ -1,3 +1,4 @@
+import { List } from 'immutable';
 import dynamic from 'next/dynamic';
 
 import React from 'react';
@@ -5,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 import { Box, Chip, Grid, Skeleton, Typography, styled } from '@mui/material';
 
+import { CategoryRecord } from '@graasp/sdk/frontend';
 import { LIBRARY } from '@graasp/translations';
 import { CCSharingVariant } from '@graasp/ui';
 
@@ -60,18 +62,12 @@ const convertLicense = (ccLicenseAdaption: string) => {
 };
 
 type SummaryDetailsProps = {
-  createdAt: string;
-  lastUpdate: string;
+  createdAt?: string;
+  lastUpdate?: string;
   lang: string;
-  languages: Immutable.List<{
-    name: string;
-  }>;
-  levels: Immutable.List<{
-    name: string;
-  }>;
-  disciplines: Immutable.List<{
-    name: string;
-  }>;
+  languages?: List<CategoryRecord>;
+  levels?: List<CategoryRecord>;
+  disciplines?: List<CategoryRecord>;
   isLoading: boolean;
   ccLicenseAdaption: string | undefined;
 };

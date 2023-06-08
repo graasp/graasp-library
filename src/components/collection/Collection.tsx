@@ -1,13 +1,12 @@
 import { ErrorBoundary } from '@sentry/react';
 import dynamic from 'next/dynamic';
-import PropTypes from 'prop-types';
 import { validate } from 'uuid';
 
 import React, { useContext } from 'react';
 
-import { Alert, Box } from '@mui/material';
+import { Box } from '@mui/material';
 
-import { Context } from '@graasp/sdk';
+import { Context, convertJs } from '@graasp/sdk';
 
 import { DEFAULT_ITEM_IMAGE_PATH } from '../../config/constants';
 import { PUBLISHED_TAG_ID } from '../../config/env';
@@ -21,6 +20,7 @@ import Error from '../common/Error';
 import Seo from '../common/Seo';
 import useHeader from '../layout/useHeader';
 import Summary from './Summary';
+import UnpublishedItemAlert from './UnpublishedItemAlert';
 
 // todo: get similar collections in same call
 // import SimilarCollections from './SimilarCollections';
@@ -30,20 +30,18 @@ const { Main } = {
     ssr: false,
   }),
 };
-const { BuildIcon } = {
-  BuildIcon: dynamic(() => import('@graasp/ui').then((mod) => mod.BuildIcon), {
-    ssr: false,
-  }),
-};
 
-const Collection = ({ id }) => {
+type Props = {
+  id?: string;
+};
+const Collection = ({ id }: Props) => {
   const { hooks } = useContext(QueryClientContext);
   const {
     data: collection,
     isLoading: isLoadingItem,
     isError,
   } = hooks.useItem(id, {
-    placeholderData: PLACEHOLDER_COLLECTION,
+    placeholderData: convertJs(PLACEHOLDER_COLLECTION),
   });
   const {
     data: member,
@@ -51,7 +49,7 @@ const Collection = ({ id }) => {
     isLoading: isLoadingMember,
   } = hooks.useMember(collection?.creator);
   const { data: currentMember } = hooks.useCurrentMember();
-  const { data: likeCount } = hooks.useLikeCount(id);
+  const { data: likeCount } = hooks.useLikeCount(id || '');
   const { data: tags } = hooks.useItemTags(id);
   const { leftContent, rightContent } = useHeader(id);
 
@@ -59,9 +57,11 @@ const Collection = ({ id }) => {
   const canRead = Boolean(tags);
 
   const canPublish =
-    collection && currentMember && collection.creator === currentMember.id;
+    (collection && currentMember && collection.creator === currentMember.id) ||
+    false;
 
-  const isPublished = tags?.some((tag) => tag.tagId === PUBLISHED_TAG_ID);
+  const isPublished =
+    tags?.some((tag) => tag.tagId === PUBLISHED_TAG_ID) || false;
 
   if (!id || !validate(id)) {
     return (
@@ -93,7 +93,7 @@ const Collection = ({ id }) => {
 
   const isLoading = isLoadingItem || isLoadingMember;
 
-  const name = collection?.name;
+  const name = collection?.name || '';
   // todo: handle image
   const imageUrl = DEFAULT_ITEM_IMAGE_PATH;
 
@@ -115,32 +115,12 @@ const Collection = ({ id }) => {
         headerLeftContent={leftContent}
         headerRightContent={rightContent}
       >
-        {
-          // show alert only if 1. user is logged in, 2. it has at least read access and 3. item is not published
-          currentMember?.id && canRead && !isPublished && (
-            <Alert severity="warning">
-              You are viewing this item in Library preview mode. It cannot be
-              viewed publicly.
-              {
-                // if the user is the admin of the item, also suggest publishing from Builder
-                canPublish && (
-                  <>
-                    <br />
-                    If you&apos;d like to share this collection with everyone,
-                    you can publish this item in
-                    <BuildIcon
-                      size={18}
-                      sx={{ verticalAlign: 'middle', mr: 0.3 }}
-                      primaryOpacity={0}
-                      secondaryColor="rgb(102, 60, 0)"
-                    />
-                    Builder.
-                  </>
-                )
-              }
-            </Alert>
-          )
-        }
+        <UnpublishedItemAlert
+          canRead={canRead}
+          canPublish={canPublish}
+          isPublished={isPublished}
+          currentMember={currentMember}
+        />
         <Box
           id={id}
           px={{
@@ -152,7 +132,6 @@ const Collection = ({ id }) => {
         >
           <Summary
             collection={collection}
-            creator={member}
             likes={likes}
             isLoading={isLoading}
           />
@@ -161,10 +140,6 @@ const Collection = ({ id }) => {
       </Main>
     </ErrorBoundary>
   );
-};
-
-Collection.propTypes = {
-  id: PropTypes.string.isRequired,
 };
 
 export default Collection;

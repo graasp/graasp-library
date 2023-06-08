@@ -9,12 +9,9 @@ import { MUTATION_KEYS } from '@graasp/query-client';
 import { Member } from '@graasp/sdk';
 import { BUILDER } from '@graasp/translations';
 
-import {
-  DOMAIN,
-  MEMBER_PROFILE_PATH,
-  SIGN_IN_PATH,
-} from '../../config/constants';
+import { DOMAIN } from '../../config/env';
 import { useBuilderTranslation } from '../../config/i18n';
+import { MEMBER_PROFILE_ROUTE, SIGN_IN_ROUTE } from '../../config/paths';
 import { QueryClientContext } from '../QueryClientContext';
 import MemberAvatar from './MemberAvatar';
 
@@ -37,7 +34,9 @@ const UserSwitchWrapper: FC<Props> = ({ ButtonContent }) => {
     isSuccess: isSuccessUser,
   } = hooks.useCurrentMember();
   const { t: translateBuilder } = useBuilderTranslation();
-  const { mutateAsync: signOut } = useMutation(MUTATION_KEYS.SIGN_OUT);
+  const { mutateAsync: signOut } = useMutation<unknown, unknown, string>(
+    MUTATION_KEYS.SIGN_OUT,
+  );
   const { mutate: switchMember } = useMutation(MUTATION_KEYS.SWITCH_MEMBER);
 
   const renderAvatar = (m: RecordOf<Member>) => <MemberAvatar id={m.id} />;
@@ -60,9 +59,9 @@ const UserSwitchWrapper: FC<Props> = ({ ButtonContent }) => {
         switchMemberText={translateBuilder(
           BUILDER.USER_SWITCH_SWITCH_USER_TEXT,
         )}
-        profilePath={MEMBER_PROFILE_PATH}
+        profilePath={MEMBER_PROFILE_ROUTE}
         domain={DOMAIN}
-        redirectPath={SIGN_IN_PATH}
+        redirectPath={SIGN_IN_ROUTE}
         useMembers={hooks.useMembers}
         renderAvatar={renderAvatar as any}
       />

@@ -5,8 +5,9 @@ import React from 'react';
 
 import { Box, Typography, styled } from '@mui/material';
 
-import { APP_NAME, HOST_MAP } from '../../config/constants';
+import { APP_NAME } from '../../config/constants';
 import { HEADER_LOGO_HEIGHT } from '../../config/cssStyles';
+import { HOST_MAP } from '../../config/paths';
 
 const GraaspLogo = dynamic(
   () => import('@graasp/ui').then((mod) => mod.GraaspLogo),

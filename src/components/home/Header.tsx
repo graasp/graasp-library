@@ -2,16 +2,16 @@ import React from 'react';
 
 import { Box, Container, Grid, Stack, Typography } from '@mui/material';
 
+import { HOME_PAGE_TITLE_TEXT_ID } from '../../config/selectors';
 import Search from './Search';
 
 type PopularSearchItemProps = {
   text: string;
 };
 
+// todo: make items clickable and launch a search for these terms
 const PopularSearchItem: React.FC<PopularSearchItemProps> = ({ text }) => (
-  <Box
-    style={{ border: '1px solid white', padding: '4px 12px', borderRadius: 12 }}
-  >
+  <Box border="1px solid white" padding="4px 12px" borderRadius={12}>
     <Typography color="white">{text.toUpperCase()}</Typography>
   </Box>
 );
@@ -43,6 +43,7 @@ const Header: React.FC<HeaderProps> = () => {
             style={{ maxWidth: '30%' }}
           />
           <Typography
+            id={HOME_PAGE_TITLE_TEXT_ID}
             color="white"
             variant="h1"
             marginLeft={4}

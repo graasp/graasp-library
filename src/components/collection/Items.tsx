@@ -1,5 +1,3 @@
-import { List } from 'immutable';
-
 import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -14,7 +12,7 @@ import { LIBRARY } from '@graasp/translations';
 
 import { ITEM_TYPES } from '../../config/constants';
 import { CHILDREN_ITEMS_GRID_ID } from '../../config/selectors';
-import { PLACEHOLDER_COLLECTION } from '../../utils/collections';
+import { PLACEHOLDER_COLLECTIONS } from '../../utils/collections';
 import { QueryClientContext } from '../QueryClientContext';
 import { FileChildrenCard, FolderChildrenCard } from './ChildrenCard';
 
@@ -95,7 +93,7 @@ const Items: React.FC<ItemsProps> = ({ parentId, lang, isTopLevel }) => {
   const { t } = useTranslation();
   const { hooks } = useContext(QueryClientContext);
   const { data: items } = hooks.useChildren(parentId, {
-    placeholderData: List(PLACEHOLDER_COLLECTION.children),
+    placeholderData: PLACEHOLDER_COLLECTIONS,
   });
 
   const theme = useTheme();

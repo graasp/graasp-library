@@ -8,7 +8,7 @@ import Fab from '@mui/material/Fab';
 import { redirect } from '@graasp/sdk';
 import { LIBRARY } from '@graasp/translations';
 
-import { GRAASP_BUILDER_HOST } from '../../config/constants';
+import { GRAASP_BUILDER_HOST } from '../../config/env';
 import { QueryClientContext } from '../QueryClientContext';
 
 const CreateButton: FC = () => {

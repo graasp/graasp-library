@@ -1,21 +1,10 @@
-import { Context, buildSignInPath } from '@graasp/sdk';
-
-import {
-  GRAASP_BUILDER_HOST as ENV_GRAASP_BUILDER_HOST,
-  SHOW_NOTIFICATIONS as ENV_SHOW_NOTIFICATIONS,
-  GRAASP_ANALYTICS_HOST,
-  GRAASP_AUTH_HOST,
-  GRAASP_PERFORM_HOST,
-  NEXT_PUBLIC_DOMAIN,
-  PUBLISHED_TAG_ID,
-} from './env';
-
 export const APP_NAME = 'Graasp';
 export const GRAASP_LOGO_HEADER_HEIGHT = 40;
 
 export const APP_KEYWORDS = ['graasp', 'library'];
 export const APP_AUTHOR = 'Graasp';
 export const DEFAULT_LANG = 'en';
+export const DEFAULT_USER_NAME = 'Anonymous';
 
 export const MIN_CARD_WIDTH = 345;
 
@@ -26,12 +15,6 @@ export const BLOCK_MATH_INDICATOR = '\\[';
 export const INLINE_MATH_INDICATOR = '\\(';
 export const BLOCK_MATH_REGEX = /(\\\[(.*?)\\])/g;
 export const INLINE_MATH_REGEX = /(\\\((.*?)\\\))/g;
-
-export const GRAASP_BUILDER_HOST =
-  ENV_GRAASP_BUILDER_HOST || 'http://localhost:3111';
-
-export const GRAASP_PLAYER_HOST =
-  GRAASP_PERFORM_HOST || 'http://localhost:3112';
 
 export const ITEM_TYPES = {
   APPLICATION: 'Application',
@@ -72,12 +55,6 @@ export const PICTURE_QUALITIES = {
 export const DEFAULT_PICTURE_QUALITY = PICTURE_QUALITIES.LARGE;
 export const MAX_COLLECTION_NAME_LENGTH = 100;
 
-// Cache Keys
-// todo: use query client keys
-export const ITEMS_KEY = 'items';
-export const PUBLISHED_ITEMS_KEY = [ITEMS_KEY, 'itemTags', PUBLISHED_TAG_ID];
-export const buildCollectionKey = (id: string) => [ITEMS_KEY, id];
-
 export const CLIENT_ERROR_MESSAGE = 'Something went wrong!';
 export const DEFAULT_ITEM_IMAGE_PATH = '/libraryDefault.svg';
 export const DEFAULT_MEMBER_THUMBNAIL = '/defaultAvatar.png';
@@ -91,36 +68,11 @@ export const THUMBNAIL_SIZES = {
 };
 export const DEFAULT_THUMBNAIL_SIZE = THUMBNAIL_SIZES.MEDIUM;
 
-export const SIGN_IN_ROUTE = `${GRAASP_AUTH_HOST}/signIn`;
-export const SIGN_UP_ROUTE = `${GRAASP_AUTH_HOST}/signUp`;
-
-export const buildPlayerViewItemRoute = (id = ':id') =>
-  `${GRAASP_PERFORM_HOST}/${id}`;
-
 export const MY_LIST_TAB_NAMES = {
   MY_LIKES: 'myLikes',
   MY_FAVORITES: 'myFavorites',
   MY_PUBLISHMENTS: 'myPublishments',
 };
-
-export const HOST_MAP = {
-  [Context.BUILDER]: GRAASP_BUILDER_HOST,
-  [Context.LIBRARY]: '/',
-  [Context.ANALYTICS]: GRAASP_ANALYTICS_HOST,
-  [Context.PLAYER]: GRAASP_PLAYER_HOST,
-
-  /** @deprecated - to remove */
-  [Context.EXPLORER]: '/',
-  /** @deprecated - to remove */
-  [Context.ANALYZER]: '/',
-};
-
-export const SHOW_NOTIFICATIONS =
-  ENV_SHOW_NOTIFICATIONS ||
-  process.env.NEXT_PUBLIC_SHOW_NOTIFICATIONS === 'true' ||
-  false;
-
-export const DOMAIN = NEXT_PUBLIC_DOMAIN ?? 'localhost';
 
 export const ENV = {
   DEVELOPMENT: 'development',
@@ -131,15 +83,14 @@ export const ENV = {
 export const TREE_VIEW_MAX_WIDTH = 400;
 
 // values of CATEGORY_TYPES = "level", "discipline", etc
-type Keys = keyof typeof CATEGORY_TYPES;
-type Values = (typeof CATEGORY_TYPES)[Keys];
-
-export const CATEGORY_COLORS: Record<Values, string> = {
+export const CATEGORY_COLORS: Record<
+  // eslint report an error that prettier auto-corrects in the other way, so we disable eslint here
+  // eslint-disable-next-line prettier/prettier
+  (typeof CATEGORY_TYPES)[keyof typeof CATEGORY_TYPES],
+  string
+> = {
   [CATEGORY_TYPES.DISCIPLINE]: '#4997DE',
   [CATEGORY_TYPES.LANGUAGE]: '#9A49DE',
   [CATEGORY_TYPES.LEVEL]: '#5050d2',
   [CATEGORY_TYPES.LICENSE]: '#5050d2',
 };
-
-export const MEMBER_PROFILE_PATH = `${GRAASP_BUILDER_HOST}/profile`;
-export const SIGN_IN_PATH = buildSignInPath({ host: GRAASP_AUTH_HOST });

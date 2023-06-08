@@ -1,9 +1,8 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { ErrorBoundary } from '@sentry/react';
-import PropTypes from 'prop-types';
 
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { DehydratedState } from 'react-query';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { Box, Divider, ThemeProvider, createTheme } from '@mui/material';
@@ -11,12 +10,13 @@ import { Box, Divider, ThemeProvider, createTheme } from '@mui/material';
 import { LIBRARY } from '@graasp/translations';
 import '@graasp/ui/dist/bundle.css';
 
+import { WRAPPER_SCROLLABLE_PAGE_BODY_ID } from '../../config/selectors';
 import { QueryClientProvider } from '../QueryClientContext';
 import Footer from '../layout/Footer';
 import { LoginModalProvider } from './SignInModalContext';
 import TranslationWrapper from './TranslationWrapper';
 
-const Content = ({ children }) => {
+const Content = ({ children }: { children: JSX.Element }) => {
   const { t } = useTranslation();
 
   return (
@@ -24,29 +24,37 @@ const Content = ({ children }) => {
       <LoginModalProvider>
         {children}
         {/* divider for placeholder at bottom to prevent item be covered by footer, set color to white */}
-        <Divider mt={10} />
+        <Divider sx={{ mt: 10 }} />
         <Footer />
       </LoginModalProvider>
     </ErrorBoundary>
   );
 };
 
-Content.propTypes = {
-  children: PropTypes.element.isRequired,
-};
-
-const Wrapper = ({ dehydratedState, children }) => {
+const Wrapper = ({
+  dehydratedState,
+  children,
+}: {
+  children: JSX.Element;
+  dehydratedState: DehydratedState;
+}) => {
   const [theme, setTheme] = useState(createTheme());
 
-  React.useEffect(async () => {
-    if (typeof window !== 'undefined') {
-      setTheme((await import('@graasp/ui')).theme);
-    }
+  React.useEffect(() => {
+    const setupTheme = async () => {
+      if (typeof window !== 'undefined') {
+        setTheme((await import('@graasp/ui')).theme);
+      }
+    };
+    setupTheme();
   }, []);
 
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ flexGrow: 1, height: '100%' }}>
+      <Box
+        sx={{ flexGrow: 1, height: '100%' }}
+        id={WRAPPER_SCROLLABLE_PAGE_BODY_ID}
+      >
         <QueryClientProvider dehydratedState={dehydratedState}>
           <TranslationWrapper>
             <Content>{children}</Content>
@@ -55,11 +63,6 @@ const Wrapper = ({ dehydratedState, children }) => {
       </Box>
     </ThemeProvider>
   );
-};
-
-Wrapper.propTypes = {
-  dehydratedState: PropTypes.shape({}).isRequired,
-  children: PropTypes.element.isRequired,
 };
 
 export default Wrapper;

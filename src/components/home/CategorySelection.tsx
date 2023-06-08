@@ -1,19 +1,31 @@
+import { List as ImmutableList } from 'immutable';
 import dynamic from 'next/dynamic';
-import PropTypes from 'prop-types';
 
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import { List, ListItem, ListItemText, Typography } from '@mui/material';
+import { List, ListItemButton, ListItemText, Typography } from '@mui/material';
 import Skeleton from '@mui/material/Skeleton';
 
+import { CategoryRecord } from '@graasp/sdk/frontend';
 import { LIBRARY, namespaces } from '@graasp/translations';
 
 const Button = dynamic(() => import('@graasp/ui').then((mod) => mod.Button), {
   ssr: false,
 });
 
+type Props = {
+  title: string;
+  selectedValues: string[];
+  valueList?: ImmutableList<CategoryRecord>;
+  handleClick: (id: string) => void;
+  clearSelection: (categoryType: string) => void;
+  categoryType: string;
+  isLoading: boolean;
+  buttonId?: string;
+  buildOptionIndex?: (index: number) => string;
+};
 const CategorySelection = ({
   title,
   selectedValues,
@@ -24,7 +36,7 @@ const CategorySelection = ({
   buttonId,
   isLoading,
   buildOptionIndex,
-}) => {
+}: Props) => {
   const { t: translateCategories } = useTranslation(namespaces.categories);
   const { t } = useTranslation();
 
@@ -36,17 +48,18 @@ const CategorySelection = ({
       {isLoading ? (
         <Skeleton height="10%" />
       ) : (
-        <List dense my={0}>
+        <List dense sx={{ my: 0 }}>
           {valueList?.map((entry, index) => (
-            <ListItem
-              button
+            <ListItemButton
               key={entry.id}
-              onClick={handleClick(entry.id)}
-              selected={selectedValues.find((value) => value === entry.id)}
-              id={buildOptionIndex(index)}
+              onClick={() => handleClick(entry.id)}
+              selected={Boolean(
+                selectedValues.find((value) => value === entry.id),
+              )}
+              id={buildOptionIndex?.(index)}
             >
               <ListItemText primary={translateCategories(entry.name)} />
-            </ListItem>
+            </ListItemButton>
           ))}
         </List>
       )}
@@ -54,31 +67,13 @@ const CategorySelection = ({
         variant="text"
         size="small"
         startIcon={<HighlightOffIcon />}
-        onClick={clearSelection(categoryType)}
+        onClick={() => clearSelection(categoryType)}
         id={buttonId}
       >
         {t(LIBRARY.ALL_COLLECTIONS_CLEAR_SELECTION_BUTTON)}
       </Button>
     </>
   );
-};
-
-CategorySelection.propTypes = {
-  title: PropTypes.string.isRequired,
-  selectedValues: PropTypes.arrayOf(PropTypes.string).isRequired,
-  valueList: PropTypes.arrayOf({}),
-  handleClick: PropTypes.func.isRequired,
-  clearSelection: PropTypes.func.isRequired,
-  categoryType: PropTypes.string.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-  buttonId: PropTypes.string,
-  buildOptionIndex: PropTypes.func,
-};
-
-CategorySelection.defaultProps = {
-  buttonId: '',
-  buildOptionIndex: () => null,
-  valueList: [],
 };
 
 export default CategorySelection;

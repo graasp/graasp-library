@@ -1,3 +1,5 @@
+import { List } from 'immutable';
+
 import React from 'react';
 
 import {
@@ -22,15 +24,11 @@ const StyledContainer = styled(Box)(() => ({
 
 type ItemCollectionProps = {
   title: string;
-  collections: Immutable.List<ItemRecord>;
+  collections?: List<ItemRecord>;
   sx?: SxProps<Theme>;
 };
 
-const ItemCollection: React.FC<ItemCollectionProps> = ({
-  title,
-  collections,
-  sx,
-}) => {
+const ItemCollection = ({ title, collections, sx }: ItemCollectionProps) => {
   if (!collections || !collections.size) {
     return null;
   }

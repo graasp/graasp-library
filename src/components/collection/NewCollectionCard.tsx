@@ -20,6 +20,7 @@ import { LIBRARY } from '@graasp/translations';
 import {
   DEFAULT_ITEM_IMAGE_PATH,
   DEFAULT_MEMBER_THUMBNAIL,
+  DEFAULT_USER_NAME,
 } from '../../config/constants';
 import {
   COLLECTION_CARD_BORDER_RADIUS,
@@ -223,7 +224,9 @@ const NewCollectionCard: FC<NewCollectionCardProps> = ({
                     {isLoadingAuthor ? (
                       <Skeleton>
                         <Avatar
-                          alt={t(LIBRARY.AVATAR_ALT, { name: author?.name })}
+                          alt={t(LIBRARY.AVATAR_ALT, {
+                            name: DEFAULT_USER_NAME,
+                          })}
                           defaultImage={DEFAULT_MEMBER_THUMBNAIL}
                           component="avatar"
                           maxWidth={30}
@@ -259,10 +262,7 @@ const NewCollectionCard: FC<NewCollectionCardProps> = ({
                   {false && <ViewsAndLikes likes={likes} views={views} />}
                   <Box>
                     {member?.id && <CopyButton id={collection.id} />}
-                    <CopyLinkButton
-                      id={collection.id}
-                      extra={collection.extra}
-                    />
+                    <CopyLinkButton item={collection} />
                     <DownloadButton id={collection.id} />
                   </Box>
                 </Stack>

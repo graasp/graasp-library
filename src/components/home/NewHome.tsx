@@ -1,11 +1,13 @@
 import dynamic from 'next/dynamic';
 
 import React, { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Explore } from '@mui/icons-material';
 import { Box, Button, styled } from '@mui/material';
 
 import { Context } from '@graasp/sdk';
+import { LIBRARY } from '@graasp/translations';
 
 import { APP_AUTHOR } from '../../config/constants';
 import { PUBLISHED_TAG_ID } from '../../config/env';
@@ -24,6 +26,10 @@ const { Main } = {
   }),
 };
 
+const StyledBackgroundContainer = styled(Box)(() => ({
+  backgroundColor: GRAASP_COLOR,
+}));
+
 const DiscoverButton = styled(Button)(() => ({
   color: GRAASP_COLOR,
   fontSize: '1.2rem',
@@ -33,7 +39,7 @@ const DiscoverButton = styled(Button)(() => ({
 type HomeProps = {};
 
 const Home: React.FC<HomeProps> = () => {
-  // const { t } = useTranslation();
+  const { t } = useTranslation();
 
   const { leftContent, rightContent } = useHeader();
 
@@ -44,10 +50,10 @@ const Home: React.FC<HomeProps> = () => {
   });
 
   return (
-    <div style={{ backgroundColor: GRAASP_COLOR }}>
+    <StyledBackgroundContainer>
       <Seo
-        title={/* t(LIBRARY.GRAASP_LIBRARY) */ 'title'}
-        description={/* t(LIBRARY.GRAASP_LIBRARY_DESCRIPTION) */ 'description'}
+        title={t(LIBRARY.GRAASP_LIBRARY)}
+        description={t(LIBRARY.GRAASP_LIBRARY_DESCRIPTION)}
         author={APP_AUTHOR}
       />
       <Main
@@ -84,7 +90,7 @@ const Home: React.FC<HomeProps> = () => {
           </DiscoverButton>
         </Box>
       </Main>
-    </div>
+    </StyledBackgroundContainer>
   );
 };
 export default Home;

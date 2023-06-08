@@ -10,7 +10,6 @@ import {
   CardActions,
   CardContent,
   CardHeader,
-  Stack,
   Typography,
   styled,
 } from '@mui/material';
@@ -21,7 +20,6 @@ import { LIBRARY } from '@graasp/translations';
 
 import { DEFAULT_MEMBER_THUMBNAIL } from '../../config/constants';
 import { buildCollectionRoute } from '../../config/routes';
-import { buildCollectionCardGridId } from '../../config/selectors';
 import { QueryClientContext } from '../QueryClientContext';
 import CardMediaComponent from '../common/CardMediaComponent';
 import { StyledCard } from '../common/StyledCard';
@@ -90,7 +88,7 @@ const ItemTag: React.FC<ItemTagProps> = ({ createdAt, updatedAt }) => {
 };
 
 export const CollectionCard = ({ collection }: Props) => {
-  const { name, id, creator, description, extra } = collection;
+  const { name, id, creator, description } = collection;
   const { t } = useTranslation();
   const { hooks } = useContext(QueryClientContext);
   const { data: author } = hooks.useMember(creator);
@@ -99,25 +97,10 @@ export const CollectionCard = ({ collection }: Props) => {
     id: creator,
     size: ThumbnailSize.Small,
   });
-
-  const avatar = (
-    <Avatar
-      blob={userAvatar}
-      alt={t(LIBRARY.AVATAR_ALT, { name: author?.name })}
-      defaultImage={DEFAULT_MEMBER_THUMBNAIL}
-      isLoading={isLoadingAvatar}
-      component="avatar"
-      sx={{ width: 30, height: 30 }}
-      maxWidth={30}
-      maxHeight={30}
-      variant="circular"
-    />
-  );
-
   const link = buildCollectionRoute(id);
 
   return (
-    <StyledCard id={buildCollectionCardGridId(collection?.id)}>
+    <StyledCard>
       <CardActionArea component={Link} href={link}>
         <ItemTag
           createdAt={collection.createdAt}
@@ -133,12 +116,12 @@ export const CollectionCard = ({ collection }: Props) => {
         <CardHeader
           // avatar={avatar}
           title={name}
-          subheader={
-            <Stack direction="row" alignItems="center" spacing={1}>
-              {avatar}
-              <Typography noWrap>{author?.name}</Typography>
-            </Stack>
-          }
+          // subheader={
+          //   <Stack direction="row" alignItems="center" spacing={1}>
+          //     {avatar}
+          //     <Typography noWrap>{author?.name}</Typography>
+          //   </Stack>
+          // }
           sx={{ '.MuiCardHeader-content	': { minWidth: '0px' } }}
           titleTypographyProps={{
             title: name,
@@ -187,7 +170,7 @@ export const CollectionCard = ({ collection }: Props) => {
         </Typography>
         <DownloadButton id={id} />
         {member?.id && <CopyButton id={id} />}
-        <CopyLinkButton id={id} extra={extra} />
+        <CopyLinkButton item={collection} />
       </CardActions>
     </StyledCard>
   );

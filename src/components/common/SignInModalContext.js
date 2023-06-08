@@ -16,7 +16,7 @@ import Typography from '@mui/material/Typography';
 import { DATA_KEYS } from '@graasp/query-client';
 import { LIBRARY } from '@graasp/translations';
 
-import { SIGN_IN_ROUTE, SIGN_UP_ROUTE } from '../../config/constants';
+import { SIGN_IN_ROUTE, SIGN_UP_ROUTE } from '../../config/paths';
 import { openInNewTab } from '../../utils/helpers';
 import { QueryClientContext } from '../QueryClientContext';
 

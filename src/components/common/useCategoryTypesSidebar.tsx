@@ -11,7 +11,6 @@ import { CATEGORY_TYPES } from '../../config/constants';
 import {
   CLEAR_EDUCATION_LEVEL_SELECTION_ID,
   SIDEMENU_HEADING_ID,
-  buildEducationLevelOptionId,
 } from '../../config/selectors';
 import { compare } from '../../utils/helpers';
 import { QueryClientContext } from '../QueryClientContext';
@@ -33,19 +32,19 @@ const useCategoryTypesSidebar = () => {
   const levelList = allCategories?.get(
     categoryTypes?.find(
       (type: { name: string }) => type.name === CATEGORY_TYPES.LEVEL,
-    )?.id,
+    )?.id || '',
   );
   const disciplineList = allCategories
     ?.get(
       categoryTypes?.find(
         (type: { name: string }) => type.name === CATEGORY_TYPES.DISCIPLINE,
-      )?.id,
+      )?.id || '',
     )
     ?.sort(compare);
   const languageList = allCategories?.get(
     categoryTypes?.find(
       (type: { name: string }) => type.name === CATEGORY_TYPES.LANGUAGE,
-    )?.id,
+    )?.id || '',
   );
 
   // state variable to record selected options
@@ -129,7 +128,6 @@ const useCategoryTypesSidebar = () => {
         valueList={levelList}
         handleClick={handleClickForLevel}
         isLoading={isCategoriesLoading}
-        buildOptionIndex={buildEducationLevelOptionId}
         clearSelection={clearSelection}
         categoryType={CATEGORY_TYPES.LEVEL}
         buttonId={CLEAR_EDUCATION_LEVEL_SELECTION_ID}

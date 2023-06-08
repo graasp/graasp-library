@@ -49,8 +49,8 @@ const TreeModal = ({ itemIds, open, title, onClose, onConfirm }) => {
   const [selectedId, setSelectedId] = useState(null);
   const { isItemLoading } = useItems(itemIds);
 
-  if (isOwnItemsLoading || isSharedItemsLoading || isItemLoading) {
-    return <Loader />;
+  if (open && (isOwnItemsLoading || isSharedItemsLoading || isItemLoading)) {
+    return <Loader id="treeModalLoader" />;
   }
 
   const handleClose = () => {

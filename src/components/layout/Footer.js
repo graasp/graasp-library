@@ -11,7 +11,7 @@ import { MUTATION_KEYS } from '@graasp/query-client';
 import { setLangCookie } from '@graasp/sdk';
 import { langs } from '@graasp/translations';
 
-import { DOMAIN } from '../../config/constants';
+import { DOMAIN } from '../../config/env';
 import i18n from '../../config/i18n';
 import { QueryClientContext } from '../QueryClientContext';
 

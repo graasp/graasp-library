@@ -4,18 +4,17 @@ import dynamic from 'next/dynamic';
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import Skeleton from '@mui/material/Skeleton';
 
 import { ThumbnailSize } from '@graasp/sdk';
-import {
-  ItemMembershipRecord,
-  ItemRecord,
-  MemberRecord,
-} from '@graasp/sdk/frontend';
+import { ItemMembershipRecord, ItemRecord } from '@graasp/sdk/frontend';
 import { LIBRARY } from '@graasp/translations';
 
-import { DEFAULT_MEMBER_THUMBNAIL } from '../../config/constants';
+import {
+  DEFAULT_MEMBER_THUMBNAIL,
+  DEFAULT_USER_NAME,
+} from '../../config/constants';
 import { SUMMARY_AUTHOR_CONTAINER_ID } from '../../config/selectors';
 import { QueryClientContext } from '../QueryClientContext';
 import Contributors from './Contributors';
@@ -25,20 +24,21 @@ const Avatar = dynamic(() => import('@graasp/ui').then((mod) => mod.Avatar), {
 });
 
 type Props = {
-  itemId: ItemRecord['id'];
-  author: MemberRecord;
-  isLoading: boolean;
+  itemId?: ItemRecord['id'];
+  authorId?: ItemRecord['creator'];
 };
-
-const Authorship = ({ itemId, author, isLoading }: Props) => {
+const Authorship = ({ itemId, authorId }: Props) => {
   const { t } = useTranslation();
   const { hooks } = useContext(QueryClientContext);
+  const authorQuery = hooks.useMember(authorId);
+
   const { data: item, isLoading: isLoadingItem } = hooks.useItem(itemId);
   const { data: memberships } = hooks.useItemMemberships(itemId);
-  const { data: authorBlob, isLoading: isLoadingAuthor } = hooks.useAvatar({
-    id: author?.id,
-    size: ThumbnailSize.Small,
-  });
+  const { data: authorBlob, isLoading: isLoadingAuthorAvatar } =
+    hooks.useAvatar({
+      id: authorId,
+      size: ThumbnailSize.Small,
+    });
 
   const memberIds: string[] = [
     ...new Set(
@@ -46,7 +46,7 @@ const Authorship = ({ itemId, author, isLoading }: Props) => {
         ?.filter(
           ({ permission, memberId }) =>
             (permission === 'write' || permission === 'admin') &&
-            memberId !== author?.id,
+            memberId !== authorId,
         )
         ?.map(({ memberId }) => memberId),
     ),
@@ -55,44 +55,54 @@ const Authorship = ({ itemId, author, isLoading }: Props) => {
     hooks.useMembers(memberIds);
 
   const isAnyLoading =
-    isLoadingItem || isLoading || isLoadingContributors || isLoadingAuthor;
+    isLoadingItem || isLoadingContributors || isLoadingAuthorAvatar;
 
   if (isAnyLoading) {
-    return <Skeleton variant="rectangular" height={50} />;
+    return (
+      <Stack direction="row" alignItems="center" spacing={1}>
+        <Skeleton variant="circular" width={30} height={30} />
+        <Skeleton variant="rounded" width={100} height={25} />
+      </Stack>
+    );
   }
 
-  if (!author && !isLoading) {
-    return null;
-  }
-
-  const authorName = author?.name;
+  const authorName = authorQuery?.data?.name;
 
   return (
     // wrapper div is necessary for grid to apply
     <div>
-      <div
+      <Stack
         id={SUMMARY_AUTHOR_CONTAINER_ID}
-        style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}
+        spacing={1}
+        direction="row"
+        alignItems="center"
       >
         <Avatar
           blob={authorBlob}
           alt={t(LIBRARY.AVATAR_ALT, { name: authorName })}
           defaultImage={DEFAULT_MEMBER_THUMBNAIL}
-          isLoading={isLoadingAuthor}
+          isLoading={isLoadingAuthorAvatar}
           component="avatar"
           maxWidth={30}
           maxHeight={30}
           variant="circular"
+          sx={{ maxWidth: 30, maxHeight: 30 }}
         />
-        <Typography variant="body1" marginLeft={1}>
-          {isLoading ? <Skeleton /> : authorName}
+        <Typography variant="body1">
+          {authorQuery.isLoading ? (
+            <Skeleton variant="rounded">{DEFAULT_USER_NAME}</Skeleton>
+          ) : (
+            authorName
+          )}
         </Typography>
 
         <Contributors
           contributors={contributors}
-          displayContributors={item?.settings?.displayCoEditors}
+          displayContributors={
+            (item?.settings?.displayCoEditors as boolean | undefined) ?? true
+          }
         />
-      </div>
+      </Stack>
     </div>
   );
 };

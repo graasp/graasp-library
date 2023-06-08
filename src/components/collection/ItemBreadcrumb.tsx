@@ -23,7 +23,7 @@ const getPublicParents = (publicParentPath: string, itemPath: string) => {
 };
 
 type ItemBreadcrumbProps = {
-  itemId: string;
+  itemId?: string;
 };
 
 const ItemBreadcrumb: React.FC<ItemBreadcrumbProps> = ({ itemId }) => {

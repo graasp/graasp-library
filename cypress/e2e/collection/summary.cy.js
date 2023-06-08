@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon';
 
 import { isChildOf } from '@graasp/sdk';
+import { DEFAULT_LANG } from '@graasp/translations';
 
 import { buildCollectionRoute } from '../../../src/config/routes';
 import {
@@ -51,7 +52,7 @@ describe('Collection Summary', () => {
         cy.get(`#${SUMMARY_CREATED_AT_CONTAINER_ID}`).should(
           'contain',
           DateTime.fromISO(item.createdAt).toLocaleString(DateTime.DATE_FULL, {
-            locale: member?.extra?.lang,
+            locale: member?.extra?.lang || DEFAULT_LANG,
           }),
         );
       }
@@ -61,7 +62,7 @@ describe('Collection Summary', () => {
         cy.get(`#${SUMMARY_LAST_UPDATE_CONTAINER_ID}`).should(
           'contain',
           DateTime.fromISO(item.updatedAt).toLocaleString(DateTime.DATE_FULL, {
-            locale: member?.extra?.lang,
+            locale: member?.extra?.lang || DEFAULT_LANG,
           }),
         );
       }

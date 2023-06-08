@@ -16,7 +16,7 @@ const Thumbnail = dynamic(
 );
 
 type Props = {
-  name: string;
+  name?: string;
   itemId?: string;
   size?: ThumbnailSizeVariant;
   svgPadding?: number;
@@ -48,7 +48,7 @@ const CardMediaComponent = ({
       }}
     >
       <Thumbnail
-        alt={name}
+        alt={name || ''}
         useThumbnail={hooks.useItemThumbnail}
         id={itemId || ''}
         thumbnailSrc={DEFAULT_ITEM_IMAGE_PATH}

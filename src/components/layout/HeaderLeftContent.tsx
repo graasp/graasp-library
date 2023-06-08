@@ -7,7 +7,7 @@ import { LIBRARY } from '@graasp/translations';
 
 import { ALL_COLLECTIONS_ROUTE, MY_LIST_ROUTE } from '../../config/routes';
 import {
-  HEADER_ALL_COLLECTIONS_ID,
+  ALL_COLLECTIONS_HEADER_ID,
   HEADER_MY_LIST_ID,
 } from '../../config/selectors';
 import { QueryClientContext } from '../QueryClientContext';
@@ -46,7 +46,7 @@ const HeaderLeftContent: FC<Props> = ({ id, sx }) => {
       <HeaderNavigation rootId={id} />
       <HeaderLink
         href={ALL_COLLECTIONS_ROUTE}
-        id={HEADER_ALL_COLLECTIONS_ID}
+        id={ALL_COLLECTIONS_HEADER_ID}
         text={t(LIBRARY.HEADER_ALL_COLLECTIONS)}
       />
       {/* // todo: put back once the page looks better */}

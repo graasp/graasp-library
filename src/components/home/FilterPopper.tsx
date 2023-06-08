@@ -13,6 +13,11 @@ import {
 
 import { CategoryRecord } from '@graasp/sdk/frontend';
 
+import {
+  FILTER_POPPER_ID,
+  buildCategoryOptionId,
+} from '../../config/selectors';
+
 const StyledPopper = styled(Stack)(() => ({
   background: 'white',
   padding: 20,
@@ -49,6 +54,7 @@ const FilterPopper = React.forwardRef<HTMLDivElement, FilterPopperProps>(
 
     return (
       <Popper
+        id={FILTER_POPPER_ID}
         open={props.open}
         anchorEl={props.anchorEl}
         ref={ref}
@@ -61,11 +67,12 @@ const FilterPopper = React.forwardRef<HTMLDivElement, FilterPopperProps>(
           // eslint-disable-next-line react/jsx-props-no-spreading
           <Grow {...TransitionProps}>
             <StyledPopper>
-              {props.options.map((option) => {
+              {props.options.map((option, idx) => {
                 const isSelected = props.selectedOptions.includes(option.id);
                 return (
                   <Stack
                     key={option.id}
+                    id={buildCategoryOptionId(idx)}
                     direction="row"
                     alignItems="center"
                     justifyContent="space-between"

@@ -17,7 +17,7 @@ import {
 
 import { MUTATION_KEYS } from '@graasp/query-client';
 import { ThumbnailSize } from '@graasp/sdk';
-import { ItemLikeRecord, MemberRecord } from '@graasp/sdk/frontend';
+import { ItemLikeRecord, ItemRecord } from '@graasp/sdk/frontend';
 
 import {
   ITEM_SUMMARY_TITLE_ID,
@@ -39,49 +39,47 @@ const { LikeButton } = {
 };
 
 type SummaryHeaderProps = {
-  itemId: string;
+  collection?: ItemRecord;
   isLoading: boolean;
-  name: string;
   truncatedName: string;
   tags: Immutable.List<string> | undefined;
-  description: string;
-  creator: MemberRecord;
   views: number;
   likes: number;
   isLogged: boolean;
-  extra: any;
 };
 
 const SummaryHeader: React.FC<SummaryHeaderProps> = ({
+  collection,
   isLogged,
   isLoading,
-  itemId,
-  name,
   truncatedName,
   tags,
-  description,
-  creator,
   views,
   likes,
-  extra,
 }) => {
   const { hooks, useMutation } = useContext(QueryClientContext);
 
   const { data: member } = hooks.useCurrentMember();
-  const { data: likedItems } = hooks.useLikedItems(member?.get('id'));
+  const { data: likedItems } = hooks.useLikedItems(member?.id || '');
 
-  const { mutate: postItemLike } = useMutation(MUTATION_KEYS.POST_ITEM_LIKE);
-  const { mutate: deleteItemLike } = useMutation(
-    MUTATION_KEYS.DELETE_ITEM_LIKE,
-  );
+  const { mutate: postItemLike } = useMutation<
+    unknown,
+    unknown,
+    { itemId?: string; memberId?: string }
+  >(MUTATION_KEYS.POST_ITEM_LIKE);
+  const { mutate: deleteItemLike } = useMutation<
+    unknown,
+    unknown,
+    { id: string; itemId?: string; memberId?: string }
+  >(MUTATION_KEYS.DELETE_ITEM_LIKE);
 
   const likeEntry = likedItems?.find(
-    (itemLike: ItemLikeRecord) => itemLike?.itemId === itemId,
+    (itemLike: ItemLikeRecord) => itemLike?.itemId === collection?.id,
   );
 
   const handleLike = () => {
     postItemLike({
-      itemId,
+      itemId: collection?.id,
       memberId: member?.id,
     });
   };
@@ -89,7 +87,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
   const handleUnlike = () => {
     deleteItemLike({
       id: likeEntry?.id,
-      itemId,
+      itemId: collection?.id,
       memberId: member?.id,
     });
   };
@@ -118,12 +116,12 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
             <StyledCard>
               {isLoading ? (
                 <Skeleton variant="rectangular" width="100%">
-                  <CardMedia name={name} />
+                  <CardMedia name={collection?.name} />
                 </Skeleton>
               ) : (
                 <CardMedia
-                  itemId={itemId}
-                  name={name}
+                  itemId={collection?.id}
+                  name={collection?.name}
                   size={ThumbnailSize.Original}
                 />
               )}
@@ -153,11 +151,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
                 handleUnlike={handleUnlike}
               />
             </Typography>
-            <SummaryActionButtons
-              itemId={itemId}
-              isLogged={isLogged}
-              extra={extra}
-            />
+            <SummaryActionButtons item={collection} isLogged={isLogged} />
           </Grid>
           <Grid item>
             {tags?.size ? (
@@ -171,7 +165,10 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
             )}
           </Grid>
           <Grid item>
-            <Description isLoading={isLoading} description={description} />
+            <Description
+              isLoading={isLoading}
+              description={collection?.description || ''}
+            />
           </Grid>
           <Grid item>
             <Stack
@@ -181,9 +178,8 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
             >
               <Box display="flex" alignItems="center">
                 <Authorship
-                  itemId={itemId}
-                  author={creator}
-                  isLoading={isLoading}
+                  itemId={collection?.id}
+                  authorId={collection?.creator}
                 />
               </Box>
               <Box display="flex" alignItems="center">
@@ -213,7 +209,10 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
                 </Grid>
               </Box>
               <Box>
-                <Badges name={name} description={description} />
+                <Badges
+                  name={collection?.name}
+                  description={collection?.description}
+                />
               </Box>
             </Stack>
           </Grid>

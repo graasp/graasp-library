@@ -1,14 +1,20 @@
 import dynamic from 'next/dynamic';
 
 import React, { useContext, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Box, Container } from '@mui/material';
 
 import { Context } from '@graasp/sdk';
+import { ItemRecord } from '@graasp/sdk/frontend';
+import { LIBRARY } from '@graasp/translations';
 
 import { APP_AUTHOR } from '../../config/constants';
 import { PUBLISHED_TAG_ID } from '../../config/env';
-import { MENU_BUTTON_ID } from '../../config/selectors';
+import {
+  ALL_COLLECTIONS_GRID_ID,
+  MENU_BUTTON_ID,
+} from '../../config/selectors';
 import {
   PLACEHOLDER_COLLECTIONS,
   filterErrorItems,
@@ -26,11 +32,16 @@ const Main = dynamic(() => import('@graasp/ui').then((mod) => mod.Main), {
 type AllCollectionsProps = {};
 
 const AllCollections: React.FC<AllCollectionsProps> = () => {
+  const { t } = useTranslation();
   const { hooks } = useContext(QueryClientContext);
-  const { data: collections } = hooks.usePublicItemsWithTag(PUBLISHED_TAG_ID, {
-    placeholderData: PLACEHOLDER_COLLECTIONS,
-  });
-  const collectionsWithoutErrors = filterErrorItems(collections);
+  const { data: collections, isLoading } = hooks.usePublicItemsWithTag(
+    PUBLISHED_TAG_ID,
+    {
+      placeholderData: PLACEHOLDER_COLLECTIONS,
+    },
+  );
+
+  const collectionsWithoutErrors = filterErrorItems<ItemRecord>(collections);
 
   const { leftContent, rightContent } = useHeader();
 
@@ -45,11 +56,8 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
   return (
     <>
       <Seo
-        // TODO: The keys aren't defined.
-        // title={t(LIBRARY.GRAASP_LIBRARY)}
-        // description={t(LIBRARY.GRAASP_LIBRARY_DESCRIPTION)}
-        title="Graasp Library"
-        description="Graasp Library Description"
+        title={t(LIBRARY.GRAASP_LIBRARY)}
+        description={t(LIBRARY.GRAASP_LIBRARY_DESCRIPTION)}
         author={APP_AUTHOR}
       />
       {/* todo: allow main to get custom header */}
@@ -65,12 +73,14 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
           </Box>
         </Container>
 
-        <CollectionsGrid
-          containerWidth="xl"
-          collections={collectionsWithoutErrors}
-          id="foobar"
-          isLoading={false}
-        />
+        <Box m={2} id={ALL_COLLECTIONS_GRID_ID}>
+          <CollectionsGrid
+            containerWidth="xl"
+            collections={collectionsWithoutErrors}
+            id="foobar"
+            isLoading={isLoading}
+          />
+        </Box>
       </Main>
     </>
   );
