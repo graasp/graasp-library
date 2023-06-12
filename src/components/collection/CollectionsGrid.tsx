@@ -16,9 +16,9 @@ import { buildCollectionCardGridId } from '../../config/selectors';
 import CollectionCard from './CollectionCard';
 
 type Props = {
-  collections: List<ItemRecord>;
+  collections?: List<ItemRecord>;
   isLoading: boolean;
-  id: string;
+  id?: string;
   containerWidth?: Breakpoint | false;
 };
 

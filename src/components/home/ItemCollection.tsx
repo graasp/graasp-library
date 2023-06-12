@@ -13,6 +13,7 @@ import {
 
 import { ItemRecord } from '@graasp/sdk/frontend';
 
+import { SECTION_TITLE_ID } from '../../config/selectors';
 import CollectionsGrid from '../collection/CollectionsGrid';
 
 const StyledContainer = styled(Box)(() => ({
@@ -23,27 +24,31 @@ const StyledContainer = styled(Box)(() => ({
 }));
 
 type ItemCollectionProps = {
+  id: string;
+  collectionGridId?: string;
   title: string;
   collections?: List<ItemRecord>;
   sx?: SxProps<Theme>;
 };
 
-const ItemCollection = ({ title, collections, sx }: ItemCollectionProps) => {
-  if (!collections || !collections.size) {
-    return null;
-  }
-
+const ItemCollection = ({
+  id,
+  collectionGridId,
+  title,
+  collections,
+  sx,
+}: ItemCollectionProps) => {
   return (
-    <StyledContainer sx={sx}>
+    <StyledContainer sx={sx} id={id}>
       <Container maxWidth="xl">
-        <Typography variant="h4" marginBottom={3}>
+        <Typography variant="h4" marginBottom={3} id={SECTION_TITLE_ID}>
           {title}
         </Typography>
       </Container>
 
       <CollectionsGrid
         collections={collections}
-        id="foobar"
+        id={collectionGridId}
         isLoading={false}
       />
     </StyledContainer>

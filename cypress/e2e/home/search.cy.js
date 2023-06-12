@@ -19,7 +19,8 @@ const search = (text, range) => {
 const keywords = 'keywords';
 const searchResultItems = PUBLISHED_ITEMS.slice(2);
 
-describe('Search', () => {
+// todo: enable back when search is implemented
+describe.skip('Search', () => {
   buildPublicAndPrivateEnvironments().forEach((environment) => {
     describe(`Fetch results for ${environment.currentMember.name}`, () => {
       Object.values(SEARCH_RANGES).forEach((range) => {

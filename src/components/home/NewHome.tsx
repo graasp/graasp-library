@@ -10,7 +10,13 @@ import { Context } from '@graasp/sdk';
 import { LIBRARY } from '@graasp/translations';
 
 import { APP_AUTHOR } from '../../config/constants';
-import { PUBLISHED_TAG_ID } from '../../config/env';
+import { NEXT_PUBLIC_GRAASPER_ID, PUBLISHED_TAG_ID } from '../../config/env';
+import {
+  GRAASPER_COLLECTIONS_GRID_ID,
+  GRAASP_SELECTION_TITLE_ID,
+  MOST_LIKED_TITLE_ID,
+  POPULAR_THIS_WEEK_TITLE_ID,
+} from '../../config/selectors';
 import { PLACEHOLDER_COLLECTIONS } from '../../utils/collections';
 import { QueryClientContext } from '../QueryClientContext';
 import Seo from '../common/Seo';
@@ -45,9 +51,14 @@ const Home: React.FC<HomeProps> = () => {
 
   const { hooks } = useContext(QueryClientContext);
 
+  // todo: implement endpoints for the sections
   const { data: collections } = hooks.usePublicItemsWithTag(PUBLISHED_TAG_ID, {
     placeholderData: PLACEHOLDER_COLLECTIONS,
   });
+  // todo: add a special call
+  const graasperCollections = collections?.filter(
+    (c) => c.creator === NEXT_PUBLIC_GRAASPER_ID,
+  );
 
   return (
     <StyledBackgroundContainer>
@@ -64,18 +75,22 @@ const Home: React.FC<HomeProps> = () => {
         <Header />
 
         <ItemCollection
+          id={POPULAR_THIS_WEEK_TITLE_ID}
           collections={collections}
-          title="Popular this week"
+          title={t(LIBRARY.HOME_POPULAR_THIS_WEEK_COLLECTIONS_TITLE)}
           sx={{ backgroundColor: 'white' }}
         />
         <ItemCollection
-          collections={collections}
-          title="Graasp Selection"
+          id={GRAASP_SELECTION_TITLE_ID}
+          collectionGridId={GRAASPER_COLLECTIONS_GRID_ID}
+          collections={graasperCollections}
+          title={t(LIBRARY.HOME_GRAASPER_COLLECTIONS_TITLE)}
           sx={{ backgroundColor: '#fafafa' }}
         />
         <ItemCollection
+          id={MOST_LIKED_TITLE_ID}
           collections={collections}
-          title="Most liked"
+          title={t(LIBRARY.HOME_MOST_LIKED_COLLECTIONS_TITLE)}
           sx={{ backgroundColor: 'white' }}
         />
 

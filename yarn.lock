@@ -897,10 +897,10 @@ __metadata:
 
 "@graasp/translations@github:graasp/graasp-translations#159-add-library-homepage-translations":
   version: 1.14.0
-  resolution: "@graasp/translations@https://github.com/graasp/graasp-translations.git#commit=43dd7cb23f0daf7b0abe91ada2a6cc00ba571d42"
+  resolution: "@graasp/translations@https://github.com/graasp/graasp-translations.git#commit=98ff29bb4622e1fb155a3d56a9695dbc5a7e63df"
   dependencies:
     i18next: 22.4.15
-  checksum: af7158376d74922649bb11fbda542a934541bfc28fb0cc13c132bae6930b24227a9a32ebf138c38e2687896244cb41deb018eb831eabe35cd8af7739e681f620
+  checksum: d4ed73b32ef719ae508aadced986e4ea03459f3d501e2d9550e79098a773652288cec1b243024c4f73b0318a020c11130e6e71d5794070e47d99832fab0d7025
   languageName: node
   linkType: hard
 

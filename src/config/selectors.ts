@@ -1,7 +1,7 @@
 export const HOME_PAGE_TITLE_TEXT_ID = 'homeTitle';
 export const SUBTITLE_TEXT_ID = 'homeSubtitle';
 export const SIDEMENU_HEADING_ID = 'sidemenuHeading';
-export const COLLECTIONS_GRID_ID = 'collectionsGrid';
+export const GRAASPER_COLLECTIONS_GRID_ID = 'graasperCollectionsGrid';
 export const buildCategoryOptionId = (index: number) =>
   `categoryOption-${index}`;
 export const CLEAR_EDUCATION_LEVEL_SELECTION_ID = 'clearEducationLevelButton';
@@ -17,8 +17,12 @@ export const ALL_COLLECTIONS_HEADER_ID = 'allCollectionsHeader';
 export const ALL_COLLECTIONS_TITLE_ID = 'allCollectionsTitle';
 export const HEADER_GRAASP_LIBRARY_ID = 'headerGraaspLibrary';
 export const HEADER_MY_LIST_ID = 'headerMyList';
+
+export const SECTION_TITLE_ID = 'sectionTitleId';
 export const GRAASP_SELECTION_TITLE_ID = 'graaspSelectionTitleId';
 export const DISCOVER_SECTION_TITLE_ID = 'discoverSectionTitleId';
+export const POPULAR_THIS_WEEK_TITLE_ID = 'popularSectionTitleId';
+export const MOST_LIKED_TITLE_ID = 'mostLikedSectionTitleId';
 export const WRAPPER_SCROLLABLE_PAGE_BODY_ID = 'wrapperContentPageBody';
 
 export const SUMMARY_AUTHOR_CONTAINER_ID = 'summaryAuthorContainer';
