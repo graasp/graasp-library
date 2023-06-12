@@ -256,6 +256,10 @@ export const mockGetItemThumbnail = (
 
       const item = items.find(({ id: thisId }) => id === thisId);
 
+      if (!item) {
+        return reply({ statusCode: StatusCodes.NOT_FOUND });
+      }
+
       const hasAccess = checkMembership({ item, currentMember });
       if (!hasAccess) {
         return reply({ statusCode: StatusCodes.UNAUTHORIZED, body: null });
@@ -283,6 +287,10 @@ export const mockGetChildren = ({ items, currentMember }) => {
     ({ url, reply }) => {
       const id = url.slice(API_HOST.length).split('/')[2];
       const item = getItemById(items, id);
+
+      if (!item) {
+        return reply({ statusCode: StatusCodes.NOT_FOUND });
+      }
 
       if (!checkMembership({ item, currentMember })) {
         return reply({ statusCode: StatusCodes.UNAUTHORIZED, body: null });
@@ -506,6 +514,10 @@ export const mockGetItemCategories = (
 
       const itemId = url.slice(API_HOST.length).split('/')[2];
       const item = items.find(({ id }) => id === itemId);
+
+      if (!item) {
+        return reply({ statusCode: StatusCodes.NOT_FOUND });
+      }
 
       if (!checkMembership({ item, currentMember })) {
         return reply({ statusCode: StatusCodes.UNAUTHORIZED, body: null });

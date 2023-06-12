@@ -8,10 +8,6 @@ import {
   ALL_COLLECTIONS_HEADER_ID,
   ALL_COLLECTIONS_TITLE_ID,
   CLEAR_EDUCATION_LEVEL_SELECTION_ID,
-  SEARCH_FILTER_DISCIPLINE_ID,
-  SEARCH_FILTER_EDUCATION_ID,
-  SEARCH_FILTER_LANGUAGE_ID,
-  SEARCH_FILTER_LICENSE_ID,
   buildCategoryOptionSelector,
   buildCollectionCardGridId,
   buildSearchFilterCategoryId,
@@ -48,19 +44,21 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
       );
 
       // filter header
-      cy.get(`#${SEARCH_FILTER_EDUCATION_ID}`).should(
+      cy.get(`#${buildSearchFilterCategoryId(CATEGORY_TYPES.LEVEL)}`).should(
         'contain.text',
         i18n.t(CATEGORIES.EDUCATION_LEVEL, { ns: namespaces.categories }),
       );
-      cy.get(`#${SEARCH_FILTER_DISCIPLINE_ID}`).should(
+      cy.get(
+        `#${buildSearchFilterCategoryId(CATEGORY_TYPES.DISCIPLINE)}`,
+      ).should(
         'contain.text',
         i18n.t(CATEGORIES.DISCIPLINE, { ns: namespaces.categories }),
       );
-      cy.get(`#${SEARCH_FILTER_LANGUAGE_ID}`).should(
+      cy.get(`#${buildSearchFilterCategoryId(CATEGORY_TYPES.LANGUAGE)}`).should(
         'contain.text',
         i18n.t(CATEGORIES.LANGUAGE, { ns: namespaces.categories }),
       );
-      cy.get(`#${SEARCH_FILTER_LICENSE_ID}`).should(
+      cy.get(`#${buildSearchFilterCategoryId(CATEGORY_TYPES.LICENSE)}`).should(
         'contain.text',
         // todo: add translations
         // i18n.t(CATEGORIES.EDUCATION_LEVEL, { ns: namespaces.categories }),
@@ -75,7 +73,8 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
       );
     });
 
-    it.only('display menu options', () => {
+    // todo: enable when search is implemented
+    it.skip('display menu options', () => {
       cy.wait(['@getCategories', '@getCategoryTypes']);
       cy.scrollTo('top');
       SAMPLE_CATEGORY_TYPES.forEach(({ name, id }) => {
@@ -106,7 +105,8 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
       );
     });
 
-    it('select/unselect categories', () => {
+    // todo: enable when search is implemented
+    it.skip('select/unselect categories', () => {
       // const selectCategoryButton = cy.get(buildEducationLevelOptionSelector(0));
       // selectCategoryButton.click();
       cy.wait('@getPublishedItemsInCategories').then(

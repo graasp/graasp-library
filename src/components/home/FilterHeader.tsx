@@ -300,6 +300,7 @@ const FilterHeader: FC<FilterHeaderProps> = ({ onFiltersChanged }) => {
 
   const filters = [
     <Filter
+      key={CATEGORY_TYPES.LEVEL}
       category={CATEGORY_TYPES.LEVEL}
       title={translateCategories(CATEGORIES.EDUCATION_LEVEL)}
       options={levelList}
@@ -308,6 +309,7 @@ const FilterHeader: FC<FilterHeaderProps> = ({ onFiltersChanged }) => {
       isLoading={isCategoriesLoading}
     />,
     <Filter
+      key={CATEGORY_TYPES.DISCIPLINE}
       category={CATEGORY_TYPES.DISCIPLINE}
       title={translateCategories(CATEGORIES.DISCIPLINE)}
       options={disciplineList}
@@ -316,6 +318,7 @@ const FilterHeader: FC<FilterHeaderProps> = ({ onFiltersChanged }) => {
       isLoading={isCategoriesLoading}
     />,
     <Filter
+      key={CATEGORY_TYPES.LANGUAGE}
       category={CATEGORY_TYPES.LANGUAGE}
       title={translateCategories(CATEGORIES.LANGUAGE)}
       options={languageList}
@@ -324,6 +327,7 @@ const FilterHeader: FC<FilterHeaderProps> = ({ onFiltersChanged }) => {
       isLoading={isCategoriesLoading}
     />,
     <Filter
+      key={CATEGORY_TYPES.LICENSE}
       category={CATEGORY_TYPES.LICENSE}
       title="License"
       options={licenseList}

@@ -1,7 +1,6 @@
 module.exports = {
   experimental: {
     newNextLinkBehavior: true,
-    swcPlugins: ['swc-plugin-coverage-instrument'],
   },
   productionBrowserSourceMaps: true,
   publicRuntimeConfig: {
