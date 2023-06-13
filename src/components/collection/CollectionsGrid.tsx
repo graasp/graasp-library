@@ -34,33 +34,35 @@ const CollectionsGrid = ({
     return <Skeleton />;
   }
 
-  return !collections?.size ? (
-    <Typography variant="h5" color="inherit">
-      {t(LIBRARY.EMPTY_COLLECTION_MESSAGE)}
-    </Typography>
-  ) : (
+  return (
     <Container maxWidth={containerWidth ?? 'xl'}>
-      <Grid
-        container
-        spacing={4}
-        alignItems="stretch"
-        justifyContent="flex-start"
-        id={id}
-      >
-        {collections?.map((collection) => (
-          <Grid
-            key={collection.id}
-            xs={6}
-            sm={4}
-            md={3}
-            lg={3}
-            xl={2}
-            id={buildCollectionCardGridId(collection.id)}
-          >
-            <CollectionCard collection={collection} />
-          </Grid>
-        ))}
-      </Grid>
+      {!collections?.size ? (
+        <Typography variant="h5" color="inherit">
+          {t(LIBRARY.EMPTY_COLLECTION_MESSAGE)}
+        </Typography>
+      ) : (
+        <Grid
+          container
+          spacing={4}
+          alignItems="stretch"
+          justifyContent="flex-start"
+          id={id}
+        >
+          {collections?.map((collection) => (
+            <Grid
+              key={collection.id}
+              xs={6}
+              sm={4}
+              md={3}
+              lg={3}
+              xl={2}
+              id={buildCollectionCardGridId(collection.id)}
+            >
+              <CollectionCard collection={collection} />
+            </Grid>
+          ))}
+        </Grid>
+      )}
     </Container>
   );
 };

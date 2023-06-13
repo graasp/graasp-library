@@ -16,11 +16,9 @@ import { ItemRecord } from '@graasp/sdk/frontend';
 import { SECTION_TITLE_ID } from '../../config/selectors';
 import CollectionsGrid from '../collection/CollectionsGrid';
 
-const StyledContainer = styled(Box)(() => ({
+const StyledContainer = styled(Box)(({ theme }) => ({
   backgroundColor: 'white',
-  paddingBottom: 120,
-  paddingTop: 80,
-  // boxShadow: '1px 7px 15px 1px rgba(0,0,0,0.38)',
+  padding: theme.spacing(4, 3, 8, 3),
 }));
 
 type ItemCollectionProps = {

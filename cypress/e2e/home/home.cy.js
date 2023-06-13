@@ -51,7 +51,9 @@ describe('Home Page', () => {
           cy.wait('@getPublicItemsWithTags').then(({ request: { url } }) => {
             expect(url).to.contain(ITEM_PUBLISHED_TAG.id);
             // todo: this succeeds because this element is not implemented anymore
-            cy.get(`#${GRAASP_SELECTION_TITLE_ID}`).should('not.exist');
+            cy.get(`#${GRAASP_SELECTION_TITLE_ID}`)
+              .should('be.visible')
+              .and('contain.text', i18n.t(LIBRARY.EMPTY_COLLECTION_MESSAGE));
           });
         });
         it('Display graasper items', () => {
