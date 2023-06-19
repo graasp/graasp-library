@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { forwardRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import SearchIcon from '@mui/icons-material/Search';
@@ -13,27 +13,30 @@ type SearchProps = {
   isLoading: boolean;
 };
 
-const Search: React.FC<SearchProps> = ({ handleClick, isLoading }) => {
-  const [searchInput, setSearchInput] = useState<string>('');
+const Search = forwardRef<HTMLDivElement, SearchProps>(function Search(
+  { handleClick, isLoading },
+  ref,
+) {
+  const [searchInput, setSearchInput] = useState<string>();
 
   const { t } = useTranslation();
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    setSearchInput(event.target.value.trim().toLowerCase());
+    setSearchInput(event.target.value);
   };
 
   const handleSearch = () => {
-    if (handleClick) {
-      handleClick(searchInput);
+    if (searchInput) {
+      handleClick(searchInput.trim().toLowerCase());
     }
   };
 
   const handleSearchOnClick = (
     event: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    if (event.code === 'Enter') {
+    if (event.code === 'Enter' && searchInput) {
       handleClick(searchInput);
     }
   };
@@ -50,10 +53,12 @@ const Search: React.FC<SearchProps> = ({ handleClick, isLoading }) => {
         my: 1,
         borderRadius: 2,
       }}
+      ref={ref}
     >
       <InputBase
         // search on click
-        onKeyUp={handleSearch}
+        // onKeyUp={handleSearch}
+        value={searchInput}
         id={HOME_SEARCH_ID}
         disabled={isLoading}
         sx={{ m: 1 }}
@@ -78,6 +83,6 @@ const Search: React.FC<SearchProps> = ({ handleClick, isLoading }) => {
       </IconButton>
     </Paper>
   );
-};
+});
 
 export default Search;

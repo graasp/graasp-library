@@ -7,15 +7,11 @@ import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 
-import { Category, CategoryType, ItemCategory } from '@graasp/sdk';
+import { Category, CategoryType } from '@graasp/sdk';
 import { ItemRecord } from '@graasp/sdk/frontend';
 import { DEFAULT_LANG, LIBRARY } from '@graasp/translations';
 
-import {
-  CATEGORY_TYPES,
-  ITEM_TYPES,
-  MAX_COLLECTION_NAME_LENGTH,
-} from '../../config/constants';
+import { ITEM_TYPES, MAX_COLLECTION_NAME_LENGTH } from '../../config/constants';
 import { compare } from '../../utils/helpers';
 import { QueryClientContext } from '../QueryClientContext';
 import ItemBreadcrumb from './ItemBreadcrumb';
@@ -65,7 +61,6 @@ const Summary: React.FC<SummaryProps> = ({
   const { hooks } = useContext(QueryClientContext);
   const { data: member } = hooks.useCurrentMember();
   const { data: categories } = hooks.useCategories();
-  const { data: categoryTypes } = hooks.useCategoryTypes();
 
   const parents = getParentsIdsFromPath(collection?.path);
   const { data: topLevelParent } = hooks.useItem(parents[0] ?? collection?.id);
@@ -73,33 +68,21 @@ const Summary: React.FC<SummaryProps> = ({
     topLevelParent?.id ?? collection?.id,
   );
 
-  const tags = collection?.settings?.tags as any;
+  const tags = collection?.settings?.tags;
 
   const selectedCategories = categories
-    ?.filter((category: Category) =>
+    ?.filter((category) =>
       itemCategories
-        ?.map((entry: ItemCategory) => entry.categoryId)
-        ?.includes(category.id),
+        ?.map((entry) => entry.category.type)
+        ?.includes(category.type),
     )
     ?.groupBy((entry: Category) => entry.type);
 
-  const levels = selectedCategories?.get(
-    categoryTypes?.find(
-      (ctype: CategoryType) => ctype.name === CATEGORY_TYPES.LEVEL,
-    )?.id ?? '',
-  );
+  const levels = selectedCategories?.get(CategoryType.Level);
   const disciplines = selectedCategories
-    ?.get(
-      categoryTypes?.find(
-        (ctype: CategoryType) => ctype.name === CATEGORY_TYPES.DISCIPLINE,
-      )?.id ?? '',
-    )
+    ?.get(CategoryType.Discipline)
     ?.sort(compare);
-  const languages = selectedCategories?.get(
-    categoryTypes?.find(
-      (ctype: CategoryType) => ctype.name === CATEGORY_TYPES.LANGUAGE,
-    )?.id ?? '',
-  );
+  const languages = selectedCategories?.get(CategoryType.Language);
 
   // todo: remove cast after refactor
   const ccLicenseAdaption = (

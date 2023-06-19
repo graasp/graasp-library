@@ -5,7 +5,7 @@ import {
   SEARCH_RESULTS_GRID_ID,
   buildSearchRangeOptionId,
 } from '../../../src/config/selectors';
-import { SEARCH_RANGES } from '../../../src/enums/searchRanges';
+import { SearchRanges } from '../../../src/enums/searchRanges';
 import { buildPublicAndPrivateEnvironments } from '../../fixtures/environment';
 import { PUBLISHED_ITEMS } from '../../fixtures/items';
 
@@ -23,7 +23,7 @@ const searchResultItems = PUBLISHED_ITEMS.slice(2);
 describe.skip('Search', () => {
   buildPublicAndPrivateEnvironments().forEach((environment) => {
     describe(`Fetch results for ${environment.currentMember.name}`, () => {
-      Object.values(SEARCH_RANGES).forEach((range) => {
+      Object.values(SearchRanges).forEach((range) => {
         it(range.title, () => {
           cy.setUpApi({ ...environment, searchResultItems });
           cy.visit(HOME_ROUTE);

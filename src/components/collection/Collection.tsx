@@ -9,7 +9,6 @@ import { Box } from '@mui/material';
 import { Context, convertJs } from '@graasp/sdk';
 
 import { DEFAULT_ITEM_IMAGE_PATH } from '../../config/constants';
-import { PUBLISHED_TAG_ID } from '../../config/env';
 import {
   ERROR_INVALID_COLLECTION_ID_CODE,
   ERROR_UNEXPECTED_ERROR_CODE,
@@ -43,30 +42,28 @@ const Collection = ({ id }: Props) => {
   } = hooks.useItem(id, {
     placeholderData: convertJs(PLACEHOLDER_COLLECTION),
   });
-  const {
-    data: member,
-    isError: memberIsError,
-    isLoading: isLoadingMember,
-  } = hooks.useMember(collection?.creator);
   const { data: currentMember } = hooks.useCurrentMember();
-  const { data: likeCount } = hooks.useLikeCount(id || '');
+  const { data: likes } = hooks.useLikesForItem(id);
   const { data: tags } = hooks.useItemTags(id);
   const { leftContent, rightContent } = useHeader(id);
+  // get item published
+  const { data: itemPublishEntry } = hooks.useItemPublishedInformation({
+    itemId: id || '',
+  });
 
   // if tags could be fetched then user has at least read access
   const canRead = Boolean(tags);
 
   const canPublish =
-    (collection && currentMember && collection.creator === currentMember.id) ||
+    (collection &&
+      currentMember &&
+      collection.creator?.id === currentMember.id) ||
     false;
-
-  const isPublished =
-    tags?.some((tag) => tag.tagId === PUBLISHED_TAG_ID) || false;
 
   if (!id || !validate(id)) {
     return (
       <Main
-        context={Context.LIBRARY}
+        context={Context.Library}
         headerLeftContent={leftContent}
         headerRightContent={rightContent}
       >
@@ -77,10 +74,10 @@ const Collection = ({ id }: Props) => {
     );
   }
 
-  if (isError || memberIsError) {
+  if (isError) {
     return (
       <Main
-        context={Context.LIBRARY}
+        context={Context.Library}
         headerLeftContent={leftContent}
         headerRightContent={rightContent}
       >
@@ -91,34 +88,33 @@ const Collection = ({ id }: Props) => {
     );
   }
 
-  const isLoading = isLoadingItem || isLoadingMember;
+  const isLoading = isLoadingItem;
 
   const name = collection?.name || '';
+  const parsedDescription = collection?.description || '';
+  const author = collection?.creator?.name || '';
   // todo: handle image
   const imageUrl = DEFAULT_ITEM_IMAGE_PATH;
 
-  const parsedDescription = collection?.description || '';
-
-  // todo: views don't exist
-  const likes = likeCount;
+  const likeCount = likes?.size;
 
   return (
     <ErrorBoundary>
       <Seo
         title={name}
         description={parsedDescription}
-        author={member?.name ?? ''}
+        author={author}
         image={imageUrl}
       />
       <Main
-        context={Context.LIBRARY}
+        context={Context.Library}
         headerLeftContent={leftContent}
         headerRightContent={rightContent}
       >
         <UnpublishedItemAlert
           canRead={canRead}
           canPublish={canPublish}
-          isPublished={isPublished}
+          isPublished={!!itemPublishEntry}
           currentMember={currentMember}
         />
         <Box
@@ -132,7 +128,7 @@ const Collection = ({ id }: Props) => {
         >
           <Summary
             collection={collection}
-            likes={likes}
+            likes={likeCount}
             isLoading={isLoading}
           />
           {/* <Comments comments={comments} members={members} /> */}

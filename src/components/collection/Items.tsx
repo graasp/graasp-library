@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { Add, Remove } from '@mui/icons-material';
 import { Button, Grow, useMediaQuery, useTheme } from '@mui/material';
-import Box from '@mui/material/Box/Box';
+import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 

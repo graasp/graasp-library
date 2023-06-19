@@ -1,14 +1,10 @@
-import getConfig from 'next/config';
-
-import * as React from 'react';
 import { DehydratedState } from 'react-query';
 
 import { Api, configureQueryClient } from '@graasp/query-client';
 
 import Wrapper from '../src/components/common/Wrapper';
-import Home from '../src/components/home/NewHome';
+import Home from '../src/components/home/Home';
 import { QUERY_CLIENT_OPTIONS } from '../src/config/queryClient';
-import { PUBLISHED_ITEMS_KEY } from '../src/config/queryKeys';
 
 const HomePage = ({
   dehydratedState,
@@ -21,18 +17,16 @@ const HomePage = ({
 );
 
 export async function getServerSideProps() {
-  const { publicRuntimeConfig } = getConfig();
   const { queryClient, dehydrate } = configureQueryClient(QUERY_CLIENT_OPTIONS);
 
-  await queryClient.prefetchQuery(PUBLISHED_ITEMS_KEY, () =>
-    Api.getPublicItemsWithTag(
-      {
-        tagId: publicRuntimeConfig.NEXT_PUBLIC_PUBLISHED_TAG_ID,
-      },
-      QUERY_CLIENT_OPTIONS,
-    ).then((data) => data),
+  // todo: can't use DATA_KEYS.buildPublishedItemsKey which returns undefined when no categoryIds are passed in
+  await queryClient.prefetchQuery(['items', 'collections', 'all'], () =>
+    Api.getAllPublishedItems({}, QUERY_CLIENT_OPTIONS).then((data) => {
+      // todo: this is a hack to resolve the date serializing issue
+      // deserialization of dates should happen later in the pipeline so we ge the raw api response here
+      return JSON.parse(JSON.stringify(data));
+    }),
   );
-
   // Pass data to the page via props
   return { props: { dehydratedState: dehydrate(queryClient) } };
 }

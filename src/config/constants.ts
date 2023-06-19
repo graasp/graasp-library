@@ -5,6 +5,7 @@ export const APP_KEYWORDS = ['graasp', 'library'];
 export const APP_AUTHOR = 'Graasp';
 export const DEFAULT_LANG = 'en';
 export const DEFAULT_USER_NAME = 'Anonymous';
+export const DEFAULT_THUMBNAIL_ALT_TEXT = 'Thumbnail';
 
 export const MIN_CARD_WIDTH = 345;
 

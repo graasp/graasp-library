@@ -7,7 +7,10 @@ import { Box } from '@mui/material';
 import { ThumbnailSize } from '@graasp/sdk';
 import { ThumbnailSizeVariant } from '@graasp/sdk/frontend';
 
-import { DEFAULT_ITEM_IMAGE_PATH } from '../../config/constants';
+import {
+  DEFAULT_ITEM_IMAGE_PATH,
+  DEFAULT_THUMBNAIL_ALT_TEXT,
+} from '../../config/constants';
 import { QueryClientContext } from '../QueryClientContext';
 
 const Thumbnail = dynamic(
@@ -29,6 +32,8 @@ const CardMediaComponent = ({
   svgPadding = 15,
 }: Props) => {
   const { hooks } = useContext(QueryClientContext);
+  const { data: thumbnailUrl, isLoading: isThumbnailLoading } =
+    hooks.useItemThumbnailUrl({ id: itemId });
 
   return (
     <Box
@@ -48,10 +53,10 @@ const CardMediaComponent = ({
       }}
     >
       <Thumbnail
-        alt={name || ''}
-        useThumbnail={hooks.useItemThumbnail}
-        id={itemId || ''}
-        thumbnailSrc={DEFAULT_ITEM_IMAGE_PATH}
+        url={thumbnailUrl ?? DEFAULT_ITEM_IMAGE_PATH}
+        isLoading={isThumbnailLoading}
+        alt={name ?? DEFAULT_THUMBNAIL_ALT_TEXT}
+        id={itemId}
         sx={{
           width: '100%',
           objectFit: 'cover',

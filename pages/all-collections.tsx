@@ -1,28 +1,24 @@
-import getConfig from 'next/config';
 import PropTypes from 'prop-types';
 
-import * as React from 'react';
 import { DehydratedState } from 'react-query';
-
-import { Box } from '@mui/material';
 
 import { Api, configureQueryClient } from '@graasp/query-client';
 
 import Wrapper from '../src/components/common/Wrapper';
 import AllCollections from '../src/components/home/AllCollections';
 import { QUERY_CLIENT_OPTIONS } from '../src/config/queryClient';
-import { PUBLISHED_ITEMS_KEY } from '../src/config/queryKeys';
 
 const AllCollectionsPage = ({
   dehydratedState,
 }: {
   dehydratedState: DehydratedState;
 }) => (
-  <Box style={{ backgroundColor: '#F8F7FE' }}>
-    <Wrapper dehydratedState={dehydratedState}>
-      <AllCollections />
-    </Wrapper>
-  </Box>
+  <Wrapper
+    dehydratedState={dehydratedState}
+    sx={{ backgroundColor: '#F8F7FE' }}
+  >
+    <AllCollections />
+  </Wrapper>
 );
 
 AllCollectionsPage.propTypes = {
@@ -30,16 +26,12 @@ AllCollectionsPage.propTypes = {
 };
 
 export async function getServerSideProps() {
-  const { publicRuntimeConfig } = getConfig();
   const { queryClient, dehydrate } = configureQueryClient(QUERY_CLIENT_OPTIONS);
 
-  await queryClient.prefetchQuery(PUBLISHED_ITEMS_KEY, () =>
-    Api.getPublicItemsWithTag(
-      {
-        tagId: publicRuntimeConfig.NEXT_PUBLIC_PUBLISHED_TAG_ID,
-      },
-      QUERY_CLIENT_OPTIONS,
-    ).then((data) => data),
+  await queryClient.prefetchQuery(['items', 'collections', 'all'], () =>
+    Api.getAllPublishedItems({}, QUERY_CLIENT_OPTIONS).then((data) =>
+      JSON.parse(JSON.stringify(data)),
+    ),
   );
 
   // Pass data to the page via props

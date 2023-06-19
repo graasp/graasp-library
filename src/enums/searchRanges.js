@@ -1,21 +1,21 @@
 import { LIBRARY } from '@graasp/translations';
 
 // eslint-disable-next-line import/prefer-default-export
-export const SEARCH_RANGES = {
-  ALL: {
-    value: 'all',
-    title: LIBRARY.SEARCH_RANGES_ALL,
-  },
-  TAG: {
+export const SearchRanges = {
+  // All: {
+  //   value: 'all',
+  //   title: LIBRARY.SEARCH_RANGES_ALL,
+  // },
+  Tags: {
     value: 'tags',
     title: LIBRARY.SEARCH_RANGES_TAGS,
   },
-  TITLE: {
-    value: 'title',
+  Name: {
+    value: 'name',
     title: LIBRARY.SEARCH_RANGES_TITLE,
   },
-  AUTHOR: {
-    value: 'author',
+  Author: {
+    value: 'creator',
     title: LIBRARY.SEARCH_RANGES_AUTHOR,
   },
 };

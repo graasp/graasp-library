@@ -10,15 +10,11 @@ import { ItemRecord } from '@graasp/sdk/frontend';
 import { LIBRARY } from '@graasp/translations';
 
 import { APP_AUTHOR } from '../../config/constants';
-import { PUBLISHED_TAG_ID } from '../../config/env';
 import {
   ALL_COLLECTIONS_GRID_ID,
   MENU_BUTTON_ID,
 } from '../../config/selectors';
-import {
-  PLACEHOLDER_COLLECTIONS,
-  filterErrorItems,
-} from '../../utils/collections';
+import { filterErrorItems } from '../../utils/collections';
 import { QueryClientContext } from '../QueryClientContext';
 import CollectionsGrid from '../collection/CollectionsGrid';
 import Seo from '../common/Seo';
@@ -34,12 +30,7 @@ type AllCollectionsProps = {};
 const AllCollections: React.FC<AllCollectionsProps> = () => {
   const { t } = useTranslation();
   const { hooks } = useContext(QueryClientContext);
-  const { data: collections, isLoading } = hooks.usePublicItemsWithTag(
-    PUBLISHED_TAG_ID,
-    {
-      placeholderData: PLACEHOLDER_COLLECTIONS,
-    },
-  );
+  const { data: collections, isLoading } = hooks.useAllPublishedItems();
 
   const collectionsWithoutErrors = filterErrorItems<ItemRecord>(collections);
 
@@ -62,7 +53,7 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
       />
       {/* todo: allow main to get custom header */}
       <Main
-        context={Context.LIBRARY}
+        context={Context.Library}
         menuButtonId={MENU_BUTTON_ID}
         headerLeftContent={leftContent}
         headerRightContent={rightContent}
@@ -73,7 +64,7 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
           </Box>
         </Container>
 
-        <Box m={2} id={ALL_COLLECTIONS_GRID_ID}>
+        <Box m={2} id={ALL_COLLECTIONS_GRID_ID} flexGrow={2}>
           <CollectionsGrid
             containerWidth="xl"
             collections={collectionsWithoutErrors}

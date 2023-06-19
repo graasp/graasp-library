@@ -15,7 +15,7 @@ import {
   styled,
 } from '@mui/material';
 
-import { convertJs } from '@graasp/sdk';
+import { CategoryType, convertJs } from '@graasp/sdk';
 import { CategoryRecord } from '@graasp/sdk/frontend';
 import { CATEGORIES, LIBRARY, namespaces } from '@graasp/translations';
 
@@ -28,7 +28,7 @@ import {
 import { compare } from '../../utils/helpers';
 import { QueryClientContext } from '../QueryClientContext';
 import FilterPopper from './FilterPopper';
-import { GRAASP_COLOR } from './NewHome';
+import { GRAASP_COLOR } from './Home';
 import Search from './Search';
 
 type FilterProps = {
@@ -55,7 +55,7 @@ const Filter: React.FC<FilterProps> = ({
     setShowPopper((oldVal) => !oldVal);
   };
 
-  const popperAnchor = useRef<null | HTMLElement>(null);
+  const popperAnchor = useRef<null | HTMLDivElement>(null);
   const popper = useRef<null | HTMLDivElement>(null);
 
   const onDocumentScrolled = () => {
@@ -211,25 +211,14 @@ const FilterHeader: FC<FilterHeaderProps> = ({ onFiltersChanged }) => {
   const { t } = useTranslation();
 
   const { hooks } = useContext(QueryClientContext);
-  const { data: categoryTypes } = hooks.useCategoryTypes();
   const { data: categories, isLoading: isCategoriesLoading } =
     hooks.useCategories();
   const allCategories = categories?.groupBy((entry: Category) => entry.type);
-  const levelList = allCategories?.get(
-    // @ts-ignore
-    categoryTypes.find((type) => type.name === CATEGORY_TYPES.LEVEL)?.id,
-  ) as List<CategoryRecord>;
-  const disciplineList = (
-    allCategories?.get(
-      // @ts-ignore
-      categoryTypes?.find((type) => type.name === CATEGORY_TYPES.DISCIPLINE)
-        ?.id,
-    ) as List<CategoryRecord>
-  )?.sort(compare);
-  const languageList = allCategories?.get(
-    // @ts-ignore
-    categoryTypes?.find((type) => type.name === CATEGORY_TYPES.LANGUAGE)?.id,
-  ) as List<CategoryRecord>;
+  const levelList = allCategories?.get(CategoryType.Level);
+  const disciplineList = allCategories
+    ?.get(CategoryType.Discipline)
+    ?.sort(compare);
+  const languageList = allCategories?.get(CategoryType.Language);
 
   // TODO: Replace with real values.
   const licenseList: List<CategoryRecord> = convertJs([
@@ -267,7 +256,7 @@ const FilterHeader: FC<FilterHeaderProps> = ({ onFiltersChanged }) => {
     notifyFiltersChanged();
   };
 
-  const filterContainer = useRef<HTMLElement>(null);
+  const filterContainer = useRef<HTMLDivElement>(null);
 
   const [sticky, setSticky] = useState<boolean>(false);
 

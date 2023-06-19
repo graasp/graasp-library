@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useContext, useRef, useState } from 'react';
 
-import { Box, Container, Grid, Stack, Typography } from '@mui/material';
+import {
+  Box,
+  CircularProgress,
+  Container,
+  Grid,
+  List,
+  ListItemButton,
+  ListItemText,
+  Popover,
+  Stack,
+  Typography,
+} from '@mui/material';
+
+import { ItemRecord } from '@graasp/sdk/frontend';
 
 import { HOME_PAGE_TITLE_TEXT_ID } from '../../config/selectors';
+import { SearchRanges } from '../../enums/searchRanges';
+import { QueryClientContext } from '../QueryClientContext';
 import Search from './Search';
 
 type PopularSearchItemProps = {
@@ -16,11 +31,26 @@ const PopularSearchItem: React.FC<PopularSearchItemProps> = ({ text }) => (
   </Box>
 );
 
-type HeaderProps = {};
-
-const Header: React.FC<HeaderProps> = () => {
+const Header = () => {
+  const { hooks } = useContext(QueryClientContext);
+  const searchBarRef = useRef<HTMLDivElement>(null);
   // TODO: Feed from real data.
   const popularSearches = ['Climate', 'Biology', 'Science', 'Education'];
+  const [keywords, setKeywords] = useState<string>();
+  const [resultsOpen, setResultsOpen] = useState<boolean>(false);
+  const range = SearchRanges.Name.value;
+  const {
+    data: resultsCollections,
+    isLoading: isLoadingSearch,
+    refetch,
+  } = hooks.useKeywordSearch({
+    [range]: keywords,
+  });
+  const handleSearch = (searchKeywords: string) => {
+    setResultsOpen(true);
+    setKeywords(searchKeywords);
+    refetch();
+  };
 
   return (
     <Container maxWidth="md">
@@ -28,7 +58,7 @@ const Header: React.FC<HeaderProps> = () => {
         direction="column"
         alignItems="center"
         paddingBottom={{
-          xs: 0,
+          xs: 2,
           md: 6,
           lg: 15,
         }}
@@ -53,16 +83,52 @@ const Header: React.FC<HeaderProps> = () => {
               md: '4.5rem',
             }}
           >
-            Graasp
+            Graasp Library
           </Typography>
         </Box>
         <Box>
           <Typography color="white" variant="h5" textAlign="center">
-            Library of OER resources lorem ipsum dolor sit
+            Browse and Discover Open Educational Resources
           </Typography>
         </Box>
         <Box width="100%">
-          <Search handleClick={() => {}} isLoading={false} />
+          <Search
+            ref={searchBarRef}
+            handleClick={handleSearch}
+            isLoading={false}
+          />
+          <Popover
+            open={resultsOpen}
+            sx={{
+              width: '100%',
+            }}
+            onClose={() => setResultsOpen(false)}
+            anchorEl={searchBarRef?.current}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'center',
+            }}
+          >
+            {isLoadingSearch ? (
+              <CircularProgress />
+            ) : (
+              <List>
+                {resultsCollections.size ? (
+                  resultsCollections.map((c: ItemRecord) => (
+                    <ListItemButton key={c.id}>{c.name}</ListItemButton>
+                  ))
+                ) : (
+                  <ListItemButton key="empty">
+                    <ListItemText primary="Empty results" />
+                  </ListItemButton>
+                )}
+              </List>
+            )}
+          </Popover>
         </Box>
         <Box width="100%">
           <Typography color="white" variant="h6" gutterBottom>

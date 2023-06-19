@@ -1,4 +1,5 @@
 import { List } from 'immutable';
+import { DateTime } from 'luxon';
 import dynamic from 'next/dynamic';
 
 import React from 'react';
@@ -19,8 +20,6 @@ import {
   SUMMARY_LANGUAGES_CONTAINER_ID,
   SUMMARY_LAST_UPDATE_CONTAINER_ID,
 } from '../../config/selectors';
-
-const { DateTime } = require('luxon');
 
 const { CreativeCommons } = {
   CreativeCommons: dynamic(
@@ -62,8 +61,8 @@ const convertLicense = (ccLicenseAdaption: string) => {
 };
 
 type SummaryDetailsProps = {
-  createdAt?: string;
-  lastUpdate?: string;
+  createdAt?: Date;
+  lastUpdate?: Date;
   lang: string;
   languages?: List<CategoryRecord>;
   levels?: List<CategoryRecord>;
@@ -105,9 +104,11 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
                 {t(LIBRARY.SUMMARY_DETAILS_CREATED_AT_TITLE)}
               </Typography>
               <Typography variant="body1" gutterBottom>
-                {DateTime.fromISO(createdAt).toLocaleString(
+                {DateTime.fromMillis(createdAt.getTime()).toLocaleString(
                   DateTime.DATE_FULL,
-                  { locale: lang },
+                  {
+                    locale: lang,
+                  },
                 )}
               </Typography>
             </div>
@@ -122,7 +123,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
                 {t(LIBRARY.SUMMARY_DETAILS_UPDATED_AT_TITLE)}
               </Typography>
               <Typography variant="body1" gutterBottom>
-                {DateTime.fromISO(lastUpdate).toLocaleString(
+                {DateTime.fromMillis(lastUpdate.getTime()).toLocaleString(
                   DateTime.DATE_FULL,
                   { locale: lang },
                 )}

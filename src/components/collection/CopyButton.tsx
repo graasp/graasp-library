@@ -1,6 +1,4 @@
-import PropTypes from 'prop-types';
-
-import React, { useContext, useState } from 'react';
+import { MouseEvent, useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import FileCopyIcon from '@mui/icons-material/FileCopy';
@@ -8,7 +6,6 @@ import CircularProgress from '@mui/material/CircularProgress';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
-import { MUTATION_KEYS } from '@graasp/query-client';
 import { LIBRARY } from '@graasp/translations';
 
 import { ROOT_ID } from '../../config/constants';
@@ -19,17 +16,15 @@ import {
 import { QueryClientContext } from '../QueryClientContext';
 import TreeModal from './TreeModal';
 
-export const useCopyAction = (itemId) => {
+export const useCopyAction = (id: string) => {
   const { t } = useTranslation();
 
   const [showTreeModal, setShowTreeModal] = useState(false);
-  const { hooks, useMutation } = useContext(QueryClientContext);
+  const { hooks, mutations } = useContext(QueryClientContext);
   const { data: user } = hooks.useCurrentMember();
-  const { mutate: copyItem, isLoading: isCopying } = useMutation(
-    MUTATION_KEYS.COPY_PUBLIC_ITEM,
-  );
+  const { mutate: copyItems, isLoading: isCopying } = mutations.useCopyItems();
 
-  const startCopy = (event) => {
+  const startCopy = (event: MouseEvent<HTMLButtonElement>) => {
     if (user?.id) {
       setShowTreeModal(true);
     }
@@ -37,28 +32,31 @@ export const useCopyAction = (itemId) => {
   };
 
   // todo: set notifier for copy
-  const copy = ({ to }) => {
+  const copy = ({ to }: { to: string }) => {
     // remove loading icon on callback
     // do not set parent if it is root
-    copyItem({
-      id: itemId,
-      to: [
-        ROOT_ID,
-        TREE_MODAL_MY_ITEMS_ID,
-        TREE_MODAL_SHARED_ITEMS_ID,
-      ].includes(to)
-        ? undefined
-        : to,
-    });
+    const payload: Parameters<typeof copyItems>[0] = {
+      ids: [id],
+    };
+
+    payload.to = [
+      ROOT_ID,
+      TREE_MODAL_MY_ITEMS_ID,
+      TREE_MODAL_SHARED_ITEMS_ID,
+    ].includes(to)
+      ? undefined
+      : to;
+
+    copyItems(payload);
   };
 
-  const treeModal = user?.id && itemId && (
+  const treeModal = user?.id && id && (
     <TreeModal
       title={t(LIBRARY.COPY_BUTTON_MODAL_TITLE)}
       open={showTreeModal}
       onClose={() => setShowTreeModal(false)}
       onConfirm={copy}
-      itemIds={[itemId]}
+      itemIds={[id]}
     />
   );
 
@@ -69,7 +67,11 @@ export const useCopyAction = (itemId) => {
   };
 };
 
-const CopyButton = ({ id }) => {
+type Props = {
+  id: string;
+};
+
+const CopyButton = ({ id }: Props) => {
   const { t } = useTranslation();
 
   const { treeModal, isCopying, startCopy } = useCopyAction(id);
@@ -103,10 +105,6 @@ const CopyButton = ({ id }) => {
       {treeModal}
     </>
   );
-};
-
-CopyButton.propTypes = {
-  id: PropTypes.string.isRequired,
 };
 
 export default CopyButton;

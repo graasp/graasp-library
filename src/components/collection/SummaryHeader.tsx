@@ -15,7 +15,6 @@ import {
   Typography,
 } from '@mui/material';
 
-import { MUTATION_KEYS } from '@graasp/query-client';
 import { ThumbnailSize } from '@graasp/sdk';
 import { ItemLikeRecord, ItemRecord } from '@graasp/sdk/frontend';
 
@@ -44,7 +43,6 @@ type SummaryHeaderProps = {
   truncatedName: string;
   tags: Immutable.List<string> | undefined;
   views: number;
-  likes: number;
   isLogged: boolean;
 };
 
@@ -55,40 +53,40 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
   truncatedName,
   tags,
   views,
-  likes,
 }) => {
-  const { hooks, useMutation } = useContext(QueryClientContext);
+  const { hooks, mutations } = useContext(QueryClientContext);
 
   const { data: member } = hooks.useCurrentMember();
-  const { data: likedItems } = hooks.useLikedItems(member?.id || '');
+  const { data: likedItems } = hooks.useLikesForMember(member?.id);
+  const { data: itemLikesForItem } = hooks.useLikesForItem(collection?.id);
+  const likes = itemLikesForItem?.size;
 
-  const { mutate: postItemLike } = useMutation<
-    unknown,
-    unknown,
-    { itemId?: string; memberId?: string }
-  >(MUTATION_KEYS.POST_ITEM_LIKE);
-  const { mutate: deleteItemLike } = useMutation<
-    unknown,
-    unknown,
-    { id: string; itemId?: string; memberId?: string }
-  >(MUTATION_KEYS.DELETE_ITEM_LIKE);
+  const { mutate: postItemLike } = mutations.usePostItemLike();
+  const { mutate: deleteItemLike } = mutations.useDeleteItemLike();
 
   const likeEntry = likedItems?.find(
-    (itemLike: ItemLikeRecord) => itemLike?.itemId === collection?.id,
+    (itemLike: ItemLikeRecord) => itemLike?.item.id === collection?.id,
   );
 
   const handleLike = () => {
+    if (!collection?.id || !member?.id) {
+      console.error('unable to like an item which id is undefined');
+      return;
+    }
     postItemLike({
       itemId: collection?.id,
-      memberId: member?.id,
+      memberId: member.id,
     });
   };
 
   const handleUnlike = () => {
+    if (!collection?.id || !member?.id) {
+      console.error('unable to unlike an item which id is undefined');
+      return;
+    }
     deleteItemLike({
-      id: likeEntry?.id,
-      itemId: collection?.id,
-      memberId: member?.id,
+      itemId: collection.id,
+      memberId: member.id,
     });
   };
 
@@ -144,9 +142,9 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
             >
               {truncatedName}
               <LikeButton
-                ariaLabel=""
+                ariaLabel="like"
                 color="primary"
-                isLiked={false}
+                isLiked={Boolean(likeEntry)}
                 handleLike={handleLike}
                 handleUnlike={handleUnlike}
               />
@@ -179,7 +177,8 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
               <Box display="flex" alignItems="center">
                 <Authorship
                   itemId={collection?.id}
-                  authorId={collection?.creator}
+                  author={collection?.creator}
+                  displayCoEditors={collection?.settings?.displayCoEditors}
                 />
               </Box>
               <Box display="flex" alignItems="center">

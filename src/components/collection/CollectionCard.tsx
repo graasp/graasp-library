@@ -18,7 +18,6 @@ import { ThumbnailSize } from '@graasp/sdk';
 import { ItemRecord } from '@graasp/sdk/frontend';
 import { LIBRARY } from '@graasp/translations';
 
-import { DEFAULT_MEMBER_THUMBNAIL } from '../../config/constants';
 import { buildCollectionRoute } from '../../config/routes';
 import { QueryClientContext } from '../QueryClientContext';
 import CardMediaComponent from '../common/CardMediaComponent';
@@ -59,17 +58,17 @@ const StyledItemTag = styled(Box)<{ tagColor: string }>(({ tagColor }) => ({
 }));
 
 type ItemTagProps = {
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 const ItemTag: React.FC<ItemTagProps> = ({ createdAt, updatedAt }) => {
   const MS_PER_DAY = 1000 * 60 * 60 * 24;
 
   const recentlyUpdated =
-    Date.now() - Date.parse(updatedAt) < RECENT_DAYS * MS_PER_DAY;
+    Date.now() - updatedAt.getTime() < RECENT_DAYS * MS_PER_DAY;
   const recentlyCreated =
-    Date.now() - Date.parse(createdAt) < RECENT_DAYS * MS_PER_DAY;
+    Date.now() - createdAt.getTime() < RECENT_DAYS * MS_PER_DAY;
 
   const color = recentlyCreated ? '#84F05E' : '#F08D55';
   const text = recentlyCreated ? 'NEW' : 'UPDATED';
@@ -91,17 +90,21 @@ export const CollectionCard = ({ collection }: Props) => {
   const { name, id, creator, description } = collection;
   const { t } = useTranslation();
   const { hooks } = useContext(QueryClientContext);
-  const { data: author } = hooks.useMember(creator);
   const { data: member } = hooks.useCurrentMember();
-  const { data: userAvatar, isLoading: isLoadingAvatar } = hooks.useAvatar({
-    id: creator,
-    size: ThumbnailSize.Small,
-  });
+  const { data: authorAvatarUrl, isLoading: isLoadingAvatar } =
+    hooks.useAvatarUrl({
+      id: creator?.id,
+      size: ThumbnailSize.Small,
+    });
   const link = buildCollectionRoute(id);
 
   return (
     <StyledCard>
-      <CardActionArea component={Link} href={link}>
+      <CardActionArea
+        component={Link}
+        href={link}
+        sx={{ borderRadius: '0px', flexGrow: 1 }}
+      >
         <ItemTag
           createdAt={collection.createdAt}
           updatedAt={collection.updatedAt}
@@ -128,7 +131,7 @@ export const CollectionCard = ({ collection }: Props) => {
             noWrap: true,
           }}
           subheaderTypographyProps={{
-            title: author?.name,
+            title: creator?.name,
             noWrap: true,
           }}
         />
@@ -147,14 +150,14 @@ export const CollectionCard = ({ collection }: Props) => {
       </CardActionArea>
       <CardActions disableSpacing sx={{ pt: 0, paddingX: 2 }}>
         <Avatar
-          alt={t(LIBRARY.AVATAR_ALT, { name: author?.name })}
-          defaultImage={DEFAULT_MEMBER_THUMBNAIL}
+          url={authorAvatarUrl}
+          alt={t(LIBRARY.AVATAR_ALT, { name: creator?.name })}
           component="avatar"
+          id={creator?.id}
           maxWidth={30}
           maxHeight={30}
           variant="circular"
           isLoading={isLoadingAvatar}
-          blob={userAvatar}
           sx={{
             maxWidth: 30,
             maxHeight: 30,
@@ -166,7 +169,7 @@ export const CollectionCard = ({ collection }: Props) => {
           marginLeft={1}
           fontSize={12}
         >
-          {author?.name}
+          {creator?.name}
         </Typography>
         <DownloadButton id={id} />
         {member?.id && <CopyButton id={id} />}

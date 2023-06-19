@@ -1,10 +1,10 @@
 import truncate from 'lodash.truncate';
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Email, Facebook, Twitter } from '@mui/icons-material';
-import { Grid, IconButton, useMediaQuery, useTheme } from '@mui/material';
+import { IconButton, Stack, useMediaQuery, useTheme } from '@mui/material';
 
 import { LIBRARY } from '@graasp/translations';
 
@@ -14,18 +14,13 @@ import {
 } from '../../config/constants';
 import { openInNewTab } from '../../utils/helpers';
 import { removeTagsFromString } from '../../utils/text';
-import BadgeContainer from '../common/BadgeContainer';
-import FavoriteBadge from '../common/FavoriteBadge';
-import VisibilityBadge from '../common/VisibilityBadge';
 
 type Props = {
-  views?: number;
-  likes?: number;
   name?: string;
   description?: string;
 };
 
-const Badges = ({ views, likes, name, description }: Props) => {
+const Badges = ({ name, description }: Props) => {
   const { t } = useTranslation();
   const [pageLocation, setPageLocation] = useState<string>();
   const parsedDescription = removeTagsFromString(description);
@@ -55,37 +50,25 @@ const Badges = ({ views, likes, name, description }: Props) => {
   })} ${pageLocation}${MAIL_BREAK_LINE}${MAIL_BREAK_LINE}${parsedDescription}`;
   const mailString = `mailto:?subject=${subject}&body=${message}`;
 
-  const shouldShowLikesAndViews = likes !== undefined || views !== undefined;
-
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down('sm'));
 
   const iconSize = isSm ? 'medium' : 'large';
 
   return (
-    <Grid container justifyItems="space-between" alignItems="center" mb={1}>
-      {shouldShowLikesAndViews && (
-        <Grid item>
-          <BadgeContainer>
-            <FavoriteBadge likes={likes || 0} />
-            <VisibilityBadge views={views || 0} />
-          </BadgeContainer>
-        </Grid>
-      )}
-      <Grid item>
-        <IconButton color="primary" onClick={shareOnFacebook}>
-          <Facebook fontSize={iconSize} />
+    <Stack direction="row" justifyItems="space-between" alignItems="center">
+      <IconButton color="primary" onClick={shareOnFacebook}>
+        <Facebook fontSize={iconSize} />
+      </IconButton>
+      <IconButton color="primary" onClick={shareOnTwitter}>
+        <Twitter fontSize={iconSize} />
+      </IconButton>
+      <a href={mailString}>
+        <IconButton color="primary">
+          <Email fontSize={iconSize} />
         </IconButton>
-        <IconButton color="primary" onClick={shareOnTwitter}>
-          <Twitter fontSize={iconSize} />
-        </IconButton>
-        <a href={mailString}>
-          <IconButton color="primary">
-            <Email fontSize={iconSize} />
-          </IconButton>
-        </a>
-      </Grid>
-    </Grid>
+      </a>
+    </Stack>
   );
 };
 

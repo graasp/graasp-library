@@ -10,13 +10,16 @@ export const StyledCard = styled(Card)(() => ({
   borderRadius: COLLECTION_CARD_BORDER_RADIUS,
   boxShadow: DEFAULT_SHADOW_EFFECT,
   padding: 0,
+  display: 'flex',
+  flexDirection: 'column',
+  height: '100%',
 
   transition: '0.2s ease-in-out',
-  border: '1px solid #eee',
+  border: '1px solid #ddd',
 
   '&:hover': {
     transform: 'scale(1.05)',
-    border: '1px solid #ddd',
+    border: '1px solid #ccc',
   },
 
   '& img[src$=".svg"]': {

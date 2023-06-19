@@ -10,14 +10,13 @@ import { Context } from '@graasp/sdk';
 import { LIBRARY } from '@graasp/translations';
 
 import { APP_AUTHOR } from '../../config/constants';
-import { NEXT_PUBLIC_GRAASPER_ID, PUBLISHED_TAG_ID } from '../../config/env';
+import { NEXT_PUBLIC_GRAASPER_ID } from '../../config/env';
 import {
   GRAASPER_COLLECTIONS_GRID_ID,
   GRAASP_SELECTION_TITLE_ID,
   MOST_LIKED_TITLE_ID,
   POPULAR_THIS_WEEK_TITLE_ID,
 } from '../../config/selectors';
-import { PLACEHOLDER_COLLECTIONS } from '../../utils/collections';
 import { QueryClientContext } from '../QueryClientContext';
 import Seo from '../common/Seo';
 import useHeader from '../layout/useHeader';
@@ -52,13 +51,13 @@ const Home: React.FC<HomeProps> = () => {
   const { hooks } = useContext(QueryClientContext);
 
   // todo: implement endpoints for the sections
-  const { data: collections } = hooks.usePublicItemsWithTag(PUBLISHED_TAG_ID, {
-    placeholderData: PLACEHOLDER_COLLECTIONS,
-  });
+  const { data: collections } = hooks.useAllPublishedItems();
   // todo: add a special call
   const graasperCollections = collections?.filter(
     (c) => c.creator === NEXT_PUBLIC_GRAASPER_ID,
   );
+  // todo: add call for most liked collections
+  // todo: add call for most viewed collections (using actions)
 
   return (
     <StyledBackgroundContainer>
@@ -68,7 +67,7 @@ const Home: React.FC<HomeProps> = () => {
         author={APP_AUTHOR}
       />
       <Main
-        context={Context.LIBRARY}
+        context={Context.Library}
         headerLeftContent={leftContent}
         headerRightContent={rightContent}
       >

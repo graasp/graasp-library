@@ -1,32 +1,41 @@
 import createEmotionServer from '@emotion/server/create-instance';
-import Document, { Head, Html, Main, NextScript } from 'next/document';
-
-import React from 'react';
+import { AppType } from 'next/dist/shared/lib/utils';
+import Document, {
+  DocumentContext,
+  DocumentProps,
+  Head,
+  Html,
+  Main,
+  NextScript,
+} from 'next/document';
 
 import { DEFAULT_LANG } from '../src/config/constants';
 import createEmotionCache from '../src/config/createEmotionCache';
+import { MyAppProps } from './_app';
 
-export default class GraaspLibraryDocument extends Document {
-  render() {
-    return (
-      <Html lang={DEFAULT_LANG}>
-        <Head>
-          {this.props.emotionStyleTags}
-          <meta name="theme-color" />
-          <link rel="stylesheet" />
-        </Head>
-        <body>
-          <Main />
-          <NextScript />
-        </body>
-      </Html>
-    );
-  }
+interface MyDocumentProps extends DocumentProps {
+  emotionStyleTags: JSX.Element[];
 }
+
+const GraaspLibraryDocument = ({ emotionStyleTags }: MyDocumentProps) => {
+  return (
+    <Html lang={DEFAULT_LANG}>
+      <Head>
+        <meta name="theme-color" />
+        <link rel="stylesheet" />
+        {emotionStyleTags}
+      </Head>
+      <body>
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  );
+};
 
 // `getInitialProps` belongs to `_document` (instead of `_app`),
 // it's compatible with static-site generation (SSG).
-GraaspLibraryDocument.getInitialProps = async (ctx) => {
+GraaspLibraryDocument.getInitialProps = async (ctx: DocumentContext) => {
   // Resolution order
   //
   // On the server:
@@ -57,15 +66,18 @@ GraaspLibraryDocument.getInitialProps = async (ctx) => {
 
   ctx.renderPage = () =>
     originalRenderPage({
-      enhanceApp: (App) =>
+      enhanceApp: (
+        App: React.ComponentType<React.ComponentProps<AppType> & MyAppProps>,
+      ) =>
         function EnhanceApp(props) {
           // eslint-disable-next-line react/jsx-props-no-spreading
-          return <App emotionCache={cache} {...props} />;
+          return <App {...props} />;
         },
     });
 
   const initialProps = await Document.getInitialProps(ctx);
-
+  // This is important. It prevents Emotion to render invalid HTML.
+  // See https://github.com/mui/material-ui/issues/26561#issuecomment-855286153
   const emotionStyles = extractCriticalToChunks(initialProps.html);
   const emotionStyleTags = emotionStyles.styles.map((style) => (
     <style
@@ -78,8 +90,8 @@ GraaspLibraryDocument.getInitialProps = async (ctx) => {
 
   return {
     ...initialProps,
-    // Styles fragment is rendered after the app and page rendering finish.
-    // styles: [...React.Children.toArray(initialProps.styles)],
     emotionStyleTags,
   };
 };
+
+export default GraaspLibraryDocument;

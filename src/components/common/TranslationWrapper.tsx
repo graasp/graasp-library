@@ -7,7 +7,7 @@ import i18n from '../../config/i18n';
 import { QueryClientContext } from '../QueryClientContext';
 
 type Props = {
-  children: JSX.Element;
+  children: JSX.Element | JSX.Element[];
 };
 
 const TranslationWrapper = ({ children }: Props): JSX.Element => {

@@ -15,8 +15,8 @@ export const buildPlayerViewItemRoute = (id = ':id') =>
   `${GRAASP_PLAYER_HOST}/${id}`;
 
 export const HOST_MAP = {
-  [Context.BUILDER]: GRAASP_BUILDER_HOST,
-  [Context.LIBRARY]: '/',
-  [Context.ANALYTICS]: GRAASP_ANALYTICS_HOST,
-  [Context.PLAYER]: GRAASP_PLAYER_HOST,
+  [Context.Builder]: GRAASP_BUILDER_HOST,
+  [Context.Library]: '/',
+  [Context.Analytics]: GRAASP_ANALYTICS_HOST,
+  [Context.Player]: GRAASP_PLAYER_HOST,
 };
