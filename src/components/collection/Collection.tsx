@@ -2,18 +2,17 @@ import { ErrorBoundary } from '@sentry/react';
 import dynamic from 'next/dynamic';
 import { validate } from 'uuid';
 
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 
 import { Box } from '@mui/material';
 
-import { Context, convertJs } from '@graasp/sdk';
+import { Context } from '@graasp/sdk';
 
 import { DEFAULT_ITEM_IMAGE_PATH } from '../../config/constants';
 import {
   ERROR_INVALID_COLLECTION_ID_CODE,
   ERROR_UNEXPECTED_ERROR_CODE,
 } from '../../config/messages';
-import { PLACEHOLDER_COLLECTION } from '../../utils/collections';
 import { QueryClientContext } from '../QueryClientContext';
 import Error from '../common/Error';
 import Seo from '../common/Seo';
@@ -39,11 +38,8 @@ const Collection = ({ id }: Props) => {
     data: collection,
     isLoading: isLoadingItem,
     isError,
-  } = hooks.useItem(id, {
-    placeholderData: convertJs(PLACEHOLDER_COLLECTION),
-  });
+  } = hooks.useItem(id);
   const { data: currentMember } = hooks.useCurrentMember();
-  const { data: likes } = hooks.useLikesForItem(id);
   const { data: tags } = hooks.useItemTags(id);
   const { leftContent, rightContent } = useHeader(id);
   // get item published
@@ -96,8 +92,6 @@ const Collection = ({ id }: Props) => {
   // todo: handle image
   const imageUrl = DEFAULT_ITEM_IMAGE_PATH;
 
-  const likeCount = likes?.size;
-
   return (
     <ErrorBoundary>
       <Seo
@@ -126,11 +120,7 @@ const Collection = ({ id }: Props) => {
           }}
           py={5}
         >
-          <Summary
-            collection={collection}
-            likes={likeCount}
-            isLoading={isLoading}
-          />
+          <Summary collection={collection} isLoading={isLoading} />
           {/* <Comments comments={comments} members={members} /> */}
         </Box>
       </Main>

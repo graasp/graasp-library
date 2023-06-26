@@ -4,9 +4,9 @@ import React, { useContext } from 'react';
 
 import { Breadcrumbs, Button, Typography } from '@mui/material';
 
-import { ItemRecord, ItemTagRecord } from '@graasp/sdk/frontend';
+import { ItemTagType } from '@graasp/sdk';
+import { ItemTagRecord } from '@graasp/sdk/frontend';
 
-import { PUBLISHED_TAG_ID } from '../../config/env';
 import { buildCollectionRoute } from '../../config/routes';
 import { QueryClientContext } from '../QueryClientContext';
 
@@ -34,8 +34,8 @@ const ItemBreadcrumb: React.FC<ItemBreadcrumbProps> = ({ itemId }) => {
   const { data: tags } = hooks.useItemTags(itemId);
 
   const topPublicParentPath = tags?.find(
-    (t: ItemTagRecord) => t.tagId === PUBLISHED_TAG_ID,
-  )?.itemPath;
+    (t: ItemTagRecord) => t.type === ItemTagType.Public,
+  )?.item.path;
 
   const publicParentsIds = getPublicParents(
     topPublicParentPath ?? '',
@@ -44,13 +44,13 @@ const ItemBreadcrumb: React.FC<ItemBreadcrumbProps> = ({ itemId }) => {
 
   const { data: parents } = hooks.useItems(publicParentsIds);
 
-  if (!parents?.size) {
+  if (!parents?.data.toSeq().size) {
     return null;
   }
 
   return (
     <Breadcrumbs>
-      {parents.map((parent: ItemRecord) => (
+      {parents?.data.toSeq().map((parent) => (
         <Button component={Link} href={buildCollectionRoute(parent.id)}>
           {parent.name}
         </Button>

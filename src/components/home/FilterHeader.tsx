@@ -213,6 +213,7 @@ const FilterHeader: FC<FilterHeaderProps> = ({ onFiltersChanged }) => {
   const { t: translateCategories } = useTranslation(namespaces.categories);
   const { t } = useTranslation();
 
+  // filters are of the form ["a1,a2", "b1"] where the items wanted should have (a1 OR a2) AND b1
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const filterContainer = useRef<HTMLDivElement>(null);
   const [sticky, setSticky] = useState<boolean>(false);
@@ -247,6 +248,27 @@ const FilterHeader: FC<FilterHeaderProps> = ({ onFiltersChanged }) => {
     },
   ]);
 
+  const groupedByCategories = (filters: string[]): string[] => {
+    // eslint-disable-next-line no-console
+    console.log(filters);
+    if (allCategories) {
+      const groupedFilters = allCategories
+        ?.toIndexedSeq()
+        .map((cats) =>
+          cats
+            .filter(({ id }) => filters.includes(id))
+            .map(({ id }) => id)
+            .join(','),
+        )
+        .toArray()
+        .filter((r) => r);
+      // eslint-disable-next-line no-console
+      console.log(groupedFilters);
+      return groupedFilters;
+    }
+    return filters;
+  };
+
   const onFilterChanged = (id: string, newValue: boolean) => {
     let newFilters;
     if (newValue) {
@@ -255,7 +277,7 @@ const FilterHeader: FC<FilterHeaderProps> = ({ onFiltersChanged }) => {
       newFilters = selectedFilters.filter((it) => it !== id);
     }
     setSelectedFilters(newFilters);
-    onFiltersChanged(newFilters);
+    onFiltersChanged(groupedByCategories(newFilters));
   };
 
   const onClearCategory = (categoryIds?: string[] | List<string>) => {
@@ -263,7 +285,7 @@ const FilterHeader: FC<FilterHeaderProps> = ({ onFiltersChanged }) => {
       (activeFilterId) => !categoryIds?.includes(activeFilterId),
     );
     setSelectedFilters(newFilters);
-    onFiltersChanged(newFilters);
+    onFiltersChanged(groupedByCategories(newFilters));
   };
 
   useEffect(() => {

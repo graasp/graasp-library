@@ -6,11 +6,7 @@ import { Box } from '@mui/material';
 
 import { COMMON } from '@graasp/translations';
 
-import {
-  AVATAR_ICON_HEIGHT,
-  DEFAULT_MEMBER_THUMBNAIL,
-  THUMBNAIL_SIZES,
-} from '../../config/constants';
+import { AVATAR_ICON_HEIGHT, THUMBNAIL_SIZES } from '../../config/constants';
 import { useCommonTranslation } from '../../config/i18n';
 import { QueryClientContext } from '../QueryClientContext';
 
@@ -30,10 +26,10 @@ const MemberAvatar = React.forwardRef<HTMLDivElement, Props>(
     const { t } = useCommonTranslation();
     const { data: member, isLoading, isFetching } = hooks.useMember(id);
     const {
-      data: thumbnailBlob,
+      data: avatarUrl,
       isLoading: isLoadingAvatar,
       isFetching: isFetchingAvatar,
-    } = hooks.useAvatar({
+    } = hooks.useAvatarUrl({
       id,
       size: THUMBNAIL_SIZES.SMALL,
     });
@@ -45,12 +41,11 @@ const MemberAvatar = React.forwardRef<HTMLDivElement, Props>(
           isLoading={
             isLoading || isLoadingAvatar || isFetchingAvatar || isFetching
           }
+          url={avatarUrl}
           alt={member?.name || t(COMMON.AVATAR_DEFAULT_ALT)}
-          defaultImage={DEFAULT_MEMBER_THUMBNAIL}
           component="avatar"
           maxWidth={AVATAR_ICON_HEIGHT}
           maxHeight={AVATAR_ICON_HEIGHT}
-          blob={thumbnailBlob}
           sx={{ mx: 1 }}
         />
       </Box>

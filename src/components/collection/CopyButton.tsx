@@ -16,7 +16,7 @@ import {
 import { QueryClientContext } from '../QueryClientContext';
 import TreeModal from './TreeModal';
 
-export const useCopyAction = (id: string) => {
+export const useCopyAction = (id?: string) => {
   const { t } = useTranslation();
 
   const [showTreeModal, setShowTreeModal] = useState(false);
@@ -30,6 +30,10 @@ export const useCopyAction = (id: string) => {
     }
     event.stopPropagation();
   };
+
+  if (!id) {
+    return {};
+  }
 
   // todo: set notifier for copy
   const copy = ({ to }: { to: string }) => {

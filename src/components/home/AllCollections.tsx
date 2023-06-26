@@ -30,7 +30,7 @@ type AllCollectionsProps = {};
 const AllCollections: React.FC<AllCollectionsProps> = () => {
   const { t } = useTranslation();
   const { hooks } = useContext(QueryClientContext);
-  // Filters is unused for now.
+
   const [filters, setFilters] = useState<string[]>([]);
   const { data: collections, isLoading } = hooks.useAllPublishedItems({
     categoryIds: filters,
@@ -40,7 +40,7 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
 
   const { leftContent, rightContent } = useHeader();
 
-  const onFilterChanged = (newFilters: string[]) => {
+  const onFiltersChanged = (newFilters: string[]) => {
     setFilters(newFilters);
   };
 
@@ -60,7 +60,7 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
       >
         <Container maxWidth="xl">
           <Box py={10}>
-            <FilterHeader onFiltersChanged={onFilterChanged} />
+            <FilterHeader onFiltersChanged={onFiltersChanged} />
           </Box>
         </Container>
 
