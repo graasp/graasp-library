@@ -7,12 +7,11 @@ import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 
-import { Category, CategoryType } from '@graasp/sdk';
+import { CategoryType } from '@graasp/sdk';
 import { ItemRecord } from '@graasp/sdk/frontend';
 import { DEFAULT_LANG, LIBRARY } from '@graasp/translations';
 
 import { ITEM_TYPES, MAX_COLLECTION_NAME_LENGTH } from '../../config/constants';
-import { compare } from '../../utils/helpers';
 import { QueryClientContext } from '../QueryClientContext';
 import ItemBreadcrumb from './ItemBreadcrumb';
 import Items from './Items';
@@ -46,21 +45,18 @@ export const getParentsIdsFromPath = (
 
 type SummaryProps = {
   collection?: ItemRecord;
-  likes?: number;
   isLoading: boolean;
   views?: number;
 };
 
 const Summary: React.FC<SummaryProps> = ({
   collection,
-  likes = 0,
   views = 0,
   isLoading,
 }) => {
   const { t } = useTranslation();
   const { hooks } = useContext(QueryClientContext);
   const { data: member } = hooks.useCurrentMember();
-  const { data: categories } = hooks.useCategories();
 
   const parents = getParentsIdsFromPath(collection?.path);
   const { data: topLevelParent } = hooks.useItem(parents[0] ?? collection?.id);
@@ -68,21 +64,15 @@ const Summary: React.FC<SummaryProps> = ({
     topLevelParent?.id ?? collection?.id,
   );
 
-  const tags = collection?.settings?.tags;
-
-  const selectedCategories = categories
-    ?.filter((category) =>
-      itemCategories
-        ?.map((entry) => entry.category.type)
-        ?.includes(category.type),
-    )
-    ?.groupBy((entry: Category) => entry.type);
-
-  const levels = selectedCategories?.get(CategoryType.Level);
-  const disciplines = selectedCategories
-    ?.get(CategoryType.Discipline)
-    ?.sort(compare);
-  const languages = selectedCategories?.get(CategoryType.Language);
+  const levels = itemCategories
+    ?.filter((c) => c.category.type === CategoryType.Level)
+    .map((c) => c.category);
+  const disciplines = itemCategories
+    ?.filter((c) => c.category.type === CategoryType.Discipline)
+    .map((c) => c.category);
+  const languages = itemCategories
+    ?.filter((c) => c.category.type === CategoryType.Language)
+    .map((c) => c.category);
 
   // todo: remove cast after refactor
   const ccLicenseAdaption = (
@@ -104,8 +94,7 @@ const Summary: React.FC<SummaryProps> = ({
         collection={collection}
         isLogged={member?.id !== undefined}
         isLoading={isLoading}
-        likes={likes}
-        tags={tags}
+        tags={collection?.settings?.tags}
         truncatedName={truncatedName}
         views={views}
       />

@@ -8,7 +8,7 @@ import { DEFAULT_TAGS } from '../fixtures/itemTags';
 import { PUBLISHED_ITEMS } from '../fixtures/items';
 import { MEMBERS } from '../fixtures/members';
 import {
-  mockGetAvatar,
+  mockGetAvatarUrl,
   mockGetCategories,
   mockGetCategoryTypes,
   mockGetChildren,
@@ -18,18 +18,11 @@ import {
   mockGetItemCategories,
   mockGetItemMembershipsForItem,
   mockGetItemTags,
-  mockGetItemThumbnail,
+  mockGetItemThumbnailUrl,
   mockGetLikedItems,
   mockGetMember,
   mockGetMembers,
   mockGetOwnItems,
-  mockGetPublicChildren,
-  mockGetPublicItem,
-  mockGetPublicItemCategories,
-  mockGetPublicItemMembershipsForItem,
-  mockGetPublicItemsWithTags,
-  mockGetPublicMember,
-  mockGetPublicMembers,
   mockGetPublishedItemsInCategories,
   mockSearch,
   mockSignInRedirection,
@@ -63,22 +56,20 @@ Cypress.Commands.add(
     mockGetOwnItems({ items, currentMember });
 
     mockGetChildren({ items, currentMember });
-    mockGetPublicChildren({ items });
 
     mockGetMember({ members: cachedMembers, currentMember });
-    mockGetPublicMember({ members: cachedMembers });
+
     mockGetMembers({ members: cachedMembers, currentMember });
-    mockGetPublicMembers({ members: cachedMembers });
 
     mockGetCurrentMember(currentMember, getCurrentMemberError);
 
     mockGetItem({ items, currentMember });
-    mockGetPublicItem({ items });
+
     mockGetItemTags({ tags });
 
-    mockGetAvatar({ members, currentMember });
+    mockGetAvatarUrl({ members, currentMember });
 
-    mockGetItemThumbnail({ items, currentMember });
+    mockGetItemThumbnailUrl({ items, currentMember });
 
     mockSignInRedirection();
 
@@ -89,13 +80,10 @@ Cypress.Commands.add(
     mockGetCategories(categories, getCategoriesError);
 
     mockGetItemCategories({ items, currentMember }, getItemCategoriesError);
-    mockGetPublicItemCategories({ items }, getItemCategoriesError);
 
     mockGetPublishedItemsInCategories({ items });
-    mockGetPublicItemsWithTags({ items });
 
     mockGetItemMembershipsForItem({ items, currentMember });
-    mockGetPublicItemMembershipsForItem({ items });
 
     mockGetFlags({ flags, currentMember });
     mockSearch({ searchResultItems }, searchError);

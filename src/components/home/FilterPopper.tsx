@@ -33,42 +33,36 @@ type FilterPopperProps = {
   // IDs of selected options.
   selectedOptions: string[];
   onOptionChange: (id: string, newSelected: boolean) => void;
+  onClearOptions: () => void;
 };
 
 const FilterPopper = React.forwardRef<HTMLDivElement, FilterPopperProps>(
-  (props, ref) => {
-    const {
+  (
+    {
       anchorEl,
       onOptionChange,
       open,
       options,
       selectedOptions,
-      ...otherProps
-    } = props;
-
-    const onClear = () => {
-      options.forEach((option) => {
-        onOptionChange(option.id, false);
-      });
-    };
-
+      onClearOptions,
+    },
+    ref,
+  ) => {
     return (
       <Popper
         id={FILTER_POPPER_ID}
-        open={props.open}
-        anchorEl={props.anchorEl}
+        open={open}
+        anchorEl={anchorEl}
         ref={ref}
         style={{ zIndex: 4 }}
         transition
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        {...otherProps}
       >
         {({ TransitionProps }) => (
           // eslint-disable-next-line react/jsx-props-no-spreading
           <Grow {...TransitionProps}>
             <StyledPopper>
-              {props.options.map((option, idx) => {
-                const isSelected = props.selectedOptions.includes(option.id);
+              {options.map((option, idx) => {
+                const isSelected = selectedOptions.includes(option.id);
                 return (
                   <Stack
                     key={option.id}
@@ -101,7 +95,7 @@ const FilterPopper = React.forwardRef<HTMLDivElement, FilterPopperProps>(
               <Button
                 variant="outlined"
                 fullWidth
-                onClick={onClear}
+                onClick={onClearOptions}
                 sx={{ mt: 2 }}
               >
                 Clear

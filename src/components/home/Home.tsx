@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -11,6 +12,7 @@ import { LIBRARY } from '@graasp/translations';
 
 import { APP_AUTHOR } from '../../config/constants';
 import { NEXT_PUBLIC_GRAASPER_ID } from '../../config/env';
+import { ALL_COLLECTIONS_ROUTE } from '../../config/routes';
 import {
   GRAASPER_COLLECTIONS_GRID_ID,
   GRAASP_SELECTION_TITLE_ID,
@@ -41,9 +43,7 @@ const DiscoverButton = styled(Button)(() => ({
   padding: '20px 50px',
 }));
 
-type HomeProps = {};
-
-const Home: React.FC<HomeProps> = () => {
+const Home = () => {
   const { t } = useTranslation();
 
   const { leftContent, rightContent } = useHeader();
@@ -52,11 +52,11 @@ const Home: React.FC<HomeProps> = () => {
 
   // todo: implement endpoints for the sections
   const { data: collections } = hooks.useAllPublishedItems();
-  // todo: add a special call
-  const graasperCollections = collections?.filter(
-    (c) => c.creator === NEXT_PUBLIC_GRAASPER_ID,
+  const { data: graasperCollections } = hooks.usePublishedItemsForMember(
+    NEXT_PUBLIC_GRAASPER_ID,
   );
-  // todo: add call for most liked collections
+  // todo: add hook to query-client
+  // const {data: mostLikedCollections }
   // todo: add call for most viewed collections (using actions)
 
   return (
@@ -95,6 +95,8 @@ const Home: React.FC<HomeProps> = () => {
 
         <Box textAlign="center" marginBottom={20} marginTop={20}>
           <DiscoverButton
+            LinkComponent={Link}
+            href={ALL_COLLECTIONS_ROUTE}
             startIcon={<Explore fontSize="large" />}
             color="secondary"
             variant="contained"

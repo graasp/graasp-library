@@ -18,10 +18,7 @@ import Typography from '@mui/material/Typography';
 import { ItemRecord } from '@graasp/sdk/frontend';
 import { LIBRARY } from '@graasp/translations';
 
-import {
-  DEFAULT_ITEM_IMAGE_PATH,
-  THUMBNAIL_SIZES,
-} from '../../config/constants';
+import { THUMBNAIL_SIZES } from '../../config/constants';
 import { COLLECTION_CARD_BORDER_RADIUS } from '../../config/cssStyles';
 import { buildCollectionRoute } from '../../config/routes';
 import { QueryClientContext } from '../QueryClientContext';
@@ -146,7 +143,7 @@ export const FileChildrenCard: React.FC<FileChildrenCardProps> = ({
 
   const { hooks } = useContext(QueryClientContext);
 
-  const { data: thumbnailData } = hooks.useItemThumbnail({
+  const { data: thumbnailUrl } = hooks.useItemThumbnailUrl({
     id: item.id,
     size: THUMBNAIL_SIZES.SMALL,
   });
@@ -162,19 +159,11 @@ export const FileChildrenCard: React.FC<FileChildrenCardProps> = ({
 
   const thumbnail = React.useMemo(
     () =>
-      thumbnailData ? (
+      thumbnailUrl ? (
         <Thumbnail
-          defaultValue={
-            <img
-              style={THUMBNAIL_DIMENSIONS}
-              src={DEFAULT_ITEM_IMAGE_PATH}
-              alt="thumbnail"
-            />
-          }
           alt={name}
-          useThumbnail={hooks.useItemThumbnail}
           id={id}
-          thumbnailSrc={DEFAULT_ITEM_IMAGE_PATH}
+          url={thumbnailUrl}
           sx={{
             objectFit: 'cover',
             overflow: 'hidden',
@@ -193,7 +182,7 @@ export const FileChildrenCard: React.FC<FileChildrenCardProps> = ({
           />
         </div>
       ),
-    [thumbnailData],
+    [thumbnailUrl],
   );
 
   return <SubItemCard item={item} thumbnail={thumbnail} subtext={subtext} />;

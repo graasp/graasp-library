@@ -38,6 +38,7 @@ type FilterProps = {
   // IDs of selected options.
   selectedOptions: string[];
   onOptionChange: (key: string, newValue: boolean) => void;
+  onClearOptions: () => void;
   isLoading: boolean;
 };
 
@@ -45,6 +46,7 @@ const Filter: React.FC<FilterProps> = ({
   category,
   title,
   onOptionChange,
+  onClearOptions,
   options,
   selectedOptions,
   isLoading,
@@ -164,6 +166,7 @@ const Filter: React.FC<FilterProps> = ({
         options={options ?? List()}
         selectedOptions={selectedOptions}
         onOptionChange={onOptionChange}
+        onClearOptions={onClearOptions}
       />
     </Stack>
   );
@@ -210,9 +213,14 @@ const FilterHeader: FC<FilterHeaderProps> = ({ onFiltersChanged }) => {
   const { t: translateCategories } = useTranslation(namespaces.categories);
   const { t } = useTranslation();
 
+  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
+  const filterContainer = useRef<HTMLDivElement>(null);
+  const [sticky, setSticky] = useState<boolean>(false);
+
   const { hooks } = useContext(QueryClientContext);
   const { data: categories, isLoading: isCategoriesLoading } =
     hooks.useCategories();
+
   const allCategories = categories?.groupBy((entry: Category) => entry.type);
   const levelList = allCategories?.get(CategoryType.Level);
   const disciplineList = allCategories
@@ -239,26 +247,24 @@ const FilterHeader: FC<FilterHeaderProps> = ({ onFiltersChanged }) => {
     },
   ]);
 
-  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
-
-  const notifyFiltersChanged = () => {
-    if (onFiltersChanged) {
-      onFiltersChanged(selectedFilters);
-    }
-  };
-
   const onFilterChanged = (id: string, newValue: boolean) => {
+    let newFilters;
     if (newValue) {
-      setSelectedFilters((oldVal) => [...oldVal, id]);
+      newFilters = [...selectedFilters, id];
     } else {
-      setSelectedFilters((oldVal) => oldVal.filter((it) => it !== id));
+      newFilters = selectedFilters.filter((it) => it !== id);
     }
-    notifyFiltersChanged();
+    setSelectedFilters(newFilters);
+    onFiltersChanged(newFilters);
   };
 
-  const filterContainer = useRef<HTMLDivElement>(null);
-
-  const [sticky, setSticky] = useState<boolean>(false);
+  const onClearCategory = (categoryIds?: string[] | List<string>) => {
+    const newFilters: string[] = selectedFilters.filter(
+      (activeFilterId) => !categoryIds?.includes(activeFilterId),
+    );
+    setSelectedFilters(newFilters);
+    onFiltersChanged(newFilters);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -289,30 +295,33 @@ const FilterHeader: FC<FilterHeaderProps> = ({ onFiltersChanged }) => {
 
   const filters = [
     <Filter
-      key={CATEGORY_TYPES.LEVEL}
-      category={CATEGORY_TYPES.LEVEL}
+      key={CategoryType.Level}
+      category={CategoryType.Level}
       title={translateCategories(CATEGORIES.EDUCATION_LEVEL)}
       options={levelList}
       selectedOptions={selectedFilters}
       onOptionChange={onFilterChanged}
+      onClearOptions={() => onClearCategory(levelList?.map((l) => l.id))}
       isLoading={isCategoriesLoading}
     />,
     <Filter
-      key={CATEGORY_TYPES.DISCIPLINE}
-      category={CATEGORY_TYPES.DISCIPLINE}
+      key={CategoryType.Discipline}
+      category={CategoryType.Discipline}
       title={translateCategories(CATEGORIES.DISCIPLINE)}
       options={disciplineList}
       selectedOptions={selectedFilters}
       onOptionChange={onFilterChanged}
+      onClearOptions={() => onClearCategory(disciplineList?.map((d) => d.id))}
       isLoading={isCategoriesLoading}
     />,
     <Filter
-      key={CATEGORY_TYPES.LANGUAGE}
-      category={CATEGORY_TYPES.LANGUAGE}
+      key={CategoryType.Language}
+      category={CategoryType.Language}
       title={translateCategories(CATEGORIES.LANGUAGE)}
       options={languageList}
       selectedOptions={selectedFilters}
       onOptionChange={onFilterChanged}
+      onClearOptions={() => onClearCategory(languageList?.map((d) => d.id))}
       isLoading={isCategoriesLoading}
     />,
     <Filter
@@ -322,6 +331,7 @@ const FilterHeader: FC<FilterHeaderProps> = ({ onFiltersChanged }) => {
       options={licenseList}
       selectedOptions={selectedFilters}
       onOptionChange={onFilterChanged}
+      onClearOptions={() => onClearCategory(licenseList?.map((d) => d.id))}
       isLoading={isCategoriesLoading}
     />,
   ];

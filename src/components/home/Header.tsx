@@ -1,9 +1,13 @@
-import React, { useContext, useRef, useState } from 'react';
+import { Markup } from 'interweave';
+import Link from 'next/link';
+
+import React, { Fragment, useContext, useRef, useState } from 'react';
 
 import {
   Box,
   CircularProgress,
   Container,
+  Divider,
   Grid,
   List,
   ListItemButton,
@@ -11,13 +15,16 @@ import {
   Popover,
   Stack,
   Typography,
+  useTheme,
 } from '@mui/material';
 
 import { ItemRecord } from '@graasp/sdk/frontend';
 
+import { buildCollectionRoute } from '../../config/routes';
 import { HOME_PAGE_TITLE_TEXT_ID } from '../../config/selectors';
 import { SearchRanges } from '../../enums/searchRanges';
 import { QueryClientContext } from '../QueryClientContext';
+import { CollapsibleDescription } from '../collection/ContentDescription';
 import Search from './Search';
 
 type PopularSearchItemProps = {
@@ -32,6 +39,7 @@ const PopularSearchItem: React.FC<PopularSearchItemProps> = ({ text }) => (
 );
 
 const Header = () => {
+  const theme = useTheme();
   const { hooks } = useContext(QueryClientContext);
   const searchBarRef = useRef<HTMLDivElement>(null);
   // TODO: Feed from real data.
@@ -47,9 +55,9 @@ const Header = () => {
     [range]: keywords,
   });
   const handleSearch = (searchKeywords: string) => {
-    setResultsOpen(true);
     setKeywords(searchKeywords);
     refetch();
+    setResultsOpen(true);
   };
 
   return (
@@ -99,27 +107,42 @@ const Header = () => {
           />
           <Popover
             open={resultsOpen}
-            sx={{
-              width: '100%',
-            }}
             onClose={() => setResultsOpen(false)}
             anchorEl={searchBarRef?.current}
             anchorOrigin={{
               vertical: 'bottom',
-              horizontal: 'center',
+              horizontal: 'left',
             }}
             transformOrigin={{
               vertical: 'top',
-              horizontal: 'center',
+              horizontal: 'left',
+            }}
+            slotProps={{
+              paper: { style: { width: '100%', padding: theme.spacing(3) } },
             }}
           >
             {isLoadingSearch ? (
               <CircularProgress />
             ) : (
               <List>
-                {resultsCollections.size ? (
-                  resultsCollections.map((c: ItemRecord) => (
-                    <ListItemButton key={c.id}>{c.name}</ListItemButton>
+                {resultsCollections && resultsCollections.size ? (
+                  resultsCollections.map((c: ItemRecord, idx) => (
+                    <Fragment key={c.id}>
+                      {idx !== 0 && <Divider component="li" />}
+                      <ListItemButton
+                        component={Link}
+                        href={buildCollectionRoute(c.id)}
+                      >
+                        <ListItemText
+                          primary={c.name}
+                          secondary={
+                            <CollapsibleDescription collapsed>
+                              <Markup noHtml content={c.description} />
+                            </CollapsibleDescription>
+                          }
+                        />
+                      </ListItemButton>
+                    </Fragment>
                   ))
                 ) : (
                   <ListItemButton key="empty">

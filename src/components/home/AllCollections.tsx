@@ -30,15 +30,15 @@ type AllCollectionsProps = {};
 const AllCollections: React.FC<AllCollectionsProps> = () => {
   const { t } = useTranslation();
   const { hooks } = useContext(QueryClientContext);
-  const { data: collections, isLoading } = hooks.useAllPublishedItems();
+  // Filters is unused for now.
+  const [filters, setFilters] = useState<string[]>([]);
+  const { data: collections, isLoading } = hooks.useAllPublishedItems({
+    categoryIds: filters,
+  });
 
   const collectionsWithoutErrors = filterErrorItems<ItemRecord>(collections);
 
   const { leftContent, rightContent } = useHeader();
-
-  // Filters is unused for now.
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [filters, setFilters] = useState<string[]>([]);
 
   const onFilterChanged = (newFilters: string[]) => {
     setFilters(newFilters);
