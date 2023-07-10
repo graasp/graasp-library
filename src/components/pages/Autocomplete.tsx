@@ -13,7 +13,7 @@ import {
 import axios, { Method } from 'axios';
 import { useRouter } from 'next/router';
 
-import { Fragment, createElement, useEffect, useRef } from 'react';
+import React, { Fragment, createElement, useEffect, useRef } from 'react';
 import { render } from 'react-dom';
 
 type AutocompleteProps = Partial<AutocompleteOptions<BaseItem>> & {

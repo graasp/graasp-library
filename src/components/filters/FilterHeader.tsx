@@ -395,11 +395,15 @@ const FilterHeader: FC<FilterHeaderProps> = ({
         <Typography variant="h4" width="100%" id={ALL_COLLECTIONS_TITLE_ID}>
           {t(LIBRARY.SEARCH_PAGE_TITLE)}
         </Typography>
+<<<<<<< HEAD:src/components/filters/FilterHeader.tsx
         <Search
           isLoading={isLoadingResults}
           handleClick={onSearch}
           searchPreset={searchPreset}
         />
+=======
+        <Search />
+>>>>>>> 11e43fa (chore: wip):src/components/home/FilterHeader.tsx
       </Stack>
       <StyledFilterContainer
         id="not-sticky"
