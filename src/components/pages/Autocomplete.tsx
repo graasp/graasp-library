@@ -1,6 +1,7 @@
 import { BaseItem } from '@algolia/autocomplete-core';
 import {
   AutocompleteOptions,
+  AutocompleteSource,
   Render,
   autocomplete,
 } from '@algolia/autocomplete-js';
@@ -118,8 +119,8 @@ const Autocomplete = ({
                 </div>`;
               },
             },
-          },
-        ]);
+          } as AutocompleteSource<BaseItem>,
+        ]) as Promise<AutocompleteSource<BaseItem>[]>; // How to do this properly?;
       },
 
       renderer: { createElement, Fragment, render: render as Render },
