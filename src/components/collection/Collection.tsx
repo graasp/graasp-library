@@ -17,8 +17,8 @@ import { QueryClientContext } from '../QueryClientContext';
 import Error from '../common/Error';
 import Seo from '../common/Seo';
 import useHeader from '../layout/useHeader';
-import Summary from './Summary';
 import UnpublishedItemAlert from './UnpublishedItemAlert';
+import Summary from './summary/Summary';
 
 // todo: get similar collections in same call
 // import SimilarCollections from './SimilarCollections';

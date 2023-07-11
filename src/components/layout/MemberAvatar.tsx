@@ -1,13 +1,17 @@
 import dynamic from 'next/dynamic';
 
 import React, { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Box } from '@mui/material';
 
-import { COMMON } from '@graasp/translations';
+import { ThumbnailSize } from '@graasp/sdk';
+import { LIBRARY } from '@graasp/translations';
 
-import { AVATAR_ICON_HEIGHT, THUMBNAIL_SIZES } from '../../config/constants';
-import { useCommonTranslation } from '../../config/i18n';
+import {
+  DEFAULT_MEMBER_THUMBNAIL,
+  SMALL_AVATAR_ICON_SIZE,
+} from '../../config/constants';
 import { QueryClientContext } from '../QueryClientContext';
 
 const { Avatar } = {
@@ -18,12 +22,13 @@ const { Avatar } = {
 
 type Props = {
   id?: string;
+  size?: number;
 };
 
 const MemberAvatar = React.forwardRef<HTMLDivElement, Props>(
-  ({ id, ...otherProps }, ref): JSX.Element => {
+  ({ id, size = SMALL_AVATAR_ICON_SIZE, ...otherProps }, ref): JSX.Element => {
     const { hooks } = useContext(QueryClientContext);
-    const { t } = useCommonTranslation();
+    const { t } = useTranslation();
     const { data: member, isLoading, isFetching } = hooks.useMember(id);
     const {
       data: avatarUrl,
@@ -31,7 +36,7 @@ const MemberAvatar = React.forwardRef<HTMLDivElement, Props>(
       isFetching: isFetchingAvatar,
     } = hooks.useAvatarUrl({
       id,
-      size: THUMBNAIL_SIZES.SMALL,
+      size: ThumbnailSize.Small,
     });
 
     return (
@@ -41,12 +46,19 @@ const MemberAvatar = React.forwardRef<HTMLDivElement, Props>(
           isLoading={
             isLoading || isLoadingAvatar || isFetchingAvatar || isFetching
           }
-          url={avatarUrl}
-          alt={member?.name || t(COMMON.AVATAR_DEFAULT_ALT)}
+          url={avatarUrl ?? DEFAULT_MEMBER_THUMBNAIL}
+          alt={
+            member && avatarUrl
+              ? t(LIBRARY.AVATAR_ALT, { name: member?.name })
+              : ''
+          }
           component="avatar"
-          maxWidth={AVATAR_ICON_HEIGHT}
-          maxHeight={AVATAR_ICON_HEIGHT}
-          sx={{ mx: 1 }}
+          maxWidth={size}
+          maxHeight={size}
+          sx={{
+            maxWidth: size,
+            maxHeight: size,
+          }}
         />
       </Box>
     );

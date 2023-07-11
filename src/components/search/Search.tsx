@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import SearchIcon from '@mui/icons-material/Search';
@@ -9,17 +9,24 @@ import { LIBRARY } from '@graasp/translations';
 import { HOME_SEARCH_BUTTON_ID, HOME_SEARCH_ID } from '../../config/selectors';
 
 type SearchProps = {
+  searchPreset?: string;
   handleClick: (input: string) => void;
   isLoading: boolean;
 };
 
 const Search = forwardRef<HTMLDivElement, SearchProps>(function Search(
-  { handleClick, isLoading },
+  { searchPreset, handleClick, isLoading },
   ref,
 ) {
   const [searchInput, setSearchInput] = useState<string>();
 
   const { t } = useTranslation();
+
+  useEffect(() => {
+    if (searchPreset) {
+      setSearchInput(searchPreset);
+    }
+  }, []);
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,

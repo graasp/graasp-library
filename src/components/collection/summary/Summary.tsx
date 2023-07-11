@@ -11,10 +11,13 @@ import { CategoryType } from '@graasp/sdk';
 import { ItemRecord } from '@graasp/sdk/frontend';
 import { DEFAULT_LANG, LIBRARY } from '@graasp/translations';
 
-import { ITEM_TYPES, MAX_COLLECTION_NAME_LENGTH } from '../../config/constants';
-import { QueryClientContext } from '../QueryClientContext';
-import ItemBreadcrumb from './ItemBreadcrumb';
-import Items from './Items';
+import {
+  ITEM_TYPES,
+  MAX_COLLECTION_NAME_LENGTH,
+} from '../../../config/constants';
+import { QueryClientContext } from '../../QueryClientContext';
+import ItemBreadcrumb from '../ItemBreadcrumb';
+import Items from '../Items';
 import SummaryDetails from './SummaryDetails';
 import SummaryHeader from './SummaryHeader';
 

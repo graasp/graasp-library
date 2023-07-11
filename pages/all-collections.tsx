@@ -5,7 +5,7 @@ import { DehydratedState } from 'react-query';
 import { Api, configureQueryClient } from '@graasp/query-client';
 
 import Wrapper from '../src/components/common/Wrapper';
-import AllCollections from '../src/components/home/AllCollections';
+import AllCollections from '../src/components/pages/AllCollections';
 import { QUERY_CLIENT_OPTIONS } from '../src/config/queryClient';
 
 const AllCollectionsPage = ({

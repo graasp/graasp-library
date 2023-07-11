@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import { MUTATION_KEYS } from '@graasp/query-client';
 import { BUILDER } from '@graasp/translations';
 
+import { MEMBER_AVATAR_ICON_SIZE } from '../../config/constants';
 import { DOMAIN } from '../../config/env';
 import { useBuilderTranslation } from '../../config/i18n';
 import { MEMBER_PROFILE_ROUTE, SIGN_IN_ROUTE } from '../../config/paths';
@@ -53,7 +54,9 @@ const UserSwitchWrapper: FC<Props> = ({ ButtonContent }) => {
         domain={DOMAIN}
         redirectPath={SIGN_IN_ROUTE}
         useMembers={hooks.useMembers}
-        renderAvatar={(m) => <MemberAvatar id={m?.id} />}
+        renderAvatar={(m) => (
+          <MemberAvatar size={MEMBER_AVATAR_ICON_SIZE} id={m?.id} />
+        )}
       />
     </Box>
   );

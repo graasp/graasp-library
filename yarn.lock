@@ -2068,11 +2068,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/ui@npm:3.1.0":
-  version: 3.1.0
-  resolution: "@graasp/ui@npm:3.1.0"
+"@graasp/ui@npm:3.2.0":
+  version: 3.2.0
+  resolution: "@graasp/ui@npm:3.2.0"
   dependencies:
-    "@graasp/sdk": 1.0.0
+    "@graasp/sdk": 1.1.0
     clsx: 1.2.1
     http-status-codes: 2.2.0
     immutable: 4.3.0
@@ -2103,7 +2103,7 @@ __metadata:
       optional: true
     ag-grid-react:
       optional: true
-  checksum: d030e2882e8d988b82f8db9e1b1f912693b036c3ab795fb6b922e06ee9ea02b424ae3796d578e5e6adc1b799e84e3a1ff2655d55a5f6f4f3648684f407a0f532
+  checksum: 2bd2d1df239c8c748649aab71ad24b8e7ab806f79d24870a24139ccca5a6f8abf11949794604a9e78dceee64d32a5b934d9a51187c187b11f19a6afa67f231dc
   languageName: node
   linkType: hard
 
@@ -3079,6 +3079,15 @@ __metadata:
   dependencies:
     "@types/react": "*"
   checksum: 8301f35cf1cbfec8c723e9477aecf87774e3c168bd457d353b23c45064737213d3e8008b067c6767b7b08e4f2b3823ee239242a6c225fc91e7f8725ef8734124
+  languageName: node
+  linkType: hard
+
+"@types/react-helmet@npm:6.1.6":
+  version: 6.1.6
+  resolution: "@types/react-helmet@npm:6.1.6"
+  dependencies:
+    "@types/react": "*"
+  checksum: 81560c56bfe854b6a43aee31360862588ac875d1177b975da5ce049ac9aa2f7c98dcde65d4397bfaa04e468f40cf3ab2975a2ef966a69d64a60493422898698d
   languageName: node
   linkType: hard
 
@@ -6817,7 +6826,7 @@ __metadata:
     "@graasp/query-client": 1.0.1
     "@graasp/sdk": 1.1.0
     "@graasp/translations": 1.15.0
-    "@graasp/ui": 3.1.0
+    "@graasp/ui": 3.2.0
     "@mui/icons-material": 5.11.16
     "@mui/lab": 5.0.0-alpha.134
     "@mui/material": 5.13.5
@@ -6832,6 +6841,7 @@ __metadata:
     "@types/node": 18.16.2
     "@types/react": 17.0.30
     "@types/react-dom": 17.0.2
+    "@types/react-helmet": 6.1.6
     "@types/uuid": 9.0.1
     "@typescript-eslint/eslint-plugin": 5.59.1
     "@typescript-eslint/parser": 5.59.1
@@ -10225,7 +10235,7 @@ __metadata:
 
 "resolve@patch:resolve@^1.10.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.12.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.19.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.22.1#~builtin<compat/resolve>":
   version: 1.22.3
-  resolution: "resolve@patch:resolve@npm%3A1.22.3#~builtin<compat/resolve>::version=1.22.3&hash=c3c19d"
+  resolution: "resolve@patch:resolve@npm%3A1.22.3#~builtin<compat/resolve>::version=1.22.3&hash=07638b"
   dependencies:
     is-core-module: ^2.12.0
     path-parse: ^1.0.7
@@ -10238,7 +10248,7 @@ __metadata:
 
 "resolve@patch:resolve@^2.0.0-next.4#~builtin<compat/resolve>":
   version: 2.0.0-next.4
-  resolution: "resolve@patch:resolve@npm%3A2.0.0-next.4#~builtin<compat/resolve>::version=2.0.0-next.4&hash=c3c19d"
+  resolution: "resolve@patch:resolve@npm%3A2.0.0-next.4#~builtin<compat/resolve>::version=2.0.0-next.4&hash=07638b"
   dependencies:
     is-core-module: ^2.9.0
     path-parse: ^1.0.7
@@ -11484,21 +11494,21 @@ __metadata:
 
 "typescript@patch:typescript@4.8.4#~builtin<compat/typescript>":
   version: 4.8.4
-  resolution: "typescript@patch:typescript@npm%3A4.8.4#~builtin<compat/typescript>::version=4.8.4&hash=1a91c8"
+  resolution: "typescript@patch:typescript@npm%3A4.8.4#~builtin<compat/typescript>::version=4.8.4&hash=701156"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: c981e82b77a5acdcc4e69af9c56cdecf5b934a87a08e7b52120596701e389a878b8e3f860e73ffb287bf649cc47a8c741262ce058148f71de4cdd88bb9c75153
+  checksum: 301459fc3eb3b1a38fe91bf96d98eb55da88a9cb17b4ef80b4d105d620f4d547ba776cc27b44cc2ef58b66eda23fe0a74142feb5e79a6fb99f54fc018a696afa
   languageName: node
   linkType: hard
 
 "typescript@patch:typescript@^4.6.4 || ^5.0.0#~builtin<compat/typescript>":
   version: 5.1.3
-  resolution: "typescript@patch:typescript@npm%3A5.1.3#~builtin<compat/typescript>::version=5.1.3&hash=5da071"
+  resolution: "typescript@patch:typescript@npm%3A5.1.3#~builtin<compat/typescript>::version=5.1.3&hash=701156"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 6f0a9dca6bf4ce9dcaf4e282aade55ef4c56ecb5fb98d0a4a5c0113398815aea66d871b5611e83353e5953a19ed9ef103cf5a76ac0f276d550d1e7cd5344f61e
+  checksum: 32a25b2e128a4616f999d4ee502aabb1525d5647bc8955e6edf05d7fbc53af8aa98252e2f6ba80bcedfc0260c982b885f3c09cfac8bb65d2924f3133ad1e1e62
   languageName: node
   linkType: hard
 

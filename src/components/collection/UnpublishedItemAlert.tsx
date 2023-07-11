@@ -27,6 +27,8 @@ const UnpublishedItemAlert = ({
     canRead &&
     !isPublished
   ) {
+    // eslint-disable-next-line no-console
+    console.log('isPublished', isPublished);
     return (
       <Alert severity="warning">
         You are viewing this item in Library preview mode. It cannot be viewed

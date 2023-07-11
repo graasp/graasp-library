@@ -33,8 +33,7 @@ const CardMediaComponent = ({
 }: Props) => {
   const { hooks } = useContext(QueryClientContext);
   const { data: thumbnailUrl, isLoading: isThumbnailLoading } =
-    hooks.useItemThumbnailUrl({ id: itemId });
-
+    hooks.useItemThumbnailUrl({ id: itemId, size });
   return (
     <Box
       title={name}

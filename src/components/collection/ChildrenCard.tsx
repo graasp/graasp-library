@@ -15,10 +15,10 @@ import {
 } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
+import { ThumbnailSize } from '@graasp/sdk';
 import { ItemRecord } from '@graasp/sdk/frontend';
 import { LIBRARY } from '@graasp/translations';
 
-import { THUMBNAIL_SIZES } from '../../config/constants';
 import { COLLECTION_CARD_BORDER_RADIUS } from '../../config/cssStyles';
 import { buildCollectionRoute } from '../../config/routes';
 import { QueryClientContext } from '../QueryClientContext';
@@ -55,7 +55,12 @@ const ChildrenCard = ({
   href: string;
 }): JSX.Element => (
   <StyledCardBox id={id} elevation={0}>
-    <CardActionArea component={Link} href={href}>
+    <CardActionArea
+      component={Link}
+      href={href}
+      // remove border radius from card action
+      style={{ borderRadius: 'unset' }}
+    >
       <CardContent>{children}</CardContent>
     </CardActionArea>
     <CardActions disableSpacing>{actions}</CardActions>
@@ -145,7 +150,7 @@ export const FileChildrenCard: React.FC<FileChildrenCardProps> = ({
 
   const { data: thumbnailUrl } = hooks.useItemThumbnailUrl({
     id: item.id,
-    size: THUMBNAIL_SIZES.SMALL,
+    size: ThumbnailSize.Small,
   });
 
   const subtext = item.updatedAt

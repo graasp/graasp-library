@@ -14,7 +14,7 @@ import {
 import { ItemRecord } from '@graasp/sdk/frontend';
 
 import { SECTION_TITLE_ID } from '../../config/selectors';
-import CollectionsGrid from '../collection/CollectionsGrid';
+import CollectionsGrid from './CollectionsGrid';
 
 const StyledContainer = styled(Box)(({ theme }) => ({
   backgroundColor: 'white',

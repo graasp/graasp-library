@@ -13,8 +13,8 @@ import Typography from '@mui/material/Typography';
 
 import { LIBRARY } from '@graasp/translations';
 
-import { formatDate } from '../../utils/date';
-import { getAvatar } from '../../utils/layout';
+import { formatDate } from '../../../utils/date';
+import { getAvatar } from '../../../utils/layout';
 
 const Comment = ({ comment, members }) => {
   const { content, author, published } = comment;

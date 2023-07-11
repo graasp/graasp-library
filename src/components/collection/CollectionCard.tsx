@@ -105,7 +105,7 @@ export const CollectionCard = ({ collection }: Props) => {
       <CardActionArea
         component={Link}
         href={link}
-        sx={{ borderRadius: '0px', flexGrow: 1 }}
+        sx={{ borderRadius: 'unset', flexGrow: 1 }}
       >
         <ItemTag
           createdAt={collection.createdAt}

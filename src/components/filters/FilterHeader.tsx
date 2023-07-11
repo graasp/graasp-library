@@ -15,11 +15,11 @@ import {
   styled,
 } from '@mui/material';
 
-import { CategoryType, convertJs } from '@graasp/sdk';
+import { CategoryType } from '@graasp/sdk';
 import { CategoryRecord } from '@graasp/sdk/frontend';
 import { CATEGORIES, LIBRARY, namespaces } from '@graasp/translations';
 
-import { CATEGORY_TYPES } from '../../config/constants';
+import { GRAASP_COLOR } from '../../config/constants';
 import {
   ALL_COLLECTIONS_TITLE_ID,
   buildSearchFilterCategoryId,
@@ -27,9 +27,8 @@ import {
 } from '../../config/selectors';
 import { compare } from '../../utils/helpers';
 import { QueryClientContext } from '../QueryClientContext';
+import Search from '../search/Search';
 import FilterPopper from './FilterPopper';
-import { GRAASP_COLOR } from './Home';
-import Search from './Search';
 
 type FilterProps = {
   category: string;
@@ -207,9 +206,17 @@ type Category = {
 
 type FilterHeaderProps = {
   onFiltersChanged: (selectedFilters: string[]) => void;
+  onSearch: (searchKeywords: string) => void;
+  searchPreset?: string;
+  isLoadingResults: boolean;
 };
 
-const FilterHeader: FC<FilterHeaderProps> = ({ onFiltersChanged }) => {
+const FilterHeader: FC<FilterHeaderProps> = ({
+  onFiltersChanged,
+  onSearch,
+  searchPreset,
+  isLoadingResults,
+}) => {
   const { t: translateCategories } = useTranslation(namespaces.categories);
   const { t } = useTranslation();
 
@@ -230,27 +237,25 @@ const FilterHeader: FC<FilterHeaderProps> = ({ onFiltersChanged }) => {
   const languageList = allCategories?.get(CategoryType.Language);
 
   // TODO: Replace with real values.
-  const licenseList: List<CategoryRecord> = convertJs([
-    {
-      id: '3f811e5f-5221-4d22-a20c-1086af809bda',
-      name: 'Public Domain (CC0)',
-      type: '3f811e5f-5221-4d22-a20c-1086af809bd0',
-    },
-    {
-      id: '3f811e5f-5221-4d22-a20c-1086af809bdb',
-      name: 'For Commercial Use',
-      type: '3f811e5f-5221-4d22-a20c-1086af809bd0',
-    },
-    {
-      id: '3f811e5f-5221-4d22-a20c-1086af809bdc',
-      name: 'Derivable',
-      type: '3f811e5f-5221-4d22-a20c-1086af809bd0',
-    },
-  ]);
+  // const licenseList: List<CategoryRecord> = convertJs([
+  //   {
+  //     id: '3f811e5f-5221-4d22-a20c-1086af809bda',
+  //     name: 'Public Domain (CC0)',
+  //     type: '3f811e5f-5221-4d22-a20c-1086af809bd0',
+  //   },
+  //   {
+  //     id: '3f811e5f-5221-4d22-a20c-1086af809bdb',
+  //     name: 'For Commercial Use',
+  //     type: '3f811e5f-5221-4d22-a20c-1086af809bd0',
+  //   },
+  //   {
+  //     id: '3f811e5f-5221-4d22-a20c-1086af809bdc',
+  //     name: 'Derivable',
+  //     type: '3f811e5f-5221-4d22-a20c-1086af809bd0',
+  //   },
+  // ]);
 
   const groupedByCategories = (filters: string[]): string[] => {
-    // eslint-disable-next-line no-console
-    console.log(filters);
     if (allCategories) {
       const groupedFilters = allCategories
         ?.toIndexedSeq()
@@ -262,8 +267,6 @@ const FilterHeader: FC<FilterHeaderProps> = ({ onFiltersChanged }) => {
         )
         .toArray()
         .filter((r) => r);
-      // eslint-disable-next-line no-console
-      console.log(groupedFilters);
       return groupedFilters;
     }
     return filters;
@@ -346,16 +349,16 @@ const FilterHeader: FC<FilterHeaderProps> = ({ onFiltersChanged }) => {
       onClearOptions={() => onClearCategory(languageList?.map((d) => d.id))}
       isLoading={isCategoriesLoading}
     />,
-    <Filter
-      key={CATEGORY_TYPES.LICENSE}
-      category={CATEGORY_TYPES.LICENSE}
-      title="License"
-      options={licenseList}
-      selectedOptions={selectedFilters}
-      onOptionChange={onFilterChanged}
-      onClearOptions={() => onClearCategory(licenseList?.map((d) => d.id))}
-      isLoading={isCategoriesLoading}
-    />,
+    // <Filter
+    //   key={CATEGORY_TYPES.LICENSE}
+    //   category={CATEGORY_TYPES.LICENSE}
+    //   title="License"
+    //   options={licenseList}
+    //   selectedOptions={selectedFilters}
+    //   onOptionChange={onFilterChanged}
+    //   onClearOptions={() => onClearCategory(licenseList?.map((d) => d.id))}
+    //   isLoading={isCategoriesLoading}
+    // />,
   ];
 
   return (
@@ -392,7 +395,11 @@ const FilterHeader: FC<FilterHeaderProps> = ({ onFiltersChanged }) => {
         <Typography variant="h4" width="100%" id={ALL_COLLECTIONS_TITLE_ID}>
           {t(LIBRARY.SEARCH_PAGE_TITLE)}
         </Typography>
-        <Search isLoading={false} handleClick={() => {}} />
+        <Search
+          isLoading={isLoadingResults}
+          handleClick={onSearch}
+          searchPreset={searchPreset}
+        />
       </Stack>
       <StyledFilterContainer
         id="not-sticky"

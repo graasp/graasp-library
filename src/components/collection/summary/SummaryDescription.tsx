@@ -5,7 +5,7 @@ import { Box, Button, Skeleton, Typography } from '@mui/material';
 
 import { LIBRARY } from '@graasp/translations';
 
-import ContentDescription from './ContentDescription';
+import ContentDescription from '../ContentDescription';
 
 export const CollapsibleDescription = ({
   collapsed,

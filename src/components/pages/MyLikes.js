@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 
 import { PUBLISHED_TAG_ID } from '../../config/env';
-import { MY_PUBLISHMENTS_COLLECTIONS_ID } from '../../config/selectors';
+import { MY_LIKES_COLLECTIONS_ID } from '../../config/selectors';
 import { PLACEHOLDER_COLLECTIONS } from '../../utils/collections';
 import { QueryClientContext } from '../QueryClientContext';
 import CollectionsGrid from '../collection/CollectionsGrid';
-import TabPanel from './TabPanel';
+import TabPanel from '../common/TabPanel';
 
-const MyPublishments = ({ tab, index }) => {
+const MyLikes = ({ tab, index }) => {
   const { hooks } = useContext(QueryClientContext);
   const { data: member } = hooks.useCurrentMember();
   const { data: collections, isLoading } = hooks.usePublicItemsWithTag(
@@ -18,24 +18,26 @@ const MyPublishments = ({ tab, index }) => {
       placeholderData: PLACEHOLDER_COLLECTIONS,
     },
   );
-  const ownCollections = collections?.filter(
-    (collection) => collection?.creator === member?.id,
+  const { data: likedItems } = hooks.useLikedItems(member?.id);
+  const likedItemsList = likedItems?.map((entry) => entry.itemId);
+  const likedCollections = collections?.filter((collection) =>
+    likedItemsList?.includes(collection?.id),
   );
 
   return (
     <TabPanel value={tab} index={index}>
       <CollectionsGrid
-        id={MY_PUBLISHMENTS_COLLECTIONS_ID}
-        collections={ownCollections}
+        id={MY_LIKES_COLLECTIONS_ID}
+        collections={likedCollections}
         isLoading={isLoading}
       />
     </TabPanel>
   );
 };
 
-MyPublishments.propTypes = {
+MyLikes.propTypes = {
   tab: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
 };
 
-export default MyPublishments;
+export default MyLikes;

@@ -7,7 +7,7 @@ import { MY_FAVORITES_COLLECTIONS_ID } from '../../config/selectors';
 import { PLACEHOLDER_COLLECTIONS } from '../../utils/collections';
 import { QueryClientContext } from '../QueryClientContext';
 import CollectionsGrid from '../collection/CollectionsGrid';
-import TabPanel from './TabPanel';
+import TabPanel from '../common/TabPanel';
 
 const MyFavorites = ({ tab, index }) => {
   const { hooks } = useContext(QueryClientContext);

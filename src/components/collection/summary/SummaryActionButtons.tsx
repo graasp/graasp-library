@@ -16,11 +16,11 @@ import {
 import { ItemRecord } from '@graasp/sdk/frontend';
 import { LIBRARY } from '@graasp/translations';
 
-import { buildPlayerViewItemRoute } from '../../config/paths';
-import { openInNewTab } from '../../utils/helpers';
-import { useCopyAction } from './CopyButton';
-import { useEmbedAction } from './CopyLinkButton';
-import { useDownloadAction } from './DownloadButton';
+import { buildPlayerViewItemRoute } from '../../../config/paths';
+import { openInNewTab } from '../../../utils/helpers';
+import { useCopyAction } from '../CopyButton';
+import { useEmbedAction } from '../CopyLinkButton';
+import { useDownloadAction } from '../DownloadButton';
 
 const StyledButton = styled(Button)(() => ({
   color: '#504FD2',

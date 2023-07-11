@@ -21,12 +21,12 @@ import { ItemLikeRecord, ItemRecord } from '@graasp/sdk/frontend';
 import {
   ITEM_SUMMARY_TITLE_ID,
   SUMMARY_TAGS_CONTAINER_ID,
-} from '../../config/selectors';
-import { QueryClientContext } from '../QueryClientContext';
-import CardMedia from '../common/CardMediaComponent';
-import { StyledCard } from '../common/StyledCard';
-import Authorship from './Authorship';
-import Badges from './Badges';
+} from '../../../config/selectors';
+import { QueryClientContext } from '../../QueryClientContext';
+import CardMedia from '../../common/CardMediaComponent';
+import { StyledCard } from '../../common/StyledCard';
+import Authorship from '../Authorship';
+import Badges from '../Badges';
 import SummaryActionButtons from './SummaryActionButtons';
 import Description from './SummaryDescription';
 
@@ -111,7 +111,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
               },
             }}
           >
-            <StyledCard>
+            <StyledCard id={collection?.id}>
               {isLoading ? (
                 <Skeleton variant="rectangular" width="100%">
                   <CardMedia name={collection?.name} />

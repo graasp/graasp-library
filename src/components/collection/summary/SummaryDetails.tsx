@@ -5,13 +5,21 @@ import dynamic from 'next/dynamic';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Box, Chip, Grid, Skeleton, Typography, styled } from '@mui/material';
+import {
+  Box,
+  Chip,
+  Grid,
+  Skeleton,
+  Stack,
+  Typography,
+  styled,
+} from '@mui/material';
 
 import { CategoryRecord } from '@graasp/sdk/frontend';
 import { LIBRARY } from '@graasp/translations';
 import { CCSharingVariant } from '@graasp/ui';
 
-import { CATEGORY_COLORS, CATEGORY_TYPES } from '../../config/constants';
+import { CATEGORY_COLORS, CATEGORY_TYPES } from '../../../config/constants';
 import {
   SUMMARY_CATEGORIES_CONTAINER_ID,
   SUMMARY_CC_LICENSE_CONTAINER_ID,
@@ -19,7 +27,7 @@ import {
   SUMMARY_CREATED_AT_CONTAINER_ID,
   SUMMARY_LANGUAGES_CONTAINER_ID,
   SUMMARY_LAST_UPDATE_CONTAINER_ID,
-} from '../../config/selectors';
+} from '../../../config/selectors';
 
 const { CreativeCommons } = {
   CreativeCommons: dynamic(
@@ -139,20 +147,24 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
               {t(LIBRARY.COLLECTION_LANGUAGES_TITLE)}
             </Typography>
             {isLoading && <Skeleton />}
-            {languages?.size ? (
-              languages?.map((entry) => (
-                <Chip
-                  key={entry.name}
-                  label={t(entry.name)}
-                  variant="outlined"
-                  sx={{
-                    color: CATEGORY_COLORS[CATEGORY_TYPES.LANGUAGE],
-                  }}
-                />
-              ))
-            ) : (
-              <Typography>{t(LIBRARY.SUMMARY_DETAILS_NO_LANGUAGES)}</Typography>
-            )}
+            <Stack gap={1} direction="row" flexWrap="wrap">
+              {languages?.size ? (
+                languages?.map((entry) => (
+                  <Chip
+                    key={entry.name}
+                    label={t(entry.name)}
+                    variant="outlined"
+                    sx={{
+                      color: CATEGORY_COLORS[CATEGORY_TYPES.LANGUAGE],
+                    }}
+                  />
+                ))
+              ) : (
+                <Typography>
+                  {t(LIBRARY.SUMMARY_DETAILS_NO_LANGUAGES)}
+                </Typography>
+              )}
+            </Stack>
           </div>
         </DetailCard>
       </Grid>
@@ -163,7 +175,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
               {t(LIBRARY.COLLECTION_CATEGORIES_TITLE)}
             </Typography>
             {levels?.size || disciplines?.size ? (
-              <>
+              <Stack gap={1} direction="row" flexWrap="wrap">
                 {levels?.map((entry) => (
                   <Chip
                     key={entry.name}
@@ -171,7 +183,6 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
                     variant="outlined"
                     component={Typography}
                     sx={{ color: CATEGORY_COLORS[CATEGORY_TYPES.LEVEL] }}
-                    mr={1}
                   />
                 ))}
                 {disciplines?.map((entry) => (
@@ -183,10 +194,9 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
                     }}
                     variant="outlined"
                     component={Typography}
-                    mr={1}
                   />
                 ))}
-              </>
+              </Stack>
             ) : (
               <Typography>
                 {t(LIBRARY.SUMMARY_DETAILS_NO_CATEGORIES)}

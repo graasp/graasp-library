@@ -3,7 +3,7 @@ import { DehydratedState } from 'react-query';
 import { Api, DATA_KEYS, configureQueryClient } from '@graasp/query-client';
 
 import Wrapper from '../src/components/common/Wrapper';
-import MyList from '../src/components/home/MyList';
+import MyList from '../src/components/pages/MyList';
 import { QUERY_CLIENT_OPTIONS } from '../src/config/queryClient';
 
 const MyListPage = ({

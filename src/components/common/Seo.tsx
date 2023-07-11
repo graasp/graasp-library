@@ -1,11 +1,23 @@
-import PropTypes from 'prop-types';
-
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 
 import { APP_KEYWORDS, DEFAULT_LANG } from '../../config/constants';
 
-const Seo = ({ lang, title, description, author, image }) => {
+type Props = {
+  lang?: string;
+  image?: string;
+  title: string;
+  description: string;
+  author: string;
+};
+
+const Seo = ({
+  lang = DEFAULT_LANG,
+  title,
+  description,
+  author,
+  image = '/icon.png',
+}: Props) => {
   const keywords = APP_KEYWORDS;
 
   // todo: default to env variable
@@ -39,19 +51,6 @@ const Seo = ({ lang, title, description, author, image }) => {
       <html lang={lang} />
     </Helmet>
   );
-};
-
-Seo.defaultProps = {
-  lang: DEFAULT_LANG,
-  image: '/defaultImage.png',
-};
-
-Seo.propTypes = {
-  lang: PropTypes.string,
-  image: PropTypes.string,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  author: PropTypes.string.isRequired,
 };
 
 export default Seo;
