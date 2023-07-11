@@ -1,12 +1,10 @@
 import dynamic from 'next/dynamic';
-import { useRouter } from 'next/router';
 
 import React, { useRef } from 'react';
 
 import { Box, Container, Stack, Typography } from '@mui/material';
 
-import { GRAASP_COLOR, UrlSearch } from '../../config/constants';
-import { ALL_COLLECTIONS_ROUTE } from '../../config/routes';
+import { GRAASP_COLOR } from '../../config/constants';
 import { HOME_PAGE_TITLE_TEXT_ID } from '../../config/selectors';
 import Search from '../search/Search';
 
@@ -35,17 +33,9 @@ const PopularSearchItem: React.FC<PopularSearchItemProps> = ({ text }) => (
 );
 
 const HomeHeader = () => {
-  const router = useRouter();
   const searchBarRef = useRef<HTMLDivElement>(null);
   // TODO: Feed from real data.
   const popularSearches = ['Climate', 'Biology', 'Science', 'Education'];
-
-  const handleSearch = (searchKeywords: string) => {
-    router.push({
-      pathname: ALL_COLLECTIONS_ROUTE,
-      query: { [UrlSearch.KeywordSearch]: searchKeywords },
-    });
-  };
 
   return (
     <Container maxWidth="md">
@@ -82,11 +72,7 @@ const HomeHeader = () => {
           </Typography>
         </Box>
         <Box width="100%">
-          <Search
-            ref={searchBarRef}
-            handleClick={handleSearch}
-            isLoading={false}
-          />
+          <Search ref={searchBarRef} />
         </Box>
         <Box width="100%">
           <Typography color="white" variant="h6" gutterBottom>

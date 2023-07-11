@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import { Box, Container, Grid, Stack, Typography } from '@mui/material';
 
 import { HOME_PAGE_TITLE_TEXT_ID } from '../../config/selectors';
-import Search from './Search';
+import Search from '../search/Search';
 
 type PopularSearchItemProps = {
   text: string;

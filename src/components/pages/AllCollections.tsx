@@ -83,9 +83,9 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
           <Box py={10}>
             <FilterHeader
               onFiltersChanged={onFiltersChanged}
-              onSearch={setSearchKeywords}
-              searchPreset={searchKeywords}
-              isLoadingResults={false}
+              // onSearch={setSearchKeywords}
+              // searchPreset={searchKeywords}
+              // isLoadingResults={false}
             />
           </Box>
         </Container>

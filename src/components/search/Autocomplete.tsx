@@ -16,6 +16,9 @@ import { useRouter } from 'next/router';
 import React, { Fragment, createElement, useEffect, useRef } from 'react';
 import { render } from 'react-dom';
 
+import { UrlSearch } from '../../config/constants';
+import { ALL_COLLECTIONS_ROUTE } from '../../config/routes';
+
 type AutocompleteProps = Partial<AutocompleteOptions<BaseItem>> & {
   className?: string;
 };
@@ -50,7 +53,7 @@ function debouncePromise(fn: Function, time: number) {
   };
 }
 
-const debounced = debouncePromise((items: any) => Promise.resolve(items), 500);
+const debounced = debouncePromise((items: any) => Promise.resolve(items), 400);
 
 const Autocomplete = ({
   className,
@@ -67,8 +70,17 @@ const Autocomplete = ({
     const autocompleteInstance = autocomplete({
       ...autocompleteProps,
       container: autocompleteContainer.current,
-      onSubmit({ state }) {
-        router.push(`/all-collections?query=${state.query}`);
+      onSubmit({ state, event }) {
+        router.push({
+          pathname: ALL_COLLECTIONS_ROUTE,
+          query: { [UrlSearch.KeywordSearch]: state.query },
+        });
+      },
+      // navigation use next router
+      navigator: {
+        navigate({ itemUrl }) {
+          router.push(itemUrl);
+        },
       },
       getSources() {
         return debounced([

@@ -206,17 +206,12 @@ type Category = {
 
 type FilterHeaderProps = {
   onFiltersChanged: (selectedFilters: string[]) => void;
-  onSearch: (searchKeywords: string) => void;
-  searchPreset?: string;
-  isLoadingResults: boolean;
+  // onSearch: (searchKeywords: string) => void;
+  // searchPreset?: string;
+  // isLoadingResults: boolean;
 };
 
-const FilterHeader: FC<FilterHeaderProps> = ({
-  onFiltersChanged,
-  onSearch,
-  searchPreset,
-  isLoadingResults,
-}) => {
+const FilterHeader: FC<FilterHeaderProps> = ({ onFiltersChanged }) => {
   const { t: translateCategories } = useTranslation(namespaces.categories);
   const { t } = useTranslation();
 
@@ -395,15 +390,7 @@ const FilterHeader: FC<FilterHeaderProps> = ({
         <Typography variant="h4" width="100%" id={ALL_COLLECTIONS_TITLE_ID}>
           {t(LIBRARY.SEARCH_PAGE_TITLE)}
         </Typography>
-<<<<<<< HEAD:src/components/filters/FilterHeader.tsx
-        <Search
-          isLoading={isLoadingResults}
-          handleClick={onSearch}
-          searchPreset={searchPreset}
-        />
-=======
         <Search />
->>>>>>> 11e43fa (chore: wip):src/components/home/FilterHeader.tsx
       </Stack>
       <StyledFilterContainer
         id="not-sticky"
