@@ -1,10 +1,8 @@
 import dynamic from 'next/dynamic';
-import PropTypes from 'prop-types';
 
-import React, { useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { MUTATION_KEYS } from '@graasp/query-client';
 import { LIBRARY } from '@graasp/translations';
 
 import { QueryClientContext } from '../QueryClientContext';
@@ -16,14 +14,14 @@ const { GraaspDownloadButton } = {
   ),
 };
 
-export const useDownloadAction = (itemId) => {
-  const { useMutation } = useContext(QueryClientContext);
+export const useDownloadAction = (itemId: string) => {
+  const { mutations } = useContext(QueryClientContext);
   const {
     mutate: exportZip,
     data,
     isSuccess,
     isLoading,
-  } = useMutation(MUTATION_KEYS.EXPORT_ZIP);
+  } = mutations.useExportZip();
 
   useEffect(() => {
     if (isSuccess) {
@@ -46,23 +44,25 @@ export const useDownloadAction = (itemId) => {
   };
 };
 
-const DownloadButton = ({ id }) => {
+type Props = {
+  id: string;
+};
+
+const DownloadButton = ({ id }: Props) => {
   const { t } = useTranslation();
 
   const { isDownloading, startDownload } = useDownloadAction(id);
 
   return (
     <GraaspDownloadButton
-      onClick={(e) => e.stopPropagation()}
       isLoading={isDownloading}
       handleDownload={startDownload}
       title={t(LIBRARY.DOWNLOAD_BUTTON_TOOLTIP)}
+      ariaLabel={t(LIBRARY.DOWNLOAD_BUTTON_TOOLTIP)}
+      loaderColor="primary"
+      loaderSize={20}
     />
   );
-};
-
-DownloadButton.propTypes = {
-  id: PropTypes.string.isRequired,
 };
 
 export default DownloadButton;

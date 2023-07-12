@@ -1,17 +1,15 @@
 import Link from 'next/link';
-import PropTypes from 'prop-types';
 
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Grid, Typography, styled } from '@mui/material';
+import { Stack, Typography, styled } from '@mui/material';
 
 import { LIBRARY } from '@graasp/translations';
 
 import { APP_AUTHOR } from '../../config/constants';
 import {
-  ERROR_MESSAGES,
   ERROR_UNEXPECTED_ERROR_CODE,
+  ErrorMessages,
 } from '../../config/messages';
 import { HOME_ROUTE } from '../../config/routes';
 import Seo from './Seo';
@@ -22,9 +20,13 @@ const StyledLink = styled(Link)(({ theme }) => ({
   marginTop: theme.spacing(2),
 }));
 
-const Error = ({ code = ERROR_UNEXPECTED_ERROR_CODE }) => {
+type Props = {
+  code?: keyof typeof ErrorMessages;
+};
+
+const Error = ({ code = ERROR_UNEXPECTED_ERROR_CODE }: Props) => {
   const { t } = useTranslation();
-  const message = ERROR_MESSAGES[code];
+  const message = ErrorMessages[code];
 
   return (
     <>
@@ -33,24 +35,18 @@ const Error = ({ code = ERROR_UNEXPECTED_ERROR_CODE }) => {
         description={t(message)}
         author={APP_AUTHOR}
       />
-      <Grid container justify="center" alignItems="center" direction="column">
-        <Grid item textAlign="center">
-          <Typography variant="h4" align="center">
-            {t(message)}
+      <Stack justifyContent="center" alignItems="center" direction="column">
+        <Typography variant="h4" align="center">
+          {t(message)}
+        </Typography>
+        <StyledLink href={HOME_ROUTE}>
+          <Typography variant="subtitle1">
+            {t(LIBRARY.ERROR_RETURN_TO_HOME)}
           </Typography>
-          <StyledLink href={HOME_ROUTE}>
-            <Typography variant="subtitle1">
-              {t(LIBRARY.ERROR_RETURN_TO_HOME)}
-            </Typography>
-          </StyledLink>
-        </Grid>
-      </Grid>
+        </StyledLink>
+      </Stack>
     </>
   );
-};
-
-Error.propTypes = {
-  code: PropTypes.string,
 };
 
 Error.defaultProps = {
