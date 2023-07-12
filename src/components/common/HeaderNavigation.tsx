@@ -3,7 +3,13 @@ import Link from 'next/link';
 
 import React from 'react';
 
-import { Box, Typography, styled } from '@mui/material';
+import {
+  Box,
+  Typography,
+  styled,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 
 import { APP_NAME } from '../../config/constants';
 import { HEADER_LOGO_HEIGHT } from '../../config/cssStyles';
@@ -95,14 +101,13 @@ export const platformsHostsMap = defaultHostsMapper({
   [Platform.Player]: HOST_MAP.player,
 });
 
-const linkStyles = {
+const StyledLink = styled(Link)(({ theme }) => ({
   textDecoration: 'none',
   color: 'inherit',
   display: 'flex',
   alignItems: 'center',
-};
-
-const StyledLink = styled(Link)(() => linkStyles);
+  marginRight: theme.spacing(1),
+}));
 
 interface HeaderNavigationProps {
   rootId?: string;
@@ -130,16 +135,18 @@ export const HeaderNavigation = ({
       disabled: true,
     },
   };
+  const theme = useTheme();
+  const hasSpace = useMediaQuery(theme.breakpoints.up('sm'));
+
   return (
-    <Box display="flex" ml={2}>
-      <StyledLink href="/" legacyBehavior>
-        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-        <a style={linkStyles}>
-          <GraaspLogo height={HEADER_LOGO_HEIGHT} sx={{ fill: 'white' }} />
-          <Typography variant="h6" color="inherit" mr={2} ml={1}>
+    <Box display="flex">
+      <StyledLink href="/">
+        <GraaspLogo height={HEADER_LOGO_HEIGHT} sx={{ fill: 'white' }} />
+        {hasSpace && (
+          <Typography variant="h6" color="inherit" ml={1}>
             {APP_NAME}
           </Typography>
-        </a>
+        )}
       </StyledLink>
       <PlatformSwitch
         id={APP_NAVIGATION_PLATFORM_SWITCH_ID}
