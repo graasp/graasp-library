@@ -18,7 +18,6 @@ import {
   mockGetMember,
   mockGetMembers,
   mockGetOwnItems,
-  mockGetPublishedItemsInCategories,
   mockSearch,
   mockSignInRedirection,
   mockSignOut,
@@ -50,7 +49,7 @@ Cypress.Commands.add(
       cy.setCookie('session', currentMember?.id);
     }
 
-    mockGetAllPublishedItems({ items });
+    mockGetAllPublishedItems({ items }, getPublishedItemsInCategoriesError);
 
     mockGetOwnItems({ items, currentMember });
 
@@ -77,11 +76,6 @@ Cypress.Commands.add(
     mockGetCategories(categories, getCategoriesError);
 
     mockGetItemCategories({ items, currentMember }, getItemCategoriesError);
-
-    mockGetPublishedItemsInCategories(
-      { items },
-      getPublishedItemsInCategoriesError,
-    );
 
     mockGetItemMembershipsForItems({ items, currentMember });
 

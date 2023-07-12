@@ -96,8 +96,6 @@ export const CollectionCard = ({ collection }: Props) => {
       id: creator?.id,
       size: ThumbnailSize.Small,
     });
-  // eslint-disable-next-line no-console
-  console.log('avatar', authorAvatarUrl);
   const link = buildCollectionRoute(id);
 
   return (

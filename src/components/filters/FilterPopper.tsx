@@ -14,6 +14,7 @@ import {
 import { CategoryRecord } from '@graasp/sdk/frontend';
 
 import {
+  CLEAR_FILTER_POPPER_BUTTON_ID,
   FILTER_POPPER_ID,
   buildCategoryOptionId,
 } from '../../config/selectors';
@@ -93,6 +94,7 @@ const FilterPopper = React.forwardRef<HTMLDivElement, FilterPopperProps>(
                 );
               })}
               <Button
+                id={CLEAR_FILTER_POPPER_BUTTON_ID}
                 variant="outlined"
                 fullWidth
                 onClick={onClearOptions}

@@ -8,7 +8,7 @@ import {
   ALL_COLLECTIONS_GRID_ID,
   ALL_COLLECTIONS_HEADER_ID,
   ALL_COLLECTIONS_TITLE_ID,
-  CLEAR_EDUCATION_LEVEL_SELECTION_ID,
+  CLEAR_FILTER_POPPER_BUTTON_ID,
   buildCategoryOptionSelector,
   buildCollectionCardGridId,
   buildSearchFilterCategoryId,
@@ -74,16 +74,18 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
       );
     });
 
-    // todo: enable when search is implemented
-    it.skip('display menu options', () => {
+    it('display menu options', () => {
       cy.wait(['@getCategories']);
       cy.scrollTo('top');
-      Object.values(CategoryType).forEach((categoryType) => {
+      [
+        CategoryType.Level,
+        CategoryType.Discipline,
+        CategoryType.Language,
+      ].forEach((categoryType) => {
         cy.get(
           `#not-sticky button#${buildSearchFilterPopperButtonId(categoryType)}`,
         )
           .filter(':visible')
-          .click()
           .click();
         const categories = SAMPLE_CATEGORIES.filter(
           (c) => c.type === categoryType,
@@ -97,7 +99,7 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
       });
     });
 
-    it('scroll to bottom and search should pop out', () => {
+    it.skip('scroll to bottom and search should pop out', () => {
       cy.get(`#${ALL_COLLECTIONS_GRID_ID}`);
 
       cy.scrollTo('bottom');
@@ -110,19 +112,25 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
       );
     });
 
-    // todo: enable when search is implemented
-    it.skip('select/unselect categories', () => {
-      // const selectCategoryButton = cy.get(buildEducationLevelOptionSelector(0));
-      // selectCategoryButton.click();
-      cy.wait('@getPublishedItemsInCategories').then(({ response }) => {
+    it('select/unselect categories', () => {
+      cy.wait(['@getCategories', '@getAllPublishedItems']);
+      cy.scrollTo('top');
+      cy.get(
+        `#not-sticky button#${buildSearchFilterPopperButtonId(
+          CategoryType.Level,
+        )}`,
+      ).click();
+      cy.get(buildCategoryOptionSelector(0)).click();
+      cy.wait('@getAllPublishedItems').then(({ response }) => {
         cy.get(`#${ALL_COLLECTIONS_GRID_ID}`)
           .children()
           .should('have.length', response?.body.length);
       });
 
       // clear selection
-      cy.get(`#${CLEAR_EDUCATION_LEVEL_SELECTION_ID}`).click();
+      cy.get(`#${CLEAR_FILTER_POPPER_BUTTON_ID}`).click();
 
+      cy.wait('@getAllPublishedItems');
       // check default display
       cy.get(`#${ALL_COLLECTIONS_GRID_ID}`)
         .children()

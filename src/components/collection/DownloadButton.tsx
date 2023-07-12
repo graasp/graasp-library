@@ -14,7 +14,7 @@ const { GraaspDownloadButton } = {
   ),
 };
 
-export const useDownloadAction = (itemId: string) => {
+export const useDownloadAction = (itemId?: string) => {
   const { mutations } = useContext(QueryClientContext);
   const {
     mutate: exportZip,
@@ -35,7 +35,9 @@ export const useDownloadAction = (itemId: string) => {
   }, [data, isSuccess]);
 
   const startDownload = () => {
-    exportZip({ id: itemId });
+    if (itemId) {
+      exportZip({ id: itemId });
+    }
   };
 
   return {

@@ -90,11 +90,11 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
           </Box>
         </Container>
 
-        <Box m={2} id={ALL_COLLECTIONS_GRID_ID} flexGrow={2}>
+        <Box m={2} flexGrow={2}>
           <CollectionsGrid
             containerWidth="xl"
             collections={filteredCollections}
-            id="foobar"
+            id={ALL_COLLECTIONS_GRID_ID}
             isLoading={isLoading}
           />
         </Box>

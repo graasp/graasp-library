@@ -39,7 +39,6 @@ const {
   buildGetMembersRoute,
   buildGetCategoriesRoute,
   GET_OWN_ITEMS_ROUTE,
-  buildGetItemsInCategoryRoute,
   buildGetItemsByKeywordRoute,
 } = API_ROUTES;
 
@@ -68,15 +67,34 @@ export const redirectionReply = {
   body: null,
 };
 
-export const mockGetAllPublishedItems = ({ items }: { items: MockItem[] }) => {
+export const mockGetAllPublishedItems = (
+  { items }: { items: MockItem[] },
+  shouldThrowError: boolean,
+) => {
   cy.intercept(
     {
       method: DEFAULT_GET.method,
-      url: `${API_HOST}/${ITEMS_ROUTE}/collections`,
+      url: new RegExp(`${API_HOST}/${ITEMS_ROUTE}/collections`),
     },
-    ({ reply }) => {
-      const allPublishedItems = getRootPublishedItems(items);
-      return reply(allPublishedItems);
+    ({ reply, url }) => {
+      if (shouldThrowError) {
+        return reply({ statusCode: StatusCodes.BAD_REQUEST, body: null });
+      }
+      const categoryIds = new URLSearchParams(new URL(url).search).getAll(
+        'categoryId',
+      );
+
+      // this does not account for the OR and AND syntax
+      const publishedItems = getRootPublishedItems(items);
+      const result = publishedItems.filter(({ categories }) => {
+        if (categoryIds.length) {
+          return categories?.some(({ category }) =>
+            categoryIds.includes(category.id),
+          );
+        }
+        return true;
+      });
+      return reply(result);
     },
   ).as('getAllPublishedItems');
 };
@@ -448,35 +466,6 @@ export const mockGetItemCategories = (
       return reply(itemCategories);
     },
   ).as('getItemCategories');
-};
-
-export const mockGetPublishedItemsInCategories = (
-  { items }: { items: MockItem[] },
-  shouldThrowError: boolean,
-) => {
-  cy.intercept(
-    {
-      method: DEFAULT_GET.method,
-      url: new RegExp(
-        `${API_HOST}/${parseStringToRegExp(buildGetItemsInCategoryRoute([]))}`,
-      ),
-    },
-    ({ reply, url }) => {
-      if (shouldThrowError) {
-        return reply({ statusCode: StatusCodes.BAD_REQUEST, body: null });
-      }
-      const categoryIds = new URLSearchParams(new URL(url).search).getAll(
-        'categoryId',
-      );
-
-      // this does not account for the OR and AND syntax
-      const publishedItems = getRootPublishedItems(items);
-      const result = publishedItems.filter(({ categories }) =>
-        categories?.find(({ category }) => categoryIds.includes(category.id)),
-      );
-      return reply(result);
-    },
-  ).as('getPublishedItemsInCategories');
 };
 
 export const mockGetItemMembershipsForItems = ({

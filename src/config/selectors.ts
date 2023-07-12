@@ -4,7 +4,7 @@ export const SIDEMENU_HEADING_ID = 'sidemenuHeading';
 export const GRAASPER_COLLECTIONS_GRID_ID = 'graasperCollectionsGrid';
 export const buildCategoryOptionId = (index: number) =>
   `categoryOption-${index}`;
-export const CLEAR_EDUCATION_LEVEL_SELECTION_ID = 'clearEducationLevelButton';
+export const CLEAR_FILTER_POPPER_BUTTON_ID = 'clearFilterPopperButton';
 export const MENU_BUTTON_ID = 'menuButton';
 export const OPEN_MENU_BUTTON_ID = 'openMenuButton';
 export const buildCollectionCardGridId = (collectionId: string) =>
