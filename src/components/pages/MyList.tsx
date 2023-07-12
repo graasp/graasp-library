@@ -19,19 +19,18 @@ const MyList = () => {
 
   const [tab, setTab] = useState(0);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (_: React.SyntheticEvent, newValue: number) => {
     setTab(newValue);
   };
 
   return (
     <Box display="flex" flexGrow={1} mt={10}>
-      <AppBar position="static" color="default" mb={5} boxShadow={0}>
+      <AppBar position="static" color="default" sx={{ mb: 5, boxShadow: 0 }}>
         <Tabs
           value={tab}
           onChange={handleChange}
           variant="fullWidth"
           indicatorColor="primary"
-          textColor="fff"
           aria-label={t(LIBRARY.MY_LISTS_TAB_ARIA_LABEL)}
         >
           <Tab

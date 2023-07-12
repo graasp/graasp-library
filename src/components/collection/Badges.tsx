@@ -17,7 +17,7 @@ import { removeTagsFromString } from '../../utils/text';
 
 type Props = {
   name?: string;
-  description?: string;
+  description?: string | null;
 };
 
 const Badges = ({ name, description }: Props) => {

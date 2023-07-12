@@ -4,7 +4,6 @@ import { FC, useContext } from 'react';
 
 import Box from '@mui/material/Box';
 
-import { MUTATION_KEYS } from '@graasp/query-client';
 import { BUILDER } from '@graasp/translations';
 
 import { MEMBER_AVATAR_ICON_SIZE } from '../../config/constants';
@@ -26,16 +25,14 @@ type Props = {
 };
 
 const UserSwitchWrapper: FC<Props> = ({ ButtonContent }) => {
-  const { hooks, useMutation } = useContext(QueryClientContext);
+  const { hooks, mutations } = useContext(QueryClientContext);
   const {
     data: member,
     isLoading,
     isSuccess: isSuccessUser,
   } = hooks.useCurrentMember();
   const { t: translateBuilder } = useBuilderTranslation();
-  const { mutateAsync: signOut } = useMutation<unknown, unknown, string>(
-    MUTATION_KEYS.SIGN_OUT,
-  );
+  const { mutateAsync: signOut } = mutations.useSignOut();
 
   return (
     <Box mr={1}>
