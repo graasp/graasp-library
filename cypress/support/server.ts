@@ -569,19 +569,19 @@ export const mockGetLikedItems = (
   cy.intercept(
     {
       method: DEFAULT_GET.method,
-      url: new RegExp(`${API_HOST}/items/${ID_FORMAT}/likes`),
+      url: new RegExp(`${API_HOST}/items/liked`),
     },
     ({ reply, url }) => {
       if (shouldThrowError) {
         reply({ statusCode: StatusCodes.BAD_REQUEST });
       }
 
-      const currentUserId = new URL(url).pathname.split('/')[2];
+      const memberId = new URLSearchParams(new URL(url).search).get('memberId');
       const results = itemLikes.filter(
-        ({ creator }) => creator?.id === currentUserId,
+        ({ creator }) => creator?.id === memberId,
       );
 
       return reply(results || []);
     },
-  ).as('getLikedItems');
+  ).as('getLikedItemsForMember');
 };

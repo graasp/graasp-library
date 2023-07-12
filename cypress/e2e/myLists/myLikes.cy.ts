@@ -3,7 +3,6 @@ import {
   MY_LIKES_COLLECTIONS_ID,
   buildMyListNavigationTabId,
 } from '../../../src/config/selectors';
-import { ITEM_LIKES } from '../../fixtures/itemLikes';
 import { PUBLISHED_ITEMS } from '../../fixtures/items';
 import { CURRENT_USER } from '../../fixtures/members';
 
@@ -17,10 +16,11 @@ describe('My Liked Items', () => {
       // click my likes tab
       cy.get(`#${buildMyListNavigationTabId('myLikes')}`).click();
 
-      cy.wait('@getLikedItems');
-      cy.get(`#${MY_LIKES_COLLECTIONS_ID}`)
-        .children()
-        .should('have.length', ITEM_LIKES.length);
+      cy.wait('@getLikedItemsForMember').then(({ response }) => {
+        cy.get(`#${MY_LIKES_COLLECTIONS_ID}`)
+          .children()
+          .should('have.length', response?.body.length);
+      });
     });
   });
 });
