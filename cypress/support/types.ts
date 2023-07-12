@@ -2,12 +2,14 @@ import {
   Category,
   DiscriminatedItem,
   ItemCategory,
+  ItemLike,
   ItemMembership,
   ItemTagType,
   Member,
   PermissionLevel,
 } from '@graasp/sdk';
 
+export type MockItemLike = Omit<ItemLike, 'createdAt'>;
 export type MockItemCategory = Omit<ItemCategory, 'createdAt' | 'creator'>;
 export type MockMember = Member & { thumbnail?: string };
 export type MockItemMembership = Omit<

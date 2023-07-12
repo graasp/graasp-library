@@ -1,6 +1,6 @@
 import { MY_LIST_ROUTE } from '../../../src/config/routes';
 import {
-  MY_PUBLISHMENTS_COLLECTIONS_ID,
+  MY_PUBLISHED_COLLECTIONS_ID,
   buildMyListNavigationTabId,
 } from '../../../src/config/selectors';
 import {
@@ -19,7 +19,7 @@ describe('My Published Items', () => {
       // click my publishment tab
       cy.get(`#${buildMyListNavigationTabId('myPublishments')}`).click();
 
-      cy.get(`#${MY_PUBLISHMENTS_COLLECTIONS_ID}`)
+      cy.get(`#${MY_PUBLISHED_COLLECTIONS_ID}`)
         .children()
         .should('have.length', getNumberOfOwnPublishedItems(CURRENT_USER.id));
     });

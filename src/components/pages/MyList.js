@@ -12,7 +12,7 @@ import { MY_LIST_TAB_NAMES } from '../../config/constants';
 import { buildMyListNavigationTabId } from '../../config/selectors';
 import MyFavorites from './MyFavorites';
 import MyLikes from './MyLikes';
-import MyPublishments from './MyPublishments';
+import MyPublishedCollections from './MyPublishedCollections';
 
 const MyList = () => {
   const { t } = useTranslation();
@@ -53,7 +53,7 @@ const MyList = () => {
       </AppBar>
       <MyFavorites tab={tab} index={0} />
       <MyLikes tab={tab} index={1} />
-      <MyPublishments tab={tab} index={2} />
+      <MyPublishedCollections tab={tab} index={2} />
     </Box>
   );
 };

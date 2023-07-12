@@ -54,7 +54,7 @@ export const buildMyListNavigationTabId = (name: string) => `nav-tab-${name}`;
 
 export const MY_FAVORITES_COLLECTIONS_ID = 'favoriteCollectionsGrid';
 export const MY_LIKES_COLLECTIONS_ID = 'likedCollectionsGrid';
-export const MY_PUBLISHMENTS_COLLECTIONS_ID = 'publishmentCollectionsGrid';
+export const MY_PUBLISHED_COLLECTIONS_ID = 'publishedCollectionsGrid';
 
 export const APP_NAVIGATION_DROP_DOWN_ID = 'appNavigationDropDown';
 

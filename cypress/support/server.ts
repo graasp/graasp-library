@@ -4,7 +4,6 @@ import { v4 } from 'uuid';
 import { API_ROUTES } from '@graasp/query-client';
 import {
   Category,
-  ItemLike,
   ItemTagType,
   PermissionLevel,
   buildPathFromIds,
@@ -15,6 +14,7 @@ import { FAILURE_MESSAGES } from '@graasp/translations';
 import {
   MockItem,
   MockItemCategory,
+  MockItemLike,
   MockItemMembership,
   MockMember,
 } from './types';
@@ -465,7 +465,9 @@ export const mockGetPublishedItemsInCategories = (
       if (shouldThrowError) {
         return reply({ statusCode: StatusCodes.BAD_REQUEST, body: null });
       }
-      const categoryIds = new URLSearchParams(url).getAll('categoryId');
+      const categoryIds = new URLSearchParams(new URL(url).search).getAll(
+        'categoryId',
+      );
 
       // this does not account for the OR and AND syntax
       const publishedItems = getRootPublishedItems(items);
@@ -572,7 +574,7 @@ export const mockSearch = (
 };
 
 export const mockGetLikedItems = (
-  { itemLikes }: { itemLikes: ItemLike[] },
+  { itemLikes }: { itemLikes: MockItemLike[] },
   shouldThrowError: boolean,
 ) => {
   cy.intercept(
