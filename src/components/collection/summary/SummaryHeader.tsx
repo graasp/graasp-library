@@ -147,15 +147,18 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
             </Stack>
             <SummaryActionButtons item={collection} isLogged={isLogged} />
           </Stack>
-          <Stack
-            id={SUMMARY_TAGS_CONTAINER_ID}
-            direction="row"
-            flexWrap="wrap"
-            spacing={1}
-          >
-            {tags?.size &&
-              tags?.map((text) => <Chip key={text} label={text} />)}
-          </Stack>
+          {tags && tags.size && (
+            <Stack
+              id={SUMMARY_TAGS_CONTAINER_ID}
+              direction="row"
+              flexWrap="wrap"
+              spacing={1}
+            >
+              {tags.map((text) => (
+                <Chip key={text} label={text} />
+              ))}
+            </Stack>
+          )}
           <Description
             isLoading={isLoading}
             description={collection?.description || ''}
