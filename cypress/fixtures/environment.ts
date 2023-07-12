@@ -1,8 +1,8 @@
 import { PUBLISHED_ITEMS } from './items';
-import { CURRENT_USER, SIGNED_OUT_MEMBER } from './members';
+import { CURRENT_USER } from './members';
 
 // eslint-disable-next-line import/prefer-default-export
 export const buildPublicAndPrivateEnvironments = (items = PUBLISHED_ITEMS) => [
-  { currentMember: SIGNED_OUT_MEMBER, items },
+  { items },
   { currentMember: CURRENT_USER, items },
 ];

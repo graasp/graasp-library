@@ -1,3 +1,4 @@
+import { CategoryType } from '@graasp/sdk';
 import { CATEGORIES, LIBRARY, namespaces } from '@graasp/translations';
 
 import { CATEGORY_TYPES } from '../../../src/config/constants';
@@ -13,21 +14,20 @@ import {
   buildSearchFilterCategoryId,
   buildSearchFilterPopperButtonId,
 } from '../../../src/config/selectors';
-import {
-  SAMPLE_CATEGORIES,
-  SAMPLE_CATEGORY_TYPES,
-} from '../../fixtures/categories';
+import { SAMPLE_CATEGORIES } from '../../fixtures/categories';
 import { buildPublicAndPrivateEnvironments } from '../../fixtures/environment';
 import { PUBLISHED_ITEMS } from '../../fixtures/items';
 import { getRootPublishedItems } from '../../support/utils';
 
 buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
-  describe(`All Collections Page for ${environment.currentMember.name}`, () => {
+  describe(`All Collections Page for ${
+    environment.currentMember?.name ?? 'signed out user'
+  }`, () => {
     // check if title and headings are displayed correctly
     beforeEach(() => {
       cy.setUpApi(environment);
-      if (environment.currentMember?.extra?.lang) {
-        i18n.changeLanguage(environment.currentMember?.extra?.lang);
+      if (environment.currentMember?.extra.lang) {
+        i18n.changeLanguage(environment.currentMember.extra.lang);
       }
       cy.visit(ALL_COLLECTIONS_ROUTE);
     });
@@ -58,12 +58,13 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
         'contain.text',
         i18n.t(CATEGORIES.LANGUAGE, { ns: namespaces.categories }),
       );
-      cy.get(`#${buildSearchFilterCategoryId(CATEGORY_TYPES.LICENSE)}`).should(
-        'contain.text',
-        // todo: add translations
-        // i18n.t(CATEGORIES.EDUCATION_LEVEL, { ns: namespaces.categories }),
-        'License',
-      );
+      // todo: add back when license filtering is enabled
+      // cy.get(`#${buildSearchFilterCategoryId(CATEGORY_TYPES.LICENSE)}`).should(
+      //   'contain.text',
+      //   // todo: add translations
+      //   // i18n.t(CATEGORIES.EDUCATION_LEVEL, { ns: namespaces.categories }),
+      //   'License',
+      // );
 
       // verify 2 item cards are displayed
       cy.get(`#${ALL_COLLECTIONS_GRID_ID}`);
@@ -75,14 +76,18 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
 
     // todo: enable when search is implemented
     it.skip('display menu options', () => {
-      cy.wait(['@getCategories', '@getCategoryTypes']);
+      cy.wait(['@getCategories']);
       cy.scrollTo('top');
-      SAMPLE_CATEGORY_TYPES.forEach(({ name, id }) => {
-        cy.get(`#not-sticky button#${buildSearchFilterPopperButtonId(name)}`)
+      Object.values(CategoryType).forEach((categoryType) => {
+        cy.get(
+          `#not-sticky button#${buildSearchFilterPopperButtonId(categoryType)}`,
+        )
           .filter(':visible')
           .click()
           .click();
-        const categories = SAMPLE_CATEGORIES.filter((c) => c.type === id);
+        const categories = SAMPLE_CATEGORIES.filter(
+          (c) => c.type === categoryType,
+        );
         categories.forEach((cat, idx) =>
           cy
             .get(buildCategoryOptionSelector(idx))
@@ -109,13 +114,11 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
     it.skip('select/unselect categories', () => {
       // const selectCategoryButton = cy.get(buildEducationLevelOptionSelector(0));
       // selectCategoryButton.click();
-      cy.wait('@getPublishedItemsInCategories').then(
-        ({ response: { body } }) => {
-          cy.get(`#${ALL_COLLECTIONS_GRID_ID}`)
-            .children()
-            .should('have.length', body.length);
-        },
-      );
+      cy.wait('@getPublishedItemsInCategories').then(({ response }) => {
+        cy.get(`#${ALL_COLLECTIONS_GRID_ID}`)
+          .children()
+          .should('have.length', response?.body.length);
+      });
 
       // clear selection
       cy.get(`#${CLEAR_EDUCATION_LEVEL_SELECTION_ID}`).click();

@@ -1,4 +1,6 @@
-import { ITEM_PUBLISHED_TAG } from '../fixtures/itemTags';
+import { Member } from '@graasp/sdk';
+
+import { MockItem } from './types';
 
 // use simple id format for tests
 export const ID_FORMAT = '(?=.*[0-9])(?=.*[a-zA-Z])([a-z0-9-]+)';
@@ -8,16 +10,16 @@ export const ID_FORMAT = '(?=.*[0-9])(?=.*[a-zA-Z])([a-z0-9-]+)';
  * This function mainly allows for endpoints to have fixed chain of strings
  * as well as regex descriptions for data validation, eg /items/item-login?parentId=<id>
  *
- * @param {string} string
+ * @param {string} inputString
  * @param {string[]} characters
  * @param {boolean} parseQueryString
  * @returns regex string of the given string
  */
 export const parseStringToRegExp = (
-  string,
+  inputString: string,
   { characters = ['?', '.'], parseQueryString = false } = {},
 ) => {
-  const [originalPathname, ...querystrings] = string.split('?');
+  const [originalPathname, ...querystrings] = inputString.split('?');
   let pathname = originalPathname;
   let querystring = querystrings.join('?');
   characters.forEach((c) => {
@@ -62,16 +64,14 @@ export const DEFAULT_PUT = {
   credentials: 'include',
 };
 
-export const getItemById = (items, id) =>
+export const getItemById = (items: MockItem[], id?: string) =>
   items.find(({ id: thisId }) => id === thisId);
 
-export const getMemberById = (members, id) =>
+export const getMemberById = (members: Member[], id: string) =>
   members.find(({ id: thisId }) => id === thisId);
 
-export const getRootPublishedItems = (items) =>
-  items.filter(({ path, tags }) =>
-    tags.find(
-      ({ tagId, itemPath }) =>
-        tagId === ITEM_PUBLISHED_TAG.id && itemPath === path,
-    ),
+export const getRootPublishedItems = (items: MockItem[]) =>
+  items.filter(
+    ({ publishedInfo, path }) =>
+      publishedInfo?.isPublished && publishedInfo?.rootPath === path,
   );

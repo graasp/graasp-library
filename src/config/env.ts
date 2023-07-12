@@ -3,8 +3,6 @@ import getConfig from 'next/config';
 
 const { publicRuntimeConfig } = getConfig();
 
-export const PUBLISHED_TAG_ID =
-  publicRuntimeConfig.NEXT_PUBLIC_PUBLISHED_TAG_ID;
 export const SENTRY_DSN = publicRuntimeConfig.NEXT_PUBLIC_SENTRY_DSN;
 export const GRAASP_AUTH_HOST =
   publicRuntimeConfig.NEXT_PUBLIC_GRAASP_AUTH_HOST;

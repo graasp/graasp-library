@@ -7,10 +7,10 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
+import { ItemType } from '@graasp/sdk';
 import { ItemRecord } from '@graasp/sdk/frontend';
 import { LIBRARY } from '@graasp/translations';
 
-import { ITEM_TYPES } from '../../config/constants';
 import { CHILDREN_ITEMS_GRID_ID } from '../../config/selectors';
 import { QueryClientContext } from '../QueryClientContext';
 import { FileChildrenCard, FolderChildrenCard } from './ChildrenCard';
@@ -139,7 +139,7 @@ const Items: React.FC<ItemsProps> = ({ parentId, lang, isTopLevel }) => {
         items.size > 0 && (
           <CollapsibleItemCategory defaultItemCount={itemToShow} items={items}>
             {(item) =>
-              item.type === ITEM_TYPES.FOLDER ? (
+              item.type === ItemType.FOLDER ? (
                 <FolderChildrenCard key={item.id} item={item} />
               ) : (
                 <FileChildrenCard key={item.id} item={item} lang={lang} />

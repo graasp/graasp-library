@@ -20,9 +20,7 @@ export const BLOCK_MATH_REGEX = /(\\\[(.*?)\\])/g;
 export const INLINE_MATH_REGEX = /(\\\((.*?)\\\))/g;
 
 export const ITEM_TYPES = {
-  APPLICATION: 'Application',
   FOLDER: 'folder',
-  RESOURCE: 'Resource',
 };
 
 export const MIME_TYPES = {

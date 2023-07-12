@@ -23,13 +23,9 @@ module.exports = (on, config) => {
   const newConfig = {
     ...config,
     env: {
-      'cypress-react-selector': {
-        root: '#root',
-      },
       API_HOST: process.env.NEXT_PUBLIC_API_HOST,
       AUTHENTICATION_HOST: process.env.NEXT_PUBLIC_GRAASP_AUTH_HOST,
       GRAASPER_ID: process.env.NEXT_PUBLIC_GRAASPER_ID,
-      PUBLISHED_TAG_ID: process.env.NEXT_PUBLIC_PUBLISHED_TAG_ID,
     },
   };
   require('@cypress/code-coverage/task')(on, newConfig);

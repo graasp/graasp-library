@@ -40,7 +40,6 @@ You will also need to create a file called `.env.local` with the following conte
 
 ```dotenv
 NEXT_PUBLIC_GOOGLE_ANALYTICS_ID=<value>
-NEXT_PUBLIC_PUBLISHED_TAG_ID=<value>
 NEXT_PUBLIC_API_HOST=<value>
 NEXT_PUBLIC_GRAASP_AUTH_HOST=<value>
 NEXT_PUBLIC_GRAASP_PERFORM_HOST=<value>

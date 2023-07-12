@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Box } from '@mui/material';
+import { Box, SxProps } from '@mui/material';
 
 import { ThumbnailSize } from '@graasp/sdk';
 import { LIBRARY } from '@graasp/translations';
@@ -22,11 +22,16 @@ const { Avatar } = {
 
 type Props = {
   id?: string;
+  memberId?: string;
   size?: number;
+  sx?: SxProps;
 };
 
 const MemberAvatar = React.forwardRef<HTMLDivElement, Props>(
-  ({ id, size = SMALL_AVATAR_ICON_SIZE, ...otherProps }, ref): JSX.Element => {
+  (
+    { id, memberId, size = SMALL_AVATAR_ICON_SIZE, ...otherProps },
+    ref,
+  ): JSX.Element => {
     const { hooks } = useContext(QueryClientContext);
     const { t } = useTranslation();
     const { data: member, isLoading, isFetching } = hooks.useMember(id);
@@ -35,13 +40,13 @@ const MemberAvatar = React.forwardRef<HTMLDivElement, Props>(
       isLoading: isLoadingAvatar,
       isFetching: isFetchingAvatar,
     } = hooks.useAvatarUrl({
-      id,
+      id: memberId,
       size: ThumbnailSize.Small,
     });
 
     return (
       // eslint-disable-next-line react/jsx-props-no-spreading
-      <Box ref={ref} {...otherProps}>
+      <Box id={id} ref={ref} {...otherProps}>
         <Avatar
           isLoading={
             isLoading || isLoadingAvatar || isFetchingAvatar || isFetching

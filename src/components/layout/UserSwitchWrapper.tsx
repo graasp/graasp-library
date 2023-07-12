@@ -55,7 +55,11 @@ const UserSwitchWrapper: FC<Props> = ({ ButtonContent }) => {
         redirectPath={SIGN_IN_ROUTE}
         useMembers={hooks.useMembers}
         renderAvatar={(m) => (
-          <MemberAvatar size={MEMBER_AVATAR_ICON_SIZE} id={m?.id} />
+          <MemberAvatar
+            sx={{ mr: 1 }}
+            size={MEMBER_AVATAR_ICON_SIZE}
+            memberId={m?.id}
+          />
         )}
       />
     </Box>

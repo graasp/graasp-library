@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
 
-import { isChildOf } from '@graasp/sdk';
+import { PermissionLevel, isChildOf } from '@graasp/sdk';
 import { DEFAULT_LANG } from '@graasp/translations';
 
 import { buildCollectionRoute } from '../../../src/config/routes';
@@ -15,7 +15,6 @@ import {
 import { buildPublicAndPrivateEnvironments } from '../../fixtures/environment';
 import { PUBLISHED_ITEMS } from '../../fixtures/items';
 import { MEMBERS } from '../../fixtures/members';
-import { PERMISSION_LEVELS } from '../../support/constants';
 
 describe('Collection Summary', () => {
   buildPublicAndPrivateEnvironments().forEach((environment) => {
@@ -27,7 +26,7 @@ describe('Collection Summary', () => {
 
       // current member
       const member = Object.values(MEMBERS).find(
-        ({ name }) => name === environment.currentMember.name,
+        ({ name }) => name === environment.currentMember?.name,
       );
 
       // name
@@ -43,7 +42,7 @@ describe('Collection Summary', () => {
 
       // author
       const authorName = Object.values(MEMBERS).find(
-        ({ id }) => id === item.creator,
+        ({ id }) => id === item.creator?.id,
       )?.name;
       cy.get(`#${SUMMARY_AUTHOR_CONTAINER_ID}`).should('contain', authorName);
 
@@ -51,9 +50,12 @@ describe('Collection Summary', () => {
       if (item.createdAt) {
         cy.get(`#${SUMMARY_CREATED_AT_CONTAINER_ID}`).should(
           'contain',
-          DateTime.fromISO(item.createdAt).toLocaleString(DateTime.DATE_FULL, {
-            locale: member?.extra?.lang || DEFAULT_LANG,
-          }),
+          DateTime.fromMillis(item.createdAt.getTime()).toLocaleString(
+            DateTime.DATE_FULL,
+            {
+              locale: member?.extra?.lang || DEFAULT_LANG,
+            },
+          ),
         );
       }
 
@@ -61,19 +63,23 @@ describe('Collection Summary', () => {
       if (item.updatedAt) {
         cy.get(`#${SUMMARY_LAST_UPDATE_CONTAINER_ID}`).should(
           'contain',
-          DateTime.fromISO(item.updatedAt).toLocaleString(DateTime.DATE_FULL, {
-            locale: member?.extra?.lang || DEFAULT_LANG,
-          }),
+          DateTime.fromMillis(item.updatedAt.getTime()).toLocaleString(
+            DateTime.DATE_FULL,
+            {
+              locale: member?.extra?.lang || DEFAULT_LANG,
+            },
+          ),
         );
       }
 
       // contributors
-      const contributors = item.memberships.filter(
-        ({ permission, memberId }) =>
-          permission === PERMISSION_LEVELS.ADMIN && memberId !== item.creator,
+      const contributors = item.memberships?.filter(
+        ({ permission, member: membershipMember }) =>
+          permission === PermissionLevel.Admin &&
+          membershipMember.id !== item.creator?.id,
       );
-      contributors.forEach(({ memberId }) => {
-        cy.get(`#${buildContributorId(memberId)}`).should('exist');
+      contributors?.forEach(({ member: membershipMember }) => {
+        cy.get(`#${buildContributorId(membershipMember.id)}`).should('exist');
       });
     });
 
@@ -85,17 +91,20 @@ describe('Collection Summary', () => {
 
       // author
       const authorName = Object.values(MEMBERS).find(
-        ({ id }) => id === item.creator,
+        ({ id }) => id === item.creator?.id,
       )?.name;
       cy.get(`#${SUMMARY_AUTHOR_CONTAINER_ID}`).should('contain', authorName);
 
       // contributors
-      const contributors = item.memberships.filter(
-        ({ permission, memberId }) =>
-          permission === PERMISSION_LEVELS.ADMIN && memberId !== item.creator,
+      const contributors = item.memberships?.filter(
+        ({ permission, member: membershipMember }) =>
+          permission === PermissionLevel.Admin &&
+          membershipMember.id !== item.creator?.id,
       );
-      contributors.forEach(({ memberId }) => {
-        cy.get(`#${buildContributorId(memberId)}`).should('not.exist');
+      contributors?.forEach(({ member: membershipMember }) => {
+        cy.get(`#${buildContributorId(membershipMember.id)}`).should(
+          'not.exist',
+        );
       });
     });
   });

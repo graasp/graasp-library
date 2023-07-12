@@ -60,7 +60,6 @@ export const useCopyAction = (id?: string) => {
       open={showTreeModal}
       onClose={() => setShowTreeModal(false)}
       onConfirm={copy}
-      itemIds={[id]}
     />
   );
 

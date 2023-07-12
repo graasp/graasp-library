@@ -42,16 +42,7 @@ const Authorship = ({ itemId, author, displayCoEditors }: Props) => {
     ?.filter(({ member }) => member.id !== author?.id)
     ?.map(({ member }) => member);
 
-  const isAnyLoading = !author || isLoadingAuthorAvatar;
-
-  if (isAnyLoading) {
-    return (
-      <Stack direction="row" alignItems="center" spacing={1}>
-        <Skeleton variant="circular" width={30} height={30} />
-        <Skeleton variant="rounded" width={100} height={25} />
-      </Stack>
-    );
-  }
+  const isLoadingAuthor = !author || isLoadingAuthorAvatar;
 
   return (
     // wrapper div is necessary for grid to apply
@@ -62,17 +53,26 @@ const Authorship = ({ itemId, author, displayCoEditors }: Props) => {
         direction="row"
         alignItems="center"
       >
-        <Avatar
-          url={authorUrl ?? DEFAULT_MEMBER_THUMBNAIL}
-          alt={t(LIBRARY.AVATAR_ALT, { name: author?.name })}
-          isLoading={isLoadingAuthorAvatar}
-          component="avatar"
-          maxWidth={30}
-          maxHeight={30}
-          variant="circular"
-          sx={{ maxWidth: 30, maxHeight: 30 }}
-        />
-        <Typography variant="body1">{author?.name}</Typography>
+        {isLoadingAuthor ? (
+          <>
+            <Skeleton variant="circular" width={30} height={30} />
+            <Skeleton variant="rounded" width={100} height={25} />
+          </>
+        ) : (
+          <>
+            <Avatar
+              url={authorUrl ?? DEFAULT_MEMBER_THUMBNAIL}
+              alt={t(LIBRARY.AVATAR_ALT, { name: author?.name })}
+              isLoading={isLoadingAuthorAvatar}
+              component="avatar"
+              maxWidth={30}
+              maxHeight={30}
+              variant="circular"
+              sx={{ maxWidth: 30, maxHeight: 30 }}
+            />
+            <Typography variant="body1">{author?.name}</Typography>
+          </>
+        )}
 
         <Contributors
           contributors={contributors}

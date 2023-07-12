@@ -1,12 +1,12 @@
 import { HOME_ROUTE } from '../../src/config/routes';
 import { ALL_COLLECTIONS_HEADER_ID } from '../../src/config/selectors';
 import { PUBLISHED_ITEMS } from '../fixtures/items';
-import { SIGNED_OUT_MEMBER } from '../fixtures/members';
+import { CURRENT_USER } from '../fixtures/members';
 
 describe('Header', () => {
   describe('Signed In User', () => {
     beforeEach(() => {
-      cy.setUpApi({ items: PUBLISHED_ITEMS });
+      cy.setUpApi({ items: PUBLISHED_ITEMS, currentMember: CURRENT_USER });
       cy.visit(HOME_ROUTE);
     });
 
@@ -18,7 +18,7 @@ describe('Header', () => {
 
   describe('Signed Out User', () => {
     beforeEach(() => {
-      cy.setUpApi({ items: PUBLISHED_ITEMS, currentMember: SIGNED_OUT_MEMBER });
+      cy.setUpApi({ items: PUBLISHED_ITEMS });
       cy.visit(HOME_ROUTE);
     });
 

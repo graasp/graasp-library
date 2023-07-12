@@ -1,22 +1,17 @@
-import {
-  SAMPLE_CATEGORIES,
-  SAMPLE_CATEGORY_TYPES,
-} from '../fixtures/categories';
-import { SAMPLE_FLAGS } from '../fixtures/flags';
+import { SAMPLE_CATEGORIES } from '../fixtures/categories';
 import { ITEM_LIKES } from '../fixtures/itemLikes';
 import { DEFAULT_TAGS } from '../fixtures/itemTags';
 import { PUBLISHED_ITEMS } from '../fixtures/items';
 import { MEMBERS } from '../fixtures/members';
 import {
+  mockGetAllPublishedItems,
   mockGetAvatarUrl,
   mockGetCategories,
-  mockGetCategoryTypes,
   mockGetChildren,
   mockGetCurrentMember,
-  mockGetFlags,
   mockGetItem,
   mockGetItemCategories,
-  mockGetItemMembershipsForItem,
+  mockGetItemMembershipsForItems,
   mockGetItemTags,
   mockGetItemThumbnailUrl,
   mockGetLikedItems,
@@ -34,17 +29,19 @@ Cypress.Commands.add(
   ({
     items,
     members = Object.values(MEMBERS),
-    currentMember = MEMBERS.ANNA,
+    currentMember,
     categories = SAMPLE_CATEGORIES,
-    categoryTypes = SAMPLE_CATEGORY_TYPES,
     getCurrentMemberError = false,
     getCategoriesError = false,
     getItemCategoriesError = false,
-    flags = SAMPLE_FLAGS,
     searchResultItems = PUBLISHED_ITEMS,
     searchError = false,
     itemLikes = ITEM_LIKES,
     getLikedItemsError = false,
+    getItemError = false,
+    getTagsError = false,
+    getItemThumbnailError = false,
+    getPublishedItemsInCategoriesError = false,
     tags = DEFAULT_TAGS,
   } = {}) => {
     const cachedMembers = JSON.parse(JSON.stringify(members));
@@ -52,6 +49,8 @@ Cypress.Commands.add(
     if (currentMember?.id) {
       cy.setCookie('session', currentMember?.id);
     }
+
+    mockGetAllPublishedItems({ items });
 
     mockGetOwnItems({ items, currentMember });
 
@@ -63,43 +62,31 @@ Cypress.Commands.add(
 
     mockGetCurrentMember(currentMember, getCurrentMemberError);
 
-    mockGetItem({ items, currentMember });
+    mockGetItem({ items, currentMember }, getItemError);
 
-    mockGetItemTags({ tags });
+    mockGetItemTags({ tags }, getTagsError);
 
     mockGetAvatarUrl({ members, currentMember });
 
-    mockGetItemThumbnailUrl({ items, currentMember });
+    mockGetItemThumbnailUrl({ items, currentMember }, getItemThumbnailError);
 
     mockSignInRedirection();
 
     mockSignOut();
 
-    mockGetCategoryTypes(categoryTypes);
-
     mockGetCategories(categories, getCategoriesError);
 
     mockGetItemCategories({ items, currentMember }, getItemCategoriesError);
 
-    mockGetPublishedItemsInCategories({ items });
+    mockGetPublishedItemsInCategories(
+      { items },
+      getPublishedItemsInCategoriesError,
+    );
 
-    mockGetItemMembershipsForItem({ items, currentMember });
+    mockGetItemMembershipsForItems({ items, currentMember });
 
-    mockGetFlags({ flags, currentMember });
     mockSearch({ searchResultItems }, searchError);
 
     mockGetLikedItems({ itemLikes }, getLikedItemsError);
   },
-);
-
-Cypress.Commands.add(
-  'checkContentInElementInIframe',
-  (iframeSelector, elementSelector, text) =>
-    cy
-      .get(iframeSelector)
-      .then(($iframe) =>
-        cy
-          .wrap($iframe.contents().find(elementSelector))
-          .should('contain', text),
-      ),
 );

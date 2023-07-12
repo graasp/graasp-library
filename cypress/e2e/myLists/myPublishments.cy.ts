@@ -3,7 +3,6 @@ import {
   MY_PUBLISHMENTS_COLLECTIONS_ID,
   buildMyListNavigationTabId,
 } from '../../../src/config/selectors';
-import { ITEM_PUBLISHED_TAG } from '../../fixtures/itemTags';
 import {
   PUBLISHED_ITEMS,
   getNumberOfOwnPublishedItems,
@@ -20,9 +19,6 @@ describe('My Published Items', () => {
       // click my publishment tab
       cy.get(`#${buildMyListNavigationTabId('myPublishments')}`).click();
 
-      cy.wait('@getPublicItemsWithTags').then(({ request: { url } }) => {
-        expect(url).to.contain(ITEM_PUBLISHED_TAG.id);
-      });
       cy.get(`#${MY_PUBLISHMENTS_COLLECTIONS_ID}`)
         .children()
         .should('have.length', getNumberOfOwnPublishedItems(CURRENT_USER.id));

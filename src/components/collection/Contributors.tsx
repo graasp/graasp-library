@@ -8,6 +8,7 @@ import { Stack, Tooltip, Typography } from '@mui/material';
 import { MemberRecord } from '@graasp/sdk/frontend';
 import { LIBRARY } from '@graasp/translations';
 
+import { buildContributorId } from '../../config/selectors';
 import MemberAvatar from '../layout/MemberAvatar';
 
 type Props = {
@@ -36,7 +37,7 @@ const Contributors = ({ contributors, displayContributors }: Props) => {
           const { id, name: contributorName } = contributor;
           return (
             <Tooltip title={contributorName} key={id} arrow>
-              <MemberAvatar id={id} />
+              <MemberAvatar id={buildContributorId(id)} memberId={id} />
             </Tooltip>
           );
         })}
