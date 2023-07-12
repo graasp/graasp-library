@@ -127,12 +127,10 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
           </Box>
         </Grid>
         <Grid item xs={12} sm={8}>
-          <Grid
+          <Stack
             marginBottom={{ xs: 3, sm: 0 }}
-            item
             justifyContent="space-between"
-            flexDirection={{ xs: 'column', sm: 'row' }}
-            display="flex"
+            direction={{ xs: 'column', sm: 'row' }}
             alignItems={{ xs: 'start', sm: 'start' }}
           >
             <Typography
@@ -150,8 +148,8 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
               />
             </Typography>
             <SummaryActionButtons item={collection} isLogged={isLogged} />
-          </Grid>
-          <Grid item>
+          </Stack>
+          <Stack>
             {tags?.size ? (
               <div id={SUMMARY_TAGS_CONTAINER_ID}>
                 {tags?.map((text) => (
@@ -161,60 +159,56 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
             ) : (
               <div style={{ marginTop: 22 }} />
             )}
-          </Grid>
-          <Grid item>
-            <Description
-              isLoading={isLoading}
-              description={collection?.description || ''}
-            />
-          </Grid>
-          <Grid item>
-            <Stack
-              spacing={2}
-              direction="row"
-              divider={<Divider orientation="vertical" flexItem />}
-            >
-              <Box display="flex" alignItems="center">
-                <Authorship
-                  itemId={collection?.id}
-                  author={collection?.creator}
-                  displayCoEditors={collection?.settings?.displayCoEditors}
-                />
-              </Box>
-              <Box display="flex" alignItems="center">
-                <Grid item justifyContent="row" marginLeft={1} marginTop={0}>
-                  <Typography
-                    fontWeight="bold"
-                    display="flex"
-                    alignItems="center"
-                    color="primary"
-                  >
-                    <Tooltip title="Views" arrow placement="bottom">
-                      <span style={{ display: 'flex', alignItems: 'center' }}>
-                        {views}
-                        <Visibility color="primary" style={{ marginLeft: 5 }} />
-                      </span>
-                    </Tooltip>
-                    <span style={{ margin: '0 10px' }}>
-                      {String.fromCharCode(183)}
+          </Stack>
+          <Description
+            isLoading={isLoading}
+            description={collection?.description || ''}
+          />
+          <Stack
+            spacing={2}
+            direction="row"
+            divider={<Divider orientation="vertical" flexItem />}
+          >
+            <Box display="flex" alignItems="center">
+              <Authorship
+                itemId={collection?.id}
+                author={collection?.creator}
+                displayCoEditors={collection?.settings?.displayCoEditors}
+              />
+            </Box>
+            <Box display="flex" alignItems="center">
+              <Grid item justifyContent="row" marginLeft={1} marginTop={0}>
+                <Typography
+                  fontWeight="bold"
+                  display="flex"
+                  alignItems="center"
+                  color="primary"
+                >
+                  <Tooltip title="Views" arrow placement="bottom">
+                    <span style={{ display: 'flex', alignItems: 'center' }}>
+                      {views}
+                      <Visibility color="primary" style={{ marginLeft: 5 }} />
                     </span>
-                    <Tooltip title="Likes" arrow placement="bottom">
-                      <span style={{ display: 'flex', alignItems: 'center' }}>
-                        {likes}
-                        <Favorite color="primary" style={{ marginLeft: 5 }} />
-                      </span>
-                    </Tooltip>
-                  </Typography>
-                </Grid>
-              </Box>
-              <Box>
-                <Badges
-                  name={collection?.name}
-                  description={collection?.description}
-                />
-              </Box>
-            </Stack>
-          </Grid>
+                  </Tooltip>
+                  <span style={{ margin: '0 10px' }}>
+                    {String.fromCharCode(183)}
+                  </span>
+                  <Tooltip title="Likes" arrow placement="bottom">
+                    <span style={{ display: 'flex', alignItems: 'center' }}>
+                      {likes}
+                      <Favorite color="primary" style={{ marginLeft: 5 }} />
+                    </span>
+                  </Tooltip>
+                </Typography>
+              </Grid>
+            </Box>
+            <Box>
+              <Badges
+                name={collection?.name}
+                description={collection?.description}
+              />
+            </Box>
+          </Stack>
         </Grid>
       </Grid>
     </Container>

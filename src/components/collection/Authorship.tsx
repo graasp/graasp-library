@@ -45,14 +45,8 @@ const Authorship = ({ itemId, author, displayCoEditors }: Props) => {
   const isLoadingAuthor = !author || isLoadingAuthorAvatar;
 
   return (
-    // wrapper div is necessary for grid to apply
-    <div>
-      <Stack
-        id={SUMMARY_AUTHOR_CONTAINER_ID}
-        spacing={1}
-        direction="row"
-        alignItems="center"
-      >
+    <Stack id={SUMMARY_AUTHOR_CONTAINER_ID} direction="row" alignItems="center">
+      <Stack direction="row" alignItems="center" spacing={1}>
         {isLoadingAuthor ? (
           <>
             <Skeleton variant="circular" width={30} height={30} />
@@ -73,13 +67,13 @@ const Authorship = ({ itemId, author, displayCoEditors }: Props) => {
             <Typography variant="body1">{author?.name}</Typography>
           </>
         )}
-
-        <Contributors
-          contributors={contributors}
-          displayContributors={displayCoEditors ?? true}
-        />
       </Stack>
-    </div>
+
+      <Contributors
+        contributors={contributors}
+        displayContributors={displayCoEditors ?? true}
+      />
+    </Stack>
   );
 };
 

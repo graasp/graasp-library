@@ -130,7 +130,6 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
       // clear selection
       cy.get(`#${CLEAR_FILTER_POPPER_BUTTON_ID}`).click();
 
-      cy.wait('@getAllPublishedItems');
       // check default display
       cy.get(`#${ALL_COLLECTIONS_GRID_ID}`)
         .children()

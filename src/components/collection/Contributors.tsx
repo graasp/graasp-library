@@ -29,7 +29,7 @@ const Contributors = ({ contributors, displayContributors }: Props) => {
 
   return (
     <Stack direction="row" alignItems="center">
-      <Typography variant="subtitle2" mx={2} color="primary" fontWeight="bold">
+      <Typography variant="subtitle2" mx={1} color="primary" fontWeight="bold">
         {t(LIBRARY.CONTRIBUTORS_TITLE)}
       </Typography>
       <AvatarGroup max={8}>
