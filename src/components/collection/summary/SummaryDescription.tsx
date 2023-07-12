@@ -59,7 +59,7 @@ const Description: React.FC<DescriptionProps> = ({
   if (description) {
     // Case distinction to allow the show more button to be rendered inline.
     return (
-      <>
+      <Box>
         <ContentDescription
           content={description}
           collapsed={collapsedDescription}
@@ -74,7 +74,7 @@ const Description: React.FC<DescriptionProps> = ({
             ? t(LIBRARY.SUMMARY_DESCRIPTION_SHOW_MORE)
             : t(LIBRARY.SUMMARY_DESCRIPTION_SHOW_LESS)}
         </Button>
-      </>
+      </Box>
     );
   }
 

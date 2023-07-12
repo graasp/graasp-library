@@ -9,7 +9,6 @@ import {
   Chip,
   Container,
   Divider,
-  Grid,
   Stack,
   Tooltip,
   Typography,
@@ -18,6 +17,7 @@ import {
 import { ThumbnailSize } from '@graasp/sdk';
 import { ItemLikeRecord, ItemRecord } from '@graasp/sdk/frontend';
 
+import { GRAASP_COLOR } from '../../../config/constants';
 import {
   ITEM_SUMMARY_TITLE_ID,
   SUMMARY_TAGS_CONTAINER_ID,
@@ -92,53 +92,51 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
 
   return (
     <Container maxWidth="lg">
-      <Grid container columnSpacing={6} alignItems="start">
-        <Grid
-          item
-          xs={12}
-          sm={4}
-          md={4}
-          mb={4}
-          alignItems="center"
-          justifyContent="center"
+      <Stack
+        direction={{ xs: 'column', sm: 'row' }}
+        spacing={{ xs: 2, sm: 6 }}
+        alignItems={{ xs: 'center', sm: 'start' }}
+      >
+        <Box
+          sx={{
+            // '& .MuiPaper-root:has(img[src$=".svg"])': {
+            '& .MuiPaper-root': {
+              border: '1px solid #ddd',
+              boxShadow: 'none',
+            },
+          }}
+          width={{ xs: '90%', sm: '30%' }}
         >
-          <Box
-            sx={{
-              // '& .MuiPaper-root:has(img[src$=".svg"])': {
-              '& .MuiPaper-root': {
-                border: '1px solid #ddd',
-                boxShadow: 'none',
-              },
-            }}
-          >
-            <StyledCard id={collection?.id}>
-              {isLoading ? (
-                <Skeleton variant="rectangular" width="100%">
-                  <CardMedia name={collection?.name} />
-                </Skeleton>
-              ) : (
-                <CardMedia
-                  itemId={collection?.id}
-                  name={collection?.name}
-                  size={ThumbnailSize.Original}
-                />
-              )}
-            </StyledCard>
-          </Box>
-        </Grid>
-        <Grid item xs={12} sm={8}>
+          <StyledCard id={collection?.id}>
+            {isLoading ? (
+              <Skeleton variant="rectangular" width="100%">
+                <CardMedia name={collection?.name} />
+              </Skeleton>
+            ) : (
+              <CardMedia
+                itemId={collection?.id}
+                name={collection?.name}
+                size={ThumbnailSize.Original}
+              />
+            )}
+          </StyledCard>
+        </Box>
+        <Stack direction="column" spacing={1} width={{ xs: '90%', sm: '70%' }}>
           <Stack
-            marginBottom={{ xs: 3, sm: 0 }}
             justifyContent="space-between"
-            direction={{ xs: 'column', sm: 'row' }}
+            direction="row"
+            flexWrap="wrap"
             alignItems={{ xs: 'start', sm: 'start' }}
           >
-            <Typography
-              variant="h1"
-              fontSize={{ xs: '1.7em', sm: '2em' }}
-              id={ITEM_SUMMARY_TITLE_ID}
-            >
-              {truncatedName}
+            <Stack direction="row" alignItems="center" spacing={1} minWidth={0}>
+              <Typography
+                variant="h1"
+                noWrap
+                fontSize={{ xs: '1.7em', sm: '2em' }}
+                id={ITEM_SUMMARY_TITLE_ID}
+              >
+                {truncatedName}
+              </Typography>
               <LikeButton
                 ariaLabel="like"
                 color="primary"
@@ -146,71 +144,85 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
                 handleLike={handleLike}
                 handleUnlike={handleUnlike}
               />
-            </Typography>
+            </Stack>
             <SummaryActionButtons item={collection} isLogged={isLogged} />
           </Stack>
-          <Stack>
-            {tags?.size ? (
-              <div id={SUMMARY_TAGS_CONTAINER_ID}>
-                {tags?.map((text) => (
-                  <Chip key={text} label={text} component={Typography} mr={1} />
-                ))}
-              </div>
-            ) : (
-              <div style={{ marginTop: 22 }} />
-            )}
+          <Stack
+            id={SUMMARY_TAGS_CONTAINER_ID}
+            direction="row"
+            flexWrap="wrap"
+            spacing={1}
+          >
+            {tags?.size &&
+              tags?.map((text) => <Chip key={text} label={text} />)}
           </Stack>
           <Description
             isLoading={isLoading}
             description={collection?.description || ''}
           />
           <Stack
-            spacing={2}
+            spacing={{ xs: 1, md: 2 }}
+            useFlexGap
+            flexWrap="wrap"
             direction="row"
             divider={<Divider orientation="vertical" flexItem />}
           >
-            <Box display="flex" alignItems="center">
-              <Authorship
-                itemId={collection?.id}
-                author={collection?.creator}
-                displayCoEditors={collection?.settings?.displayCoEditors}
-              />
-            </Box>
-            <Box display="flex" alignItems="center">
-              <Grid item justifyContent="row" marginLeft={1} marginTop={0}>
-                <Typography
-                  fontWeight="bold"
-                  display="flex"
-                  alignItems="center"
-                  color="primary"
+            <Authorship
+              itemId={collection?.id}
+              author={collection?.creator}
+              displayCoEditors={collection?.settings?.displayCoEditors}
+            />
+            <Stack
+              direction="row"
+              alignItems="center"
+              px={1}
+              divider={
+                <Divider
+                  flexItem
+                  sx={{
+                    alignSelf: 'center',
+                    color: GRAASP_COLOR,
+                    fontWeight: 'bold',
+                  }}
                 >
-                  <Tooltip title="Views" arrow placement="bottom">
-                    <span style={{ display: 'flex', alignItems: 'center' }}>
-                      {views}
-                      <Visibility color="primary" style={{ marginLeft: 5 }} />
-                    </span>
-                  </Tooltip>
-                  <span style={{ margin: '0 10px' }}>
-                    {String.fromCharCode(183)}
-                  </span>
-                  <Tooltip title="Likes" arrow placement="bottom">
-                    <span style={{ display: 'flex', alignItems: 'center' }}>
-                      {likes}
-                      <Favorite color="primary" style={{ marginLeft: 5 }} />
-                    </span>
-                  </Tooltip>
-                </Typography>
-              </Grid>
-            </Box>
-            <Box>
-              <Badges
-                name={collection?.name}
-                description={collection?.description}
-              />
-            </Box>
+                  {String.fromCharCode(183)}
+                </Divider>
+              }
+            >
+              <Tooltip title="Views" arrow placement="bottom">
+                <Stack direction="row" alignItems="center">
+                  <Typography
+                    fontWeight="bold"
+                    display="flex"
+                    alignItems="center"
+                    color="primary"
+                  >
+                    {views}
+                  </Typography>
+                  <Visibility color="primary" style={{ marginLeft: 5 }} />
+                </Stack>
+              </Tooltip>
+              <Tooltip title="Likes" arrow placement="bottom">
+                <Stack direction="row" alignItems="center">
+                  <Typography
+                    fontWeight="bold"
+                    display="flex"
+                    alignItems="center"
+                    color="primary"
+                  >
+                    {likes}
+                  </Typography>
+                  <Favorite color="primary" style={{ marginLeft: 5 }} />
+                </Stack>
+              </Tooltip>
+            </Stack>
+            <Badges
+              name={collection?.name}
+              description={collection?.description}
+            />
           </Stack>
-        </Grid>
-      </Grid>
+        </Stack>
+      </Stack>
     </Container>
   );
 };
