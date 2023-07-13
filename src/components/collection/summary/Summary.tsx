@@ -42,7 +42,7 @@ export const getParentsIdsFromPath = (
     }
     [p] = els;
   }
-  const ids = p.replace(/_/g, '-').split('.');
+  const ids = p?.replace(/_/g, '-').split('.');
   return ids;
 };
 

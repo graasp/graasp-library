@@ -17,5 +17,5 @@ export const QUERY_CLIENT_OPTIONS: QueryClientConfig = {
   DOMAIN,
   notifier,
   SHOW_NOTIFICATIONS: true,
-  WS_HOST: `${GRAASP_API_HOST.replace('http', 'ws')}/ws`,
+  WS_HOST: `${GRAASP_API_HOST?.replace('http', 'ws')}/ws`,
 };
