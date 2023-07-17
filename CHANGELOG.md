@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.8.0](https://github.com/graasp/graasp-library/compare/v0.7.3...v0.8.0) (2023-07-17)
+
+
+### Features
+
+* refactor to typeorm ([#275](https://github.com/graasp/graasp-library/issues/275)) ([71c454a](https://github.com/graasp/graasp-library/commit/71c454ae4397b997ca833bd94fe67531b4f71a61))
+* rework homepage ([#270](https://github.com/graasp/graasp-library/issues/270)) ([04a3164](https://github.com/graasp/graasp-library/commit/04a3164ee60fc5f5796da0afa5d3926db6bfef73))
+
+
+### Bug Fixes
+
+* update deps and fix date ([f976845](https://github.com/graasp/graasp-library/commit/f97684544ba43323c040408f220da3ebe7fa4ea9))
+
 ## [0.7.3](https://github.com/graasp/graasp-library/compare/v0.7.2...v0.7.3) (2023-05-15)
 
 ### Bug Fixes
