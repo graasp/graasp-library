@@ -71,7 +71,7 @@ GraaspLibraryDocument.getInitialProps = async (ctx: DocumentContext) => {
       ) =>
         function EnhanceApp(props) {
           // eslint-disable-next-line react/jsx-props-no-spreading
-          return <App {...props} />;
+          return <App emotionCache={cache} {...props} />;
         },
     });
 
