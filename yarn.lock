@@ -2791,6 +2791,33 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/query-core@npm:^4.0.0-beta.1":
+  version: 4.29.25
+  resolution: "@tanstack/query-core@npm:4.29.25"
+  checksum: 5287e278cf0ef781c5bd238842243adc4430a43ffc9bee1963131726c5bdf6a67d38e122f45c3375232d05c5a335b1309026ce4252647bb3e4710b70bcebdbf5
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query@npm:4.0.5":
+  version: 4.0.5
+  resolution: "@tanstack/react-query@npm:4.0.5"
+  dependencies:
+    "@tanstack/query-core": ^4.0.0-beta.1
+    "@types/use-sync-external-store": ^0.0.3
+    use-sync-external-store: ^1.2.0
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-native: "*"
+  peerDependenciesMeta:
+    react-dom:
+      optional: true
+    react-native:
+      optional: true
+  checksum: c555d2dce19a57ba254855f19a06e4968ae21a08d5cd8890635d9771f77d5aef2e889b23a300b25d1e09b52edeb3fdf7b4579679c43cf9449692463a45a689b8
+  languageName: node
+  linkType: hard
+
 "@testing-library/dom@npm:^9.0.0":
   version: 9.3.0
   resolution: "@testing-library/dom@npm:9.3.0"
@@ -3152,6 +3179,13 @@ __metadata:
   dependencies:
     "@types/jest": "*"
   checksum: 92f81cefeacba3b5c06d4b3fbea0341fe2bcaa6e425c026ae262de39f1148c2588cf3003112aa4ac0880c3972ffb77641a863f3be71518d1d8080402c944e326
+  languageName: node
+  linkType: hard
+
+"@types/use-sync-external-store@npm:^0.0.3":
+  version: 0.0.3
+  resolution: "@types/use-sync-external-store@npm:0.0.3"
+  checksum: 161ddb8eec5dbe7279ac971531217e9af6b99f7783213566d2b502e2e2378ea19cf5e5ea4595039d730aa79d3d35c6567d48599f69773a02ffcff1776ec2a44e
   languageName: node
   linkType: hard
 
@@ -6814,6 +6848,7 @@ __metadata:
     "@mui/material": 5.13.5
     "@sentry/node": 7.56.0
     "@sentry/react": 7.56.0
+    "@tanstack/react-query": 4.0.5
     "@testing-library/jest-dom": 5.16.5
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
@@ -6860,7 +6895,6 @@ __metadata:
     react-ga4: 2.1.0
     react-helmet: 6.1.0
     react-i18next: 11.17.0
-    react-query: 3.39.3
     react-router-dom: 6.10.0
     react-toastify: 9.1.2
     standard-version: 9.5.0
@@ -11587,7 +11621,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"use-sync-external-store@npm:1.2.0":
+"use-sync-external-store@npm:1.2.0, use-sync-external-store@npm:^1.2.0":
   version: 1.2.0
   resolution: "use-sync-external-store@npm:1.2.0"
   peerDependencies:
