@@ -6859,7 +6859,7 @@ __metadata:
     react-dom: 17.0.2
     react-ga4: 2.1.0
     react-helmet: 6.1.0
-    react-i18next: 11.17.0
+    react-i18next: 11.17.4
     react-query: 3.39.3
     react-router-dom: 6.10.0
     react-toastify: 9.1.2
@@ -9802,9 +9802,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-i18next@npm:11.17.0":
-  version: 11.17.0
-  resolution: "react-i18next@npm:11.17.0"
+"react-i18next@npm:11.17.4":
+  version: 11.17.4
+  resolution: "react-i18next@npm:11.17.4"
   dependencies:
     "@babel/runtime": ^7.14.5
     html-escaper: ^2.0.2
@@ -9817,7 +9817,7 @@ __metadata:
       optional: true
     react-native:
       optional: true
-  checksum: 0ed6823af56f4133bf1664262206be6651cbea95e2f9275411d6346c6b8009e277b32fe60702fd06607d13b8979913bd013da702e25fa3f4e1bd73e403417296
+  checksum: f6ce17f5d987c1e31b17972898f9663b57448cb2ae36c20d5cc73689253d862c3d3af7f03e2c4fa623bed665c3b55e6ce0e7b44f08c79f9e8acdaa8f0a7fe33b
   languageName: node
   linkType: hard
 
