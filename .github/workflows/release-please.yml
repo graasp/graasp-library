@@ -10,6 +10,8 @@ on:
 jobs:
   release-please:
     runs-on: ubuntu-latest
+    outputs:
+      tag_name: ${{ steps.release.outputs.tag_name }}
     steps:
       - uses: google-github-actions/release-please-action@v3
         id: release
@@ -53,3 +55,26 @@ jobs:
         with:
           releases_created: ${{ steps.release.outputs.releases_created }}
           tag_name: ${{ steps.release.outputs.tag_name }}
+
+  sentry-release:
+    if: ${{ needs.release-please.result == "success" }}
+    needs: release-please
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: yarn install, build
+        run: yarn && yarn build
+
+      - name: Create Sentry release
+        uses: getsentry/action-release@v1
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+          SENTRY_PROJECT: graasp-library
+        with:
+          environment: production
+          sourcemaps: './build'
+          version: ${{ needs.release-please.outputs.tag_name }}
