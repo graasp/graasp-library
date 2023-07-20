@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.8.1](https://github.com/graasp/graasp-library/compare/v0.8.0...v0.8.1) (2023-07-20)
+
+
+### Bug Fixes
+
+* userswitch props ([#289](https://github.com/graasp/graasp-library/issues/289)) ([1884f36](https://github.com/graasp/graasp-library/commit/1884f361902a9d7965649332f99d17d9b45cd0c8))
+
 ## [0.8.0](https://github.com/graasp/graasp-library/compare/v0.7.3...v0.8.0) (2023-07-17)
 
 
