@@ -15,8 +15,9 @@ import { NEXT_PUBLIC_GRAASPER_ID } from '../../config/env';
 import { ALL_COLLECTIONS_ROUTE } from '../../config/routes';
 import {
   GRAASPER_COLLECTIONS_GRID_ID,
-  GRAASP_SELECTION_TITLE_ID, // MOST_LIKED_TITLE_ID,
-  // POPULAR_THIS_WEEK_TITLE_ID,
+  GRAASP_SELECTION_TITLE_ID,
+  MOST_LIKED_TITLE_ID,
+  POPULAR_THIS_WEEK_TITLE_ID,
 } from '../../config/selectors';
 import { QueryClientContext } from '../QueryClientContext';
 import ItemCollection from '../collection/ItemCollection';
@@ -53,10 +54,8 @@ const Home = () => {
   const { data: graasperCollections } = hooks.usePublishedItemsForMember(
     NEXT_PUBLIC_GRAASPER_ID,
   );
-  // todo: add hook to query-client
-  // const {data: mostLikedCollections } = hooks.useMostLikedCollections();
-  // todo: add call for most viewed collections (using actions)
-  // const {data: recentCollections } = hooks.useRecentCollections();
+  const { data: mostLikedCollections } = hooks.useMostLikedPublishedItems();
+  const { data: recentCollections } = hooks.useMostRecentPublishedItems();
 
   return (
     <StyledBackgroundContainer>
@@ -77,20 +76,17 @@ const Home = () => {
           collectionGridId={GRAASPER_COLLECTIONS_GRID_ID}
           collections={graasperCollections}
           title={t(LIBRARY.HOME_GRAASPER_COLLECTIONS_TITLE)}
-          sx={{ backgroundColor: 'white' }}
         />
-        {/* <ItemCollection
-          id={POPULAR_THIS_WEEK_TITLE_ID}
-          collections={recentCollections}
-          title={t(LIBRARY.HOME_POPULAR_THIS_WEEK_COLLECTIONS_TITLE)}
-          sx={{ backgroundColor: '#fafafa' }}
-        /> */}
-        {/* <ItemCollection
+        <ItemCollection
           id={MOST_LIKED_TITLE_ID}
           collections={mostLikedCollections}
           title={t(LIBRARY.HOME_MOST_LIKED_COLLECTIONS_TITLE)}
-          sx={{ backgroundColor: 'white' }}
-        /> */}
+        />
+        <ItemCollection
+          id={POPULAR_THIS_WEEK_TITLE_ID}
+          collections={recentCollections}
+          title={t(LIBRARY.HOME_POPULAR_THIS_WEEK_COLLECTIONS_TITLE)}
+        />
 
         <Box textAlign="center" marginBottom={20} marginTop={20}>
           <DiscoverButton

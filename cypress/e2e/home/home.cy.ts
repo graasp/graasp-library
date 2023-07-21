@@ -5,6 +5,8 @@ import { HOME_ROUTE } from '../../../src/config/routes';
 import {
   GRAASP_SELECTION_TITLE_ID,
   HOME_PAGE_TITLE_TEXT_ID,
+  MOST_LIKED_TITLE_ID,
+  POPULAR_THIS_WEEK_TITLE_ID,
   SECTION_TITLE_ID,
 } from '../../../src/config/selectors';
 import { buildPublicAndPrivateEnvironments } from '../../fixtures/environment';
@@ -27,16 +29,14 @@ describe('Home Page', () => {
         cy.get(`#${HOME_PAGE_TITLE_TEXT_ID}`)
           .should('be.visible')
           .and('have.text', 'Graasp Library');
-        // todo: add back when implemented
-        // cy.get(`#${POPULAR_THIS_WEEK_TITLE_ID} #${SECTION_TITLE_ID}`).should(
-        //   'have.text',
-        //   i18n.t(LIBRARY.HOME_POPULAR_THIS_WEEK_COLLECTIONS_TITLE),
-        // );
-        // todo: add back when implemented
-        // cy.get(`#${MOST_LIKED_TITLE_ID} #${SECTION_TITLE_ID}`).should(
-        //   'have.text',
-        //   i18n.t(LIBRARY.HOME_MOST_LIKED_COLLECTIONS_TITLE),
-        // );
+        cy.get(`#${POPULAR_THIS_WEEK_TITLE_ID} #${SECTION_TITLE_ID}`).should(
+          'have.text',
+          i18n.t(LIBRARY.HOME_POPULAR_THIS_WEEK_COLLECTIONS_TITLE),
+        );
+        cy.get(`#${MOST_LIKED_TITLE_ID} #${SECTION_TITLE_ID}`).should(
+          'have.text',
+          i18n.t(LIBRARY.HOME_MOST_LIKED_COLLECTIONS_TITLE),
+        );
 
         cy.get(`#${GRAASP_SELECTION_TITLE_ID} #${SECTION_TITLE_ID}`, {
           timeout: 4000,
