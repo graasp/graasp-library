@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.8.2](https://github.com/graasp/graasp-library/compare/v0.8.1...v0.8.2) (2023-07-21)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @graasp/query-client to v1.2.0 ([#303](https://github.com/graasp/graasp-library/issues/303)) ([85160d5](https://github.com/graasp/graasp-library/commit/85160d565a69bbd3e182a57893b556c1b80de1c5))
+* **deps:** update mui (non-major) ([#300](https://github.com/graasp/graasp-library/issues/300)) ([8513c60](https://github.com/graasp/graasp-library/commit/8513c60d828c462fc7f8bed37f935e750d03334a))
+* **deps:** update sentry packages to v7.59.3 ([#301](https://github.com/graasp/graasp-library/issues/301)) ([0228198](https://github.com/graasp/graasp-library/commit/0228198d3e684d4047a3c378b426ac10ae18ee99))
+* emotion cache ([#298](https://github.com/graasp/graasp-library/issues/298)) ([c1acf01](https://github.com/graasp/graasp-library/commit/c1acf01c5f99b9e6cf3c706831a51f95d7604271))
+
 ## [0.8.1](https://github.com/graasp/graasp-library/compare/v0.8.0...v0.8.1) (2023-07-20)
 
 
