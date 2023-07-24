@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.9.0](https://github.com/graasp/graasp-library/compare/v0.8.2...v0.9.0) (2023-07-24)
+
+
+### Features
+
+* add recent and most liked collections on home ([#317](https://github.com/graasp/graasp-library/issues/317)) ([e85782b](https://github.com/graasp/graasp-library/commit/e85782b48206fd16c6aae188125ad550665607fe))
+
+
+### Bug Fixes
+
+* **deps:** update sentry packages to v7.60.0 ([#310](https://github.com/graasp/graasp-library/issues/310)) ([16096ab](https://github.com/graasp/graasp-library/commit/16096ab2695a85b7f8e9e7e6663b80157b879f29))
+* release-please ([79d24c6](https://github.com/graasp/graasp-library/commit/79d24c6b7ae6b5db51072e64425fbd5988b3cb02))
+* remove unused workflows and update release-please to include sentry release ([#286](https://github.com/graasp/graasp-library/issues/286)) ([e63be94](https://github.com/graasp/graasp-library/commit/e63be94a3d927e7a1a0c123a01d3dbef28b386fe))
+
 ## [0.8.2](https://github.com/graasp/graasp-library/compare/v0.8.1...v0.8.2) (2023-07-21)
 
 
