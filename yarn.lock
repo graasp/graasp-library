@@ -1611,9 +1611,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/query-client@github:graasp/graasp-query-client#289-add-most-liked-collections":
-  version: 1.2.0
-  resolution: "@graasp/query-client@https://github.com/graasp/graasp-query-client.git#commit=c6ca248ad2ee482663827b8290d015883e87b555"
+"@graasp/query-client@npm:1.3.0":
+  version: 1.3.0
+  resolution: "@graasp/query-client@npm:1.3.0"
   dependencies:
     "@graasp/sdk": 1.1.3
     "@graasp/translations": 1.15.1
@@ -1626,7 +1626,7 @@ __metadata:
     uuid: 9.0.0
   peerDependencies:
     react: ^17.0.0
-  checksum: aa4100748545a3f4e72842d5fba2a5ff6379680c1e93b8fb503bfdbe2be7d6739031eda8c62b6d5436147959ae8c33eb36185af3ed9aa3b23550a438c69a2c73
+  checksum: 8fa729e84aaef149006defbcd12548aa506571e5ae42d0ade27709773681347513d59055451ae67e61250257ff0c377c44a3b4325b4566456836bff9dd1211ad
   languageName: node
   linkType: hard
 
@@ -6901,7 +6901,7 @@ __metadata:
     "@emotion/react": 11.11.1
     "@emotion/server": 11.11.0
     "@emotion/styled": 11.11.0
-    "@graasp/query-client": "github:graasp/graasp-query-client#289-add-most-liked-collections"
+    "@graasp/query-client": 1.3.0
     "@graasp/sdk": 1.1.3
     "@graasp/translations": 1.15.1
     "@graasp/ui": 3.2.5
