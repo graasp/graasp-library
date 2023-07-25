@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import ReactGA from 'react-ga4';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import CssBaseline from '@mui/material/CssBaseline';
 

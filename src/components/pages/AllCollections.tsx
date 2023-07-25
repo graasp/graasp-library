@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Box, Container } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 
 import { Context } from '@graasp/sdk';
 import { ItemRecord } from '@graasp/sdk/frontend';
@@ -83,14 +83,19 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
           <Box py={10}>
             <FilterHeader
               onFiltersChanged={onFiltersChanged}
+              onChangeSearch={setSearchKeywords}
               onSearch={setSearchKeywords}
               searchPreset={searchKeywords}
               isLoadingResults={false}
             />
           </Box>
         </Container>
-
         <Box m={2} flexGrow={2}>
+          {searchKeywords && (
+            <Typography color="palette.red">
+              Search results for: {searchKeywords}
+            </Typography>
+          )}
           <CollectionsGrid
             containerWidth="xl"
             collections={filteredCollections}

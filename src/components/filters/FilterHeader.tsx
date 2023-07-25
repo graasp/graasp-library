@@ -206,6 +206,7 @@ type Category = {
 
 type FilterHeaderProps = {
   onFiltersChanged: (selectedFilters: string[]) => void;
+  onChangeSearch?: (searchKeywords: string) => void;
   onSearch: (searchKeywords: string) => void;
   searchPreset?: string;
   isLoadingResults: boolean;
@@ -213,6 +214,7 @@ type FilterHeaderProps = {
 
 const FilterHeader: FC<FilterHeaderProps> = ({
   onFiltersChanged,
+  onChangeSearch,
   onSearch,
   searchPreset,
   isLoadingResults,
@@ -397,6 +399,7 @@ const FilterHeader: FC<FilterHeaderProps> = ({
         </Typography>
         <Search
           isLoading={isLoadingResults}
+          onChange={onChangeSearch}
           handleClick={onSearch}
           searchPreset={searchPreset}
         />

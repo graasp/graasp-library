@@ -10,15 +10,16 @@ import { HOME_SEARCH_BUTTON_ID, HOME_SEARCH_ID } from '../../config/selectors';
 
 type SearchProps = {
   searchPreset?: string;
+  onChange?: (input: string) => void;
   handleClick: (input: string) => void;
   isLoading: boolean;
 };
 
 const Search = forwardRef<HTMLDivElement, SearchProps>(function Search(
-  { searchPreset, handleClick, isLoading },
+  { searchPreset, onChange, handleClick, isLoading },
   ref,
 ) {
-  const [searchInput, setSearchInput] = useState<string>();
+  const [searchInput, setSearchInput] = useState(searchPreset || '');
 
   const { t } = useTranslation();
 
@@ -31,19 +32,19 @@ const Search = forwardRef<HTMLDivElement, SearchProps>(function Search(
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    setSearchInput(event.target.value);
+    const newValue = event.target.value;
+    setSearchInput(newValue);
+    onChange?.(newValue);
   };
 
   const handleSearch = () => {
-    if (searchInput) {
-      handleClick(searchInput.trim().toLowerCase());
-    }
+    handleClick(searchInput.trim().toLowerCase());
   };
 
   const handleSearchOnClick = (
     event: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    if (event.code === 'Enter' && searchInput) {
+    if (event.code === 'Enter') {
       handleClick(searchInput);
     }
   };

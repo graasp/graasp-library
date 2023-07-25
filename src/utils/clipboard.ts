@@ -1,8 +1,11 @@
 // eslint-disable-next-line import/prefer-default-export
-export const copyToClipboard = (string, { onSuccess, onError }) => {
+export const copyToClipboard = (
+  textToCopy: string,
+  { onSuccess, onError }: { onSuccess: () => void; onError: () => void },
+) => {
   // write to clipboard
   navigator.clipboard
-    .writeText(string)
+    .writeText(textToCopy)
     .then(() => onSuccess?.())
     .catch(() => onError?.());
 };
