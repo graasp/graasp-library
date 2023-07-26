@@ -97,7 +97,7 @@ const Home = () => {
             variant="contained"
             size="large"
           >
-            View more in the library
+            {t(LIBRARY.HOME_VIEW_MORE_IN_LIBRARY_BUTTON)}
           </DiscoverButton>
         </Box>
       </Main>

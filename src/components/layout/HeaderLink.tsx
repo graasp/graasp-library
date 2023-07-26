@@ -1,8 +1,6 @@
 import Link from 'next/link';
 
-import React, { FC } from 'react';
-
-import { Typography } from '@mui/material';
+import { Button } from '@mui/material';
 
 type Props = {
   href: string;
@@ -10,18 +8,16 @@ type Props = {
   text: string;
 };
 
-const HeaderLink: FC<Props> = ({ href, id, text }) => (
-  <Typography
-    sx={{ textDecoration: 'none' }}
+const HeaderLink = ({ href, id, text }: Props): JSX.Element => (
+  <Button
+    sx={{ textTransform: 'none', fontSize: 'large', marginLeft: 2 }}
     component={Link}
     href={href}
-    variant="h6"
-    color="inherit"
-    mx={2}
     id={id}
+    color="inherit"
   >
     {text}
-  </Typography>
+  </Button>
 );
 
 export default HeaderLink;
