@@ -89,20 +89,20 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
               isLoadingResults={false}
             />
           </Box>
+          <Box flexGrow={2}>
+            {searchKeywords && (
+              <Typography color="#999">
+                {t(LIBRARY.SEARCH_RESULTS_FOR_TEXT, { search: searchKeywords })}
+              </Typography>
+            )}
+            <CollectionsGrid
+              containerWidth="xl"
+              collections={filteredCollections}
+              id={ALL_COLLECTIONS_GRID_ID}
+              isLoading={isLoading}
+            />
+          </Box>
         </Container>
-        <Box m={2} flexGrow={2}>
-          {searchKeywords && (
-            <Typography color="palette.red">
-              Search results for: {searchKeywords}
-            </Typography>
-          )}
-          <CollectionsGrid
-            containerWidth="xl"
-            collections={filteredCollections}
-            id={ALL_COLLECTIONS_GRID_ID}
-            isLoading={isLoading}
-          />
-        </Box>
       </Main>
     </>
   );

@@ -43,6 +43,7 @@ const DiscoverButton = styled(Button)(({ theme }) => ({
   color: GRAASP_COLOR,
   fontSize: '1.2rem',
   padding: theme.spacing(3, 6),
+  textTransform: 'none',
 }));
 
 const Home = () => {

@@ -50,6 +50,7 @@ const Filter: React.FC<FilterProps> = ({
   selectedOptions,
   isLoading,
 }) => {
+  const { t } = useTranslation();
   const [showPopper, setShowPopper] = useState<boolean>(false);
 
   const togglePopper = () => {
@@ -84,7 +85,7 @@ const Filter: React.FC<FilterProps> = ({
       options
         ?.filter((it) => selectedOptions.includes(it.id))
         .map((it) => it.name)
-        .get(0) ?? 'No filter...';
+        .get(0) ?? t(LIBRARY.FILTER_DROPDOWN_NO_FILTER);
     return optionsStr;
   }, [selectedOptions, options]);
 
@@ -162,7 +163,7 @@ const Filter: React.FC<FilterProps> = ({
         ref={popper}
         open={showPopper}
         anchorEl={popperAnchor.current}
-        options={options ?? List()}
+        options={options}
         selectedOptions={selectedOptions}
         onOptionChange={onOptionChange}
         onClearOptions={onClearOptions}

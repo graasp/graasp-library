@@ -1,4 +1,3 @@
-import { t } from 'i18next';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
@@ -38,7 +37,7 @@ type Props = {
   collection: ItemRecord;
 };
 
-const StyledItemTag = styled(Box)<{ tagColor: string }>(({ tagColor }) => ({
+const StyledItemTag = styled(Box)(({ tagColor }: { tagColor: string }) => ({
   position: 'absolute',
   right: 10,
   top: 10,
