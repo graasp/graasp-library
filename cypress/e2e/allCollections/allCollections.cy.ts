@@ -1,7 +1,6 @@
 import { CategoryType } from '@graasp/sdk';
-import { CATEGORIES, LIBRARY, namespaces } from '@graasp/translations';
+import { LIBRARY, namespaces } from '@graasp/translations';
 
-import { CATEGORY_TYPES } from '../../../src/config/constants';
 import i18n from '../../../src/config/i18n';
 import { ALL_COLLECTIONS_ROUTE } from '../../../src/config/routes';
 import {
@@ -44,19 +43,17 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
       );
 
       // filter header
-      cy.get(`#${buildSearchFilterCategoryId(CATEGORY_TYPES.LEVEL)}`).should(
+      cy.get(`#${buildSearchFilterCategoryId(CategoryType.Level)}`).should(
         'contain.text',
-        i18n.t(CATEGORIES.EDUCATION_LEVEL, { ns: namespaces.categories }),
+        i18n.t(CategoryType.Level, { ns: namespaces.categories }),
       );
-      cy.get(
-        `#${buildSearchFilterCategoryId(CATEGORY_TYPES.DISCIPLINE)}`,
-      ).should(
+      cy.get(`#${buildSearchFilterCategoryId(CategoryType.Discipline)}`).should(
         'contain.text',
-        i18n.t(CATEGORIES.DISCIPLINE, { ns: namespaces.categories }),
+        i18n.t(CategoryType.Discipline, { ns: namespaces.categories }),
       );
-      cy.get(`#${buildSearchFilterCategoryId(CATEGORY_TYPES.LANGUAGE)}`).should(
+      cy.get(`#${buildSearchFilterCategoryId(CategoryType.Language)}`).should(
         'contain.text',
-        i18n.t(CATEGORIES.LANGUAGE, { ns: namespaces.categories }),
+        i18n.t(CategoryType.Language, { ns: namespaces.categories }),
       );
       // todo: add back when license filtering is enabled
       // cy.get(`#${buildSearchFilterCategoryId(CATEGORY_TYPES.LICENSE)}`).should(
@@ -104,10 +101,8 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
 
       cy.scrollTo('bottom');
 
-      cy.get(
-        `#${buildSearchFilterPopperButtonId(CATEGORY_TYPES.LEVEL)}`,
-      ).click();
-      cy.get(`#${buildSearchFilterCategoryId(CATEGORY_TYPES.LEVEL)}`).should(
+      cy.get(`#${buildSearchFilterPopperButtonId(CategoryType.Level)}`).click();
+      cy.get(`#${buildSearchFilterCategoryId(CategoryType.Level)}`).should(
         'be.visible',
       );
     });

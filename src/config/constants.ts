@@ -42,13 +42,6 @@ export const MAIL_BREAK_LINE = '%0D%0A';
 
 export const LEFT_MENU_WIDTH = 300;
 
-export const CATEGORY_TYPES = {
-  LEVEL: 'level',
-  DISCIPLINE: 'discipline',
-  LANGUAGE: 'language',
-  LICENSE: 'license',
-} as const;
-
 export const PICTURE_QUALITIES = {
   LARGE: 'large',
   MEDIUM: 'medium',
@@ -90,7 +83,6 @@ export const TREE_VIEW_MAX_WIDTH = 400;
 
 export const GRAASP_COLOR = '#5050D2';
 
-// values of CATEGORY_TYPES = "level", "discipline", etc
 export const CATEGORY_COLORS: Record<
   // eslint report an error that prettier auto-corrects in the other way, so we disable eslint here
   // eslint-disable-next-line prettier/prettier
