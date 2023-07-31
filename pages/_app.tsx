@@ -67,6 +67,14 @@ const GraaspLibraryApp = (props: MyAppProps) => {
 
     router.events.on('routeChangeComplete', handleRouteChange);
 
+    // remove cross domain tracking query params
+    const { pathname, query } = router;
+    const params = new URLSearchParams(query as Record<string, string>);
+    params.delete('_gl');
+    router.replace({ pathname, query: params.toString() }, undefined, {
+      shallow: true,
+    });
+
     // If the component is unmounted, unsubscribe
     // from the event with the `off` method:
     return () => {
