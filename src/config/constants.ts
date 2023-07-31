@@ -64,7 +64,8 @@ export const DEFAULT_THUMBNAIL_SIZE = ThumbnailSize.Medium;
 
 export const UrlSearch = {
   KeywordSearch: 's',
-  CategorySearch: 'cat',
+  CategorySearch: 'category',
+  GACrossDomainKey: '_gl',
 };
 
 export const MY_LIST_TAB_NAMES = {

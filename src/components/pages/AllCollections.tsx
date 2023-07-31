@@ -44,8 +44,10 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
     const { query } = router;
     if (query) {
       if (query[UrlSearch.KeywordSearch]) {
-        const keywordSearch = query[UrlSearch.KeywordSearch] as string;
-        setSearchKeywords(keywordSearch);
+        const keywordSearch = query[UrlSearch.KeywordSearch];
+        if (keywordSearch && !Array.isArray(keywordSearch)) {
+          setSearchKeywords(keywordSearch);
+        }
       }
       if (query[UrlSearch.CategorySearch]) {
         const categoryId = query[UrlSearch.CategorySearch];

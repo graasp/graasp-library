@@ -261,8 +261,6 @@ const FilterHeader: FC<FilterHeaderProps> = ({
   // ]);
 
   useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log(categoryPreset);
     setSelectedFilters(
       categoryPreset ? categoryPreset.map((f) => f.split(',')).flat() : [],
     );
