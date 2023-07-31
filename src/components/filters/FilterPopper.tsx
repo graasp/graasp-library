@@ -15,7 +15,7 @@ import {
 import { TransitionProps as MUITransitionProps } from '@mui/material/transitions';
 
 import { CategoryRecord } from '@graasp/sdk/frontend';
-import { LIBRARY } from '@graasp/translations';
+import { LIBRARY, namespaces } from '@graasp/translations';
 
 import {
   CLEAR_FILTER_POPPER_BUTTON_ID,
@@ -53,6 +53,7 @@ const FilterPopper = React.forwardRef<HTMLDivElement, FilterPopperProps>(
     },
     ref,
   ) => {
+    const { t: translateCategories } = useTranslation(namespaces.categories);
     const { t } = useTranslation();
     return (
       <Popper
@@ -91,7 +92,7 @@ const FilterPopper = React.forwardRef<HTMLDivElement, FilterPopperProps>(
                             }
                           />
                         }
-                        label={option.name}
+                        label={translateCategories(option.name)}
                         labelPlacement="end"
                       />
                     </FormControl>

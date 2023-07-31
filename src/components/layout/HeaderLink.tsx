@@ -10,7 +10,12 @@ type Props = {
 
 const HeaderLink = ({ href, id, text }: Props): JSX.Element => (
   <Button
-    sx={{ textTransform: 'none', fontSize: 'large', marginLeft: 2 }}
+    sx={{
+      textTransform: 'none',
+      fontSize: 'large',
+      marginLeft: 2,
+      ':hover': { bgcolor: 'rgba(0,0,0,0.1)' },
+    }}
     component={Link}
     href={href}
     id={id}
