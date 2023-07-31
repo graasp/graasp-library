@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.9.1](https://github.com/graasp/graasp-library/compare/v0.9.0...v0.9.1) (2023-07-31)
+
+
+### Bug Fixes
+
+* add search on keypress and update workflow to include show-notifications env ([#325](https://github.com/graasp/graasp-library/issues/325)) ([7cd5f98](https://github.com/graasp/graasp-library/commit/7cd5f9824ba86caaab808ed59e26b311aa137bfa))
+
 ## [0.9.0](https://github.com/graasp/graasp-library/compare/v0.8.2...v0.9.0) (2023-07-24)
 
 
