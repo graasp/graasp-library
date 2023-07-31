@@ -1,4 +1,4 @@
-import { ThumbnailSize } from '@graasp/sdk';
+import { CategoryType, ThumbnailSize } from '@graasp/sdk';
 
 export const APP_NAME = 'Graasp';
 export const GRAASP_LOGO_HEADER_HEIGHT = 40;
@@ -71,6 +71,7 @@ export const DEFAULT_THUMBNAIL_SIZE = ThumbnailSize.Medium;
 
 export const UrlSearch = {
   KeywordSearch: 's',
+  CategorySearch: 'cat',
 };
 
 export const MY_LIST_TAB_NAMES = {
@@ -93,11 +94,12 @@ export const GRAASP_COLOR = '#5050D2';
 export const CATEGORY_COLORS: Record<
   // eslint report an error that prettier auto-corrects in the other way, so we disable eslint here
   // eslint-disable-next-line prettier/prettier
-  (typeof CATEGORY_TYPES)[keyof typeof CATEGORY_TYPES],
+  (typeof CategoryType)[keyof typeof CategoryType] | 'license',
   string
 > = {
-  [CATEGORY_TYPES.DISCIPLINE]: '#4997DE',
-  [CATEGORY_TYPES.LANGUAGE]: '#9A49DE',
-  [CATEGORY_TYPES.LEVEL]: '#5050d2',
-  [CATEGORY_TYPES.LICENSE]: '#5050d2',
+  [CategoryType.Discipline]: '#4997DE',
+  [CategoryType.Language]: '#9A49DE',
+  [CategoryType.Level]: '#5050d2',
+  [CategoryType.Type]: '#E56548',
+  license: '#E56548',
 };

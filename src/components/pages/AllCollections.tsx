@@ -4,7 +4,8 @@ import { useRouter } from 'next/router';
 import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Box, Container, Typography } from '@mui/material';
+import { Close } from '@mui/icons-material';
+import { Box, Container, IconButton, Stack, Typography } from '@mui/material';
 
 import { Context } from '@graasp/sdk';
 import { ItemRecord } from '@graasp/sdk/frontend';
@@ -41,9 +42,17 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
 
   useEffect(() => {
     const { query } = router;
-    if (query && query[UrlSearch.KeywordSearch]) {
-      const keywordSearch = query[UrlSearch.KeywordSearch] as string;
-      setSearchKeywords(keywordSearch);
+    if (query) {
+      if (query[UrlSearch.KeywordSearch]) {
+        const keywordSearch = query[UrlSearch.KeywordSearch] as string;
+        setSearchKeywords(keywordSearch);
+      }
+      if (query[UrlSearch.CategorySearch]) {
+        const categoryId = query[UrlSearch.CategorySearch];
+        if (categoryId) {
+          setFilters(Array.isArray(categoryId) ? categoryId : [categoryId]);
+        }
+      }
     }
   }, []);
 
@@ -65,6 +74,14 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
     setFilters(newFilters);
   };
 
+  const clearAllSearch = () => {
+    setSearchKeywords('');
+    // clear search query params
+    const url = new URL(window.location.toString());
+    url.searchParams.delete(UrlSearch.KeywordSearch);
+    router.replace(url);
+  };
+
   return (
     <>
       <Seo
@@ -80,20 +97,28 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
         headerRightContent={rightContent}
       >
         <Container maxWidth="xl">
-          <Box py={10}>
+          <Box py={5}>
             <FilterHeader
               onFiltersChanged={onFiltersChanged}
               onChangeSearch={setSearchKeywords}
               onSearch={setSearchKeywords}
               searchPreset={searchKeywords}
+              categoryPreset={filters}
               isLoadingResults={false}
             />
           </Box>
-          <Box flexGrow={2}>
+          <Stack flexGrow={2} direction="column" spacing={2}>
             {searchKeywords && (
-              <Typography color="#999">
-                {t(LIBRARY.SEARCH_RESULTS_FOR_TEXT, { search: searchKeywords })}
-              </Typography>
+              <Stack direction="row" spacing={1} alignItems="center">
+                <Typography color="#999">
+                  {t(LIBRARY.SEARCH_RESULTS_FOR_TEXT, {
+                    search: searchKeywords,
+                  })}
+                </Typography>
+                <IconButton onClick={clearAllSearch}>
+                  <Close />
+                </IconButton>
+              </Stack>
             )}
             <CollectionsGrid
               containerWidth="xl"
@@ -101,7 +126,7 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
               id={ALL_COLLECTIONS_GRID_ID}
               isLoading={isLoading}
             />
-          </Box>
+          </Stack>
         </Container>
       </Main>
     </>

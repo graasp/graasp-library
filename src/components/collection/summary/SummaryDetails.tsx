@@ -1,6 +1,7 @@
 import { List } from 'immutable';
 import { DateTime } from 'luxon';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -19,7 +20,8 @@ import { CategoryRecord } from '@graasp/sdk/frontend';
 import { LIBRARY } from '@graasp/translations';
 import { CCSharingVariant } from '@graasp/ui';
 
-import { CATEGORY_COLORS, CATEGORY_TYPES } from '../../../config/constants';
+import { CATEGORY_COLORS, UrlSearch } from '../../../config/constants';
+import { ALL_COLLECTIONS_ROUTE } from '../../../config/routes';
 import {
   SUMMARY_CATEGORIES_CONTAINER_ID,
   SUMMARY_CC_LICENSE_CONTAINER_ID,
@@ -66,6 +68,35 @@ const convertLicense = (ccLicenseAdaption: string) => {
       return ccLicenseAdaption?.includes('ND') ? 'no' : 'yes';
     })(),
   };
+};
+
+type CategoryChipProps = {
+  category: CategoryRecord;
+};
+
+const CategoryChip = ({ category }: CategoryChipProps) => {
+  const { t } = useTranslation();
+  const router = useRouter();
+
+  const handleCategorySearch = (categoryId: string) => {
+    // navigate to "/all-collections?cat=<categoryId>"
+    router.push({
+      pathname: ALL_COLLECTIONS_ROUTE,
+      query: { [UrlSearch.CategorySearch]: categoryId },
+    });
+  };
+  return (
+    <Chip
+      onClick={() => handleCategorySearch(category.id)}
+      key={category.name}
+      label={t(category.name)}
+      sx={{
+        color: CATEGORY_COLORS[category.type],
+      }}
+      variant="outlined"
+      component={Typography}
+    />
+  );
 };
 
 type SummaryDetailsProps = {
@@ -149,16 +180,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
             {isLoading && <Skeleton />}
             <Stack gap={1} direction="row" flexWrap="wrap">
               {languages?.size ? (
-                languages?.map((entry) => (
-                  <Chip
-                    key={entry.name}
-                    label={t(entry.name)}
-                    variant="outlined"
-                    sx={{
-                      color: CATEGORY_COLORS[CATEGORY_TYPES.LANGUAGE],
-                    }}
-                  />
-                ))
+                languages?.map((entry) => <CategoryChip category={entry} />)
               ) : (
                 <Typography>
                   {t(LIBRARY.SUMMARY_DETAILS_NO_LANGUAGES)}
@@ -177,24 +199,10 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
             {levels?.size || disciplines?.size ? (
               <Stack gap={1} direction="row" flexWrap="wrap">
                 {levels?.map((entry) => (
-                  <Chip
-                    key={entry.name}
-                    label={t(entry.name)}
-                    variant="outlined"
-                    component={Typography}
-                    sx={{ color: CATEGORY_COLORS[CATEGORY_TYPES.LEVEL] }}
-                  />
+                  <CategoryChip category={entry} />
                 ))}
                 {disciplines?.map((entry) => (
-                  <Chip
-                    key={entry.name}
-                    label={t(entry.name)}
-                    sx={{
-                      color: CATEGORY_COLORS[CATEGORY_TYPES.DISCIPLINE],
-                    }}
-                    variant="outlined"
-                    component={Typography}
-                  />
+                  <CategoryChip category={entry} />
                 ))}
               </Stack>
             ) : (

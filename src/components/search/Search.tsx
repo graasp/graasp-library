@@ -24,10 +24,10 @@ const Search = forwardRef<HTMLDivElement, SearchProps>(function Search(
   const { t } = useTranslation();
 
   useEffect(() => {
-    if (searchPreset) {
+    if (searchPreset !== undefined) {
       setSearchInput(searchPreset);
     }
-  }, []);
+  }, [searchPreset]);
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,

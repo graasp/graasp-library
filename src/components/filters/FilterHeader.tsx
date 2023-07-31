@@ -17,7 +17,7 @@ import {
 
 import { CategoryType } from '@graasp/sdk';
 import { CategoryRecord } from '@graasp/sdk/frontend';
-import { CATEGORIES, LIBRARY, namespaces } from '@graasp/translations';
+import { LIBRARY, namespaces } from '@graasp/translations';
 
 import { GRAASP_COLOR } from '../../config/constants';
 import {
@@ -210,6 +210,7 @@ type FilterHeaderProps = {
   onChangeSearch?: (searchKeywords: string) => void;
   onSearch: (searchKeywords: string) => void;
   searchPreset?: string;
+  categoryPreset?: string[];
   isLoadingResults: boolean;
 };
 
@@ -218,6 +219,7 @@ const FilterHeader: FC<FilterHeaderProps> = ({
   onChangeSearch,
   onSearch,
   searchPreset,
+  categoryPreset,
   isLoadingResults,
 }) => {
   const { t: translateCategories } = useTranslation(namespaces.categories);
@@ -257,6 +259,14 @@ const FilterHeader: FC<FilterHeaderProps> = ({
   //     type: '3f811e5f-5221-4d22-a20c-1086af809bd0',
   //   },
   // ]);
+
+  useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.log(categoryPreset);
+    setSelectedFilters(
+      categoryPreset ? categoryPreset.map((f) => f.split(',')).flat() : [],
+    );
+  }, [categoryPreset]);
 
   const groupedByCategories = (filters: string[]): string[] => {
     if (allCategories) {
@@ -325,7 +335,7 @@ const FilterHeader: FC<FilterHeaderProps> = ({
     <Filter
       key={CategoryType.Level}
       category={CategoryType.Level}
-      title={translateCategories(CATEGORIES.EDUCATION_LEVEL)}
+      title={translateCategories(CategoryType.Level)}
       options={levelList}
       selectedOptions={selectedFilters}
       onOptionChange={onFilterChanged}
@@ -335,7 +345,7 @@ const FilterHeader: FC<FilterHeaderProps> = ({
     <Filter
       key={CategoryType.Discipline}
       category={CategoryType.Discipline}
-      title={translateCategories(CATEGORIES.DISCIPLINE)}
+      title={translateCategories(CategoryType.Discipline)}
       options={disciplineList}
       selectedOptions={selectedFilters}
       onOptionChange={onFilterChanged}
@@ -345,7 +355,7 @@ const FilterHeader: FC<FilterHeaderProps> = ({
     <Filter
       key={CategoryType.Language}
       category={CategoryType.Language}
-      title={translateCategories(CATEGORIES.LANGUAGE)}
+      title={translateCategories(CategoryType.Language)}
       options={languageList}
       selectedOptions={selectedFilters}
       onOptionChange={onFilterChanged}
