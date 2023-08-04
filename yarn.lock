@@ -3073,10 +3073,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:18.16.19":
-  version: 18.16.19
-  resolution: "@types/node@npm:18.16.19"
-  checksum: 63c31f09616508aa7135380a4c79470a897b75f9ff3a70eb069e534dfabdec3f32fb0f9df5939127f1086614d980ddea0fa5e8cc29a49103c4f74cd687618aaf
+"@types/node@npm:18.17.2":
+  version: 18.17.2
+  resolution: "@types/node@npm:18.17.2"
+  checksum: 2e08acaeb30e05f96fbf3d974fc2203bf10ed9020cafd511018dbba8023044bb8758f9d5a2a8e68da3bca827ccef7628202de9b7ca3b515374a7b094b128930a
   languageName: node
   linkType: hard
 
@@ -6999,7 +6999,7 @@ __metadata:
     "@trivago/prettier-plugin-sort-imports": 4.1.1
     "@types/lodash.truncate": 4.4.7
     "@types/luxon": 3.3.1
-    "@types/node": 18.16.19
+    "@types/node": 18.17.2
     "@types/react": 17.0.62
     "@types/react-dom": 17.0.20
     "@types/react-helmet": 6.1.6
