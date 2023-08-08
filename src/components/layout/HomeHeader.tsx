@@ -137,8 +137,7 @@ const HomeHeader = () => {
             color="secondary"
             endIcon={<ArrowForward />}
           >
-            {/* {todo: translate} */}
-            Browse All Collections
+            {t(LIBRARY.HOME_BROWSE_ALL_COLLECTIONS)}
           </Button>
         </Stack>
       </Stack>
