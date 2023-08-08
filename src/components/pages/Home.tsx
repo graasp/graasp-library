@@ -10,7 +10,11 @@ import { Box, Button, styled } from '@mui/material';
 import { Context } from '@graasp/sdk';
 import { LIBRARY } from '@graasp/translations';
 
-import { APP_AUTHOR, GRAASP_COLOR } from '../../config/constants';
+import {
+  APP_AUTHOR,
+  GRAASP_COLOR,
+  HOMEPAGE_NB_ELEMENTS_TO_SHOW,
+} from '../../config/constants';
 import { NEXT_PUBLIC_GRAASPER_ID } from '../../config/env';
 import { ALL_COLLECTIONS_ROUTE } from '../../config/routes';
 import {
@@ -55,8 +59,12 @@ const Home = () => {
   const { data: graasperCollections } = hooks.usePublishedItemsForMember(
     NEXT_PUBLIC_GRAASPER_ID,
   );
-  const { data: mostLikedCollections } = hooks.useMostLikedPublishedItems();
-  const { data: recentCollections } = hooks.useMostRecentPublishedItems();
+  const { data: mostLikedCollections } = hooks.useMostLikedPublishedItems({
+    limit: HOMEPAGE_NB_ELEMENTS_TO_SHOW,
+  });
+  const { data: recentCollections } = hooks.useMostRecentPublishedItems({
+    limit: HOMEPAGE_NB_ELEMENTS_TO_SHOW,
+  });
 
   return (
     <StyledBackgroundContainer>
@@ -86,7 +94,7 @@ const Home = () => {
         <ItemCollection
           id={POPULAR_THIS_WEEK_TITLE_ID}
           collections={recentCollections}
-          title={t(LIBRARY.HOME_POPULAR_THIS_WEEK_COLLECTIONS_TITLE)}
+          title={t(LIBRARY.HOME_RECENT_COLLECTIONS_TITLE)}
         />
 
         <Box textAlign="center" marginBottom={20} marginTop={20}>

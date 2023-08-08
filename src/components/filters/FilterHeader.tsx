@@ -84,7 +84,7 @@ const Filter: React.FC<FilterProps> = ({
     const optionsStr =
       options
         ?.filter((it) => selectedOptions.includes(it.id))
-        .map((it) => it.name)
+        .map((it) => t(it.name, { ns: namespaces.categories }))
         .get(0) ?? t(LIBRARY.FILTER_DROPDOWN_NO_FILTER);
     return optionsStr;
   }, [selectedOptions, options]);

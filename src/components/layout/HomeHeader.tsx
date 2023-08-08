@@ -1,11 +1,14 @@
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { ArrowForward } from '@mui/icons-material';
 import {
   Box,
+  Button,
   Chip,
   Container,
   Stack,
@@ -57,7 +60,7 @@ const HomeHeader = () => {
   const searchBarRef = useRef<HTMLDivElement>(null);
 
   // TODO: Feed from real data.
-  const popularSearches = ['Climate', 'Biology', 'Science', 'Education'];
+  const popularSearches = ['Climate', 'App', 'Science', 'Education'];
 
   const handleSearch = (searchKeywords: string) => {
     router.push({
@@ -107,20 +110,37 @@ const HomeHeader = () => {
             isLoading={false}
           />
         </Box>
-        <Box width="100%">
-          <Typography color="white" variant="h6" gutterBottom>
-            {t(LIBRARY.HOME_POPULAR_SEARCHES_TITLE)}
-          </Typography>
-          <Stack direction="row" spacing={2}>
-            {popularSearches.map((term) => (
-              <PopularSearchItem
-                key={term}
-                text={term}
-                onClick={handleSearch}
-              />
-            ))}
-          </Stack>
-        </Box>
+        <Stack
+          direction="row"
+          width="100%"
+          justifyContent="space-between"
+          alignItems="end"
+        >
+          <Box>
+            <Typography color="white" variant="h6" gutterBottom>
+              {t(LIBRARY.HOME_POPULAR_SEARCHES_TITLE)}
+            </Typography>
+            <Stack direction="row" spacing={2}>
+              {popularSearches.map((term) => (
+                <PopularSearchItem
+                  key={term}
+                  text={term}
+                  onClick={handleSearch}
+                />
+              ))}
+            </Stack>
+          </Box>
+          <Button
+            component={Link}
+            href={ALL_COLLECTIONS_ROUTE}
+            sx={{ textTransform: 'none' }}
+            color="secondary"
+            endIcon={<ArrowForward />}
+          >
+            {/* {todo: translate} */}
+            Browse All Collections
+          </Button>
+        </Stack>
       </Stack>
     </Container>
   );

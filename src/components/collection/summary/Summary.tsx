@@ -3,7 +3,7 @@ import truncate from 'lodash.truncate';
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 
@@ -16,6 +16,7 @@ import {
   MAX_COLLECTION_NAME_LENGTH,
 } from '../../../config/constants';
 import { QueryClientContext } from '../../QueryClientContext';
+import BackButton from '../../common/BackButton';
 import ItemBreadcrumb from '../ItemBreadcrumb';
 import Items from '../Items';
 import SummaryDetails from './SummaryDetails';
@@ -77,22 +78,25 @@ const Summary: React.FC<SummaryProps> = ({
     ?.filter((c) => c.category.type === CategoryType.Language)
     .map((c) => c.category);
 
-  // todo: remove cast after refactor
-  const ccLicenseAdaption = (
-    topLevelParent
-      ? topLevelParent.settings?.ccLicenseAdaption
-      : collection?.settings?.ccLicenseAdaption
-  ) as string;
+  const ccLicenseAdaption = topLevelParent
+    ? topLevelParent.settings?.ccLicenseAdaption
+    : collection?.settings?.ccLicenseAdaption;
 
   const truncatedName = truncate(collection?.name, {
     length: MAX_COLLECTION_NAME_LENGTH,
     separator: /,? +/,
   });
   return (
-    <div>
-      <Container maxWidth="lg" sx={{ my: 2 }}>
-        <ItemBreadcrumb itemId={collection?.id} />
-      </Container>
+    <Stack
+      maxWidth="lg"
+      margin="auto"
+      alignItems="flex-start"
+      justifyItems="flex-start"
+      justifySelf="center"
+      spacing={2}
+    >
+      <BackButton />
+      <ItemBreadcrumb itemId={collection?.id} />
       <SummaryHeader
         collection={collection}
         isLogged={member?.id !== undefined}
@@ -129,7 +133,7 @@ const Summary: React.FC<SummaryProps> = ({
           levels={levels}
         />
       </Container>
-    </div>
+    </Stack>
   );
 };
 
