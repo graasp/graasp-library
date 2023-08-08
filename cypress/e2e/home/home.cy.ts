@@ -28,10 +28,10 @@ describe('Home Page', () => {
 
         cy.get(`#${HOME_PAGE_TITLE_TEXT_ID}`)
           .should('be.visible')
-          .and('have.text', 'Graasp Library');
+          .and('have.text', i18n.t(LIBRARY.HOME_TITLE));
         cy.get(`#${POPULAR_THIS_WEEK_TITLE_ID} #${SECTION_TITLE_ID}`).should(
           'have.text',
-          i18n.t(LIBRARY.HOME_POPULAR_THIS_WEEK_COLLECTIONS_TITLE),
+          i18n.t(LIBRARY.HOME_RECENT_COLLECTIONS_TITLE),
         );
         cy.get(`#${MOST_LIKED_TITLE_ID} #${SECTION_TITLE_ID}`).should(
           'have.text',
