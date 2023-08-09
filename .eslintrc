@@ -87,6 +87,12 @@
     "react/react-in-jsx-scope": "off",
     "react/require-default-props": "off",
     "import/no-named-as-default": 0,
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true
+      }
+    ],
     "react/static-property-placement": [
       "error",
       "property assignment",

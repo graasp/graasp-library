@@ -20,14 +20,5 @@
  */
 // eslint-disable-next-line no-unused-vars
 module.exports = (on, config) => {
-  const newConfig = {
-    ...config,
-    env: {
-      API_HOST: process.env.NEXT_PUBLIC_API_HOST,
-      AUTHENTICATION_HOST: process.env.NEXT_PUBLIC_GRAASP_AUTH_HOST,
-      GRAASPER_ID: process.env.NEXT_PUBLIC_GRAASPER_ID,
-    },
-  };
-  require('@cypress/code-coverage/task')(on, newConfig);
-  return newConfig;
+  return config;
 };
