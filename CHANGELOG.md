@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.10.0](https://github.com/graasp/graasp-library/compare/v0.9.1...v0.10.0) (2023-08-10)
+
+
+### Features
+
+* add a back button on the collection summary page ([#337](https://github.com/graasp/graasp-library/issues/337)) ([94a3cd3](https://github.com/graasp/graasp-library/commit/94a3cd3497f7c6577bb9cb1b7de92e3e216b7556))
+* enable analytics in platform switch ([#341](https://github.com/graasp/graasp-library/issues/341)) ([3265431](https://github.com/graasp/graasp-library/commit/32654312c28c46be8fbd0b1024517711171c822c))
+
+
+### Bug Fixes
+
+* add button to navigate to all collections on home page ([94a3cd3](https://github.com/graasp/graasp-library/commit/94a3cd3497f7c6577bb9cb1b7de92e3e216b7556))
+* change limit to 12 close [#336](https://github.com/graasp/graasp-library/issues/336) ([94a3cd3](https://github.com/graasp/graasp-library/commit/94a3cd3497f7c6577bb9cb1b7de92e3e216b7556))
+* **deps:** update dependency @graasp/translations to v1.17.2 ([#331](https://github.com/graasp/graasp-library/issues/331)) ([88adf17](https://github.com/graasp/graasp-library/commit/88adf17528be0bcc41286e3336f965c03f022597))
+* **deps:** update dependency @trivago/prettier-plugin-sort-imports to v4.2.0 ([#308](https://github.com/graasp/graasp-library/issues/308)) ([459a7e7](https://github.com/graasp/graasp-library/commit/459a7e74e04b1ab98c62e042d90833bc6c97ff47))
+* language select ([#339](https://github.com/graasp/graasp-library/issues/339)) ([d5c7029](https://github.com/graasp/graasp-library/commit/d5c7029d6ed586e3f4fec982b9f3770d427d34e1))
+
 ## [0.9.1](https://github.com/graasp/graasp-library/compare/v0.9.0...v0.9.1) (2023-07-31)
 
 
