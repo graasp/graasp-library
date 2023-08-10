@@ -130,6 +130,7 @@ export const HeaderNavigation = ({
     },
     [Platform.Library]: {
       id: APP_NAVIGATION_PLATFORM_SWITCH_BUTTON_IDS[Platform.Library],
+      href: '/',
     },
     [Platform.Analytics]: {
       id: APP_NAVIGATION_PLATFORM_SWITCH_BUTTON_IDS[Platform.Analytics],
