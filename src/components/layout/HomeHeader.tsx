@@ -13,6 +13,7 @@ import {
   Container,
   Stack,
   Typography,
+  styled,
   useTheme,
 } from '@mui/material';
 
@@ -47,12 +48,21 @@ const PopularSearchItem = ({
       sx={{
         color: theme.palette.primary.contrastText,
         borderColor: theme.palette.primary.contrastText,
+        ':hover': {
+          backgroundColor: 'rgba(0, 0, 0, 0.2)',
+        },
       }}
       label={text}
       onClick={() => onClick(text)}
     />
   );
 };
+
+const StyledBackground = styled(Box)(() => ({
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  backgroundImage: `url("rfflux.svg")`,
+}));
 
 const HomeHeader = () => {
   const { t } = useTranslation();
@@ -70,78 +80,85 @@ const HomeHeader = () => {
   };
 
   return (
-    <Container maxWidth="md">
-      <Stack
-        direction="column"
-        alignItems="center"
-        paddingBottom={{
-          xs: 2,
-          md: 6,
-          lg: 15,
-        }}
-        paddingTop={14}
-        spacing={4}
-      >
-        <Box display="flex" flexDirection="row" alignItems="center">
-          <GraaspLogo height={120} sx={{ fill: 'white' }} />
-          <Typography
-            id={HOME_PAGE_TITLE_TEXT_ID}
-            color="white"
-            variant="h1"
-            marginLeft={2}
-            fontSize={{
-              xs: '2.5rem',
-              sm: '4rem',
-              md: '4.5rem',
-            }}
-          >
-            {t(LIBRARY.HOME_TITLE)}
-          </Typography>
-        </Box>
-        <Box>
-          <Typography color="white" variant="h5" textAlign="center">
-            {t(LIBRARY.HOME_SUBTITLE)}
-          </Typography>
-        </Box>
-        <Box width="100%">
-          <Search
-            ref={searchBarRef}
-            handleClick={handleSearch}
-            isLoading={false}
-          />
-        </Box>
+    <StyledBackground>
+      <Container maxWidth="md">
         <Stack
-          direction="row"
-          width="100%"
-          justifyContent="space-between"
-          alignItems="end"
+          direction="column"
+          alignItems="center"
+          paddingBottom={{
+            xs: 2,
+            md: 6,
+            lg: 15,
+          }}
+          paddingTop={14}
+          spacing={4}
         >
-          <Box>
-            <Typography color="white" variant="h6" gutterBottom>
-              {t(LIBRARY.HOME_POPULAR_SEARCHES_TITLE)}
+          <Box display="flex" flexDirection="row" alignItems="center">
+            <GraaspLogo height={120} sx={{ fill: 'white' }} />
+            <Typography
+              id={HOME_PAGE_TITLE_TEXT_ID}
+              color="white"
+              variant="h1"
+              marginLeft={2}
+              fontSize={{
+                xs: '2.5rem',
+                sm: '4rem',
+                md: '4.5rem',
+              }}
+            >
+              {t(LIBRARY.HOME_TITLE)}
             </Typography>
-            <Stack direction="row" spacing={2}>
-              {popularSearches.map((term) => (
-                <PopularSearchItem
-                  key={term}
-                  text={term}
-                  onClick={handleSearch}
-                />
-              ))}
-            </Stack>
           </Box>
-          <Button
-            component={Link}
-            href={ALL_COLLECTIONS_ROUTE}
-            sx={{ textTransform: 'none' }}
-            color="secondary"
-            endIcon={<ArrowForward />}
+          <Box>
+            <Typography color="white" variant="h5" textAlign="center">
+              {t(LIBRARY.HOME_SUBTITLE)}
+            </Typography>
+          </Box>
+          <Box width="100%">
+            <Search
+              ref={searchBarRef}
+              handleClick={handleSearch}
+              isLoading={false}
+            />
+          </Box>
+          <Stack
+            direction="row"
+            width="100%"
+            justifyContent="space-between"
+            alignItems="end"
           >
-            {t(LIBRARY.HOME_BROWSE_ALL_COLLECTIONS)}
-          </Button>
+            <Box>
+              <Typography color="white" variant="h6" gutterBottom>
+                {t(LIBRARY.HOME_POPULAR_SEARCHES_TITLE)}
+              </Typography>
+              <Stack direction="row" spacing={2}>
+                {popularSearches.map((term) => (
+                  <PopularSearchItem
+                    key={term}
+                    text={term}
+                    onClick={handleSearch}
+                  />
+                ))}
+              </Stack>
+            </Box>
+            <Button
+              component={Link}
+              href={ALL_COLLECTIONS_ROUTE}
+              sx={{
+                textTransform: 'none',
+                ':hover': {
+                  backgroundColor: 'rgba(255, 255, 255, 0.15)',
+                },
+              }}
+              color="secondary"
+              endIcon={<ArrowForward />}
+            >
+              {t(LIBRARY.HOME_BROWSE_ALL_COLLECTIONS)}
+            </Button>
+          </Stack>
         </Stack>
-      </Stack>
-    </Container>
+      </Container>
+    </StyledBackground>
   );
 };
 
