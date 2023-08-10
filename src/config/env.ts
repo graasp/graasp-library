@@ -14,7 +14,8 @@ export const GRAASP_BUILDER_HOST =
   publicRuntimeConfig.NEXT_PUBLIC_GRAASP_BUILDER_HOST ||
   'http://localhost:3111';
 export const GRAASP_ANALYTICS_HOST =
-  publicRuntimeConfig.NEXT_PUBLIC_GRAASP_ANALYTICS_HOST;
+  publicRuntimeConfig.NEXT_PUBLIC_GRAASP_ANALYTICS_HOST ||
+  'http://localhost:3113';
 export const NODE_ENV = publicRuntimeConfig.NODE_ENV;
 export const GA_MEASUREMENT_ID =
   publicRuntimeConfig.NEXT_PUBLIC_GA_MEASUREMENT_ID;
