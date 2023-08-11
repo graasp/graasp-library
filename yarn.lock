@@ -3085,10 +3085,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:18.17.2":
-  version: 18.17.2
-  resolution: "@types/node@npm:18.17.2"
-  checksum: 2e08acaeb30e05f96fbf3d974fc2203bf10ed9020cafd511018dbba8023044bb8758f9d5a2a8e68da3bca827ccef7628202de9b7ca3b515374a7b094b128930a
+"@types/node@npm:18.17.5":
+  version: 18.17.5
+  resolution: "@types/node@npm:18.17.5"
+  checksum: b8c658a99234b99425243c324b641ed7b9ceb6bee6b06421fdc9bb7c58f9a5552e353225cc549e6982462ac384abe1985022ed76e2e4728797f59b21f659ca2b
   languageName: node
   linkType: hard
 
@@ -3174,14 +3174,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^17.0.30":
-  version: 17.0.62
-  resolution: "@types/react@npm:17.0.62"
+"@types/react@npm:17.0.64":
+  version: 17.0.64
+  resolution: "@types/react@npm:17.0.64"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: 428a5aff44824ef504e9a9259b5894fe44a5db1c344b536990f07e132900ff5b34cbef0be77a84f30f37be1f88fc8b56dce328f568de8d65de3bfe414c05b2e1
+  checksum: 71a7b402e8849ff31ed542d1d1a2ff6adb0e6f0e17321d126e7382a2fcb671ec1e1d1bf7045306922fa90b0319c57a8a45e6215bbf00fb6f73c3860d3f869870
   languageName: node
   linkType: hard
 
@@ -7050,8 +7050,8 @@ __metadata:
     "@trivago/prettier-plugin-sort-imports": 4.2.0
     "@types/lodash.truncate": 4.4.7
     "@types/luxon": 3.3.1
-    "@types/node": 18.17.2
-    "@types/react": 17.0.62
+    "@types/node": 18.17.5
+    "@types/react": 17.0.64
     "@types/react-dom": 17.0.20
     "@types/react-helmet": 6.1.6
     "@types/uuid": 9.0.2
