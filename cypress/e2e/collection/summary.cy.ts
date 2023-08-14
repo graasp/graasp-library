@@ -83,6 +83,18 @@ describe('Collection Summary', () => {
       });
     });
 
+    it('Show like button only to logged in users', () => {
+      cy.setUpApi(environment);
+      const item = PUBLISHED_ITEMS[1];
+      cy.visit(buildCollectionRoute(item.id));
+
+      if (environment.currentMember) {
+        cy.get(`button[aria-label="like"]`).should('be.visible');
+      } else {
+        cy.get(`button[aria-label="like"]`).should('not.exist');
+      }
+    });
+
     it('Hide co-editor', { defaultCommandTimeout: 10000 }, () => {
       cy.setUpApi(environment);
 

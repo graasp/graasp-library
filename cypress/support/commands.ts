@@ -45,10 +45,6 @@ Cypress.Commands.add(
   } = {}) => {
     const cachedMembers = JSON.parse(JSON.stringify(members));
 
-    if (currentMember?.id) {
-      cy.setCookie('session', currentMember?.id);
-    }
-
     mockGetAllPublishedItems({ items }, getPublishedItemsInCategoriesError);
 
     mockGetOwnItems({ items, currentMember });
