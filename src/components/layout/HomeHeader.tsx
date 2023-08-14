@@ -47,6 +47,9 @@ const PopularSearchItem = ({
       sx={{
         color: theme.palette.primary.contrastText,
         borderColor: theme.palette.primary.contrastText,
+        ':hover': {
+          backgroundColor: 'rgba(0, 0, 0, 0.2)',
+        },
       }}
       label={text}
       onClick={() => onClick(text)}
@@ -120,7 +123,13 @@ const HomeHeader = () => {
             <Typography color="white" variant="h6" gutterBottom>
               {t(LIBRARY.HOME_POPULAR_SEARCHES_TITLE)}
             </Typography>
-            <Stack direction="row" spacing={2}>
+            <Stack
+              direction="row"
+              columnGap={2}
+              rowGap={1}
+              flexWrap="wrap"
+              useFlexGap
+            >
               {popularSearches.map((term) => (
                 <PopularSearchItem
                   key={term}
@@ -133,7 +142,12 @@ const HomeHeader = () => {
           <Button
             component={Link}
             href={ALL_COLLECTIONS_ROUTE}
-            sx={{ textTransform: 'none' }}
+            sx={{
+              textTransform: 'none',
+              ':hover': {
+                backgroundColor: 'rgba(255, 255, 255, 0.15)',
+              },
+            }}
             color="secondary"
             endIcon={<ArrowForward />}
           >
