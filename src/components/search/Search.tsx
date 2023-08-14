@@ -61,7 +61,7 @@ const Search = forwardRef<HTMLDivElement, SearchProps>(function Search(
         my: 1,
         borderRadius: 2,
         border: '1px solid transparent',
-        transition: 'border-color 0.1s ease-in',
+        transition: 'all 0.3s ease-in-out',
         '&:hover, &:has(.Mui-focused)': {
           border: '1px solid #5050d230',
           boxShadow: '0px 0px 30px 2px #5050d230',
