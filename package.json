@@ -70,8 +70,8 @@
     "uuid": "9.0.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "17.6.7",
-    "@commitlint/config-conventional": "17.6.7",
+    "@commitlint/cli": "17.7.1",
+    "@commitlint/config-conventional": "17.7.0",
     "@cypress/code-coverage": "3.11.0",
     "@types/lodash.truncate": "4.4.7",
     "@types/luxon": "3.3.1",
