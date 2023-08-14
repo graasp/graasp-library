@@ -137,13 +137,15 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
               >
                 {truncatedName}
               </Typography>
-              <LikeButton
-                ariaLabel="like"
-                color="primary"
-                isLiked={Boolean(likeEntry)}
-                handleLike={handleLike}
-                handleUnlike={handleUnlike}
-              />
+              {member && member.id && (
+                <LikeButton
+                  ariaLabel="like"
+                  color="primary"
+                  isLiked={Boolean(likeEntry)}
+                  handleLike={handleLike}
+                  handleUnlike={handleUnlike}
+                />
+              )}
             </Stack>
             <SummaryActionButtons item={collection} isLogged={isLogged} />
           </Stack>
