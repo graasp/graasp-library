@@ -1,11 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { CacheProvider, EmotionCache, ThemeProvider } from '@emotion/react';
-import * as Sentry from '@sentry/react';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import ReactGA from 'react-ga4';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -16,25 +15,8 @@ import { hasAcceptedCookies } from '@graasp/sdk';
 
 import { ENV, UrlSearch } from '../src/config/constants';
 import createEmotionCache from '../src/config/createEmotionCache';
-import { GA_MEASUREMENT_ID, NODE_ENV, SENTRY_DSN } from '../src/config/env';
-import WHITELISTED_ERRORS from '../src/config/errors';
+import { GA_MEASUREMENT_ID, NODE_ENV } from '../src/config/env';
 import { theme } from '../src/config/theme';
-
-// set up sentry
-if (SENTRY_DSN) {
-  Sentry.init({
-    dsn: SENTRY_DSN,
-    ...WHITELISTED_ERRORS,
-    beforeSend(event) {
-      // check if it is an exception, and if so, show the report dialog
-      if (event.exception) {
-        Sentry.showReportDialog({ eventId: event.event_id });
-      }
-      return event;
-    },
-    release: `${process.env.NEXT_PUBLIC_APP_NAME}@v${process.env.NEXT_PUBLIC_APP_VERSION}`,
-  });
-}
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();

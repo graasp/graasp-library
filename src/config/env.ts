@@ -29,3 +29,7 @@ export const SHOW_NOTIFICATIONS =
 const NEXT_PUBLIC_DOMAIN = publicRuntimeConfig.NEXT_PUBLIC_DOMAIN;
 
 export const DOMAIN = NEXT_PUBLIC_DOMAIN ?? 'localhost';
+
+export const APP_VERSION = publicRuntimeConfig.NEXT_PUBLIC_APP_VERSION;
+const projectName = 'graasp-library';
+export const SENTRY_RELEASE = `${projectName}@${APP_VERSION}`;

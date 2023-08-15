@@ -69,3 +69,6 @@ build/*
 .next
 next-env.d.ts
 .vscode
+
+# Sentry Auth Token
+.sentryclirc

@@ -1,4 +1,4 @@
-import { ErrorBoundary } from '@sentry/react';
+import { ErrorBoundary } from '@sentry/nextjs';
 import dynamic from 'next/dynamic';
 import { validate } from 'uuid';
 

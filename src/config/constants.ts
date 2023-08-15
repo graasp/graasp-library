@@ -1,8 +1,8 @@
 import { CategoryType, ThumbnailSize } from '@graasp/sdk';
 
-export const APP_NAME = 'Graasp';
 export const GRAASP_LOGO_HEADER_HEIGHT = 40;
 
+export const APP_NAME = 'Graasp';
 export const APP_KEYWORDS = ['graasp', 'library'];
 export const APP_AUTHOR = 'Graasp';
 export const DEFAULT_LANG = 'en';

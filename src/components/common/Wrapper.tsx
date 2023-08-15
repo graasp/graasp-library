@@ -1,4 +1,4 @@
-import { ErrorBoundary } from '@sentry/react';
+import { ErrorBoundary } from '@sentry/nextjs';
 
 import { useTranslation } from 'react-i18next';
 import { DehydratedState } from 'react-query';
