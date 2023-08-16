@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Explore } from '@mui/icons-material';
+import { ArrowForward } from '@mui/icons-material';
 import { Box, Button, styled } from '@mui/material';
 
 import { Context } from '@graasp/sdk';
@@ -34,6 +34,14 @@ const { Main } = {
     ssr: false,
   }),
 };
+const { LibraryIcon } = {
+  LibraryIcon: dynamic(
+    () => import('@graasp/ui').then((mod) => mod.LibraryIcon),
+    {
+      ssr: false,
+    },
+  ),
+};
 
 const PATTERN_OPACITY = 0.7;
 const SECONDARY_PATTERN_COLOR = '505DD2';
@@ -44,10 +52,28 @@ const StyledBackgroundContainer = styled(Box)(() => ({
 }));
 
 const DiscoverButton = styled(Button)(({ theme }) => ({
-  color: GRAASP_COLOR,
   fontSize: '1.2rem',
-  padding: theme.spacing(3, 6),
+  padding: theme.spacing(1, 2),
+  margin: theme.spacing(3),
+  [theme.breakpoints.up('sm')]: {
+    padding: theme.spacing(3, 6),
+  },
+  backgroundColor: 'transparent',
   textTransform: 'none',
+  ':hover': {
+    transition: 'background-color 500ms linear',
+    backgroundColor: 'rgba(255, 255, 255, 0.15)',
+  },
+  '&:hover > .MuiButton-endIcon': {
+    '@keyframes bounce': {
+      '0%': { transform: 'translateX(0px)' },
+      '30%': { transform: 'translateX(15px)' },
+      '85%': { transform: 'translateX(0px)' },
+    },
+    animationName: 'bounce',
+    animationDuration: '1.2s',
+    animationIterationCount: 'infinite',
+  },
 }));
 
 const Home = () => {
@@ -101,12 +127,18 @@ const Home = () => {
           <DiscoverButton
             LinkComponent={Link}
             href={ALL_COLLECTIONS_ROUTE}
-            startIcon={<Explore fontSize="large" />}
+            endIcon={<ArrowForward />}
             color="secondary"
-            variant="contained"
-            size="large"
           >
-            {t(LIBRARY.HOME_VIEW_MORE_IN_LIBRARY_BUTTON)}
+            <Box display="inline">
+              <LibraryIcon
+                size={30}
+                sx={{ mr: 1, verticalAlign: 'middle', mt: '-3px' }}
+                secondaryColor="white"
+                primaryColor="transparent"
+              />
+              {t(LIBRARY.HOME_VIEW_MORE_IN_LIBRARY_BUTTON)}
+            </Box>
           </DiscoverButton>
         </Box>
       </Main>
