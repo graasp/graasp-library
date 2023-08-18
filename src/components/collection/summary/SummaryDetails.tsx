@@ -198,12 +198,8 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
             </Typography>
             {levels?.size || disciplines?.size ? (
               <Stack gap={1} direction="row" flexWrap="wrap">
-                {levels?.map((entry) => (
-                  <CategoryChip category={entry} />
-                ))}
-                {disciplines?.map((entry) => (
-                  <CategoryChip category={entry} />
-                ))}
+                {levels?.map((entry) => <CategoryChip category={entry} />)}
+                {disciplines?.map((entry) => <CategoryChip category={entry} />)}
               </Stack>
             ) : (
               <Typography>

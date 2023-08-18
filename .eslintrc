@@ -27,6 +27,7 @@
     "project": "./tsconfig.json"
   },
   "rules": {
+    "import/order": "off",
     "prettier/prettier": "error",
     "no-console": [
       "error",

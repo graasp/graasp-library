@@ -171,9 +171,8 @@ export const mockGetAvatarUrl = (
       }
 
       const id = new URL(url).pathname.split('/')[2];
-      const thumbnail = members.find(
-        ({ id: thisId }) => id === thisId,
-      )?.thumbnail;
+      const thumbnail = members.find(({ id: thisId }) => id === thisId)
+        ?.thumbnail;
       if (!thumbnail) {
         return reply({ statusCode: StatusCodes.NOT_FOUND });
       }

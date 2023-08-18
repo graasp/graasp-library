@@ -1,4 +1,4 @@
-﻿import Immutable, { List } from 'immutable';
+import Immutable, { List } from 'immutable';
 
 import React, { FC, useContext, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
