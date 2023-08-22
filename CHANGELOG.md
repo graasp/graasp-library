@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.10.1](https://github.com/graasp/graasp-library/compare/v0.10.0...v0.10.1) (2023-08-22)
+
+
+### Bug Fixes
+
+* change view more icon button ([#354](https://github.com/graasp/graasp-library/issues/354)) ([8aa85f9](https://github.com/graasp/graasp-library/commit/8aa85f9061e218fafee0d832a9184b88671043b6))
+* **deps:** update dependency @graasp/query-client to v1.4.3 ([#365](https://github.com/graasp/graasp-library/issues/365)) ([dbf09c7](https://github.com/graasp/graasp-library/commit/dbf09c7a102d44c78036643a44925d5d5d206748))
+* **deps:** update dependency react-router-dom to v6.15.0 ([#360](https://github.com/graasp/graasp-library/issues/360)) ([0695e26](https://github.com/graasp/graasp-library/commit/0695e2687ecf2ffd683138eca1cf3d472020576f))
+* **deps:** update mui (non-major) ([#335](https://github.com/graasp/graasp-library/issues/335)) ([643948e](https://github.com/graasp/graasp-library/commit/643948e11f05d8b8f9c29b169571de0298b2f0d1))
+* only show like button to logged-in users ([#349](https://github.com/graasp/graasp-library/issues/349)) ([09c1a54](https://github.com/graasp/graasp-library/commit/09c1a54a0c43f09cf4183bbe0910546e0456f782))
+* place tooltips at the bottom ([09c1a54](https://github.com/graasp/graasp-library/commit/09c1a54a0c43f09cf4183bbe0910546e0456f782))
+* sentry config for next ([8aa85f9](https://github.com/graasp/graasp-library/commit/8aa85f9061e218fafee0d832a9184b88671043b6))
+* **ui:** small color and wrapping improvements ([#352](https://github.com/graasp/graasp-library/issues/352)) ([3743d96](https://github.com/graasp/graasp-library/commit/3743d9676a7def604df96352661c3bf560638292))
+
 ## [0.10.0](https://github.com/graasp/graasp-library/compare/v0.9.1...v0.10.0) (2023-08-10)
 
 
