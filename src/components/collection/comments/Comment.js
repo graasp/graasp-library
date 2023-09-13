@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { Tooltip } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
@@ -11,14 +10,14 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 
-import { LIBRARY } from '@graasp/translations';
-
+import { useLibraryTranslation } from '../../../config/i18n';
+import LIBRARY from '../../../langs/constants';
 import { formatDate } from '../../../utils/date';
 import { getAvatar } from '../../../utils/layout';
 
 const Comment = ({ comment, members }) => {
   const { content, author, published } = comment;
-  const { t } = useTranslation();
+  const { t } = useLibraryTranslation();
 
   const { name: authorName = t(LIBRARY.GUEST), image } =
     members.find(({ id }) => id === author) || {};

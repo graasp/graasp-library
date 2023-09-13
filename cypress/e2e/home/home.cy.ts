@@ -1,5 +1,3 @@
-import { LIBRARY } from '@graasp/translations';
-
 import i18n from '../../../src/config/i18n';
 import { HOME_ROUTE } from '../../../src/config/routes';
 import {
@@ -9,6 +7,7 @@ import {
   POPULAR_THIS_WEEK_TITLE_ID,
   SECTION_TITLE_ID,
 } from '../../../src/config/selectors';
+import LIBRARY from '../../../src/langs/constants';
 import { buildPublicAndPrivateEnvironments } from '../../fixtures/environment';
 import { GRAASPER_ITEMS } from '../../fixtures/items';
 import { SIGNED_OUT_USER } from '../../support/constants';

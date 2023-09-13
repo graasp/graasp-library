@@ -2,7 +2,6 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
 import React, { useContext } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import {
   Box,
@@ -12,13 +11,15 @@ import {
   CardHeader,
   Typography,
   styled,
+  useTheme,
 } from '@mui/material';
 
 import { ThumbnailSize } from '@graasp/sdk';
 import { ItemRecord } from '@graasp/sdk/frontend';
-import { LIBRARY } from '@graasp/translations';
 
+import { useLibraryTranslation } from '../../config/i18n';
 import { buildCollectionRoute } from '../../config/routes';
+import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
 import CardMediaComponent from '../common/CardMediaComponent';
 import { StyledCard } from '../common/StyledCard';
@@ -34,7 +35,8 @@ const Avatar = dynamic(() => import('@graasp/ui').then((mod) => mod.Avatar), {
 const RECENT_DAYS = 4;
 
 type Props = {
-  collection: ItemRecord;
+  collection: ItemRecord & { isPublishedRoot?: boolean };
+  showIsContentTag?: boolean;
 };
 
 const StyledItemTag = styled(Box)(({ tagColor }: { tagColor: string }) => ({
@@ -60,11 +62,29 @@ const StyledItemTag = styled(Box)(({ tagColor }: { tagColor: string }) => ({
 type ItemTagProps = {
   createdAt: Date;
   updatedAt: Date;
+  isChild: boolean;
+  showIsContentTag?: boolean;
 };
 
-const ItemTag: React.FC<ItemTagProps> = ({ createdAt, updatedAt }) => {
-  const { t } = useTranslation();
-  const MS_PER_DAY = 1000 * 60 * 60 * 24;
+const MS_PER_DAY = 1000 * 60 * 60 * 24;
+
+const ItemTag: React.FC<ItemTagProps> = ({
+  isChild,
+  createdAt,
+  updatedAt,
+  showIsContentTag = false,
+}) => {
+  const { t } = useLibraryTranslation();
+  const theme = useTheme();
+  if (showIsContentTag && isChild) {
+    return (
+      <StyledItemTag tagColor={theme.palette.primary.main}>
+        <Typography variant="body2" fontSize={13}>
+          {'Content'.toUpperCase()}
+        </Typography>
+      </StyledItemTag>
+    );
+  }
 
   const recentlyUpdated =
     Date.now() - updatedAt.getTime() < RECENT_DAYS * MS_PER_DAY;
@@ -89,9 +109,17 @@ const ItemTag: React.FC<ItemTagProps> = ({ createdAt, updatedAt }) => {
   return null;
 };
 
-export const CollectionCard = ({ collection }: Props) => {
-  const { name, id, creator, description } = collection;
-  const { t } = useTranslation();
+export const CollectionCard = ({ collection, showIsContentTag }: Props) => {
+  const {
+    name,
+    id,
+    creator,
+    description,
+    createdAt,
+    updatedAt,
+    isPublishedRoot,
+  } = collection;
+  const { t } = useLibraryTranslation();
   const { hooks } = useContext(QueryClientContext);
   const { data: member } = hooks.useCurrentMember();
   const { data: authorAvatarUrl, isLoading: isLoadingAvatar } =
@@ -109,8 +137,10 @@ export const CollectionCard = ({ collection }: Props) => {
         sx={{ borderRadius: 'unset', flexGrow: 1 }}
       >
         <ItemTag
-          createdAt={collection.createdAt}
-          updatedAt={collection.updatedAt}
+          isChild={!isPublishedRoot}
+          createdAt={createdAt}
+          updatedAt={updatedAt}
+          showIsContentTag={showIsContentTag}
         />
         <Box>
           <CardMediaComponent

@@ -1,15 +1,15 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { Info } from '@mui/icons-material';
 import { Tooltip, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { useTheme } from '@mui/material/styles';
 
-import { LIBRARY } from '@graasp/translations';
+import { useLibraryTranslation } from '../../../config/i18n';
+import LIBRARY from '../../../langs/constants';
 
 const CommentsHeader = () => {
-  const { t } = useTranslation();
+  const { t } = useLibraryTranslation();
   const theme = useTheme();
   return (
     <div style={{ marginBottom: theme.spacing(2), flexGrow: 1 }}>

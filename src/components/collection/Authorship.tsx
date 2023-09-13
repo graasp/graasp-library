@@ -1,17 +1,17 @@
 import dynamic from 'next/dynamic';
 
 import React, { useContext } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { Stack, Typography } from '@mui/material';
 import Skeleton from '@mui/material/Skeleton';
 
 import { PermissionLevel, ThumbnailSize } from '@graasp/sdk';
 import { ItemRecord } from '@graasp/sdk/frontend';
-import { LIBRARY } from '@graasp/translations';
 
 import { DEFAULT_MEMBER_THUMBNAIL } from '../../config/constants';
+import { useLibraryTranslation } from '../../config/i18n';
 import { SUMMARY_AUTHOR_CONTAINER_ID } from '../../config/selectors';
+import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
 import Contributors from './Contributors';
 
@@ -25,7 +25,7 @@ type Props = {
   displayCoEditors?: boolean;
 };
 const Authorship = ({ itemId, author, displayCoEditors }: Props) => {
-  const { t } = useTranslation();
+  const { t } = useLibraryTranslation();
   const { hooks } = useContext(QueryClientContext);
 
   const { data: memberships } = hooks.useItemMemberships(itemId);

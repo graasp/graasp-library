@@ -2,13 +2,11 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
 import { useContext } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { ArrowForward } from '@mui/icons-material';
 import { Box, Button, styled } from '@mui/material';
 
 import { Context } from '@graasp/sdk';
-import { LIBRARY } from '@graasp/translations';
 
 import {
   APP_AUTHOR,
@@ -16,6 +14,7 @@ import {
   HOMEPAGE_NB_ELEMENTS_TO_SHOW,
 } from '../../config/constants';
 import { NEXT_PUBLIC_GRAASPER_ID } from '../../config/env';
+import { useLibraryTranslation } from '../../config/i18n';
 import { ALL_COLLECTIONS_ROUTE } from '../../config/routes';
 import {
   GRAASPER_COLLECTIONS_GRID_ID,
@@ -23,6 +22,7 @@ import {
   MOST_LIKED_TITLE_ID,
   POPULAR_THIS_WEEK_TITLE_ID,
 } from '../../config/selectors';
+import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
 import ItemCollection from '../collection/ItemCollection';
 import Seo from '../common/Seo';
@@ -77,7 +77,7 @@ const DiscoverButton = styled(Button)(({ theme }) => ({
 }));
 
 const Home = () => {
-  const { t } = useTranslation();
+  const { t } = useLibraryTranslation();
 
   const { leftContent, rightContent } = useHeader();
   const { hooks } = useContext(QueryClientContext);

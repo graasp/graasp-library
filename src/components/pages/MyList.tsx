@@ -1,7 +1,6 @@
 import dynamic from 'next/dynamic';
 
 import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import PublishIcon from '@mui/icons-material/Publish';
@@ -9,10 +8,11 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { AppBar, Box, Tab, Tabs } from '@mui/material';
 
 import { Context } from '@graasp/sdk';
-import { LIBRARY } from '@graasp/translations';
 
 import { APP_AUTHOR, MY_LIST_TAB_NAMES } from '../../config/constants';
+import { useLibraryTranslation } from '../../config/i18n';
 import { buildMyListNavigationTabId } from '../../config/selectors';
+import LIBRARY from '../../langs/constants';
 import Seo from '../common/Seo';
 import useHeader from '../layout/useHeader';
 import MyFavorites from './MyFavorites';
@@ -26,7 +26,7 @@ const { Main } = {
 };
 
 const MyList = () => {
-  const { t } = useTranslation();
+  const { t } = useLibraryTranslation();
   const { leftContent, rightContent } = useHeader();
 
   const [tab, setTab] = useState(0);

@@ -2,8 +2,7 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { useRef } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useEffect, useRef, useState } from 'react';
 
 import { ArrowForward } from '@mui/icons-material';
 import {
@@ -16,12 +15,13 @@ import {
   useTheme,
 } from '@mui/material';
 
-import { LIBRARY } from '@graasp/translations';
-
 import { UrlSearch } from '../../config/constants';
+import { useLibraryTranslation } from '../../config/i18n';
 import { ALL_COLLECTIONS_ROUTE } from '../../config/routes';
 import { HOME_PAGE_TITLE_TEXT_ID } from '../../config/selectors';
+import LIBRARY from '../../langs/constants';
 import Search from '../search/Search';
+import SearchResults from '../search/SearchResults';
 
 const { GraaspLogo } = {
   GraaspLogo: dynamic(
@@ -58,12 +58,12 @@ const PopularSearchItem = ({
 };
 
 const HomeHeader = () => {
-  const { t } = useTranslation();
+  const { t } = useLibraryTranslation();
   const router = useRouter();
   const searchBarRef = useRef<HTMLDivElement>(null);
 
-  // TODO: Feed from real data.
-  const popularSearches = ['Climate', 'App', 'Science', 'Education'];
+  const [searchInput, setSearchInput] = useState('');
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
 
   const handleSearch = (searchKeywords: string) => {
     router.push({
@@ -71,6 +71,16 @@ const HomeHeader = () => {
       query: { [UrlSearch.KeywordSearch]: searchKeywords },
     });
   };
+
+  // save search bar focus state
+  useEffect(() => {
+    setIsSearchFocused(
+      document.activeElement === searchBarRef?.current?.firstChild,
+    );
+  }, [document.activeElement, searchBarRef?.current]);
+
+  // TODO: Feed from real data.
+  const popularSearches = ['Climate', 'App', 'Science', 'Education'];
 
   return (
     <Container maxWidth="md">
@@ -106,12 +116,21 @@ const HomeHeader = () => {
             {t(LIBRARY.HOME_SUBTITLE)}
           </Typography>
         </Box>
-        <Box width="100%">
+        <Box width="100%" position="relative">
           <Search
+            setIsFocused={setIsSearchFocused}
             ref={searchBarRef}
             handleClick={handleSearch}
             isLoading={false}
+            onChange={(newValue) => setSearchInput(newValue)}
           />
+          {/* show results if search bar is focused */}
+          {isSearchFocused && (
+            <SearchResults
+              onOutsideClick={setIsSearchFocused}
+              query={searchInput}
+            />
+          )}
         </Box>
         <Stack
           direction="row"

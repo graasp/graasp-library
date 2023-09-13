@@ -1,19 +1,19 @@
 import dynamic from 'next/dynamic';
 
 import { useContext } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { CircularProgress, Typography } from '@mui/material';
 
 import { ItemType } from '@graasp/sdk';
 import { ItemRecord } from '@graasp/sdk/frontend';
-import { LIBRARY } from '@graasp/translations';
 
 import { TREE_VIEW_MAX_WIDTH } from '../../config/constants';
+import { useLibraryTranslation } from '../../config/i18n';
 import {
   TREE_MODAL_MY_ITEMS_ID,
   TREE_MODAL_SHARED_ITEMS_ID,
 } from '../../config/selectors';
+import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
 
 const DynamicTreeView = dynamic(
@@ -34,7 +34,7 @@ const TreeModalContent = ({
   selectedId,
   onTreeItemSelect,
 }: TreeModalContentProps) => {
-  const { t } = useTranslation();
+  const { t } = useLibraryTranslation();
 
   const { hooks } = useContext(QueryClientContext);
   const { useItem, useOwnItems, useChildren, useSharedItems } = hooks;

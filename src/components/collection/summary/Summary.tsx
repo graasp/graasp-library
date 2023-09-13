@@ -1,7 +1,6 @@
 import truncate from 'lodash.truncate';
 
 import React, { useContext } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { Stack, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
@@ -15,6 +14,7 @@ import {
   ITEM_TYPES,
   MAX_COLLECTION_NAME_LENGTH,
 } from '../../../config/constants';
+import { useLibraryTranslation } from '../../../config/i18n';
 import { QueryClientContext } from '../../QueryClientContext';
 import BackButton from '../../common/BackButton';
 import ItemBreadcrumb from '../ItemBreadcrumb';
@@ -58,7 +58,7 @@ const Summary: React.FC<SummaryProps> = ({
   views = 0,
   isLoading,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useLibraryTranslation();
   const { hooks } = useContext(QueryClientContext);
   const { data: member } = hooks.useCurrentMember();
 

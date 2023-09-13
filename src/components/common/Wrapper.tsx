@@ -1,24 +1,27 @@
 import { ErrorBoundary } from '@sentry/nextjs';
 
-import { useTranslation } from 'react-i18next';
+import { Trans } from 'react-i18next';
 import { DehydratedState } from 'react-query';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { Box, Stack, SxProps } from '@mui/material';
 
-import { LIBRARY } from '@graasp/translations';
 import '@graasp/ui/dist/bundle.css';
 
+import { useLibraryTranslation } from '../../config/i18n';
 import { WRAPPER_SCROLLABLE_PAGE_BODY_ID } from '../../config/selectors';
+import LIBRARY from '../../langs/constants';
 import { QueryClientProvider } from '../QueryClientContext';
 import Footer from '../layout/Footer';
 import TranslationWrapper from './TranslationWrapper';
 
 const Content = ({ children }: { children: JSX.Element }) => {
-  const { t } = useTranslation();
+  const { t } = useLibraryTranslation();
 
   return (
-    <ErrorBoundary fallback={t(LIBRARY.UNEXPECTED_ERROR_MESSAGE)}>
+    <ErrorBoundary
+      fallback={<Trans t={t} i18nKey={LIBRARY.UNEXPECTED_ERROR_MESSAGE} />}
+    >
       {children}
     </ErrorBoundary>
   );

@@ -1,5 +1,5 @@
 import { CategoryType } from '@graasp/sdk';
-import { LIBRARY, namespaces } from '@graasp/translations';
+import { namespaces } from '@graasp/translations';
 
 import i18n from '../../../src/config/i18n';
 import { ALL_COLLECTIONS_ROUTE } from '../../../src/config/routes';
@@ -13,6 +13,7 @@ import {
   buildSearchFilterCategoryId,
   buildSearchFilterPopperButtonId,
 } from '../../../src/config/selectors';
+import LIBRARY from '../../../src/langs/constants';
 import { SAMPLE_CATEGORIES } from '../../fixtures/categories';
 import { buildPublicAndPrivateEnvironments } from '../../fixtures/environment';
 import { PUBLISHED_ITEMS } from '../../fixtures/items';

@@ -4,6 +4,7 @@ import { v4 } from 'uuid';
 import { API_ROUTES } from '@graasp/query-client';
 import {
   Category,
+  HttpMethod,
   ItemTagType,
   PermissionLevel,
   buildPathFromIds,
@@ -39,7 +40,7 @@ const {
   buildGetMembersRoute,
   buildGetCategoriesRoute,
   GET_OWN_ITEMS_ROUTE,
-  buildGetItemsByKeywordRoute,
+  SEARCH_PUBLISHED_ITEMS_ROUTE,
 } = API_ROUTES;
 
 const API_HOST = Cypress.env('API_HOST');
@@ -221,10 +222,7 @@ export const mockGetItem = (
   ).as('getItem');
 };
 
-export const mockGetItemTags = (
-  { tags }: { tags: any[] },
-  shouldThrowError: boolean,
-) => {
+export const mockGetItemTags = (shouldThrowError: boolean) => {
   cy.intercept(
     {
       method: DEFAULT_GET.method,
@@ -235,8 +233,13 @@ export const mockGetItemTags = (
         return reply({ statusCode: StatusCodes.UNAUTHORIZED, body: null });
       }
 
+      const ITEM_PUBLIC_TAG = {
+        id: 'public-tag-id',
+        name: 'public-item',
+      };
+
       return reply({
-        body: tags,
+        body: [ITEM_PUBLIC_TAG],
         statusCode: StatusCodes.OK,
       });
     },
@@ -545,8 +548,8 @@ export const mockSearch = (
 ) => {
   cy.intercept(
     {
-      method: DEFAULT_GET.method,
-      url: new RegExp(`${API_HOST}/${buildGetItemsByKeywordRoute({})}`),
+      method: HttpMethod.POST,
+      url: new RegExp(`${API_HOST}/${SEARCH_PUBLISHED_ITEMS_ROUTE}`),
     },
     ({ reply }) => {
       if (shouldThrowError) {

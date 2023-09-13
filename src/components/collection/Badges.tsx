@@ -1,17 +1,16 @@
 import truncate from 'lodash.truncate';
 
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { Email, Facebook, Twitter } from '@mui/icons-material';
 import { IconButton, Stack } from '@mui/material';
-
-import { LIBRARY } from '@graasp/translations';
 
 import {
   MAIL_BREAK_LINE,
   TWITTER_MESSAGE_MAX_LENGTH,
 } from '../../config/constants';
+import { useLibraryTranslation } from '../../config/i18n';
+import LIBRARY from '../../langs/constants';
 import { openInNewTab } from '../../utils/helpers';
 import { removeTagsFromString } from '../../utils/text';
 
@@ -21,7 +20,7 @@ type Props = {
 };
 
 const Badges = ({ name, description }: Props) => {
-  const { t } = useTranslation();
+  const { t } = useLibraryTranslation();
   const [pageLocation, setPageLocation] = useState<string>();
   const parsedDescription = removeTagsFromString(description);
 

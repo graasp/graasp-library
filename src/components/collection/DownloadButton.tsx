@@ -1,10 +1,9 @@
 import dynamic from 'next/dynamic';
 
 import { useContext, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 
-import { LIBRARY } from '@graasp/translations';
-
+import { useLibraryTranslation } from '../../config/i18n';
+import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
 
 const { GraaspDownloadButton } = {
@@ -51,7 +50,7 @@ type Props = {
 };
 
 const DownloadButton = ({ id }: Props) => {
-  const { t } = useTranslation();
+  const { t } = useLibraryTranslation();
 
   const { isDownloading, startDownload } = useDownloadAction(id);
 

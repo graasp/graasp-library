@@ -4,7 +4,6 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 
 import {
   Box,
@@ -17,10 +16,10 @@ import {
 } from '@mui/material';
 
 import { CategoryRecord } from '@graasp/sdk/frontend';
-import { LIBRARY } from '@graasp/translations';
 import { CCSharingVariant } from '@graasp/ui';
 
 import { CATEGORY_COLORS, UrlSearch } from '../../../config/constants';
+import { useLibraryTranslation } from '../../../config/i18n';
 import { ALL_COLLECTIONS_ROUTE } from '../../../config/routes';
 import {
   SUMMARY_CATEGORIES_CONTAINER_ID,
@@ -30,6 +29,7 @@ import {
   SUMMARY_LANGUAGES_CONTAINER_ID,
   SUMMARY_LAST_UPDATE_CONTAINER_ID,
 } from '../../../config/selectors';
+import LIBRARY from '../../../langs/constants';
 
 const { CreativeCommons } = {
   CreativeCommons: dynamic(
@@ -75,7 +75,7 @@ type CategoryChipProps = {
 };
 
 const CategoryChip = ({ category }: CategoryChipProps) => {
-  const { t } = useTranslation();
+  const { t } = useLibraryTranslation();
   const router = useRouter();
 
   const handleCategorySearch = (categoryId: string) => {
@@ -120,7 +120,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
   disciplines,
   ccLicenseAdaption,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useLibraryTranslation();
 
   const { allowSharing, allowCommercialUse, requireAccreditation } =
     React.useMemo(

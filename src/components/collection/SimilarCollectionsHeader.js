@@ -1,14 +1,14 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { Info } from '@mui/icons-material';
 import { Box, Tooltip, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
 
-import { LIBRARY } from '@graasp/translations';
+import { useLibraryTranslation } from '../../config/i18n';
+import LIBRARY from '../../langs/constants';
 
 const SimilarCollectionsHeader = () => {
-  const { t } = useTranslation();
+  const { t } = useLibraryTranslation();
   return (
     <Box mb={2} flexGrow={1}>
       <Grid container spacing={0} justify="space-between">

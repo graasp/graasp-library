@@ -1,7 +1,6 @@
 import { List } from 'immutable';
 
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { Breakpoint } from '@mui/material';
 import Container from '@mui/material/Container';
@@ -10,9 +9,10 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Unstable_Grid2';
 
 import { ItemRecord } from '@graasp/sdk/frontend';
-import { LIBRARY } from '@graasp/translations';
 
+import { useLibraryTranslation } from '../../config/i18n';
 import { buildCollectionCardGridId } from '../../config/selectors';
+import LIBRARY from '../../langs/constants';
 import CollectionCard from './CollectionCard';
 
 type Props = {
@@ -20,6 +20,7 @@ type Props = {
   isLoading: boolean;
   id?: string;
   containerWidth?: Breakpoint | false;
+  showIsContentTag?: boolean;
 };
 
 const CollectionsGrid = ({
@@ -27,8 +28,9 @@ const CollectionsGrid = ({
   isLoading,
   id,
   containerWidth,
+  showIsContentTag,
 }: Props) => {
-  const { t } = useTranslation();
+  const { t } = useLibraryTranslation();
 
   if (isLoading) {
     return <Skeleton />;
@@ -58,7 +60,10 @@ const CollectionsGrid = ({
               xl={2}
               id={buildCollectionCardGridId(collection.id)}
             >
-              <CollectionCard collection={collection} />
+              <CollectionCard
+                showIsContentTag={showIsContentTag}
+                collection={collection}
+              />
             </Grid>
           ))}
         </Grid>

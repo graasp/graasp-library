@@ -1,14 +1,13 @@
 import { List } from 'immutable';
 
-import { useTranslation } from 'react-i18next';
-
 import AvatarGroup from '@mui/lab/AvatarGroup';
 import { Stack, Tooltip, Typography } from '@mui/material';
 
 import { MemberRecord } from '@graasp/sdk/frontend';
-import { LIBRARY } from '@graasp/translations';
 
+import { useLibraryTranslation } from '../../config/i18n';
 import { buildContributorId } from '../../config/selectors';
+import LIBRARY from '../../langs/constants';
 import MemberAvatar from '../layout/MemberAvatar';
 
 type Props = {
@@ -17,7 +16,7 @@ type Props = {
 };
 
 const Contributors = ({ contributors, displayContributors }: Props) => {
-  const { t } = useTranslation();
+  const { t } = useLibraryTranslation();
 
   if (!contributors || contributors.isEmpty()) {
     return null;

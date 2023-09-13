@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { Add, Remove } from '@mui/icons-material';
 import { Button, Grow, useMediaQuery, useTheme } from '@mui/material';
@@ -9,9 +8,10 @@ import Typography from '@mui/material/Typography';
 
 import { ItemType } from '@graasp/sdk';
 import { ItemRecord } from '@graasp/sdk/frontend';
-import { LIBRARY } from '@graasp/translations';
 
+import { useLibraryTranslation } from '../../config/i18n';
 import { CHILDREN_ITEMS_GRID_ID } from '../../config/selectors';
+import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
 import { FileChildrenCard, FolderChildrenCard } from './ChildrenCard';
 
@@ -34,7 +34,7 @@ const CollapsibleItemCategory: React.FC<CollapsibleItemCategoryProps> = ({
   children,
   defaultItemCount,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useLibraryTranslation();
 
   const [showMoreItems, setShowMoreItems] = useState<boolean>(false);
 
@@ -89,7 +89,7 @@ type ItemsProps = {
 };
 
 const Items: React.FC<ItemsProps> = ({ parentId, lang, isTopLevel }) => {
-  const { t } = useTranslation();
+  const { t } = useLibraryTranslation();
   const { hooks } = useContext(QueryClientContext);
   const { data: items, isLoading: isLoadingChildren } =
     hooks.useChildren(parentId);

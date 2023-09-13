@@ -1,5 +1,4 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 
 import {
   Button,
@@ -15,13 +14,18 @@ import {
 import { TransitionProps as MUITransitionProps } from '@mui/material/transitions';
 
 import { CategoryRecord } from '@graasp/sdk/frontend';
-import { LIBRARY, namespaces } from '@graasp/translations';
 
+import {
+  useCategoriesTranslation,
+  useLibraryTranslation,
+} from '../../config/i18n';
 import {
   CLEAR_FILTER_POPPER_BUTTON_ID,
   FILTER_POPPER_ID,
   buildCategoryOptionId,
 } from '../../config/selectors';
+import LIBRARY from '../../langs/constants';
+import { compare } from '../../utils/helpers';
 
 const StyledPopper = styled(Stack)(() => ({
   background: 'white',
@@ -53,8 +57,8 @@ const FilterPopper = React.forwardRef<HTMLDivElement, FilterPopperProps>(
     },
     ref,
   ) => {
-    const { t: translateCategories } = useTranslation(namespaces.categories);
-    const { t } = useTranslation();
+    const { t: translateCategories } = useCategoriesTranslation();
+    const { t } = useLibraryTranslation();
     return (
       <Popper
         id={FILTER_POPPER_ID}
@@ -68,37 +72,40 @@ const FilterPopper = React.forwardRef<HTMLDivElement, FilterPopperProps>(
           // eslint-disable-next-line react/jsx-props-no-spreading
           <Grow {...TransitionProps}>
             <StyledPopper>
-              {options?.map((option, idx) => {
-                const isSelected = selectedOptions.includes(option.id);
-                return (
-                  <Stack
-                    key={option.id}
-                    id={buildCategoryOptionId(idx)}
-                    direction="row"
-                    alignItems="center"
-                    justifyContent="space-between"
-                    minWidth={200}
-                  >
-                    <FormControl fullWidth>
-                      <FormControlLabel
-                        sx={{
-                          width: '100%',
-                        }}
-                        control={
-                          <Checkbox
-                            checked={isSelected}
-                            onChange={() =>
-                              onOptionChange(option.id, !isSelected)
-                            }
-                          />
-                        }
-                        label={translateCategories(option.name)}
-                        labelPlacement="end"
-                      />
-                    </FormControl>
-                  </Stack>
-                );
-              }) || (
+              {options
+                ?.map((c) => c.set('name', translateCategories(c.name)))
+                ?.sort(compare)
+                .map((option, idx) => {
+                  const isSelected = selectedOptions.includes(option.id);
+                  return (
+                    <Stack
+                      key={option.id}
+                      id={buildCategoryOptionId(idx)}
+                      direction="row"
+                      alignItems="center"
+                      justifyContent="space-between"
+                      minWidth={200}
+                    >
+                      <FormControl fullWidth>
+                        <FormControlLabel
+                          sx={{
+                            width: '100%',
+                          }}
+                          control={
+                            <Checkbox
+                              checked={isSelected}
+                              onChange={() =>
+                                onOptionChange(option.id, !isSelected)
+                              }
+                            />
+                          }
+                          label={option.name}
+                          labelPlacement="end"
+                        />
+                      </FormControl>
+                    </Stack>
+                  );
+                }) || (
                 <Typography color="#666">
                   {t(LIBRARY.FILTER_DROPDOWN_NO_CATEGORIES_AVAILABLE)}
                 </Typography>

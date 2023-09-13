@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { Grid, styled } from '@mui/material';
 import FormControl from '@mui/material/FormControl';
@@ -11,6 +10,7 @@ import { setLangCookie } from '@graasp/sdk';
 import { langs } from '@graasp/translations';
 
 import { DOMAIN } from '../../config/env';
+import { useLibraryTranslation } from '../../config/i18n';
 import { QueryClientContext } from '../QueryClientContext';
 
 const StyledFooter = styled('footer')(({ theme }) => ({
@@ -24,7 +24,7 @@ const usePreferredLanguage = (): {
   language: string;
   onLanguageChange: (newLang: string) => void;
 } => {
-  const { i18n } = useTranslation();
+  const { i18n } = useLibraryTranslation();
   const { hooks, mutations } = useContext(QueryClientContext);
   const { data: member } = hooks.useCurrentMember();
   const { mutate: editMember } = mutations.useEditMember();

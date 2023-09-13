@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { Box, Button, Skeleton, Typography } from '@mui/material';
 
-import { LIBRARY } from '@graasp/translations';
-
+import { useLibraryTranslation } from '../../../config/i18n';
+import LIBRARY from '../../../langs/constants';
 import ContentDescription from '../ContentDescription';
 
 export const CollapsibleDescription = ({
@@ -44,7 +43,7 @@ const Description: React.FC<DescriptionProps> = ({
   description,
   isLoading,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useLibraryTranslation();
 
   const [collapsedDescription, setCollapsedDescription] = useState(true);
 

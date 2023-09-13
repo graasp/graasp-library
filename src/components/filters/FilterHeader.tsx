@@ -1,14 +1,15 @@
 import Immutable, { List } from 'immutable';
 
 import React, { FC, useContext, useEffect, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { ExpandMoreRounded } from '@mui/icons-material';
 import {
   Box,
   Button,
+  Checkbox,
   Container,
   Divider,
+  FormControlLabel,
   Skeleton,
   Stack,
   Typography,
@@ -17,15 +18,18 @@ import {
 
 import { CategoryType } from '@graasp/sdk';
 import { CategoryRecord } from '@graasp/sdk/frontend';
-import { LIBRARY, namespaces } from '@graasp/translations';
 
 import { GRAASP_COLOR } from '../../config/constants';
+import {
+  useCategoriesTranslation,
+  useLibraryTranslation,
+} from '../../config/i18n';
 import {
   ALL_COLLECTIONS_TITLE_ID,
   buildSearchFilterCategoryId,
   buildSearchFilterPopperButtonId,
 } from '../../config/selectors';
-import { compare } from '../../utils/helpers';
+import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
 import Search from '../search/Search';
 import FilterPopper from './FilterPopper';
@@ -50,9 +54,9 @@ const Filter: React.FC<FilterProps> = ({
   selectedOptions,
   isLoading,
 }) => {
-  const { t } = useTranslation();
+  const { t: translateCategories } = useCategoriesTranslation();
+  const { t } = useLibraryTranslation();
   const [showPopper, setShowPopper] = useState<boolean>(false);
-
   const togglePopper = () => {
     setShowPopper((oldVal) => !oldVal);
   };
@@ -84,7 +88,7 @@ const Filter: React.FC<FilterProps> = ({
     const optionsStr =
       options
         ?.filter((it) => selectedOptions.includes(it.id))
-        .map((it) => t(it.name, { ns: namespaces.categories }))
+        .map((it) => translateCategories(it.name))
         .get(0) ?? t(LIBRARY.FILTER_DROPDOWN_NO_FILTER);
     return optionsStr;
   }, [selectedOptions, options]);
@@ -206,11 +210,13 @@ type Category = {
 };
 
 type FilterHeaderProps = {
-  onFiltersChanged: (selectedFilters: string[]) => void;
+  onFiltersChanged: (selectedFilters: string[][]) => void;
+  onIncludeContentChange: (newValue: boolean) => void;
+  shouldIncludeContent: boolean;
   onChangeSearch?: (searchKeywords: string) => void;
   onSearch: (searchKeywords: string) => void;
   searchPreset?: string;
-  categoryPreset?: string[];
+  categoryPreset?: string[][];
   isLoadingResults: boolean;
 };
 
@@ -221,9 +227,11 @@ const FilterHeader: FC<FilterHeaderProps> = ({
   searchPreset,
   categoryPreset,
   isLoadingResults,
+  onIncludeContentChange,
+  shouldIncludeContent,
 }) => {
-  const { t: translateCategories } = useTranslation(namespaces.categories);
-  const { t } = useTranslation();
+  const { t: translateCategories } = useCategoriesTranslation();
+  const { t } = useLibraryTranslation();
 
   // filters are of the form ["a1,a2", "b1"] where the items wanted should have (a1 OR a2) AND b1
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
@@ -236,9 +244,7 @@ const FilterHeader: FC<FilterHeaderProps> = ({
 
   const allCategories = categories?.groupBy((entry: Category) => entry.type);
   const levelList = allCategories?.get(CategoryType.Level);
-  const disciplineList = allCategories
-    ?.get(CategoryType.Discipline)
-    ?.sort(compare);
+  const disciplineList = allCategories?.get(CategoryType.Discipline);
   const languageList = allCategories?.get(CategoryType.Language);
 
   // TODO: Replace with real values.
@@ -261,12 +267,10 @@ const FilterHeader: FC<FilterHeaderProps> = ({
   // ]);
 
   useEffect(() => {
-    setSelectedFilters(
-      categoryPreset ? categoryPreset.map((f) => f.split(',')).flat() : [],
-    );
+    setSelectedFilters(categoryPreset ? categoryPreset.flat() : []);
   }, [categoryPreset]);
 
-  const groupedByCategories = (filters: string[]): string[] => {
+  const groupedByCategories = (filters: string[]): string[][] => {
     if (allCategories) {
       const groupedFilters = allCategories
         ?.toIndexedSeq()
@@ -274,13 +278,13 @@ const FilterHeader: FC<FilterHeaderProps> = ({
           cats
             .filter(({ id }) => filters.includes(id))
             .map(({ id }) => id)
-            .join(','),
+            .toArray(),
         )
         .toArray()
-        .filter((r) => r);
+        .filter((r) => r.length);
       return groupedFilters;
     }
-    return filters;
+    return [filters];
   };
 
   const onFilterChanged = (id: string, newValue: boolean) => {
@@ -424,6 +428,20 @@ const FilterHeader: FC<FilterHeaderProps> = ({
       >
         {filters}
       </StyledFilterContainer>
+      <Stack alignItems="end">
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={shouldIncludeContent}
+              size="small"
+              onChange={(e) => {
+                onIncludeContentChange(e.target.checked);
+              }}
+            />
+          }
+          label={t(LIBRARY.ENABLE_IN_DEPTH_SEARCH_LABEL)}
+        />
+      </Stack>
     </Stack>
   );
 };

@@ -95,6 +95,8 @@ export const CATEGORY_COLORS: Record<
   [CategoryType.Discipline]: '#4997DE',
   [CategoryType.Language]: '#9A49DE',
   [CategoryType.Level]: '#5050d2',
-  [CategoryType.Type]: '#E56548',
+  [CategoryType.ResourceType]: '#E56548',
   license: '#E56548',
 };
+
+export const MAX_RESULTS_TO_SHOW = 5;

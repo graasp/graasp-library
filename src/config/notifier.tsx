@@ -3,13 +3,10 @@ import { toast } from 'react-toastify';
 
 import { Notifier, routines } from '@graasp/query-client';
 import { ItemRecord } from '@graasp/sdk/frontend';
-import {
-  FAILURE_MESSAGES,
-  LIBRARY,
-  SUCCESS_MESSAGES,
-} from '@graasp/translations';
+import { FAILURE_MESSAGES, SUCCESS_MESSAGES } from '@graasp/translations';
 
 import ToastrWithLink from '../components/common/ToastrWithLink';
+import LIBRARY from '../langs/constants';
 import { SHOW_NOTIFICATIONS } from './env';
 import i18n from './i18n';
 import { buildPlayerViewItemRoute } from './paths';

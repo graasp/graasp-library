@@ -1,23 +1,22 @@
 import { MouseEvent, useContext, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import FileCopyIcon from '@mui/icons-material/FileCopy';
 import CircularProgress from '@mui/material/CircularProgress';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
-import { LIBRARY } from '@graasp/translations';
-
 import { ROOT_ID } from '../../config/constants';
+import { useLibraryTranslation } from '../../config/i18n';
 import {
   TREE_MODAL_MY_ITEMS_ID,
   TREE_MODAL_SHARED_ITEMS_ID,
 } from '../../config/selectors';
+import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
 import TreeModal from './TreeModal';
 
 export const useCopyAction = (id?: string) => {
-  const { t } = useTranslation();
+  const { t } = useLibraryTranslation();
 
   const [showTreeModal, setShowTreeModal] = useState(false);
   const { hooks, mutations } = useContext(QueryClientContext);
@@ -75,7 +74,7 @@ type Props = {
 };
 
 const CopyButton = ({ id }: Props) => {
-  const { t } = useTranslation();
+  const { t } = useLibraryTranslation();
 
   const { treeModal, isCopying, startCopy } = useCopyAction(id);
 

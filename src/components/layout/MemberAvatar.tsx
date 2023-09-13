@@ -1,17 +1,17 @@
 import dynamic from 'next/dynamic';
 
 import React, { useContext } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { Box, SxProps } from '@mui/material';
 
 import { ThumbnailSize } from '@graasp/sdk';
-import { LIBRARY } from '@graasp/translations';
 
 import {
   DEFAULT_MEMBER_THUMBNAIL,
   SMALL_AVATAR_ICON_SIZE,
 } from '../../config/constants';
+import { useLibraryTranslation } from '../../config/i18n';
+import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
 
 const { Avatar } = {
@@ -33,7 +33,7 @@ const MemberAvatar = React.forwardRef<HTMLDivElement, Props>(
     ref,
   ): JSX.Element => {
     const { hooks } = useContext(QueryClientContext);
-    const { t } = useTranslation();
+    const { t } = useLibraryTranslation();
     const { data: member, isLoading, isFetching } = hooks.useMember(id);
     const {
       data: avatarUrl,

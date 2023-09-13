@@ -3,7 +3,6 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
 import React, { useContext } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { Folder } from '@mui/icons-material';
 import {
@@ -18,10 +17,11 @@ import Typography from '@mui/material/Typography';
 
 import { ThumbnailSize } from '@graasp/sdk';
 import { ItemRecord } from '@graasp/sdk/frontend';
-import { LIBRARY } from '@graasp/translations';
 
 import { COLLECTION_CARD_BORDER_RADIUS } from '../../config/cssStyles';
+import { useLibraryTranslation } from '../../config/i18n';
 import { buildCollectionRoute } from '../../config/routes';
+import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
 import CopyButton from './CopyButton';
 import CopyLinkButton from './CopyLinkButton';
@@ -141,7 +141,7 @@ export const FileChildrenCard: React.FC<FileChildrenCardProps> = ({
   item,
   lang,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useLibraryTranslation();
 
   const { name } = item;
 
@@ -199,7 +199,7 @@ type FolderChildrenCardProps = {
 export const FolderChildrenCard: React.FC<FolderChildrenCardProps> = ({
   item,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useLibraryTranslation();
 
   const { id } = item;
 

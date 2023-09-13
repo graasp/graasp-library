@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -7,12 +6,12 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 
-import { LIBRARY } from '@graasp/translations';
-
+import { useLibraryTranslation } from '../../config/i18n';
 import {
   COPY_MODAL_TITLE_ID,
   TREE_MODAL_CONFIRM_BUTTON_ID,
 } from '../../config/selectors';
+import LIBRARY from '../../langs/constants';
 import TreeModalContent from './TreeModalContent';
 
 type TreeModalProps = {
@@ -32,7 +31,7 @@ const TreeModal = ({
   onClose,
   onConfirm,
 }: TreeModalProps) => {
-  const { t } = useTranslation();
+  const { t } = useLibraryTranslation();
 
   const [selectedId, setSelectedId] = useState<string>();
 

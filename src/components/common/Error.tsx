@@ -1,17 +1,15 @@
 import Link from 'next/link';
 
-import { useTranslation } from 'react-i18next';
-
 import { Stack, Typography, styled } from '@mui/material';
 
-import { LIBRARY } from '@graasp/translations';
-
 import { APP_AUTHOR } from '../../config/constants';
+import { useLibraryTranslation } from '../../config/i18n';
 import {
   ERROR_UNEXPECTED_ERROR_CODE,
   ErrorMessages,
 } from '../../config/messages';
 import { HOME_ROUTE } from '../../config/routes';
+import LIBRARY from '../../langs/constants';
 import Seo from './Seo';
 
 const StyledLink = styled(Link)(({ theme }) => ({
@@ -25,7 +23,7 @@ type Props = {
 };
 
 const Error = ({ code = ERROR_UNEXPECTED_ERROR_CODE }: Props) => {
-  const { t } = useTranslation();
+  const { t } = useLibraryTranslation();
   const message = ErrorMessages[code];
 
   return (
