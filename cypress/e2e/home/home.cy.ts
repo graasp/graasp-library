@@ -1,4 +1,4 @@
-import i18n from '../../../src/config/i18n';
+import i18n, { LIBRARY_NAMESPACE } from '../../../src/config/i18n';
 import { HOME_ROUTE } from '../../../src/config/routes';
 import {
   GRAASP_SELECTION_TITLE_ID,
@@ -27,19 +27,31 @@ describe('Home Page', () => {
 
         cy.get(`#${HOME_PAGE_TITLE_TEXT_ID}`)
           .should('be.visible')
-          .and('have.text', i18n.t(LIBRARY.HOME_TITLE));
+          .and(
+            'have.text',
+            i18n.t(LIBRARY.HOME_TITLE, { ns: LIBRARY_NAMESPACE }),
+          );
         cy.get(`#${POPULAR_THIS_WEEK_TITLE_ID} #${SECTION_TITLE_ID}`).should(
           'have.text',
-          i18n.t(LIBRARY.HOME_RECENT_COLLECTIONS_TITLE),
+          i18n.t(LIBRARY.HOME_RECENT_COLLECTIONS_TITLE, {
+            ns: LIBRARY_NAMESPACE,
+          }),
         );
         cy.get(`#${MOST_LIKED_TITLE_ID} #${SECTION_TITLE_ID}`).should(
           'have.text',
-          i18n.t(LIBRARY.HOME_MOST_LIKED_COLLECTIONS_TITLE),
+          i18n.t(LIBRARY.HOME_MOST_LIKED_COLLECTIONS_TITLE, {
+            ns: LIBRARY_NAMESPACE,
+          }),
         );
 
         cy.get(`#${GRAASP_SELECTION_TITLE_ID} #${SECTION_TITLE_ID}`, {
           timeout: 4000,
-        }).should('have.text', i18n.t(LIBRARY.HOME_GRAASPER_COLLECTIONS_TITLE));
+        }).should(
+          'have.text',
+          i18n.t(LIBRARY.HOME_GRAASPER_COLLECTIONS_TITLE, {
+            ns: LIBRARY_NAMESPACE,
+          }),
+        );
       });
 
       describe('Graasper items', () => {

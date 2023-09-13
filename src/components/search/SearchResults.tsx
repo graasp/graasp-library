@@ -24,7 +24,6 @@ import {
   buildCollectionRoute,
 } from '../../config/routes';
 import LIBRARY from '../../langs/constants';
-import { MeiliSearchResults } from '../../utils/types';
 import { QueryClientContext } from '../QueryClientContext';
 import SearchThumbnail from './SearchThumbnail';
 import { useOutsideClick } from './hooks';
@@ -103,7 +102,7 @@ const SearchResults = ({
     return null;
   }
   // eslint-disable-next-line prefer-destructuring
-  const queryResults = (collections as MeiliSearchResults).results.first();
+  const queryResults = collections.results.first();
   const hits = queryResults?.hits;
   // no result found
   if (!hits || hits.isEmpty()) {

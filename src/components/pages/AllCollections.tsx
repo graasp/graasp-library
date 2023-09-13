@@ -23,7 +23,6 @@ import {
   MENU_BUTTON_ID,
 } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
-import { MeiliSearchResults } from '../../utils/types';
 import { QueryClientContext } from '../QueryClientContext';
 import CollectionsGrid from '../collection/CollectionsGrid';
 import Seo from '../common/Seo';
@@ -120,8 +119,7 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
                     values={{
                       search: searchKeywords,
                       count:
-                        (collections as MeiliSearchResults)?.results?.first()
-                          ?.estimatedTotalHits ?? 0,
+                        collections?.results?.first()?.estimatedTotalHits ?? 0,
                     }}
                     t={t}
                     i18nKey={LIBRARY.SEARCH_RESULTS_FOR_TEXT}
