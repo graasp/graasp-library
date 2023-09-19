@@ -1,3 +1,4 @@
+import { Interweave } from 'interweave';
 import { useRouter } from 'next/router';
 
 import React, { useContext } from 'react';
@@ -137,24 +138,21 @@ const SearchResults = ({
                   </Stack>
                   <Stack>
                     <Stack direction="column">
-                      <span
+                      <Interweave
                         style={{ paddingRight: 5 }}
-                        dangerouslySetInnerHTML={{
-                          // eslint-disable-next-line no-underscore-dangle
-                          __html: result._formatted.name,
-                        }}
+                        //  eslint-disable-next-line no-underscore-dangle
+                        content={result._formatted.name}
                       />
                     </Stack>
                     <Stack>
-                      <span
+                      <Interweave
                         style={{ color: '#999' }}
-                        dangerouslySetInnerHTML={{
-                          __html:
-                            // eslint-disable-next-line no-underscore-dangle
-                            result._formatted.description ||
-                            // eslint-disable-next-line no-underscore-dangle
-                            result._formatted.content,
-                        }}
+                        content={
+                          // eslint-disable-next-line no-underscore-dangle
+                          result._formatted.description ||
+                          // eslint-disable-next-line no-underscore-dangle
+                          result._formatted.content
+                        }
                       />
                     </Stack>
                   </Stack>

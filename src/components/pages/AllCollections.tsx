@@ -1,3 +1,4 @@
+import { List } from 'immutable';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
@@ -5,16 +6,10 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Trans } from 'react-i18next';
 
 import { Close } from '@mui/icons-material';
-import {
-  Box,
-  Button,
-  Container,
-  IconButton,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { Box, Container, IconButton, Stack, Typography } from '@mui/material';
 
 import { Context } from '@graasp/sdk';
+import { ItemRecord } from '@graasp/sdk/frontend';
 
 import { APP_AUTHOR, UrlSearch } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';
@@ -32,6 +27,9 @@ import useHeader from '../layout/useHeader';
 const Main = dynamic(() => import('@graasp/ui').then((mod) => mod.Main), {
   ssr: false,
 });
+const Button = dynamic(() => import('@graasp/ui').then((mod) => mod.Button), {
+  ssr: false,
+});
 
 type AllCollectionsProps = {};
 
@@ -44,12 +42,24 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
   const [shouldIncludeContent, setShouldIncludeContent] =
     useState<boolean>(true);
   const [searchKeywords, setSearchKeywords] = useState<string>('');
+  const [page, setPage] = useState<number>(1);
   const { data: collections, isLoading } = hooks.useSearchPublishedItems({
     query: searchKeywords,
     categories: filters,
+    page,
     // does not show children if option is disabled or if a no query search exists
-    isPublishedRoot: !searchKeywords || !shouldIncludeContent,
+    isPublishedRoot: !shouldIncludeContent,
   });
+  const [allCollections, setAllCollections] = useState<List<ItemRecord>>(
+    List(),
+  );
+
+  useEffect(() => {
+    const newCollections = (collections as any)?.results?.first()?.hits;
+    if (newCollections) {
+      setAllCollections(allCollections.concat(newCollections));
+    }
+  }, [collections]);
 
   useEffect(() => {
     const { query } = router;
@@ -132,14 +142,26 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
             )}
             <CollectionsGrid
               containerWidth="xl"
-              collections={(collections as any)?.results?.first()?.hits}
+              collections={allCollections}
               id={ALL_COLLECTIONS_GRID_ID}
               isLoading={isLoading}
               showIsContentTag
             />
           </Stack>
-          {!shouldIncludeContent && Boolean(searchKeywords) && (
-            <Box my={10} textAlign="center">
+          <Box my={10} textAlign="center">
+            {Boolean(
+              (collections?.results?.first()?.totalHits ?? 0) >
+                allCollections.size,
+            ) && (
+              <Button
+                onClick={() => {
+                  setPage(page + 1);
+                }}
+              >
+                {t('Load more')}
+              </Button>
+            )}
+            {!shouldIncludeContent && Boolean(searchKeywords) && (
               <Button
                 onClick={() => {
                   setShouldIncludeContent(true);
@@ -157,8 +179,8 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
                   i18nKey={LIBRARY.SUGGESTION_TO_ENABLE_IN_DEPTH_SEARCH_TEXT}
                 />
               </Button>
-            </Box>
-          )}
+            )}
+          </Box>
         </Container>
       </Main>
     </>
