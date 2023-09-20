@@ -36,4 +36,5 @@ export type MockItem = DiscriminatedItem & {
   memberships?: MockMemberships[];
   categories?: { category: Category }[];
   thumbnail?: string;
+  isPublishedRoot?: boolean;
 };

@@ -3,7 +3,6 @@ import { ITEM_LIKES } from '../fixtures/itemLikes';
 import { PUBLISHED_ITEMS } from '../fixtures/items';
 import { MEMBERS } from '../fixtures/members';
 import {
-  mockGetAllPublishedItems,
   mockGetAvatarUrl,
   mockGetCategories,
   mockGetChildren,
@@ -39,11 +38,8 @@ Cypress.Commands.add(
     getItemError = false,
     getTagsError = false,
     getItemThumbnailError = false,
-    getPublishedItemsInCategoriesError = false,
   } = {}) => {
     const cachedMembers = JSON.parse(JSON.stringify(members));
-
-    mockGetAllPublishedItems({ items }, getPublishedItemsInCategoriesError);
 
     mockGetOwnItems({ items, currentMember });
 

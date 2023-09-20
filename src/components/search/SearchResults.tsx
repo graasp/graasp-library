@@ -24,6 +24,10 @@ import {
   ALL_COLLECTIONS_ROUTE,
   buildCollectionRoute,
 } from '../../config/routes';
+import {
+  SEARCH_RESULTS_LIST_ID,
+  SEARCH_RESULTS_SHOW_MORE_BUTTON,
+} from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
 import SearchThumbnail from './SearchThumbnail';
@@ -121,7 +125,7 @@ const SearchResults = ({
 
   return (
     <Container>
-      <List sx={{ width: '100%' }} ref={ref}>
+      <List id={SEARCH_RESULTS_LIST_ID} sx={{ width: '100%' }} ref={ref}>
         {hits.take(MAX_RESULTS_TO_SHOW).map((result) => (
           <>
             <ListItemButton
@@ -167,6 +171,7 @@ const SearchResults = ({
             component="a"
             target="_blank"
             onClick={onLoadMoreClick}
+            id={SEARCH_RESULTS_SHOW_MORE_BUTTON}
           >
             <LoadMoreResultsText>
               {t(LIBRARY.SEE_MORE_RESULTS_SEARCH, {

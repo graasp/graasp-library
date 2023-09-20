@@ -34,7 +34,7 @@
     "@emotion/server": "11.11.0",
     "@emotion/styled": "11.11.0",
     "@graasp/query-client": "github:graasp/graasp-query-client#421-meilisearch",
-    "@graasp/sdk": "https://github.com/graasp/graasp-sdk#351-search",
+    "@graasp/sdk": "1.6.0",
     "@graasp/translations": "1.19.1",
     "@graasp/ui": "3.4.0",
     "@mui/icons-material": "5.14.3",
@@ -103,7 +103,8 @@
     "wait-on": "7.0.1"
   },
   "resolutions": {
-    "@types/react": "17.0.64"
+    "@types/react": "17.0.64",
+    "immutable": "4.3.2"
   },
   "nyc": {
     "exclude": [

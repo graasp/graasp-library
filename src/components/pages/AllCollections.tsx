@@ -42,6 +42,7 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
   const [shouldIncludeContent, setShouldIncludeContent] =
     useState<boolean>(true);
   const [searchKeywords, setSearchKeywords] = useState<string>('');
+  const [prevResults, setPrevResults] = useState<List<ItemRecord>>(List());
   const [page, setPage] = useState<number>(1);
   const { data: collections, isLoading } = hooks.useSearchPublishedItems({
     query: searchKeywords,
@@ -50,16 +51,6 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
     // does not show children if option is disabled or if a no query search exists
     isPublishedRoot: !shouldIncludeContent,
   });
-  const [allCollections, setAllCollections] = useState<List<ItemRecord>>(
-    List(),
-  );
-
-  useEffect(() => {
-    const newCollections = (collections as any)?.results?.first()?.hits;
-    if (newCollections) {
-      setAllCollections(allCollections.concat(newCollections));
-    }
-  }, [collections]);
 
   useEffect(() => {
     const { query } = router;
@@ -80,7 +71,16 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
     }
   }, []);
 
+  // reset prev results on query changes
+  useEffect(() => {
+    setPrevResults(List());
+  }, [searchKeywords, filters, shouldIncludeContent]);
+
   const { leftContent, rightContent } = useHeader();
+
+  const allCollections = prevResults.concat(
+    (collections as any)?.results?.first()?.hits,
+  );
 
   const onFiltersChanged = (newFilters: string[][]) => {
     setFilters(newFilters);
@@ -155,6 +155,7 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
             ) && (
               <Button
                 onClick={() => {
+                  setPrevResults(allCollections);
                   setPage(page + 1);
                 }}
               >

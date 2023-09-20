@@ -26,6 +26,7 @@ import {
 } from '../../config/i18n';
 import {
   ALL_COLLECTIONS_TITLE_ID,
+  ENABLE_IN_DEPTH_SEARCH_CHECKBOX_ID,
   buildSearchFilterCategoryId,
   buildSearchFilterPopperButtonId,
 } from '../../config/selectors';
@@ -432,6 +433,7 @@ const FilterHeader: FC<FilterHeaderProps> = ({
         <FormControlLabel
           control={
             <Checkbox
+              id={ENABLE_IN_DEPTH_SEARCH_CHECKBOX_ID}
               checked={shouldIncludeContent}
               size="small"
               onChange={(e) => {

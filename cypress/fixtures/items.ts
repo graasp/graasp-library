@@ -1,5 +1,6 @@
 import {
   FolderItemType,
+  Item,
   ItemTagType,
   ItemType,
   PermissionLevel,
@@ -35,6 +36,8 @@ export const PUBLISHED_ITEMS: MockItem[] = [
       ccLicenseAdaption: 'CC BY-NC-ND',
       displayCoEditors: true,
     },
+    // info available only from meilisearch
+    isPublishedRoot: true,
     publishedInfo: {
       isPublished: true,
       rootPath: 'ecafbd2a_5688_11eb_ae93_0242ac130002',
@@ -74,6 +77,8 @@ export const PUBLISHED_ITEMS: MockItem[] = [
     path: 'ecafbd2a_5688_11eb_ae93_0242ac130002.fdf09f5a_5688_11eb_ae93_0242ac130004.bdf09f5a_5688_11eb_ae93_0242ac130004',
     createdAt: new Date(Date.parse('2023-02-27T18:20:09.732Z')),
     updatedAt: new Date(Date.parse('2023-02-28T18:20:09.732Z')),
+    // info available only from meilisearch
+    isPublishedRoot: false,
     publishedInfo: {
       isPublished: true,
       rootPath: 'ecafbd2a_5688_11eb_ae93_0242ac130002',
@@ -105,6 +110,8 @@ export const PUBLISHED_ITEMS: MockItem[] = [
     path: 'ecafbd2a_5688_11eb_ae93_0242ac130002.fdf09f5a_5688_11eb_ae93_0242ac130004',
     createdAt: new Date(Date.parse('2023-01-27T18:20:09.732Z')),
     updatedAt: new Date(Date.parse('2023-01-28T18:20:09.732Z')),
+    // info available only from meilisearch
+    isPublishedRoot: false,
     publishedInfo: {
       isPublished: true,
       rootPath: 'ecafbd2a_5688_11eb_ae93_0242ac130002',
@@ -144,6 +151,8 @@ export const PUBLISHED_ITEMS: MockItem[] = [
     path: 'egafbd2a_5688_11eb_ae93_0242ac130002',
     createdAt: new Date(Date.parse('2023-02-27T18:20:09.732Z')),
     updatedAt: new Date(Date.parse('2023-02-28T18:20:09.732Z')),
+    // info available only from meilisearch
+    isPublishedRoot: true,
     publishedInfo: {
       isPublished: true,
       rootPath: 'egafbd2a_5688_11eb_ae93_0242ac130002',
@@ -161,6 +170,9 @@ export const PUBLISHED_ITEMS: MockItem[] = [
     id: 'fdf09f5a-5688-11eb-ae93-0242ac130003',
     name: 'public item2',
     path: 'ecafbd2a_5688_11eb_ae93_0242ac130002.fdf09f5a_5688_11eb_ae93_0242ac130003',
+
+    // info available only from meilisearch
+    isPublishedRoot: false,
     publishedInfo: {
       isPublished: true,
       rootPath: 'egafbd2a_5688_11eb_ae93_0242ac130002',
@@ -320,3 +332,13 @@ export const getNumberOfOwnPublishedItems = (memberId: string) =>
   PUBLISHED_ITEMS.filter(
     ({ path, creator }) => !path.includes('.') && creator?.id === memberId,
   ).length;
+
+export const builderMeilisearchResults = (items: Item[]) => ({
+  results: [
+    {
+      hits: items.map((i) => ({ ...i, _formatted: i })),
+      totalHits: items.length,
+      estimatedTotalHits: items.length,
+    },
+  ],
+});

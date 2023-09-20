@@ -64,3 +64,6 @@ export const TREE_MODAL_SHARED_ITEMS_ID = 'treeModalSharedItems';
 export const TREE_MODAL_CONFIRM_BUTTON_ID = 'treeModalConfirmButton';
 export const buildTreeItemId = (id: string, treeRootId: string) =>
   `${treeRootId}-${id}`;
+export const ENABLE_IN_DEPTH_SEARCH_CHECKBOX_ID = 'enableInDepthSearchCheckbox';
+export const SEARCH_RESULTS_LIST_ID = 'searchResultsList';
+export const SEARCH_RESULTS_SHOW_MORE_BUTTON = 'searchResultsShowMoreButton';

@@ -18,6 +18,7 @@ i18n.addResourceBundle('en', LIBRARY_NAMESPACE, en);
 i18n.addResourceBundle('fr', LIBRARY_NAMESPACE, fr);
 i18n.addResourceBundle('it', LIBRARY_NAMESPACE, it);
 
+i18n.setDefaultNamespace(LIBRARY_NAMESPACE);
 export const useLibraryTranslation = () => useTranslation(LIBRARY_NAMESPACE);
 export const useCommonTranslation = () => useTranslation(namespaces.common);
 export const useCategoriesTranslation = () =>

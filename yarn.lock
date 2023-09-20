@@ -1671,6 +1671,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@graasp/sdk@npm:1.6.0":
+  version: 1.6.0
+  resolution: "@graasp/sdk@npm:1.6.0"
+  dependencies:
+    "@aws-sdk/client-s3": 3.370.0
+    "@fastify/secure-session": 6.1.0
+    "@graasp/etherpad-api": 2.1.1
+    date-fns: 2.30.0
+    fastify: 4.18.0
+    fluent-json-schema: 4.1.0
+    immutable: 4.3.2
+    js-cookie: 3.0.5
+    qs: 6.11.2
+    typeorm: 0.3.17
+    uuid: 9.0.0
+    validator: 13.11.0
+  checksum: 6e115053e1eb3596238fddbe7df9cd453ac042ebbc54051d2dde85a40d31988ce96853b2fdf7e957a18530c788689ab56c4aef08ff2eb5896699022aaf10afcd
+  languageName: node
+  linkType: hard
+
 "@graasp/translations@npm:1.19.0":
   version: 1.19.0
   resolution: "@graasp/translations@npm:1.19.0"
@@ -7258,7 +7278,7 @@ __metadata:
     "@emotion/server": 11.11.0
     "@emotion/styled": 11.11.0
     "@graasp/query-client": "github:graasp/graasp-query-client#421-meilisearch"
-    "@graasp/sdk": "https://github.com/graasp/graasp-sdk#351-search"
+    "@graasp/sdk": 1.6.0
     "@graasp/translations": 1.19.1
     "@graasp/ui": 3.4.0
     "@mui/icons-material": 5.14.3
