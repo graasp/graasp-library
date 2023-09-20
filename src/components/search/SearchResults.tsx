@@ -175,7 +175,9 @@ const SearchResults = ({
           >
             <LoadMoreResultsText>
               {t(LIBRARY.SEE_MORE_RESULTS_SEARCH, {
-                total: queryResults.estimatedTotalHits - MAX_RESULTS_TO_SHOW,
+                total:
+                  (queryResults.totalHits ?? queryResults.estimatedTotalHits) -
+                  MAX_RESULTS_TO_SHOW,
               })}
             </LoadMoreResultsText>
           </ListItemButton>

@@ -6,7 +6,14 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Trans } from 'react-i18next';
 
 import { Close } from '@mui/icons-material';
-import { Box, Container, IconButton, Stack, Typography } from '@mui/material';
+import {
+  Box,
+  Container,
+  IconButton,
+  Button as MuiButton,
+  Stack,
+  Typography,
+} from '@mui/material';
 
 import { Context } from '@graasp/sdk';
 import { ItemRecord } from '@graasp/sdk/frontend';
@@ -48,7 +55,7 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
     query: searchKeywords,
     categories: filters,
     page,
-    // does not show children if option is disabled or if a no query search exists
+    // does not show children if option is disabled
     isPublishedRoot: !shouldIncludeContent,
   });
 
@@ -71,9 +78,10 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
     }
   }, []);
 
-  // reset prev results on query changes
+  // reset on query changes
   useEffect(() => {
     setPrevResults(List());
+    setPage(1);
   }, [searchKeywords, filters, shouldIncludeContent]);
 
   const { leftContent, rightContent } = useHeader();
@@ -93,6 +101,10 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
     url.searchParams.delete(UrlSearch.KeywordSearch);
     router.replace(url);
   };
+
+  const hitsNumber =
+    collections?.results?.first()?.totalHits ??
+    collections?.results?.first()?.estimatedTotalHits;
 
   return (
     <>
@@ -149,21 +161,19 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
             />
           </Stack>
           <Box my={10} textAlign="center">
-            {Boolean(
-              (collections?.results?.first()?.totalHits ?? 0) >
-                allCollections.size,
-            ) && (
+            {Boolean((hitsNumber ?? 0) > allCollections.size) && (
               <Button
                 onClick={() => {
                   setPrevResults(allCollections);
                   setPage(page + 1);
                 }}
               >
-                {t('Load more')}
+                {t(LIBRARY.SEARCH_RESULTS_LOAD_MORE)}
               </Button>
             )}
             {!shouldIncludeContent && Boolean(searchKeywords) && (
-              <Button
+              <MuiButton
+                disableElevation
                 onClick={() => {
                   setShouldIncludeContent(true);
                   window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
@@ -179,7 +189,7 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
                   t={t}
                   i18nKey={LIBRARY.SUGGESTION_TO_ENABLE_IN_DEPTH_SEARCH_TEXT}
                 />
-              </Button>
+              </MuiButton>
             )}
           </Box>
         </Container>
