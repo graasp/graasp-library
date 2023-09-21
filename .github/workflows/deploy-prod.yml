@@ -12,15 +12,15 @@ jobs:
     # Replace with repository name
     name: CD caller template
     # Replace 'main' with the hash of a commit, so it points to an specific version of the reusable workflow that is used
-    uses: graasp/graasp-deploy/.github/workflows/cdeployment-ecs-library.yml@v1
+    uses: graasp/graasp-deploy/.github/workflows/library-deploy-prod.yml@v1
     # abort previous deployment if a newer one is in progress
     concurrency:
       group: deploy-production
       cancel-in-progress: true
     # Replace input ecs-task-definition with template file. Format: '.aws/<name>-prod.json'
     with:
-      app-name: $npm_package_name
-      app-version: $npm_package_version
+      app-name: graasp-library
+      app-version: ${{ github.event.client_payload.tag }}
       ecs-task-definition: '.aws/graasp-library-prod.json'
       tag: ${{ github.event.client_payload.tag }}
     # Insert required secrets based on repository with the following format: ${{ secrets.SECRET_NAME }}
@@ -44,4 +44,5 @@ jobs:
       # to be removed ! we do not use it anymore
       next-public-published-tag-id: ${{ secrets.NEXT_PUBLIC_PUBLISHED_TAG_ID }}
       next-public-sentry-dsn: ${{ secrets.SENTRY_DSN }}
+      next-public-sentry-env: production
       port: ${{ secrets.PORT }}

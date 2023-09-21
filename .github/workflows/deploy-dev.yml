@@ -16,14 +16,14 @@ jobs:
   graasp-deploy-ecs-workflow:
     name: Graasp Library
     # Reference reusable workflow file. Using the commit SHA is the safest for stability and security
-    uses: graasp/graasp-deploy/.github/workflows/cintegration-ecs-library.yml@v1
+    uses: graasp/graasp-deploy/.github/workflows/library-deploy-dev.yml@v1
     # abort previous deployment if a newer one is in progress
     concurrency:
       group: deploy-development
       cancel-in-progress: true
     with:
-      app-name: $npm_package_name
-      app-version: $npm_package_version
+      app-name: graasp-library
+      app-version: ${{ github.sha }}
       ecs-task-definition: '.aws/graasp-library-dev.json'
     secrets:
       aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
@@ -45,4 +45,5 @@ jobs:
       # to be removed ! we do not use it anymore
       next-public-published-tag-id: ${{ secrets.NEXT_PUBLIC_PUBLISHED_TAG_ID }}
       next-public-sentry-dsn: ${{ secrets.SENTRY_DSN }}
+      next-public-sentry-env: development
       port: ${{ secrets.PORT }}

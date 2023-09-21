@@ -11,15 +11,15 @@ jobs:
   graasp-deploy-ecs-workflow:
     # repository name
     name: Graasp Library
-    uses: graasp/graasp-deploy/.github/workflows/cdelivery-ecs-library.yml@v1
+    uses: graasp/graasp-deploy/.github/workflows/library-deploy-stage.yml@v1
     # abort previous deployment if a newer one is in progress
     concurrency:
       group: deploy-staging
       cancel-in-progress: true
     # ecs-task-definition template file
     with:
-      app-name: $npm_package_name
-      app-version: $npm_package_version
+      app-name: graasp-library
+      app-version: ${{ github.event.client_payload.tag }}
       ecs-task-definition: '.aws/graasp-library-stage.json'
       tag: ${{ github.event.client_payload.tag }}
     # required secrets
@@ -43,4 +43,5 @@ jobs:
       # to be removed ! we do not use it anymore
       next-public-published-tag-id: ${{ secrets.NEXT_PUBLIC_PUBLISHED_TAG_ID }}
       next-public-sentry-dsn: ${{ secrets.SENTRY_DSN }}
+      next-public-sentry-env: staging
       port: ${{ secrets.PORT }}

@@ -3,7 +3,7 @@
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 import * as Sentry from '@sentry/nextjs';
 
-import { SENTRY_DSN, SENTRY_RELEASE } from './src/config/env';
+import { SENTRY_DSN, SENTRY_ENV, SENTRY_RELEASE } from './src/config/env';
 
 Sentry.init({
   dsn: SENTRY_DSN,
@@ -21,6 +21,7 @@ Sentry.init({
   replaysSessionSampleRate: 0.3,
 
   release: SENTRY_RELEASE,
+  environment: SENTRY_ENV,
 
   // You can remove this option if you're not planning to use the Sentry Session Replay feature:
   integrations: [

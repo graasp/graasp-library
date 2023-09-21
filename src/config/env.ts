@@ -4,6 +4,7 @@ import getConfig from 'next/config';
 const { publicRuntimeConfig } = getConfig();
 
 export const SENTRY_DSN = publicRuntimeConfig.NEXT_PUBLIC_SENTRY_DSN;
+export const SENTRY_ENV = publicRuntimeConfig.NEXT_PUBLIC_SENTRY_ENV;
 export const GRAASP_AUTH_HOST =
   publicRuntimeConfig.NEXT_PUBLIC_GRAASP_AUTH_HOST;
 export const GRAASP_API_HOST = publicRuntimeConfig.NEXT_PUBLIC_API_HOST;
