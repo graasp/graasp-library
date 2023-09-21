@@ -8,6 +8,7 @@ import Skeleton from '@mui/material/Skeleton';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Unstable_Grid2';
 
+import { IndexItem } from '@graasp/sdk';
 import { ItemRecord } from '@graasp/sdk/frontend';
 
 import { useLibraryTranslation } from '../../config/i18n';
@@ -16,7 +17,11 @@ import LIBRARY from '../../langs/constants';
 import CollectionCard from './CollectionCard';
 
 type Props = {
-  collections?: List<ItemRecord>;
+  collections?: List<
+    (ItemRecord | IndexItem) & {
+      isPublishedRoot?: IndexItem['isPublishedRoot'];
+    }
+  >;
   isLoading: boolean;
   id?: string;
   containerWidth?: Breakpoint | false;

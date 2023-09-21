@@ -14,7 +14,7 @@ import {
   useTheme,
 } from '@mui/material';
 
-import { ThumbnailSize } from '@graasp/sdk';
+import { IndexItem, ThumbnailSize } from '@graasp/sdk';
 import { ItemRecord } from '@graasp/sdk/frontend';
 
 import { useLibraryTranslation } from '../../config/i18n';
@@ -35,7 +35,9 @@ const Avatar = dynamic(() => import('@graasp/ui').then((mod) => mod.Avatar), {
 const RECENT_DAYS = 4;
 
 type Props = {
-  collection: ItemRecord & { isPublishedRoot?: boolean };
+  collection: (ItemRecord | IndexItem) & {
+    isPublishedRoot?: IndexItem['isPublishedRoot'];
+  };
   showIsContentTag?: boolean;
 };
 
@@ -206,7 +208,7 @@ export const CollectionCard = ({ collection, showIsContentTag }: Props) => {
         </Typography>
         <DownloadButton id={id} />
         {member?.id && <CopyButton id={id} />}
-        <CopyLinkButton item={collection} />
+        <CopyLinkButton itemId={collection.id} />
       </CardActions>
     </StyledCard>
   );

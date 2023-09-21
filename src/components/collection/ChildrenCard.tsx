@@ -95,7 +95,7 @@ export const SubItemCard: React.FC<SubItemCardProps> = ({
       actions={
         <>
           {member?.id && <CopyButton id={id} />}
-          <CopyLinkButton item={item} />
+          <CopyLinkButton itemId={item.id} />
           <DownloadButton id={id} />
         </>
       }

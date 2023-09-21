@@ -42,7 +42,7 @@ const SummaryActionButtons: React.FC<SummaryActionButtonsProps> = ({
 
   const { startDownload } = useDownloadAction(item?.id);
 
-  const { startEmbed } = useEmbedAction(item);
+  const { startEmbed } = useEmbedAction(item?.id);
 
   const [open, setOpen] = useState(false);
   const anchorRef = React.useRef<HTMLDivElement>(null);

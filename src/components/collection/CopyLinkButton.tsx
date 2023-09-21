@@ -4,8 +4,7 @@ import CodeIcon from '@mui/icons-material/Code';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
-import { ItemType, getAppExtra, getEmbeddedLinkExtra } from '@graasp/sdk';
-import { ItemRecord } from '@graasp/sdk/frontend';
+import { Item } from '@graasp/sdk';
 
 import { useLibraryTranslation } from '../../config/i18n';
 import notifier, {
@@ -15,21 +14,9 @@ import { buildPlayerViewItemRoute } from '../../config/paths';
 import LIBRARY from '../../langs/constants';
 import { copyToClipboard } from '../../utils/clipboard';
 
-export const useEmbedAction = (item?: ItemRecord) => {
+export const useEmbedAction = (itemId?: Item['id']) => {
   const startEmbed = (event: MouseEvent<HTMLButtonElement>) => {
-    let link = buildPlayerViewItemRoute(item?.id);
-    if (item?.type === ItemType.LINK) {
-      const embeddedLinkUrl = getEmbeddedLinkExtra(item?.extra)?.url;
-      if (embeddedLinkUrl) {
-        link = embeddedLinkUrl;
-      }
-    }
-    if (item?.type === ItemType.APP) {
-      const appUrl = getAppExtra(item?.extra)?.url;
-      if (appUrl) {
-        link = appUrl;
-      }
-    }
+    const link = buildPlayerViewItemRoute(itemId);
 
     copyToClipboard(link, {
       onSuccess: () => {
@@ -52,14 +39,12 @@ export const useEmbedAction = (item?: ItemRecord) => {
     startEmbed,
   };
 };
-type CopyLinkButtonProps = {
-  item: ItemRecord;
-};
+type CopyLinkButtonProps = { itemId: Item['id'] };
 
-const CopyLinkButton = ({ item }: CopyLinkButtonProps) => {
+const CopyLinkButton = ({ itemId }: CopyLinkButtonProps) => {
   const { t } = useLibraryTranslation();
 
-  const { startEmbed } = useEmbedAction(item);
+  const { startEmbed } = useEmbedAction(itemId);
 
   return (
     <Tooltip title={t(LIBRARY.COPY_LINK_BUTTON_TOOLTIP)}>
