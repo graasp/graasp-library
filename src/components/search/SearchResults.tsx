@@ -148,8 +148,6 @@ const SearchResults = ({
       list.push(
         <ListItemButton
           component={Link}
-          target="_blank"
-          // onClick={onLoadMoreClick}
           id={SEARCH_RESULTS_SHOW_MORE_BUTTON}
           href={{
             pathname: ALL_COLLECTIONS_ROUTE,
