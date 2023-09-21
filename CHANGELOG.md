@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.11.0](https://github.com/graasp/graasp-library/compare/v0.10.1...v0.11.0) (2023-09-21)
+
+
+### Features
+
+* implement meilisearch search, import translations ([#378](https://github.com/graasp/graasp-library/issues/378)) ([151243e](https://github.com/graasp/graasp-library/commit/151243e92373ff4fe838b373c2cae0418b3c2f23))
+
+
+### Bug Fixes
+
+* **deps:** update dependency luxon to v3.4.2 ([#370](https://github.com/graasp/graasp-library/issues/370)) ([e3475e2](https://github.com/graasp/graasp-library/commit/e3475e26ff1ce733a4c750e2e453590a57ddee3c))
+
 ## [0.10.1](https://github.com/graasp/graasp-library/compare/v0.10.0...v0.10.1) (2023-08-22)
 
 
