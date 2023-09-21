@@ -3,6 +3,7 @@ import { ALL_COLLECTIONS_ROUTE, HOME_ROUTE } from '../../../src/config/routes';
 import {
   ALL_COLLECTIONS_GRID_ID,
   HOME_SEARCH_ID,
+  SEARCH_ERROR_MESSAGE_ID,
   SEARCH_RESULTS_LIST_ID,
   SEARCH_RESULTS_SHOW_MORE_BUTTON,
 } from '../../../src/config/selectors';
@@ -64,10 +65,24 @@ describe('Search', () => {
           },
         );
 
-        // todo: toggle categories
+        // todo: test toggle categories should update search
       });
 
-      // todo: load more
+      it(`Fallback silently for search error`, () => {
+        cy.setUpApi({ ...environment, searchError: true });
+        cy.visit(ALL_COLLECTIONS_ROUTE);
+
+        cy.get(`#${HOME_SEARCH_ID}`).type(keywords);
+
+        // wait for the request to fail (does not retry for 500 error)
+        cy.wait('@search');
+
+        cy.get(`#${SEARCH_ERROR_MESSAGE_ID}`).should('be.visible');
+
+        cy.get(`#${HOME_SEARCH_ID}`).should('have.value', keywords);
+      });
+
+      // todo: test load more functionality
     });
   });
 });

@@ -14,12 +14,12 @@ import {
   useTheme,
 } from '@mui/material';
 
-import { IndexItem, ThumbnailSize } from '@graasp/sdk';
-import { ItemRecord } from '@graasp/sdk/frontend';
+import { ThumbnailSize } from '@graasp/sdk';
 
 import { useLibraryTranslation } from '../../config/i18n';
 import { buildCollectionRoute } from '../../config/routes';
 import LIBRARY from '../../langs/constants';
+import { ItemOrSearchedItem } from '../../utils/types';
 import { QueryClientContext } from '../QueryClientContext';
 import CardMediaComponent from '../common/CardMediaComponent';
 import { StyledCard } from '../common/StyledCard';
@@ -35,9 +35,7 @@ const Avatar = dynamic(() => import('@graasp/ui').then((mod) => mod.Avatar), {
 const RECENT_DAYS = 4;
 
 type Props = {
-  collection: (ItemRecord | IndexItem) & {
-    isPublishedRoot?: IndexItem['isPublishedRoot'];
-  };
+  collection: ItemOrSearchedItem;
   showIsContentTag?: boolean;
 };
 

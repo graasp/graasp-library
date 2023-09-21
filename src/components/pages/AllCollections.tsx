@@ -7,6 +7,7 @@ import { Trans } from 'react-i18next';
 
 import { Close } from '@mui/icons-material';
 import {
+  Alert,
   Box,
   Container,
   IconButton,
@@ -16,15 +17,16 @@ import {
 } from '@mui/material';
 
 import { Context } from '@graasp/sdk';
-import { ItemRecord } from '@graasp/sdk/frontend';
 
 import { APP_AUTHOR, UrlSearch } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';
 import {
   ALL_COLLECTIONS_GRID_ID,
   MENU_BUTTON_ID,
+  SEARCH_ERROR_MESSAGE_ID,
 } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
+import { ItemOrSearchedItem } from '../../utils/types';
 import { QueryClientContext } from '../QueryClientContext';
 import CollectionsGrid from '../collection/CollectionsGrid';
 import Seo from '../common/Seo';
@@ -49,9 +51,15 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
   const [shouldIncludeContent, setShouldIncludeContent] =
     useState<boolean>(true);
   const [searchKeywords, setSearchKeywords] = useState<string>('');
-  const [prevResults, setPrevResults] = useState<List<ItemRecord>>(List());
+  const [prevResults, setPrevResults] = useState<List<ItemOrSearchedItem>>(
+    List(),
+  );
   const [page, setPage] = useState<number>(1);
-  const { data: collections, isLoading } = hooks.useSearchPublishedItems({
+  const {
+    data: collections,
+    isLoading,
+    error,
+  } = hooks.useSearchPublishedItems({
     query: searchKeywords,
     categories: filters,
     page,
@@ -78,6 +86,12 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (error) {
+      console.error(error);
+    }
+  }, [error]);
+
   // reset on query changes
   useEffect(() => {
     setPrevResults(List());
@@ -87,8 +101,8 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
   const { leftContent, rightContent } = useHeader();
 
   const allCollections = prevResults.concat(
-    (collections as any)?.results?.first()?.hits,
-  );
+    collections?.results?.first()?.hits ?? [],
+  ) as List<ItemOrSearchedItem>;
 
   const onFiltersChanged = (newFilters: string[][]) => {
     setFilters(newFilters);
@@ -151,13 +165,19 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
                 </IconButton>
               </Stack>
             )}
-            <CollectionsGrid
-              containerWidth="xl"
-              collections={allCollections}
-              id={ALL_COLLECTIONS_GRID_ID}
-              isLoading={isLoading}
-              showIsContentTag
-            />
+            {error ? (
+              <Alert severity="error" id={SEARCH_ERROR_MESSAGE_ID}>
+                {t(LIBRARY.UNEXPECTED_ERROR_MESSAGE)}
+              </Alert>
+            ) : (
+              <CollectionsGrid
+                containerWidth="xl"
+                collections={allCollections}
+                id={ALL_COLLECTIONS_GRID_ID}
+                isLoading={isLoading}
+                showIsContentTag
+              />
+            )}
           </Stack>
           <Box my={10} textAlign="center">
             {Boolean((hitsNumber ?? 0) > allCollections.size) && (
