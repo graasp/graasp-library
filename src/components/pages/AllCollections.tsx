@@ -140,8 +140,7 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
                   <Trans
                     values={{
                       search: searchKeywords,
-                      count:
-                        collections?.results?.first()?.estimatedTotalHits ?? 0,
+                      count: hitsNumber ?? 0,
                     }}
                     t={t}
                     i18nKey={LIBRARY.SEARCH_RESULTS_FOR_TEXT}

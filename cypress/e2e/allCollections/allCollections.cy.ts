@@ -32,7 +32,7 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
       cy.visit(ALL_COLLECTIONS_ROUTE);
     });
 
-    it.only('Layout', () => {
+    it('Layout', () => {
       cy.get(`#${ALL_COLLECTIONS_HEADER_ID}`).should(
         'have.text',
         i18n.t(LIBRARY.HEADER_ALL_COLLECTIONS),

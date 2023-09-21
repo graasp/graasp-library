@@ -50,14 +50,9 @@ export const getParentsIdsFromPath = (
 type SummaryProps = {
   collection?: ItemRecord;
   isLoading: boolean;
-  views?: number;
 };
 
-const Summary: React.FC<SummaryProps> = ({
-  collection,
-  views = 0,
-  isLoading,
-}) => {
+const Summary: React.FC<SummaryProps> = ({ collection, isLoading }) => {
   const { t } = useLibraryTranslation();
   const { hooks } = useContext(QueryClientContext);
   const { data: member } = hooks.useCurrentMember();
@@ -103,7 +98,6 @@ const Summary: React.FC<SummaryProps> = ({
         isLoading={isLoading}
         tags={collection?.settings?.tags}
         truncatedName={truncatedName}
-        views={views}
       />
       {collection?.type === ITEM_TYPES.FOLDER && (
         <>

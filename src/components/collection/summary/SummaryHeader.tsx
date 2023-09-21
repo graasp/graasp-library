@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic';
 
 import React, { useContext } from 'react';
 
-import { Favorite, Visibility } from '@mui/icons-material';
+import { Favorite } from '@mui/icons-material';
 import { Skeleton } from '@mui/lab';
 import {
   Box,
@@ -42,7 +42,6 @@ type SummaryHeaderProps = {
   isLoading: boolean;
   truncatedName: string;
   tags: Immutable.List<string> | undefined;
-  views: number;
   isLogged: boolean;
 };
 
@@ -52,7 +51,6 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
   isLoading,
   truncatedName,
   tags,
-  views,
 }) => {
   const { hooks, mutations } = useContext(QueryClientContext);
 
@@ -194,7 +192,8 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
                 </Divider>
               }
             >
-              <Tooltip title="Views" arrow placement="bottom">
+              {/* turn on again when endpoint exists */}
+              {/* <Tooltip title="Views" arrow placement="bottom">
                 <Stack direction="row" alignItems="center">
                   <Typography
                     fontWeight="bold"
@@ -206,7 +205,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
                   </Typography>
                   <Visibility color="primary" style={{ marginLeft: 5 }} />
                 </Stack>
-              </Tooltip>
+              </Tooltip> */}
               <Tooltip title="Likes" arrow placement="bottom">
                 <Stack direction="row" alignItems="center">
                   <Typography

@@ -110,5 +110,7 @@
   "SUMMARY_ACTIONS_EMBED": "Copier le lien",
   "FILTER_DROPDOWN_NO_FILTER": "Pas de filtres…",
   "FILTER_DROPDOWN_CLEAR_FILTERS": "Réinitialiser",
-  "FILTER_DROPDOWN_NO_CATEGORIES_AVAILABLE": "Pas de catégories disponibles"
+  "FILTER_DROPDOWN_NO_CATEGORIES_AVAILABLE": "Pas de catégories disponibles",
+  "CONTENT_CHIP": "Contenu",
+  "SEARCH_RESULTS_LOAD_MORE": "Afficher plus"
 }

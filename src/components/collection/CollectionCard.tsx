@@ -80,7 +80,7 @@ const ItemTag: React.FC<ItemTagProps> = ({
     return (
       <StyledItemTag tagColor={theme.palette.primary.main}>
         <Typography variant="body2" fontSize={13}>
-          {'Content'.toUpperCase()}
+          {t(LIBRARY.CONTENT_CHIP).toUpperCase()}
         </Typography>
       </StyledItemTag>
     );

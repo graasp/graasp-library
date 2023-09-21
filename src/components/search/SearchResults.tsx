@@ -1,5 +1,5 @@
 import { Interweave } from 'interweave';
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 import React, { useContext } from 'react';
 import { Trans } from 'react-i18next';
@@ -16,7 +16,8 @@ import {
   useTheme,
 } from '@mui/material';
 
-import { Category } from '@graasp/sdk';
+import { Category, IndexItem } from '@graasp/sdk';
+import { ImmutableCast } from '@graasp/sdk/frontend';
 
 import { MAX_RESULTS_TO_SHOW, UrlSearch } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';
@@ -29,6 +30,7 @@ import {
   SEARCH_RESULTS_SHOW_MORE_BUTTON,
 } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
+import intersperse from '../../utils/helpers';
 import { QueryClientContext } from '../QueryClientContext';
 import SearchThumbnail from './SearchThumbnail';
 import { useOutsideClick } from './hooks';
@@ -82,7 +84,6 @@ const SearchResults = ({
     onOutsideClick?.(false);
   });
   const theme = useTheme();
-  const router = useRouter();
   const { hooks } = useContext(QueryClientContext);
   const { data: collections } = hooks.useSearchPublishedItems({
     query,
@@ -95,12 +96,75 @@ const SearchResults = ({
     highlightPreTag: `<span style="font-weight:bold;color:${theme.palette.primary.main}">`,
   });
 
-  const onLoadMoreClick = () => {
-    // navigate to "/all-collections?cat=<categoryId>"
-    router.push({
-      pathname: ALL_COLLECTIONS_ROUTE,
-      query: { [UrlSearch.KeywordSearch]: query },
-    });
+  const buildResultListItems = (
+    results: ImmutableCast<(IndexItem & { _formatted: IndexItem })[]>,
+    nbOfHits: number = 0,
+  ) => {
+    const list = results
+      .take(MAX_RESULTS_TO_SHOW)
+      .toJS()
+      .map((r) => {
+        // cast because of toJS
+        const result = r as IndexItem & { _formatted: IndexItem };
+
+        return (
+          <ListItemButton
+            key={result.id}
+            component={Link}
+            href={buildCollectionRoute(result.id)}
+            target="_blank"
+          >
+            <ListItemText>
+              <Stack direction="row" alignItems="center">
+                <Stack>
+                  <SearchThumbnail name={result.name} itemId={result.id} />
+                </Stack>
+                <Stack>
+                  <Stack direction="column">
+                    <Interweave
+                      style={{ paddingRight: 5 }}
+                      //  eslint-disable-next-line no-underscore-dangle
+                      content={result._formatted.name}
+                    />
+                  </Stack>
+                  <Stack>
+                    <Interweave
+                      style={{ color: '#999' }}
+                      content={
+                        // eslint-disable-next-line no-underscore-dangle
+                        result._formatted.description ||
+                        // eslint-disable-next-line no-underscore-dangle
+                        result._formatted.content
+                      }
+                    />
+                  </Stack>
+                </Stack>
+              </Stack>
+            </ListItemText>
+          </ListItemButton>
+        );
+      });
+    if (nbOfHits > MAX_RESULTS_TO_SHOW) {
+      list.push(
+        <ListItemButton
+          component={Link}
+          target="_blank"
+          // onClick={onLoadMoreClick}
+          id={SEARCH_RESULTS_SHOW_MORE_BUTTON}
+          href={{
+            pathname: ALL_COLLECTIONS_ROUTE,
+            query: { [UrlSearch.KeywordSearch]: query },
+          }}
+        >
+          <LoadMoreResultsText>
+            {t(LIBRARY.SEE_MORE_RESULTS_SEARCH, {
+              total: nbOfHits - MAX_RESULTS_TO_SHOW,
+            })}
+          </LoadMoreResultsText>
+        </ListItemButton>,
+      );
+    }
+    return list;
   };
 
   if (!collections) {
@@ -109,6 +173,8 @@ const SearchResults = ({
   // eslint-disable-next-line prefer-destructuring
   const queryResults = collections.results.first();
   const hits = queryResults?.hits;
+  const nbOfResults =
+    queryResults?.totalHits ?? queryResults?.estimatedTotalHits;
   // no result found
   if (!hits || hits.isEmpty()) {
     return (
@@ -126,62 +192,7 @@ const SearchResults = ({
   return (
     <Container>
       <List id={SEARCH_RESULTS_LIST_ID} sx={{ width: '100%' }} ref={ref}>
-        {hits.take(MAX_RESULTS_TO_SHOW).map((result) => (
-          <>
-            <ListItemButton
-              component="a"
-              href={buildCollectionRoute(result.id)}
-              target="_blank"
-            >
-              <ListItemText
-              // primary={result._formatted.name}
-              >
-                <Stack direction="row" alignItems="center">
-                  <Stack>
-                    <SearchThumbnail name={result.name} itemId={result.id} />
-                  </Stack>
-                  <Stack>
-                    <Stack direction="column">
-                      <Interweave
-                        style={{ paddingRight: 5 }}
-                        //  eslint-disable-next-line no-underscore-dangle
-                        content={result._formatted.name}
-                      />
-                    </Stack>
-                    <Stack>
-                      <Interweave
-                        style={{ color: '#999' }}
-                        content={
-                          // eslint-disable-next-line no-underscore-dangle
-                          result._formatted.description ||
-                          // eslint-disable-next-line no-underscore-dangle
-                          result._formatted.content
-                        }
-                      />
-                    </Stack>
-                  </Stack>
-                </Stack>
-              </ListItemText>
-            </ListItemButton>
-            <Divider />
-          </>
-        ))}
-        {hits.size > MAX_RESULTS_TO_SHOW && (
-          <ListItemButton
-            component="a"
-            target="_blank"
-            onClick={onLoadMoreClick}
-            id={SEARCH_RESULTS_SHOW_MORE_BUTTON}
-          >
-            <LoadMoreResultsText>
-              {t(LIBRARY.SEE_MORE_RESULTS_SEARCH, {
-                total:
-                  (queryResults.totalHits ?? queryResults.estimatedTotalHits) -
-                  MAX_RESULTS_TO_SHOW,
-              })}
-            </LoadMoreResultsText>
-          </ListItemButton>
-        )}
+        {intersperse(buildResultListItems(hits, nbOfResults), <Divider />)}
       </List>
     </Container>
   );

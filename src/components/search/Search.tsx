@@ -34,7 +34,7 @@ const Search = forwardRef<HTMLDivElement, SearchProps>(function Search(
   ) => {
     const newValue = event.target.value;
     setSearchInput(newValue);
-    onChange?.(newValue);
+    onChange?.(newValue.trim().toLowerCase());
   };
 
   const handleSearch = () => {
@@ -45,7 +45,7 @@ const Search = forwardRef<HTMLDivElement, SearchProps>(function Search(
     event: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     if (event.code === 'Enter') {
-      handleClick(searchInput);
+      handleClick(searchInput.trim().toLowerCase());
     }
   };
 
@@ -70,7 +70,6 @@ const Search = forwardRef<HTMLDivElement, SearchProps>(function Search(
     >
       <InputBase
         // search on click
-        // onKeyUp={handleSearch}
         value={searchInput}
         id={HOME_SEARCH_ID}
         disabled={isLoading}
@@ -84,7 +83,6 @@ const Search = forwardRef<HTMLDivElement, SearchProps>(function Search(
         ref={ref}
         onChange={handleChange}
         onKeyDown={handleSearchOnClick}
-        // onBlur={() => setIsFocused?.(false)}
         onFocus={() => setIsFocused?.(true)}
       />
       <Divider sx={{ m: 1 }} orientation="vertical" />
