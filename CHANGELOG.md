@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.11.1](https://github.com/graasp/graasp-library/compare/v0.11.0...v0.11.1) (2023-09-25)
+
+
+### Bug Fixes
+
+* add sentry env and rename workflows ([#385](https://github.com/graasp/graasp-library/issues/385)) ([0063519](https://github.com/graasp/graasp-library/commit/006351905c1579b1e679ec93e75c7c36823aa2b6))
+* handle serch error without crash ([#383](https://github.com/graasp/graasp-library/issues/383)) ([e1d2655](https://github.com/graasp/graasp-library/commit/e1d2655423302716a3fc88fcb9a119376185680f))
+
 ## [0.11.0](https://github.com/graasp/graasp-library/compare/v0.10.1...v0.11.0) (2023-09-21)
 
 
