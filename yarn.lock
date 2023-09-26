@@ -3180,10 +3180,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/luxon@npm:3.3.1":
-  version: 3.3.1
-  resolution: "@types/luxon@npm:3.3.1"
-  checksum: da8f6158edacae1430f3eca5f4ab4891200ffb34aa521ef6bae407a3c50b3854907098bc4535fb2a66a2779738f3c6c48fdfd86f01117a6f4844b18536cdb7c0
+"@types/luxon@npm:3.3.2":
+  version: 3.3.2
+  resolution: "@types/luxon@npm:3.3.2"
+  checksum: b9111132720eae0269538872a5a496b29587ecfc8edc3b0ff7d269aa93a5ff00a131b23d1e9d1f12ec39f2c779ad21bd8d9f90b122c85a182771aabde7f676b8
   languageName: node
   linkType: hard
 
@@ -3201,10 +3201,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:18.17.6":
-  version: 18.17.6
-  resolution: "@types/node@npm:18.17.6"
-  checksum: 70bc92adde47d569f25c5ed40b55040cdf189518d6149e0c3041c6e60b1098cad9c48a856f0b7868ebd74d4098a0ca508b0ec4373dd96216eb8a387ee898e14c
+"@types/node@npm:18.17.19":
+  version: 18.17.19
+  resolution: "@types/node@npm:18.17.19"
+  checksum: 6ab47127cd7534511aa199550659d56b44e5a6dbec9df054d0cde279926b4d43f0e6438f92c8392b039ab4e2a85aa0f698b95926430aff860e23bfc36c96576c
   languageName: node
   linkType: hard
 
@@ -3297,14 +3297,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:17.0.64":
-  version: 17.0.64
-  resolution: "@types/react@npm:17.0.64"
+"@types/react@npm:17.0.66":
+  version: 17.0.66
+  resolution: "@types/react@npm:17.0.66"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: 71a7b402e8849ff31ed542d1d1a2ff6adb0e6f0e17321d126e7382a2fcb671ec1e1d1bf7045306922fa90b0319c57a8a45e6215bbf00fb6f73c3860d3f869870
+  checksum: b364a98670ccee222dbd21ddd6cd1be78ad22bca40c7e1c073fff908121fd51fe1de0e9afc3d4ef8dfb6ceedfa28c5257dde9f23af0096f4d350e60c4b2f8858
   languageName: node
   linkType: hard
 
@@ -3361,10 +3361,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/uuid@npm:9.0.2":
-  version: 9.0.2
-  resolution: "@types/uuid@npm:9.0.2"
-  checksum: 1754bcf3444e1e3aeadd6e774fc328eb53bc956665e2e8fb6ec127aa8e1f43d9a224c3d22a9a6233dca8dd81a12dc7fed4d84b8876dd5ec82d40f574f7ff8b68
+"@types/uuid@npm:9.0.4":
+  version: 9.0.4
+  resolution: "@types/uuid@npm:9.0.4"
+  checksum: 356e2504456eaebbc43a5af5ca6c07d71f5ae5520b5767cb1c62cd0ec55475fc4ee3d16a2874f4a5fce78e40e8583025afd3a7d9ba41f82939de310665f53f0e
   languageName: node
   linkType: hard
 
@@ -4725,9 +4725,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"concurrently@npm:8.2.0":
-  version: 8.2.0
-  resolution: "concurrently@npm:8.2.0"
+"concurrently@npm:8.2.1":
+  version: 8.2.1
+  resolution: "concurrently@npm:8.2.1"
   dependencies:
     chalk: ^4.1.2
     date-fns: ^2.30.0
@@ -4741,7 +4741,7 @@ __metadata:
   bin:
     conc: dist/bin/concurrently.js
     concurrently: dist/bin/concurrently.js
-  checksum: eafe6a4d9b7fda87f55ea285cfc6acd937a5286ceec8991ab48e6cc27c45fce6a5c6f45e18d7555defa15dc7d7e8941bc5a9d1ceaf182e31441d420e00333434
+  checksum: 216cb16d5b301cbd9c657b19430836d1686fe8fa9b9ef35ef7ac601e1a5cf6535166a3e57de446696dbd5e7e3f45d78fc70f33c5fd4bb565342cd5e752c5b069
   languageName: node
   linkType: hard
 
@@ -7251,15 +7251,15 @@ __metadata:
     "@testing-library/user-event": 14.4.3
     "@trivago/prettier-plugin-sort-imports": 4.2.0
     "@types/lodash.truncate": 4.4.7
-    "@types/luxon": 3.3.1
-    "@types/node": 18.17.6
-    "@types/react": 17.0.64
+    "@types/luxon": 3.3.2
+    "@types/node": 18.17.19
+    "@types/react": 17.0.66
     "@types/react-dom": 17.0.20
     "@types/react-helmet": 6.1.6
-    "@types/uuid": 9.0.2
+    "@types/uuid": 9.0.4
     "@typescript-eslint/eslint-plugin": 6.4.1
     "@typescript-eslint/parser": 6.4.1
-    concurrently: 8.2.0
+    concurrently: 8.2.1
     cypress: 12.17.4
     env-cmd: 10.1.0
     eslint: 8.47.0
@@ -7284,7 +7284,7 @@ __metadata:
     luxon: 3.4.2
     next: 12.3.4
     nyc: 15.1.0
-    prettier: 3.0.2
+    prettier: 3.0.3
     prop-types: 15.8.1
     qs: 6.11.2
     react: 17.0.2
@@ -10084,12 +10084,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:3.0.2":
-  version: 3.0.2
-  resolution: "prettier@npm:3.0.2"
+"prettier@npm:3.0.3":
+  version: 3.0.3
+  resolution: "prettier@npm:3.0.3"
   bin:
     prettier: bin/prettier.cjs
-  checksum: 118b59ddb6c80abe2315ab6d0f4dd1b253be5cfdb20622fa5b65bb1573dcd362e6dd3dcf2711dd3ebfe64aecf7bdc75de8a69dc2422dcd35bdde7610586b677a
+  checksum: e10b9af02b281f6c617362ebd2571b1d7fc9fb8a3bd17e371754428cda992e5e8d8b7a046e8f7d3e2da1dcd21aa001e2e3c797402ebb6111b5cd19609dd228e0
   languageName: node
   linkType: hard
 
