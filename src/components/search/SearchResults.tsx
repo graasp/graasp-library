@@ -112,7 +112,6 @@ const SearchResults = ({
             key={result.id}
             component={Link}
             href={buildCollectionRoute(result.id)}
-            target="_blank"
           >
             <ListItemText>
               <Stack direction="row" alignItems="center">

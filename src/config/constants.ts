@@ -100,3 +100,4 @@ export const CATEGORY_COLORS: Record<
 };
 
 export const MAX_RESULTS_TO_SHOW = 5;
+export const MAX_HITS_PER_PAGE_ALL_COLLECTIONS = 24;

@@ -18,7 +18,11 @@ import {
 
 import { Context } from '@graasp/sdk';
 
-import { APP_AUTHOR, UrlSearch } from '../../config/constants';
+import {
+  APP_AUTHOR,
+  MAX_HITS_PER_PAGE_ALL_COLLECTIONS,
+  UrlSearch,
+} from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';
 import {
   ALL_COLLECTIONS_GRID_ID,
@@ -63,6 +67,7 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
     query: searchKeywords,
     categories: filters,
     page,
+    elementsPerPage: MAX_HITS_PER_PAGE_ALL_COLLECTIONS,
     // does not show children if option is disabled
     isPublishedRoot: !shouldIncludeContent,
   });
