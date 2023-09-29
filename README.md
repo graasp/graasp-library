@@ -6,19 +6,14 @@
 
 <h1 align="center">Graasp Library</h1>
 
-<p align="center">
-  <a href="https://conventionalcommits.org">
-    <img
-      alt="Conventional Commits"
-      src="https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg"
-    >
-  </a>
-</p>
+[![GitHub Release](https://img.shields.io/github/release/graasp/graasp-library)]()
+![typescript version](https://img.shields.io/github/package-json/dependency-version/graasp/graasp-library/dev/typescript)
+[![gitlocalized ](https://gitlocalize.com/repo/8977/whole_project/badge.svg)](https://gitlocalize.com/repo/8977?utm_source=badge)
 
 <p align="center">
   <img
     alt="Screenshot"
-    src="https://raw.githubusercontent.com/graasp/graasp-explore/master/docs/assets/screenshot.png"
+    src="https://raw.githubusercontent.com/graasp/graasp-library/main/docs/assets/screenshot.png"
     width="900"
   >
 </p>
