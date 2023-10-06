@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
+import { Sparklines, SparklinesLine } from 'react-sparklines-typescript';
 
 import { Favorite, Visibility } from '@mui/icons-material';
 import { Skeleton } from '@mui/lab';
@@ -90,6 +91,25 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
     });
   };
 
+  // views per day { day: no.Of views }
+  const sparklineData = useMemo(
+    () =>
+      views.reduce(
+        (acc: { [key: string]: number }, curr: { createAt: Date }) => {
+          const day = curr.createdAt?.toDateString();
+
+          if (acc[day]) {
+            acc[day] += 1;
+          } else {
+            acc[day] = 1;
+          }
+
+          return acc;
+        },
+        {},
+      ),
+    [views.length],
+  );
   return (
     <Container maxWidth="lg">
       <Stack
@@ -190,10 +210,17 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
                     fontWeight: 'bold',
                   }}
                 >
-                  {String.fromCharCode(183)}
+                  |
                 </Divider>
               }
             >
+              {Object.values(sparklineData).length > 2 && (
+                <Stack sx={{ width: '100px' }}>
+                  <Sparklines data={Object.values(sparklineData)}>
+                    <SparklinesLine color="blue" />
+                  </Sparklines>
+                </Stack>
+              )}
               {/* display only when there's a views */}
               {views.length ? (
                 <Tooltip title="Views" arrow placement="bottom">
