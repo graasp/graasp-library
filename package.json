@@ -33,25 +33,22 @@
     "@emotion/react": "11.11.1",
     "@emotion/server": "11.11.0",
     "@emotion/styled": "11.11.0",
-    "@graasp/query-client": "github:graasp/graasp-query-client#449-use-limit-and-offset-for-meilisearch-pagination",
-    "@graasp/sdk": "1.6.0",
-    "@graasp/translations": "1.19.1",
-    "@graasp/ui": "3.4.0",
+    "@graasp/query-client": "1.9.0",
+    "@graasp/sdk": "1.7.0",
+    "@graasp/translations": "1.19.2",
+    "@graasp/ui": "3.5.4",
     "@mui/icons-material": "5.14.3",
     "@mui/lab": "5.0.0-alpha.140",
     "@mui/material": "5.14.5",
-    "@sentry/nextjs": "7.64.0",
+    "@sentry/nextjs": "7.73.0",
     "@testing-library/jest-dom": "5.17.0",
     "@testing-library/react": "14.0.0",
     "@testing-library/user-event": "14.4.3",
     "@trivago/prettier-plugin-sort-imports": "4.2.0",
     "http-status-codes": "2.2.0",
     "i18next": "23.4.6",
-    "immutable": "4.3.2",
+    "immutable": "4.3.4",
     "interweave": "13.1.0",
-    "lodash": "4.17.21",
-    "lodash.isobject": "3.0.2",
-    "lodash.isstring": "4.0.1",
     "lodash.truncate": "4.4.2",
     "luxon": "3.4.3",
     "next": "12.3.4",
@@ -103,8 +100,7 @@
     "wait-on": "7.0.1"
   },
   "resolutions": {
-    "@types/react": "17.0.66",
-    "@graasp/sdk": "1.6.0"
+    "@types/react": "17.0.66"
   },
   "nyc": {
     "exclude": [
