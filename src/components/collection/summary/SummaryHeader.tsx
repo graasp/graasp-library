@@ -95,7 +95,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
   const sparklineData = useMemo(
     () =>
       views.reduce(
-        (acc: { [key: string]: number }, curr: { createAt: Date }) => {
+        (acc: { [key: string]: number }, curr: { createdAt: Date }) => {
           const day = curr.createdAt?.toDateString();
 
           if (acc[day]) {
@@ -214,7 +214,8 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
                 </Divider>
               }
             >
-              {Object.values(sparklineData).length > 2 && (
+              {/* display spark line only when there's two points at least */}
+              {Object.values(sparklineData).length >= 2 && (
                 <Stack sx={{ width: '100px' }}>
                   <Sparklines data={Object.values(sparklineData)}>
                     <SparklinesLine color="blue" />

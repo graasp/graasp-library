@@ -47,11 +47,11 @@ const Collection = ({ id }: Props) => {
     itemId: id || '',
   });
 
-  const { mutate: postView } = mutations.usePostAction();
+  const { mutate: postView } = mutations.usePostItemAction();
 
   useEffect(() => {
     if (id) {
-      postView({ itemId: id, type: 'collection-view' });
+      postView({ itemId: id, payload: { type: 'collection-view' } });
     }
   }, []);
   // if tags could be fetched then user has at least read access
@@ -116,7 +116,7 @@ const Collection = ({ id }: Props) => {
           canRead={canRead}
           canPublish={canPublish}
           isPublished={!!itemPublishEntry}
-          currentMember={currentMember}
+          currentMember={currentMember as any}
         />
         <Box
           id={id}
@@ -130,7 +130,7 @@ const Collection = ({ id }: Props) => {
           <Summary
             collection={collection}
             isLoading={isLoading}
-            views={itemPublishEntry?.itemViews?.toJS()}
+            views={(itemPublishEntry as any)?.itemViews?.toJS()}
           />
           {/* <Comments comments={comments} members={members} /> */}
         </Box>
