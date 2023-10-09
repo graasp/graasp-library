@@ -94,7 +94,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
   // views per day { day: no.Of views }
   const sparklineData = useMemo(
     () =>
-      views.reduce(
+      views?.reduce(
         (acc: { [key: string]: number }, curr: { createdAt: Date }) => {
           const day = curr.createdAt?.toDateString();
 
