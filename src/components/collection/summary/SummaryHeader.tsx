@@ -108,7 +108,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
         },
         {},
       ),
-    [views.length],
+    [views?.length],
   );
   return (
     <Container maxWidth="lg">
@@ -223,7 +223,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
                 </Stack>
               )}
               {/* display only when there's a views */}
-              {views.length ? (
+              {views?.length ? (
                 <Tooltip title="Views" arrow placement="bottom">
                   <Stack direction="row" alignItems="center">
                     <Typography

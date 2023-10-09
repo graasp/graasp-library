@@ -53,7 +53,7 @@ const Collection = ({ id }: Props) => {
     if (id) {
       postView({ itemId: id, payload: { type: 'collection-view' } });
     }
-  }, []);
+  }, [id]);
   // if tags could be fetched then user has at least read access
   const canRead = Boolean(tags);
 
@@ -116,7 +116,7 @@ const Collection = ({ id }: Props) => {
           canRead={canRead}
           canPublish={canPublish}
           isPublished={!!itemPublishEntry}
-          currentMember={currentMember as any}
+          currentMember={currentMember}
         />
         <Box
           id={id}
@@ -130,6 +130,7 @@ const Collection = ({ id }: Props) => {
           <Summary
             collection={collection}
             isLoading={isLoading}
+            // any types needs to be changed from sdk
             views={(itemPublishEntry as any)?.itemViews?.toJS()}
           />
           {/* <Comments comments={comments} members={members} /> */}
