@@ -5,10 +5,12 @@ import React, { useContext } from 'react';
 import { Favorite } from '@mui/icons-material';
 import { Skeleton } from '@mui/lab';
 import {
+  Alert,
   Box,
   Chip,
   Container,
   Divider,
+  Snackbar,
   Stack,
   Tooltip,
   Typography,
@@ -18,10 +20,12 @@ import { ThumbnailSize } from '@graasp/sdk';
 import { ItemLikeRecord, ItemRecord } from '@graasp/sdk/frontend';
 
 import { GRAASP_COLOR } from '../../../config/constants';
+import { useLibraryTranslation } from '../../../config/i18n';
 import {
   ITEM_SUMMARY_TITLE_ID,
   SUMMARY_TAGS_CONTAINER_ID,
 } from '../../../config/selectors';
+import LIBRARY from '../../../langs/constants';
 import { QueryClientContext } from '../../QueryClientContext';
 import CardMedia from '../../common/CardMediaComponent';
 import { StyledCard } from '../../common/StyledCard';
@@ -52,6 +56,10 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
   truncatedName,
   tags,
 }) => {
+  const { t } = useLibraryTranslation();
+
+  const [open, setOpen] = React.useState(false);
+
   const { hooks, mutations } = useContext(QueryClientContext);
 
   const { data: member } = hooks.useCurrentMember();
@@ -66,9 +74,27 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
     (itemLike: ItemLikeRecord) => itemLike?.item.id === collection?.id,
   );
 
+  const openLoginSnackbarMessage = () => {
+    setOpen(true);
+  };
+
+  const handleCloseSnackBarMessage = (
+    event: React.SyntheticEvent | Event,
+    reason?: string,
+  ) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
   const handleLike = () => {
-    if (!collection?.id || !member?.id) {
+    if (!collection?.id) {
       console.error('unable to like an item which id is undefined');
+      return;
+    }
+    if (!member?.id) {
+      openLoginSnackbarMessage();
       return;
     }
     postItemLike({
@@ -78,8 +104,12 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
   };
 
   const handleUnlike = () => {
-    if (!collection?.id || !member?.id) {
+    if (!collection?.id) {
       console.error('unable to unlike an item which id is undefined');
+      return;
+    }
+    if (!member?.id) {
+      openLoginSnackbarMessage();
       return;
     }
     deleteItemLike({
@@ -135,15 +165,13 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
               >
                 {truncatedName}
               </Typography>
-              {member && member.id && (
-                <LikeButton
-                  ariaLabel="like"
-                  color="primary"
-                  isLiked={Boolean(likeEntry)}
-                  handleLike={handleLike}
-                  handleUnlike={handleUnlike}
-                />
-              )}
+              <LikeButton
+                ariaLabel="like"
+                color="primary"
+                isLiked={Boolean(likeEntry)}
+                handleLike={handleLike}
+                handleUnlike={handleUnlike}
+              />
             </Stack>
             <SummaryActionButtons item={collection} isLogged={isLogged} />
           </Stack>
@@ -227,6 +255,16 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
           </Stack>
         </Stack>
       </Stack>
+      <Snackbar
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackBarMessage}
+      >
+        <Alert onClose={handleCloseSnackBarMessage} severity="error">
+          {t(LIBRARY.SIGNIN_MESSAGE)}
+        </Alert>
+      </Snackbar>
     </Container>
   );
 };
