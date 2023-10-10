@@ -23,6 +23,7 @@ import { GRAASP_COLOR } from '../../../config/constants';
 import { useLibraryTranslation } from '../../../config/i18n';
 import {
   ITEM_SUMMARY_TITLE_ID,
+  LIKE_COLLECTION_NOT_LOGGED_ID,
   SUMMARY_TAGS_CONTAINER_ID,
 } from '../../../config/selectors';
 import LIBRARY from '../../../langs/constants';
@@ -261,7 +262,11 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
         autoHideDuration={6000}
         onClose={handleCloseSnackBarMessage}
       >
-        <Alert onClose={handleCloseSnackBarMessage} severity="error">
+        <Alert
+          id={LIKE_COLLECTION_NOT_LOGGED_ID}
+          onClose={handleCloseSnackBarMessage}
+          severity="error"
+        >
           {t(LIBRARY.SIGNIN_MESSAGE)}
         </Alert>
       </Snackbar>

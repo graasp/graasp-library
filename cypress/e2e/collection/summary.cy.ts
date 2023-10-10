@@ -7,6 +7,7 @@ import { buildCollectionRoute } from '../../../src/config/routes';
 import {
   CHILDREN_ITEMS_GRID_ID,
   ITEM_SUMMARY_TITLE_ID,
+  LIKE_COLLECTION_NOT_LOGGED_ID,
   SUMMARY_AUTHOR_CONTAINER_ID,
   SUMMARY_CREATED_AT_CONTAINER_ID,
   SUMMARY_LAST_UPDATE_CONTAINER_ID,
@@ -83,7 +84,7 @@ describe('Collection Summary', () => {
       });
     });
 
-    it('Show like button only to logged in users', () => {
+    it('Show like button', () => {
       cy.setUpApi(environment);
       const item = PUBLISHED_ITEMS[1];
       cy.visit(buildCollectionRoute(item.id));
@@ -91,7 +92,8 @@ describe('Collection Summary', () => {
       if (environment.currentMember) {
         cy.get(`button[aria-label="like"]`).should('be.visible');
       } else {
-        cy.get(`button[aria-label="like"]`).should('not.exist');
+        cy.get(`button[aria-label="like"]`).click();
+        cy.get(`#${LIKE_COLLECTION_NOT_LOGGED_ID}`).should('exist');
       }
     });
 
