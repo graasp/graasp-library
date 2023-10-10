@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 import { MEMBER_AVATAR_ICON_SIZE } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';
 import { MEMBER_PROFILE_ROUTE, SIGN_IN_ROUTE } from '../../config/paths';
+import { MY_LIST_ROUTE } from '../../config/routes';
 import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
 import MemberAvatar from './MemberAvatar';
@@ -33,7 +34,7 @@ const UserSwitchWrapper: FC<Props> = ({ ButtonContent }) => {
     <Box sx={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
       {member?.id && (
         <Link
-          href="/my-list"
+          href={MY_LIST_ROUTE}
           style={{ textDecoration: 'none', color: 'white' }}
         >
           {t(LIBRARY.LIKED_ITEMS)}
