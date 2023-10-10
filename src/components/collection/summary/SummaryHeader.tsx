@@ -215,7 +215,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
               }
             >
               {/* display spark line only when there's two points at least */}
-              {Object.values(sparklineData).length >= 2 && (
+              {sparklineData && Object.values(sparklineData).length >= 2 && (
                 <Stack sx={{ width: '100px' }}>
                   <Sparklines data={Object.values(sparklineData)}>
                     <SparklinesLine color="blue" />
