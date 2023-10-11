@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 
 import { CategoryType } from '@graasp/sdk';
-import { ActionRecord, ItemRecord } from '@graasp/sdk/frontend';
+import { ItemRecord } from '@graasp/sdk/frontend';
 import { DEFAULT_LANG, LIBRARY } from '@graasp/translations';
 
 import {
@@ -50,10 +50,14 @@ export const getParentsIdsFromPath = (
 type SummaryProps = {
   collection?: ItemRecord;
   isLoading: boolean;
-  views: ActionRecord[];
+  totalViews: number;
 };
 
-const Summary: React.FC<SummaryProps> = ({ collection, isLoading, views }) => {
+const Summary: React.FC<SummaryProps> = ({
+  collection,
+  isLoading,
+  totalViews,
+}) => {
   const { t } = useLibraryTranslation();
   const { hooks } = useContext(QueryClientContext);
   const { data: member } = hooks.useCurrentMember();
@@ -99,7 +103,7 @@ const Summary: React.FC<SummaryProps> = ({ collection, isLoading, views }) => {
         isLoading={isLoading}
         tags={collection?.settings?.tags}
         truncatedName={truncatedName}
-        views={views}
+        totalViews={totalViews}
       />
       {collection?.type === ITEM_TYPES.FOLDER && (
         <>

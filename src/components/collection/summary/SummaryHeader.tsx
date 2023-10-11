@@ -1,7 +1,6 @@
 import dynamic from 'next/dynamic';
 
-import React, { useContext, useMemo } from 'react';
-import { Sparklines, SparklinesLine } from 'react-sparklines-typescript';
+import React, { useContext } from 'react';
 
 import { Favorite, Visibility } from '@mui/icons-material';
 import { Skeleton } from '@mui/lab';
@@ -16,7 +15,7 @@ import {
 } from '@mui/material';
 
 import { ThumbnailSize } from '@graasp/sdk';
-import { ActionRecord, ItemLikeRecord, ItemRecord } from '@graasp/sdk/frontend';
+import { ItemLikeRecord, ItemRecord } from '@graasp/sdk/frontend';
 
 import { GRAASP_COLOR } from '../../../config/constants';
 import {
@@ -44,7 +43,7 @@ type SummaryHeaderProps = {
   truncatedName: string;
   tags: Immutable.List<string> | undefined;
   isLogged: boolean;
-  views: ActionRecord[];
+  totalViews: number;
 };
 
 const SummaryHeader: React.FC<SummaryHeaderProps> = ({
@@ -53,7 +52,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
   isLoading,
   truncatedName,
   tags,
-  views,
+  totalViews,
 }) => {
   const { hooks, mutations } = useContext(QueryClientContext);
 
@@ -91,25 +90,6 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
     });
   };
 
-  // views per day { day: no.Of views }
-  const sparklineData = useMemo(
-    () =>
-      views?.reduce(
-        (acc: { [key: string]: number }, curr: { createdAt: Date }) => {
-          const day = curr.createdAt?.toDateString();
-
-          if (acc[day]) {
-            acc[day] += 1;
-          } else {
-            acc[day] = 1;
-          }
-
-          return acc;
-        },
-        {},
-      ),
-    [views?.length],
-  );
   return (
     <Container maxWidth="lg">
       <Stack
@@ -214,16 +194,8 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
                 </Divider>
               }
             >
-              {/* display spark line only when there's two points at least */}
-              {sparklineData && Object.values(sparklineData).length >= 2 && (
-                <Stack sx={{ width: '100px' }}>
-                  <Sparklines data={Object.values(sparklineData)}>
-                    <SparklinesLine color="blue" />
-                  </Sparklines>
-                </Stack>
-              )}
               {/* display only when there's a views */}
-              {views?.length ? (
+              {totalViews ? (
                 <Tooltip title="Views" arrow placement="bottom">
                   <Stack direction="row" alignItems="center">
                     <Typography
@@ -232,7 +204,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
                       alignItems="center"
                       color="primary"
                     >
-                      {views?.length}
+                      {totalViews}
                     </Typography>
                     <Visibility color="primary" style={{ marginLeft: 5 }} />
                   </Stack>
