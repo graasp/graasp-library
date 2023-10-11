@@ -1,8 +1,9 @@
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 
 import React, { useContext } from 'react';
 
-import { Stack, Typography } from '@mui/material';
+import { Stack } from '@mui/material';
 import Skeleton from '@mui/material/Skeleton';
 
 import { PermissionLevel, ThumbnailSize } from '@graasp/sdk';
@@ -10,6 +11,7 @@ import { ItemRecord } from '@graasp/sdk/frontend';
 
 import { DEFAULT_MEMBER_THUMBNAIL } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';
+import { buildMemberRoute } from '../../config/routes';
 import { SUMMARY_AUTHOR_CONTAINER_ID } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
@@ -64,7 +66,12 @@ const Authorship = ({ itemId, author, displayCoEditors }: Props) => {
               variant="circular"
               sx={{ maxWidth: 30, maxHeight: 30 }}
             />
-            <Typography variant="body1">{author?.name}</Typography>
+            <Link
+              href={buildMemberRoute(author.id)}
+              style={{ textDecoration: 'none', color: 'black' }}
+            >
+              {author?.name}
+            </Link>
           </>
         )}
       </Stack>

@@ -1,4 +1,5 @@
 import { List } from 'immutable';
+import Link from 'next/link';
 
 import AvatarGroup from '@mui/lab/AvatarGroup';
 import { Stack, Tooltip, Typography } from '@mui/material';
@@ -6,6 +7,7 @@ import { Stack, Tooltip, Typography } from '@mui/material';
 import { MemberRecord } from '@graasp/sdk/frontend';
 
 import { useLibraryTranslation } from '../../config/i18n';
+import { buildMemberRoute } from '../../config/routes';
 import { buildContributorId } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
 import MemberAvatar from '../layout/MemberAvatar';
@@ -36,7 +38,9 @@ const Contributors = ({ contributors, displayContributors }: Props) => {
           const { id, name: contributorName } = contributor;
           return (
             <Tooltip title={contributorName} key={id} arrow>
-              <MemberAvatar id={buildContributorId(id)} memberId={id} />
+              <Link href={buildMemberRoute(id)}>
+                <MemberAvatar id={buildContributorId(id)} memberId={id} />
+              </Link>
             </Tooltip>
           );
         })}
