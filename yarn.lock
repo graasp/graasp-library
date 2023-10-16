@@ -1522,11 +1522,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/query-client@npm:1.10.0":
-  version: 1.10.0
-  resolution: "@graasp/query-client@npm:1.10.0"
+"@graasp/query-client@https://github.com/graasp/graasp-query-client.git#fix-useItemPublishedInformation-type":
+  version: 1.11.0
+  resolution: "@graasp/query-client@https://github.com/graasp/graasp-query-client.git#commit=21c4df46f271d31e9b2851b5a94440cdf80bea5c"
   dependencies:
-    "@graasp/sdk": 1.7.0
+    "@graasp/sdk": "https://github.com/graasp/graasp-sdk.git#292-fix-itempublish-type"
     "@graasp/translations": 1.19.3
     axios: 0.27.2
     crypto-js: 4.1.1
@@ -1537,13 +1537,13 @@ __metadata:
     uuid: 9.0.1
   peerDependencies:
     react: ^17.0.0 || ^18.0.0
-  checksum: 46d365ad26df3f91287361235d9d7330f9f3c3995f8bd5ff83a723a5debeb6fede1ddad887ce1ff56a18315e828b0e71fc478e461834988ef86e6cd6106c7304
+  checksum: 4fde1fbb744c6a1e33f2de341dfd967aaa1886aa42fdb443cb2c3022a6e214058c6d86c1bf9fc1f99db5cb3d5bc62a3aabb419760ea2b4672c0cc5b6ad1999ed
   languageName: node
   linkType: hard
 
-"@graasp/sdk@npm:1.7.0":
+"@graasp/sdk@https://github.com/graasp/graasp-sdk.git#292-fix-itempublish-type":
   version: 1.7.0
-  resolution: "@graasp/sdk@npm:1.7.0"
+  resolution: "@graasp/sdk@https://github.com/graasp/graasp-sdk.git#commit=5264a090b01696645208633865675dda005d2d51"
   dependencies:
     "@aws-sdk/client-s3": 3.417.0
     "@fastify/secure-session": 6.1.0
@@ -1555,9 +1555,9 @@ __metadata:
     js-cookie: 3.0.5
     qs: 6.11.2
     typeorm: 0.3.17
-    uuid: 9.0.0
+    uuid: 9.0.1
     validator: 13.11.0
-  checksum: bcb31ac2b1965739aa63395b9946a6bee53ef575f2f8d9e3e50316c51310dbf2f58bad60ae71d4bec6b477eaa698eb1d6971f100ad95afc36e5d5b1b520d8f69
+  checksum: da678fa47f4a7489b899f08bb46f96cf8251c86ef7afca2e7dd49aa5c955016b500a6719c99f34790721aa9ee9076365fce04efd904afd0f4bc48bc76c495c33
   languageName: node
   linkType: hard
 
@@ -7217,7 +7217,7 @@ __metadata:
     "@emotion/react": 11.11.1
     "@emotion/server": 11.11.0
     "@emotion/styled": 11.11.0
-    "@graasp/query-client": 1.10.0
+    "@graasp/query-client": "https://github.com/graasp/graasp-query-client.git#fix-useItemPublishedInformation-type"
     "@graasp/sdk": 1.7.0
     "@graasp/translations": 1.19.1
     "@graasp/ui": 3.5.4

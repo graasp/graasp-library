@@ -17,7 +17,6 @@ import {
 import { ThumbnailSize } from '@graasp/sdk';
 import { ItemLikeRecord, ItemRecord } from '@graasp/sdk/frontend';
 
-import { GRAASP_COLOR } from '../../../config/constants';
 import {
   ITEM_SUMMARY_TITLE_ID,
   SUMMARY_TAGS_CONTAINER_ID,
@@ -184,14 +183,10 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
               divider={
                 <Divider
                   flexItem
-                  sx={{
-                    alignSelf: 'center',
-                    color: GRAASP_COLOR,
-                    fontWeight: 'bold',
-                  }}
-                >
-                  |
-                </Divider>
+                  variant="middle"
+                  orientation="vertical"
+                  sx={{ margin: 1 }}
+                />
               }
             >
               {/* display only when there's a views */}

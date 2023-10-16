@@ -130,8 +130,7 @@ const Collection = ({ id }: Props) => {
           <Summary
             collection={collection}
             isLoading={isLoading}
-            // any types needs to be changed from sdk
-            totalViews={(itemPublishEntry as any)?.totalViews}
+            totalViews={itemPublishEntry?.totalViews ?? 0}
           />
           {/* <Comments comments={comments} members={members} /> */}
         </Box>
