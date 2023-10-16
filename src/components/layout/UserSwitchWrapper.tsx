@@ -1,5 +1,4 @@
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
 
 import { FC, useContext } from 'react';
 
@@ -8,9 +7,10 @@ import Box from '@mui/material/Box';
 import { MEMBER_AVATAR_ICON_SIZE } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';
 import { MEMBER_PROFILE_ROUTE, SIGN_IN_ROUTE } from '../../config/paths';
-import { MY_LIST_ROUTE } from '../../config/routes';
+import { MY_LIKED_ITEMS_ROUTE } from '../../config/routes';
 import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
+import HeaderLink from './HeaderLink';
 import MemberAvatar from './MemberAvatar';
 
 const { GraaspUserSwitch } = {
@@ -33,12 +33,7 @@ const UserSwitchWrapper: FC<Props> = ({ ButtonContent }) => {
   return (
     <Box sx={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
       {member?.id && (
-        <Link
-          href={MY_LIST_ROUTE}
-          style={{ textDecoration: 'none', color: 'white' }}
-        >
-          {t(LIBRARY.LIKED_ITEMS)}
-        </Link>
+        <HeaderLink href={MY_LIKED_ITEMS_ROUTE} text={t(LIBRARY.LIKED_ITEMS)} />
       )}
       <Box mr={1}>
         <GraaspUserSwitch

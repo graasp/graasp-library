@@ -1,4 +1,4 @@
-import { MY_LIST_ROUTE } from '../../../src/config/routes';
+import { MY_LIKED_ITEMS_ROUTE } from '../../../src/config/routes';
 import {
   MY_LIKES_COLLECTIONS_ID,
   buildMyListNavigationTabId,
@@ -11,7 +11,7 @@ describe('My Liked Items', () => {
     // check if title and headings are displayed correctly
     it('display liked items', () => {
       cy.setUpApi({ currentMember: CURRENT_USER, items: PUBLISHED_ITEMS });
-      cy.visit(MY_LIST_ROUTE);
+      cy.visit(MY_LIKED_ITEMS_ROUTE);
 
       // click my likes tab
       cy.get(`#${buildMyListNavigationTabId('myLikes')}`).click();

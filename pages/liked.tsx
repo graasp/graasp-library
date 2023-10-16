@@ -6,7 +6,7 @@ import Wrapper from '../src/components/common/Wrapper';
 import MyList from '../src/components/pages/MyList';
 import { QUERY_CLIENT_OPTIONS } from '../src/config/queryClient';
 
-const MyListPage = ({
+const MyLikedItemsPage = ({
   dehydratedState,
 }: {
   dehydratedState: DehydratedState;
@@ -29,4 +29,4 @@ export async function getServerSideProps() {
   return { props: { dehydratedState: dehydrate(queryClient) } };
 }
 
-export default MyListPage;
+export default MyLikedItemsPage;
