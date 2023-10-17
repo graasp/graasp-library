@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic';
 
 import { useContext } from 'react';
 
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 
 import { Context } from '@graasp/sdk';
 
@@ -13,6 +13,7 @@ import { MENU_BUTTON_ID } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
 import CollectionsGrid from '../collection/CollectionsGrid';
+import BackButton from '../common/BackButton';
 import Error from '../common/Error';
 import Seo from '../common/Seo';
 import useHeader from '../layout/useHeader';
@@ -64,10 +65,18 @@ const Member = ({ id }: Props) => {
         headerLeftContent={leftContent}
         headerRightContent={rightContent}
       >
-        <Container maxWidth="xl" sx={{ mb: 5 }}>
-          <Box
-            sx={{ display: 'flex', mb: 6, mt: 5, gap: 2, alignItems: 'center' }}
-          >
+        <Stack
+          maxWidth="xl"
+          marginX="auto"
+          alignItems="flex-start"
+          justifyItems="flex-start"
+          justifySelf="center"
+          marginTop={2}
+          padding={3}
+        >
+          <BackButton />
+
+          <Box sx={{ display: 'flex', my: 3, gap: 2, alignItems: 'center' }}>
             <Avatar
               alt={t(LIBRARY.AVATAR_ALT, { name: data?.name })}
               isLoading={isMemberInfoLoading}
@@ -77,7 +86,11 @@ const Member = ({ id }: Props) => {
               variant="circular"
               sx={{ width: 90, height: 90, fontSize: '2.5rem' }}
             />
-            <Typography variant="h5">{data?.name}</Typography>
+            <Box>
+              <Typography variant="h5">{data?.name}</Typography>
+              {/* Bio goes there */}
+              {/* <Typography variant="body1"></Typography> */}
+            </Box>
           </Box>
           <Box flexGrow={1}>
             <Typography variant="h6" fontWeight="bold" sx={{ mb: 4 }}>
@@ -89,7 +102,7 @@ const Member = ({ id }: Props) => {
               isLoading={isLoading}
             />
           </Box>
-        </Container>
+        </Stack>
       </Main>
     </>
   );
