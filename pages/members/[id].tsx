@@ -39,9 +39,16 @@ export const getServerSideProps: GetServerSideProps<Props, Params> = async ({
   if (id) {
     // prefetch data in query client
     await queryClient.prefetchQuery(DATA_KEYS.buildItemKey(id), () =>
-      Api.getMember({ id }, QUERY_CLIENT_OPTIONS).then((data) =>
-        JSON.parse(JSON.stringify(data)),
-      ),
+      Promise.all([
+        Api.getMember({ id }, QUERY_CLIENT_OPTIONS).then((data) => {
+          return JSON.parse(JSON.stringify(data));
+        }),
+        Api.getPublishedItemsForMember(id, QUERY_CLIENT_OPTIONS).then(
+          (data) => {
+            return JSON.parse(JSON.stringify(data));
+          },
+        ),
+      ]),
     );
   }
 

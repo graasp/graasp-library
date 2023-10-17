@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import React, { useContext } from 'react';
 
-import { Stack } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import Skeleton from '@mui/material/Skeleton';
 
 import { PermissionLevel, ThumbnailSize } from '@graasp/sdk';
@@ -66,12 +66,13 @@ const Authorship = ({ itemId, author, displayCoEditors }: Props) => {
               variant="circular"
               sx={{ maxWidth: 30, maxHeight: 30 }}
             />
-            <Link
+            <Typography
+              component={Link}
               href={buildMemberRoute(author.id)}
-              style={{ textDecoration: 'none', color: 'black' }}
+              variant="body1"
             >
               {author?.name}
-            </Link>
+            </Typography>
           </>
         )}
       </Stack>
