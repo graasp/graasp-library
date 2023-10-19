@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.12.0](https://github.com/graasp/graasp-library/compare/v0.11.2...v0.12.0) (2023-10-19)
+
+
+### Features
+
+* add like button for unlogged users and redirect to login ([#399](https://github.com/graasp/graasp-library/issues/399)) ([4ace8d1](https://github.com/graasp/graasp-library/commit/4ace8d1dddd014b1d6dfa013f96bc947bed3917d))
+
+
+### Bug Fixes
+
+* update aws deployment file ([#405](https://github.com/graasp/graasp-library/issues/405)) ([b0a9ed0](https://github.com/graasp/graasp-library/commit/b0a9ed0094eca7d4ca1e5209a8193e64e6721299))
+
 ## [0.11.2](https://github.com/graasp/graasp-library/compare/v0.11.1...v0.11.2) (2023-10-06)
 
 
