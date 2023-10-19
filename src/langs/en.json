@@ -116,5 +116,6 @@
   "SUGGESTION_TO_ENABLE_IN_DEPTH_SEARCH_TEXT": "Cannot find what you looked for?<br/>Try to enable in-depth search to include content",
   "SEARCH_NO_RESULTS": "Nothing corresponds to your search",
   "SEARCH_RESULTS_LOAD_MORE": "Load more",
-  "CONTENT_CHIP": "Content"
+  "CONTENT_CHIP": "Content",
+  "SIGNIN_MESSAGE": "You need to sign in First"
 }
