@@ -1670,13 +1670,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/ui@npm:3.4.0":
-  version: 3.4.0
-  resolution: "@graasp/ui@npm:3.4.0"
+"@graasp/ui@https://github.com/graasp/graasp-ui.git#usermenu-dropdown":
+  version: 3.5.4
+  resolution: "@graasp/ui@https://github.com/graasp/graasp-ui.git#commit=6b7bc9a17619ba66e658ab838322fb19c9df81f3"
   dependencies:
-    "@graasp/sdk": 1.4.0
-    http-status-codes: 2.2.0
-    immutable: 4.3.2
+    "@graasp/sdk": 1.7.0
+    http-status-codes: 2.3.0
+    immutable: 4.3.4
     katex: 0.16.8
     lodash.truncate: 4.4.2
     qs: 6.11.2
@@ -1685,7 +1685,8 @@ __metadata:
     react-quill: 2.0.0-beta.4
     react-rnd: 10.4.1
     react-text-mask: 5.5.0
-    uuid: 9.0.0
+    short-uuid: 4.2.2
+    uuid: 9.0.1
   peerDependencies:
     "@emotion/cache": ~11.10.7 || ~11.11.0
     "@emotion/react": ~11.10.6 || ~11.11.0
@@ -1707,7 +1708,7 @@ __metadata:
       optional: true
     ag-grid-react:
       optional: true
-  checksum: fc12ceaf940a5e0869346067427819eaa10cda9e531fd833b5324042ec7e5f32987ff40713079f03b69ae62fb68248b545d8ab97ada5c70fcedf5b8a0a55f3cd
+  checksum: 04b91fc170238efb6ae2c61c923994fb806993240808c83e034377b60d4a5a332059c98fe3c77ddb4103b86439f5eeaa614b6b9c62daa0b4102399af19590034
   languageName: node
   linkType: hard
 
@@ -3783,6 +3784,13 @@ __metadata:
   version: 6.2.1
   resolution: "ansi-styles@npm:6.2.1"
   checksum: ef940f2f0ced1a6347398da88a91da7930c33ecac3c77b72c5905f8b8fe402c52e6fde304ff5347f616e27a742da3f1dc76de98f6866c69251ad0b07a66776d9
+  languageName: node
+  linkType: hard
+
+"any-base@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "any-base@npm:1.1.0"
+  checksum: c1fd040de52e710e2de7d9ae4df52bac589f35622adb24686c98ce21c7b824859a8db9614bc119ed8614f42fd08918b2612e6a6c385480462b3100a1af59289d
   languageName: node
   linkType: hard
 
@@ -7241,7 +7249,7 @@ __metadata:
     "@graasp/query-client": 1.8.0
     "@graasp/sdk": 1.6.0
     "@graasp/translations": 1.19.1
-    "@graasp/ui": 3.4.0
+    "@graasp/ui": "https://github.com/graasp/graasp-ui.git#usermenu-dropdown"
     "@mui/icons-material": 5.14.3
     "@mui/lab": 5.0.0-alpha.140
     "@mui/material": 5.14.5
@@ -7553,6 +7561,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"http-status-codes@npm:2.3.0":
+  version: 2.3.0
+  resolution: "http-status-codes@npm:2.3.0"
+  checksum: dae3b99e0155441b6df28e8265ff27c56a45f82c6092f736414233e9ccf063d5ea93c1e1279e8b499c4642e2538b37995c76b1640ed3f615d0e2883d3a1dcfd5
+  languageName: node
+  linkType: hard
+
 "https-proxy-agent@npm:^5.0.0":
   version: 5.0.1
   resolution: "https-proxy-agent@npm:5.0.1"
@@ -7645,6 +7660,13 @@ __metadata:
   version: 4.3.2
   resolution: "immutable@npm:4.3.2"
   checksum: bb1d0f3eb8ebef04aa9e2c698ba1a248976a4dc0257fa2f1bffaaae575f891395fe9ef39eaf49856d6c4edd31704e300ec563ed44ea9d7c7996186deab91d0ff
+  languageName: node
+  linkType: hard
+
+"immutable@npm:4.3.4":
+  version: 4.3.4
+  resolution: "immutable@npm:4.3.4"
+  checksum: de3edd964c394bab83432429d3fb0b4816b42f56050f2ca913ba520bd3068ec3e504230d0800332d3abc478616e8f55d3787424a90d0952e6aba864524f1afc3
   languageName: node
   linkType: hard
 
@@ -11127,6 +11149,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"short-uuid@npm:4.2.2":
+  version: 4.2.2
+  resolution: "short-uuid@npm:4.2.2"
+  dependencies:
+    any-base: ^1.1.0
+    uuid: ^8.3.2
+  checksum: 5b718a026897f34483bc95cebb6814cff45538d462583053be9003403f459a104ea88ed893fa462589ef040abd454bf499298d55fa0081d61d987ab85cbf3fe4
+  languageName: node
+  linkType: hard
+
 "side-channel@npm:^1.0.4":
   version: 1.0.4
   resolution: "side-channel@npm:1.0.4"
@@ -12331,6 +12363,15 @@ __metadata:
   bin:
     uuid: dist/bin/uuid
   checksum: 8dd2c83c43ddc7e1c71e36b60aea40030a6505139af6bee0f382ebcd1a56f6cd3028f7f06ffb07f8cf6ced320b76aea275284b224b002b289f89fe89c389b028
+  languageName: node
+  linkType: hard
+
+"uuid@npm:9.0.1":
+  version: 9.0.1
+  resolution: "uuid@npm:9.0.1"
+  bin:
+    uuid: dist/bin/uuid
+  checksum: 39931f6da74e307f51c0fb463dc2462807531dc80760a9bff1e35af4316131b4fc3203d16da60ae33f07fdca5b56f3f1dd662da0c99fea9aaeab2004780cc5f4
   languageName: node
   linkType: hard
 
