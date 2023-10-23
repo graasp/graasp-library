@@ -1572,7 +1572,7 @@ __metadata:
 
 "@graasp/ui@https://github.com/graasp/graasp-ui.git#usermenu-dropdown":
   version: 3.5.4
-  resolution: "@graasp/ui@https://github.com/graasp/graasp-ui.git#commit=6b7bc9a17619ba66e658ab838322fb19c9df81f3"
+  resolution: "@graasp/ui@https://github.com/graasp/graasp-ui.git#commit=596713d21fbf271df17ef61dd3b2d84a9f07964d"
   dependencies:
     "@graasp/sdk": 1.7.0
     http-status-codes: 2.3.0
@@ -1608,7 +1608,7 @@ __metadata:
       optional: true
     ag-grid-react:
       optional: true
-  checksum: 04b91fc170238efb6ae2c61c923994fb806993240808c83e034377b60d4a5a332059c98fe3c77ddb4103b86439f5eeaa614b6b9c62daa0b4102399af19590034
+  checksum: 9e48976df3258664cb8868dfaa11563ccd5f49075d969e27af5612aa299ba4d1eb5eca2aaa0e5000ad0d9f65bf8496f9647fc21692a660b6237b6900b2044c92
   languageName: node
   linkType: hard
 

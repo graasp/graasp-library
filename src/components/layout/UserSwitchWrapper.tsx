@@ -2,11 +2,14 @@ import dynamic from 'next/dynamic';
 
 import { FC, useContext } from 'react';
 
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import Box from '@mui/material/Box';
 
 import { MEMBER_AVATAR_ICON_SIZE } from '../../config/constants';
+import { useLibraryTranslation } from '../../config/i18n';
 import { MEMBER_PROFILE_ROUTE, SIGN_IN_ROUTE } from '../../config/paths';
 import { MY_LIKED_ITEMS_ROUTE } from '../../config/routes';
+import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
 import MemberAvatar from './MemberAvatar';
 
@@ -25,7 +28,15 @@ const UserSwitchWrapper: FC<Props> = ({ ButtonContent }) => {
   const { hooks, mutations } = useContext(QueryClientContext);
   const { data: member, isLoading } = hooks.useCurrentMember();
   const { mutateAsync: signOut } = mutations.useSignOut();
+  const { t } = useLibraryTranslation();
 
+  const userItems = [
+    {
+      icon: <FavoriteIcon fontSize="large" />,
+      text: t(LIBRARY.LIKED_ITEMS),
+      redirect_path: MY_LIKED_ITEMS_ROUTE,
+    },
+  ];
   return (
     <Box sx={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
       <Box mr={1}>
@@ -43,8 +54,7 @@ const UserSwitchWrapper: FC<Props> = ({ ButtonContent }) => {
               memberId={m?.id}
             />
           )}
-          likedItemsProfile
-          likedItemsPath={MY_LIKED_ITEMS_ROUTE}
+          userMenuItems={userItems}
         />
       </Box>
     </Box>
