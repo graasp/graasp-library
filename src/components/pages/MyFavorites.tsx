@@ -19,6 +19,7 @@ const MyFavorites = ({ tab, index }: Props) => {
     <TabPanel value={tab} index={index}>
       <CollectionsGrid
         id={MY_FAVORITES_COLLECTIONS_ID}
+        // @ts-ignore
         collections={collections}
         isLoading={isLoading}
       />

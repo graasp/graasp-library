@@ -11,7 +11,6 @@ import {
   Typography,
   styled,
 } from '@mui/material';
-import { TransitionProps as MUITransitionProps } from '@mui/material/transitions';
 
 import { CategoryRecord } from '@graasp/sdk/frontend';
 
@@ -68,7 +67,7 @@ const FilterPopper = React.forwardRef<HTMLDivElement, FilterPopperProps>(
         style={{ zIndex: 4 }}
         transition
       >
-        {({ TransitionProps }: { TransitionProps: MUITransitionProps }) => (
+        {({ TransitionProps }) => (
           // eslint-disable-next-line react/jsx-props-no-spreading
           <Grow {...TransitionProps}>
             <StyledPopper>

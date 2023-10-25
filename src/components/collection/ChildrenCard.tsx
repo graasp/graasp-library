@@ -15,7 +15,7 @@ import {
 } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
-import { ThumbnailSize } from '@graasp/sdk';
+import { ItemType, ThumbnailSize } from '@graasp/sdk';
 import { ItemRecord } from '@graasp/sdk/frontend';
 
 import { COLLECTION_CARD_BORDER_RADIUS } from '../../config/cssStyles';
@@ -180,7 +180,12 @@ export const FileChildrenCard: React.FC<FileChildrenCardProps> = ({
           <ItemIcon
             alt={item.type}
             type={item.type}
-            extra={item.extra}
+            extra={
+              item.type === ItemType.LOCAL_FILE ||
+              item.type === ItemType.S3_FILE
+                ? item.extra
+                : undefined
+            }
             // TODO: replace with theme values
             sx={{ fontSize: '2.1875rem', color: '#5050d2' }}
           />
