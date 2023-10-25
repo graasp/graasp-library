@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { Stack, Typography, styled } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 
 import { APP_AUTHOR } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';
@@ -11,12 +11,6 @@ import {
 import { HOME_ROUTE } from '../../config/routes';
 import LIBRARY from '../../langs/constants';
 import Seo from './Seo';
-
-const StyledLink = styled(Link)(({ theme }) => ({
-  display: 'block',
-  margin: 'auto',
-  marginTop: theme.spacing(2),
-}));
 
 type Props = {
   code?: keyof typeof ErrorMessages;
@@ -37,11 +31,11 @@ const Error = ({ code = ERROR_UNEXPECTED_ERROR_CODE }: Props) => {
         <Typography variant="h4" align="center">
           {t(message)}
         </Typography>
-        <StyledLink href={HOME_ROUTE}>
+        <Box marginTop={2} component={Link} href={HOME_ROUTE}>
           <Typography variant="subtitle1">
             {t(LIBRARY.ERROR_RETURN_TO_HOME)}
           </Typography>
-        </StyledLink>
+        </Box>
       </Stack>
     </>
   );

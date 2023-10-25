@@ -38,25 +38,23 @@ const UserSwitchWrapper: FC<Props> = ({ ButtonContent }) => {
     },
   ];
   return (
-    <Box sx={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
-      <Box mr={1}>
-        <GraaspUserSwitch
-          ButtonContent={ButtonContent}
-          signOut={signOut}
-          currentMember={member}
-          isCurrentMemberLoading={isLoading}
-          profilePath={MEMBER_PROFILE_ROUTE}
-          redirectPath={SIGN_IN_ROUTE}
-          renderAvatar={(m) => (
-            <MemberAvatar
-              sx={{ mr: 1 }}
-              size={MEMBER_AVATAR_ICON_SIZE}
-              memberId={m?.id}
-            />
-          )}
-          userMenuItems={userItems}
-        />
-      </Box>
+    <Box mr={1}>
+      <GraaspUserSwitch
+        ButtonContent={ButtonContent}
+        signOut={signOut}
+        currentMember={member}
+        isCurrentMemberLoading={isLoading}
+        profilePath={MEMBER_PROFILE_ROUTE}
+        redirectPath={SIGN_IN_ROUTE}
+        renderAvatar={(m) => (
+          <MemberAvatar
+            sx={{ mr: 1 }}
+            size={MEMBER_AVATAR_ICON_SIZE}
+            memberId={m?.id}
+          />
+        )}
+        userMenuItems={userItems}
+      />
     </Box>
   );
 };

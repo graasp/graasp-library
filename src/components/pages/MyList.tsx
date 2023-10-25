@@ -27,9 +27,9 @@ const MyList = () => {
   const { leftContent, rightContent } = useHeader();
   const { hooks } = useContext(QueryClientContext);
 
-  const { data: member } = hooks.useCurrentMember();
+  const { data: member, isLoading } = hooks.useCurrentMember();
 
-  if (member) {
+  if (member && member.id) {
     return (
       <>
         <Seo
@@ -53,20 +53,22 @@ const MyList = () => {
     );
   }
 
-  if (!member) {
-    return (
-      <Main
-        context={Context.Library}
-        headerLeftContent={leftContent}
-        headerRightContent={rightContent}
-      >
-        <Box p={5}>
-          <Error code={ERROR_UNAUTHORIZED_CODE} />
-        </Box>
-      </Main>
-    );
+  if (isLoading) {
+    return <Skeleton />;
   }
-  return <Skeleton />;
+
+  // todo: currently member response is not empty when member is logged out, so we default to unauthorized
+  return (
+    <Main
+      context={Context.Library}
+      headerLeftContent={leftContent}
+      headerRightContent={rightContent}
+    >
+      <Box p={5}>
+        <Error code={ERROR_UNAUTHORIZED_CODE} />
+      </Box>
+    </Main>
+  );
 };
 
 export default MyList;
