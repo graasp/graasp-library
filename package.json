@@ -33,10 +33,10 @@
     "@emotion/react": "11.11.1",
     "@emotion/server": "11.11.0",
     "@emotion/styled": "11.11.0",
-    "@graasp/query-client": "https://github.com/graasp/graasp-query-client.git#main",
-    "@graasp/sdk": "1.9.1",
+    "@graasp/query-client": "1.11.1",
+    "@graasp/sdk": "1.9.2",
     "@graasp/translations": "1.19.1",
-    "@graasp/ui": "https://github.com/graasp/graasp-ui.git#usermenu-dropdown",
+    "@graasp/ui": "https://github.com/graasp/graasp-ui.git#main",
     "@mui/icons-material": "5.14.3",
     "@mui/lab": "5.0.0-alpha.140",
     "@mui/material": "5.14.5",
@@ -69,7 +69,7 @@
     "uuid": "9.0.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "17.7.1",
+    "@commitlint/cli": "17.7.2",
     "@commitlint/config-conventional": "17.7.0",
     "@cypress/code-coverage": "3.11.0",
     "@types/lodash.truncate": "4.4.7",
@@ -104,7 +104,7 @@
   },
   "resolutions": {
     "@types/react": "17.0.66",
-    "@graasp/sdk": "1.9.1",
+    "@graasp/sdk": "1.9.2",
     "immutable": "4.3.4"
   },
   "nyc": {

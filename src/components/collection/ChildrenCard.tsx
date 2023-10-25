@@ -15,7 +15,11 @@ import {
 } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
-import { ThumbnailSize } from '@graasp/sdk';
+import {
+  LocalFileItemExtra,
+  S3FileItemExtra,
+  ThumbnailSize,
+} from '@graasp/sdk';
 import { ItemRecord } from '@graasp/sdk/frontend';
 
 import { COLLECTION_CARD_BORDER_RADIUS } from '../../config/cssStyles';
@@ -180,7 +184,7 @@ export const FileChildrenCard: React.FC<FileChildrenCardProps> = ({
           <ItemIcon
             alt={item.type}
             type={item.type}
-            extra={item.extra}
+            extra={item.extra as LocalFileItemExtra | S3FileItemExtra}
             // TODO: replace with theme values
             sx={{ fontSize: '2.1875rem', color: '#5050d2' }}
           />
