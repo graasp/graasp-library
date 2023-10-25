@@ -1593,15 +1593,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/translations@npm:1.19.3":
-  version: 1.19.3
-  resolution: "@graasp/translations@npm:1.19.3"
-  dependencies:
-    i18next: "npm:23.5.1"
-  checksum: 10b5c5aadeff02812e011251ee977b62c3d256cca29df3fcb74b1f8d67ebef4666eac3f1a6a81a537b7ad8d297452513e03ae14b7be78e1fe78f7e9a6a51b779
-  languageName: node
-  linkType: hard
-
 "@graasp/translations@npm:1.19.4":
   version: 1.19.4
   resolution: "@graasp/translations@npm:1.19.4"
@@ -7619,15 +7610,6 @@ __metadata:
   bin:
     husky: lib/bin.js
   checksum: b754cf70fdc97c3b60fec5b80056b9c11436464953b1691bf2b5dcf0081fb6685d2c5f47abb8b2b1c49f504aabea5321fdd6496f8b755d9f6e7525a493406abb
-  languageName: node
-  linkType: hard
-
-"i18next@npm:23.5.1":
-  version: 23.5.1
-  resolution: "i18next@npm:23.5.1"
-  dependencies:
-    "@babel/runtime": "npm:^7.22.5"
-  checksum: 38e62d582b0f67eb2eee4f079c9cd512246496f2fb970f50a0be26c7c5e6ac5e772de9763ac1943919ecd816b2c0375f4b2071c67b1485a6a980c4d37348408f
   languageName: node
   linkType: hard
 

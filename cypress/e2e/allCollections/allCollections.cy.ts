@@ -1,7 +1,7 @@
 import { CategoryType } from '@graasp/sdk';
 import { namespaces } from '@graasp/translations';
 
-import i18n from '../../../src/config/i18n';
+import i18n, { LIBRARY_NAMESPACE } from '../../../src/config/i18n';
 import { ALL_COLLECTIONS_ROUTE } from '../../../src/config/routes';
 import {
   ALL_COLLECTIONS_GRID_ID,
@@ -32,15 +32,15 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
       cy.visit(ALL_COLLECTIONS_ROUTE);
     });
 
-    it('Layout', () => {
+    it.only('Layout', () => {
       cy.get(`#${ALL_COLLECTIONS_HEADER_ID}`).should(
         'have.text',
-        i18n.t(LIBRARY.HEADER_ALL_COLLECTIONS),
+        i18n.t(LIBRARY.HEADER_ALL_COLLECTIONS, { ns: LIBRARY_NAMESPACE }),
       );
 
       cy.get(`#${ALL_COLLECTIONS_TITLE_ID}`).should(
         'have.text',
-        i18n.t(LIBRARY.SEARCH_PAGE_TITLE),
+        i18n.t(LIBRARY.SEARCH_PAGE_TITLE, { ns: LIBRARY_NAMESPACE }),
       );
 
       // filter header

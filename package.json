@@ -107,5 +107,8 @@
       "pages/api/__coverage__.js"
     ]
   },
+  "resolutions": {
+    "@graasp/translations": "1.19.4"
+  },
   "packageManager": "yarn@4.0.0"
 }
