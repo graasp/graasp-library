@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { Code, CopyAll, Download, MoreVert } from '@mui/icons-material';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
@@ -12,12 +12,14 @@ import {
   styled,
 } from '@mui/material';
 
+import { Triggers } from '@graasp/sdk';
 import { ItemRecord } from '@graasp/sdk/frontend';
 
 import { useLibraryTranslation } from '../../../config/i18n';
 import { buildPlayerViewItemRoute } from '../../../config/paths';
 import LIBRARY from '../../../langs/constants';
 import { openInNewTab } from '../../../utils/helpers';
+import { QueryClientContext } from '../../QueryClientContext';
 import { useCopyAction } from '../CopyButton';
 import { useEmbedAction } from '../CopyLinkButton';
 import { useDownloadAction } from '../DownloadButton';
@@ -36,11 +38,14 @@ const SummaryActionButtons: React.FC<SummaryActionButtonsProps> = ({
   item,
   isLogged,
 }) => {
+  const { mutations } = useContext(QueryClientContext);
+
   const { t } = useLibraryTranslation();
 
   const { isCopying, startCopy, treeModal } = useCopyAction(item?.id);
 
   const { startDownload } = useDownloadAction(item?.id);
+  const { mutate: triggerAction } = mutations.usePostItemAction();
 
   const { startEmbed } = useEmbedAction(item?.id);
 
@@ -66,6 +71,16 @@ const SummaryActionButtons: React.FC<SummaryActionButtonsProps> = ({
     openInNewTab(buildPlayerViewItemRoute(item?.id));
   };
 
+  const embedItem = (e: any) => {
+    startEmbed(e);
+    if (item?.id) {
+      // create an embed trigger
+      triggerAction({
+        itemId: item?.id,
+        payload: { type: Triggers.ItemEmbed },
+      });
+    }
+  };
   return (
     <>
       <ButtonGroup
@@ -148,7 +163,7 @@ const SummaryActionButtons: React.FC<SummaryActionButtonsProps> = ({
                   )}
                   <StyledButton
                     color="secondary"
-                    onClick={startEmbed}
+                    onClick={embedItem}
                     startIcon={<Code />}
                   >
                     {t(LIBRARY.SUMMARY_ACTIONS_EMBED)}

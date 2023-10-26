@@ -2,6 +2,8 @@ import dynamic from 'next/dynamic';
 
 import { useContext, useEffect } from 'react';
 
+import { Triggers } from '@graasp/sdk';
+
 import { useLibraryTranslation } from '../../config/i18n';
 import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
@@ -35,7 +37,7 @@ export const useDownloadAction = (itemId?: string) => {
 
   const startDownload = () => {
     if (itemId) {
-      exportZip({ id: itemId });
+      exportZip({ itemId, type: Triggers.ItemDownload });
     }
   };
 

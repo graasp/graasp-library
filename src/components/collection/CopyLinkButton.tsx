@@ -1,10 +1,10 @@
-import React, { MouseEvent } from 'react';
+import React, { MouseEvent, useContext } from 'react';
 
 import CodeIcon from '@mui/icons-material/Code';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
-import { Item } from '@graasp/sdk';
+import { Item, Triggers } from '@graasp/sdk';
 
 import { useLibraryTranslation } from '../../config/i18n';
 import notifier, {
@@ -13,6 +13,7 @@ import notifier, {
 import { buildPlayerViewItemRoute } from '../../config/paths';
 import LIBRARY from '../../langs/constants';
 import { copyToClipboard } from '../../utils/clipboard';
+import { QueryClientContext } from '../QueryClientContext';
 
 export const useEmbedAction = (itemId?: Item['id']) => {
   const startEmbed = (event: MouseEvent<HTMLButtonElement>) => {
@@ -43,13 +44,20 @@ type CopyLinkButtonProps = { itemId: Item['id'] };
 
 const CopyLinkButton = ({ itemId }: CopyLinkButtonProps) => {
   const { t } = useLibraryTranslation();
+  const { mutations } = useContext(QueryClientContext);
 
   const { startEmbed } = useEmbedAction(itemId);
+  const { mutate: triggerAction } = mutations.usePostItemAction();
 
+  const embedItem = (e: any) => {
+    startEmbed(e);
+    // create an embed trigger
+    triggerAction({ itemId, payload: { type: Triggers.ItemEmbed } });
+  };
   return (
     <Tooltip title={t(LIBRARY.COPY_LINK_BUTTON_TOOLTIP)}>
       <IconButton
-        onClick={startEmbed}
+        onClick={embedItem}
         aria-label={t(LIBRARY.COPY_LINK_BUTTON_TOOLTIP)}
       >
         <CodeIcon />
