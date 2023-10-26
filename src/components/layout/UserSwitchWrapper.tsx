@@ -1,8 +1,11 @@
+import { RecordOf } from 'immutable';
 import dynamic from 'next/dynamic';
 
 import { FC, useContext } from 'react';
 
 import Box from '@mui/material/Box';
+
+import { Member } from '@graasp/sdk';
 
 import { MEMBER_AVATAR_ICON_SIZE } from '../../config/constants';
 import { MEMBER_PROFILE_ROUTE, SIGN_IN_ROUTE } from '../../config/paths';
@@ -30,7 +33,7 @@ const UserSwitchWrapper: FC<Props> = ({ ButtonContent }) => {
       <GraaspUserSwitch
         ButtonContent={ButtonContent}
         signOut={signOut}
-        currentMember={member}
+        currentMember={member as RecordOf<Member>}
         isCurrentMemberLoading={isLoading}
         profilePath={MEMBER_PROFILE_ROUTE}
         redirectPath={SIGN_IN_ROUTE}

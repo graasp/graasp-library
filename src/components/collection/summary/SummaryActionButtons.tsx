@@ -71,7 +71,7 @@ const SummaryActionButtons: React.FC<SummaryActionButtonsProps> = ({
     openInNewTab(buildPlayerViewItemRoute(item?.id));
   };
 
-  const embedItem = (e: any) => {
+  const embedItem = (e: React.MouseEvent<HTMLButtonElement>) => {
     startEmbed(e);
     if (item?.id) {
       // create an embed trigger

@@ -6,6 +6,7 @@ import {
   Category,
   HttpMethod,
   ItemTagType,
+  Member,
   PermissionLevel,
   buildPathFromIds,
   isChildOf,
@@ -336,7 +337,7 @@ export const mockGetMembers = ({
 
       const memberIds = new URLSearchParams(url).getAll('id');
       const result = {
-        data: {} as { [key: string]: MockMember },
+        data: {} as { [key: string]: Member },
         errors: [] as { statusCode: number; name: string }[],
       };
 

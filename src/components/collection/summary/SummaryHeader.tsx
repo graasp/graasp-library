@@ -17,7 +17,7 @@ import {
 } from '@mui/material';
 
 import { ThumbnailSize } from '@graasp/sdk';
-import { ItemLikeRecord, ItemRecord } from '@graasp/sdk/frontend';
+import { ItemRecord } from '@graasp/sdk/frontend';
 
 import { useLibraryTranslation } from '../../../config/i18n';
 import {
@@ -73,7 +73,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
   const { mutate: deleteItemLike } = mutations.useDeleteItemLike();
 
   const likeEntry = likedItems?.find(
-    (itemLike: ItemLikeRecord) => itemLike?.item.id === collection?.id,
+    (itemLike) => itemLike?.item.id === collection?.id,
   );
 
   const openLoginSnackbarMessage = () => {

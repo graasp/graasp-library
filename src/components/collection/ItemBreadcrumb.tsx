@@ -5,7 +5,6 @@ import React, { useContext } from 'react';
 import { Breadcrumbs, Button, Typography } from '@mui/material';
 
 import { ItemTagType } from '@graasp/sdk';
-import { ItemTagRecord } from '@graasp/sdk/frontend';
 
 import { buildCollectionRoute } from '../../config/routes';
 import { QueryClientContext } from '../QueryClientContext';
@@ -33,9 +32,8 @@ const ItemBreadcrumb: React.FC<ItemBreadcrumbProps> = ({ itemId }) => {
 
   const { data: tags } = hooks.useItemTags(itemId);
 
-  const topPublicParentPath = tags?.find(
-    (t: ItemTagRecord) => t.type === ItemTagType.Public,
-  )?.item.path;
+  const topPublicParentPath = tags?.find((t) => t.type === ItemTagType.Public)
+    ?.item.path;
 
   const publicParentsIds = getPublicParents(
     topPublicParentPath ?? '',

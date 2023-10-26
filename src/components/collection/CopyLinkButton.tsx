@@ -49,7 +49,7 @@ const CopyLinkButton = ({ itemId }: CopyLinkButtonProps) => {
   const { startEmbed } = useEmbedAction(itemId);
   const { mutate: triggerAction } = mutations.usePostItemAction();
 
-  const embedItem = (e: any) => {
+  const embedItem = (e: React.MouseEvent<HTMLButtonElement>) => {
     startEmbed(e);
     // create an embed trigger
     triggerAction({ itemId, payload: { type: Triggers.ItemEmbed } });

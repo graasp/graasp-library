@@ -11,7 +11,15 @@ import {
 
 export type MockItemLike = Omit<ItemLike, 'createdAt'>;
 export type MockItemCategory = Omit<ItemCategory, 'createdAt' | 'creator'>;
-export type MockMember = Member & { thumbnail?: string };
+export type MockMember = Member & {
+  thumbnail?: string;
+  extra: {
+    lang?: string;
+  };
+  createdAt: Date;
+  updatedAt: Date;
+  type: string;
+};
 export type MockItemMembership = Omit<
   ItemMembership,
   'creator' | 'createdAt' | 'updatedAt'
@@ -27,7 +35,7 @@ type MockPublishedInfo = {
 };
 type MockMemberships = {
   itemPath: string;
-  member: MockMember;
+  member: Member;
   permission: PermissionLevel; // can't use "read" | "write" | "admin" with `${PermissionLevel}` because it is not allowed in the interface which is an oversight
 };
 export type MockItem = DiscriminatedItem & {
