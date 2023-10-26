@@ -1,10 +1,10 @@
-import React, { MouseEvent } from 'react';
+import React, { MouseEvent, useContext } from 'react';
 
 import CodeIcon from '@mui/icons-material/Code';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
-import { DiscriminatedItem } from '@graasp/sdk';
+import { DiscriminatedItem, Triggers } from '@graasp/sdk';
 
 import { useLibraryTranslation } from '../../config/i18n';
 import notifier, {
@@ -13,13 +13,20 @@ import notifier, {
 import { buildPlayerViewItemRoute } from '../../config/paths';
 import LIBRARY from '../../langs/constants';
 import { copyToClipboard } from '../../utils/clipboard';
+import { QueryClientContext } from '../QueryClientContext';
 
 export const useEmbedAction = (itemId?: DiscriminatedItem['id']) => {
   const startEmbed = (event: MouseEvent<HTMLButtonElement>) => {
     const link = buildPlayerViewItemRoute(itemId);
+    const { mutations } = useContext(QueryClientContext);
 
+    const { mutate: triggerAction } = mutations.usePostItemAction();
     copyToClipboard(link, {
       onSuccess: () => {
+        if (itemId) {
+          triggerAction({ itemId, payload: { type: Triggers.ItemEmbed } });
+        }
+
         notifier({
           type: COPY_RESOURCE_LINK_TO_CLIPBOARD.SUCCESS,
           payload: {},

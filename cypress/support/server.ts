@@ -121,7 +121,10 @@ export const mockGetAvatarUrl = (
   {
     members,
     currentMember,
-  }: { members: MockMember[]; currentMember?: MockMember },
+  }: {
+    members: MockMember[];
+    currentMember?: MockMember;
+  },
   shouldThrowError?: boolean,
 ) => {
   cy.intercept(
