@@ -16,8 +16,7 @@ import {
   Typography,
 } from '@mui/material';
 
-import { ThumbnailSize } from '@graasp/sdk';
-import { ItemLikeRecord, ItemRecord } from '@graasp/sdk/frontend';
+import { DiscriminatedItem, ThumbnailSize } from '@graasp/sdk';
 
 import { useLibraryTranslation } from '../../../config/i18n';
 import {
@@ -42,10 +41,10 @@ const { LikeButton } = {
 };
 
 type SummaryHeaderProps = {
-  collection?: ItemRecord;
+  collection?: DiscriminatedItem;
   isLoading: boolean;
   truncatedName: string;
-  tags: Immutable.List<string> | undefined;
+  tags?: string[];
   isLogged: boolean;
   totalViews: number;
 };
@@ -67,13 +66,13 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
   const { data: member } = hooks.useCurrentMember();
   const { data: likedItems } = hooks.useLikesForMember(member?.id);
   const { data: itemLikesForItem } = hooks.useLikesForItem(collection?.id);
-  const likes = itemLikesForItem?.size;
+  const likes = itemLikesForItem?.length;
 
   const { mutate: postItemLike } = mutations.usePostItemLike();
   const { mutate: deleteItemLike } = mutations.useDeleteItemLike();
 
   const likeEntry = likedItems?.find(
-    (itemLike: ItemLikeRecord) => itemLike?.item.id === collection?.id,
+    (itemLike) => itemLike?.item.id === collection?.id,
   );
 
   const openLoginSnackbarMessage = () => {
@@ -177,7 +176,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
             </Stack>
             <SummaryActionButtons item={collection} isLogged={isLogged} />
           </Stack>
-          {tags && tags.size && (
+          {tags && tags.length && (
             <Stack
               id={SUMMARY_TAGS_CONTAINER_ID}
               direction="row"

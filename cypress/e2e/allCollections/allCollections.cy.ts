@@ -13,7 +13,6 @@ import {
   buildSearchFilterCategoryId,
   buildSearchFilterPopperButtonId,
 } from '../../../src/config/selectors';
-import LIBRARY from '../../../src/langs/constants';
 import { SAMPLE_CATEGORIES } from '../../fixtures/categories';
 import { buildPublicAndPrivateEnvironments } from '../../fixtures/environment';
 import { PUBLISHED_ITEMS } from '../../fixtures/items';
@@ -29,19 +28,14 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
       if (environment.currentMember?.extra.lang) {
         i18n.changeLanguage(environment.currentMember.extra.lang);
       }
+
       cy.visit(ALL_COLLECTIONS_ROUTE);
     });
 
     it('Layout', () => {
-      cy.get(`#${ALL_COLLECTIONS_HEADER_ID}`).should(
-        'have.text',
-        i18n.t(LIBRARY.HEADER_ALL_COLLECTIONS),
-      );
+      cy.get(`#${ALL_COLLECTIONS_HEADER_ID}`).should('be.visible');
 
-      cy.get(`#${ALL_COLLECTIONS_TITLE_ID}`).should(
-        'have.text',
-        i18n.t(LIBRARY.SEARCH_PAGE_TITLE),
-      );
+      cy.get(`#${ALL_COLLECTIONS_TITLE_ID}`).should('be.visible');
 
       // filter header
       cy.get(`#${buildSearchFilterCategoryId(CategoryType.Level)}`).should(

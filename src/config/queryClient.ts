@@ -1,10 +1,8 @@
-import { QueryClientConfig } from '@graasp/query-client';
-
 import { DOMAIN, GRAASP_API_HOST } from './env';
 import notifier from './notifier';
 
 // eslint-disable-next-line import/prefer-default-export
-export const QUERY_CLIENT_OPTIONS: QueryClientConfig = {
+export const QUERY_CLIENT_OPTIONS = {
   API_HOST: GRAASP_API_HOST,
   enableWebsocket: false,
   defaultQueryOptions: {

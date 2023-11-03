@@ -40,6 +40,7 @@ const UserSwitchWrapper: FC<Props> = ({ ButtonContent }) => {
   return (
     <Box mr={1}>
       <GraaspUserSwitch
+        userMenuItems={[]}
         ButtonContent={ButtonContent}
         signOut={signOut}
         currentMember={member}

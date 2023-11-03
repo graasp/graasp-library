@@ -1,6 +1,4 @@
-import { DateTime } from 'luxon';
-
-import { PermissionLevel, isChildOf } from '@graasp/sdk';
+import { PermissionLevel, formatDate, isChildOf } from '@graasp/sdk';
 import { DEFAULT_LANG } from '@graasp/translations';
 
 import { buildCollectionRoute } from '../../../src/config/routes';
@@ -15,7 +13,7 @@ import {
 } from '../../../src/config/selectors';
 import { buildPublicAndPrivateEnvironments } from '../../fixtures/environment';
 import { PUBLISHED_ITEMS } from '../../fixtures/items';
-import { MEMBERS } from '../../fixtures/members';
+import { COMPLETE_MEMBERS, MEMBERS } from '../../fixtures/members';
 
 describe('Collection Summary', () => {
   buildPublicAndPrivateEnvironments().forEach((environment) => {
@@ -26,7 +24,7 @@ describe('Collection Summary', () => {
       cy.visit(buildCollectionRoute(item.id));
 
       // current member
-      const member = Object.values(MEMBERS).find(
+      const member = Object.values(COMPLETE_MEMBERS).find(
         ({ name }) => name === environment.currentMember?.name,
       );
 
@@ -51,12 +49,9 @@ describe('Collection Summary', () => {
       if (item.createdAt) {
         cy.get(`#${SUMMARY_CREATED_AT_CONTAINER_ID}`).should(
           'contain',
-          DateTime.fromMillis(item.createdAt.getTime()).toLocaleString(
-            DateTime.DATE_FULL,
-            {
-              locale: member?.extra?.lang || DEFAULT_LANG,
-            },
-          ),
+          formatDate(item.createdAt, {
+            locale: member?.extra?.lang || DEFAULT_LANG,
+          }),
         );
       }
 
@@ -64,12 +59,9 @@ describe('Collection Summary', () => {
       if (item.updatedAt) {
         cy.get(`#${SUMMARY_LAST_UPDATE_CONTAINER_ID}`).should(
           'contain',
-          DateTime.fromMillis(item.updatedAt.getTime()).toLocaleString(
-            DateTime.DATE_FULL,
-            {
-              locale: member?.extra?.lang || DEFAULT_LANG,
-            },
-          ),
+          formatDate(item.updatedAt, {
+            locale: member?.extra?.lang || DEFAULT_LANG,
+          }),
         );
       }
 

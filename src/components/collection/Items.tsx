@@ -6,8 +6,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
-import { ItemType } from '@graasp/sdk';
-import { ItemRecord } from '@graasp/sdk/frontend';
+import { DiscriminatedItem, ItemType } from '@graasp/sdk';
 
 import { useLibraryTranslation } from '../../config/i18n';
 import { CHILDREN_ITEMS_GRID_ID } from '../../config/selectors';
@@ -24,9 +23,9 @@ const DEFAULT_ITEM_SHOWN_COUNT = {
 };
 
 type CollapsibleItemCategoryProps = {
-  items: Immutable.List<ItemRecord>;
+  items: DiscriminatedItem[];
   defaultItemCount: number;
-  children: (item: ItemRecord) => JSX.Element;
+  children: (item: DiscriminatedItem) => JSX.Element;
 };
 
 const CollapsibleItemCategory: React.FC<CollapsibleItemCategoryProps> = ({
@@ -49,12 +48,12 @@ const CollapsibleItemCategory: React.FC<CollapsibleItemCategoryProps> = ({
     setShowMoreItems((prevValue) => !prevValue);
   };
 
-  const additionalItemsCount = items.size - defaultItemCount;
+  const additionalItemsCount = items.length - defaultItemCount;
 
   return (
     <>
       <Box display="flex" justifyContent="flex-end">
-        {items.size > defaultItemCount && (
+        {items.length > defaultItemCount && (
           <Button
             onClick={handleShowMoreItems}
             startIcon={showMoreItems ? <Remove /> : <Add />}
@@ -129,14 +128,14 @@ const Items: React.FC<ItemsProps> = ({ parentId, lang, isTopLevel }) => {
         {t(LIBRARY.SUMMARY_CONTENT_TITLE)}
       </Typography>
 
-      {!items?.size ? (
+      {!items?.length ? (
         <div className="Main">
           <Typography variant="body1" mx={1} color="inherit">
             {isLoadingChildren ? loadingMessage : emptyMessage}
           </Typography>
         </div>
       ) : (
-        items.size > 0 && (
+        items.length > 0 && (
           <CollapsibleItemCategory defaultItemCount={itemToShow} items={items}>
             {(item) =>
               item.type === ItemType.FOLDER ? (

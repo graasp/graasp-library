@@ -12,7 +12,7 @@ import {
   styled,
 } from '@mui/material';
 
-import { ItemRecord } from '@graasp/sdk/frontend';
+import { DiscriminatedItem } from '@graasp/sdk';
 
 import { useLibraryTranslation } from '../../../config/i18n';
 import { buildPlayerViewItemRoute } from '../../../config/paths';
@@ -28,7 +28,7 @@ const StyledButton = styled(Button)(() => ({
 }));
 
 type SummaryActionButtonsProps = {
-  item?: ItemRecord;
+  item?: DiscriminatedItem;
   isLogged: boolean;
 };
 

@@ -16,8 +16,8 @@ export const DEFAULT_FOLDER_ITEM: FolderItemType = {
   description: 'Some description',
   settings: {},
   path: 'ecafbd2a_5688_11eb_ae93_0242ac130002',
-  createdAt: new Date(Date.parse('2023-02-27T18:20:09.732Z')),
-  updatedAt: new Date(Date.parse('2023-02-28T18:20:09.732Z')),
+  createdAt: '2023-02-27T18:20:09.732Z',
+  updatedAt: '2023-02-28T18:20:09.732Z',
   extra: { [ItemType.FOLDER]: { childrenOrder: [] } },
   creator: CURRENT_USER,
   type: ItemType.FOLDER,
@@ -29,8 +29,8 @@ export const PUBLISHED_ITEMS: MockItem[] = [
     id: 'ecafbd2a-5688-11eb-ae93-0242ac130002',
     name: 'parent of public item1',
     path: 'ecafbd2a_5688_11eb_ae93_0242ac130002',
-    createdAt: new Date(Date.parse('2023-02-27T18:20:09.732Z')),
-    updatedAt: new Date(Date.parse('2023-02-28T18:20:09.732Z')),
+    createdAt: '2023-02-27T18:20:09.732Z',
+    updatedAt: '2023-02-28T18:20:09.732Z',
     settings: {
       tags: ['one-tag', 'two-tag'],
       ccLicenseAdaption: 'CC BY-NC-ND',
@@ -75,8 +75,8 @@ export const PUBLISHED_ITEMS: MockItem[] = [
     id: 'bdf09f5a-5688-11eb-ae93-0242ac130004',
     name: 'child of public item1',
     path: 'ecafbd2a_5688_11eb_ae93_0242ac130002.fdf09f5a_5688_11eb_ae93_0242ac130004.bdf09f5a_5688_11eb_ae93_0242ac130004',
-    createdAt: new Date(Date.parse('2023-02-27T18:20:09.732Z')),
-    updatedAt: new Date(Date.parse('2023-02-28T18:20:09.732Z')),
+    createdAt: '2023-02-27T18:20:09.732Z',
+    updatedAt: '2023-02-28T18:20:09.732Z',
     // info available only from meilisearch
     isPublishedRoot: false,
     publishedInfo: {
@@ -108,8 +108,8 @@ export const PUBLISHED_ITEMS: MockItem[] = [
     id: 'fdf09f5a-5688-11eb-ae93-0242ac130004',
     name: 'public item1',
     path: 'ecafbd2a_5688_11eb_ae93_0242ac130002.fdf09f5a_5688_11eb_ae93_0242ac130004',
-    createdAt: new Date(Date.parse('2023-01-27T18:20:09.732Z')),
-    updatedAt: new Date(Date.parse('2023-01-28T18:20:09.732Z')),
+    createdAt: '2023-01-27T18:20:09.732Z',
+    updatedAt: '2023-01-28T18:20:09.732Z',
     // info available only from meilisearch
     isPublishedRoot: false,
     publishedInfo: {
@@ -149,8 +149,8 @@ export const PUBLISHED_ITEMS: MockItem[] = [
     id: 'egafbd2a-5688-11eb-ae93-0242ac130002',
     name: 'independant item',
     path: 'egafbd2a_5688_11eb_ae93_0242ac130002',
-    createdAt: new Date(Date.parse('2023-02-27T18:20:09.732Z')),
-    updatedAt: new Date(Date.parse('2023-02-28T18:20:09.732Z')),
+    createdAt: '2023-02-27T18:20:09.732Z',
+    updatedAt: '2023-02-28T18:20:09.732Z',
     // info available only from meilisearch
     isPublishedRoot: true,
     publishedInfo: {
@@ -202,8 +202,8 @@ export const PUBLISHED_ITEMS: MockItem[] = [
     id: 'ecafcc2c-5688-11eb-ae93-0242ac130002',
     name: 'Item Without Licence',
     path: 'ecafcc2c_5688_11eb_ae93_0242ac130002',
-    createdAt: new Date(Date.parse('2023-02-27T18:20:09.732Z')),
-    updatedAt: new Date(Date.parse('2023-02-28T18:20:09.732Z')),
+    createdAt: '2023-02-27T18:20:09.732Z',
+    updatedAt: '2023-02-28T18:20:09.732Z',
     creator: MEMBERS.BOB,
     settings: {
       tags: ['one-tag', 'two-tag'],

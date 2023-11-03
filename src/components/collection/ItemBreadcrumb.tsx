@@ -4,8 +4,7 @@ import React, { useContext } from 'react';
 
 import { Breadcrumbs, Button, Typography } from '@mui/material';
 
-import { ItemTagType } from '@graasp/sdk';
-import { ItemTagRecord } from '@graasp/sdk/frontend';
+import { ItemTag, ItemTagType } from '@graasp/sdk';
 
 import { buildCollectionRoute } from '../../config/routes';
 import { QueryClientContext } from '../QueryClientContext';
@@ -34,7 +33,7 @@ const ItemBreadcrumb: React.FC<ItemBreadcrumbProps> = ({ itemId }) => {
   const { data: tags } = hooks.useItemTags(itemId);
 
   const topPublicParentPath = tags?.find(
-    (t: ItemTagRecord) => t.type === ItemTagType.Public,
+    (t: ItemTag) => t.type === ItemTagType.Public,
   )?.item.path;
 
   const publicParentsIds = getPublicParents(
@@ -44,17 +43,18 @@ const ItemBreadcrumb: React.FC<ItemBreadcrumbProps> = ({ itemId }) => {
 
   const { data: parents } = hooks.useItems(publicParentsIds);
 
-  if (!parents?.data.toSeq().size) {
+  if (!parents?.data?.length) {
     return null;
   }
 
   return (
     <Breadcrumbs>
-      {parents?.data.toSeq().map((parent) => (
-        <Button component={Link} href={buildCollectionRoute(parent.id)}>
-          {parent.name}
-        </Button>
-      ))}
+      {parents?.data &&
+        Object.values(parents?.data)?.map((parent) => (
+          <Button component={Link} href={buildCollectionRoute(parent.id)}>
+            {parent.name}
+          </Button>
+        ))}
       <Typography color="text.primary">{item?.name}</Typography>
     </Breadcrumbs>
   );

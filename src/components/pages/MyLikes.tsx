@@ -1,8 +1,4 @@
-import { List } from 'immutable';
-
 import { useContext } from 'react';
-
-import { ItemRecord } from '@graasp/sdk/frontend';
 
 import { MY_LIKES_COLLECTIONS_ID } from '../../config/selectors';
 import { QueryClientContext } from '../QueryClientContext';
@@ -17,8 +13,7 @@ const MyLikes = () => {
   return (
     <CollectionsGrid
       id={MY_LIKES_COLLECTIONS_ID}
-      // todo: this is an issue because the ItemLike type uses Item instead of DiscriminatedItem
-      collections={collections as List<ItemRecord>}
+      collections={collections}
       isLoading={isLoading}
     />
   );

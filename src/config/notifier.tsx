@@ -2,7 +2,7 @@ import React from 'react';
 import { toast } from 'react-toastify';
 
 import { Notifier, routines } from '@graasp/query-client';
-import { ItemRecord } from '@graasp/sdk/frontend';
+import { DiscriminatedItem } from '@graasp/sdk';
 import { FAILURE_MESSAGES, SUCCESS_MESSAGES } from '@graasp/translations';
 
 import ToastrWithLink from '../components/common/ToastrWithLink';
@@ -49,7 +49,7 @@ const notifier: Notifier = ({ type, payload }) => {
       toast.success(
         <ToastrWithLink
           link={buildPlayerViewItemRoute(
-            (payload?.newItem as ItemRecord | undefined)?.id,
+            (payload?.newItem as DiscriminatedItem | undefined)?.id,
           )}
           text={t(SUCCESS_MESSAGES.COPY_ITEM)}
           linkText={i18n.t(LIBRARY.COPY_ITEM_TOASTR_LINK)}

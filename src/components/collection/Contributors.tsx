@@ -1,9 +1,7 @@
-import { List } from 'immutable';
-
 import AvatarGroup from '@mui/lab/AvatarGroup';
 import { Stack, Tooltip, Typography } from '@mui/material';
 
-import { MemberRecord } from '@graasp/sdk/frontend';
+import { Member } from '@graasp/sdk';
 
 import { useLibraryTranslation } from '../../config/i18n';
 import { buildContributorId } from '../../config/selectors';
@@ -11,14 +9,14 @@ import LIBRARY from '../../langs/constants';
 import MemberAvatar from '../layout/MemberAvatar';
 
 type Props = {
-  contributors?: List<MemberRecord>;
+  contributors?: Member[];
   displayContributors: boolean;
 };
 
 const Contributors = ({ contributors, displayContributors }: Props) => {
   const { t } = useLibraryTranslation();
 
-  if (!contributors || contributors.isEmpty()) {
+  if (!contributors?.length) {
     return null;
   }
 

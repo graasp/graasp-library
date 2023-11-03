@@ -4,8 +4,7 @@ import React, { useContext } from 'react';
 
 import { Box } from '@mui/material';
 
-import { ThumbnailSize } from '@graasp/sdk';
-import { ThumbnailSizeVariant } from '@graasp/sdk/frontend';
+import { ThumbnailSize, ThumbnailSizeVariant } from '@graasp/sdk';
 
 import {
   DEFAULT_ITEM_IMAGE_PATH,

@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic';
 
 import { Alert } from '@mui/material';
 
-import { MemberRecord } from '@graasp/sdk/frontend';
+import { CompleteMember } from '@graasp/sdk';
 
 const { BuildIcon } = {
   BuildIcon: dynamic(() => import('@graasp/ui').then((mod) => mod.BuildIcon), {
@@ -13,7 +13,7 @@ type Props = {
   canRead: boolean;
   canPublish: boolean;
   isPublished: boolean;
-  currentMember?: MemberRecord;
+  currentMember?: CompleteMember | null;
 };
 const UnpublishedItemAlert = ({
   canPublish,
