@@ -31,7 +31,7 @@ const notifier: Notifier = ({ type, payload }) => {
   switch (type) {
     case routines.postItemFlagRoutine.FAILURE:
     case routines.exportItemRoutine.FAILURE:
-    case routines.copyItemRoutine.FAILURE: {
+    case routines.copyItemsRoutine.FAILURE: {
       message =
         (
           payload?.error as
@@ -45,7 +45,7 @@ const notifier: Notifier = ({ type, payload }) => {
       message = payload?.message ?? SUCCESS_MESSAGES.DEFAULT_SUCCESS;
       break;
     }
-    case routines.copyItemRoutine.SUCCESS:
+    case routines.copyItemsRoutine.SUCCESS:
       toast.success(
         <ToastrWithLink
           link={buildPlayerViewItemRoute(
