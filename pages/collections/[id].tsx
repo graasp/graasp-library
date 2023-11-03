@@ -38,9 +38,7 @@ export const getServerSideProps: GetServerSideProps<Props, Params> = async ({
   if (id) {
     // prefetch data in query client
     await queryClient.prefetchQuery(DATA_KEYS.buildItemKey(id), () =>
-      Api.getItem(id, { ...QUERY_CLIENT_OPTIONS, axios }).then((data) =>
-        JSON.parse(JSON.stringify(data)),
-      ),
+      Api.getItem(id, { ...QUERY_CLIENT_OPTIONS, axios }),
     );
   }
   // TODO: Prefetch items for breadcrumb.
