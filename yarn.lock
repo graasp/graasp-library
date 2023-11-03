@@ -1490,9 +1490,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/query-client@github:graasp/graasp-query-client#433-remove-immutable":
-  version: 1.11.1
-  resolution: "@graasp/query-client@https://github.com/graasp/graasp-query-client.git#commit=ce01533bf158429bdbe7bfb623f2c7d048ac9500"
+"@graasp/query-client@npm:2.0.0":
+  version: 2.0.0
+  resolution: "@graasp/query-client@npm:2.0.0"
   dependencies:
     "@graasp/sdk": 2.0.0
     "@graasp/translations": 1.19.4
@@ -1504,7 +1504,7 @@ __metadata:
     uuid: 9.0.1
   peerDependencies:
     react: ^17.0.0 || ^18.0.0
-  checksum: c14a0b8172b8ebef1c8eb85941cb08d010501078f69a28965da1cb34371f0e096370d69a8bb794d9d131fe9119854c795a7401035cb37af13da069336f230df4
+  checksum: 6eea7a2bfb46dd22c3905297479cce07c9757ca8d129ee43033446eebf33833c369be5a58e5512d7c1e3558b903fef84cf3ad2d6f70514ce498165f9ddd72af4
   languageName: node
   linkType: hard
 
@@ -1532,11 +1532,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/ui@github:graasp/graasp-ui#remove-immutable":
-  version: 3.7.0
-  resolution: "@graasp/ui@https://github.com/graasp/graasp-ui.git#commit=d56fde84c65026266f19da8e21c30d210ba128c3"
+"@graasp/ui@npm:4.0.0":
+  version: 4.0.0
+  resolution: "@graasp/ui@npm:4.0.0"
   dependencies:
-    "@graasp/sdk": "github:graasp/graasp-sdk#remove-frontend"
+    "@graasp/sdk": 2.0.0
     http-status-codes: 2.3.0
     katex: 0.16.9
     lodash.truncate: 4.4.2
@@ -1569,7 +1569,7 @@ __metadata:
       optional: true
     ag-grid-react:
       optional: true
-  checksum: a71db5e96f0bd622fcf5eb22b0c028cf0448cbf1bb58df2c943267d9115c098c4172f399a4c251909621a32fd74d37ddbf98e53154d33e6401faa56334061c09
+  checksum: 17b08f3b45e5292416b3ef9cafdf73931e302907da1f5d3ebc88fb6e460f711b21e2d436e37832591779a35484d1bf6ed48e192e280b72a2c2f381dff3854349
   languageName: node
   linkType: hard
 
@@ -7099,10 +7099,10 @@ __metadata:
     "@emotion/react": 11.11.1
     "@emotion/server": 11.11.0
     "@emotion/styled": 11.11.0
-    "@graasp/query-client": "github:graasp/graasp-query-client#433-remove-immutable"
+    "@graasp/query-client": 2.0.0
     "@graasp/sdk": 2.0.0
     "@graasp/translations": 1.19.4
-    "@graasp/ui": "github:graasp/graasp-ui#remove-immutable"
+    "@graasp/ui": 4.0.0
     "@mui/icons-material": 5.14.3
     "@mui/lab": 5.0.0-alpha.140
     "@mui/material": 5.14.5
