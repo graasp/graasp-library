@@ -1492,9 +1492,9 @@ __metadata:
 
 "@graasp/query-client@github:graasp/graasp-query-client#433-remove-immutable":
   version: 1.11.1
-  resolution: "@graasp/query-client@https://github.com/graasp/graasp-query-client.git#commit=acacdb2654303c63a05aaea418ac28fabd7d3e6d"
+  resolution: "@graasp/query-client@https://github.com/graasp/graasp-query-client.git#commit=ce01533bf158429bdbe7bfb623f2c7d048ac9500"
   dependencies:
-    "@graasp/sdk": "github:graasp/graasp-sdk#remove-frontend"
+    "@graasp/sdk": 2.0.0
     "@graasp/translations": 1.19.4
     axios: 0.27.2
     crypto-js: 4.1.1
@@ -1504,7 +1504,7 @@ __metadata:
     uuid: 9.0.1
   peerDependencies:
     react: ^17.0.0 || ^18.0.0
-  checksum: fdbf25442795f6506a6159f770f04ca626d05e001ad374307eab67f7ee137c63644f64838b80d949ccf8b249b7e9adc9cc2f9514569c02f9f4dd1bb423999044
+  checksum: c14a0b8172b8ebef1c8eb85941cb08d010501078f69a28965da1cb34371f0e096370d69a8bb794d9d131fe9119854c795a7401035cb37af13da069336f230df4
   languageName: node
   linkType: hard
 
@@ -6381,8 +6381,8 @@ __metadata:
   linkType: hard
 
 "fast-json-stringify@npm:^5.8.0":
-  version: 5.9.1
-  resolution: "fast-json-stringify@npm:5.9.1"
+  version: 5.9.0
+  resolution: "fast-json-stringify@npm:5.9.0"
   dependencies:
     "@fastify/deepmerge": ^1.0.0
     ajv: ^8.10.0
@@ -6391,7 +6391,7 @@ __metadata:
     fast-uri: ^2.1.0
     json-schema-ref-resolver: ^1.0.1
     rfdc: ^1.2.0
-  checksum: 9b251b15c37e685b91ee8462fd35ed97451f6d5f5e916f6f7ebcb9d927428ce9fd51fb031d971a1955dd1bda20feaa59f85f30a5f961e8437f5065a5e2c5b35b
+  checksum: 0082633f67ec07a7be750828f042de462d59f8f4a1a8b5e9a57dd23b8ce1af1ff213fb411398a9bda7caf35bb8da9886f3724ac2c1695d4482bf94ed2067b3f2
   languageName: node
   linkType: hard
 
@@ -7100,7 +7100,7 @@ __metadata:
     "@emotion/server": 11.11.0
     "@emotion/styled": 11.11.0
     "@graasp/query-client": "github:graasp/graasp-query-client#433-remove-immutable"
-    "@graasp/sdk": "github:graasp/graasp-sdk#remove-frontend"
+    "@graasp/sdk": 2.0.0
     "@graasp/translations": 1.19.4
     "@graasp/ui": "github:graasp/graasp-ui#remove-immutable"
     "@mui/icons-material": 5.14.3
