@@ -29,6 +29,7 @@ const notifier: Notifier = ({ type, payload }) => {
   let message = '';
 
   switch (type) {
+    // copy notification won't work until websockets are enabled
     case routines.postItemFlagRoutine.FAILURE:
     case routines.exportItemRoutine.FAILURE:
     case routines.copyItemsRoutine.FAILURE: {
