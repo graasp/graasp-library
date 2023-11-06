@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://github.com/graasp/graasp-library/compare/v0.13.0...v1.0.0) (2023-11-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove immutable ([#413](https://github.com/graasp/graasp-library/issues/413))
+
+### chore
+
+* release 1.0.0 ([2fbec76](https://github.com/graasp/graasp-library/commit/2fbec76dfaba039145521189990763f59303a66b))
+
+
+### Features
+
+* add liked items page ([#401](https://github.com/graasp/graasp-library/issues/401)) ([de2a134](https://github.com/graasp/graasp-library/commit/de2a13459db042548b04045de74d6302b492e933))
+* remove immutable ([#413](https://github.com/graasp/graasp-library/issues/413)) ([57a87b5](https://github.com/graasp/graasp-library/commit/57a87b5cbad324ca2d517e91a7fe136164827206))
+
 ## [0.13.0](https://github.com/graasp/graasp-library/compare/v0.12.0...v0.13.0) (2023-10-25)
 
 
