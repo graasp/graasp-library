@@ -44,7 +44,7 @@
     "@testing-library/jest-dom": "5.17.0",
     "@testing-library/react": "14.0.0",
     "@testing-library/user-event": "14.4.3",
-    "@trivago/prettier-plugin-sort-imports": "4.2.0",
+    "@trivago/prettier-plugin-sort-imports": "4.2.1",
     "http-status-codes": "2.2.0",
     "i18next": "23.6.0",
     "interweave": "13.1.0",
