@@ -1,10 +1,8 @@
-import { CompleteMember, MemberType } from '@graasp/sdk';
-
-import { MockMember } from '../support/types';
+import { CompleteMember, Member, MemberType } from '@graasp/sdk';
 
 const GRAASPER_ID = Cypress.env('GRAASPER_ID');
 
-export const MEMBERS: { [key: string]: MockMember } = {
+export const MEMBERS: { [key: string]: Member & { thumbnail?: string } } = {
   ANNA: {
     id: 'ecafbd2a-5642-31fb-ae93-0242ac130002',
     name: 'anna',

@@ -1,12 +1,9 @@
-import { RecordOf } from 'immutable';
 import dynamic from 'next/dynamic';
 
 import { FC, useContext } from 'react';
 
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Box from '@mui/material/Box';
-
-import { Member } from '@graasp/sdk';
 
 import { MEMBER_AVATAR_ICON_SIZE } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';
@@ -46,7 +43,7 @@ const UserSwitchWrapper: FC<Props> = ({ ButtonContent }) => {
         userMenuItems={userItems}
         ButtonContent={ButtonContent}
         signOut={signOut}
-        currentMember={member as RecordOf<Member>}
+        currentMember={member}
         isCurrentMemberLoading={isLoading}
         profilePath={MEMBER_PROFILE_ROUTE}
         redirectPath={SIGN_IN_ROUTE}

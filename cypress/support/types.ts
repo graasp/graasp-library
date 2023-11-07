@@ -1,5 +1,6 @@
 import {
   Category,
+  CompleteMember,
   DiscriminatedItem,
   ItemCategory,
   ItemLike,
@@ -11,15 +12,8 @@ import {
 
 export type MockItemLike = Omit<ItemLike, 'createdAt'> & { creator: Member };
 export type MockItemCategory = Omit<ItemCategory, 'createdAt' | 'creator'>;
-export type MockMember = Member & {
-  thumbnail?: string;
-  extra: {
-    lang?: string;
-  };
-  createdAt: Date;
-  updatedAt: Date;
-  type: string;
-};
+export type MockMember = CompleteMember & { thumbnail?: string };
+
 export type MockItemMembership = Omit<
   ItemMembership,
   'creator' | 'createdAt' | 'updatedAt'

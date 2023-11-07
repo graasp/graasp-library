@@ -1,4 +1,4 @@
-import { Category } from '@graasp/sdk';
+import { Category, CompleteMember } from '@graasp/sdk';
 
 import { MockItem, MockItemLike, MockMember } from './types';
 
@@ -8,7 +8,7 @@ declare global {
       setUpApi(arg: {
         items: MockItem[];
         members?: MockMember[];
-        currentMember?: MockMember;
+        currentMember?: CompleteMember & { thumbnail?: string | undefined };
         categories?: Category[];
         getCurrentMemberError?: boolean;
         getCategoriesError?: boolean;
