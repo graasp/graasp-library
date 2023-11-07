@@ -18,9 +18,15 @@ import { QueryClientContext } from '../QueryClientContext';
 export const useEmbedAction = (itemId?: DiscriminatedItem['id']) => {
   const startEmbed = (event: MouseEvent<HTMLButtonElement>) => {
     const link = buildPlayerViewItemRoute(itemId);
+    const { mutations } = useContext(QueryClientContext);
 
+    const { mutate: triggerAction } = mutations.usePostItemAction();
     copyToClipboard(link, {
       onSuccess: () => {
+        if (itemId) {
+          triggerAction({ itemId, payload: { type: Triggers.ItemEmbed } });
+        }
+
         notifier({
           type: COPY_RESOURCE_LINK_TO_CLIPBOARD.SUCCESS,
           payload: {},
@@ -44,20 +50,13 @@ type CopyLinkButtonProps = { itemId: DiscriminatedItem['id'] };
 
 const CopyLinkButton = ({ itemId }: CopyLinkButtonProps) => {
   const { t } = useLibraryTranslation();
-  const { mutations } = useContext(QueryClientContext);
 
   const { startEmbed } = useEmbedAction(itemId);
-  const { mutate: triggerAction } = mutations.usePostItemAction();
 
-  const embedItem = (e: React.MouseEvent<HTMLButtonElement>) => {
-    startEmbed(e);
-    // create an embed trigger
-    triggerAction({ itemId, payload: { type: Triggers.ItemEmbed } });
-  };
   return (
     <Tooltip title={t(LIBRARY.COPY_LINK_BUTTON_TOOLTIP)}>
       <IconButton
-        onClick={embedItem}
+        onClick={startEmbed}
         aria-label={t(LIBRARY.COPY_LINK_BUTTON_TOOLTIP)}
       >
         <CodeIcon />
