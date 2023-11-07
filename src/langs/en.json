@@ -69,7 +69,7 @@
   "HOME_BROWSE_ALL_COLLECTIONS": "Browse All Collections",
   "MY_LISTS_MY_FAVORITES_TAB": "My Favorites",
   "MY_LISTS_MY_PUBLISHMENTS_TAB": "My Publishments",
-  "MY_LISTS_MY_LIKES_TAB": "My Likes",
+  "MY_LISTS_MY_LIKES_TAB": "Liked Collections",
   "MY_LISTS_TAB_ARIA_LABEL": "My lists tabs",
   "COLLECTION_CC_LICENSE_TITLE": "Creative Commons License",
   "COPY_LINK_BUTTON_TOOLTIP": "Embed",
@@ -117,5 +117,6 @@
   "SEARCH_NO_RESULTS": "Nothing corresponds to your search",
   "SEARCH_RESULTS_LOAD_MORE": "Load more",
   "CONTENT_CHIP": "Content",
+  "LIKED_ITEMS": "Liked Items",
   "SIGNIN_MESSAGE": "You need to sign in First"
 }

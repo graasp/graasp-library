@@ -4,7 +4,7 @@ import CodeIcon from '@mui/icons-material/Code';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
-import { Item, Triggers } from '@graasp/sdk';
+import { DiscriminatedItem, Triggers } from '@graasp/sdk';
 
 import { useLibraryTranslation } from '../../config/i18n';
 import notifier, {
@@ -15,7 +15,7 @@ import LIBRARY from '../../langs/constants';
 import { copyToClipboard } from '../../utils/clipboard';
 import { QueryClientContext } from '../QueryClientContext';
 
-export const useEmbedAction = (itemId?: Item['id']) => {
+export const useEmbedAction = (itemId?: DiscriminatedItem['id']) => {
   const startEmbed = (event: MouseEvent<HTMLButtonElement>) => {
     const link = buildPlayerViewItemRoute(itemId);
 
@@ -40,7 +40,7 @@ export const useEmbedAction = (itemId?: Item['id']) => {
     startEmbed,
   };
 };
-type CopyLinkButtonProps = { itemId: Item['id'] };
+type CopyLinkButtonProps = { itemId: DiscriminatedItem['id'] };
 
 const CopyLinkButton = ({ itemId }: CopyLinkButtonProps) => {
   const { t } = useLibraryTranslation();

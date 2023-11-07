@@ -6,15 +6,15 @@ import { Stack, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 
-import { CategoryType } from '@graasp/sdk';
-import { ItemRecord } from '@graasp/sdk/frontend';
-import { DEFAULT_LANG, LIBRARY } from '@graasp/translations';
+import { CategoryType, DiscriminatedItem } from '@graasp/sdk';
+import { DEFAULT_LANG } from '@graasp/translations';
 
 import {
   ITEM_TYPES,
   MAX_COLLECTION_NAME_LENGTH,
 } from '../../../config/constants';
 import { useLibraryTranslation } from '../../../config/i18n';
+import LIBRARY from '../../../langs/constants';
 import { QueryClientContext } from '../../QueryClientContext';
 import BackButton from '../../common/BackButton';
 import ItemBreadcrumb from '../ItemBreadcrumb';
@@ -48,7 +48,7 @@ export const getParentsIdsFromPath = (
 };
 
 type SummaryProps = {
-  collection?: ItemRecord;
+  collection?: DiscriminatedItem;
   isLoading: boolean;
   totalViews: number;
 };

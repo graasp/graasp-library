@@ -4,8 +4,7 @@ import React, { useContext } from 'react';
 
 import { Box } from '@mui/material';
 
-import { ThumbnailSize } from '@graasp/sdk';
-import { ThumbnailSizeVariant } from '@graasp/sdk/frontend';
+import { ThumbnailSize, ThumbnailSizeType } from '@graasp/sdk';
 
 import {
   DEFAULT_ITEM_IMAGE_PATH,
@@ -21,7 +20,7 @@ const Thumbnail = dynamic(
 type Props = {
   name?: string;
   itemId?: string;
-  size?: ThumbnailSizeVariant;
+  size?: ThumbnailSizeType;
   svgPadding?: number;
 };
 

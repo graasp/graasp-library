@@ -15,8 +15,7 @@ import {
 } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
-import { ThumbnailSize } from '@graasp/sdk';
-import { ItemRecord } from '@graasp/sdk/frontend';
+import { DiscriminatedItem, ItemType, ThumbnailSize } from '@graasp/sdk';
 
 import { COLLECTION_CARD_BORDER_RADIUS } from '../../config/cssStyles';
 import { useLibraryTranslation } from '../../config/i18n';
@@ -70,7 +69,7 @@ const THUMBNAIL_SIZE = 50;
 const THUMBNAIL_DIMENSIONS = { width: THUMBNAIL_SIZE, height: THUMBNAIL_SIZE };
 
 type SubItemCardProps = {
-  item: ItemRecord;
+  item: DiscriminatedItem;
   thumbnail: React.ReactNode;
   subtext: string;
 };
@@ -133,7 +132,7 @@ export const SubItemCard: React.FC<SubItemCardProps> = ({
 };
 
 type FileChildrenCardProps = {
-  item: ItemRecord;
+  item: DiscriminatedItem;
   lang?: string;
 };
 
@@ -154,10 +153,9 @@ export const FileChildrenCard: React.FC<FileChildrenCardProps> = ({
 
   const subtext = item.updatedAt
     ? t(LIBRARY.SUMMARY_BROWSE_FILE_UPDATED, {
-        date: DateTime.fromMillis(item.updatedAt.getTime()).toLocaleString(
-          DateTime.DATE_FULL,
-          { locale: lang },
-        ),
+        date: DateTime.fromMillis(
+          new Date(item.updatedAt).getTime(),
+        ).toLocaleString(DateTime.DATE_FULL, { locale: lang }),
       })
     : '...';
 
@@ -180,7 +178,12 @@ export const FileChildrenCard: React.FC<FileChildrenCardProps> = ({
           <ItemIcon
             alt={item.type}
             type={item.type}
-            extra={item.extra}
+            extra={
+              item.type === ItemType.LOCAL_FILE ||
+              item.type === ItemType.S3_FILE
+                ? item.extra
+                : undefined
+            }
             // TODO: replace with theme values
             sx={{ fontSize: '2.1875rem', color: '#5050d2' }}
           />
@@ -193,7 +196,7 @@ export const FileChildrenCard: React.FC<FileChildrenCardProps> = ({
 };
 
 type FolderChildrenCardProps = {
-  item: ItemRecord;
+  item: DiscriminatedItem;
 };
 
 export const FolderChildrenCard: React.FC<FolderChildrenCardProps> = ({
@@ -207,7 +210,7 @@ export const FolderChildrenCard: React.FC<FolderChildrenCardProps> = ({
   const { data: items } = hooks.useChildren(id);
 
   const subtext = items
-    ? t(LIBRARY.SUMMARY_BROWSE_FOLDER_CONTAINS, { count: items.size })
+    ? t(LIBRARY.SUMMARY_BROWSE_FOLDER_CONTAINS, { count: items.length })
     : '...';
 
   const thumbnail = (

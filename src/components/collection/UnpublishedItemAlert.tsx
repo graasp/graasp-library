@@ -13,7 +13,7 @@ type Props = {
   canRead: boolean;
   canPublish: boolean;
   isPublished: boolean;
-  currentMember?: CompleteMember;
+  currentMember?: CompleteMember | null;
 };
 const UnpublishedItemAlert = ({
   canPublish,

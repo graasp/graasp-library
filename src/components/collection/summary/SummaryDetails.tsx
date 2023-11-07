@@ -1,5 +1,3 @@
-import { List } from 'immutable';
-import { DateTime } from 'luxon';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
@@ -15,7 +13,7 @@ import {
   styled,
 } from '@mui/material';
 
-import { CategoryRecord } from '@graasp/sdk/frontend';
+import { Category, formatDate } from '@graasp/sdk';
 import { CCSharingVariant } from '@graasp/ui';
 
 import { CATEGORY_COLORS, UrlSearch } from '../../../config/constants';
@@ -71,7 +69,7 @@ const convertLicense = (ccLicenseAdaption: string) => {
 };
 
 type CategoryChipProps = {
-  category: CategoryRecord;
+  category: Category;
 };
 
 const CategoryChip = ({ category }: CategoryChipProps) => {
@@ -100,12 +98,12 @@ const CategoryChip = ({ category }: CategoryChipProps) => {
 };
 
 type SummaryDetailsProps = {
-  createdAt?: Date;
-  lastUpdate?: Date;
+  createdAt?: string;
+  lastUpdate?: string;
   lang: string;
-  languages?: List<CategoryRecord>;
-  levels?: List<CategoryRecord>;
-  disciplines?: List<CategoryRecord>;
+  languages?: Category[];
+  levels?: Category[];
+  disciplines?: Category[];
   isLoading: boolean;
   ccLicenseAdaption: string | undefined;
 };
@@ -143,12 +141,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
                 {t(LIBRARY.SUMMARY_DETAILS_CREATED_AT_TITLE)}
               </Typography>
               <Typography variant="body1" gutterBottom>
-                {DateTime.fromMillis(createdAt.getTime()).toLocaleString(
-                  DateTime.DATE_FULL,
-                  {
-                    locale: lang,
-                  },
-                )}
+                {formatDate(createdAt, { locale: lang })}
               </Typography>
             </div>
           )}
@@ -162,10 +155,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
                 {t(LIBRARY.SUMMARY_DETAILS_UPDATED_AT_TITLE)}
               </Typography>
               <Typography variant="body1" gutterBottom>
-                {DateTime.fromMillis(lastUpdate.getTime()).toLocaleString(
-                  DateTime.DATE_FULL,
-                  { locale: lang },
-                )}
+                {formatDate(lastUpdate, { locale: lang })}
               </Typography>
             </div>
           )}
@@ -179,7 +169,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
             </Typography>
             {isLoading && <Skeleton />}
             <Stack gap={1} direction="row" flexWrap="wrap">
-              {languages?.size ? (
+              {languages?.length ? (
                 languages?.map((entry) => <CategoryChip category={entry} />)
               ) : (
                 <Typography>
@@ -196,7 +186,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
             <Typography variant="body1" fontWeight="bold">
               {t(LIBRARY.COLLECTION_CATEGORIES_TITLE)}
             </Typography>
-            {levels?.size || disciplines?.size ? (
+            {levels?.length || disciplines?.length ? (
               <Stack gap={1} direction="row" flexWrap="wrap">
                 {levels?.map((entry) => <CategoryChip category={entry} />)}
                 {disciplines?.map((entry) => <CategoryChip category={entry} />)}

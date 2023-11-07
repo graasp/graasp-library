@@ -60,8 +60,8 @@ const StyledItemTag = styled(Box)(({ tagColor }: { tagColor: string }) => ({
 }));
 
 type ItemTagProps = {
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
   isChild: boolean;
   showIsContentTag?: boolean;
 };
@@ -87,9 +87,9 @@ const ItemTag: React.FC<ItemTagProps> = ({
   }
 
   const recentlyUpdated =
-    Date.now() - updatedAt.getTime() < RECENT_DAYS * MS_PER_DAY;
+    Date.now() - new Date(updatedAt).getTime() < RECENT_DAYS * MS_PER_DAY;
   const recentlyCreated =
-    Date.now() - createdAt.getTime() < RECENT_DAYS * MS_PER_DAY;
+    Date.now() - new Date(createdAt).getTime() < RECENT_DAYS * MS_PER_DAY;
 
   const color = recentlyCreated ? '#84F05E' : '#F08D55';
   const text = recentlyCreated

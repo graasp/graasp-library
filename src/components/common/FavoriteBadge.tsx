@@ -14,7 +14,7 @@ const FavoriteBadge = ({ itemId, fontSize = 'large' }: Props) => {
   const { hooks } = useContext(QueryClientContext);
   const { data: likes } = hooks.useLikesForItem(itemId);
   return (
-    <Badge badgeContent={likes?.size} color="secondary" max={999}>
+    <Badge badgeContent={likes?.length} color="secondary" max={999}>
       <Favorite color="primary" fontSize={fontSize} />
     </Badge>
   );

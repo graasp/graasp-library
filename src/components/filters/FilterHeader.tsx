@@ -1,4 +1,4 @@
-import Immutable, { List } from 'immutable';
+import groupBy from 'lodash.groupby';
 
 import React, { FC, useContext, useEffect, useRef, useState } from 'react';
 
@@ -16,8 +16,7 @@ import {
   styled,
 } from '@mui/material';
 
-import { CategoryType } from '@graasp/sdk';
-import { CategoryRecord } from '@graasp/sdk/frontend';
+import { Category, CategoryType } from '@graasp/sdk';
 
 import { GRAASP_COLOR } from '../../config/constants';
 import {
@@ -38,7 +37,7 @@ import FilterPopper from './FilterPopper';
 type FilterProps = {
   category: string;
   title: string;
-  options?: Immutable.List<CategoryRecord>;
+  options?: Category[];
   // IDs of selected options.
   selectedOptions: string[];
   onOptionChange: (key: string, newValue: boolean) => void;
@@ -89,8 +88,8 @@ const Filter: React.FC<FilterProps> = ({
     const optionsStr =
       options
         ?.filter((it) => selectedOptions.includes(it.id))
-        .map((it) => translateCategories(it.name))
-        .get(0) ?? t(LIBRARY.FILTER_DROPDOWN_NO_FILTER);
+        .map((it) => translateCategories(it.name))?.[0] ??
+      t(LIBRARY.FILTER_DROPDOWN_NO_FILTER);
     return optionsStr;
   }, [selectedOptions, options]);
 
@@ -204,12 +203,6 @@ const StyledStickyFilters = styled(Box)(() => ({
   },
 }));
 
-type Category = {
-  name: string;
-  id: string;
-  type: string;
-};
-
 type FilterHeaderProps = {
   onFiltersChanged: (selectedFilters: string[][]) => void;
   onIncludeContentChange: (newValue: boolean) => void;
@@ -243,13 +236,13 @@ const FilterHeader: FC<FilterHeaderProps> = ({
   const { data: categories, isLoading: isCategoriesLoading } =
     hooks.useCategories();
 
-  const allCategories = categories?.groupBy((entry: Category) => entry.type);
-  const levelList = allCategories?.get(CategoryType.Level);
-  const disciplineList = allCategories?.get(CategoryType.Discipline);
-  const languageList = allCategories?.get(CategoryType.Language);
+  const allCategories = groupBy(categories, (entry) => entry.type);
+  const levelList = allCategories[CategoryType.Level];
+  const disciplineList = allCategories[CategoryType.Discipline];
+  const languageList = allCategories[CategoryType.Language];
 
   // TODO: Replace with real values.
-  // const licenseList: List<CategoryRecord> = convertJs([
+  // const licenseList: List<Category> = convertJs([
   //   {
   //     id: '3f811e5f-5221-4d22-a20c-1086af809bda',
   //     name: 'Public Domain (CC0)',
@@ -273,15 +266,10 @@ const FilterHeader: FC<FilterHeaderProps> = ({
 
   const groupedByCategories = (filters: string[]): string[][] => {
     if (allCategories) {
-      const groupedFilters = allCategories
-        ?.toIndexedSeq()
+      const groupedFilters = Object.values(allCategories)
         .map((cats) =>
-          cats
-            .filter(({ id }) => filters.includes(id))
-            .map(({ id }) => id)
-            .toArray(),
+          cats.filter(({ id }) => filters.includes(id)).map(({ id }) => id),
         )
-        .toArray()
         .filter((r) => r.length);
       return groupedFilters;
     }
@@ -299,7 +287,7 @@ const FilterHeader: FC<FilterHeaderProps> = ({
     onFiltersChanged(groupedByCategories(newFilters));
   };
 
-  const onClearCategory = (categoryIds?: string[] | List<string>) => {
+  const onClearCategory = (categoryIds?: string[]) => {
     const newFilters: string[] = selectedFilters.filter(
       (activeFilterId) => !categoryIds?.includes(activeFilterId),
     );

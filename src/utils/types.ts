@@ -1,6 +1,5 @@
-import { IndexItem } from '@graasp/sdk';
-import { ItemRecord } from '@graasp/sdk/frontend';
+import { DiscriminatedItem, IndexItem } from '@graasp/sdk';
 
-export type ItemOrSearchedItem = (ItemRecord | IndexItem) & {
+export type ItemOrSearchedItem = (DiscriminatedItem | IndexItem) & {
   isPublishedRoot?: IndexItem['isPublishedRoot'];
 };

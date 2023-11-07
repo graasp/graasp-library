@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import { TransitionProps as MUITransitionProps } from '@mui/material/transitions';
 
-import { CategoryRecord } from '@graasp/sdk/frontend';
+import { Category } from '@graasp/sdk';
 
 import {
   useCategoriesTranslation,
@@ -38,7 +38,7 @@ const StyledPopper = styled(Stack)(() => ({
 type FilterPopperProps = {
   open: boolean;
   anchorEl: HTMLElement | null;
-  options?: Immutable.List<CategoryRecord>;
+  options?: Category[];
   // IDs of selected options.
   selectedOptions: string[];
   onOptionChange: (id: string, newSelected: boolean) => void;
@@ -73,7 +73,7 @@ const FilterPopper = React.forwardRef<HTMLDivElement, FilterPopperProps>(
           <Grow {...TransitionProps}>
             <StyledPopper>
               {options
-                ?.map((c) => c.set('name', translateCategories(c.name)))
+                ?.map((c) => ({ ...c, name: translateCategories(c.name) }))
                 ?.sort(compare)
                 .map((option, idx) => {
                   const isSelected = selectedOptions.includes(option.id);

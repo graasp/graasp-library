@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 
 import { MY_FAVORITES_COLLECTIONS_ID } from '../../config/selectors';
-import { ItemOrSearchedItem } from '../../utils/types';
 import { QueryClientContext } from '../QueryClientContext';
 import CollectionsGrid from '../collection/CollectionsGrid';
 import TabPanel from '../common/TabPanel';
@@ -20,7 +19,7 @@ const MyFavorites = ({ tab, index }: Props) => {
     <TabPanel value={tab} index={index}>
       <CollectionsGrid
         id={MY_FAVORITES_COLLECTIONS_ID}
-        collections={collections as Immutable.List<ItemOrSearchedItem>}
+        collections={collections as any}
         isLoading={isLoading}
       />
     </TabPanel>

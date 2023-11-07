@@ -16,8 +16,7 @@ import {
   useTheme,
 } from '@mui/material';
 
-import { Category, IndexItem } from '@graasp/sdk';
-import { ImmutableCast } from '@graasp/sdk/frontend';
+import { Category, MeiliSearchResults } from '@graasp/sdk';
 
 import { MAX_RESULTS_TO_SHOW, UrlSearch } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';
@@ -97,52 +96,46 @@ const SearchResults = ({
   });
 
   const buildResultListItems = (
-    results: ImmutableCast<(IndexItem & { _formatted: IndexItem })[]>,
+    results: MeiliSearchResults['results'][0]['hits'],
     nbOfHits: number = 0,
   ) => {
-    const list = results
-      .take(MAX_RESULTS_TO_SHOW)
-      .toJS()
-      .map((r) => {
-        // cast because of toJS
-        const result = r as IndexItem & { _formatted: IndexItem };
-
-        return (
-          <ListItemButton
-            key={result.id}
-            component={Link}
-            href={buildCollectionRoute(result.id)}
-          >
-            <ListItemText>
-              <Stack direction="row" alignItems="center">
-                <Stack>
-                  <SearchThumbnail name={result.name} itemId={result.id} />
+    const list = results.slice(0, MAX_RESULTS_TO_SHOW).map((result) => {
+      return (
+        <ListItemButton
+          key={result.id}
+          component={Link}
+          href={buildCollectionRoute(result.id)}
+        >
+          <ListItemText>
+            <Stack direction="row" alignItems="center">
+              <Stack>
+                <SearchThumbnail name={result.name} itemId={result.id} />
+              </Stack>
+              <Stack>
+                <Stack direction="column">
+                  <Interweave
+                    style={{ paddingRight: 5 }}
+                    //  eslint-disable-next-line no-underscore-dangle
+                    content={result._formatted.name}
+                  />
                 </Stack>
                 <Stack>
-                  <Stack direction="column">
-                    <Interweave
-                      style={{ paddingRight: 5 }}
-                      //  eslint-disable-next-line no-underscore-dangle
-                      content={result._formatted.name}
-                    />
-                  </Stack>
-                  <Stack>
-                    <Interweave
-                      style={{ color: '#999' }}
-                      content={
-                        // eslint-disable-next-line no-underscore-dangle
-                        result._formatted.description ||
-                        // eslint-disable-next-line no-underscore-dangle
-                        result._formatted.content
-                      }
-                    />
-                  </Stack>
+                  <Interweave
+                    style={{ color: '#999' }}
+                    content={
+                      // eslint-disable-next-line no-underscore-dangle
+                      result._formatted.description ||
+                      // eslint-disable-next-line no-underscore-dangle
+                      result._formatted.content
+                    }
+                  />
                 </Stack>
               </Stack>
-            </ListItemText>
-          </ListItemButton>
-        );
-      });
+            </Stack>
+          </ListItemText>
+        </ListItemButton>
+      );
+    });
     if (nbOfHits > MAX_RESULTS_TO_SHOW) {
       list.push(
         <ListItemButton
@@ -168,12 +161,12 @@ const SearchResults = ({
     return null;
   }
   // eslint-disable-next-line prefer-destructuring
-  const queryResults = collections.results.first();
+  const queryResults = collections.results[0];
   const hits = queryResults?.hits;
   const nbOfResults =
     queryResults?.totalHits ?? queryResults?.estimatedTotalHits;
   // no result found
-  if (!hits || hits.isEmpty()) {
+  if (!hits?.length) {
     return (
       <Container
         sx={{

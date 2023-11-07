@@ -26,12 +26,11 @@ AllCollectionsPage.propTypes = {
 };
 
 export async function getServerSideProps() {
-  const { queryClient, dehydrate } = configureQueryClient(QUERY_CLIENT_OPTIONS);
+  const { queryClient, dehydrate, axios } =
+    configureQueryClient(QUERY_CLIENT_OPTIONS);
 
   await queryClient.prefetchQuery(['items', 'collections', 'all'], () =>
-    Api.getAllPublishedItems({}, QUERY_CLIENT_OPTIONS).then((data) =>
-      JSON.parse(JSON.stringify(data)),
-    ),
+    Api.getAllPublishedItems({}, { ...QUERY_CLIENT_OPTIONS, axios }),
   );
 
   // Pass data to the page via props

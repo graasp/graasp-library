@@ -4,8 +4,7 @@ import { useContext } from 'react';
 
 import { CircularProgress, Typography } from '@mui/material';
 
-import { ItemType } from '@graasp/sdk';
-import { ItemRecord } from '@graasp/sdk/frontend';
+import { DiscriminatedItem, ItemType } from '@graasp/sdk';
 
 import { TREE_VIEW_MAX_WIDTH } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';
@@ -51,7 +50,7 @@ const TreeModalContent = ({
     isSuccess: isSharedItemsSuccess,
   } = useSharedItems();
 
-  const isFolder = (i: ItemRecord) => i.type === ItemType.FOLDER;
+  const isFolder = (i: DiscriminatedItem) => i.type === ItemType.FOLDER;
 
   // compute tree only when the modal is open
   if (open) {

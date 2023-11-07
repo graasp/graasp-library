@@ -3,7 +3,10 @@ import React, { FC, useContext } from 'react';
 import { Box, SxProps } from '@mui/material';
 
 import { useLibraryTranslation } from '../../config/i18n';
-import { ALL_COLLECTIONS_ROUTE, MY_LIST_ROUTE } from '../../config/routes';
+import {
+  ALL_COLLECTIONS_ROUTE,
+  MY_LIKED_ITEMS_ROUTE,
+} from '../../config/routes';
 import {
   ALL_COLLECTIONS_HEADER_ID,
   HEADER_MY_LIST_ID,
@@ -25,7 +28,7 @@ const MyListHeaderLink = () => {
 
   return (
     <HeaderLink
-      href={MY_LIST_ROUTE}
+      href={MY_LIKED_ITEMS_ROUTE}
       text={t(LIBRARY.HEADER_MY_LISTS)}
       id={HEADER_MY_LIST_ID}
     />
