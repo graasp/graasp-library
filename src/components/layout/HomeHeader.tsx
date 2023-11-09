@@ -32,17 +32,18 @@ const { GraaspLogo } = {
   ),
 };
 type PopularSearchItemProps = {
-  onClick: (search: string) => void;
   text: string;
 };
 
-const PopularSearchItem = ({
-  onClick,
-  text,
-}: PopularSearchItemProps): JSX.Element => {
+const PopularSearchItem = ({ text }: PopularSearchItemProps): JSX.Element => {
   const theme = useTheme();
   return (
     <Chip
+      component={Link}
+      href={{
+        pathname: ALL_COLLECTIONS_ROUTE,
+        query: { [UrlSearch.KeywordSearch]: text },
+      }}
       variant="filled"
       sx={{
         color: theme.palette.primary.contrastText,
@@ -52,7 +53,6 @@ const PopularSearchItem = ({
         },
       }}
       label={text}
-      onClick={() => onClick(text)}
     />
   );
 };
@@ -150,11 +150,7 @@ const HomeHeader = () => {
               useFlexGap
             >
               {popularSearches.map((term) => (
-                <PopularSearchItem
-                  key={term}
-                  text={term}
-                  onClick={handleSearch}
-                />
+                <PopularSearchItem key={term} text={term} />
               ))}
             </Stack>
           </Box>

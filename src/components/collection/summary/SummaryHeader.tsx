@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 
 import React, { useContext } from 'react';
 
@@ -18,7 +19,9 @@ import {
 
 import { DiscriminatedItem, ThumbnailSize } from '@graasp/sdk';
 
+import { UrlSearch } from '../../../config/constants';
 import { useLibraryTranslation } from '../../../config/i18n';
+import { ALL_COLLECTIONS_ROUTE } from '../../../config/routes';
 import {
   ITEM_SUMMARY_TITLE_ID,
   LIKE_COLLECTION_NOT_LOGGED_ID,
@@ -184,7 +187,15 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
               spacing={1}
             >
               {tags.map((text) => (
-                <Chip key={text} label={text} />
+                <Chip
+                  component={Link}
+                  href={{
+                    pathname: ALL_COLLECTIONS_ROUTE,
+                    query: { [UrlSearch.KeywordSearch]: text },
+                  }}
+                  key={text}
+                  label={text}
+                />
               ))}
             </Stack>
           )}
