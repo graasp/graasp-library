@@ -6,7 +6,6 @@ import {
   Category,
   HttpMethod,
   ItemTagType,
-  Member,
   PermissionLevel,
   buildPathFromIds,
   isChildOf,
@@ -123,7 +122,7 @@ export const mockGetAvatarUrl = (
     members,
     currentMember,
   }: {
-    members: (Member & { thumbnail?: string | undefined })[];
+    members: MockMember[];
     currentMember?: MockMember;
   },
   shouldThrowError?: boolean,
@@ -340,7 +339,7 @@ export const mockGetMembers = ({
 
       const memberIds = new URLSearchParams(url).getAll('id');
       const result = {
-        data: {} as { [key: string]: Member },
+        data: {} as { [key: string]: MockMember },
         errors: [] as { statusCode: number; name: string }[],
       };
 
