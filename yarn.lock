@@ -1497,9 +1497,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/query-client@https://github.com/graasp/graasp-query-client.git#495-useExportZip-type-as-qs":
+"@graasp/query-client@npm:2.0.1":
   version: 2.0.1
-  resolution: "@graasp/query-client@https://github.com/graasp/graasp-query-client.git#commit=4eee4f04916b29f52b22a2838a84112a2dbf6121"
+  resolution: "@graasp/query-client@npm:2.0.1"
   dependencies:
     "@graasp/sdk": 2.0.0
     "@graasp/translations": 1.19.4
@@ -1511,7 +1511,7 @@ __metadata:
     uuid: 9.0.1
   peerDependencies:
     react: ^17.0.0 || ^18.0.0
-  checksum: 2fbca196d88b5f3129ca96ad62660bdc9afd48e32a8ac3f4bcf5c9edfd9e4a466a1b0cf31b3a4b7437ee50718825ebfb4b912061d234c43ec23368c8e62cb0be
+  checksum: 2d614e38f5f1ec49939160ce2c5913e2dce0fa36aee44791a4076ca0e9c0f50e90c1f1dda6535dcbcebe33cba82fac3307dec51c0df1f8ff59bff2b3d81f3229
   languageName: node
   linkType: hard
 
@@ -7091,7 +7091,7 @@ __metadata:
     "@emotion/react": 11.11.1
     "@emotion/server": 11.11.0
     "@emotion/styled": 11.11.0
-    "@graasp/query-client": "https://github.com/graasp/graasp-query-client.git#495-useExportZip-type-as-qs"
+    "@graasp/query-client": 2.0.1
     "@graasp/sdk": "https://github.com/graasp/graasp-sdk.git#library-triggers-enum"
     "@graasp/translations": 1.19.4
     "@graasp/ui": 4.0.0

@@ -33,7 +33,7 @@
     "@emotion/react": "11.11.1",
     "@emotion/server": "11.11.0",
     "@emotion/styled": "11.11.0",
-    "@graasp/query-client": "https://github.com/graasp/graasp-query-client.git#495-useExportZip-type-as-qs",
+    "@graasp/query-client": "2.0.1",
     "@graasp/sdk": "https://github.com/graasp/graasp-sdk.git#library-triggers-enum",
     "@graasp/translations": "1.19.4",
     "@graasp/ui": "4.0.0",
