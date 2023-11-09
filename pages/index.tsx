@@ -1,4 +1,4 @@
-import { DehydratedState } from 'react-query';
+import type { DehydratedState } from 'react-query';
 
 import { Api, configureQueryClient } from '@graasp/query-client';
 

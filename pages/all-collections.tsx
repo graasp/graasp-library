@@ -1,6 +1,4 @@
-import PropTypes from 'prop-types';
-
-import { DehydratedState } from 'react-query';
+import type { DehydratedState } from 'react-query';
 
 import { Api, configureQueryClient } from '@graasp/query-client';
 
@@ -20,10 +18,6 @@ const AllCollectionsPage = ({
     <AllCollections />
   </Wrapper>
 );
-
-AllCollectionsPage.propTypes = {
-  dehydratedState: PropTypes.shape({}).isRequired,
-};
 
 export async function getServerSideProps() {
   const { queryClient, dehydrate, axios } =

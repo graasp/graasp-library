@@ -2,7 +2,7 @@ import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 
 import * as React from 'react';
-import { DehydratedState } from 'react-query';
+import type { DehydratedState } from 'react-query';
 
 import { Api, DATA_KEYS, configureQueryClient } from '@graasp/query-client';
 

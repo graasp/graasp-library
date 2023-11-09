@@ -1,6 +1,5 @@
 import React from 'react';
-import { DehydratedState } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
+import type { DehydratedState } from 'react-query';
 
 import { configureQueryClient } from '@graasp/query-client';
 
@@ -16,7 +15,12 @@ type Props = {
 
 const QueryClientProvider = ({ children, dehydratedState }: Props) => {
   const value = configureQueryClient(QUERY_CLIENT_OPTIONS);
-  const { QueryClientProvider: Provider, queryClient, Hydrate } = value;
+  const {
+    QueryClientProvider: Provider,
+    queryClient,
+    Hydrate,
+    ReactQueryDevtools,
+  } = value;
 
   return (
     <QueryClientContext.Provider value={value}>

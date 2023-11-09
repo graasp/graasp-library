@@ -7080,7 +7080,7 @@ __metadata:
     "@emotion/server": "npm:11.11.0"
     "@emotion/styled": "npm:11.11.0"
     "@graasp/query-client": "npm:2.0.1"
-    "@graasp/sdk": "npm:2.0.0"
+    "@graasp/sdk": "npm:2.0.1"
     "@graasp/translations": "npm:1.19.4"
     "@graasp/ui": "npm:4.0.0"
     "@mui/icons-material": "npm:5.14.3"
@@ -7118,7 +7118,6 @@ __metadata:
     husky: "npm:8.0.3"
     i18next: "npm:23.6.0"
     interweave: "npm:13.1.0"
-    lodash: "npm:4.17.21"
     lodash.groupby: "npm:4.6.0"
     lodash.isobject: "npm:3.0.2"
     lodash.isstring: "npm:4.0.1"
@@ -7127,7 +7126,6 @@ __metadata:
     next: "npm:12.3.4"
     nyc: "npm:15.1.0"
     prettier: "npm:3.0.3"
-    prop-types: "npm:15.8.1"
     qs: "npm:6.11.2"
     react: "npm:17.0.2"
     react-dom: "npm:17.0.2"
@@ -8665,7 +8663,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:4.17.21, lodash@npm:^4.17.15, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.17.4":
+"lodash@npm:^4.17.15, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.17.4":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: c08619c038846ea6ac754abd6dd29d2568aa705feb69339e836dfa8d8b09abbb2f859371e86863eda41848221f9af43714491467b5b0299122431e202bb0c532
@@ -9973,7 +9971,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:15.8.1, prop-types@npm:^15.5.6, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
+"prop-types@npm:^15.5.6, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
