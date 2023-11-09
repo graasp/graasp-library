@@ -9,7 +9,6 @@ import {
 
 export const SIGN_IN_ROUTE = `${GRAASP_AUTH_HOST}/signin`;
 export const SIGN_UP_ROUTE = `${GRAASP_AUTH_HOST}/signup`;
-export const MEMBER_PROFILE_ROUTE = `${GRAASP_BUILDER_HOST}/profile`;
 
 export const buildPlayerViewItemRoute = (id = ':id') =>
   `${GRAASP_PLAYER_HOST}/${id}`;

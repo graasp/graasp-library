@@ -6,8 +6,9 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import Box from '@mui/material/Box';
 
 import { MEMBER_AVATAR_ICON_SIZE } from '../../config/constants';
+import { GRAASP_ACCOUNT_HOST } from '../../config/env';
 import { useLibraryTranslation } from '../../config/i18n';
-import { MEMBER_PROFILE_ROUTE, SIGN_IN_ROUTE } from '../../config/paths';
+import { SIGN_IN_ROUTE } from '../../config/paths';
 import { MY_LIKED_ITEMS_ROUTE } from '../../config/routes';
 import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
@@ -45,7 +46,7 @@ const UserSwitchWrapper: FC<Props> = ({ ButtonContent }) => {
         signOut={signOut}
         currentMember={member}
         isCurrentMemberLoading={isLoading}
-        profilePath={MEMBER_PROFILE_ROUTE}
+        profilePath={GRAASP_ACCOUNT_HOST}
         redirectPath={SIGN_IN_ROUTE}
         renderAvatar={(m) => (
           <MemberAvatar
