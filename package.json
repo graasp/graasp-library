@@ -102,13 +102,12 @@
     "wait-on": "7.0.1"
   },
   "resolutions": {
-    "@types/react": "17.0.66",
-    "@graasp/sdk": "2.0.0"
+    "@types/react": "17.0.66"
   },
   "nyc": {
     "exclude": [
       "pages/api/__coverage__.js"
     ]
   },
-  "packageManager": "yarn@4.0.1"
+  "packageManager": "yarn@3.6.4"
 }
