@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 import React from 'react';
 
@@ -78,10 +78,9 @@ const CategoryChip = ({ category }: CategoryChipProps) => {
 
   const handleCategorySearch = (categoryId: string) => {
     // navigate to "/all-collections?cat=<categoryId>"
-    router.push({
-      pathname: ALL_COLLECTIONS_ROUTE,
-      query: { [UrlSearch.CategorySearch]: categoryId },
-    });
+    router.push(
+      `${ALL_COLLECTIONS_ROUTE}?${UrlSearch.CategorySearch}=${categoryId}`,
+    );
   };
   return (
     <Chip

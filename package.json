@@ -13,8 +13,8 @@
     "hooks:install": "husky install",
     "test:once": "exit 0",
     "lint": "eslint .",
-    "prettier:check": "prettier --check '{src,pages,cypress}/**/*.{js,ts,tsx}'",
-    "prettier:write": "prettier --write '{src,pages,cypress}/**/*.{js,ts,tsx}'",
+    "prettier:check": "prettier --check '{app,src,pages,cypress}/**/*.{js,ts,tsx}'",
+    "prettier:write": "prettier --write '{app,src,pages,cypress}/**/*.{js,ts,tsx}'",
     "check": "yarn lint && yarn prettier:check && yarn tsc --noEmit",
     "release": "standard-version -a",
     "release:first": "standard-version -a --first-release",
@@ -45,6 +45,7 @@
     "@testing-library/react": "14.1.2",
     "@testing-library/user-event": "14.5.1",
     "@trivago/prettier-plugin-sort-imports": "4.3.0",
+    "eslint-config-next": "14.0.1",
     "http-status-codes": "2.3.0",
     "i18next": "23.7.6",
     "interweave": "13.1.0",
@@ -53,9 +54,9 @@
     "lodash.isstring": "4.0.1",
     "lodash.truncate": "4.4.2",
     "luxon": "3.4.4",
-    "next": "12.3.4",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
+    "next": "14.0.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "react-ga4": "2.1.0",
     "react-helmet": "6.1.0",
     "react-i18next": "13.5.0",
@@ -73,8 +74,8 @@
     "@types/lodash.truncate": "4.4.9",
     "@types/luxon": "3.3.6",
     "@types/node": "20.10.1",
-    "@types/react": "17.0.71",
-    "@types/react-dom": "17.0.25",
+    "@types/react": "18.2.37",
+    "@types/react-dom": "18.2.15",
     "@types/react-helmet": "6.1.9",
     "@types/uuid": "9.0.7",
     "@typescript-eslint/eslint-plugin": "6.13.1",
@@ -100,9 +101,6 @@
     "standard-version": "9.5.0",
     "typescript": "5.3.2",
     "wait-on": "7.2.0"
-  },
-  "resolutions": {
-    "@types/react": "17.0.66"
   },
   "nyc": {
     "exclude": [

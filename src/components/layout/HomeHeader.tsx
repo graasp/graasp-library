@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 import { useEffect, useRef, useState } from 'react';
 
@@ -66,10 +66,10 @@ const HomeHeader = () => {
   const [isSearchFocused, setIsSearchFocused] = useState(false);
 
   const handleSearch = (searchKeywords: string) => {
-    router.push({
-      pathname: ALL_COLLECTIONS_ROUTE,
-      query: { [UrlSearch.KeywordSearch]: searchKeywords },
-    });
+    const searchParams = new URLSearchParams();
+    searchParams.set(UrlSearch.KeywordSearch, searchKeywords);
+
+    router.push(`${ALL_COLLECTIONS_ROUTE}?${searchParams.toString()}`);
   };
 
   // save search bar focus state
