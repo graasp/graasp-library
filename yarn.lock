@@ -1515,9 +1515,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/sdk@https://github.com/graasp/graasp-sdk.git#library-triggers-enum":
-  version: 2.0.1
-  resolution: "@graasp/sdk@https://github.com/graasp/graasp-sdk.git#commit=ae18ed4e13d1ad286e3f2b935269df2aed85f3f0"
+"@graasp/sdk@npm:2.1.0":
+  version: 2.1.0
+  resolution: "@graasp/sdk@npm:2.1.0"
   dependencies:
     "@aws-sdk/client-s3": "npm:3.441.0"
     "@graasp/etherpad-api": "npm:2.1.1"
@@ -1526,7 +1526,7 @@ __metadata:
     js-cookie: "npm:3.0.5"
     uuid: "npm:9.0.1"
     validator: "npm:13.11.0"
-  checksum: ae036739089622a5ff7796b70ec99006684bbe03626fe89e5483da8edfbb045b063c02017b5ec10bd0e5fba707f9814a7fe133af89bb79e4e404d8713c10d89d
+  checksum: 62e4e004d3a65b0e396b0b5e8efd3c19eecd7bf020db8962dc3c6fa145d98f4688c22552d026576e4b62ab3711c1efcd9fae40f5e7484bdb16d5da41d4e838eb
   languageName: node
   linkType: hard
 
@@ -7092,7 +7092,7 @@ __metadata:
     "@emotion/server": "npm:11.11.0"
     "@emotion/styled": "npm:11.11.0"
     "@graasp/query-client": "npm:2.0.1"
-    "@graasp/sdk": "https://github.com/graasp/graasp-sdk.git#library-triggers-enum"
+    "@graasp/sdk": "npm:2.1.0"
     "@graasp/translations": "npm:1.19.4"
     "@graasp/ui": "npm:4.0.0"
     "@mui/icons-material": "npm:5.14.3"
