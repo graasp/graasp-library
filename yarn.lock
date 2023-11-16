@@ -7251,7 +7251,7 @@ __metadata:
     lodash.isobject: "npm:3.0.2"
     lodash.isstring: "npm:4.0.1"
     lodash.truncate: "npm:4.4.2"
-    luxon: "npm:3.4.3"
+    luxon: "npm:3.4.4"
     next: "npm:12.3.4"
     nyc: "npm:15.1.0"
     prettier: "npm:3.0.3"
@@ -8864,10 +8864,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"luxon@npm:3.4.3":
-  version: 3.4.3
-  resolution: "luxon@npm:3.4.3"
-  checksum: b155c9961cf45dadae763b0ec2f5a38d81a2197714154c1dece3ed3a553f1984a34138c1856f248863c998cb623796b27de96b7f7286acdeae68220451e24540
+"luxon@npm:3.4.4":
+  version: 3.4.4
+  resolution: "luxon@npm:3.4.4"
+  checksum: c14164bc338987349075a08e63ea3ff902866735f7f5553a355b27be22667919765ff96fde4d3413d0e9a0edc4ff9e2e74ebcb8f86eae0ce8b14b27330d87d6e
   languageName: node
   linkType: hard
 
