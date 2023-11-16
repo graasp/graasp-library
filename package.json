@@ -109,5 +109,5 @@
       "pages/api/__coverage__.js"
     ]
   },
-  "packageManager": "yarn@4.0.1"
+  "packageManager": "yarn@4.0.2"
 }
