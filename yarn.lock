@@ -3177,21 +3177,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash.groupby@npm:4.6.8":
-  version: 4.6.8
-  resolution: "@types/lodash.groupby@npm:4.6.8"
+"@types/lodash.groupby@npm:4.6.9":
+  version: 4.6.9
+  resolution: "@types/lodash.groupby@npm:4.6.9"
   dependencies:
     "@types/lodash": "npm:*"
-  checksum: e9d6295ce8942b29ff72cb6c1a9370d4eb1f8a281313697ce69ce88bafb6d1e9b901a00a9a9523a4982aafa170cb2612468f48b080b90876a52d822803514b54
+  checksum: b8310a9f89badc42a504887ca0b9619c2a284b3fec8dc505cf72508eb6beba47b822df939c7d57c0f69bc685f51ff5a232e0480ecad6b18b7ab76fecc1d74691
   languageName: node
   linkType: hard
 
-"@types/lodash.truncate@npm:4.4.7":
-  version: 4.4.7
-  resolution: "@types/lodash.truncate@npm:4.4.7"
+"@types/lodash.truncate@npm:4.4.9":
+  version: 4.4.9
+  resolution: "@types/lodash.truncate@npm:4.4.9"
   dependencies:
     "@types/lodash": "npm:*"
-  checksum: d95ed373b514d63535f07a523244c6513bdbf4512f6b96cac28fde408be5a1212d9f5de847614c521508752a4cc150cc470b1295ad543ee31b79cb0bd310e716
+  checksum: 8c48ddd3d6a79522a6470c57c0061dd716c1479477caae05b02206914896f356afba9d1d89935dd3bbbd7df6fc116440af50dc842926b141175de1bfecfe351d
   languageName: node
   linkType: hard
 
@@ -7220,8 +7220,8 @@ __metadata:
     "@testing-library/react": "npm:14.0.0"
     "@testing-library/user-event": "npm:14.4.3"
     "@trivago/prettier-plugin-sort-imports": "npm:4.2.1"
-    "@types/lodash.groupby": "npm:4.6.8"
-    "@types/lodash.truncate": "npm:4.4.7"
+    "@types/lodash.groupby": "npm:4.6.9"
+    "@types/lodash.truncate": "npm:4.4.9"
     "@types/luxon": "npm:3.3.2"
     "@types/node": "npm:20.9.0"
     "@types/react": "npm:17.0.66"
