@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/graasp/graasp-library/compare/v1.0.0...v1.1.0) (2023-11-16)
+
+
+### Features
+
+* add embed item action ([#437](https://github.com/graasp/graasp-library/issues/437)) ([1b64388](https://github.com/graasp/graasp-library/commit/1b643887793c15a5e1bad026069ffd4896b96b0a))
+* redirect to account host ([#429](https://github.com/graasp/graasp-library/issues/429)) ([a1c458c](https://github.com/graasp/graasp-library/commit/a1c458cd183abfc00deafa4b545ac489fe38de9b))
+
+
+### Bug Fixes
+
+* add account host in next.config.js ([#438](https://github.com/graasp/graasp-library/issues/438)) ([9eb0348](https://github.com/graasp/graasp-library/commit/9eb034897270d131c0c66a8edf66216bfae4ea5d))
+* add clickable tags in collection header ([#415](https://github.com/graasp/graasp-library/issues/415)) ([a85477d](https://github.com/graasp/graasp-library/commit/a85477d35c64dbf7302e83af2285d8d70c659b72))
+* **build:** update docker image and yarn version ([#434](https://github.com/graasp/graasp-library/issues/434)) ([162ac0f](https://github.com/graasp/graasp-library/commit/162ac0f01bc137c62a84ffedab2998bdb2ccd93f))
+* **deps:** update dependency @trivago/prettier-plugin-sort-imports to v4.2.1 ([#422](https://github.com/graasp/graasp-library/issues/422)) ([0ed9dda](https://github.com/graasp/graasp-library/commit/0ed9dda90262e83d22cd3a4236c0ee1b7800c7ef))
+* **deps:** update dependency luxon to v3.4.4 ([#439](https://github.com/graasp/graasp-library/issues/439)) ([8e66c76](https://github.com/graasp/graasp-library/commit/8e66c76bccfe55dfa6c648ab60abde05b970e981))
+* **deps:** update dependency uuid to v9.0.1 ([#423](https://github.com/graasp/graasp-library/issues/423)) ([608c1b9](https://github.com/graasp/graasp-library/commit/608c1b936ab0c1988d575b0159c83dec14b7a4b3))
+* path to analytics items ([#431](https://github.com/graasp/graasp-library/issues/431)) ([5c16115](https://github.com/graasp/graasp-library/commit/5c16115046804db422bec6b573c56cf7f368a129))
+
 ## [1.0.0](https://github.com/graasp/graasp-library/compare/v0.13.0...v1.0.0) (2023-11-06)
 
 
