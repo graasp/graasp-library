@@ -10,6 +10,9 @@ RUN mkdir -p .
 COPY package.json .
 COPY .yarnrc.yml .
 COPY .yarn .yarn
+
+ARG NEXT_PUBLIC_API_HOST=${NEXT_PUBLIC_API_HOST}
+
 RUN yarn install
 
 # bundle app source
