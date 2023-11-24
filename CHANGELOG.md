@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.1](https://github.com/graasp/graasp-library/compare/v1.1.0...v1.1.1) (2023-11-24)
+
+
+### Bug Fixes
+
+* update task def for aws prod env ([#444](https://github.com/graasp/graasp-library/issues/444)) ([85d200e](https://github.com/graasp/graasp-library/commit/85d200e0311e1396d17e97d65ce3c621660fba7f))
+
 ## [1.1.0](https://github.com/graasp/graasp-library/compare/v1.0.0...v1.1.0) (2023-11-16)
 
 
