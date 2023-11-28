@@ -148,7 +148,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
               <CardMedia
                 itemId={collection?.id}
                 name={collection?.name}
-                size={ThumbnailSize.Original}
+                size={ThumbnailSize.Medium}
               />
             )}
           </StyledCard>

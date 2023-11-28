@@ -146,7 +146,7 @@ export const CollectionCard = ({ collection, showIsContentTag }: Props) => {
           <CardMediaComponent
             itemId={id}
             name={name}
-            size={ThumbnailSize.Original}
+            size={ThumbnailSize.Medium}
           />
         </Box>
         <CardHeader
