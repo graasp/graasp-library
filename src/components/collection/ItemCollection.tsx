@@ -1,5 +1,3 @@
-import { List } from 'immutable';
-
 import React from 'react';
 
 import {
@@ -11,7 +9,7 @@ import {
   styled,
 } from '@mui/material';
 
-import { ItemRecord } from '@graasp/sdk/frontend';
+import { DiscriminatedItem } from '@graasp/sdk';
 
 import { SECTION_TITLE_ID } from '../../config/selectors';
 import CollectionsGrid from './CollectionsGrid';
@@ -26,7 +24,7 @@ type ItemCollectionProps = {
   id: string;
   collectionGridId?: string;
   title: string;
-  collections?: List<ItemRecord>;
+  collections?: DiscriminatedItem[];
   sx?: SxProps<Theme>;
 };
 

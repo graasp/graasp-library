@@ -2,7 +2,7 @@ import { ErrorBoundary } from '@sentry/nextjs';
 import dynamic from 'next/dynamic';
 import { validate } from 'uuid';
 
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
 import { Box } from '@mui/material';
 
@@ -33,7 +33,7 @@ type Props = {
   id?: string;
 };
 const Collection = ({ id }: Props) => {
-  const { hooks } = useContext(QueryClientContext);
+  const { hooks, mutations } = useContext(QueryClientContext);
   const {
     data: collection,
     isLoading: isLoadingItem,
@@ -47,6 +47,13 @@ const Collection = ({ id }: Props) => {
     itemId: id || '',
   });
 
+  const { mutate: postView } = mutations.usePostItemAction();
+
+  useEffect(() => {
+    if (id) {
+      postView({ itemId: id, payload: { type: 'collection-view' } });
+    }
+  }, [id]);
   // if tags could be fetched then user has at least read access
   const canRead = Boolean(tags);
 
@@ -120,7 +127,11 @@ const Collection = ({ id }: Props) => {
           }}
           py={5}
         >
-          <Summary collection={collection} isLoading={isLoading} />
+          <Summary
+            collection={collection}
+            isLoading={isLoading}
+            totalViews={itemPublishEntry?.totalViews ?? 0}
+          />
           {/* <Comments comments={comments} members={members} /> */}
         </Box>
       </Main>

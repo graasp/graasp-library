@@ -20,6 +20,7 @@ jobs:
     with:
       app-name: graasp-library
       app-version: ${{ github.event.client_payload.tag }}
+      next-public-graasp-account-host: ${{ vars.NEXT_PUBLIC_GRAASP_ACCOUNT_HOST_STAGE }}
       ecs-task-definition: '.aws/graasp-library-stage.json'
       tag: ${{ github.event.client_payload.tag }}
     # required secrets

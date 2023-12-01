@@ -2,7 +2,7 @@ import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 
 import * as React from 'react';
-import { DehydratedState } from 'react-query';
+import type { DehydratedState } from 'react-query';
 
 import { Api, DATA_KEYS, configureQueryClient } from '@graasp/query-client';
 
@@ -33,13 +33,12 @@ export const getServerSideProps: GetServerSideProps<Props, Params> = async ({
   params,
 }) => {
   const id = params?.id;
-  const { queryClient, dehydrate } = configureQueryClient(QUERY_CLIENT_OPTIONS);
+  const { queryClient, dehydrate, axios } =
+    configureQueryClient(QUERY_CLIENT_OPTIONS);
   if (id) {
     // prefetch data in query client
     await queryClient.prefetchQuery(DATA_KEYS.buildItemKey(id), () =>
-      Api.getItem(id, QUERY_CLIENT_OPTIONS).then((data) =>
-        JSON.parse(JSON.stringify(data)),
-      ),
+      Api.getItem(id, { ...QUERY_CLIENT_OPTIONS, axios }),
     );
   }
   // TODO: Prefetch items for breadcrumb.

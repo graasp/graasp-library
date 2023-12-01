@@ -21,6 +21,7 @@ jobs:
     with:
       app-name: graasp-library
       app-version: ${{ github.event.client_payload.tag }}
+      next-public-graasp-account-host: ${{ vars.NEXT_PUBLIC_GRAASP_ACCOUNT_HOST_PROD }}
       ecs-task-definition: '.aws/graasp-library-prod.json'
       tag: ${{ github.event.client_payload.tag }}
     # Insert required secrets based on repository with the following format: ${{ secrets.SECRET_NAME }}

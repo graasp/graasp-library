@@ -56,7 +56,7 @@ export function defaultHostsMapper(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     [Platform.Library]: (origin: string, itemId: string) => origin,
     [Platform.Analytics]: (origin: string, itemId: string) =>
-      `${origin}/${itemId}`,
+      `${origin}/items/${itemId}`,
   };
 
   return Object.fromEntries(

@@ -2,6 +2,81 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.1](https://github.com/graasp/graasp-library/compare/v1.1.0...v1.1.1) (2023-11-24)
+
+
+### Bug Fixes
+
+* update task def for aws prod env ([#444](https://github.com/graasp/graasp-library/issues/444)) ([85d200e](https://github.com/graasp/graasp-library/commit/85d200e0311e1396d17e97d65ce3c621660fba7f))
+
+## [1.1.0](https://github.com/graasp/graasp-library/compare/v1.0.0...v1.1.0) (2023-11-16)
+
+
+### Features
+
+* add embed item action ([#437](https://github.com/graasp/graasp-library/issues/437)) ([1b64388](https://github.com/graasp/graasp-library/commit/1b643887793c15a5e1bad026069ffd4896b96b0a))
+* redirect to account host ([#429](https://github.com/graasp/graasp-library/issues/429)) ([a1c458c](https://github.com/graasp/graasp-library/commit/a1c458cd183abfc00deafa4b545ac489fe38de9b))
+
+
+### Bug Fixes
+
+* add account host in next.config.js ([#438](https://github.com/graasp/graasp-library/issues/438)) ([9eb0348](https://github.com/graasp/graasp-library/commit/9eb034897270d131c0c66a8edf66216bfae4ea5d))
+* add clickable tags in collection header ([#415](https://github.com/graasp/graasp-library/issues/415)) ([a85477d](https://github.com/graasp/graasp-library/commit/a85477d35c64dbf7302e83af2285d8d70c659b72))
+* **build:** update docker image and yarn version ([#434](https://github.com/graasp/graasp-library/issues/434)) ([162ac0f](https://github.com/graasp/graasp-library/commit/162ac0f01bc137c62a84ffedab2998bdb2ccd93f))
+* **deps:** update dependency @trivago/prettier-plugin-sort-imports to v4.2.1 ([#422](https://github.com/graasp/graasp-library/issues/422)) ([0ed9dda](https://github.com/graasp/graasp-library/commit/0ed9dda90262e83d22cd3a4236c0ee1b7800c7ef))
+* **deps:** update dependency luxon to v3.4.4 ([#439](https://github.com/graasp/graasp-library/issues/439)) ([8e66c76](https://github.com/graasp/graasp-library/commit/8e66c76bccfe55dfa6c648ab60abde05b970e981))
+* **deps:** update dependency uuid to v9.0.1 ([#423](https://github.com/graasp/graasp-library/issues/423)) ([608c1b9](https://github.com/graasp/graasp-library/commit/608c1b936ab0c1988d575b0159c83dec14b7a4b3))
+* path to analytics items ([#431](https://github.com/graasp/graasp-library/issues/431)) ([5c16115](https://github.com/graasp/graasp-library/commit/5c16115046804db422bec6b573c56cf7f368a129))
+
+## [1.0.0](https://github.com/graasp/graasp-library/compare/v0.13.0...v1.0.0) (2023-11-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove immutable ([#413](https://github.com/graasp/graasp-library/issues/413))
+
+### chore
+
+* release 1.0.0 ([2fbec76](https://github.com/graasp/graasp-library/commit/2fbec76dfaba039145521189990763f59303a66b))
+
+
+### Features
+
+* add liked items page ([#401](https://github.com/graasp/graasp-library/issues/401)) ([de2a134](https://github.com/graasp/graasp-library/commit/de2a13459db042548b04045de74d6302b492e933))
+* remove immutable ([#413](https://github.com/graasp/graasp-library/issues/413)) ([57a87b5](https://github.com/graasp/graasp-library/commit/57a87b5cbad324ca2d517e91a7fe136164827206))
+
+## [0.13.0](https://github.com/graasp/graasp-library/compare/v0.12.0...v0.13.0) (2023-10-25)
+
+
+### Features
+
+* add collection views ([#397](https://github.com/graasp/graasp-library/issues/397)) ([a3d56ec](https://github.com/graasp/graasp-library/commit/a3d56ece998f78f00c2d84ec9451fb99ce0c72ec))
+
+## [0.12.0](https://github.com/graasp/graasp-library/compare/v0.11.2...v0.12.0) (2023-10-19)
+
+
+### Features
+
+* add like button for unlogged users and redirect to login ([#399](https://github.com/graasp/graasp-library/issues/399)) ([4ace8d1](https://github.com/graasp/graasp-library/commit/4ace8d1dddd014b1d6dfa013f96bc947bed3917d))
+
+
+### Bug Fixes
+
+* update aws deployment file ([#405](https://github.com/graasp/graasp-library/issues/405)) ([b0a9ed0](https://github.com/graasp/graasp-library/commit/b0a9ed0094eca7d4ca1e5209a8193e64e6721299))
+
+## [0.11.2](https://github.com/graasp/graasp-library/compare/v0.11.1...v0.11.2) (2023-10-06)
+
+
+### Bug Fixes
+
+* **deps:** update dependency luxon to v3.4.3 ([#380](https://github.com/graasp/graasp-library/issues/380)) ([40474a1](https://github.com/graasp/graasp-library/commit/40474a193648a3be8b91232c1357a59fd8efae40))
+* **navigation:** open search in current tab and close tab if there is no history on back button ([#395](https://github.com/graasp/graasp-library/issues/395)) ([788311c](https://github.com/graasp/graasp-library/commit/788311c26a225889880b18af94a6c329d2faf33d))
+
+
+### Documentation
+
+* set gitlocalize link, update screenshot ([#393](https://github.com/graasp/graasp-library/issues/393)) ([f931738](https://github.com/graasp/graasp-library/commit/f931738ab6d73b8edbc03714bb34f3d41ebbbe19))
+
 ## [0.11.1](https://github.com/graasp/graasp-library/compare/v0.11.0...v0.11.1) (2023-09-25)
 
 

@@ -69,7 +69,7 @@
   "HOME_BROWSE_ALL_COLLECTIONS": "Découvrir toutes les collections",
   "MY_LISTS_MY_FAVORITES_TAB": "Mes favoris",
   "MY_LISTS_MY_PUBLISHMENTS_TAB": "Mes publications",
-  "MY_LISTS_MY_LIKES_TAB": "Mes éléments aimés",
+  "MY_LISTS_MY_LIKES_TAB": "Collections aimées",
   "MY_LISTS_TAB_ARIA_LABEL": "Onglets Mes listes",
   "COLLECTION_CC_LICENSE_TITLE": "Licence Creative Commons",
   "COPY_LINK_BUTTON_TOOLTIP": "Copier le lien",
@@ -111,6 +111,12 @@
   "FILTER_DROPDOWN_NO_FILTER": "Pas de filtres…",
   "FILTER_DROPDOWN_CLEAR_FILTERS": "Réinitialiser",
   "FILTER_DROPDOWN_NO_CATEGORIES_AVAILABLE": "Pas de catégories disponibles",
+  "ENABLE_IN_DEPTH_SEARCH_LABEL": "Activer la recherche en profondeur",
+  "SEE_MORE_RESULTS_SEARCH": "Afficher {{total}} résultats supplémentaires",
+  "SUGGESTION_TO_ENABLE_IN_DEPTH_SEARCH_TEXT": "Vous ne trouvez pas ce que vous cherchiez ?<br/>Essayez d'activer la recherche en profondeur pour montrer l'intérieur des resources",
+  "SEARCH_NO_RESULTS": "Rien ne correspond à votre recherche",
+  "SEARCH_RESULTS_LOAD_MORE": "Afficher plus",
   "CONTENT_CHIP": "Contenu",
-  "SEARCH_RESULTS_LOAD_MORE": "Afficher plus"
+  "LIKED_ITEMS": "Collections aimées",
+  "SIGNIN_MESSAGE": "Vous devez d'abord vous connecter"
 }

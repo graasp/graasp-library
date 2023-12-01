@@ -1,12 +1,11 @@
-import { DateTime } from 'luxon';
-
-import { PermissionLevel, isChildOf } from '@graasp/sdk';
+import { PermissionLevel, formatDate, isChildOf } from '@graasp/sdk';
 import { DEFAULT_LANG } from '@graasp/translations';
 
 import { buildCollectionRoute } from '../../../src/config/routes';
 import {
   CHILDREN_ITEMS_GRID_ID,
   ITEM_SUMMARY_TITLE_ID,
+  LIKE_COLLECTION_NOT_LOGGED_ID,
   SUMMARY_AUTHOR_CONTAINER_ID,
   SUMMARY_CREATED_AT_CONTAINER_ID,
   SUMMARY_LAST_UPDATE_CONTAINER_ID,
@@ -14,7 +13,7 @@ import {
 } from '../../../src/config/selectors';
 import { buildPublicAndPrivateEnvironments } from '../../fixtures/environment';
 import { PUBLISHED_ITEMS } from '../../fixtures/items';
-import { MEMBERS } from '../../fixtures/members';
+import { COMPLETE_MEMBERS, MEMBERS } from '../../fixtures/members';
 
 describe('Collection Summary', () => {
   buildPublicAndPrivateEnvironments().forEach((environment) => {
@@ -25,7 +24,7 @@ describe('Collection Summary', () => {
       cy.visit(buildCollectionRoute(item.id));
 
       // current member
-      const member = Object.values(MEMBERS).find(
+      const member = Object.values(COMPLETE_MEMBERS).find(
         ({ name }) => name === environment.currentMember?.name,
       );
 
@@ -50,12 +49,9 @@ describe('Collection Summary', () => {
       if (item.createdAt) {
         cy.get(`#${SUMMARY_CREATED_AT_CONTAINER_ID}`).should(
           'contain',
-          DateTime.fromMillis(item.createdAt.getTime()).toLocaleString(
-            DateTime.DATE_FULL,
-            {
-              locale: member?.extra?.lang || DEFAULT_LANG,
-            },
-          ),
+          formatDate(item.createdAt, {
+            locale: member?.extra?.lang || DEFAULT_LANG,
+          }),
         );
       }
 
@@ -63,12 +59,9 @@ describe('Collection Summary', () => {
       if (item.updatedAt) {
         cy.get(`#${SUMMARY_LAST_UPDATE_CONTAINER_ID}`).should(
           'contain',
-          DateTime.fromMillis(item.updatedAt.getTime()).toLocaleString(
-            DateTime.DATE_FULL,
-            {
-              locale: member?.extra?.lang || DEFAULT_LANG,
-            },
-          ),
+          formatDate(item.updatedAt, {
+            locale: member?.extra?.lang || DEFAULT_LANG,
+          }),
         );
       }
 
@@ -83,7 +76,7 @@ describe('Collection Summary', () => {
       });
     });
 
-    it('Show like button only to logged in users', () => {
+    it('Show like button', () => {
       cy.setUpApi(environment);
       const item = PUBLISHED_ITEMS[1];
       cy.visit(buildCollectionRoute(item.id));
@@ -91,7 +84,8 @@ describe('Collection Summary', () => {
       if (environment.currentMember) {
         cy.get(`button[aria-label="like"]`).should('be.visible');
       } else {
-        cy.get(`button[aria-label="like"]`).should('not.exist');
+        cy.get(`button[aria-label="like"]`).click();
+        cy.get(`#${LIKE_COLLECTION_NOT_LOGGED_ID}`).should('exist');
       }
     });
 

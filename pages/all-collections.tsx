@@ -1,6 +1,4 @@
-import PropTypes from 'prop-types';
-
-import { DehydratedState } from 'react-query';
+import type { DehydratedState } from 'react-query';
 
 import { Api, configureQueryClient } from '@graasp/query-client';
 
@@ -21,17 +19,12 @@ const AllCollectionsPage = ({
   </Wrapper>
 );
 
-AllCollectionsPage.propTypes = {
-  dehydratedState: PropTypes.shape({}).isRequired,
-};
-
 export async function getServerSideProps() {
-  const { queryClient, dehydrate } = configureQueryClient(QUERY_CLIENT_OPTIONS);
+  const { queryClient, dehydrate, axios } =
+    configureQueryClient(QUERY_CLIENT_OPTIONS);
 
   await queryClient.prefetchQuery(['items', 'collections', 'all'], () =>
-    Api.getAllPublishedItems({}, QUERY_CLIENT_OPTIONS).then((data) =>
-      JSON.parse(JSON.stringify(data)),
-    ),
+    Api.getAllPublishedItems({}, { ...QUERY_CLIENT_OPTIONS, axios }),
   );
 
   // Pass data to the page via props

@@ -1,11 +1,7 @@
-import { isImmutable } from 'immutable';
-
 import React from 'react';
-import { DehydratedState } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
+import type { DehydratedState } from 'react-query';
 
 import { configureQueryClient } from '@graasp/query-client';
-import { convertJs, parseStringToDate } from '@graasp/sdk';
 
 import { QUERY_CLIENT_OPTIONS } from '../config/queryClient';
 
@@ -19,17 +15,12 @@ type Props = {
 
 const QueryClientProvider = ({ children, dehydratedState }: Props) => {
   const value = configureQueryClient(QUERY_CLIENT_OPTIONS);
-  const { QueryClientProvider: Provider, queryClient, Hydrate } = value;
-
-  // transform queryclient data into immutable data
-  // we can't pass immutable from server
-  dehydratedState?.queries?.forEach((query) => {
-    if (!isImmutable(query.state.data)) {
-      const deserializedData = parseStringToDate(query.state.data);
-      // eslint-disable-next-line no-param-reassign
-      query.state.data = convertJs(deserializedData);
-    }
-  });
+  const {
+    QueryClientProvider: Provider,
+    queryClient,
+    Hydrate,
+    ReactQueryDevtools,
+  } = value;
 
   return (
     <QueryClientContext.Provider value={value}>

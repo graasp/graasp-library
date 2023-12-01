@@ -35,19 +35,23 @@ export const getServerSideProps: GetServerSideProps<Props, Params> = async ({
   params,
 }) => {
   const id = params?.id;
-  const { queryClient, dehydrate } = configureQueryClient(QUERY_CLIENT_OPTIONS);
+  const { queryClient, dehydrate, axios } =
+    configureQueryClient(QUERY_CLIENT_OPTIONS);
   if (id) {
     // prefetch data in query client
     await queryClient.prefetchQuery(DATA_KEYS.buildItemKey(id), () =>
       Promise.all([
-        Api.getMember({ id }, QUERY_CLIENT_OPTIONS).then((data) => {
-          return JSON.parse(JSON.stringify(data));
-        }),
-        Api.getPublishedItemsForMember(id, QUERY_CLIENT_OPTIONS).then(
+        Api.getMember({ id }, { ...QUERY_CLIENT_OPTIONS, axios }).then(
           (data) => {
             return JSON.parse(JSON.stringify(data));
           },
         ),
+        Api.getPublishedItemsForMember(id, {
+          ...QUERY_CLIENT_OPTIONS,
+          axios,
+        }).then((data) => {
+          return JSON.parse(JSON.stringify(data));
+        }),
       ]),
     );
   }

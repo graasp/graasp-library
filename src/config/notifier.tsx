@@ -2,7 +2,7 @@ import React from 'react';
 import { toast } from 'react-toastify';
 
 import { Notifier, routines } from '@graasp/query-client';
-import { ItemRecord } from '@graasp/sdk/frontend';
+import { DiscriminatedItem } from '@graasp/sdk';
 import { FAILURE_MESSAGES, SUCCESS_MESSAGES } from '@graasp/translations';
 
 import ToastrWithLink from '../components/common/ToastrWithLink';
@@ -29,9 +29,10 @@ const notifier: Notifier = ({ type, payload }) => {
   let message = '';
 
   switch (type) {
+    // copy notification won't work until websockets are enabled
     case routines.postItemFlagRoutine.FAILURE:
     case routines.exportItemRoutine.FAILURE:
-    case routines.copyItemRoutine.FAILURE: {
+    case routines.copyItemsRoutine.FAILURE: {
       message =
         (
           payload?.error as
@@ -45,11 +46,11 @@ const notifier: Notifier = ({ type, payload }) => {
       message = payload?.message ?? SUCCESS_MESSAGES.DEFAULT_SUCCESS;
       break;
     }
-    case routines.copyItemRoutine.SUCCESS:
+    case routines.copyItemsRoutine.SUCCESS:
       toast.success(
         <ToastrWithLink
           link={buildPlayerViewItemRoute(
-            (payload?.newItem as ItemRecord | undefined)?.id,
+            (payload?.newItem as DiscriminatedItem | undefined)?.id,
           )}
           text={t(SUCCESS_MESSAGES.COPY_ITEM)}
           linkText={i18n.t(LIBRARY.COPY_ITEM_TOASTR_LINK)}

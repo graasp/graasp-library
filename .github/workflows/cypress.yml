@@ -26,7 +26,7 @@ jobs:
     steps:
       # Check-out repository under $GITHUB_WORKSPACE, so the job can access it
       - name: Check out code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Yarn install and Cache dependencies
         uses: graasp/graasp-deploy/.github/actions/yarn-install-and-cache@v1

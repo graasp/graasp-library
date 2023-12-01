@@ -68,3 +68,5 @@ export const ENABLE_IN_DEPTH_SEARCH_CHECKBOX_ID = 'enableInDepthSearchCheckbox';
 export const SEARCH_RESULTS_LIST_ID = 'searchResultsList';
 export const SEARCH_RESULTS_SHOW_MORE_BUTTON = 'searchResultsShowMoreButton';
 export const SEARCH_ERROR_MESSAGE_ID = 'searchErrorMessage';
+
+export const LIKE_COLLECTION_NOT_LOGGED_ID = 'likeCollectionLoginMessage';

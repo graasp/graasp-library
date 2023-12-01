@@ -6,15 +6,15 @@ import { Stack, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 
-import { CategoryType } from '@graasp/sdk';
-import { ItemRecord } from '@graasp/sdk/frontend';
-import { DEFAULT_LANG, LIBRARY } from '@graasp/translations';
+import { CategoryType, DiscriminatedItem } from '@graasp/sdk';
+import { DEFAULT_LANG } from '@graasp/translations';
 
 import {
   ITEM_TYPES,
   MAX_COLLECTION_NAME_LENGTH,
 } from '../../../config/constants';
 import { useLibraryTranslation } from '../../../config/i18n';
+import LIBRARY from '../../../langs/constants';
 import { QueryClientContext } from '../../QueryClientContext';
 import BackButton from '../../common/BackButton';
 import ItemBreadcrumb from '../ItemBreadcrumb';
@@ -48,11 +48,16 @@ export const getParentsIdsFromPath = (
 };
 
 type SummaryProps = {
-  collection?: ItemRecord;
+  collection?: DiscriminatedItem;
   isLoading: boolean;
+  totalViews: number;
 };
 
-const Summary: React.FC<SummaryProps> = ({ collection, isLoading }) => {
+const Summary: React.FC<SummaryProps> = ({
+  collection,
+  isLoading,
+  totalViews,
+}) => {
   const { t } = useLibraryTranslation();
   const { hooks } = useContext(QueryClientContext);
   const { data: member } = hooks.useCurrentMember();
@@ -98,6 +103,7 @@ const Summary: React.FC<SummaryProps> = ({ collection, isLoading }) => {
         isLoading={isLoading}
         tags={collection?.settings?.tags}
         truncatedName={truncatedName}
+        totalViews={totalViews}
       />
       {collection?.type === ITEM_TYPES.FOLDER && (
         <>

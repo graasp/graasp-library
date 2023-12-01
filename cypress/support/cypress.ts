@@ -1,6 +1,6 @@
-import { Category, ItemLike } from '@graasp/sdk';
+import { Category } from '@graasp/sdk';
 
-import { MockItem, MockMember } from './types';
+import { MockItem, MockItemLike, MockMember } from './types';
 
 declare global {
   namespace Cypress {
@@ -15,7 +15,7 @@ declare global {
         getItemCategoriesError?: boolean;
         searchResultItems?: MockItem[];
         searchError?: boolean;
-        itemLikes?: ItemLike[];
+        itemLikes?: MockItemLike[];
         getLikedItemsError?: boolean;
         getItemError?: boolean;
         getTagsError?: boolean;

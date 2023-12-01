@@ -1,4 +1,3 @@
-import { List } from 'immutable';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
@@ -51,9 +50,7 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
   const [shouldIncludeContent, setShouldIncludeContent] =
     useState<boolean>(true);
   const [searchKeywords, setSearchKeywords] = useState<string>('');
-  const [prevResults, setPrevResults] = useState<List<ItemOrSearchedItem>>(
-    List(),
-  );
+  const [prevResults, setPrevResults] = useState<ItemOrSearchedItem[]>([]);
   const [page, setPage] = useState<number>(1);
   const {
     data: collections,
@@ -94,15 +91,15 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
 
   // reset on query changes
   useEffect(() => {
-    setPrevResults(List());
+    setPrevResults([]);
     setPage(1);
   }, [searchKeywords, filters, shouldIncludeContent]);
 
   const { leftContent, rightContent } = useHeader();
 
   const allCollections = prevResults.concat(
-    collections?.results?.first()?.hits ?? [],
-  ) as List<ItemOrSearchedItem>;
+    collections?.results?.[0]?.hits ?? [],
+  );
 
   const onFiltersChanged = (newFilters: string[][]) => {
     setFilters(newFilters);
@@ -117,8 +114,8 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
   };
 
   const hitsNumber =
-    collections?.results?.first()?.totalHits ??
-    collections?.results?.first()?.estimatedTotalHits;
+    collections?.results?.[0]?.totalHits ??
+    collections?.results?.[0]?.estimatedTotalHits;
 
   return (
     <>
@@ -180,7 +177,7 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
             )}
           </Stack>
           <Box my={10} textAlign="center">
-            {Boolean((hitsNumber ?? 0) > allCollections.size) && (
+            {Boolean((hitsNumber ?? 0) > allCollections.length) && (
               <Button
                 onClick={() => {
                   setPrevResults(allCollections);

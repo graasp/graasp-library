@@ -1,5 +1,3 @@
-import { List } from 'immutable';
-
 import React from 'react';
 
 import { Breakpoint } from '@mui/material';
@@ -15,7 +13,7 @@ import { ItemOrSearchedItem } from '../../utils/types';
 import CollectionCard from './CollectionCard';
 
 type Props = {
-  collections?: List<ItemOrSearchedItem>;
+  collections?: ItemOrSearchedItem[];
   isLoading: boolean;
   id?: string;
   containerWidth?: Breakpoint | false;
@@ -37,7 +35,7 @@ const CollectionsGrid = ({
 
   return (
     <Container maxWidth={containerWidth ?? 'xl'}>
-      {!collections?.size ? (
+      {!collections?.length ? (
         <Typography variant="h5" color="inherit">
           {t(LIBRARY.EMPTY_COLLECTION_MESSAGE)}
         </Typography>

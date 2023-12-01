@@ -9,7 +9,7 @@ import {
   PermissionLevel,
 } from '@graasp/sdk';
 
-export type MockItemLike = Omit<ItemLike, 'createdAt'>;
+export type MockItemLike = Omit<ItemLike, 'createdAt'> & { creator: Member };
 export type MockItemCategory = Omit<ItemCategory, 'createdAt' | 'creator'>;
 export type MockMember = Member & { thumbnail?: string };
 export type MockItemMembership = Omit<

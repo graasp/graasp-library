@@ -24,6 +24,7 @@ jobs:
     with:
       app-name: graasp-library
       app-version: ${{ github.sha }}
+      next-public-graasp-account-host: ${{ vars.NEXT_PUBLIC_GRAASP_ACCOUNT_HOST_DEV }}
       ecs-task-definition: '.aws/graasp-library-dev.json'
     secrets:
       aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}

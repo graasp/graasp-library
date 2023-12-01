@@ -6,8 +6,7 @@ import React, { useContext } from 'react';
 import { Stack, Typography } from '@mui/material';
 import Skeleton from '@mui/material/Skeleton';
 
-import { PermissionLevel, ThumbnailSize } from '@graasp/sdk';
-import { ItemRecord } from '@graasp/sdk/frontend';
+import { DiscriminatedItem, PermissionLevel, ThumbnailSize } from '@graasp/sdk';
 
 import { DEFAULT_MEMBER_THUMBNAIL } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';
@@ -22,8 +21,8 @@ const Avatar = dynamic(() => import('@graasp/ui').then((mod) => mod.Avatar), {
 });
 
 type Props = {
-  itemId?: ItemRecord['id'];
-  author?: ItemRecord['creator'];
+  itemId?: DiscriminatedItem['id'];
+  author?: DiscriminatedItem['creator'];
   displayCoEditors?: boolean;
 };
 const Authorship = ({ itemId, author, displayCoEditors }: Props) => {
