@@ -58,7 +58,7 @@ const Badges = ({ name, description }: Props) => {
       <IconButton color="primary" onClick={shareOnTwitter}>
         <Twitter fontSize={iconSize} />
       </IconButton>
-      <a href={mailString}>
+      <a href={mailString} aria-label="Send by email">
         <IconButton color="primary">
           <Email fontSize={iconSize} />
         </IconButton>
