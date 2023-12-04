@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/graasp/graasp-library/compare/v1.1.1...v1.2.0) (2023-12-04)
+
+
+### Features
+
+* create a public profile for collection contributors ([#404](https://github.com/graasp/graasp-library/issues/404)) ([29f2656](https://github.com/graasp/graasp-library/commit/29f26566068e368f5974f9b4768be4cb89bf69ee))
+
+
+### Bug Fixes
+
+* upgrade deps ([#449](https://github.com/graasp/graasp-library/issues/449)) ([9b03c15](https://github.com/graasp/graasp-library/commit/9b03c1555b53c4a973b806bc9f14c11c2264623f))
+
 ## [1.1.1](https://github.com/graasp/graasp-library/compare/v1.1.0...v1.1.1) (2023-11-24)
 
 
