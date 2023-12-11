@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.1](https://github.com/graasp/graasp-library/compare/v1.2.0...v1.2.1) (2023-12-11)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @graasp/ui to v4.1.1 ([#455](https://github.com/graasp/graasp-library/issues/455)) ([c441f9c](https://github.com/graasp/graasp-library/commit/c441f9c4a9655675b52e85e426df0d6b010b47e8))
+* udpate release-please condition ([0ad24f0](https://github.com/graasp/graasp-library/commit/0ad24f0e054633cd6fbf71112e82d9f410e22618))
+* use 'medium' instead of 'original' for the thumbnails in the cards ([#452](https://github.com/graasp/graasp-library/issues/452)) ([73fe1f5](https://github.com/graasp/graasp-library/commit/73fe1f55c68425a2b5bd108796c73913e4825e14))
+
 ## [1.2.0](https://github.com/graasp/graasp-library/compare/v1.1.1...v1.2.0) (2023-12-04)
 
 
