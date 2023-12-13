@@ -102,7 +102,7 @@
     "wait-on": "7.2.0"
   },
   "resolutions": {
-    "@types/react": "17.0.66"
+    "@types/react": "17.0.73"
   },
   "nyc": {
     "exclude": [
