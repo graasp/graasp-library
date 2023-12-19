@@ -52,6 +52,12 @@ export const getServerSideProps: GetServerSideProps<Props, Params> = async ({
         }).then((data) => {
           return JSON.parse(JSON.stringify(data));
         }),
+        Api.getPublicProfile(id, {
+          ...QUERY_CLIENT_OPTIONS,
+          axios,
+        }).then((data) => {
+          return JSON.parse(JSON.stringify(data));
+        }),
       ]),
     );
   }

@@ -3,13 +3,14 @@ import dynamic from 'next/dynamic';
 import { FC, useContext } from 'react';
 
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import PublicRoundedIcon from '@mui/icons-material/PublicRounded';
 import Box from '@mui/material/Box';
 
 import { MEMBER_AVATAR_ICON_SIZE } from '../../config/constants';
 import { GRAASP_ACCOUNT_HOST } from '../../config/env';
 import { useLibraryTranslation } from '../../config/i18n';
 import { SIGN_IN_ROUTE } from '../../config/paths';
-import { MY_LIKED_ITEMS_ROUTE } from '../../config/routes';
+import { MY_LIKED_ITEMS_ROUTE, buildMemberRoute } from '../../config/routes';
 import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
 import MemberAvatar from './MemberAvatar';
@@ -33,6 +34,11 @@ const UserSwitchWrapper: FC<Props> = ({ ButtonContent }) => {
 
   const userItems = [
     {
+      icon: <PublicRoundedIcon fontSize="large" />,
+      text: t(LIBRARY.PUBLIC_PROFILE),
+      redirect_path: buildMemberRoute(member?.id),
+    },
+    {
       icon: <FavoriteIcon fontSize="large" />,
       text: t(LIBRARY.LIKED_ITEMS),
       redirect_path: MY_LIKED_ITEMS_ROUTE,
@@ -47,6 +53,7 @@ const UserSwitchWrapper: FC<Props> = ({ ButtonContent }) => {
         currentMember={member}
         isCurrentMemberLoading={isLoading}
         profilePath={GRAASP_ACCOUNT_HOST}
+        seeProfileText={t(LIBRARY.PROFILE_SETTINGS)}
         redirectPath={SIGN_IN_ROUTE}
         renderAvatar={(m) => (
           <MemberAvatar

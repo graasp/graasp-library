@@ -74,5 +74,7 @@
   "SIGN_IN_MODAL_CLOSE_BUTTON_ARIA_LABEL": "إغلاق مشروط تسجيل الدخول",
   "VIEW_BUTTON_TOOLTIP": "عرض العنصر",
   "SHARED_ITEMS_LABEL": "العناصر المنشورة",
-  "OWN_ITEMS_LABEL": "العناصر المملوكة"
+  "OWN_ITEMS_LABEL": "العناصر المملوكة",
+  "PUBLIC_PROFILE": "الحساب العام",
+  "PROFILE_SETTINGS": "إعدادات الحساب الشخصي"
 }
