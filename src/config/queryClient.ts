@@ -3,7 +3,7 @@ import notifier from './notifier';
 
 // eslint-disable-next-line import/prefer-default-export
 export const QUERY_CLIENT_OPTIONS = {
-  API_HOST: GRAASP_API_HOST!,
+  API_HOST: GRAASP_API_HOST,
   // cannot be enabled because of ssr
   enableWebsocket: false,
   defaultQueryOptions: {
