@@ -1,6 +1,7 @@
 import { Context } from '@graasp/sdk';
 
 import {
+  GRAASP_ACCOUNT_HOST,
   GRAASP_ANALYTICS_HOST,
   GRAASP_AUTH_HOST,
   GRAASP_BUILDER_HOST,
@@ -12,6 +13,8 @@ export const SIGN_UP_ROUTE = `${GRAASP_AUTH_HOST}/signup`;
 
 export const buildPlayerViewItemRoute = (id = ':id') =>
   `${GRAASP_PLAYER_HOST}/${id}`;
+
+export const publicProfileAccountPath = `${GRAASP_ACCOUNT_HOST}/public-profile`;
 
 export const HOST_MAP = {
   [Context.Builder]: GRAASP_BUILDER_HOST,

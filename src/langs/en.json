@@ -120,6 +120,8 @@
   "PUBLISHED_COLLECTIONS": "Published Collections",
   "LIKED_ITEMS": "Liked Items",
   "SIGNIN_MESSAGE": "You need to sign in First",
-  "PUBLIC_PROFILE": "Public Profile",
-  "PROFILE_SETTINGS": "Profile Settings"
+  "PUBLIC_PROFILE": "My Collections",
+  "PROFILE_SETTINGS": "Profile",
+  "EDIT": "Edit",
+  "SOCIAL_PROFILES": "Social Profiles"
 }

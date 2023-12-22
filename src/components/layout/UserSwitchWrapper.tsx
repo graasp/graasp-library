@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import { FC, useContext } from 'react';
 
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import PublicRoundedIcon from '@mui/icons-material/PublicRounded';
+import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 import Box from '@mui/material/Box';
 
 import { MEMBER_AVATAR_ICON_SIZE } from '../../config/constants';
@@ -34,7 +34,7 @@ const UserSwitchWrapper: FC<Props> = ({ ButtonContent }) => {
 
   const userItems = [
     {
-      icon: <PublicRoundedIcon fontSize="large" />,
+      icon: <LocalLibraryIcon fontSize="large" />,
       text: t(LIBRARY.PUBLIC_PROFILE),
       redirect_path: buildMemberRoute(member?.id),
     },
@@ -53,7 +53,6 @@ const UserSwitchWrapper: FC<Props> = ({ ButtonContent }) => {
         currentMember={member}
         isCurrentMemberLoading={isLoading}
         profilePath={GRAASP_ACCOUNT_HOST}
-        seeProfileText={t(LIBRARY.PROFILE_SETTINGS)}
         redirectPath={SIGN_IN_ROUTE}
         renderAvatar={(m) => (
           <MemberAvatar
