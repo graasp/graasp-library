@@ -1,3 +1,5 @@
+'use client';
+
 import { ErrorBoundary } from '@sentry/nextjs';
 
 import { Trans } from 'react-i18next';

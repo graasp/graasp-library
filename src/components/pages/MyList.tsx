@@ -1,3 +1,5 @@
+'use client';
+
 import dynamic from 'next/dynamic';
 
 import React, { useContext } from 'react';
@@ -6,13 +8,11 @@ import { Box, Container, Skeleton, Typography } from '@mui/material';
 
 import { Context } from '@graasp/sdk';
 
-import { APP_AUTHOR } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';
 import { ERROR_UNAUTHORIZED_CODE } from '../../config/messages';
 import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
 import Error from '../common/Error';
-import Seo from '../common/Seo';
 import useHeader from '../layout/useHeader';
 import MyLikes from './MyLikes';
 
@@ -22,7 +22,7 @@ const { Main } = {
   }),
 };
 
-const MyList = () => {
+const MyList = (): JSX.Element | null => {
   const { t } = useLibraryTranslation();
   const { leftContent, rightContent } = useHeader();
   const { hooks } = useContext(QueryClientContext);
@@ -31,25 +31,18 @@ const MyList = () => {
 
   if (member && member.id) {
     return (
-      <>
-        <Seo
-          title={t(LIBRARY.GRAASP_LIBRARY)}
-          description={t(LIBRARY.GRAASP_LIBRARY_DESCRIPTION)}
-          author={APP_AUTHOR}
-        />
-        <Main
-          context={Context.Library}
-          headerLeftContent={leftContent}
-          headerRightContent={rightContent}
-        >
-          <Container maxWidth="xl" sx={{ my: 5 }}>
-            <Typography variant="h5">{t(LIBRARY.LIKED_ITEMS)}</Typography>
-            <Box sx={{ mt: 4 }}>
-              <MyLikes />
-            </Box>
-          </Container>
-        </Main>
-      </>
+      <Main
+        context={Context.Library}
+        headerLeftContent={leftContent}
+        headerRightContent={rightContent}
+      >
+        <Container maxWidth="xl" sx={{ my: 5 }}>
+          <Typography variant="h5">{t(LIBRARY.LIKED_ITEMS)}</Typography>
+          <Box sx={{ mt: 4 }}>
+            <MyLikes />
+          </Box>
+        </Container>
+      </Main>
     );
   }
 

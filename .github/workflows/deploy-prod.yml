@@ -42,8 +42,6 @@ jobs:
       next-public-graasp-perform-host: ${{ secrets.PLAYER_CLIENT_HOST_PROD }}
       next-public-graasper-id: ${{ secrets.NEXT_PUBLIC_GRAASPER_ID }}
       next-public-show-notifications: ${{ secrets.NEXT_PUBLIC_SHOW_NOTIFICATIONS }}
-      # to be removed ! we do not use it anymore
-      next-public-published-tag-id: ${{ secrets.NEXT_PUBLIC_PUBLISHED_TAG_ID }}
       next-public-sentry-dsn: ${{ secrets.SENTRY_DSN }}
       next-public-sentry-env: production
       port: ${{ secrets.PORT }}

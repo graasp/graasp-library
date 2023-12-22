@@ -1,3 +1,5 @@
+'use client';
+
 import dynamic from 'next/dynamic';
 
 import { useContext } from 'react';
@@ -6,7 +8,6 @@ import { Box, Skeleton, Stack, Typography } from '@mui/material';
 
 import { Context } from '@graasp/sdk';
 
-import { APP_AUTHOR } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';
 import { ERROR_UNEXPECTED_ERROR_CODE } from '../../config/messages';
 import { MENU_BUTTON_ID } from '../../config/selectors';
@@ -14,7 +15,6 @@ import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
 import CollectionsGrid from '../collection/CollectionsGrid';
 import Error from '../common/Error';
-import Seo from '../common/Seo';
 import useHeader from '../layout/useHeader';
 import BioSection from '../member/BioSection';
 
@@ -38,46 +38,39 @@ const Member = ({ id }: Props) => {
 
   if (data && id) {
     return (
-      <>
-        <Seo
-          title={t(LIBRARY.GRAASP_LIBRARY)}
-          description={t(LIBRARY.GRAASP_LIBRARY_DESCRIPTION)}
-          author={APP_AUTHOR}
-        />
-        <Main
-          context={Context.Library}
-          menuButtonId={MENU_BUTTON_ID}
-          headerLeftContent={leftContent}
-          headerRightContent={rightContent}
+      <Main
+        context={Context.Library}
+        menuButtonId={MENU_BUTTON_ID}
+        headerLeftContent={leftContent}
+        headerRightContent={rightContent}
+      >
+        <Stack
+          maxWidth="xl"
+          marginX="auto"
+          alignItems="flex-start"
+          justifyItems="flex-start"
+          justifySelf="center"
+          marginTop={2}
+          padding={3}
         >
-          <Stack
-            maxWidth="xl"
-            marginX="auto"
-            alignItems="flex-start"
-            justifyItems="flex-start"
-            justifySelf="center"
-            marginTop={2}
-            padding={3}
-          >
-            <BioSection
-              memberData={data}
-              id={id}
-              isOwnProfile={member?.id === id}
-            />
-            <Box>
-              <Typography variant="h6" fontWeight="bold" sx={{ mb: 4 }}>
-                {t(LIBRARY.PUBLISHED_COLLECTIONS)}
-              </Typography>
+          <BioSection
+            memberData={data}
+            id={id}
+            isOwnProfile={member?.id === id}
+          />
+          <Box>
+            <Typography variant="h6" fontWeight="bold" sx={{ mb: 4 }}>
+              {t(LIBRARY.PUBLISHED_COLLECTIONS)}
+            </Typography>
 
-              <CollectionsGrid
-                collections={memberPublishedItems}
-                isLoading={isLoading}
-                containerWidth="xl"
-              />
-            </Box>
-          </Stack>
-        </Main>
-      </>
+            <CollectionsGrid
+              collections={memberPublishedItems}
+              isLoading={isLoading}
+              containerWidth="xl"
+            />
+          </Box>
+        </Stack>
+      </Main>
     );
   }
 

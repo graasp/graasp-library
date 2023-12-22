@@ -1,3 +1,5 @@
+'use client';
+
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
@@ -9,11 +11,10 @@ import { Box, Button, styled } from '@mui/material';
 import { Context } from '@graasp/sdk';
 
 import {
-  APP_AUTHOR,
   GRAASP_COLOR,
   HOMEPAGE_NB_ELEMENTS_TO_SHOW,
 } from '../../config/constants';
-import { NEXT_PUBLIC_GRAASPER_ID } from '../../config/env';
+import { GRAASPER_ID } from '../../config/env';
 import { useLibraryTranslation } from '../../config/i18n';
 import { ALL_COLLECTIONS_ROUTE } from '../../config/routes';
 import {
@@ -25,22 +26,17 @@ import {
 import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
 import ItemCollection from '../collection/ItemCollection';
-import Seo from '../common/Seo';
 import HomeHeader from '../layout/HomeHeader';
 import useHeader from '../layout/useHeader';
 
-const { Main } = {
+const { LibraryIcon, Main } = {
+  LibraryIcon: dynamic(
+    () => import('@graasp/ui').then((mod) => mod.LibraryIcon),
+    { ssr: false },
+  ),
   Main: dynamic(() => import('@graasp/ui').then((mod) => mod.Main), {
     ssr: false,
   }),
-};
-const { LibraryIcon } = {
-  LibraryIcon: dynamic(
-    () => import('@graasp/ui').then((mod) => mod.LibraryIcon),
-    {
-      ssr: false,
-    },
-  ),
 };
 
 const PATTERN_OPACITY = 0.7;
@@ -82,9 +78,8 @@ const Home = () => {
   const { leftContent, rightContent } = useHeader();
   const { hooks } = useContext(QueryClientContext);
 
-  const { data: graasperCollections } = hooks.usePublishedItemsForMember(
-    NEXT_PUBLIC_GRAASPER_ID,
-  );
+  const { data: graasperCollections } =
+    hooks.usePublishedItemsForMember(GRAASPER_ID);
   const { data: mostLikedCollections } = hooks.useMostLikedPublishedItems({
     limit: HOMEPAGE_NB_ELEMENTS_TO_SHOW,
   });
@@ -94,11 +89,6 @@ const Home = () => {
 
   return (
     <StyledBackgroundContainer>
-      <Seo
-        title={t(LIBRARY.GRAASP_LIBRARY)}
-        description={t(LIBRARY.GRAASP_LIBRARY_DESCRIPTION)}
-        author={APP_AUTHOR}
-      />
       <Main
         context={Context.Library}
         headerLeftContent={leftContent}

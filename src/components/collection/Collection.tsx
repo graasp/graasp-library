@@ -1,3 +1,5 @@
+'use client';
+
 import { ErrorBoundary } from '@sentry/nextjs';
 import dynamic from 'next/dynamic';
 import { validate } from 'uuid';
@@ -8,14 +10,12 @@ import { Box } from '@mui/material';
 
 import { Context } from '@graasp/sdk';
 
-import { DEFAULT_ITEM_IMAGE_PATH } from '../../config/constants';
 import {
   ERROR_INVALID_COLLECTION_ID_CODE,
   ERROR_UNEXPECTED_ERROR_CODE,
 } from '../../config/messages';
 import { QueryClientContext } from '../QueryClientContext';
 import Error from '../common/Error';
-import Seo from '../common/Seo';
 import useHeader from '../layout/useHeader';
 import UnpublishedItemAlert from './UnpublishedItemAlert';
 import Summary from './summary/Summary';
@@ -93,20 +93,8 @@ const Collection = ({ id }: Props) => {
 
   const isLoading = isLoadingItem;
 
-  const name = collection?.name || '';
-  const parsedDescription = collection?.description || '';
-  const author = collection?.creator?.name || '';
-  // todo: handle image
-  const imageUrl = DEFAULT_ITEM_IMAGE_PATH;
-
   return (
     <ErrorBoundary>
-      <Seo
-        title={name}
-        description={parsedDescription}
-        author={author}
-        image={imageUrl}
-      />
       <Main
         context={Context.Library}
         headerLeftContent={leftContent}

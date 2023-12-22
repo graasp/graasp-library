@@ -1,5 +1,7 @@
+'use client';
+
 import dynamic from 'next/dynamic';
-import { useRouter } from 'next/router';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import React, { useContext, useEffect, useState } from 'react';
 import { Trans } from 'react-i18next';
@@ -17,7 +19,7 @@ import {
 
 import { Context } from '@graasp/sdk';
 
-import { APP_AUTHOR, UrlSearch } from '../../config/constants';
+import { UrlSearch } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';
 import {
   ALL_COLLECTIONS_GRID_ID,
@@ -28,7 +30,6 @@ import LIBRARY from '../../langs/constants';
 import { ItemOrSearchedItem } from '../../utils/types';
 import { QueryClientContext } from '../QueryClientContext';
 import CollectionsGrid from '../collection/CollectionsGrid';
-import Seo from '../common/Seo';
 import FilterHeader from '../filters/FilterHeader';
 import useHeader from '../layout/useHeader';
 
@@ -44,7 +45,8 @@ type AllCollectionsProps = {};
 const AllCollections: React.FC<AllCollectionsProps> = () => {
   const { t } = useLibraryTranslation();
   const { hooks } = useContext(QueryClientContext);
-  const router = useRouter();
+  const params = useSearchParams();
+  const { replace } = useRouter();
 
   const [filters, setFilters] = useState<string[][]>([]);
   const [shouldIncludeContent, setShouldIncludeContent] =
@@ -65,20 +67,15 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
   });
 
   useEffect(() => {
-    const { query } = router;
-    if (query) {
-      if (query[UrlSearch.KeywordSearch]) {
-        const keywordSearch = query[UrlSearch.KeywordSearch];
-        if (keywordSearch && !Array.isArray(keywordSearch)) {
-          setSearchKeywords(keywordSearch);
-        }
+    if (params) {
+      const keywordSearch = params.get(UrlSearch.KeywordSearch);
+      if (keywordSearch && !Array.isArray(keywordSearch)) {
+        setSearchKeywords(keywordSearch);
       }
-      if (query[UrlSearch.CategorySearch]) {
-        const categoryId = query[UrlSearch.CategorySearch];
-        // todo: this only works when one category is given
-        if (categoryId) {
-          setFilters(Array.isArray(categoryId) ? [categoryId] : [[categoryId]]);
-        }
+      const categoryId = params.get(UrlSearch.CategorySearch);
+      // todo: this only works when one category is given
+      if (categoryId) {
+        setFilters(Array.isArray(categoryId) ? [categoryId] : [[categoryId]]);
       }
     }
   }, []);
@@ -110,7 +107,7 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
     // clear search query params
     const url = new URL(window.location.toString());
     url.searchParams.delete(UrlSearch.KeywordSearch);
-    router.replace(url);
+    replace(url.toString());
   };
 
   const hitsNumber =
@@ -119,11 +116,6 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
 
   return (
     <>
-      <Seo
-        title={t(LIBRARY.GRAASP_LIBRARY)}
-        description={t(LIBRARY.GRAASP_LIBRARY_DESCRIPTION)}
-        author={APP_AUTHOR}
-      />
       {/* todo: allow main to get custom header */}
       <Main
         context={Context.Library}

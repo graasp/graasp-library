@@ -68,6 +68,7 @@ const FilterPopper = React.forwardRef<HTMLDivElement, FilterPopperProps>(
         style={{ zIndex: 4 }}
         transition
       >
+        {/* @ts-ignore */}
         {({ TransitionProps }: { TransitionProps: MUITransitionProps }) => (
           // eslint-disable-next-line react/jsx-props-no-spreading
           <Grow {...TransitionProps}>
