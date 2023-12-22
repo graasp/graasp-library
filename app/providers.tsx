@@ -41,7 +41,7 @@ export default function Providers(props: { children: React.ReactNode }) {
       setCurrentPathState({ pathname, searchParams });
 
       // remove cross domain tracking query params
-      const params = new URLSearchParams(searchParams);
+      const params = new URLSearchParams(searchParams ?? {});
       params.delete(UrlSearch.GACrossDomainKey);
       // todo: check replace correctly
       // add back shallow

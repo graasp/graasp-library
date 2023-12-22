@@ -1,20 +1,10 @@
-// import { useRouter } from 'next/navigation';
-// import { useEffect } from 'react';
-// import ReactGA from 'react-ga4';
-// import { hasAcceptedCookies } from '@graasp/sdk';
-// import { ENV, UrlSearch } from '../src/config/constants';
-// import createEmotionCache from '../src/config/createEmotionCache';
-// import { GA_MEASUREMENT_ID, NODE_ENV } from '../src/config/env';
-// Client-side cache, shared for the whole session of the user in the browser.
-// const clientSideEmotionCache = createEmotionCache();
-// import { Api, DATA_KEYS, configureQueryClient } from '@graasp/query-client';
 import Head from 'next/head';
 
 import { dehydrate } from 'react-query/core';
 
 import Hydrate from '../../../src/components/HydrateClient';
-import Collection from '../../../src/components/collection/Collection';
 import Wrapper from '../../../src/components/common/Wrapper';
+import Member from '../../../src/components/pages/Member';
 import { APP_AUTHOR } from '../../../src/config/constants';
 import getQueryClient from '../../../src/config/get-query-client';
 import LIBRARY from '../../../src/langs/constants';
@@ -42,17 +32,32 @@ export async function generateMetadata() {
   });
 }
 
+// This gets called on every request
 const Page = async ({ params: { id } }: { params: { id: string } }) => {
+  // const id = params?.id;
+  // const { queryClient, dehydrate, axios } =
+  //   configureQueryClient(QUERY_CLIENT_OPTIONS);
+  // if (id) {
+  //   // prefetch data in query client
+  //   await queryClient.prefetchQuery(DATA_KEYS.buildItemKey(id), () =>
+  //     Promise.all([
+  //       Api.getMember({ id }, { ...QUERY_CLIENT_OPTIONS, axios }).then(
+  //         (data) => {
+  //           return JSON.parse(JSON.stringify(data));
+  //         },
+  //       ),
+  //       Api.getPublishedItemsForMember(id, {
+  //         ...QUERY_CLIENT_OPTIONS,
+  //         axios,
+  //       }).then((data) => {
+  //         return JSON.parse(JSON.stringify(data));
+  //       }),
+  //     ]),
+  //   );
+  // }
+
   const queryClient = getQueryClient();
   const dehydratedState = dehydrate(queryClient);
-
-  //   if (id) {
-  //     // prefetch data in query client
-
-  //   await queryClient.prefetchQuery(DATA_KEYS.buildItemKey(id), () =>
-  //   Api.getItem(id, { ...QUERY_CLIENT_OPTIONS, axios }),
-  // );
-  //   }
 
   return (
     <>
@@ -65,10 +70,11 @@ const Page = async ({ params: { id } }: { params: { id: string } }) => {
       </Head>
       <Hydrate state={dehydratedState}>
         <Wrapper dehydratedState={dehydratedState}>
-          <Collection id={id} />
+          <Member id={id} />
         </Wrapper>
       </Hydrate>
     </>
   );
 };
+
 export default Page;

@@ -1,3 +1,5 @@
+'use client';
+
 import dynamic from 'next/dynamic';
 
 import { useContext } from 'react';
@@ -6,7 +8,6 @@ import { Box, Stack, Typography } from '@mui/material';
 
 import { Context } from '@graasp/sdk';
 
-import { APP_AUTHOR } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';
 import { ERROR_UNEXPECTED_ERROR_CODE } from '../../config/messages';
 import { MENU_BUTTON_ID } from '../../config/selectors';
@@ -15,7 +16,6 @@ import { QueryClientContext } from '../QueryClientContext';
 import CollectionsGrid from '../collection/CollectionsGrid';
 import BackButton from '../common/BackButton';
 import Error from '../common/Error';
-import Seo from '../common/Seo';
 import useHeader from '../layout/useHeader';
 
 interface Props {
@@ -54,11 +54,11 @@ const Member = ({ id }: Props) => {
   }
   return (
     <>
-      <Seo
+      {/* <Seo
         title={t(LIBRARY.GRAASP_LIBRARY)}
         description={t(LIBRARY.GRAASP_LIBRARY_DESCRIPTION)}
         author={APP_AUTHOR}
-      />
+      /> */}
       <Main
         context={Context.Library}
         menuButtonId={MENU_BUTTON_ID}
