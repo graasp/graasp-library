@@ -47,7 +47,7 @@ const Wrapper = ({
     >
       <QueryClientProvider dehydratedState={dehydratedState}>
         <TranslationWrapper>
-          <Box flexGrow={1} sx={sx}>
+          <Box flexGrow={1} bgcolor="rgb(248, 247, 254)" sx={sx}>
             <Content>{children}</Content>
           </Box>
           <Footer />
