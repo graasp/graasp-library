@@ -38,14 +38,14 @@ const Search = forwardRef<HTMLDivElement, SearchProps>(function Search(
   };
 
   const handleSearch = () => {
-    handleClick(searchInput.trim().toLowerCase());
+    handleClick(searchInput.trim());
   };
 
   const handleSearchOnClick = (
     event: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     if (event.code === 'Enter') {
-      handleClick(searchInput.trim().toLowerCase());
+      handleClick(searchInput.trim());
     }
   };
 
