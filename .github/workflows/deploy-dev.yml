@@ -16,7 +16,7 @@ jobs:
   graasp-deploy-ecs-workflow:
     name: Graasp Library
     # Reference reusable workflow file. Using the commit SHA is the safest for stability and security
-    uses: graasp/graasp-deploy/.github/workflows/library-deploy-dev.yml@library-env-build
+    uses: graasp/graasp-deploy/.github/workflows/library-deploy-dev.yml@v1
     # abort previous deployment if a newer one is in progress
     concurrency:
       group: deploy-development
