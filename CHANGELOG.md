@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/graasp/graasp-library/compare/v1.2.1...v1.3.0) (2024-01-09)
+
+
+### Features
+
+* add public profile ([#463](https://github.com/graasp/graasp-library/issues/463)) ([e56aa1b](https://github.com/graasp/graasp-library/commit/e56aa1ba168770e6bb90032a741fa80c53e96f49))
+
+
+### Bug Fixes
+
+* add plural and singular forms for search results ([35fdd8d](https://github.com/graasp/graasp-library/commit/35fdd8d5deac8b265e427b0be6671540ba6bdf5d))
+* bg color missing issue ([35fdd8d](https://github.com/graasp/graasp-library/commit/35fdd8d5deac8b265e427b0be6671540ba6bdf5d))
+* keep search case when navigating ([#470](https://github.com/graasp/graasp-library/issues/470)) ([35fdd8d](https://github.com/graasp/graasp-library/commit/35fdd8d5deac8b265e427b0be6671540ba6bdf5d))
+* remove branch from deploy dev workflow ([#472](https://github.com/graasp/graasp-library/issues/472)) ([0d2d787](https://github.com/graasp/graasp-library/commit/0d2d7876464deb7536ebfe63ac1e4192fc549b9b))
+* update german translations ([#468](https://github.com/graasp/graasp-library/issues/468)) ([31893f7](https://github.com/graasp/graasp-library/commit/31893f72abbdaef3b7abd75ae1e8b674f462ceb1))
+
 ## [1.2.1](https://github.com/graasp/graasp-library/compare/v1.2.0...v1.2.1) (2023-12-11)
 
 
