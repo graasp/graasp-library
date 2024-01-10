@@ -24,7 +24,7 @@
     "postinstall": "husky install",
     "post-commit": "git status",
     "pre-commit": "yarn check",
-    "cypress:open": "env-cmd -f ./.env.local cypress open",
+    "cypress:open": "env-cmd -f ./.env.test cypress open",
     "cypress": "concurrently -k -s first \"yarn start:test\" \"wait-on http://localhost:3005 && yarn cypress:run\"",
     "cypress:run": "env-cmd -f ./.env.test cypress run --headless --browser chrome --spec \"cypress/**/*.(spec|cy).js\""
   },
