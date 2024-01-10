@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.1](https://github.com/graasp/graasp-library/compare/v1.3.0...v1.3.1) (2024-01-10)
+
+
+### Bug Fixes
+
+* **deps:** update dependency next to v14.0.4 ([e968fa5](https://github.com/graasp/graasp-library/commit/e968fa5c3d19a88521f4f1860828376849071beb))
+* **deps:** update dependency react-router-dom to v6.20.1 ([#457](https://github.com/graasp/graasp-library/issues/457)) ([a4506a6](https://github.com/graasp/graasp-library/commit/a4506a6119465365853e6ea637463a74d3415459))
+* set white background in collection view ([#479](https://github.com/graasp/graasp-library/issues/479)) ([13d017e](https://github.com/graasp/graasp-library/commit/13d017e416d255b7951a7825fac25fe1604f6c2d))
+
 ## [1.3.0](https://github.com/graasp/graasp-library/compare/v1.2.1...v1.3.0) (2024-01-09)
 
 
