@@ -64,7 +64,7 @@ const Page = async ({ params: { id } }: { params: { id: string } }) => {
         />
       </Head>
       <Hydrate state={dehydratedState}>
-        <Wrapper dehydratedState={dehydratedState}>
+        <Wrapper dehydratedState={dehydratedState} bgcolor="white">
           <Collection id={id} />
         </Wrapper>
       </Hydrate>

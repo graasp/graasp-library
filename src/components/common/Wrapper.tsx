@@ -33,10 +33,12 @@ const Wrapper = ({
   dehydratedState,
   children,
   sx,
+  bgcolor = 'rgb(248, 247, 254)',
 }: {
   children: JSX.Element;
   dehydratedState: DehydratedState;
   sx?: SxProps;
+  bgcolor?: string;
 }) => {
   return (
     <Stack
@@ -47,7 +49,7 @@ const Wrapper = ({
     >
       <QueryClientProvider dehydratedState={dehydratedState}>
         <TranslationWrapper>
-          <Box flexGrow={1} bgcolor="rgb(248, 247, 254)" sx={sx}>
+          <Box flexGrow={1} bgcolor={bgcolor} sx={sx}>
             <Content>{children}</Content>
           </Box>
           <Footer />

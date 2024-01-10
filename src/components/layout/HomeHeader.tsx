@@ -49,6 +49,7 @@ const PopularSearchItem = ({ text }: PopularSearchItemProps): JSX.Element => {
         color: theme.palette.primary.contrastText,
         borderColor: theme.palette.primary.contrastText,
         ':hover': {
+          cursor: 'pointer',
           backgroundColor: 'rgba(0, 0, 0, 0.2)',
         },
       }}
