@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import { SocialLinks } from 'social-links';
 
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 
 import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -36,17 +36,24 @@ const StyledBox = styled(Box)(({ theme }) => ({
   alignItems: 'start',
   padding: theme.spacing(3),
   marginBottom: theme.spacing(3),
+  width: '100%',
   [theme.breakpoints.down('sm')]: {
     flexWrap: 'wrap',
     justifyContent: 'center',
   },
 }));
 
+const contentLinesToShow = 3;
+
 const BioSection = ({ id, memberData, isOwnProfile }: Props) => {
   const { t } = useLibraryTranslation();
   const [collapsedDescription, setCollapsedDescription] = useState(true);
+  const [isBioClamped, setIsBioClamped] = useState(false);
+
   const { hooks } = useContext(QueryClientContext);
   const { data: publicProfile } = hooks.usePublicProfile(id || '');
+
+  const contentRef = useRef<HTMLDivElement>(null);
 
   const { data: authorUrl, isLoading: isLoadingAuthorAvatar } =
     hooks.useAvatarUrl({
@@ -57,12 +64,29 @@ const BioSection = ({ id, memberData, isOwnProfile }: Props) => {
     setCollapsedDescription(!collapsedDescription);
   };
 
+  useEffect(() => {
+    // check if text is more than content number of lines to control show less/more button
+    if (contentRef.current && publicProfile?.bio) {
+      const lineHeight = parseInt(
+        window
+          .getComputedStyle(contentRef.current)
+          .getPropertyValue('line-height'),
+        10,
+      );
+      const elementHeight = contentRef.current.offsetHeight;
+      const calculatedLines = Math.floor(elementHeight / lineHeight);
+
+      setIsBioClamped(calculatedLines >= contentLinesToShow);
+    }
+  }, [contentRef, publicProfile?.bio]);
+
   return (
     <Stack
       maxWidth="lg"
       alignItems="flex-start"
       justifyItems="flex-start"
       marginTop={2}
+      width="100%"
     >
       <BackButton />
 
@@ -81,11 +105,12 @@ const BioSection = ({ id, memberData, isOwnProfile }: Props) => {
           isLoading={isLoadingAuthorAvatar}
           component="avatar"
         />
-        <Box>
+        <Box width="100%">
           <Box
             display="flex"
             alignItems="center"
             justifyContent="space-between"
+            flex={2}
           >
             <Box display="flex" alignItems="center" gap={2}>
               <Typography variant="h3" textTransform="capitalize">
@@ -97,22 +122,25 @@ const BioSection = ({ id, memberData, isOwnProfile }: Props) => {
             )}
           </Box>
 
-          <Box my={2}>
-            <ContentDescription
-              content={publicProfile?.bio}
-              collapsed={collapsedDescription}
-              numberOfLinesToShow={3}
-            />
-
-            <Button
-              sx={{ minWidth: 'max-content' }}
-              size="small"
-              onClick={handleShowMoreButton}
-            >
-              {collapsedDescription
-                ? t(LIBRARY.SUMMARY_DESCRIPTION_SHOW_MORE)
-                : t(LIBRARY.SUMMARY_DESCRIPTION_SHOW_LESS)}
-            </Button>
+          <Box my={2} width="100%">
+            <Box ref={contentRef}>
+              <ContentDescription
+                content={publicProfile?.bio}
+                collapsed={collapsedDescription}
+                numberOfLinesToShow={contentLinesToShow}
+              />
+            </Box>
+            {publicProfile?.bio && isBioClamped && (
+              <Button
+                sx={{ minWidth: 'max-content' }}
+                size="small"
+                onClick={handleShowMoreButton}
+              >
+                {collapsedDescription
+                  ? t(LIBRARY.SUMMARY_DESCRIPTION_SHOW_MORE)
+                  : t(LIBRARY.SUMMARY_DESCRIPTION_SHOW_LESS)}
+              </Button>
+            )}
           </Box>
 
           {(publicProfile?.facebookID ||
