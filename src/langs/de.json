@@ -111,5 +111,8 @@
   "SUMMARY_ACTIONS_EMBED": "Einbetten",
   "FILTER_DROPDOWN_NO_FILTER": "Keine Filter…",
   "FILTER_DROPDOWN_CLEAR_FILTERS": "Löschen",
-  "FILTER_DROPDOWN_NO_CATEGORIES_AVAILABLE": "Keine Kategorien verfügbar"
+  "FILTER_DROPDOWN_NO_CATEGORIES_AVAILABLE": "Keine Kategorien verfügbar",
+  "ENABLE_IN_DEPTH_SEARCH_LABEL": "Tiefensuche aktivieren",
+  "SEARCH_NO_RESULTS": "Keine Ergebnisse für Ihre Suche",
+  "LIKED_ITEMS": "Gefallene Elemente"
 }
