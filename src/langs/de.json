@@ -113,6 +113,16 @@
   "FILTER_DROPDOWN_CLEAR_FILTERS": "Löschen",
   "FILTER_DROPDOWN_NO_CATEGORIES_AVAILABLE": "Keine Kategorien verfügbar",
   "ENABLE_IN_DEPTH_SEARCH_LABEL": "Tiefensuche aktivieren",
+  "SEE_MORE_RESULTS_SEARCH": "{{total}} weitere Ergebnisse anzeigen",
+  "SUGGESTION_TO_ENABLE_IN_DEPTH_SEARCH_TEXT": "Können Sie nicht finden, wonach Sie gesucht haben?<br/>Versuchen Sie, die Tiefensuche zu aktivieren, um Inhalte einzubeziehen",
   "SEARCH_NO_RESULTS": "Keine Ergebnisse für Ihre Suche",
-  "LIKED_ITEMS": "Gefallene Elemente"
+  "SEARCH_RESULTS_LOAD_MORE": "Mehr laden",
+  "CONTENT_CHIP": "Inhalt",
+  "PUBLISHED_COLLECTIONS": "Veröffentlichte Sammlungen",
+  "LIKED_ITEMS": "Gefallene Elemente",
+  "SIGNIN_MESSAGE": "Sie müssen sich zuerst anmelden",
+  "PUBLIC_PROFILE": "Meine Sammlungen",
+  "PROFILE_SETTINGS": "Profil",
+  "EDIT": "Bearbeiten",
+  "SOCIAL_PROFILES": "Profile in sozialen Netzwerken"
 }
