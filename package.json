@@ -33,7 +33,7 @@
     "@emotion/react": "11.11.3",
     "@emotion/server": "11.11.0",
     "@emotion/styled": "11.11.0",
-    "@graasp/query-client": "2.2.0",
+    "@graasp/query-client": "2.2.1",
     "@graasp/sdk": "3.3.0",
     "@graasp/translations": "1.21.0",
     "@graasp/ui": "4.1.1",
