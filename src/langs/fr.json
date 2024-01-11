@@ -118,6 +118,11 @@
   "SEARCH_NO_RESULTS": "Rien ne correspond à votre recherche",
   "SEARCH_RESULTS_LOAD_MORE": "Afficher plus",
   "CONTENT_CHIP": "Contenu",
+  "PUBLISHED_COLLECTIONS": "Collections publiées",
   "LIKED_ITEMS": "Collections aimées",
-  "SIGNIN_MESSAGE": "Vous devez d'abord vous connecter"
+  "SIGNIN_MESSAGE": "Vous devez d'abord vous connecter",
+  "PUBLIC_PROFILE": "Mes collections",
+  "PROFILE_SETTINGS": "Profil",
+  "EDIT": "Modifier",
+  "SOCIAL_PROFILES": "Profils sociaux"
 }
