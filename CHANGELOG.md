@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.2](https://github.com/graasp/graasp-library/compare/v1.3.1...v1.3.2) (2024-01-15)
+
+
+### Bug Fixes
+
+* **ar:** update ([#489](https://github.com/graasp/graasp-library/issues/489)) ([c834553](https://github.com/graasp/graasp-library/commit/c834553a1862cfd12acbcbe08743559351312f2f))
+* **deps:** update dependency @emotion/react to v11.11.3 ([44de7b7](https://github.com/graasp/graasp-library/commit/44de7b7b2b59c0d6fbef6340d8c3fd0b36f98619))
+* **deps:** update dependency @graasp/query-client to v2.2.1 ([a49f332](https://github.com/graasp/graasp-library/commit/a49f332b33ce88da6c2a174af91ac88a7ecf11c3))
+* **deps:** update dependency @graasp/sdk to v3.4.0 ([#493](https://github.com/graasp/graasp-library/issues/493)) ([e2f4228](https://github.com/graasp/graasp-library/commit/e2f4228d3a1a36e6482ec6dba86ae2344340e73d))
+* **deps:** update dependency @graasp/translations to v1.22.1 ([#485](https://github.com/graasp/graasp-library/issues/485)) ([01ae836](https://github.com/graasp/graasp-library/commit/01ae836f6a380c94ded48cf0f96ae58066dc763a))
+* **deps:** update dependency @graasp/ui to v4.2.0 ([#494](https://github.com/graasp/graasp-library/issues/494)) ([74dbb2e](https://github.com/graasp/graasp-library/commit/74dbb2eb5d23b34ba6c36f73d8f5886822397e65))
+* **deps:** update dependency @testing-library/jest-dom to v6.1.6 ([a889e28](https://github.com/graasp/graasp-library/commit/a889e281a91912e2327e87a4f386561a0736cb9b))
+* **deps:** update dependency stylis to v4.3.1 ([75f29b9](https://github.com/graasp/graasp-library/commit/75f29b95b8d44beca2915404df6aedfbc7cd34cb))
+* **de:** update ([#490](https://github.com/graasp/graasp-library/issues/490)) ([15d92f3](https://github.com/graasp/graasp-library/commit/15d92f35ffb78bbe30e0f1bfb634170cefecb745))
+* **es:** add spanish ([#488](https://github.com/graasp/graasp-library/issues/488)) ([d5702e8](https://github.com/graasp/graasp-library/commit/d5702e8ed3c17cab661fd7046b9ac795b8e8cf32))
+* **fr:** update ([#491](https://github.com/graasp/graasp-library/issues/491)) ([0359505](https://github.com/graasp/graasp-library/commit/0359505d2e0609c4fc5833e5647c40bb420b84fd))
+* **it:** update ([#492](https://github.com/graasp/graasp-library/issues/492)) ([acd404e](https://github.com/graasp/graasp-library/commit/acd404eba9848f8ed0f655aabb68410cea6bef9a))
+* use test env in cypress open and remove post-merge hook ([#487](https://github.com/graasp/graasp-library/issues/487)) ([31e89ba](https://github.com/graasp/graasp-library/commit/31e89bad03d0e4f4ccd0cdc1c08b1bd17d9b5581))
+
 ## [1.3.1](https://github.com/graasp/graasp-library/compare/v1.3.0...v1.3.1) (2024-01-10)
 
 
