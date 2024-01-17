@@ -91,8 +91,6 @@ const Collection = ({ id }: Props) => {
     );
   }
 
-  const isLoading = isLoadingItem;
-
   return (
     <ErrorBoundary>
       <Main
@@ -117,7 +115,8 @@ const Collection = ({ id }: Props) => {
         >
           <Summary
             collection={collection}
-            isLoading={isLoading}
+            publishedRoot={itemPublishEntry}
+            isLoading={isLoadingItem}
             totalViews={itemPublishEntry?.totalViews ?? 0}
           />
           {/* <Comments comments={comments} members={members} /> */}

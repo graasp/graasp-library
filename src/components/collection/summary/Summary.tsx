@@ -1,13 +1,12 @@
 import truncate from 'lodash.truncate';
 
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 
 import { Stack, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 
-import { CategoryType, DiscriminatedItem } from '@graasp/sdk';
-import { DEFAULT_LANG } from '@graasp/translations';
+import { DiscriminatedItem, ItemPublished } from '@graasp/sdk';
 
 import {
   ITEM_TYPES,
@@ -49,38 +48,22 @@ export const getParentsIdsFromPath = (
 
 type SummaryProps = {
   collection?: DiscriminatedItem;
+  publishedRoot?: ItemPublished;
   isLoading: boolean;
   totalViews: number;
 };
 
-const Summary: React.FC<SummaryProps> = ({
+const Summary = ({
   collection,
+  publishedRoot,
   isLoading,
   totalViews,
-}) => {
-  const { t } = useLibraryTranslation();
+}: SummaryProps): JSX.Element => {
+  const { t, i18n } = useLibraryTranslation();
   const { hooks } = useContext(QueryClientContext);
   const { data: member } = hooks.useCurrentMember();
 
-  const parents = getParentsIdsFromPath(collection?.path);
-  const { data: topLevelParent } = hooks.useItem(parents[0] ?? collection?.id);
-  const { data: itemCategories } = hooks.useItemCategories(
-    topLevelParent?.id ?? collection?.id,
-  );
-
-  const levels = itemCategories
-    ?.filter((c) => c.category.type === CategoryType.Level)
-    .map((c) => c.category);
-  const disciplines = itemCategories
-    ?.filter((c) => c.category.type === CategoryType.Discipline)
-    .map((c) => c.category);
-  const languages = itemCategories
-    ?.filter((c) => c.category.type === CategoryType.Language)
-    .map((c) => c.category);
-
-  const ccLicenseAdaption = topLevelParent
-    ? topLevelParent.settings?.ccLicenseAdaption
-    : collection?.settings?.ccLicenseAdaption;
+  const topLevelParent = publishedRoot?.item;
 
   const truncatedName = truncate(collection?.name, {
     length: MAX_COLLECTION_NAME_LENGTH,
@@ -123,14 +106,10 @@ const Summary: React.FC<SummaryProps> = ({
           {t(LIBRARY.SUMMARY_DETAILS_TITLE)}
         </Typography>
         <SummaryDetails
-          ccLicenseAdaption={ccLicenseAdaption}
-          createdAt={collection?.createdAt}
-          lastUpdate={collection?.updatedAt}
+          collection={collection}
+          publishedRootItem={topLevelParent}
           isLoading={isLoading}
-          lang={member?.extra?.lang || DEFAULT_LANG}
-          disciplines={disciplines}
-          languages={languages}
-          levels={levels}
+          lang={i18n.language}
         />
       </Container>
     </Stack>

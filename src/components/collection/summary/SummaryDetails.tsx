@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 
-import React from 'react';
+import React, { useContext } from 'react';
 
 import {
   Box,
@@ -13,11 +13,19 @@ import {
   styled,
 } from '@mui/material';
 
-import { Category, formatDate } from '@graasp/sdk';
+import {
+  Category,
+  CategoryType,
+  DiscriminatedItem,
+  formatDate,
+} from '@graasp/sdk';
 import { CCSharingVariant } from '@graasp/ui';
 
 import { CATEGORY_COLORS, UrlSearch } from '../../../config/constants';
-import { useLibraryTranslation } from '../../../config/i18n';
+import {
+  useCategoriesTranslation,
+  useLibraryTranslation,
+} from '../../../config/i18n';
 import { ALL_COLLECTIONS_ROUTE } from '../../../config/routes';
 import {
   SUMMARY_CATEGORIES_CONTAINER_ID,
@@ -28,6 +36,7 @@ import {
   SUMMARY_LAST_UPDATE_CONTAINER_ID,
 } from '../../../config/selectors';
 import LIBRARY from '../../../langs/constants';
+import { QueryClientContext } from '../../QueryClientContext';
 
 const { CreativeCommons } = {
   CreativeCommons: dynamic(
@@ -73,7 +82,7 @@ type CategoryChipProps = {
 };
 
 const CategoryChip = ({ category }: CategoryChipProps) => {
-  const { t } = useLibraryTranslation();
+  const { t } = useCategoriesTranslation();
   const router = useRouter();
 
   const handleCategorySearch = (categoryId: string) => {
@@ -97,27 +106,37 @@ const CategoryChip = ({ category }: CategoryChipProps) => {
 };
 
 type SummaryDetailsProps = {
-  createdAt?: string;
-  lastUpdate?: string;
+  collection?: DiscriminatedItem;
+  publishedRootItem?: DiscriminatedItem;
   lang: string;
-  languages?: Category[];
-  levels?: Category[];
-  disciplines?: Category[];
   isLoading: boolean;
-  ccLicenseAdaption: string | undefined;
 };
 
 const SummaryDetails: React.FC<SummaryDetailsProps> = ({
   isLoading,
-  createdAt,
-  lastUpdate,
   lang,
-  languages,
-  levels,
-  disciplines,
-  ccLicenseAdaption,
+  collection,
+  publishedRootItem,
 }) => {
   const { t } = useLibraryTranslation();
+  const { hooks } = useContext(QueryClientContext);
+  const { data: itemCategories } = hooks.useItemCategories(
+    publishedRootItem?.id,
+  );
+
+  const ccLicenseAdaption = publishedRootItem
+    ? publishedRootItem.settings?.ccLicenseAdaption
+    : collection?.settings?.ccLicenseAdaption;
+
+  const levels = itemCategories
+    ?.filter((c) => c.category.type === CategoryType.Level)
+    .map((c) => c.category);
+  const disciplines = itemCategories
+    ?.filter((c) => c.category.type === CategoryType.Discipline)
+    .map((c) => c.category);
+  const languages = itemCategories
+    ?.filter((c) => c.category.type === CategoryType.Language)
+    .map((c) => c.category);
 
   const { allowSharing, allowCommercialUse, requireAccreditation } =
     React.useMemo(
@@ -134,13 +153,13 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
     >
       <Grid item xs={12} sm={6} md={4}>
         <DetailCard>
-          {createdAt && (
+          {collection?.createdAt && (
             <div id={SUMMARY_CREATED_AT_CONTAINER_ID}>
               <Typography variant="body1" fontWeight="bold">
                 {t(LIBRARY.SUMMARY_DETAILS_CREATED_AT_TITLE)}
               </Typography>
               <Typography variant="body1" gutterBottom>
-                {formatDate(createdAt, { locale: lang })}
+                {formatDate(collection.createdAt, { locale: lang })}
               </Typography>
             </div>
           )}
@@ -148,13 +167,13 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
         <DetailCard>
-          {lastUpdate && (
+          {collection?.updatedAt && (
             <div id={SUMMARY_LAST_UPDATE_CONTAINER_ID}>
               <Typography variant="body1" fontWeight="bold">
                 {t(LIBRARY.SUMMARY_DETAILS_UPDATED_AT_TITLE)}
               </Typography>
               <Typography variant="body1" gutterBottom>
-                {formatDate(lastUpdate, { locale: lang })}
+                {formatDate(collection.updatedAt, { locale: lang })}
               </Typography>
             </div>
           )}
