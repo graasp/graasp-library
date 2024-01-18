@@ -64,6 +64,7 @@ export default function ThemeRegistry(props: Props) {
       <style
         key={cache.key}
         data-emotion={`${cache.key} ${names.join(' ')}`}
+        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{
           __html: styles,
         }}
