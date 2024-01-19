@@ -34,6 +34,7 @@ import {
   SUMMARY_CREATED_AT_CONTAINER_ID,
   SUMMARY_LANGUAGES_CONTAINER_ID,
   SUMMARY_LAST_UPDATE_CONTAINER_ID,
+  buildCategoryChipId,
 } from '../../../config/selectors';
 import LIBRARY from '../../../langs/constants';
 import { QueryClientContext } from '../../QueryClientContext';
@@ -95,6 +96,7 @@ const CategoryChip = ({ category }: CategoryChipProps) => {
     <Chip
       onClick={() => handleCategorySearch(category.id)}
       key={category.name}
+      id={buildCategoryChipId(category.name)}
       label={t(category.name)}
       sx={{
         color: CATEGORY_COLORS[category.type],

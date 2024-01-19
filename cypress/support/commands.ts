@@ -16,6 +16,7 @@ import {
   mockGetMember,
   mockGetMembers,
   mockGetOwnItems,
+  mockGetPublishItemInformations,
   mockSearch,
   mockSignInRedirection,
   mockSignOut,
@@ -64,6 +65,8 @@ Cypress.Commands.add(
     mockSignOut();
 
     mockGetCategories(categories, getCategoriesError);
+
+    mockGetPublishItemInformations(items);
 
     mockGetItemCategories({ items, currentMember }, getItemCategoriesError);
 

@@ -31,6 +31,7 @@ import {
 
 const {
   buildGetItemMembershipsForItemsRoute,
+  buildGetItemPublishedInformationRoute,
   buildGetItemRoute,
   buildGetItemTagsRoute,
   buildGetMember,
@@ -560,4 +561,23 @@ export const mockGetLikedItems = (
       return reply(results || []);
     },
   ).as('getLikedItemsForMember');
+};
+
+export const mockGetPublishItemInformations = (items: MockItem[]): void => {
+  cy.intercept(
+    {
+      method: HttpMethod.GET,
+      url: new RegExp(
+        `${API_HOST}/${buildGetItemPublishedInformationRoute(ID_FORMAT)}`,
+      ),
+    },
+    ({ reply, url }) => {
+      const itemId = url.slice(API_HOST.length).split('/')[3];
+      const item = items.find((i) => i?.id === itemId);
+      if (!item?.publishedInfo?.isPublished) {
+        return reply({ statusCode: StatusCodes.NOT_FOUND });
+      }
+      return reply({ item });
+    },
+  ).as('getPublishItemInformations');
 };
