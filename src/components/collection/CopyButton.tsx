@@ -5,7 +5,6 @@ import CircularProgress from '@mui/material/CircularProgress';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
-import { ROOT_ID } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';
 import {
   TREE_MODAL_MY_ITEMS_ID,
@@ -42,11 +41,10 @@ export const useCopyAction = (id?: string) => {
       ids: [id],
     };
 
-    payload.to = [
-      ROOT_ID,
-      TREE_MODAL_MY_ITEMS_ID,
-      TREE_MODAL_SHARED_ITEMS_ID,
-    ].includes(to)
+    // if the location to copy the item is MyItems or SharedItems root, then set the payload.to argument to be undefined
+    payload.to = [TREE_MODAL_MY_ITEMS_ID, TREE_MODAL_SHARED_ITEMS_ID].includes(
+      to,
+    )
       ? undefined
       : to;
 

@@ -6,12 +6,9 @@ import { Stack, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 
-import { DiscriminatedItem, ItemPublished } from '@graasp/sdk';
+import { DiscriminatedItem, ItemPublished, ItemType } from '@graasp/sdk';
 
-import {
-  ITEM_TYPES,
-  MAX_COLLECTION_NAME_LENGTH,
-} from '../../../config/constants';
+import { MAX_COLLECTION_NAME_LENGTH } from '../../../config/constants';
 import { useLibraryTranslation } from '../../../config/i18n';
 import LIBRARY from '../../../langs/constants';
 import { QueryClientContext } from '../../QueryClientContext';
@@ -88,7 +85,7 @@ const Summary = ({
         truncatedName={truncatedName}
         totalViews={totalViews}
       />
-      {collection?.type === ITEM_TYPES.FOLDER && (
+      {collection?.type === ItemType.FOLDER && (
         <>
           <Box sx={{ my: 4 }} />
           <Container maxWidth="lg">
