@@ -40,7 +40,7 @@ const ShowLessAndMoreContent = ({
           noHtml={!parseHtmlOnCollapse && isContentCollapsed}
         />
       </Box>
-      {content?.length && (
+      {content?.length > 0 && (
         <Button
           sx={{ minWidth: 'max-content' }}
           size="small"
