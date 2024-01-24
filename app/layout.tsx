@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 
 import ThemeRegistry from './ThemeRegistry';
@@ -8,9 +9,11 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
     // TODO: change lang
     <html lang="en">
       <body>
-        <Providers>
-          <ThemeRegistry options={{ key: 'mui' }}>{children}</ThemeRegistry>
-        </Providers>
+        <Suspense>
+          <Providers>
+            <ThemeRegistry options={{ key: 'mui' }}>{children}</ThemeRegistry>
+          </Providers>
+        </Suspense>
       </body>
     </html>
   );

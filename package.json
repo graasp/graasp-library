@@ -34,9 +34,9 @@
     "@emotion/server": "11.11.0",
     "@emotion/styled": "11.11.0",
     "@graasp/query-client": "2.2.1",
-    "@graasp/sdk": "3.4.1",
+    "@graasp/sdk": "github:graasp/graasp-sdk#build-with-vite",
     "@graasp/translations": "1.22.1",
-    "@graasp/ui": "4.2.0",
+    "@graasp/ui": "4.3.1",
     "@mui/icons-material": "5.14.19",
     "@mui/lab": "5.0.0-alpha.140",
     "@mui/material": "5.14.19",
@@ -45,6 +45,7 @@
     "@testing-library/react": "14.1.2",
     "@testing-library/user-event": "14.5.1",
     "@trivago/prettier-plugin-sort-imports": "4.3.0",
+    "date-fns": "3.3.1",
     "eslint-config-next": "14.0.4",
     "http-status-codes": "2.3.0",
     "i18next": "23.7.16",
@@ -53,8 +54,7 @@
     "lodash.isobject": "3.0.2",
     "lodash.isstring": "4.0.1",
     "lodash.truncate": "4.4.2",
-    "luxon": "3.4.4",
-    "next": "14.0.4",
+    "next": "14.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-ga4": "2.1.0",
@@ -73,7 +73,6 @@
     "@cypress/code-coverage": "3.12.18",
     "@types/lodash.groupby": "4.6.9",
     "@types/lodash.truncate": "4.4.9",
-    "@types/luxon": "3.3.8",
     "@types/node": "20.10.8",
     "@types/react": "18.2.47",
     "@types/react-dom": "18.2.18",
@@ -107,6 +106,9 @@
     "exclude": [
       "pages/api/__coverage__.js"
     ]
+  },
+  "resolutions": {
+    "@graasp/sdk": "github:graasp/graasp-sdk#build-with-vite"
   },
   "packageManager": "yarn@4.0.2"
 }

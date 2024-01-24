@@ -83,7 +83,7 @@ const CollapsibleItemCategory: React.FC<CollapsibleItemCategoryProps> = ({
 
 type ItemsProps = {
   parentId: string;
-  lang: string | undefined;
+  lang: string;
   isTopLevel: boolean;
 };
 

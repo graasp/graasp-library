@@ -94,7 +94,7 @@ const Summary = ({
           <Container maxWidth="lg">
             <Items
               parentId={collection?.id}
-              lang={member?.extra?.lang}
+              lang={i18n.language}
               isTopLevel={collection?.path.indexOf('.') < 0}
             />
           </Container>

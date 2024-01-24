@@ -1,4 +1,3 @@
-import { DateTime } from 'luxon';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
@@ -15,7 +14,12 @@ import {
 } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
-import { DiscriminatedItem, ItemType, ThumbnailSize } from '@graasp/sdk';
+import {
+  DiscriminatedItem,
+  ItemType,
+  ThumbnailSize,
+  formatDate,
+} from '@graasp/sdk';
 
 import { COLLECTION_CARD_BORDER_RADIUS } from '../../config/cssStyles';
 import { useLibraryTranslation } from '../../config/i18n';
@@ -133,7 +137,7 @@ export const SubItemCard: React.FC<SubItemCardProps> = ({
 
 type FileChildrenCardProps = {
   item: DiscriminatedItem;
-  lang?: string;
+  lang: string;
 };
 
 export const FileChildrenCard: React.FC<FileChildrenCardProps> = ({
@@ -153,9 +157,7 @@ export const FileChildrenCard: React.FC<FileChildrenCardProps> = ({
 
   const subtext = item.updatedAt
     ? t(LIBRARY.SUMMARY_BROWSE_FILE_UPDATED, {
-        date: DateTime.fromMillis(
-          new Date(item.updatedAt).getTime(),
-        ).toLocaleString(DateTime.DATE_FULL, { locale: lang }),
+        date: formatDate(item.updatedAt, { locale: lang }),
       })
     : '...';
 

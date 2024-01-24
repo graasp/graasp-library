@@ -1,5 +1,6 @@
 import Head from 'next/head';
 
+import { Suspense } from 'react';
 import { dehydrate } from 'react-query/core';
 
 import Hydrate from '../../src/components/HydrateClient';
@@ -42,7 +43,9 @@ const Page = async () => {
       </Head>
       <Hydrate state={dehydratedState}>
         <Wrapper dehydratedState={dehydratedState}>
-          <AllCollections />
+          <Suspense>
+            <AllCollections />
+          </Suspense>
         </Wrapper>
       </Hydrate>
     </>
