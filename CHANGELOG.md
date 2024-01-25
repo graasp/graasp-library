@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/graasp/graasp-library/compare/v1.3.2...v1.4.0) (2024-01-25)
+
+
+### Features
+
+* use `date-fns` instead of `luxon` ([#508](https://github.com/graasp/graasp-library/issues/508)) ([03751df](https://github.com/graasp/graasp-library/commit/03751df7674725cdbb6e44714c51d8ff231f4bd0))
+
+
+### Bug Fixes
+
+* category chip translations ([#503](https://github.com/graasp/graasp-library/issues/503)) ([5646f9a](https://github.com/graasp/graasp-library/commit/5646f9a1e4c530ae6d865a85aa595f0ff9c7e3f6))
+* **deps:** update dependency @graasp/sdk to v3.4.1 ([#506](https://github.com/graasp/graasp-library/issues/506)) ([307a50b](https://github.com/graasp/graasp-library/commit/307a50ba8e6ad56bc3520915df404b6f1a3d050a))
+* **deps:** update dependency @sentry/nextjs to v7.94.1 ([#497](https://github.com/graasp/graasp-library/issues/497)) ([ff0e637](https://github.com/graasp/graasp-library/commit/ff0e637455c17871f86185ed5f7ab0cb7439cbf7))
+* **deps:** update dependency react-router-dom to v6.21.3 ([#499](https://github.com/graasp/graasp-library/issues/499)) ([bc0877b](https://github.com/graasp/graasp-library/commit/bc0877b63006163ebcbe0d1fef79af8426552558))
+* use date locales from language select in summary details for logged out user ([5646f9a](https://github.com/graasp/graasp-library/commit/5646f9a1e4c530ae6d865a85aa595f0ff9c7e3f6))
+* use published root as item to fetch category information ([5646f9a](https://github.com/graasp/graasp-library/commit/5646f9a1e4c530ae6d865a85aa595f0ff9c7e3f6))
+
 ## [1.3.2](https://github.com/graasp/graasp-library/compare/v1.3.1...v1.3.2) (2024-01-15)
 
 
