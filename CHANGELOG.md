@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.1](https://github.com/graasp/graasp-library/compare/v1.4.0...v1.4.1) (2024-01-30)
+
+
+### Bug Fixes
+
+* remove branch deps ([6d99987](https://github.com/graasp/graasp-library/commit/6d99987ef387b2a3bf295887c45046c4f636f292))
+
 ## [1.4.0](https://github.com/graasp/graasp-library/compare/v1.3.2...v1.4.0) (2024-01-25)
 
 
