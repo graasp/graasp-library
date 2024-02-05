@@ -43,8 +43,6 @@ const StyledBox = styled(Box)(({ theme }) => ({
   },
 }));
 
-const contentLinesToShow = 3;
-
 const BioSection = ({ id, memberData, isOwnProfile }: Props) => {
   const { t } = useLibraryTranslation();
 
