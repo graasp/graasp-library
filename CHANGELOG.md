@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.2](https://github.com/graasp/graasp-library/compare/v1.4.1...v1.4.2) (2024-02-08)
+
+
+### Bug Fixes
+
+* improve show less/more button at public profile biography ([#486](https://github.com/graasp/graasp-library/issues/486)) ([6d542d2](https://github.com/graasp/graasp-library/commit/6d542d2c0809565f339d8855a5b45aa352b799ef))
+* update favicons to work on all devices and browsers ([#512](https://github.com/graasp/graasp-library/issues/512)) ([9162482](https://github.com/graasp/graasp-library/commit/9162482ee2deb414fe3dd8cc21707766ca4ec130))
+
 ## [1.4.1](https://github.com/graasp/graasp-library/compare/v1.4.0...v1.4.1) (2024-01-30)
 
 
