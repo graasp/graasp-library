@@ -21,7 +21,7 @@ const ShowLessAndMoreContent = ({
 
   const [isContentCollapsed, setIsContentCollapsed] = useState(true);
 
-  const handleShowMoreButton = () => {
+  const handleToggleButton = () => {
     setIsContentCollapsed(!isContentCollapsed);
   };
 
@@ -44,7 +44,7 @@ const ShowLessAndMoreContent = ({
         <Button
           sx={{ minWidth: 'max-content' }}
           size="small"
-          onClick={handleShowMoreButton}
+          onClick={handleToggleButton}
         >
           {isContentCollapsed
             ? t(LIBRARY.SUMMARY_DESCRIPTION_SHOW_MORE)
