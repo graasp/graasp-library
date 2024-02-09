@@ -1,3 +1,5 @@
+'use client';
+
 import { MouseEvent, useContext, useState } from 'react';
 
 import FileCopyIcon from '@mui/icons-material/FileCopy';

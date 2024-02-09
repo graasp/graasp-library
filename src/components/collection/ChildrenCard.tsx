@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
 import React, { useContext } from 'react';
@@ -20,6 +19,7 @@ import {
   ThumbnailSize,
   formatDate,
 } from '@graasp/sdk';
+import { ItemIcon, Thumbnail } from '@graasp/ui';
 
 import { COLLECTION_CARD_BORDER_RADIUS } from '../../config/cssStyles';
 import { useLibraryTranslation } from '../../config/i18n';
@@ -29,15 +29,6 @@ import { QueryClientContext } from '../QueryClientContext';
 import CopyButton from './CopyButton';
 import CopyLinkButton from './CopyLinkButton';
 import DownloadButton from './DownloadButton';
-
-const Thumbnail = dynamic(
-  () => import('@graasp/ui').then((mod) => mod.Thumbnail),
-  { ssr: false },
-);
-const ItemIcon = dynamic(
-  () => import('@graasp/ui').then((mod) => mod.ItemIcon),
-  { ssr: false },
-);
 
 const StyledCardBox = styled(Card)(() => ({
   border: '1px solid #ddd',

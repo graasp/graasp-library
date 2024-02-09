@@ -1,16 +1,15 @@
-import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
 import React, { useContext } from 'react';
 
 import { Favorite, Visibility } from '@mui/icons-material';
-import { Skeleton } from '@mui/lab';
 import {
   Alert,
   Box,
   Chip,
   Container,
   Divider,
+  Skeleton,
   Snackbar,
   Stack,
   Tooltip,
@@ -18,6 +17,7 @@ import {
 } from '@mui/material';
 
 import { DiscriminatedItem, ThumbnailSize } from '@graasp/sdk';
+import { LikeButton } from '@graasp/ui';
 
 import { UrlSearch } from '../../../config/constants';
 import { useLibraryTranslation } from '../../../config/i18n';
@@ -35,13 +35,6 @@ import Authorship from '../Authorship';
 import Badges from '../Badges';
 import SummaryActionButtons from './SummaryActionButtons';
 import Description from './SummaryDescription';
-
-const { LikeButton } = {
-  LikeButton: dynamic(
-    () => import('@graasp/ui').then((mod) => mod.LikeButton),
-    { ssr: false },
-  ),
-};
 
 type SummaryHeaderProps = {
   collection?: DiscriminatedItem;

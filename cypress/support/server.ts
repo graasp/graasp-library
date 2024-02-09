@@ -141,9 +141,8 @@ export const mockGetAvatarUrl = (
         return reply({ statusCode: StatusCodes.UNAUTHORIZED, body: null });
       }
 
-      const id = new URL(url).pathname.split('/')[2];
-      const thumbnail = members.find(({ id: thisId }) => id === thisId)
-        ?.thumbnail;
+      const memberId = new URL(url).pathname.split('/')[2];
+      const thumbnail = members.find(({ id }) => id === memberId)?.thumbnail;
       if (!thumbnail) {
         return reply({ statusCode: StatusCodes.NOT_FOUND });
       }

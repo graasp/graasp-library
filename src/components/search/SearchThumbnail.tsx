@@ -1,19 +1,13 @@
-import dynamic from 'next/dynamic';
-
 import React, { useContext } from 'react';
 
 import { ThumbnailSize } from '@graasp/sdk';
+import { Thumbnail } from '@graasp/ui';
 
 import {
   DEFAULT_ITEM_IMAGE_PATH,
   DEFAULT_THUMBNAIL_ALT_TEXT,
 } from '../../config/constants';
 import { QueryClientContext } from '../QueryClientContext';
-
-const Thumbnail = dynamic(
-  () => import('@graasp/ui').then((mod) => mod.Thumbnail),
-  { ssr: false },
-);
 
 const SearchThumbnail = ({
   itemId,

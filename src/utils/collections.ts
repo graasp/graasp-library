@@ -9,6 +9,7 @@ export const PLACEHOLDER_COLLECTION: DiscriminatedItem = {
   updatedAt: new Date().toISOString(),
   name: 'Loading...',
   description: 'loading...',
+  lang: '',
   creator: null,
   type: ItemType.FOLDER,
   extra: { [ItemType.FOLDER]: { childrenOrder: [] } },

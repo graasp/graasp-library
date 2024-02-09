@@ -1,6 +1,6 @@
 'use client';
 
-import dynamic from 'next/dynamic';
+// ^ the use client directive should be removed as soon as possible once query-client provides a real ESm build
 import Link from 'next/link';
 
 import { useContext } from 'react';
@@ -9,6 +9,7 @@ import { ArrowForward } from '@mui/icons-material';
 import { Box, Button, styled } from '@mui/material';
 
 import { Context } from '@graasp/sdk';
+import { LibraryIcon, Main } from '@graasp/ui';
 
 import {
   GRAASP_COLOR,
@@ -28,16 +29,6 @@ import { QueryClientContext } from '../QueryClientContext';
 import ItemCollection from '../collection/ItemCollection';
 import HomeHeader from '../layout/HomeHeader';
 import useHeader from '../layout/useHeader';
-
-const { LibraryIcon, Main } = {
-  LibraryIcon: dynamic(
-    () => import('@graasp/ui').then((mod) => mod.LibraryIcon),
-    { ssr: false },
-  ),
-  Main: dynamic(() => import('@graasp/ui').then((mod) => mod.Main), {
-    ssr: false,
-  }),
-};
 
 const PATTERN_OPACITY = 0.7;
 const SECONDARY_PATTERN_COLOR = '505DD2';
@@ -90,9 +81,12 @@ const Home = () => {
   return (
     <StyledBackgroundContainer>
       <Main
+        open={false}
         context={Context.Library}
         headerLeftContent={leftContent}
         headerRightContent={rightContent}
+        drawerContent={<>Drawer</>}
+        drawerOpenAriaLabel="open drawer"
       >
         <HomeHeader />
 

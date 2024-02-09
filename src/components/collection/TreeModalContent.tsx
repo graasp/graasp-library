@@ -1,10 +1,9 @@
-import dynamic from 'next/dynamic';
-
 import { useContext } from 'react';
 
 import { CircularProgress, Typography } from '@mui/material';
 
 import { DiscriminatedItem, ItemType } from '@graasp/sdk';
+import { DynamicTreeView } from '@graasp/ui';
 
 import { TREE_VIEW_MAX_WIDTH } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';
@@ -14,13 +13,6 @@ import {
 } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
-
-const DynamicTreeView = dynamic(
-  () => import('@graasp/ui').then((mod) => mod.DynamicTreeView),
-  {
-    ssr: false,
-  },
-);
 
 type TreeModalContentProps = {
   open: boolean;
@@ -66,7 +58,7 @@ const TreeModalContent = ({
             selectedId={selectedId}
             items={ownItems}
             onTreeItemSelect={onTreeItemSelect}
-            useChildren={useChildren}
+            useChildren={(id, options) => useChildren(id, undefined, options)}
             useItem={useItem}
             showCheckbox
             rootLabel={t(LIBRARY.OWN_ITEMS_LABEL)}
@@ -83,7 +75,7 @@ const TreeModalContent = ({
             selectedId={selectedId}
             items={sharedItems}
             onTreeItemSelect={onTreeItemSelect}
-            useChildren={useChildren}
+            useChildren={(id, options) => useChildren(id, undefined, options)}
             useItem={useItem}
             showCheckbox
             rootLabel={t(LIBRARY.SHARED_ITEMS_LABEL)}

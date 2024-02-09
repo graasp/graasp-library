@@ -8,8 +8,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { Box, Stack, SxProps } from '@mui/material';
 
-import '@graasp/ui/dist/bundle.css';
-
 import { useLibraryTranslation } from '../../config/i18n';
 import { WRAPPER_SCROLLABLE_PAGE_BODY_ID } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';

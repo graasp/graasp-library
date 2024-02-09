@@ -26,7 +26,7 @@ const Badges = ({ name, description }: Props) => {
 
   useEffect(() => {
     setPageLocation(window?.location.href);
-  });
+  }, []);
 
   const shareOnTwitter = () => {
     const message = truncate(

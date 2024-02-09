@@ -1,10 +1,10 @@
-import dynamic from 'next/dynamic';
-
 import { FC, useContext } from 'react';
 
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 import Box from '@mui/material/Box';
+
+import { UserSwitchWrapper as GraaspUserSwitch } from '@graasp/ui';
 
 import { MEMBER_AVATAR_ICON_SIZE } from '../../config/constants';
 import { GRAASP_ACCOUNT_HOST } from '../../config/env';
@@ -14,13 +14,6 @@ import { MY_LIKED_ITEMS_ROUTE, buildMemberRoute } from '../../config/routes';
 import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
 import MemberAvatar from './MemberAvatar';
-
-const { GraaspUserSwitch } = {
-  GraaspUserSwitch: dynamic(
-    () => import('@graasp/ui').then((mod) => mod.UserSwitchWrapper),
-    { ssr: false },
-  ),
-};
 
 type Props = {
   ButtonContent?: JSX.Element;

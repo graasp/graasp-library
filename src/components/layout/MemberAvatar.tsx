@@ -1,10 +1,9 @@
-import dynamic from 'next/dynamic';
-
 import React, { useContext } from 'react';
 
 import { Box, SxProps } from '@mui/material';
 
 import { ThumbnailSize } from '@graasp/sdk';
+import { Avatar } from '@graasp/ui';
 
 import {
   DEFAULT_MEMBER_THUMBNAIL,
@@ -13,12 +12,6 @@ import {
 import { useLibraryTranslation } from '../../config/i18n';
 import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
-
-const { Avatar } = {
-  Avatar: dynamic(() => import('@graasp/ui').then((mod) => mod.Avatar), {
-    ssr: false,
-  }),
-};
 
 type Props = {
   id?: string;

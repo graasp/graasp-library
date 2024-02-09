@@ -6,34 +6,6 @@ import { useLibraryTranslation } from '../../../config/i18n';
 import LIBRARY from '../../../langs/constants';
 import ContentDescription from '../ContentDescription';
 
-export const CollapsibleDescription = ({
-  collapsed,
-  numberOfLinesToShow = 1,
-  children,
-}: {
-  collapsed: boolean;
-  numberOfLinesToShow?: number;
-  children: JSX.Element;
-}) =>
-  collapsed ? (
-    <Box
-      sx={{
-        display: '-webkit-box',
-        overflow: 'hidden',
-        // number of lines to show
-        WebkitLineClamp: numberOfLinesToShow,
-        WebkitBoxOrient: 'vertical',
-        '& > p': {
-          margin: 0,
-        },
-      }}
-    >
-      {children}
-    </Box>
-  ) : (
-    children
-  );
-
 type DescriptionProps = {
   isLoading: boolean;
   description: string | null;
@@ -45,10 +17,10 @@ const Description: React.FC<DescriptionProps> = ({
 }) => {
   const { t } = useLibraryTranslation();
 
-  const [collapsedDescription, setCollapsedDescription] = useState(true);
+  const [isCollapsedDescription, setIsCollapsedDescription] = useState(true);
 
   const handleShowMoreButton = () => {
-    setCollapsedDescription(!collapsedDescription);
+    setIsCollapsedDescription((prev) => !prev);
   };
 
   if (isLoading) {
@@ -61,7 +33,7 @@ const Description: React.FC<DescriptionProps> = ({
       <Box>
         <ContentDescription
           content={description}
-          collapsed={collapsedDescription}
+          collapsed={isCollapsedDescription}
         />
 
         <Button
@@ -69,7 +41,7 @@ const Description: React.FC<DescriptionProps> = ({
           size="small"
           onClick={handleShowMoreButton}
         >
-          {collapsedDescription
+          {isCollapsedDescription
             ? t(LIBRARY.SUMMARY_DESCRIPTION_SHOW_MORE)
             : t(LIBRARY.SUMMARY_DESCRIPTION_SHOW_LESS)}
         </Button>

@@ -1,8 +1,10 @@
 import { Interweave } from 'interweave';
+import 'katex/dist/katex.min.css';
 
 import React from 'react';
+import 'react-quill/dist/quill.snow.css';
 
-import { Box } from '@mui/material';
+import { Box, styled } from '@mui/material';
 
 type CollapsibleDescriptionProps = {
   collapsed: boolean;
@@ -14,47 +16,59 @@ export const CollapsibleDescription = ({
   collapsed,
   numberOfLinesToShow = 1,
   children,
-}: CollapsibleDescriptionProps) =>
-  collapsed ? (
-    <Box
-      sx={{
-        display: '-webkit-box',
-        overflow: 'hidden',
-        // number of lines to show
-        WebkitLineClamp: numberOfLinesToShow,
-        WebkitBoxOrient: 'vertical',
-        '& > p': {
-          margin: 0,
-        },
-      }}
-    >
-      {children}
-    </Box>
-  ) : (
-    children
-  );
+}: CollapsibleDescriptionProps) => (
+  <Box
+    sx={{
+      display: '-webkit-box',
+      overflow: 'hidden',
+      // number of lines to show
+      WebkitLineClamp: collapsed ? numberOfLinesToShow : 'unset',
+      WebkitBoxOrient: 'vertical',
+      '& > p': {
+        margin: 0,
+      },
+    }}
+  >
+    {children}
+  </Box>
+);
+
+const StyledDiv = styled('div')({
+  '& .ql-editor': {
+    '& p': {
+      paddingBottom: 3,
+      paddingTop: 3,
+    },
+  },
+});
 
 type Props = {
   content: string;
   collapsed?: CollapsibleDescriptionProps['collapsed'];
   numberOfLinesToShow?: CollapsibleDescriptionProps['numberOfLinesToShow'];
 };
-
 const ContentDescription = ({
   content,
   collapsed = true,
   numberOfLinesToShow,
 }: Props): JSX.Element => (
-  <CollapsibleDescription
-    collapsed={collapsed}
-    numberOfLinesToShow={numberOfLinesToShow}
-  >
-    <Interweave
-      content={content}
-      onAfterParse={(arr) => (collapsed ? [arr.join(' ')] : arr)}
-      // disable html output when description is collapsed
-      noHtml={collapsed}
-    />
-  </CollapsibleDescription>
+  <StyledDiv className="quill">
+    <div className="ql-snow ql-disabled">
+      <div className="ql-editor">
+        <CollapsibleDescription
+          collapsed={collapsed}
+          numberOfLinesToShow={numberOfLinesToShow}
+        >
+          <Interweave
+            content={content}
+            // onAfterParse={(arr) => (collapsed ? [arr.join(' ')] : arr)}
+            // disable html output when description is collapsed
+            // noHtml={collapsed}
+            noWrap
+          />
+        </CollapsibleDescription>
+      </div>
+    </div>
+  </StyledDiv>
 );
 export default ContentDescription;

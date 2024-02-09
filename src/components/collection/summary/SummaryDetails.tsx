@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 
 import React, { useContext } from 'react';
@@ -19,7 +18,7 @@ import {
   DiscriminatedItem,
   formatDate,
 } from '@graasp/sdk';
-import { CCSharingVariant } from '@graasp/ui';
+import { CCSharingVariant, CreativeCommons } from '@graasp/ui';
 
 import { CATEGORY_COLORS, UrlSearch } from '../../../config/constants';
 import {
@@ -38,13 +37,6 @@ import {
 } from '../../../config/selectors';
 import LIBRARY from '../../../langs/constants';
 import { QueryClientContext } from '../../QueryClientContext';
-
-const { CreativeCommons } = {
-  CreativeCommons: dynamic(
-    () => import('@graasp/ui').then((mod) => mod.CreativeCommons),
-    { ssr: false },
-  ),
-};
 
 const DetailCard = styled(Box)(() => ({
   border: '1px solid #ddd',

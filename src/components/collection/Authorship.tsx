@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
 import React, { useContext } from 'react';
@@ -7,6 +6,7 @@ import { Stack, Typography } from '@mui/material';
 import Skeleton from '@mui/material/Skeleton';
 
 import { DiscriminatedItem, PermissionLevel, ThumbnailSize } from '@graasp/sdk';
+import { Avatar } from '@graasp/ui';
 
 import { DEFAULT_MEMBER_THUMBNAIL } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';
@@ -15,10 +15,6 @@ import { SUMMARY_AUTHOR_CONTAINER_ID } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
 import Contributors from './Contributors';
-
-const Avatar = dynamic(() => import('@graasp/ui').then((mod) => mod.Avatar), {
-  ssr: false,
-});
 
 type Props = {
   itemId?: DiscriminatedItem['id'];

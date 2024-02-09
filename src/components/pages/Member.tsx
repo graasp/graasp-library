@@ -1,16 +1,14 @@
 'use client';
 
-import dynamic from 'next/dynamic';
-
 import { useContext } from 'react';
 
 import { Box, Skeleton, Stack, Typography } from '@mui/material';
 
 import { Context } from '@graasp/sdk';
+import { Main } from '@graasp/ui';
 
 import { useLibraryTranslation } from '../../config/i18n';
 import { ERROR_UNEXPECTED_ERROR_CODE } from '../../config/messages';
-import { MENU_BUTTON_ID } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
 import CollectionsGrid from '../collection/CollectionsGrid';
@@ -21,10 +19,6 @@ import BioSection from '../member/BioSection';
 interface Props {
   id?: string;
 }
-
-const Main = dynamic(() => import('@graasp/ui').then((mod) => mod.Main), {
-  ssr: false,
-});
 
 const Member = ({ id }: Props) => {
   const { hooks } = useContext(QueryClientContext);
@@ -39,10 +33,12 @@ const Member = ({ id }: Props) => {
   if (data && id) {
     return (
       <Main
+        open={false}
         context={Context.Library}
-        menuButtonId={MENU_BUTTON_ID}
         headerLeftContent={leftContent}
         headerRightContent={rightContent}
+        drawerContent={<>Content</>}
+        drawerOpenAriaLabel="open drawer"
       >
         <Stack
           maxWidth="xl"
@@ -80,9 +76,12 @@ const Member = ({ id }: Props) => {
 
   return (
     <Main
+      open={false}
       context={Context.Library}
       headerLeftContent={leftContent}
       headerRightContent={rightContent}
+      drawerContent={<>Content</>}
+      drawerOpenAriaLabel="open drawer"
     >
       <Box id={id} p={5}>
         <Error code={ERROR_UNEXPECTED_ERROR_CODE} />

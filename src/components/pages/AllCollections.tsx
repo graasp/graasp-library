@@ -1,6 +1,5 @@
 'use client';
 
-import dynamic from 'next/dynamic';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import React, { useContext, useEffect, useState } from 'react';
@@ -18,12 +17,12 @@ import {
 } from '@mui/material';
 
 import { Context } from '@graasp/sdk';
+import { Button, Main } from '@graasp/ui';
 
 import { UrlSearch } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';
 import {
   ALL_COLLECTIONS_GRID_ID,
-  MENU_BUTTON_ID,
   SEARCH_ERROR_MESSAGE_ID,
 } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
@@ -32,13 +31,6 @@ import { QueryClientContext } from '../QueryClientContext';
 import CollectionsGrid from '../collection/CollectionsGrid';
 import FilterHeader from '../filters/FilterHeader';
 import useHeader from '../layout/useHeader';
-
-const Main = dynamic(() => import('@graasp/ui').then((mod) => mod.Main), {
-  ssr: false,
-});
-const Button = dynamic(() => import('@graasp/ui').then((mod) => mod.Button), {
-  ssr: false,
-});
 
 type AllCollectionsProps = {};
 
@@ -118,10 +110,12 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
     <>
       {/* todo: allow main to get custom header */}
       <Main
+        open={false}
         context={Context.Library}
-        menuButtonId={MENU_BUTTON_ID}
         headerLeftContent={leftContent}
         headerRightContent={rightContent}
+        drawerContent={<>Content</>}
+        drawerOpenAriaLabel="open drawer"
       >
         <Container maxWidth="xl" sx={{ mb: 5 }}>
           <Box py={5}>

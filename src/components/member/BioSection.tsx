@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic';
 import { SocialLinks } from 'social-links';
 
 import React, { useContext } from 'react';
@@ -9,6 +8,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import { Box, Link, Stack, Typography, styled } from '@mui/material';
 
 import { Member, ThumbnailSize } from '@graasp/sdk';
+import { Avatar } from '@graasp/ui';
 
 import { DEFAULT_MEMBER_THUMBNAIL } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';
@@ -17,10 +17,6 @@ import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
 import BackButton from '../common/BackButton';
 import ShowLessAndMoreContent from '../common/ShowLessAndMoreContent';
-
-const Avatar = dynamic(() => import('@graasp/ui').then((mod) => mod.Avatar), {
-  ssr: false,
-});
 
 const socialLinks = new SocialLinks();
 

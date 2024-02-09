@@ -8,8 +8,6 @@
 // Client-side cache, shared for the whole session of the user in the browser.
 // const clientSideEmotionCache = createEmotionCache();
 // import { Api, DATA_KEYS, configureQueryClient } from '@graasp/query-client';
-import Head from 'next/head';
-
 import { dehydrate } from 'react-query/core';
 
 import Hydrate from '../../../src/components/HydrateClient';
@@ -55,20 +53,11 @@ const Page = async ({ params: { id } }: { params: { id: string } }) => {
   //   }
 
   return (
-    <>
-      <Head>
-        <title>Graasp Library</title>
-        <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width"
-        />
-      </Head>
-      <Hydrate state={dehydratedState}>
-        <Wrapper dehydratedState={dehydratedState} bgcolor="white">
-          <Collection id={id} />
-        </Wrapper>
-      </Hydrate>
-    </>
+    <Hydrate state={dehydratedState}>
+      <Wrapper dehydratedState={dehydratedState} bgcolor="white">
+        <Collection id={id} />
+      </Wrapper>
+    </Hydrate>
   );
 };
 export default Page;

@@ -9,7 +9,7 @@ import { ReactNode, useState } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 
-import { theme } from '../src/config/theme';
+import { theme } from '@graasp/ui';
 
 type Props = {
   options: any;
@@ -35,6 +35,7 @@ export default function ThemeRegistry(props: Props) {
     newCache.compat = true;
     const prevInsert = newCache.insert;
     let inserted: string[] = [];
+    // @ts-ignore
     newCache.insert = (...args) => {
       const serialized = args[1];
       if (newCache.inserted[serialized.name] === undefined) {

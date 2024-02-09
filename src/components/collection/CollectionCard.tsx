@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
 import React, { useContext } from 'react';
@@ -15,6 +14,7 @@ import {
 } from '@mui/material';
 
 import { ThumbnailSize } from '@graasp/sdk';
+import { Avatar } from '@graasp/ui';
 
 import { useLibraryTranslation } from '../../config/i18n';
 import { buildCollectionRoute } from '../../config/routes';
@@ -27,10 +27,6 @@ import ContentDescription from './ContentDescription';
 import CopyButton from './CopyButton';
 import CopyLinkButton from './CopyLinkButton';
 import DownloadButton from './DownloadButton';
-
-const Avatar = dynamic(() => import('@graasp/ui').then((mod) => mod.Avatar), {
-  ssr: false,
-});
 
 const RECENT_DAYS = 4;
 

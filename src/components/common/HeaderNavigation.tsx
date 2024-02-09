@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
 import React from 'react';
@@ -11,22 +10,11 @@ import {
   useTheme,
 } from '@mui/material';
 
+import { GraaspLogo, PlatformSwitch } from '@graasp/ui';
+
 import { APP_NAME } from '../../config/constants';
 import { HEADER_LOGO_HEIGHT } from '../../config/cssStyles';
 import { HOST_MAP } from '../../config/paths';
-
-const GraaspLogo = dynamic(
-  () => import('@graasp/ui').then((mod) => mod.GraaspLogo),
-  {
-    ssr: false,
-  },
-);
-const PlatformSwitch = dynamic(
-  () => import('@graasp/ui').then((mod) => mod.PlatformSwitch),
-  {
-    ssr: false,
-  },
-);
 
 // TODO: use graasp-ui when window conflict is resolved
 // meanwhile we copy the definitions here

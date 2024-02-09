@@ -11,7 +11,9 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       <body>
         <Suspense>
           <Providers>
-            <ThemeRegistry options={{ key: 'mui' }}>{children}</ThemeRegistry>
+            <ThemeRegistry options={{ key: 'mui', prepend: true }}>
+              {children}
+            </ThemeRegistry>
           </Providers>
         </Suspense>
       </body>

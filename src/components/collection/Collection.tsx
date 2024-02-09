@@ -1,7 +1,6 @@
 'use client';
 
 import { ErrorBoundary } from '@sentry/nextjs';
-import dynamic from 'next/dynamic';
 import { validate } from 'uuid';
 
 import { useContext, useEffect } from 'react';
@@ -9,6 +8,7 @@ import { useContext, useEffect } from 'react';
 import { Box } from '@mui/material';
 
 import { Context } from '@graasp/sdk';
+import { Main } from '@graasp/ui';
 
 import {
   ERROR_INVALID_COLLECTION_ID_CODE,
@@ -22,12 +22,6 @@ import Summary from './summary/Summary';
 
 // todo: get similar collections in same call
 // import SimilarCollections from './SimilarCollections';
-
-const { Main } = {
-  Main: dynamic(() => import('@graasp/ui').then((mod) => mod.Main), {
-    ssr: false,
-  }),
-};
 
 type Props = {
   id?: string;
@@ -66,9 +60,12 @@ const Collection = ({ id }: Props) => {
   if (!id || !validate(id)) {
     return (
       <Main
+        open={false}
         context={Context.Library}
         headerLeftContent={leftContent}
         headerRightContent={rightContent}
+        drawerContent={<>Content</>}
+        drawerOpenAriaLabel="open drawer"
       >
         <Box id={id} p={5}>
           <Error code={ERROR_INVALID_COLLECTION_ID_CODE} />
@@ -80,9 +77,12 @@ const Collection = ({ id }: Props) => {
   if (isError) {
     return (
       <Main
+        open={false}
         context={Context.Library}
         headerLeftContent={leftContent}
         headerRightContent={rightContent}
+        drawerContent={<>Content</>}
+        drawerOpenAriaLabel="open drawer"
       >
         <Box id={id} p={5}>
           <Error code={ERROR_UNEXPECTED_ERROR_CODE} />
@@ -94,9 +94,12 @@ const Collection = ({ id }: Props) => {
   return (
     <ErrorBoundary>
       <Main
+        open={false}
         context={Context.Library}
         headerLeftContent={leftContent}
         headerRightContent={rightContent}
+        drawerContent={<>Content</>}
+        drawerOpenAriaLabel="open drawer"
       >
         <UnpublishedItemAlert
           canRead={canRead}

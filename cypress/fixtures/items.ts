@@ -1,4 +1,5 @@
 import {
+  DEFAULT_LANG,
   FolderItemType,
   Item,
   ItemTagType,
@@ -19,6 +20,7 @@ export const DEFAULT_FOLDER_ITEM: FolderItemType = {
   createdAt: '2023-02-27T18:20:09.732Z',
   updatedAt: '2023-02-28T18:20:09.732Z',
   extra: { [ItemType.FOLDER]: { childrenOrder: [] } },
+  lang: DEFAULT_LANG,
   creator: CURRENT_USER,
   type: ItemType.FOLDER,
 };

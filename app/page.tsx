@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import Head from 'next/head';
 
 import { dehydrate } from 'react-query/core';
 
@@ -36,20 +35,11 @@ const Page = async () => {
   const dehydratedState = dehydrate(queryClient);
 
   return (
-    <>
-      <Head>
-        <title>Graasp Library</title>
-        <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width"
-        />
-      </Head>
-      <Hydrate state={dehydratedState}>
-        <Wrapper dehydratedState={dehydratedState}>
-          <Home />
-        </Wrapper>
-      </Hydrate>
-    </>
+    <Hydrate state={dehydratedState}>
+      <Wrapper dehydratedState={dehydratedState}>
+        <Home />
+      </Wrapper>
+    </Hydrate>
   );
 };
 export default Page;

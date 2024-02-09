@@ -1,17 +1,12 @@
-import dynamic from 'next/dynamic';
+'use client';
 
 import { useContext, useEffect } from 'react';
+
+import { DownloadButton as GraaspDownloadButton } from '@graasp/ui';
 
 import { useLibraryTranslation } from '../../config/i18n';
 import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
-
-const { GraaspDownloadButton } = {
-  GraaspDownloadButton: dynamic(
-    () => import('@graasp/ui').then((mod) => mod.DownloadButton),
-    { ssr: false },
-  ),
-};
 
 export const useDownloadAction = (itemId?: string) => {
   const { mutations } = useContext(QueryClientContext);

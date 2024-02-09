@@ -1,14 +1,8 @@
-import dynamic from 'next/dynamic';
-
 import { Alert } from '@mui/material';
 
 import { CompleteMember } from '@graasp/sdk';
+import { BuildIcon } from '@graasp/ui';
 
-const { BuildIcon } = {
-  BuildIcon: dynamic(() => import('@graasp/ui').then((mod) => mod.BuildIcon), {
-    ssr: false,
-  }),
-};
 type Props = {
   canRead: boolean;
   canPublish: boolean;
