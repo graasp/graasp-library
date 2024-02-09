@@ -23,6 +23,7 @@ describe('CC License in Summary', () => {
         cy.visit(buildCollectionRoute(item.id));
 
         cy.get(`#${SUMMARY_CC_LICENSE_CONTAINER_ID}`)
+          .scrollIntoView()
           .should('exist')
           .and('be.visible');
       },
@@ -43,7 +44,9 @@ describe('CC License in Summary', () => {
           !environment.currentMember &&
           item.tags.find((t) => t.type === ItemTagType.Public)
         ) {
-          cy.get(`#${SUMMARY_CC_LICENSE_NO_LICENSE_ID}`).should('exist');
+          cy.get(`#${SUMMARY_CC_LICENSE_NO_LICENSE_ID}`)
+            .scrollIntoView()
+            .should('exist');
         }
       },
     );

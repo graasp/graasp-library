@@ -1,5 +1,3 @@
-import truncate from 'lodash.truncate';
-
 import { useContext } from 'react';
 
 import { Stack, Typography } from '@mui/material';
@@ -8,7 +6,6 @@ import Container from '@mui/material/Container';
 
 import { DiscriminatedItem, ItemPublished, ItemType } from '@graasp/sdk';
 
-import { MAX_COLLECTION_NAME_LENGTH } from '../../../config/constants';
 import { useLibraryTranslation } from '../../../config/i18n';
 import LIBRARY from '../../../langs/constants';
 import { QueryClientContext } from '../../QueryClientContext';
@@ -62,10 +59,6 @@ const Summary = ({
 
   const topLevelParent = publishedRoot?.item;
 
-  const truncatedName = truncate(collection?.name, {
-    length: MAX_COLLECTION_NAME_LENGTH,
-    separator: /,? +/,
-  });
   return (
     <Stack
       maxWidth="lg"
@@ -82,7 +75,6 @@ const Summary = ({
         isLogged={member?.id !== undefined}
         isLoading={isLoading}
         tags={collection?.settings?.tags}
-        truncatedName={truncatedName}
         totalViews={totalViews}
       />
       {collection?.type === ItemType.FOLDER && (

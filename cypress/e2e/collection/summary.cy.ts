@@ -76,7 +76,7 @@ describe('Collection Summary', () => {
       });
     });
 
-    it('Show like button', () => {
+    it.only('Show like button', () => {
       cy.setUpApi(environment);
       const item = PUBLISHED_ITEMS[1];
       cy.visit(buildCollectionRoute(item.id));

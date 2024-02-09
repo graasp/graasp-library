@@ -35,6 +35,7 @@ export const CollapsibleDescription = ({
 
 const StyledDiv = styled('div')({
   '& .ql-editor': {
+    paddingLeft: '0px !important',
     '& p': {
       paddingBottom: 3,
       paddingTop: 3,

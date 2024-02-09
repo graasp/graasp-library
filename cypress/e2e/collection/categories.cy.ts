@@ -25,7 +25,9 @@ describe('Categories in Summary', () => {
             `#${SUMMARY_CATEGORIES_CONTAINER_ID} #${buildCategoryChipId(
               category.name,
             )}`,
-          ).should('be.visible');
+          )
+            .scrollIntoView()
+            .should('be.visible');
         });
       },
     );
