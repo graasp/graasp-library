@@ -25,16 +25,16 @@ describe('Home Page', () => {
         cy.visit(HOME_ROUTE);
 
         cy.get(`#${HOME_PAGE_TITLE_TEXT_ID}`).should('be.visible');
-        cy.get(`#${POPULAR_THIS_WEEK_TITLE_ID} #${SECTION_TITLE_ID}`).should(
-          'be.visible',
-        );
-        cy.get(`#${MOST_LIKED_TITLE_ID} #${SECTION_TITLE_ID}`).should(
-          'be.visible',
-        );
+        cy.get(`#${POPULAR_THIS_WEEK_TITLE_ID} #${SECTION_TITLE_ID}`)
+          .scrollIntoView()
+          .should('be.visible');
+        cy.get(`#${MOST_LIKED_TITLE_ID} #${SECTION_TITLE_ID}`)
+          .scrollIntoView()
+          .should('be.visible');
 
-        cy.get(`#${GRAASP_SELECTION_TITLE_ID} #${SECTION_TITLE_ID}`, {
-          timeout: 4000,
-        }).should('be.visible');
+        cy.get(`#${GRAASP_SELECTION_TITLE_ID} #${SECTION_TITLE_ID}`)
+          .scrollIntoView()
+          .should('be.visible');
       });
 
       describe('Graasper items', () => {

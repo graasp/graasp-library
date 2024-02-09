@@ -32,11 +32,11 @@ const Page = async () => {
 
   return (
     <Hydrate state={dehydratedState}>
-      <Wrapper dehydratedState={dehydratedState}>
-        <Suspense>
+      <Suspense>
+        <Wrapper dehydratedState={dehydratedState}>
           <AllCollections />
-        </Suspense>
-      </Wrapper>
+        </Wrapper>
+      </Suspense>
     </Hydrate>
   );
 };

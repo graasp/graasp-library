@@ -35,7 +35,7 @@ describe('Search', () => {
         cy.get(`#${SEARCH_RESULTS_SHOW_MORE_BUTTON}`)
           .should('be.visible')
           .click();
-
+        cy.url().should('include', '/all-collections');
         cy.get(`#${ALL_COLLECTIONS_GRID_ID}`).should('be.visible');
 
         cy.get(`#${HOME_SEARCH_ID}`).should('have.value', keywords);
