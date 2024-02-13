@@ -36,7 +36,7 @@
     "@graasp/query-client": "2.6.0",
     "@graasp/sdk": "3.7.0",
     "@graasp/translations": "1.23.0",
-    "@graasp/ui": "github:graasp/graasp-ui#484-convert-to-pure-ts-package",
+    "@graasp/ui": "4.7.0",
     "@mui/icons-material": "5.15.8",
     "@mui/lab": "5.0.0-alpha.140",
     "@mui/material": "5.15.8",
@@ -112,8 +112,7 @@
   },
   "resolutions": {
     "@graasp/sdk": "3.7.0",
-    "@graasp/query-client": "2.6.0",
-    "@graasp/ui": "github:graasp/graasp-ui#484-convert-to-pure-ts-package"
+    "@graasp/query-client": "2.6.0"
   },
   "packageManager": "yarn@4.0.2"
 }

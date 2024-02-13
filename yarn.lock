@@ -1425,9 +1425,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/ui@github:graasp/graasp-ui#484-convert-to-pure-ts-package":
-  version: 4.6.1
-  resolution: "@graasp/ui@https://github.com/graasp/graasp-ui.git#commit=ffcf17adc5e630ecd90cc9a64d04492b1d38e43b"
+"@graasp/ui@npm:4.7.0":
+  version: 4.7.0
+  resolution: "@graasp/ui@npm:4.7.0"
   dependencies:
     "@ag-grid-community/client-side-row-model": "npm:31.0.3"
     "@ag-grid-community/react": "npm:^31.0.3"
@@ -1436,9 +1436,10 @@ __metadata:
     "@storybook/react-vite": "npm:7.6.13"
     http-status-codes: "npm:2.3.0"
     interweave: "npm:13.1.0"
+    katex: "npm:0.16.9"
     lodash.truncate: "npm:4.4.2"
     react-cookie-consent: "npm:9.0.0"
-    react-quill: "npm:2.0.0-beta.4"
+    react-quill: "npm:2.0.0"
     react-rnd: "npm:10.4.1"
     react-text-mask: "npm:5.5.0"
     uuid: "npm:9.0.1"
@@ -1457,7 +1458,7 @@ __metadata:
     react-router-dom: ^6.11.0
     stylis: ^4.1.3
     stylis-plugin-rtl: ^2.1.1
-  checksum: ddd31a89708f43d59e350bbcfdef7d05cc1a30148f49e909f2b66b2889d52569c5e11358f189409ccbe56530e4d7ae48f4c56a14b9c441ce34974d904d6c89f9
+  checksum: b0a6984dc4a8d1dbd882afb3eb5fc4bf6442c9958d0dffe0b14fded62ac3c1e500766d94c8ae9835c899fe46358e173e9b826b8bf37984d4c2470c6e770b7b6c
   languageName: node
   linkType: hard
 
@@ -7548,7 +7549,7 @@ __metadata:
     "@graasp/query-client": "npm:2.6.0"
     "@graasp/sdk": "npm:3.7.0"
     "@graasp/translations": "npm:1.23.0"
-    "@graasp/ui": "github:graasp/graasp-ui#484-convert-to-pure-ts-package"
+    "@graasp/ui": "npm:4.7.0"
     "@mui/icons-material": "npm:5.15.8"
     "@mui/lab": "npm:5.0.0-alpha.140"
     "@mui/material": "npm:5.15.8"
@@ -10840,20 +10841,6 @@ __metadata:
     react: ^16 || ^17 || ^18
     react-dom: ^16 || ^17 || ^18
   checksum: e9aa49815bf3f52aefcef067eb3e3d474a737464ba06e3ac81a37806bac486bfa440303e5f2bf95b719aedc8918bbe19948ada83a7b62d7211ae95b053cb00b1
-  languageName: node
-  linkType: hard
-
-"react-quill@npm:2.0.0-beta.4":
-  version: 2.0.0-beta.4
-  resolution: "react-quill@npm:2.0.0-beta.4"
-  dependencies:
-    "@types/quill": "npm:^1.3.10"
-    lodash: "npm:^4.17.4"
-    quill: "npm:^1.3.7"
-  peerDependencies:
-    react: ^16 || ^17
-    react-dom: ^16 || ^17
-  checksum: 1797259893bd9f3c3650e47b5dfc6332f815e2276276119fa3a73e95b755d46b06415f09d3d7d1b7c2b3744d9dea27ff7cf620700ad95d65dd1c7a9152f13064
   languageName: node
   linkType: hard
 
