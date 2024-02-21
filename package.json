@@ -34,7 +34,7 @@
     "@emotion/server": "11.11.0",
     "@emotion/styled": "11.11.0",
     "@graasp/query-client": "2.6.0",
-    "@graasp/sdk": "3.7.0",
+    "@graasp/sdk": "3.10.0",
     "@graasp/translations": "1.23.0",
     "@graasp/ui": "4.7.0",
     "@mui/icons-material": "5.15.8",
@@ -111,7 +111,7 @@
     ]
   },
   "resolutions": {
-    "@graasp/sdk": "3.7.0",
+    "@graasp/sdk": "3.10.0",
     "@graasp/query-client": "2.6.0"
   },
   "packageManager": "yarn@4.1.0"
