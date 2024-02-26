@@ -109,9 +109,5 @@
       "pages/api/__coverage__.js"
     ]
   },
-  "resolutions": {
-    "@graasp/sdk": "3.7.0",
-    "@graasp/query-client": "2.6.0"
-  },
   "packageManager": "yarn@4.1.0"
 }

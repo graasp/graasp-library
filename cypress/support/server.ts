@@ -517,7 +517,7 @@ export const mockSearch = (
 ) => {
   cy.intercept(
     {
-      method: HttpMethod.POST,
+      method: HttpMethod.Post,
       url: new RegExp(`${API_HOST}/${SEARCH_PUBLISHED_ITEMS_ROUTE}`),
     },
     ({ reply, body }) => {
@@ -565,7 +565,7 @@ export const mockGetLikedItems = (
 export const mockGetPublishItemInformations = (items: MockItem[]): void => {
   cy.intercept(
     {
-      method: HttpMethod.GET,
+      method: HttpMethod.Get,
       url: new RegExp(
         `${API_HOST}/${buildGetItemPublishedInformationRoute(ID_FORMAT)}`,
       ),

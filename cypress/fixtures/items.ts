@@ -1,7 +1,7 @@
 import {
-  DEFAULT_LANG,
+  DiscriminatedItem,
+  FolderItemFactory,
   FolderItemType,
-  Item,
   ItemTagType,
   ItemType,
   PermissionLevel,
@@ -11,19 +11,16 @@ import { MockItem } from '../support/types';
 import { SAMPLE_CATEGORIES } from './categories';
 import { CURRENT_USER, MEMBERS } from './members';
 
-export const DEFAULT_FOLDER_ITEM: FolderItemType = {
-  id: '',
+export const DEFAULT_FOLDER_ITEM: FolderItemType = FolderItemFactory({
   name: 'parent public item',
   description: 'Some description',
-  settings: {},
   path: 'ecafbd2a_5688_11eb_ae93_0242ac130002',
   createdAt: '2023-02-27T18:20:09.732Z',
   updatedAt: '2023-02-28T18:20:09.732Z',
   extra: { [ItemType.FOLDER]: { childrenOrder: [] } },
-  lang: DEFAULT_LANG,
   creator: CURRENT_USER,
   type: ItemType.FOLDER,
-};
+});
 
 export const PUBLISHED_ITEMS: MockItem[] = [
   {
@@ -335,7 +332,7 @@ export const getNumberOfOwnPublishedItems = (memberId: string) =>
     ({ path, creator }) => !path.includes('.') && creator?.id === memberId,
   ).length;
 
-export const builderMeilisearchResults = (items: Item[]) => ({
+export const builderMeilisearchResults = (items: DiscriminatedItem[]) => ({
   results: [
     {
       hits: items.map((i) => ({ ...i, _formatted: i })),

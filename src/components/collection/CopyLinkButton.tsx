@@ -4,7 +4,7 @@ import CodeIcon from '@mui/icons-material/Code';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
-import { DiscriminatedItem, Triggers } from '@graasp/sdk';
+import { ActionTriggers, DiscriminatedItem } from '@graasp/sdk';
 
 import { useLibraryTranslation } from '../../config/i18n';
 import notifier, {
@@ -24,7 +24,10 @@ export const useEmbedAction = (itemId?: DiscriminatedItem['id']) => {
     copyToClipboard(link, {
       onSuccess: () => {
         if (itemId) {
-          triggerAction({ itemId, payload: { type: Triggers.ItemEmbed } });
+          triggerAction({
+            itemId,
+            payload: { type: ActionTriggers.ItemEmbed },
+          });
         }
 
         notifier({

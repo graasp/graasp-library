@@ -42,7 +42,7 @@ export const getParentsIdsFromPath = (
 
 type SummaryProps = {
   collection?: DiscriminatedItem;
-  publishedRoot?: ItemPublished;
+  publishedRoot?: ItemPublished | null;
   isLoading: boolean;
   totalViews: number;
 };
