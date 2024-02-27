@@ -8,11 +8,11 @@ import { FAILURE_MESSAGES, SUCCESS_MESSAGES } from '@graasp/translations';
 import ToastrWithLink from '../components/common/ToastrWithLink';
 import LIBRARY from '../langs/constants';
 import { SHOW_NOTIFICATIONS } from './env';
-import { i18nConfig } from './i18n';
+import { appI18n } from './i18n';
 import { buildPlayerViewItemRoute } from './paths';
 
-const i18n = i18nConfig();
-const t = (value: string) => i18n.t(value, { ns: 'messages' });
+const t = (value: string) => appI18n.t(value, { ns: 'messages' });
+const libraryT = (value: string) => appI18n.t(value);
 
 export const COPY_RESOURCE_LINK_TO_CLIPBOARD = {
   SUCCESS: 'success',
@@ -54,15 +54,15 @@ const notifier: Notifier = ({ type, payload }) => {
             (payload?.newItem as DiscriminatedItem | undefined)?.id,
           )}
           text={t(SUCCESS_MESSAGES.COPY_ITEM)}
-          linkText={i18n.t(LIBRARY.COPY_ITEM_TOASTR_LINK)}
+          linkText={libraryT(LIBRARY.COPY_ITEM_TOASTR_LINK)}
         />,
       );
       break;
     case COPY_RESOURCE_LINK_TO_CLIPBOARD.SUCCESS:
-      toast.success(i18n.t(LIBRARY.COPY_LINK_SUCCESS_MESSAGE));
+      toast.success(libraryT(LIBRARY.COPY_LINK_SUCCESS_MESSAGE));
       break;
     case COPY_RESOURCE_LINK_TO_CLIPBOARD.FAILURE:
-      toast.error(i18n.t(LIBRARY.COPY_LINK_FAILURE_MESSAGE));
+      toast.error(libraryT(LIBRARY.COPY_LINK_FAILURE_MESSAGE));
       break;
     default:
   }
