@@ -8,9 +8,10 @@ import { FAILURE_MESSAGES, SUCCESS_MESSAGES } from '@graasp/translations';
 import ToastrWithLink from '../components/common/ToastrWithLink';
 import LIBRARY from '../langs/constants';
 import { SHOW_NOTIFICATIONS } from './env';
-import i18n from './i18n';
+import { i18nConfig } from './i18n';
 import { buildPlayerViewItemRoute } from './paths';
 
+const i18n = i18nConfig();
 const t = (value: string) => i18n.t(value, { ns: 'messages' });
 
 export const COPY_RESOURCE_LINK_TO_CLIPBOARD = {

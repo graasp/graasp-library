@@ -1,9 +1,9 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { I18nextProvider } from 'react-i18next';
 
 import { getLangCookie } from '@graasp/sdk';
 
-import i18n from '../../config/i18n';
+import { i18nConfig } from '../../config/i18n';
 import { QueryClientContext } from '../QueryClientContext';
 
 type Props = {
@@ -13,6 +13,8 @@ type Props = {
 const TranslationWrapper = ({ children }: Props): JSX.Element => {
   const { hooks } = useContext(QueryClientContext);
   const { data: member } = hooks.useCurrentMember();
+
+  const [i18n] = useState(i18nConfig);
 
   useEffect(() => {
     // change language

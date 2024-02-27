@@ -1,7 +1,7 @@
 import { CategoryType } from '@graasp/sdk';
 import { namespaces } from '@graasp/translations';
 
-import i18n from '../../../src/config/i18n';
+import { i18nConfig } from '../../../src/config/i18n';
 import { ALL_COLLECTIONS_ROUTE } from '../../../src/config/routes';
 import {
   ALL_COLLECTIONS_GRID_ID,
@@ -17,6 +17,8 @@ import { SAMPLE_CATEGORIES } from '../../fixtures/categories';
 import { buildPublicAndPrivateEnvironments } from '../../fixtures/environment';
 import { PUBLISHED_ITEMS } from '../../fixtures/items';
 import { getRootPublishedItems } from '../../support/utils';
+
+const i18n = i18nConfig();
 
 buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
   describe(`All Collections Page for ${

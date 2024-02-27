@@ -1,4 +1,4 @@
-import i18n from '../../../src/config/i18n';
+import { i18nConfig } from '../../../src/config/i18n';
 import { HOME_ROUTE } from '../../../src/config/routes';
 import {
   GRAASP_SELECTION_TITLE_ID,
@@ -10,6 +10,8 @@ import {
 import { buildPublicAndPrivateEnvironments } from '../../fixtures/environment';
 import { GRAASPER_ITEMS } from '../../fixtures/items';
 import { SIGNED_OUT_USER } from '../../support/constants';
+
+const i18n = i18nConfig();
 
 describe('Home Page', () => {
   buildPublicAndPrivateEnvironments().forEach((environment) => {
