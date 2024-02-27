@@ -16,8 +16,7 @@ import {
   Typography,
 } from '@mui/material';
 
-import { Context } from '@graasp/sdk';
-import { Button, Main } from '@graasp/ui';
+import { Button } from '@graasp/ui';
 
 import { UrlSearch } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';
@@ -30,7 +29,7 @@ import { ItemOrSearchedItem } from '../../utils/types';
 import { QueryClientContext } from '../QueryClientContext';
 import CollectionsGrid from '../collection/CollectionsGrid';
 import FilterHeader from '../filters/FilterHeader';
-import useHeader from '../layout/useHeader';
+import MainWrapper from '../layout/MainWrapper';
 
 type AllCollectionsProps = {};
 
@@ -84,8 +83,6 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
     setPage(1);
   }, [searchKeywords, filters, shouldIncludeContent]);
 
-  const { leftContent, rightContent } = useHeader();
-
   const allCollections = prevResults.concat(
     collections?.results?.[0]?.hits ?? [],
   );
@@ -107,96 +104,86 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
     collections?.results?.[0]?.estimatedTotalHits;
 
   return (
-    <>
-      {/* todo: allow main to get custom header */}
-      <Main
-        open={false}
-        context={Context.Library}
-        headerLeftContent={leftContent}
-        headerRightContent={rightContent}
-        drawerContent={<>Content</>}
-        drawerOpenAriaLabel="open drawer"
-      >
-        <Container maxWidth="xl" sx={{ mb: 5 }}>
-          <Box py={5}>
-            <FilterHeader
-              shouldIncludeContent={shouldIncludeContent}
-              onFiltersChanged={onFiltersChanged}
-              onChangeSearch={setSearchKeywords}
-              onSearch={setSearchKeywords}
-              searchPreset={searchKeywords}
-              categoryPreset={filters}
-              isLoadingResults={false}
-              onIncludeContentChange={setShouldIncludeContent}
-            />
-          </Box>
-          <Stack flexGrow={2} direction="column" spacing={2}>
-            {searchKeywords && (
-              <Stack direction="row" spacing={1} alignItems="center">
-                <Typography color="#999">
-                  <Trans
-                    values={{
-                      search: searchKeywords,
-                      count: hitsNumber ?? 0,
-                    }}
-                    t={t}
-                    i18nKey={LIBRARY.SEARCH_RESULTS_FOR_TEXT}
-                  />
-                </Typography>
-                <IconButton onClick={clearAllSearch}>
-                  <Close />
-                </IconButton>
-              </Stack>
-            )}
-            {error ? (
-              <Alert severity="error" id={SEARCH_ERROR_MESSAGE_ID}>
-                {t(LIBRARY.UNEXPECTED_ERROR_MESSAGE)}
-              </Alert>
-            ) : (
-              <CollectionsGrid
-                containerWidth="xl"
-                collections={allCollections}
-                id={ALL_COLLECTIONS_GRID_ID}
-                isLoading={isLoading}
-                showIsContentTag
-              />
-            )}
-          </Stack>
-          <Box my={10} textAlign="center">
-            {Boolean((hitsNumber ?? 0) > allCollections.length) && (
-              <Button
-                onClick={() => {
-                  setPrevResults(allCollections);
-                  setPage(page + 1);
-                }}
-              >
-                {t(LIBRARY.SEARCH_RESULTS_LOAD_MORE)}
-              </Button>
-            )}
-            {!shouldIncludeContent && Boolean(searchKeywords) && (
-              <MuiButton
-                disableElevation
-                onClick={() => {
-                  setShouldIncludeContent(true);
-                  window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-                }}
-                sx={{
-                  textTransform: 'none',
-                  paddingLeft: 5,
-                  paddingRight: 5,
-                  background: '#eee',
-                }}
-              >
+    <MainWrapper>
+      <Container maxWidth="xl" sx={{ mb: 5 }}>
+        <Box py={5}>
+          <FilterHeader
+            shouldIncludeContent={shouldIncludeContent}
+            onFiltersChanged={onFiltersChanged}
+            onChangeSearch={setSearchKeywords}
+            onSearch={setSearchKeywords}
+            searchPreset={searchKeywords}
+            categoryPreset={filters}
+            isLoadingResults={false}
+            onIncludeContentChange={setShouldIncludeContent}
+          />
+        </Box>
+        <Stack flexGrow={2} direction="column" spacing={2}>
+          {searchKeywords && (
+            <Stack direction="row" spacing={1} alignItems="center">
+              <Typography color="#999">
                 <Trans
+                  values={{
+                    search: searchKeywords,
+                    count: hitsNumber ?? 0,
+                  }}
                   t={t}
-                  i18nKey={LIBRARY.SUGGESTION_TO_ENABLE_IN_DEPTH_SEARCH_TEXT}
+                  i18nKey={LIBRARY.SEARCH_RESULTS_FOR_TEXT}
                 />
-              </MuiButton>
-            )}
-          </Box>
-        </Container>
-      </Main>
-    </>
+              </Typography>
+              <IconButton onClick={clearAllSearch}>
+                <Close />
+              </IconButton>
+            </Stack>
+          )}
+          {error ? (
+            <Alert severity="error" id={SEARCH_ERROR_MESSAGE_ID}>
+              {t(LIBRARY.UNEXPECTED_ERROR_MESSAGE)}
+            </Alert>
+          ) : (
+            <CollectionsGrid
+              containerWidth="xl"
+              collections={allCollections}
+              id={ALL_COLLECTIONS_GRID_ID}
+              isLoading={isLoading}
+              showIsContentTag
+            />
+          )}
+        </Stack>
+        <Box my={10} textAlign="center">
+          {Boolean((hitsNumber ?? 0) > allCollections.length) && (
+            <Button
+              onClick={() => {
+                setPrevResults(allCollections);
+                setPage(page + 1);
+              }}
+            >
+              {t(LIBRARY.SEARCH_RESULTS_LOAD_MORE)}
+            </Button>
+          )}
+          {!shouldIncludeContent && Boolean(searchKeywords) && (
+            <MuiButton
+              disableElevation
+              onClick={() => {
+                setShouldIncludeContent(true);
+                window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+              }}
+              sx={{
+                textTransform: 'none',
+                paddingLeft: 5,
+                paddingRight: 5,
+                background: '#eee',
+              }}
+            >
+              <Trans
+                t={t}
+                i18nKey={LIBRARY.SUGGESTION_TO_ENABLE_IN_DEPTH_SEARCH_TEXT}
+              />
+            </MuiButton>
+          )}
+        </Box>
+      </Container>
+    </MainWrapper>
   );
 };
 

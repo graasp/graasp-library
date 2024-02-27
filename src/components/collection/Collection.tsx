@@ -1,14 +1,10 @@
 'use client';
 
-import { ErrorBoundary } from '@sentry/nextjs';
 import { validate } from 'uuid';
 
 import { useContext, useEffect } from 'react';
 
 import { Box } from '@mui/material';
-
-import { Context } from '@graasp/sdk';
-import { Main } from '@graasp/ui';
 
 import {
   ERROR_INVALID_COLLECTION_ID_CODE,
@@ -16,7 +12,7 @@ import {
 } from '../../config/messages';
 import { QueryClientContext } from '../QueryClientContext';
 import Error from '../common/Error';
-import useHeader from '../layout/useHeader';
+import MainWrapper from '../layout/MainWrapper';
 import UnpublishedItemAlert from './UnpublishedItemAlert';
 import Summary from './summary/Summary';
 
@@ -35,7 +31,6 @@ const Collection = ({ id }: Props) => {
   } = hooks.useItem(id);
   const { data: currentMember } = hooks.useCurrentMember();
   const { data: tags } = hooks.useItemTags(id);
-  const { leftContent, rightContent } = useHeader(id);
   // get item published
   const { data: itemPublishEntry } = hooks.useItemPublishedInformation({
     itemId: id || '',
@@ -59,74 +54,56 @@ const Collection = ({ id }: Props) => {
 
   if (!id || !validate(id)) {
     return (
-      <Main
-        open={false}
-        context={Context.Library}
-        headerLeftContent={leftContent}
-        headerRightContent={rightContent}
-        drawerContent={<>Content</>}
-        drawerOpenAriaLabel="open drawer"
-      >
-        <Box id={id} p={5}>
-          <Error code={ERROR_INVALID_COLLECTION_ID_CODE} />
-        </Box>
-      </Main>
+      <Box id={id} p={5}>
+        <Error code={ERROR_INVALID_COLLECTION_ID_CODE} />
+      </Box>
     );
   }
 
   if (isError) {
     return (
-      <Main
-        open={false}
-        context={Context.Library}
-        headerLeftContent={leftContent}
-        headerRightContent={rightContent}
-        drawerContent={<>Content</>}
-        drawerOpenAriaLabel="open drawer"
-      >
-        <Box id={id} p={5}>
-          <Error code={ERROR_UNEXPECTED_ERROR_CODE} />
-        </Box>
-      </Main>
+      <Box id={id} p={5}>
+        <Error code={ERROR_UNEXPECTED_ERROR_CODE} />
+      </Box>
     );
   }
 
   return (
-    <ErrorBoundary>
-      <Main
-        open={false}
-        context={Context.Library}
-        headerLeftContent={leftContent}
-        headerRightContent={rightContent}
-        drawerContent={<>Content</>}
-        drawerOpenAriaLabel="open drawer"
+    <>
+      <UnpublishedItemAlert
+        canRead={canRead}
+        canPublish={canPublish}
+        isPublished={!!itemPublishEntry}
+        currentMember={currentMember}
+      />
+      <Box
+        id={id}
+        px={{
+          xs: 0,
+          sm: 2,
+          md: 5,
+        }}
+        py={5}
       >
-        <UnpublishedItemAlert
-          canRead={canRead}
-          canPublish={canPublish}
-          isPublished={!!itemPublishEntry}
-          currentMember={currentMember}
+        <Summary
+          collection={collection}
+          publishedRoot={itemPublishEntry}
+          isLoading={isLoadingItem}
+          totalViews={itemPublishEntry?.totalViews ?? 0}
         />
-        <Box
-          id={id}
-          px={{
-            xs: 0,
-            sm: 2,
-            md: 5,
-          }}
-          py={5}
-        >
-          <Summary
-            collection={collection}
-            publishedRoot={itemPublishEntry}
-            isLoading={isLoadingItem}
-            totalViews={itemPublishEntry?.totalViews ?? 0}
-          />
-          {/* <Comments comments={comments} members={members} /> */}
-        </Box>
-      </Main>
-    </ErrorBoundary>
+        {/* <Comments comments={comments} members={members} /> */}
+      </Box>
+    </>
   );
 };
 
-export default Collection;
+const CollectionPageWrapper = (props: Props) => (
+  <MainWrapper>
+    <Collection
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
+    />
+  </MainWrapper>
+);
+
+export default CollectionPageWrapper;

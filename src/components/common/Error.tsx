@@ -19,23 +19,16 @@ const Error = ({ code = ERROR_UNEXPECTED_ERROR_CODE }: Props) => {
   const message = ErrorMessages[code];
 
   return (
-    <>
-      {/* <Seo
-        title={t(LIBRARY.ERROR_TITLE)}
-        description={t(message)}
-        author={APP_AUTHOR}
-      /> */}
-      <Stack justifyContent="center" alignItems="center" direction="column">
-        <Typography variant="h4" align="center">
-          {t(message)}
+    <Stack justifyContent="center" alignItems="center" direction="column">
+      <Typography variant="h4" align="center">
+        {t(message)}
+      </Typography>
+      <Box marginTop={2} component={Link} href={HOME_ROUTE}>
+        <Typography variant="subtitle1">
+          {t(LIBRARY.ERROR_RETURN_TO_HOME)}
         </Typography>
-        <Box marginTop={2} component={Link} href={HOME_ROUTE}>
-          <Typography variant="subtitle1">
-            {t(LIBRARY.ERROR_RETURN_TO_HOME)}
-          </Typography>
-        </Box>
-      </Stack>
-    </>
+      </Box>
+    </Stack>
   );
 };
 

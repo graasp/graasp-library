@@ -4,7 +4,7 @@ import {
   GRAASP_SELECTION_TITLE_ID,
   HOME_PAGE_TITLE_TEXT_ID,
   MOST_LIKED_TITLE_ID,
-  POPULAR_THIS_WEEK_TITLE_ID,
+  RECENT_PUBLICATIONS_TITLE_ID,
   SECTION_TITLE_ID,
 } from '../../../src/config/selectors';
 import { buildPublicAndPrivateEnvironments } from '../../fixtures/environment';
@@ -27,7 +27,7 @@ describe('Home Page', () => {
         cy.visit(HOME_ROUTE);
 
         cy.get(`#${HOME_PAGE_TITLE_TEXT_ID}`).should('be.visible');
-        cy.get(`#${POPULAR_THIS_WEEK_TITLE_ID} #${SECTION_TITLE_ID}`)
+        cy.get(`#${RECENT_PUBLICATIONS_TITLE_ID} #${SECTION_TITLE_ID}`)
           .scrollIntoView()
           .should('be.visible');
         cy.get(`#${MOST_LIKED_TITLE_ID} #${SECTION_TITLE_ID}`)

@@ -1,6 +1,5 @@
 'use client';
 
-// ^ the use client directive should be removed as soon as possible once query-client provides a real ESm build
 import Link from 'next/link';
 
 import { useContext } from 'react';
@@ -8,8 +7,7 @@ import { useContext } from 'react';
 import { ArrowForward } from '@mui/icons-material';
 import { Box, Button, styled } from '@mui/material';
 
-import { Context } from '@graasp/sdk';
-import { LibraryIcon, Main } from '@graasp/ui';
+import { LibraryIcon } from '@graasp/ui';
 
 import {
   GRAASP_COLOR,
@@ -22,13 +20,13 @@ import {
   GRAASPER_COLLECTIONS_GRID_ID,
   GRAASP_SELECTION_TITLE_ID,
   MOST_LIKED_TITLE_ID,
-  POPULAR_THIS_WEEK_TITLE_ID,
+  RECENT_PUBLICATIONS_TITLE_ID,
 } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
 import ItemCollection from '../collection/ItemCollection';
 import HomeHeader from '../layout/HomeHeader';
-import useHeader from '../layout/useHeader';
+import MainWrapper from '../layout/MainWrapper';
 
 const PATTERN_OPACITY = 0.7;
 const SECONDARY_PATTERN_COLOR = '505DD2';
@@ -66,7 +64,6 @@ const DiscoverButton = styled(Button)(({ theme }) => ({
 const Home = () => {
   const { t } = useLibraryTranslation();
 
-  const { leftContent, rightContent } = useHeader();
   const { hooks } = useContext(QueryClientContext);
 
   const { data: graasperCollections } =
@@ -80,14 +77,7 @@ const Home = () => {
 
   return (
     <StyledBackgroundContainer>
-      <Main
-        open={false}
-        context={Context.Library}
-        headerLeftContent={leftContent}
-        headerRightContent={rightContent}
-        drawerContent={<>Drawer</>}
-        drawerOpenAriaLabel="open drawer"
-      >
+      <MainWrapper>
         <HomeHeader />
 
         <ItemCollection
@@ -102,7 +92,7 @@ const Home = () => {
           title={t(LIBRARY.HOME_MOST_LIKED_COLLECTIONS_TITLE)}
         />
         <ItemCollection
-          id={POPULAR_THIS_WEEK_TITLE_ID}
+          id={RECENT_PUBLICATIONS_TITLE_ID}
           collections={recentCollections}
           title={t(LIBRARY.HOME_RECENT_COLLECTIONS_TITLE)}
         />
@@ -125,7 +115,7 @@ const Home = () => {
             </Box>
           </DiscoverButton>
         </Box>
-      </Main>
+      </MainWrapper>
     </StyledBackgroundContainer>
   );
 };
