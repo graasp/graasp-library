@@ -2,10 +2,7 @@ import { buildCollectionRoute } from '../../../src/config/routes';
 import { SUMMARY_TAGS_CONTAINER_ID } from '../../../src/config/selectors';
 import { buildPublicAndPrivateEnvironments } from '../../fixtures/environment';
 import { PUBLISHED_ITEMS } from '../../fixtures/items';
-import {
-  COLLECTION_LOADING_TIME,
-  SIGNED_OUT_USER,
-} from '../../support/constants';
+import { SIGNED_OUT_USER } from '../../support/constants';
 
 describe('Tags in Summary', { defaultCommandTimeout: 10000 }, () => {
   buildPublicAndPrivateEnvironments().forEach((environment) => {
@@ -29,7 +26,6 @@ describe('Tags in Summary', { defaultCommandTimeout: 10000 }, () => {
 
       const item = PUBLISHED_ITEMS[2];
       cy.visit(buildCollectionRoute(item.id));
-      cy.wait(COLLECTION_LOADING_TIME);
 
       cy.get(`#${SUMMARY_TAGS_CONTAINER_ID}`).should('not.exist');
     });
