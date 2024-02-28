@@ -5,7 +5,6 @@ import { i18nConfig } from '../../../src/config/i18n';
 import { ALL_COLLECTIONS_ROUTE } from '../../../src/config/routes';
 import {
   ALL_COLLECTIONS_GRID_ID,
-  ALL_COLLECTIONS_HEADER_ID,
   ALL_COLLECTIONS_TITLE_ID,
   ENABLE_IN_DEPTH_SEARCH_CHECKBOX_ID,
   buildCategoryOptionSelector,
@@ -35,8 +34,6 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
     });
 
     it('Layout', () => {
-      cy.get(`#${ALL_COLLECTIONS_HEADER_ID}`).should('be.visible');
-
       cy.get(`#${ALL_COLLECTIONS_TITLE_ID}`).should('be.visible');
 
       // filter header

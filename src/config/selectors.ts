@@ -71,3 +71,14 @@ export const SEARCH_RESULTS_SHOW_MORE_BUTTON = 'searchResultsShowMoreButton';
 export const SEARCH_ERROR_MESSAGE_ID = 'searchErrorMessage';
 
 export const LIKE_COLLECTION_NOT_LOGGED_ID = 'likeCollectionLoginMessage';
+
+export const SEARCH_ALL_COLLECTIONS_DRAWER_ITEM_ID =
+  'searchAllCollectionsDrawerItemId';
+export const GRAASPER_SELECTION_DRAWER_ITEM_ID =
+  'graasperSelectionDrawerItemId';
+export const MOST_LIKED_COLLECTIONS_DRAWER_ITEM_ID =
+  'mostLikedCollectionsDrawerItemId';
+export const RECENT_COLLECTIONS_DRAWER_ITEM_ID =
+  'recentCollectionsDrawerItemId';
+export const MY_PUBLICATIONS_DRAWER_ITEM_ID = 'myPublicationsDrawerItemId';
+export const LIKED_COLLECTIONS_DRAWER_ITEM_ID = 'likedCollectionsDrawerItemId';

@@ -13,8 +13,10 @@ import {
 import {
   Divider,
   ListItemIcon,
+  ListItemText,
   MenuItem,
   MenuList,
+  Typography,
   styled,
 } from '@mui/material';
 
@@ -27,9 +29,15 @@ import {
   buildMemberRoute,
 } from '../../config/routes';
 import {
+  GRAASPER_SELECTION_DRAWER_ITEM_ID,
   GRAASP_SELECTION_TITLE_ID,
+  LIKED_COLLECTIONS_DRAWER_ITEM_ID,
+  MOST_LIKED_COLLECTIONS_DRAWER_ITEM_ID,
   MOST_LIKED_TITLE_ID,
+  MY_PUBLICATIONS_DRAWER_ITEM_ID,
+  RECENT_COLLECTIONS_DRAWER_ITEM_ID,
   RECENT_PUBLICATIONS_TITLE_ID,
+  SEARCH_ALL_COLLECTIONS_DRAWER_ITEM_ID,
 } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
@@ -38,86 +46,82 @@ const StyledLink = styled(Link)(({ theme }) => ({
   color: theme.palette.text.primary,
 }));
 
+type DrawerMenuItemProps = {
+  id: string;
+  href: string;
+  icon: JSX.Element;
+  text: string;
+};
+
+const DrawerMenuItem = ({ id, href, icon, text }: DrawerMenuItemProps) => {
+  const { setOpen } = useMainMenuOpenContext();
+
+  return (
+    <MenuItem
+      id={id}
+      color="primary"
+      component={StyledLink}
+      href={href}
+      onClick={() => setOpen(false)}
+    >
+      <ListItemIcon>{icon}</ListItemIcon>
+      <Typography noWrap component={ListItemText} textOverflow="ellipsis">
+        {text}
+      </Typography>
+    </MenuItem>
+  );
+};
+
 const DrawerContent = () => {
   const { hooks } = useContext(QueryClientContext);
-  const { setOpen } = useMainMenuOpenContext();
   const { t } = useLibraryTranslation();
   const { data: currentMember } = hooks.useCurrentMember();
   return (
     <MenuList>
-      <MenuItem
-        color="primary"
-        component={StyledLink}
+      <DrawerMenuItem
+        id={SEARCH_ALL_COLLECTIONS_DRAWER_ITEM_ID}
+        icon={<Search />}
+        text={t(LIBRARY.DRAWER_ALL_COLLECTIONS_TEXT)}
         href={ALL_COLLECTIONS_ROUTE}
-        onClick={() => setOpen(false)}
-      >
-        <ListItemIcon>
-          <Search />
-        </ListItemIcon>
-        {t(LIBRARY.DRAWER_ALL_COLLECTIONS_TEXT)}
-      </MenuItem>
-      <MenuItem
-        color="primary"
-        component={StyledLink}
+      />
+      <DrawerMenuItem
+        id={GRAASPER_SELECTION_DRAWER_ITEM_ID}
+        icon={<AutoAwesome />}
+        text={t(LIBRARY.HOME_GRAASPER_COLLECTIONS_TITLE)}
         href={`/#${GRAASP_SELECTION_TITLE_ID}`}
-        onClick={() => setOpen(false)}
-      >
-        <ListItemIcon>
-          <AutoAwesome />
-        </ListItemIcon>
-        {t(LIBRARY.HOME_GRAASPER_COLLECTIONS_TITLE)}
-      </MenuItem>
-      <MenuItem
-        color="primary"
-        component={StyledLink}
+      />
+      <DrawerMenuItem
+        id={MOST_LIKED_COLLECTIONS_DRAWER_ITEM_ID}
+        icon={<TrendingUp />}
+        text={t(LIBRARY.HOME_MOST_LIKED_COLLECTIONS_TITLE)}
         href={`/#${MOST_LIKED_TITLE_ID}`}
-        onClick={() => setOpen(false)}
-      >
-        <ListItemIcon>
-          <TrendingUp />
-        </ListItemIcon>
-        {t(LIBRARY.HOME_MOST_LIKED_COLLECTIONS_TITLE)}
-      </MenuItem>
-      <MenuItem
-        color="primary"
-        component={StyledLink}
+      />
+      <DrawerMenuItem
+        id={RECENT_COLLECTIONS_DRAWER_ITEM_ID}
+        icon={<AccessTimeFilled />}
+        text={t(LIBRARY.HOME_RECENT_COLLECTIONS_TITLE)}
         href={`/#${RECENT_PUBLICATIONS_TITLE_ID}`}
-        onClick={() => setOpen(false)}
-      >
-        <ListItemIcon>
-          <AccessTimeFilled />
-        </ListItemIcon>
-        {t(LIBRARY.HOME_RECENT_COLLECTIONS_TITLE)}
-      </MenuItem>
-      {currentMember && currentMember.id ? (
-        <>
-          <Divider component="li" textAlign="left" sx={{ paddingTop: 5 }}>
-            {t(LIBRARY.DRAWER_AUTHENTICATED_USER_LINKS_SECTION)}
-          </Divider>
-          <MenuItem
-            color="primary"
-            component={StyledLink}
-            href={`${buildMemberRoute(currentMember.id)}`}
-            onClick={() => setOpen(false)}
-          >
-            <ListItemIcon>
-              <BookOutlined />
-            </ListItemIcon>
-            {t(LIBRARY.PUBLISHED_COLLECTIONS)}
-          </MenuItem>
-          <MenuItem
-            color="primary"
-            component={StyledLink}
-            href={MY_LIKED_ITEMS_ROUTE}
-            onClick={() => setOpen(false)}
-          >
-            <ListItemIcon>
-              <Favorite />
-            </ListItemIcon>
-            {t(LIBRARY.LIKED_ITEMS)}
-          </MenuItem>
-        </>
-      ) : undefined}
+      />
+
+      {currentMember && currentMember.id
+        ? [
+            <Divider component="li" textAlign="left" sx={{ paddingTop: 5 }}>
+              {t(LIBRARY.DRAWER_AUTHENTICATED_USER_LINKS_SECTION)}
+            </Divider>,
+            <DrawerMenuItem
+              id={MY_PUBLICATIONS_DRAWER_ITEM_ID}
+              icon={<BookOutlined />}
+              text={t(LIBRARY.PUBLISHED_COLLECTIONS)}
+              href={buildMemberRoute(currentMember.id)}
+            />,
+            <DrawerMenuItem
+              id={LIKED_COLLECTIONS_DRAWER_ITEM_ID}
+              icon={<Favorite />}
+              text={t(LIBRARY.LIKED_ITEMS)}
+              href={MY_LIKED_ITEMS_ROUTE}
+            />,
+          ]
+        : undefined}
     </MenuList>
   );
 };
