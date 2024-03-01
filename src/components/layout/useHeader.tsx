@@ -3,10 +3,10 @@ import React from 'react';
 import { Header } from '@graasp/ui';
 
 import { HEADER_LOGO_HEIGHT } from '../../config/cssStyles';
-import UserHeader from './UserSwitchWrapper';
+import UserSwitchWrapper from './UserSwitchWrapper';
 
 const useHeader = () => {
-  const rightContent = <UserHeader />;
+  const rightContent = <UserSwitchWrapper />;
 
   const header = (
     <>

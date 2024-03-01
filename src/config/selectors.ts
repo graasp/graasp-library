@@ -17,8 +17,14 @@ export const CHILDREN_ITEMS_GRID_ID = 'childrenItemsGrid';
 export const ALL_COLLECTIONS_HEADER_ID = 'allCollectionsHeader';
 export const ALL_COLLECTIONS_TITLE_ID = 'allCollectionsTitle';
 export const MEMBER_COLLECTION_ID = 'memberCollectionId';
+
+export const HEADER_GRAASP_LOGO_LINK_ID = 'headerGraaspLogo';
 export const HEADER_GRAASP_LIBRARY_ID = 'headerGraaspLibrary';
 export const HEADER_MY_LIST_ID = 'headerMyList';
+export const HEADER_NAVIGATION_PLATFORM_SWITCH_ID =
+  'headerNavigationPlatformSwitch';
+
+export const USER_SWITCH_BUTTON_ID = 'userSwitch';
 
 export const SECTION_TITLE_ID = 'sectionTitleId';
 export const GRAASP_SELECTION_TITLE_ID = 'graaspSelectionTitleId';

@@ -6,8 +6,8 @@ import {
 } from '@graasp/ui';
 
 import { HOST_MAP } from '../../config/paths';
+import { HEADER_NAVIGATION_PLATFORM_SWITCH_ID } from '../../config/selectors';
 
-export const APP_NAVIGATION_PLATFORM_SWITCH_ID = 'appNavigationPlatformSwitch';
 export const APP_NAVIGATION_PLATFORM_SWITCH_BUTTON_IDS = {
   [Platform.Builder]: 'appNavigationPlatformSwitchButtonBuilder',
   [Platform.Player]: 'appNavigationPlatformSwitchButtonPlayer',
@@ -52,7 +52,7 @@ export const PlatformSwitchComponent = ({
 
   return (
     <PlatformSwitch
-      id={APP_NAVIGATION_PLATFORM_SWITCH_ID}
+      id={HEADER_NAVIGATION_PLATFORM_SWITCH_ID}
       selected={Platform.Library}
       platformsProps={platformProps}
     />

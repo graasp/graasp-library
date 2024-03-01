@@ -1,8 +1,7 @@
-import { FC, useContext } from 'react';
+import { useContext } from 'react';
 
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
-import Box from '@mui/material/Box';
 
 import { UserSwitchWrapper as GraaspUserSwitch } from '@graasp/ui';
 
@@ -11,6 +10,7 @@ import { GRAASP_ACCOUNT_HOST } from '../../config/env';
 import { useLibraryTranslation } from '../../config/i18n';
 import { SIGN_IN_ROUTE } from '../../config/paths';
 import { MY_LIKED_ITEMS_ROUTE, buildMemberRoute } from '../../config/routes';
+import { USER_SWITCH_BUTTON_ID } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
 import MemberAvatar from './MemberAvatar';
@@ -19,7 +19,7 @@ type Props = {
   ButtonContent?: JSX.Element;
 };
 
-const UserSwitchWrapper: FC<Props> = ({ ButtonContent }) => {
+const UserSwitchWrapper = ({ ButtonContent }: Props) => {
   const { hooks, mutations } = useContext(QueryClientContext);
   const { data: member, isLoading } = hooks.useCurrentMember();
   const { mutateAsync: signOut } = mutations.useSignOut();
@@ -38,24 +38,19 @@ const UserSwitchWrapper: FC<Props> = ({ ButtonContent }) => {
     },
   ];
   return (
-    <Box mr={1}>
-      <GraaspUserSwitch
-        userMenuItems={userItems}
-        ButtonContent={ButtonContent}
-        signOut={signOut}
-        currentMember={member}
-        isCurrentMemberLoading={isLoading}
-        profilePath={GRAASP_ACCOUNT_HOST}
-        redirectPath={SIGN_IN_ROUTE}
-        renderAvatar={(m) => (
-          <MemberAvatar
-            sx={{ mr: 1 }}
-            size={MEMBER_AVATAR_ICON_SIZE}
-            memberId={m?.id}
-          />
-        )}
-      />
-    </Box>
+    <GraaspUserSwitch
+      buttonId={USER_SWITCH_BUTTON_ID}
+      userMenuItems={userItems}
+      ButtonContent={ButtonContent}
+      signOut={signOut}
+      currentMember={member}
+      isCurrentMemberLoading={isLoading}
+      profilePath={GRAASP_ACCOUNT_HOST}
+      redirectPath={SIGN_IN_ROUTE}
+      renderAvatar={(m) => (
+        <MemberAvatar size={MEMBER_AVATAR_ICON_SIZE} memberId={m?.id} />
+      )}
+    />
   );
 };
 
