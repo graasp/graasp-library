@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.3](https://github.com/graasp/graasp-library/compare/v1.4.2...v1.4.3) (2024-03-04)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @sentry/nextjs to v7.100.1 ([#519](https://github.com/graasp/graasp-library/issues/519)) ([e2e2e5b](https://github.com/graasp/graasp-library/commit/e2e2e5bab2de49804a5fe1f45315133a9e28f536))
+* new version of UI and no more dynamic imports ([#515](https://github.com/graasp/graasp-library/issues/515)) ([a1f99fe](https://github.com/graasp/graasp-library/commit/a1f99feefda39eb80536167b1ccf10b82259f173))
+* **spanish:** update translations ([#525](https://github.com/graasp/graasp-library/issues/525)) ([7636968](https://github.com/graasp/graasp-library/commit/763696850c96e98154e600db494031c4a7c8d496))
+* update dependencies ([ad79c34](https://github.com/graasp/graasp-library/commit/ad79c3402be36a41589c9c1ced116822c396227f))
+* update drawer content and loading state of member page ([#532](https://github.com/graasp/graasp-library/issues/532)) ([01fe58e](https://github.com/graasp/graasp-library/commit/01fe58e3aecbfdd88d593f5ee930135c4a6e3ca1))
+* update esm dependencies ([#527](https://github.com/graasp/graasp-library/issues/527)) ([a8bcccf](https://github.com/graasp/graasp-library/commit/a8bcccf3d82178b1a13a3b426dfa84da2c746fbf))
+* update workflow to use merge-queue ([d0a176b](https://github.com/graasp/graasp-library/commit/d0a176b6725f6de0ba3b0bf0c23251d440afaf1d))
+
 ## [1.4.2](https://github.com/graasp/graasp-library/compare/v1.4.1...v1.4.2) (2024-02-08)
 
 
