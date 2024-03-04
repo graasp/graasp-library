@@ -32,7 +32,7 @@ const BioSection = ({ id, memberData, isOwnProfile }: Props) => {
 
   const { hooks } = useContext(QueryClientContext);
   const { data: publicProfile, isInitialLoading: isLoadingPublicProfile } =
-    hooks.usePublicProfile(id || '');
+    hooks.usePublicProfile(id);
   const { data: authorUrl, isInitialLoading: isLoadingAuthorAvatar } =
     hooks.useAvatarUrl({
       id,
