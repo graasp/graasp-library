@@ -99,6 +99,19 @@ const CategoryChip = ({ category }: CategoryChipProps) => {
   );
 };
 
+const CategoryDisplay = ({
+  categories,
+  emptyText,
+}: {
+  categories: Category[];
+  emptyText: string;
+}) => {
+  if (categories.length > 0) {
+    return categories?.map((entry) => <CategoryChip category={entry} />);
+  }
+  return <Typography color="text.secondary">{emptyText}</Typography>;
+};
+
 type SummaryDetailsProps = {
   collection?: DiscriminatedItem;
   publishedRootItem?: DiscriminatedItem;
@@ -114,7 +127,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
 }) => {
   const { t } = useLibraryTranslation();
   const { hooks } = useContext(QueryClientContext);
-  const { data: itemCategories } = hooks.useItemCategories(
+  const { data: rawItemCategories, isInitialLoading } = hooks.useItemCategories(
     publishedRootItem?.id,
   );
 
@@ -122,15 +135,22 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
     ? publishedRootItem.settings?.ccLicenseAdaption
     : collection?.settings?.ccLicenseAdaption;
 
+  const itemCategories =
+    // here we do a little trick to allow to have a loading state while we wait for the published entry.
+    publishedRootItem === undefined && isInitialLoading === false
+      ? // when we know if the published entry exists or not use the real value
+        rawItemCategories
+      : // set default to be empty array when we do not fetch
+        [];
   const levels = itemCategories
     ?.filter((c) => c.category.type === CategoryType.Level)
-    .map((c) => c.category);
+    ?.map((c) => c.category);
   const disciplines = itemCategories
     ?.filter((c) => c.category.type === CategoryType.Discipline)
-    .map((c) => c.category);
+    ?.map((c) => c.category);
   const languages = itemCategories
     ?.filter((c) => c.category.type === CategoryType.Language)
-    .map((c) => c.category);
+    ?.map((c) => c.category);
 
   const { allowSharing, allowCommercialUse, requireAccreditation } =
     React.useMemo(
@@ -146,50 +166,48 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
       justifyContent="space-between"
     >
       <Grid item xs={12} sm={6} md={4}>
-        <DetailCard>
-          {collection?.createdAt && (
-            <div id={SUMMARY_CREATED_AT_CONTAINER_ID}>
-              <Typography variant="body1" fontWeight="bold">
-                {t(LIBRARY.SUMMARY_DETAILS_CREATED_AT_TITLE)}
-              </Typography>
-              <Typography variant="body1" gutterBottom>
-                {formatDate(collection.createdAt, { locale: lang })}
-              </Typography>
-            </div>
-          )}
+        <DetailCard id={SUMMARY_CREATED_AT_CONTAINER_ID}>
+          <Typography variant="body1" fontWeight="bold">
+            {t(LIBRARY.SUMMARY_DETAILS_CREATED_AT_TITLE)}
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            {collection?.createdAt ? (
+              formatDate(collection.createdAt, { locale: lang })
+            ) : (
+              <Skeleton />
+            )}
+          </Typography>
         </DetailCard>
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
-        <DetailCard>
-          {collection?.updatedAt && (
-            <div id={SUMMARY_LAST_UPDATE_CONTAINER_ID}>
-              <Typography variant="body1" fontWeight="bold">
-                {t(LIBRARY.SUMMARY_DETAILS_UPDATED_AT_TITLE)}
-              </Typography>
-              <Typography variant="body1" gutterBottom>
-                {formatDate(collection.updatedAt, { locale: lang })}
-              </Typography>
-            </div>
-          )}
+        <DetailCard id={SUMMARY_LAST_UPDATE_CONTAINER_ID}>
+          <Typography variant="body1" fontWeight="bold">
+            {t(LIBRARY.SUMMARY_DETAILS_UPDATED_AT_TITLE)}
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            {collection?.updatedAt ? (
+              formatDate(collection.updatedAt, { locale: lang })
+            ) : (
+              <Skeleton />
+            )}
+          </Typography>
         </DetailCard>
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
-        <DetailCard>
-          <div id={SUMMARY_LANGUAGES_CONTAINER_ID}>
-            <Typography variant="body1" fontWeight="bold">
-              {t(LIBRARY.COLLECTION_LANGUAGES_TITLE)}
-            </Typography>
-            {isLoading && <Skeleton />}
-            <Stack gap={1} direction="row" flexWrap="wrap">
-              {languages?.length ? (
-                languages?.map((entry) => <CategoryChip category={entry} />)
-              ) : (
-                <Typography>
-                  {t(LIBRARY.SUMMARY_DETAILS_NO_LANGUAGES)}
-                </Typography>
-              )}
-            </Stack>
-          </div>
+        <DetailCard id={SUMMARY_LANGUAGES_CONTAINER_ID}>
+          <Typography variant="body1" fontWeight="bold">
+            {t(LIBRARY.COLLECTION_LANGUAGES_TITLE)}
+          </Typography>
+          <Stack gap={1} direction="row" flexWrap="wrap">
+            {languages ? (
+              <CategoryDisplay
+                categories={languages}
+                emptyText={t(LIBRARY.SUMMARY_DETAILS_NO_LANGUAGES)}
+              />
+            ) : (
+              <Skeleton width="100%" />
+            )}
+          </Stack>
         </DetailCard>
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
@@ -198,15 +216,15 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
             <Typography variant="body1" fontWeight="bold">
               {t(LIBRARY.COLLECTION_CATEGORIES_TITLE)}
             </Typography>
-            {levels?.length || disciplines?.length ? (
+            {levels || disciplines ? (
               <Stack gap={1} direction="row" flexWrap="wrap">
-                {levels?.map((entry) => <CategoryChip category={entry} />)}
-                {disciplines?.map((entry) => <CategoryChip category={entry} />)}
+                <CategoryDisplay
+                  categories={[...(levels ?? []), ...(disciplines ?? [])]}
+                  emptyText={t(LIBRARY.SUMMARY_DETAILS_NO_CATEGORIES)}
+                />
               </Stack>
             ) : (
-              <Typography>
-                {t(LIBRARY.SUMMARY_DETAILS_NO_CATEGORIES)}
-              </Typography>
+              <Skeleton width="100%" />
             )}
           </div>
         </DetailCard>
@@ -217,7 +235,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
           <Typography variant="body1" fontWeight="bold" gutterBottom>
             {t(LIBRARY.SUMMARY_DETAILS_LICENSE_TITLE)}
           </Typography>
-          <Box justifyContent="center" display="flex">
+          <Stack justifyContent="flex-start" display="flex">
             {isLoading ? (
               <Skeleton>
                 <Box maxWidth={600}>
@@ -231,9 +249,8 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
               </Skeleton>
             ) : (
               <Box
-                maxWidth={600}
-                className={ccLicenseAdaption}
                 id={SUMMARY_CC_LICENSE_CONTAINER_ID}
+                className={ccLicenseAdaption}
               >
                 {ccLicenseAdaption && ccLicenseAdaption.length > 0 ? (
                   <CreativeCommons
@@ -246,6 +263,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
                 ) : (
                   <Typography
                     variant="body1"
+                    color="text.secondary"
                     id={SUMMARY_CC_LICENSE_NO_LICENSE_ID}
                   >
                     {t(LIBRARY.SUMMARY_DETAILS_EMPTY_LICENSE_TEXT)}
@@ -253,7 +271,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
                 )}
               </Box>
             )}
-          </Box>
+          </Stack>
         </DetailCard>
       </Grid>
     </Grid>

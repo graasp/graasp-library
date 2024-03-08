@@ -37,6 +37,15 @@ const UserSwitchWrapper = ({ ButtonContent }: Props) => {
       redirect_path: MY_LIKED_ITEMS_ROUTE,
     },
   ];
+
+  const redirectUrl = new URL(SIGN_IN_ROUTE);
+  redirectUrl.searchParams.set(
+    'url',
+    encodeURIComponent(
+      typeof window !== 'undefined' ? window.location.href : '',
+    ),
+  );
+
   return (
     <GraaspUserSwitch
       buttonId={USER_SWITCH_BUTTON_ID}
@@ -46,7 +55,7 @@ const UserSwitchWrapper = ({ ButtonContent }: Props) => {
       currentMember={member}
       isCurrentMemberLoading={isLoading}
       profilePath={GRAASP_ACCOUNT_HOST}
-      redirectPath={SIGN_IN_ROUTE}
+      redirectPath={redirectUrl.toString()}
       renderAvatar={(m) => (
         <MemberAvatar size={MEMBER_AVATAR_ICON_SIZE} memberId={m?.id} />
       )}

@@ -32,8 +32,12 @@ const Collection = ({ id }: Props) => {
   const { data: currentMember } = hooks.useCurrentMember();
   const { data: tags } = hooks.useItemTags(id);
   // get item published
-  const { data: itemPublishEntry } = hooks.useItemPublishedInformation({
-    itemId: id || '',
+  const {
+    data: itemPublishEntry,
+    isLoading: isLoadingPublishedEntry,
+    isError: isErrorPublishedEntry,
+  } = hooks.useItemPublishedInformation({
+    itemId: id,
   });
 
   const { mutate: postView } = mutations.usePostItemAction();
@@ -71,9 +75,13 @@ const Collection = ({ id }: Props) => {
   return (
     <>
       <UnpublishedItemAlert
+        itemId={id}
         canRead={canRead}
         canPublish={canPublish}
-        isPublished={!!itemPublishEntry}
+        isPublished={
+          isLoadingPublishedEntry ||
+          (!!itemPublishEntry && !isErrorPublishedEntry)
+        }
         currentMember={currentMember}
       />
       <Box

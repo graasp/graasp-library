@@ -1,20 +1,32 @@
-import { Alert } from '@mui/material';
+import Link from 'next/link';
+
+import ArrowForward from '@mui/icons-material/ArrowForward';
+import { Alert, AlertTitle, Button, Stack, Typography } from '@mui/material';
 
 import { CompleteMember } from '@graasp/sdk';
-import { BuildIcon } from '@graasp/ui';
+import { BuildIcon, Platform, usePlatformNavigation } from '@graasp/ui';
+
+import { useLibraryTranslation } from '../../config/i18n';
+import LIBRARY from '../../langs/constants';
+import { platformsHostsMap } from '../common/PlatformSwitchComponent';
 
 type Props = {
+  itemId: string;
   canRead: boolean;
   canPublish: boolean;
   isPublished: boolean;
   currentMember?: CompleteMember | null;
 };
 const UnpublishedItemAlert = ({
+  itemId,
   canPublish,
   canRead,
   isPublished,
   currentMember,
 }: Props) => {
+  const { t } = useLibraryTranslation();
+  const buildLink = usePlatformNavigation(platformsHostsMap, itemId);
+
   if (
     // show alert only if 1. user is logged in, 2. it has at least read access and 3. item is not published
     currentMember?.id &&
@@ -22,27 +34,45 @@ const UnpublishedItemAlert = ({
     !isPublished
   ) {
     return (
-      <Alert severity="warning">
-        You are viewing this item in Library preview mode. It cannot be viewed
-        publicly.
-        {
-          // if the user is the admin of the item, also suggest publishing from Builder
-          canPublish && (
-            <>
-              <br />
-              If you&apos;d like to share this collection with everyone, you can
-              publish this item in
-              <BuildIcon
-                size={18}
-                sx={{ verticalAlign: 'middle', mr: 0.3 }}
-                primaryOpacity={0}
-                secondaryColor="rgb(102, 60, 0)"
-              />
-              Builder.
-            </>
-          )
-        }
-      </Alert>
+      <Stack
+        direction="column"
+        alignItems="center"
+        bgcolor="lightgray"
+        width="100%"
+        p={2}
+      >
+        <Alert
+          severity="warning"
+          sx={{ border: (theme) => theme.palette.warning.main }}
+        >
+          <AlertTitle sx={{ fontSize: '1.5rem' }}>
+            {t(LIBRARY.PREVIEW_ALERT_TITLE)}
+          </AlertTitle>
+          <Stack direction="column" spacing={1}>
+            <Typography>{t(LIBRARY.PREVIEW_ALERT_DESCRIPTION)}</Typography>
+            {
+              // if the user is the admin of the item, also suggest publishing from Builder
+              canPublish && (
+                <>
+                  <Typography>
+                    {t(LIBRARY.PREVIEW_ALERT_ADMIN_ACTION)}
+                  </Typography>
+                  <Button
+                    component={Link}
+                    href={buildLink(Platform.Builder).href}
+                    sx={{ width: 'max-content', alignSelf: 'center' }}
+                    variant="contained"
+                    startIcon={<BuildIcon size={24} selected />}
+                    endIcon={<ArrowForward />}
+                  >
+                    {t(LIBRARY.PUBLISH_ITEM_BUTTON)}
+                  </Button>
+                </>
+              )
+            }
+          </Stack>
+        </Alert>
+      </Stack>
     );
   }
   return null;

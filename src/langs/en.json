@@ -127,5 +127,9 @@
   "SOCIAL_PROFILES": "Social Profiles",
   "DRAWER_AUTHENTICATED_USER_LINKS_SECTION": "My links",
   "DRAWER_ALL_COLLECTIONS_TEXT": "Search",
-  "DRAWER_ARIA_OPEN": "Open drawer"
+  "DRAWER_ARIA_OPEN": "Open drawer",
+  "PREVIEW_ALERT_TITLE": "This is a preview",
+  "PREVIEW_ALERT_DESCRIPTION": "This item is not published. What you are seeing here is only a preview. You can see this because you have access to the item. It cannot be viewed publicly.",
+  "PREVIEW_ALERT_ADMIN_ACTION": "If you would like to share this collection with everyone, you can publish this item in the Builder using the link below.",
+  "PUBLISH_ITEM_BUTTON": "Publish Now"
 }

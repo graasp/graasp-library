@@ -12,7 +12,6 @@ import { useLibraryTranslation } from '../../config/i18n';
 import { WRAPPER_SCROLLABLE_PAGE_BODY_ID } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
 import { QueryClientProvider } from '../QueryClientContext';
-import Footer from '../layout/Footer';
 import TranslationWrapper from './TranslationWrapper';
 
 const Content = ({ children }: { children: JSX.Element }) => {
@@ -50,7 +49,6 @@ const Wrapper = ({
           <Box flexGrow={1} bgcolor={bgcolor} sx={sx}>
             <Content>{children}</Content>
           </Box>
-          <Footer />
         </TranslationWrapper>
       </QueryClientProvider>
     </Stack>

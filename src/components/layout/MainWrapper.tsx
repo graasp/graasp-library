@@ -1,11 +1,13 @@
-import { t } from 'i18next';
+import { Box, Stack } from '@mui/material';
 
 import { Context } from '@graasp/sdk';
 import { Main } from '@graasp/ui';
 
+import { useLibraryTranslation } from '../../config/i18n';
 import LIBRARY from '../../langs/constants';
 import PlatformSwitchComponent from '../common/PlatformSwitchComponent';
 import DrawerContent from './DrawerContent';
+import Footer from './Footer';
 import HeaderLinkComponent from './StyledLink';
 import useHeader from './useHeader';
 
@@ -15,6 +17,7 @@ const MainWrapper = ({
   children: JSX.Element | JSX.Element[];
 }) => {
   const { rightContent } = useHeader();
+  const { t } = useLibraryTranslation();
 
   return (
     <Main
@@ -26,7 +29,10 @@ const MainWrapper = ({
       PlatformComponent={<PlatformSwitchComponent />}
       LinkComponent={HeaderLinkComponent}
     >
-      {children}
+      <Stack direction="column" justifyItems="space-between" height="100%">
+        <Box flexGrow={1}>{children}</Box>
+        <Footer />
+      </Stack>
     </Main>
   );
 };

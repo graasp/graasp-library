@@ -79,6 +79,13 @@ const Home = () => {
     <StyledBackgroundContainer>
       <MainWrapper>
         <HomeHeader />
+        {process.env.NODE_ENV === 'development' ? (
+          <Button component="a" href="/" color="error">
+            Force reload
+          </Button>
+        ) : (
+          <div />
+        )}
 
         <ItemCollection
           id={GRAASP_SELECTION_TITLE_ID}
