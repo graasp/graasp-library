@@ -1,6 +1,9 @@
+import { t } from 'i18next';
+
 import { Context } from '@graasp/sdk';
 import { Main } from '@graasp/ui';
 
+import LIBRARY from '../../langs/constants';
 import PlatformSwitchComponent from '../common/PlatformSwitchComponent';
 import DrawerContent from './DrawerContent';
 import HeaderLinkComponent from './StyledLink';
@@ -19,7 +22,7 @@ const MainWrapper = ({
       context={Context.Library}
       headerRightContent={rightContent}
       drawerContent={<DrawerContent />}
-      drawerOpenAriaLabel="open drawer"
+      drawerOpenAriaLabel={t(LIBRARY.DRAWER_ARIA_OPEN)}
       PlatformComponent={<PlatformSwitchComponent />}
       LinkComponent={HeaderLinkComponent}
     >

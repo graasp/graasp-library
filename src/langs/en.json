@@ -126,5 +126,6 @@
   "EDIT": "Edit",
   "SOCIAL_PROFILES": "Social Profiles",
   "DRAWER_AUTHENTICATED_USER_LINKS_SECTION": "My links",
-  "DRAWER_ALL_COLLECTIONS_TEXT": "Search"
+  "DRAWER_ALL_COLLECTIONS_TEXT": "Search",
+  "DRAWER_ARIA_OPEN": "Open drawer"
 }
