@@ -6,7 +6,9 @@ import { Box, Breadcrumbs, Button, Skeleton, Typography } from '@mui/material';
 
 import { getIdsFromPath } from '@graasp/sdk';
 
+import { useLibraryTranslation } from '../../config/i18n';
 import { buildCollectionRoute } from '../../config/routes';
+import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
 
 type ItemBreadcrumbProps = {
@@ -17,6 +19,7 @@ const ItemBreadcrumb = ({
   itemId,
 }: ItemBreadcrumbProps): JSX.Element | null => {
   const { hooks } = useContext(QueryClientContext);
+  const { t } = useLibraryTranslation();
 
   const { data: item } = hooks.useItem(itemId);
 
@@ -38,10 +41,13 @@ const ItemBreadcrumb = ({
     );
 
     if (parents.length === 0) {
+      // this component is used to occupy the space normal taken by the breadcrumbs
+      // the purpose here is to remove layout shifting when navigating between parent (no breadcrumbs visible)
+      // and child (breadcrumbs visible). This takes the exact same height as the breadcrumbs, removing layout shift.
       return (
         <Box visibility="hidden">
           <Breadcrumbs>
-            <Button>Hidden text</Button>
+            <Button>{t(LIBRARY.LOADING_TEXT)}</Button>
           </Breadcrumbs>
         </Box>
       );
@@ -49,12 +55,11 @@ const ItemBreadcrumb = ({
 
     return (
       <Breadcrumbs>
-        {parents &&
-          parents.map((parent) => (
-            <Button component={Link} href={buildCollectionRoute(parent.id)}>
-              {parent.name}
-            </Button>
-          ))}
+        {parents?.map((parent) => (
+          <Button component={Link} href={buildCollectionRoute(parent.id)}>
+            {parent.name}
+          </Button>
+        ))}
         <Typography color="text.primary">{item?.name}</Typography>
       </Breadcrumbs>
     );
@@ -64,7 +69,8 @@ const ItemBreadcrumb = ({
     return (
       <Breadcrumbs>
         <Skeleton variant="text">
-          <Button>Loading</Button>
+          {/* This text is not show, it is just used to size the skeleton above */}
+          <Button>{t(LIBRARY.LOADING_TEXT)}</Button>
         </Skeleton>
       </Breadcrumbs>
     );
