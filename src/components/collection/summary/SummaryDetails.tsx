@@ -107,7 +107,9 @@ const CategoryDisplay = ({
   emptyText: string;
 }) => {
   if (categories.length > 0) {
-    return categories?.map((entry) => <CategoryChip category={entry} />);
+    return categories?.map((entry) => (
+      <CategoryChip key={entry.id} category={entry} />
+    ));
   }
   return <Typography color="text.secondary">{emptyText}</Typography>;
 };
@@ -137,17 +139,20 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
 
   const itemCategories =
     // here we do a little trick to allow to have a loading state while we wait for the published entry.
-    publishedRootItem === undefined && isInitialLoading === false
+    publishedRootItem !== undefined && isInitialLoading === false
       ? // when we know if the published entry exists or not use the real value
         rawItemCategories
       : // set default to be empty array when we do not fetch
-        [];
+        undefined;
+
   const levels = itemCategories
     ?.filter((c) => c.category.type === CategoryType.Level)
     ?.map((c) => c.category);
   const disciplines = itemCategories
     ?.filter((c) => c.category.type === CategoryType.Discipline)
     ?.map((c) => c.category);
+
+  // TODO: should use item language
   const languages = itemCategories
     ?.filter((c) => c.category.type === CategoryType.Language)
     ?.map((c) => c.category);
