@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import { setLangCookie } from '@graasp/sdk';
 import { langs } from '@graasp/translations';
 
+import { BACKGROUND_COLOR } from '../../config/constants';
 import { DOMAIN } from '../../config/env';
 import { useLibraryTranslation } from '../../config/i18n';
 import { QueryClientContext } from '../QueryClientContext';
@@ -16,8 +17,8 @@ import { QueryClientContext } from '../QueryClientContext';
 const StyledFooter = styled('footer')(({ theme }) => ({
   flexGrow: 0,
   flexShrink: 0,
-  margin: theme.spacing(1),
-  padding: theme.spacing(0, 1),
+  padding: theme.spacing(1, 2),
+  backgroundColor: BACKGROUND_COLOR,
 }));
 
 const usePreferredLanguage = (): {

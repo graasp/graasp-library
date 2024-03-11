@@ -75,7 +75,6 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
 
     it('display menu options', () => {
       cy.wait(['@getCategories']);
-      cy.scrollTo('top');
       [
         CategoryType.Level,
         CategoryType.Discipline,
@@ -86,7 +85,7 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
         )
           .filter(':visible')
           .click();
-        cy.scrollTo('top');
+        // cy.scrollTo('top');
         const categories = SAMPLE_CATEGORIES.filter(
           (c) => c.type === categoryType,
         );
@@ -112,7 +111,7 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
     it('select/unselect categories', () => {
       // search allows to get all the published items
       cy.wait(['@getCategories', '@search']);
-      cy.scrollTo('top');
+      // cy.scrollTo('top');
       cy.get(
         `#not-sticky button#${buildSearchFilterPopperButtonId(
           CategoryType.Level,

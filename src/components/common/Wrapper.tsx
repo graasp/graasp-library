@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { Box, Stack, SxProps } from '@mui/material';
 
+import { BACKGROUND_COLOR } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';
 import { WRAPPER_SCROLLABLE_PAGE_BODY_ID } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
@@ -30,7 +31,7 @@ const Wrapper = ({
   dehydratedState,
   children,
   sx,
-  bgcolor = 'rgb(248, 247, 254)',
+  bgcolor = BACKGROUND_COLOR,
 }: {
   children: JSX.Element;
   dehydratedState: DehydratedState;
