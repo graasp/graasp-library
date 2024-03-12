@@ -18,6 +18,7 @@ export const DEFAULT_MEMBER_THUMBNAIL = `data:image/svg+xml,${encodeURIComponent
 
 export const SMALL_AVATAR_ICON_SIZE = 30;
 export const MEMBER_AVATAR_ICON_SIZE = 40;
+export const MEMBER_AVATAR_MAIN_SIZE = 256;
 
 export const UrlSearch = {
   KeywordSearch: 's',

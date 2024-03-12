@@ -15,29 +15,28 @@ import ItemCollection from '../collection/ItemCollection';
 import BackButton from '../common/BackButton';
 import Error from '../common/Error';
 import MainWrapper from '../layout/MainWrapper';
-import BioSection from '../member/BioSection';
+import MemberHeader from '../member/MemberHeader';
 
 type Props = {
   id: string;
 };
 
-const MemberPage = ({ id }: Props) => {
+const MemberPage = ({ id: memberId }: Props) => {
   const { hooks } = useContext(QueryClientContext);
-  const { data } = hooks.useMember(id);
   const { data: member } = hooks.useCurrentMember();
-  const { data: memberPublishedItems } = hooks.usePublishedItemsForMember(id);
+  const { data: memberPublishedItems } =
+    hooks.usePublishedItemsForMember(memberId);
 
   const { t } = useLibraryTranslation();
 
-  if (validate(id)) {
+  if (validate(memberId)) {
     return (
       <Stack maxWidth="xl" spacing={3} paddingY={3}>
         <Stack direction="column" paddingX={3} alignItems="flex-start">
           <BackButton />
-          <BioSection
-            memberData={data}
-            id={id}
-            isOwnProfile={member?.id === id}
+          <MemberHeader
+            memberId={memberId}
+            isOwnProfile={member?.id === memberId}
           />
         </Stack>
 
@@ -51,7 +50,7 @@ const MemberPage = ({ id }: Props) => {
   }
 
   return (
-    <Box id={id} p={5}>
+    <Box id={memberId} p={5}>
       <Error code={ERROR_NOT_A_MEMBER_ID} />
     </Box>
   );
