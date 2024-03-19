@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.4](https://github.com/graasp/graasp-library/compare/v1.4.3...v1.4.4) (2024-03-19)
+
+
+### Bug Fixes
+
+* add translation to drawer aria ([#550](https://github.com/graasp/graasp-library/issues/550)) ([2567e8f](https://github.com/graasp/graasp-library/commit/2567e8fe228460352e32166cb1db70f9c61c627d))
+* breadcrumbs shows private parents ([#552](https://github.com/graasp/graasp-library/issues/552)) ([729074f](https://github.com/graasp/graasp-library/commit/729074fa6e9b989c99ff723d550bb97b004f71e2))
+* **deps:** update dependency @graasp/query-client to v2.9.1 ([#558](https://github.com/graasp/graasp-library/issues/558)) ([6589bac](https://github.com/graasp/graasp-library/commit/6589bac665291c0df6e00ffba67cb0b494996502))
+* **deps:** update dependency @graasp/sdk to v4.2.1 ([#543](https://github.com/graasp/graasp-library/issues/543)) ([c6230e0](https://github.com/graasp/graasp-library/commit/c6230e02753d5bc00ed59e42b9201aabbd0a0c68))
+* **deps:** update dependency @graasp/translations to v1.25.3 ([#563](https://github.com/graasp/graasp-library/issues/563)) ([d8bae6a](https://github.com/graasp/graasp-library/commit/d8bae6ace3342748f2fdc38d746ed4ff8daf7c20))
+* **deps:** update dependency @graasp/ui to v4.11.0 ([#496](https://github.com/graasp/graasp-library/issues/496)) ([6231cb5](https://github.com/graasp/graasp-library/commit/6231cb50b88c910b61ea899aaadbbcc6c744f0b7))
+* **deps:** update dependency @graasp/ui to v4.8.5 ([#537](https://github.com/graasp/graasp-library/issues/537)) ([d57c142](https://github.com/graasp/graasp-library/commit/d57c142063f2d47242096df33a5ee71df3582c7c))
+* **deps:** update dependency @sentry/nextjs to v7.105.0 ([#522](https://github.com/graasp/graasp-library/issues/522)) ([1ceb57a](https://github.com/graasp/graasp-library/commit/1ceb57ae13bdbbfea9957da0d520ce8cee5b2736))
+* **deps:** update dependency @sentry/nextjs to v7.106.1 ([#555](https://github.com/graasp/graasp-library/issues/555)) ([63b6a6c](https://github.com/graasp/graasp-library/commit/63b6a6cd34f8a930bc3e26537db8c5a262a3d105))
+* **deps:** update dependency @sentry/nextjs to v7.107.0 ([#564](https://github.com/graasp/graasp-library/issues/564)) ([bff3a7b](https://github.com/graasp/graasp-library/commit/bff3a7b7373c13a24f0fef8f4fe15c9868130037))
+* **deps:** update dependency date-fns to v3.4.0 ([#554](https://github.com/graasp/graasp-library/issues/554)) ([b65b758](https://github.com/graasp/graasp-library/commit/b65b758876148a1022a6663a0e97749bf06f975a))
+* **deps:** update dependency date-fns to v3.6.0 ([#568](https://github.com/graasp/graasp-library/issues/568)) ([1456ba8](https://github.com/graasp/graasp-library/commit/1456ba836f4aea0cfb37b2a8ecf2b19f26f5ec89))
+* **deps:** update dependency next to v14.1.2 ([#538](https://github.com/graasp/graasp-library/issues/538)) ([3dd7525](https://github.com/graasp/graasp-library/commit/3dd7525c88322ad8ce23375ee1cb57a7054db8a8))
+* **deps:** update dependency react-router-dom to v6.22.2 ([#535](https://github.com/graasp/graasp-library/issues/535)) ([5196d7f](https://github.com/graasp/graasp-library/commit/5196d7f5e6c9dda00d8f177524a4040345e9892c))
+* **deps:** update dependency react-toastify to v10.0.5 ([#566](https://github.com/graasp/graasp-library/issues/566)) ([5cb3c1e](https://github.com/graasp/graasp-library/commit/5cb3c1e17844a4ee686c395508cc9c6fcabaca6b))
+* **deps:** update mui (non-major) ([#426](https://github.com/graasp/graasp-library/issues/426)) ([4a8941c](https://github.com/graasp/graasp-library/commit/4a8941c8540273aeb1c1de83c8a99415f2939503))
+* loading state of profile ([#565](https://github.com/graasp/graasp-library/issues/565)) ([d5c116d](https://github.com/graasp/graasp-library/commit/d5c116d44b858eb54178d70340f5edadb6f220ad))
+* update deps ([a57159c](https://github.com/graasp/graasp-library/commit/a57159c0bd0e7439da209b60979328f1c0149e8e))
+
 ## [1.4.3](https://github.com/graasp/graasp-library/compare/v1.4.2...v1.4.3) (2024-03-04)
 
 
