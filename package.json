@@ -84,7 +84,7 @@
     "@typescript-eslint/eslint-plugin": "7.3.1",
     "@typescript-eslint/parser": "7.3.1",
     "concurrently": "8.2.2",
-    "cypress": "13.7.0",
+    "cypress": "13.7.1",
     "env-cmd": "10.1.0",
     "eslint": "8.57.0",
     "eslint-config-airbnb": "19.0.4",
