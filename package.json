@@ -50,7 +50,7 @@
     "http-status-codes": "2.3.0",
     "i18next": "23.10.1",
     "interweave": "13.1.0",
-    "katex": "0.16.9",
+    "katex": "0.16.10",
     "lodash.groupby": "4.6.0",
     "lodash.isobject": "3.0.2",
     "lodash.isstring": "4.0.1",
