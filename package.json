@@ -99,7 +99,7 @@
     "husky": "9.0.11",
     "nyc": "15.1.0",
     "prettier": "3.2.5",
-    "react-query": "3.39.3",
+    "@tanstack/react-query": "4.0.5",
     "standard-version": "9.5.0",
     "typescript": "5.4.3",
     "wait-on": "7.2.0"
