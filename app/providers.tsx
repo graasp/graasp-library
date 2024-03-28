@@ -54,7 +54,7 @@ export default function Providers(props: { children: React.ReactNode }) {
     <QueryClientProvider client={client}>
       {children}
       {/* <ReactQueryDevtools initialIsOpen={false} /> */}
-      <ToastContainer theme="colored" />
+      <ToastContainer stacked theme="colored" />
     </QueryClientProvider>
   );
 }
