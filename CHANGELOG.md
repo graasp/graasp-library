@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.5](https://github.com/graasp/graasp-library/compare/v1.4.4...v1.4.5) (2024-04-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @graasp/sdk to v4.4.0 ([#586](https://github.com/graasp/graasp-library/issues/586)) ([e5b5652](https://github.com/graasp/graasp-library/commit/e5b5652008cf49848494b8131baf8a36e34c14ad))
+* **deps:** update dependency @graasp/ui to v4.13.0 ([#584](https://github.com/graasp/graasp-library/issues/584)) ([9e867f4](https://github.com/graasp/graasp-library/commit/9e867f430795ee9a7172e16c48e7605519b8116d))
+* **deps:** update dependency @sentry/nextjs to v7.108.0 ([#580](https://github.com/graasp/graasp-library/issues/580)) ([e773093](https://github.com/graasp/graasp-library/commit/e7730935272ed140da4fa0fe3d27c6bdeeb5f09b))
+* **deps:** update dependency @testing-library/react to v14.2.2 ([#575](https://github.com/graasp/graasp-library/issues/575)) ([0c269d7](https://github.com/graasp/graasp-library/commit/0c269d72152aa2cdeb18c92955f86390d4651667))
+* **deps:** update dependency eslint-config-next to v14.1.4 ([#576](https://github.com/graasp/graasp-library/issues/576)) ([a212313](https://github.com/graasp/graasp-library/commit/a212313adca9c97533a4aacb14814fa6b7927496))
+* **deps:** update dependency next to v14.1.4 ([#577](https://github.com/graasp/graasp-library/issues/577)) ([d57d0ba](https://github.com/graasp/graasp-library/commit/d57d0ba65ddcb7d5f6e8da94ef37fdb24e26d019))
+* **deps:** update mui (non-major) ([#572](https://github.com/graasp/graasp-library/issues/572)) ([fed1da6](https://github.com/graasp/graasp-library/commit/fed1da60905bfbe00fe89000c18c947e791dcc7a))
+* use stacked notifs ([#589](https://github.com/graasp/graasp-library/issues/589)) ([b7dcc78](https://github.com/graasp/graasp-library/commit/b7dcc78f8d347130a47d98df6a569b7283b4f041))
+
 ## [1.4.4](https://github.com/graasp/graasp-library/compare/v1.4.3...v1.4.4) (2024-03-19)
 
 
