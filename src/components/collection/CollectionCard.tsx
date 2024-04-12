@@ -8,6 +8,7 @@ import {
   CardActions,
   CardContent,
   CardHeader,
+  Stack,
   Typography,
   styled,
   useTheme,
@@ -165,10 +166,7 @@ export const CollectionCard = ({ collection, showIsContentTag }: Props) => {
           }}
         />
         <CardContent sx={{ pt: 0 }}>
-          <Typography
-            variant="caption"
-            fontStyle={description ? 'inherit' : 'italic'}
-          >
+          <Typography fontStyle={description ? 'inherit' : 'italic'}>
             {description ? (
               <ContentDescription content={description} />
             ) : (
@@ -177,32 +175,39 @@ export const CollectionCard = ({ collection, showIsContentTag }: Props) => {
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions disableSpacing sx={{ pt: 0, paddingX: 2 }}>
-        <Avatar
-          url={authorAvatarUrl}
-          alt={t(LIBRARY.AVATAR_ALT, { name: creator?.name })}
-          component="avatar"
-          id={creator?.id}
-          maxWidth={30}
-          maxHeight={30}
-          variant="circular"
-          isLoading={isLoadingAvatar}
-          sx={{
-            maxWidth: 30,
-            maxHeight: 30,
-          }}
-        />
-        <Typography
-          variant="body2"
-          color="GrayText"
-          marginLeft={1}
-          fontSize={12}
-        >
-          {creator?.name}
-        </Typography>
-        <DownloadButton id={id} />
-        {member?.id && <CopyButton id={id} />}
-        <CopyLinkButton itemId={collection.id} />
+      <CardActions
+        disableSpacing
+        sx={{ pt: 0, paddingX: 2, justifyContent: 'space-between' }}
+      >
+        <Stack direction="row" spacing={1} alignItems="center">
+          <Avatar
+            url={authorAvatarUrl}
+            alt={t(LIBRARY.AVATAR_ALT, { name: creator?.name })}
+            component="avatar"
+            id={creator?.id}
+            maxWidth={30}
+            maxHeight={30}
+            variant="circular"
+            isLoading={isLoadingAvatar}
+            sx={{
+              maxWidth: 30,
+              maxHeight: 30,
+            }}
+          />
+          <Typography
+            variant="body2"
+            color="GrayText"
+            marginLeft={1}
+            fontSize={12}
+          >
+            {creator?.name}
+          </Typography>
+        </Stack>
+        <Box>
+          <DownloadButton id={id} />
+          {member?.id && <CopyButton id={id} />}
+          <CopyLinkButton itemId={collection.id} />
+        </Box>
       </CardActions>
     </StyledCard>
   );

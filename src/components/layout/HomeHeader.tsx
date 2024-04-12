@@ -71,19 +71,24 @@ const HomeHeader = () => {
           <Typography
             id={HOME_PAGE_TITLE_TEXT_ID}
             color="white"
-            variant="h1"
+            variant="display"
             marginLeft={2}
-            fontSize={{
-              xs: '2.5rem',
-              sm: '4rem',
-              md: '4.5rem',
-            }}
+            // fontSize={{
+            //   xs: '2.5rem',
+            //   sm: '4rem',
+            //   md: '4.5rem',
+            // }}
           >
             {t(LIBRARY.HOME_TITLE)}
           </Typography>
         </Box>
         <Box>
-          <Typography color="white" variant="h5" textAlign="center">
+          <Typography
+            color="white"
+            variant="h2"
+            fontWeight={300}
+            textAlign="center"
+          >
             {t(LIBRARY.HOME_SUBTITLE)}
           </Typography>
         </Box>

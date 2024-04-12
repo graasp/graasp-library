@@ -55,7 +55,7 @@ const ContentDescription = ({
 }: Props): JSX.Element => (
   <StyledDiv className="quill">
     <div className="ql-snow ql-disabled">
-      <div className="ql-editor">
+      <div className="ql-editor" style={{ padding: '0px' }}>
         <CollapsibleDescription
           collapsed={collapsed}
           numberOfLinesToShow={numberOfLinesToShow}

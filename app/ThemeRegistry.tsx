@@ -9,12 +9,16 @@ import { ReactNode, useState } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 
-import { theme } from '@graasp/ui';
+import { createGraaspTheme } from '@graasp/ui';
+
+import { nunito } from './fonts';
 
 type Props = {
   options: any;
   children: ReactNode;
 };
+
+const theme = createGraaspTheme({ fontFamily: nunito.style.fontFamily });
 
 // This implementation is from emotion-js
 // https://github.com/emotion-js/emotion/issues/2928#issuecomment-1319747902
@@ -72,7 +76,6 @@ export default function ThemeRegistry(props: Props) {
       />
     );
   });
-
   return (
     <CacheProvider value={cache}>
       <ThemeProvider theme={theme}>
