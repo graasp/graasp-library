@@ -18,7 +18,9 @@ type Props = {
   children: ReactNode;
 };
 
-const theme = createGraaspTheme({ fontFamily: nunito.style.fontFamily });
+const theme = createGraaspTheme({
+  fontFamily: `${nunito.style.fontFamily}, sans-serif`,
+});
 
 // This implementation is from emotion-js
 // https://github.com/emotion-js/emotion/issues/2928#issuecomment-1319747902
