@@ -73,11 +73,6 @@ const HomeHeader = () => {
             color="white"
             variant="display"
             marginLeft={2}
-            // fontSize={{
-            //   xs: '2.5rem',
-            //   sm: '4rem',
-            //   md: '4.5rem',
-            // }}
           >
             {t(LIBRARY.HOME_TITLE)}
           </Typography>
