@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/graasp/graasp-library/compare/v1.4.5...v1.5.0) (2024-04-15)
+
+
+### Features
+
+* update font and card description ([#594](https://github.com/graasp/graasp-library/issues/594)) ([5996665](https://github.com/graasp/graasp-library/commit/5996665f915dd5e365470d390fc520846530f836))
+
 ## [1.4.5](https://github.com/graasp/graasp-library/compare/v1.4.4...v1.4.5) (2024-04-03)
 
 
