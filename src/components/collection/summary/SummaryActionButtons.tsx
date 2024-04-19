@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 
-import { Code, CopyAll, Download, MoreVert } from '@mui/icons-material';
+import { Code, Download, MoreVert } from '@mui/icons-material';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import {
   Button,
   ButtonGroup,
-  CircularProgress,
   ClickAwayListener,
   Grow,
   Popper,
@@ -34,11 +33,10 @@ type SummaryActionButtonsProps = {
 
 const SummaryActionButtons: React.FC<SummaryActionButtonsProps> = ({
   item,
-  isLogged,
 }) => {
   const { t } = useLibraryTranslation();
 
-  const { isCopying, startCopy, treeModal } = useCopyAction(item?.id);
+  const { treeModal } = useCopyAction(item?.id);
 
   const { startDownload } = useDownloadAction(item?.id);
 
@@ -127,7 +125,7 @@ const SummaryActionButtons: React.FC<SummaryActionButtonsProps> = ({
                   >
                     {t(LIBRARY.SUMMARY_ACTIONS_DOWNLOAD)}
                   </StyledButton>
-                  {isLogged && (
+                  {/* {isLogged && (
                     <StyledButton
                       color="secondary"
                       onClick={startCopy}
@@ -145,7 +143,7 @@ const SummaryActionButtons: React.FC<SummaryActionButtonsProps> = ({
                     >
                       {t(LIBRARY.SUMMARY_ACTIONS_COPY)}
                     </StyledButton>
-                  )}
+                  )} */}
                   <StyledButton
                     color="secondary"
                     onClick={startEmbed}
