@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.1](https://github.com/graasp/graasp-library/compare/v1.5.0...v1.5.1) (2024-04-19)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @graasp/query-client to v3.4.1 ([#585](https://github.com/graasp/graasp-library/issues/585)) ([46e9c00](https://github.com/graasp/graasp-library/commit/46e9c007703b51bec9e7ac877bbc35937f5fc659))
+* remove copy button from library as currently broken ([#603](https://github.com/graasp/graasp-library/issues/603)) ([a5a7e8b](https://github.com/graasp/graasp-library/commit/a5a7e8b1a2776f3ed2049aed76602259c2c31a62))
+
 ## [1.5.0](https://github.com/graasp/graasp-library/compare/v1.4.5...v1.5.0) (2024-04-15)
 
 
