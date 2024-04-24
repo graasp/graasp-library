@@ -21,7 +21,6 @@ const MainWrapper = ({
 
   return (
     <Main
-      // backgroundColor="transparent"
       open={false}
       context={Context.Library}
       headerRightContent={rightContent}

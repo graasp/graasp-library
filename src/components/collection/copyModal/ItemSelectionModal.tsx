@@ -130,12 +130,14 @@ const ItemSelectionModal = ({
           }}
           aria-labelledby={COPY_MODAL_TITLE_ID}
         >
-          <Breadcrumbs
-            elements={[...(navigationParents ?? []), selectedNavigationItem]}
-            rootElements={[ROOT_BREADCRUMB, MY_GRAASP_BREADCRUMB]}
-            selectedId={selectedNavigationItem.id}
-            onSelect={onNavigate}
-          />
+          {selectedNavigationItem.id !== ROOT_BREADCRUMB.id && (
+            <Breadcrumbs
+              elements={[...(navigationParents ?? []), selectedNavigationItem]}
+              rootElements={[ROOT_BREADCRUMB, MY_GRAASP_BREADCRUMB]}
+              selectedId={selectedNavigationItem.id}
+              onSelect={onNavigate}
+            />
+          )}
 
           {itemToCopy && selectedNavigationItem.id === ROOT_BREADCRUMB.id && (
             <RootNavigationTree
@@ -173,13 +175,7 @@ const ItemSelectionModal = ({
         </Stack>
       </DialogContent>
       <DialogActions>
-        <Button
-          // id={id}
-          onClick={handleClose}
-          variant="text"
-          // color={color}
-          // disabled={disabled}
-        >
+        <Button onClick={handleClose} variant="text">
           {translateCommon(COMMON.CANCEL_BUTTON)}
         </Button>
         <Button
