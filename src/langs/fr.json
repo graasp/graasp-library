@@ -86,8 +86,6 @@
   "COLLECTION_INFO_BUTTON": "Information",
   "SIGN_IN_MODAL_CLOSE_BUTTON_ARIA_LABEL": "Fermer le dialogue de connection",
   "VIEW_BUTTON_TOOLTIP": "Explorer l'élément",
-  "SHARED_ITEMS_LABEL": "Éléments partagés avec moi",
-  "OWN_ITEMS_LABEL": "Mes Éléments",
   "SUMMARY_CONTENT_TITLE": "Contenu",
   "SUMMARY_DETAILS_TITLE": "Détails",
   "SUMMARY_DETAILS_CREATED_AT_TITLE": "Créé",
@@ -124,5 +122,9 @@
   "PUBLIC_PROFILE": "Mes collections",
   "PROFILE_SETTINGS": "Profil",
   "EDIT": "Modifier",
-  "SOCIAL_PROFILES": "Profils sociaux"
+  "SOCIAL_PROFILES": "Profils sociaux",
+  "COPY_MODAL_EMPTY_FOLDER": "Le dossier est vide.",
+  "COPY_MODAL_HOME_TITLE": "Accueil",
+  "COPY_MODAL_RECENT_TITLE": "Éléments récents",
+  "COPY_MODAL_SUBMIT_BUTTON": "Valider"
 }

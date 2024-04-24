@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Code, Download, MoreVert } from '@mui/icons-material';
+import { Code, CopyAll, Download, MoreVert } from '@mui/icons-material';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import {
   Button,
@@ -15,6 +15,11 @@ import { DiscriminatedItem } from '@graasp/sdk';
 
 import { useLibraryTranslation } from '../../../config/i18n';
 import { buildPlayerViewItemRoute } from '../../../config/paths';
+import {
+  LIBRARY_ACTION_GROUP_BUTTON_ID,
+  LIBRARY_ACTION_GROUP_COPY_BUTTON_ID,
+  LIBRARY_ACTION_GROUP_POP_UP_BUTTONS_ID,
+} from '../../../config/selectors';
 import LIBRARY from '../../../langs/constants';
 import { openInNewTab } from '../../../utils/helpers';
 import { useCopyAction } from '../CopyButton';
@@ -31,12 +36,13 @@ type SummaryActionButtonsProps = {
   isLogged: boolean;
 };
 
-const SummaryActionButtons: React.FC<SummaryActionButtonsProps> = ({
+const SummaryActionButtons = ({
   item,
-}) => {
+  isLogged,
+}: SummaryActionButtonsProps): JSX.Element => {
   const { t } = useLibraryTranslation();
 
-  const { treeModal } = useCopyAction(item?.id);
+  const { treeModal, startCopy } = useCopyAction(item?.id);
 
   const { startDownload } = useDownloadAction(item?.id);
 
@@ -87,6 +93,7 @@ const SummaryActionButtons: React.FC<SummaryActionButtonsProps> = ({
           aria-label="select merge strategy"
           aria-haspopup="menu"
           onClick={handleToggle}
+          id={LIBRARY_ACTION_GROUP_BUTTON_ID}
         >
           <MoreVert />
         </Button>
@@ -117,6 +124,7 @@ const SummaryActionButtons: React.FC<SummaryActionButtonsProps> = ({
                   variant="contained"
                   orientation="vertical"
                   fullWidth
+                  id={LIBRARY_ACTION_GROUP_POP_UP_BUTTONS_ID}
                 >
                   <StyledButton
                     color="secondary"
@@ -125,25 +133,16 @@ const SummaryActionButtons: React.FC<SummaryActionButtonsProps> = ({
                   >
                     {t(LIBRARY.SUMMARY_ACTIONS_DOWNLOAD)}
                   </StyledButton>
-                  {/* {isLogged && (
+                  {isLogged && (
                     <StyledButton
                       color="secondary"
                       onClick={startCopy}
-                      startIcon={
-                        isCopying ? (
-                          <CircularProgress
-                            id="copyButtonInSummaryActions"
-                            color="secondary"
-                            size={20}
-                          />
-                        ) : (
-                          <CopyAll />
-                        )
-                      }
+                      startIcon={<CopyAll />}
+                      id={LIBRARY_ACTION_GROUP_COPY_BUTTON_ID}
                     >
                       {t(LIBRARY.SUMMARY_ACTIONS_COPY)}
                     </StyledButton>
-                  )} */}
+                  )}
                   <StyledButton
                     color="secondary"
                     onClick={startEmbed}

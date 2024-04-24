@@ -8,13 +8,9 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
 import { useLibraryTranslation } from '../../config/i18n';
-import {
-  TREE_MODAL_MY_ITEMS_ID,
-  TREE_MODAL_SHARED_ITEMS_ID,
-} from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
-import TreeModal from './TreeModal';
+import ItemSelectionModal from './copyModal/ItemSelectionModal';
 
 export const useCopyAction = (id?: string) => {
   const { t } = useLibraryTranslation();
@@ -36,7 +32,7 @@ export const useCopyAction = (id?: string) => {
   }
 
   // todo: set notifier for copy
-  const copy = ({ to }: { to: string }) => {
+  const copy = (to: string | undefined) => {
     // remove loading icon on callback
     // do not set parent if it is root
     const payload: Parameters<typeof copyItems>[0] = {
@@ -44,21 +40,23 @@ export const useCopyAction = (id?: string) => {
     };
 
     // if the location to copy the item is MyItems or SharedItems root, then set the payload.to argument to be undefined
-    payload.to = [TREE_MODAL_MY_ITEMS_ID, TREE_MODAL_SHARED_ITEMS_ID].includes(
-      to,
-    )
-      ? undefined
-      : to;
+    payload.to = to;
 
     copyItems(payload);
   };
 
   const treeModal = user?.id && id && (
-    <TreeModal
+    <ItemSelectionModal
       title={t(LIBRARY.COPY_BUTTON_MODAL_TITLE)}
       open={showTreeModal}
       onClose={() => setShowTreeModal(false)}
       onConfirm={copy}
+      itemId={id}
+      buttonText={() => t(LIBRARY.COPY_MODAL_SUBMIT_BUTTON)}
+      isDisabled={(items, item) => {
+        // cannot copy inside itself
+        return items.some((i) => item.path.includes(i.path));
+      }}
     />
   );
 
@@ -70,13 +68,14 @@ export const useCopyAction = (id?: string) => {
 };
 
 type Props = {
-  id: string;
+  itemId: string;
+  id?: string;
 };
 
-const CopyButton = ({ id }: Props) => {
+const CopyButton = ({ id, itemId }: Props) => {
   const { t } = useLibraryTranslation();
 
-  const { treeModal, isCopying, startCopy } = useCopyAction(id);
+  const { treeModal, isCopying, startCopy } = useCopyAction(itemId);
 
   const renderButton = () => {
     if (isCopying) {
@@ -92,6 +91,7 @@ const CopyButton = ({ id }: Props) => {
     return (
       <Tooltip title={t(LIBRARY.COPY_BUTTON_TOOLTIP)}>
         <IconButton
+          id={id}
           onClick={startCopy}
           aria-label={t(LIBRARY.COPY_BUTTON_TOOLTIP)}
         >

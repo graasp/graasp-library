@@ -88,3 +88,9 @@ export const RECENT_COLLECTIONS_DRAWER_ITEM_ID =
   'recentCollectionsDrawerItemId';
 export const MY_PUBLICATIONS_DRAWER_ITEM_ID = 'myPublicationsDrawerItemId';
 export const LIKED_COLLECTIONS_DRAWER_ITEM_ID = 'likedCollectionsDrawerItemId';
+export const LIBRARY_ACTION_GROUP_BUTTON_ID = 'libraryActionGroupButton';
+export const LIBRARY_ACTION_GROUP_COPY_BUTTON_ID =
+  'libraryActionGroupCopyButton';
+export const LIBRARY_ACTION_GROUP_POP_UP_BUTTONS_ID =
+  'libraryActionGroupPopUpButtons';
+export const CHILD_CARD_COPY_BUTTON_ID = 'childCardCopyButton';

@@ -41,7 +41,6 @@ const {
   SIGN_OUT_ROUTE,
   buildGetMembersRoute,
   buildGetCategoriesRoute,
-  GET_OWN_ITEMS_ROUTE,
   SEARCH_PUBLISHED_ITEMS_ROUTE,
 } = API_ROUTES;
 
@@ -70,29 +69,30 @@ export const redirectionReply = {
   body: null,
 };
 
-export const mockGetOwnItems = ({
-  items,
-  currentMember,
-}: {
-  items: MockItem[];
-  currentMember?: MockMember;
-}) => {
+export const mockGetAccessibleItems = (items: MockItem[]): void => {
   cy.intercept(
     {
-      method: DEFAULT_GET.method,
-      url: `${API_HOST}/${GET_OWN_ITEMS_ROUTE}`,
+      method: HttpMethod.Get,
+      pathname: `/${ITEMS_ROUTE}/accessible`,
     },
-    ({ reply }) => {
-      if (!currentMember) {
-        return reply({ statusCode: StatusCodes.UNAUTHORIZED, body: null });
-      }
-      const own = items.filter(
-        ({ creator, path }) =>
-          creator?.id === currentMember.id && !path.includes('.'),
-      );
-      return reply(own);
+    ({ url, reply }) => {
+      const params = new URL(url).searchParams;
+
+      const page = parseInt(params.get('page') ?? '1', 10);
+      const pageSize = parseInt(params.get('pageSize') ?? '10', 10);
+
+      // as { page: number; pageSize: number };
+
+      // warning: we don't check memberships
+      const root = items.filter((i) => !i.path.includes('.'));
+
+      // todo: filter
+
+      const result = root.slice((page - 1) * pageSize, page * pageSize);
+
+      reply({ data: result, totalCount: root.length });
     },
-  ).as('getOwnItems');
+  ).as('getAccessibleItems');
 };
 
 export const mockGetCurrentMember = (

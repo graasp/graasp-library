@@ -25,6 +25,7 @@ import { QueryClientContext } from '../QueryClientContext';
 import CardMediaComponent from '../common/CardMediaComponent';
 import { StyledCard } from '../common/StyledCard';
 import ContentDescription from './ContentDescription';
+import CopyButton from './CopyButton';
 import CopyLinkButton from './CopyLinkButton';
 import DownloadButton from './DownloadButton';
 
@@ -117,7 +118,7 @@ export const CollectionCard = ({ collection, showIsContentTag }: Props) => {
   } = collection;
   const { t } = useLibraryTranslation();
   const { hooks } = useContext(QueryClientContext);
-  // const { data: member } = hooks.useCurrentMember();
+  const { data: member } = hooks.useCurrentMember();
   const { data: authorAvatarUrl, isLoading: isLoadingAvatar } =
     hooks.useAvatarUrl({
       id: creator?.id,
@@ -204,7 +205,7 @@ export const CollectionCard = ({ collection, showIsContentTag }: Props) => {
         </Stack>
         <Box>
           <DownloadButton id={id} />
-          {/* {member?.id && <CopyButton id={id} />} */}
+          {member?.id && <CopyButton itemId={id} />}
           <CopyLinkButton itemId={collection.id} />
         </Box>
       </CardActions>

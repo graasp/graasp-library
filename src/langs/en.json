@@ -80,14 +80,11 @@
   "COPY_ITEM_TOASTR_LINK": "Click here to open the item on Graasp.",
   "COPY_LINK_SUCCESS_MESSAGE": "The item resource link was successfully copied.",
   "COPY_LINK_FAILURE_MESSAGE": "An error occured while copying the resource link.",
-  "COPY_BUTTON_MODAL_MY_ITEMS_ROOT": "My Items",
   "AVATAR_ALT": "{{name}}'s avatar",
   "COLLECTION_EMPTY_DESCRIPTION_TEXT": "This item has no description.",
   "COLLECTION_INFO_BUTTON": "Information",
   "SIGN_IN_MODAL_CLOSE_BUTTON_ARIA_LABEL": "Close Sign In Modal",
   "VIEW_BUTTON_TOOLTIP": "View item",
-  "SHARED_ITEMS_LABEL": "Shared Items",
-  "OWN_ITEMS_LABEL": "Owned Items",
   "SUMMARY_CONTENT_TITLE": "Content",
   "SUMMARY_DETAILS_TITLE": "Details",
   "SUMMARY_DETAILS_CREATED_AT_TITLE": "Created",
@@ -132,5 +129,10 @@
   "PREVIEW_ALERT_DESCRIPTION": "This item is not published. What you are seeing here is only a preview. You can see this because you have access to the item. It cannot be viewed publicly.",
   "PREVIEW_ALERT_ADMIN_ACTION": "If you would like to share this collection with everyone, you can publish this item in the Builder using the link below.",
   "PUBLISH_ITEM_BUTTON": "Publish Now",
-  "LOADING_TEXT": "Loading"
+  "LOADING_TEXT": "Loading",
+  "COPY_MODAL_EMPTY_FOLDER": "The folder is empty.",
+  "COPY_MODAL_HOME_TITLE": "Home",
+  "COPY_MODAL_RECENT_TITLE": "Recent items",
+  "COPY_MODAL_SUBMIT_BUTTON": "Submit",
+  "COPY_MODAL_MY_GRAASP_BREADCRUMB": "My Graasp"
 }
