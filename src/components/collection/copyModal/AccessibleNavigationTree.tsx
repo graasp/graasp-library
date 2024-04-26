@@ -5,6 +5,8 @@ import { Alert, Skeleton } from '@mui/material';
 import { ItemType, PermissionLevel } from '@graasp/sdk';
 import { RowMenuProps, RowMenus } from '@graasp/ui';
 
+import { useLibraryTranslation } from '../../../config/i18n';
+import LIBRARY from '../../../langs/constants';
 import { QueryClientContext } from '../../QueryClientContext';
 
 interface AccessibleNavigationTreeProps {
@@ -20,8 +22,8 @@ const AccessibleNavigationTree = ({
   onNavigate,
   selectedId,
 }: AccessibleNavigationTreeProps): JSX.Element => {
+  const { t } = useLibraryTranslation();
   const [page, setPage] = useState(1);
-  // todo: show only items with admin rights
   const { hooks } = useContext(QueryClientContext);
   const { data: accessibleItems, isLoading } = hooks.useAccessibleItems(
     {
@@ -59,7 +61,7 @@ const AccessibleNavigationTree = ({
     );
   }
 
-  return <Alert severity="error">An unexpected error happened</Alert>;
+  return <Alert severity="error">{t(LIBRARY.UNEXPECTED_ERROR_MESSAGE)}</Alert>;
 };
 
 export default AccessibleNavigationTree;

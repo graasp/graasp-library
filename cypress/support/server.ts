@@ -81,8 +81,6 @@ export const mockGetAccessibleItems = (items: MockItem[]): void => {
       const page = parseInt(params.get('page') ?? '1', 10);
       const pageSize = parseInt(params.get('pageSize') ?? '10', 10);
 
-      // as { page: number; pageSize: number };
-
       // warning: we don't check memberships
       const root = items.filter((i) => !i.path.includes('.'));
 

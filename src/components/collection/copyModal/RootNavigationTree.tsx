@@ -36,11 +36,8 @@ const RootNavigationTree = ({
     },
     { pageSize: 5 },
   );
-  const recentFolders = recentItems?.data?.filter(
-    ({ type }) => type === ItemType.FOLDER,
-  );
 
-  if (recentItems) {
+  if (recentItems?.data?.length) {
     return (
       <>
         <Typography color="darkgrey" variant="subtitle2">
@@ -53,13 +50,13 @@ const RootNavigationTree = ({
           onClick={onClick}
           //   root items cannot be disabled - but they are disabled by the button
         />
-        {recentFolders && (
+        {recentItems && (
           <>
             <Typography color="darkgrey" variant="subtitle2">
               {t(LIBRARY.COPY_MODAL_RECENT_TITLE)}
             </Typography>
             <RowMenus
-              elements={recentFolders}
+              elements={recentItems.data}
               onNavigate={onNavigate}
               selectedId={selectedId}
               onClick={onClick}
@@ -81,7 +78,7 @@ const RootNavigationTree = ({
     );
   }
 
-  return <Alert severity="error">An unexpected error happened</Alert>;
+  return <Alert severity="error">{t(LIBRARY.UNEXPECTED_ERROR_MESSAGE)}</Alert>;
 };
 
 export default RootNavigationTree;

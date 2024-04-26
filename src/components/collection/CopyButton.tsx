@@ -39,7 +39,6 @@ export const useCopyAction = (id?: string) => {
       ids: [id],
     };
 
-    // if the location to copy the item is MyItems or SharedItems root, then set the payload.to argument to be undefined
     payload.to = to;
 
     copyItems(payload);

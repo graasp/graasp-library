@@ -28,14 +28,13 @@ const ChildrenNavigationTree = ({
   const { hooks } = useContext(QueryClientContext);
   const { data: children, isLoading } = hooks.useChildren(
     selectedNavigationItem.id,
+    { types: [ItemType.FOLDER] },
   );
-  // TODO: use hook's filter when available
-  const folders = children?.filter((f) => f.type === ItemType.FOLDER);
 
   if (children) {
     return (
       <RowMenus
-        elements={folders}
+        elements={children}
         onNavigate={onNavigate}
         selectedId={selectedId}
         onClick={onClick}
@@ -57,7 +56,7 @@ const ChildrenNavigationTree = ({
       </>
     );
   }
-  return <Alert severity="error">An unexpected error happened</Alert>;
+  return <Alert severity="error">{t(LIBRARY.UNEXPECTED_ERROR_MESSAGE)}</Alert>;
 };
 
 export default ChildrenNavigationTree;
