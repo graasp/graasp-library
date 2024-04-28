@@ -76,8 +76,8 @@ const Home = () => {
   });
 
   return (
-    <StyledBackgroundContainer>
-      <MainWrapper>
+    <MainWrapper>
+      <StyledBackgroundContainer>
         <HomeHeader />
 
         <ItemCollection
@@ -97,7 +97,7 @@ const Home = () => {
           title={t(LIBRARY.HOME_RECENT_COLLECTIONS_TITLE)}
         />
 
-        <Box textAlign="center" marginBottom={20} marginTop={20}>
+        <Box textAlign="center" paddingBottom={20} paddingTop={20}>
           <DiscoverButton
             LinkComponent={Link}
             href={ALL_COLLECTIONS_ROUTE}
@@ -108,15 +108,15 @@ const Home = () => {
               <LibraryIcon
                 size={30}
                 sx={{ mr: 1, verticalAlign: 'middle', mt: '-3px' }}
-                secondaryColor="white"
-                primaryColor="transparent"
+                secondaryColor="transparent"
+                primaryColor="white"
               />
               {t(LIBRARY.HOME_VIEW_MORE_IN_LIBRARY_BUTTON)}
             </Box>
           </DiscoverButton>
         </Box>
-      </MainWrapper>
-    </StyledBackgroundContainer>
+      </StyledBackgroundContainer>
+    </MainWrapper>
   );
 };
 export default Home;

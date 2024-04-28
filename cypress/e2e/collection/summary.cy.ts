@@ -4,16 +4,25 @@ import { DEFAULT_LANG } from '@graasp/translations';
 import { buildCollectionRoute } from '../../../src/config/routes';
 import {
   CHILDREN_ITEMS_GRID_ID,
+  CHILD_CARD_COPY_BUTTON_ID,
   ITEM_SUMMARY_TITLE_ID,
+  LIBRARY_ACTION_GROUP_BUTTON_ID,
+  LIBRARY_ACTION_GROUP_COPY_BUTTON_ID,
+  LIBRARY_ACTION_GROUP_POP_UP_BUTTONS_ID,
   LIKE_COLLECTION_NOT_LOGGED_ID,
   SUMMARY_AUTHOR_CONTAINER_ID,
   SUMMARY_CREATED_AT_CONTAINER_ID,
   SUMMARY_LAST_UPDATE_CONTAINER_ID,
+  TREE_MODAL_CONFIRM_BUTTON_ID,
   buildContributorId,
 } from '../../../src/config/selectors';
 import { buildPublicAndPrivateEnvironments } from '../../fixtures/environment';
 import { PUBLISHED_ITEMS } from '../../fixtures/items';
-import { COMPLETE_MEMBERS, MEMBERS } from '../../fixtures/members';
+import {
+  COMPLETE_MEMBERS,
+  CURRENT_USER,
+  MEMBERS,
+} from '../../fixtures/members';
 
 describe('Collection Summary', () => {
   buildPublicAndPrivateEnvironments().forEach((environment) => {
@@ -111,6 +120,64 @@ describe('Collection Summary', () => {
         cy.get(`#${buildContributorId(membershipMember.id)}`).should(
           'not.exist',
         );
+      });
+    });
+  });
+
+  describe('Signed out', () => {
+    it('should not show copy button', { defaultCommandTimeout: 10000 }, () => {
+      cy.setUpApi({ items: PUBLISHED_ITEMS });
+
+      const item = PUBLISHED_ITEMS[1];
+      cy.visit(buildCollectionRoute(item.id));
+
+      cy.get(`#${LIBRARY_ACTION_GROUP_BUTTON_ID}`).click();
+      cy.get(`#${LIBRARY_ACTION_GROUP_POP_UP_BUTTONS_ID}`)
+        .find('button')
+        .should('have.length', 2);
+    });
+  });
+
+  describe('Signed in', () => {
+    beforeEach(() => {
+      cy.setUpApi({ currentMember: CURRENT_USER, items: PUBLISHED_ITEMS });
+    });
+
+    it('copy current item and child', { defaultCommandTimeout: 10000 }, () => {
+      cy.intercept({
+        method: 'POST',
+        url: '/items/copy*',
+      }).as('copy');
+
+      const item = PUBLISHED_ITEMS[0];
+      cy.visit(buildCollectionRoute(item.id));
+
+      // copy parent item on home
+      cy.get(`#${LIBRARY_ACTION_GROUP_BUTTON_ID}`).click();
+      cy.get(`#${LIBRARY_ACTION_GROUP_COPY_BUTTON_ID}`).click();
+
+      cy.get(`#${TREE_MODAL_CONFIRM_BUTTON_ID}`).should('be.disabled');
+      cy.get(`button`).contains('My Graasp').click();
+      cy.get(`#${TREE_MODAL_CONFIRM_BUTTON_ID}`).click();
+
+      cy.wait('@copy').then(({ request: { url, body } }) => {
+        expect(url).to.contain(item.id);
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+        expect(body.to).to.be.undefined;
+      });
+
+      // copy child item on home
+      const child = PUBLISHED_ITEMS[2];
+      cy.get(`#${CHILD_CARD_COPY_BUTTON_ID}`).click();
+
+      cy.get(`#${TREE_MODAL_CONFIRM_BUTTON_ID}`).should('be.disabled');
+      cy.get(`button`).contains('My Graasp').click();
+      cy.get(`#${TREE_MODAL_CONFIRM_BUTTON_ID}`).click();
+
+      cy.wait('@copy').then(({ request: { url, body } }) => {
+        expect(url).to.contain(child.id);
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+        expect(body.to).to.be.undefined;
       });
     });
   });

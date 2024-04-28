@@ -24,8 +24,10 @@ import { ItemIcon, Thumbnail } from '@graasp/ui';
 import { COLLECTION_CARD_BORDER_RADIUS } from '../../config/cssStyles';
 import { useLibraryTranslation } from '../../config/i18n';
 import { buildCollectionRoute } from '../../config/routes';
+import { CHILD_CARD_COPY_BUTTON_ID } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
+import CopyButton from './CopyButton';
 import CopyLinkButton from './CopyLinkButton';
 import DownloadButton from './DownloadButton';
 
@@ -73,9 +75,9 @@ export const SubItemCard: React.FC<SubItemCardProps> = ({
   thumbnail,
   subtext,
 }) => {
-  // const { hooks } = useContext(QueryClientContext);
+  const { hooks } = useContext(QueryClientContext);
 
-  // const { data: member } = hooks.useCurrentMember();
+  const { data: member } = hooks.useCurrentMember();
 
   const { name, id } = item;
 
@@ -87,7 +89,9 @@ export const SubItemCard: React.FC<SubItemCardProps> = ({
       href={link}
       actions={
         <>
-          {/* {member?.id && <CopyButton id={id} />} */}
+          {member?.id && (
+            <CopyButton id={CHILD_CARD_COPY_BUTTON_ID} itemId={id} />
+          )}
           <CopyLinkButton itemId={item.id} />
           <DownloadButton id={id} />
         </>
