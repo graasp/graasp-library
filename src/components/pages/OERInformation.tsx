@@ -2,57 +2,32 @@
 
 import Link from 'next/link';
 
-import { ArrowForward } from '@mui/icons-material';
-import { Box, Button, Typography, styled } from '@mui/material';
+import { Trans } from 'react-i18next';
 
-import { LibraryIcon } from '@graasp/ui';
+import { ImportContacts } from '@mui/icons-material';
+import { Box, Container, Divider, Typography } from '@mui/material';
 
-import { GRAASP_COLOR } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';
-import { ALL_COLLECTIONS_ROUTE } from '../../config/routes';
-import {
-  GRAASPER_COLLECTIONS_GRID_ID,
-  GRAASP_SELECTION_TITLE_ID,
-  MOST_LIKED_TITLE_ID,
-  RECENT_PUBLICATIONS_TITLE_ID,
-} from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
-import ItemCollection from '../collection/ItemCollection';
-import HomeHeader from '../layout/HomeHeader';
+import VideoWithCC from '../collection/oer/VideoWithCC';
+import DiscoverButton from '../common/DiscoverButton';
+import EmailButton from '../common/EmailButton';
+import FacebookButton from '../common/FacebookButton';
+import TwitterButton from '../common/TwitterButton';
 import MainWrapper from '../layout/MainWrapper';
+import StyledBackgroundContainer from '../layout/StyledBackgroundContainer';
+import StyledBox from '../layout/StyledContainer';
 
-const PATTERN_OPACITY = 0.7;
-const SECONDARY_PATTERN_COLOR = '505DD2';
-
-const StyledBackgroundContainer = styled(Box)(() => ({
-  backgroundColor: GRAASP_COLOR,
-  backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21.184 20c.357-.13.72-.264 1.088-.402l1.768-.661C33.64 15.347 39.647 14 50 14c10.271 0 15.362 1.222 24.629 4.928.955.383 1.869.74 2.75 1.072h6.225c-2.51-.73-5.139-1.691-8.233-2.928C65.888 13.278 60.562 12 50 12c-10.626 0-16.855 1.397-26.66 5.063l-1.767.662c-2.475.923-4.66 1.674-6.724 2.275h6.335zm0-20C13.258 2.892 8.077 4 0 4V2c5.744 0 9.951-.574 14.85-2h6.334zM77.38 0C85.239 2.966 90.502 4 100 4V2c-6.842 0-11.386-.542-16.396-2h-6.225zM0 14c8.44 0 13.718-1.21 22.272-4.402l1.768-.661C33.64 5.347 39.647 4 50 4c10.271 0 15.362 1.222 24.629 4.928C84.112 12.722 89.438 14 100 14v-2c-10.271 0-15.362-1.222-24.629-4.928C65.888 3.278 60.562 2 50 2 39.374 2 33.145 3.397 23.34 7.063l-1.767.662C13.223 10.84 8.163 12 0 12v2z' fill='%23${SECONDARY_PATTERN_COLOR}' fill-opacity='${PATTERN_OPACITY}' fill-rule='evenodd'/%3E%3C/svg%3E")`,
-}));
-
-const DiscoverButton = styled(Button)(({ theme }) => ({
-  fontSize: '1.2rem',
-  padding: theme.spacing(1, 2),
-  margin: theme.spacing(3),
-  [theme.breakpoints.up('sm')]: {
-    padding: theme.spacing(3, 6),
+const references = [
+  {
+    href: 'https://www.bpb.de/mediathek/video/234994/oer-erklaert-die-grundlagen/',
+    name: 'OER erklärt – die Grundlagen',
   },
-  backgroundColor: 'transparent',
-  textTransform: 'none',
-  ':hover': {
-    transition: 'background-color 500ms linear',
-    backgroundColor: 'rgba(255, 255, 255, 0.15)',
+  {
+    href: 'https://www.bpb.de/mediathek/video/234998/oer-erklaert-ueber-die-qualitaet-der-materialien/',
+    name: 'OER erklärt – über die Qualität der Materialien',
   },
-  '&:hover > .MuiButton-endIcon': {
-    '@keyframes bounce': {
-      '0%': { transform: 'translateX(0px)' },
-      '30%': { transform: 'translateX(15px)' },
-      '85%': { transform: 'translateX(0px)' },
-    },
-    animationName: 'bounce',
-    animationDuration: '1.2s',
-    animationIterationCount: 'infinite',
-  },
-}));
+];
 
 const OERInformation = () => {
   const { t } = useLibraryTranslation();
@@ -60,7 +35,99 @@ const OERInformation = () => {
   return (
     <StyledBackgroundContainer>
       <MainWrapper>
-        <Typography>OER Information</Typography>
+        <Box py={10}>
+          <Typography variant="h1" align="center" color="white">
+            <ImportContacts fontSize="large" sx={{ mr: 1 }} />
+            {t(LIBRARY.OER_INFORMATION_PAGE_TITLE)}
+          </Typography>
+          <Typography variant="subtitle1" align="center" color="white">
+            {t(LIBRARY.OER_INFORMATION_SUBTITLE)}
+          </Typography>
+        </Box>
+
+        {/* share options */}
+        <Box sx={{ background: 'white', textAlign: 'right' }}>
+          <Box sx={{ textAlign: 'right' }} p={2}>
+            <FacebookButton showBorder iconSize="medium" />
+            <TwitterButton
+              showBorder
+              iconSize="medium"
+              message={t(LIBRARY.OER_INFORMATION_PAGE_DESCRIPTION)}
+            />
+            <EmailButton
+              showBorder
+              iconSize="medium"
+              name={t(LIBRARY.OER_INFORMATION_PAGE_TITLE)}
+              description={t(LIBRARY.OER_INFORMATION_PAGE_DESCRIPTION)}
+            />
+          </Box>
+          <Divider variant="middle" />
+        </Box>
+
+        {/* first section */}
+        <StyledBox>
+          <Container>
+            <Typography align="justify" variant="h2">
+              {t(LIBRARY.OER_INFORMATION_BASICS_TITLE)}
+            </Typography>
+            <Typography py={2}>
+              <Trans
+                i18nKey={LIBRARY.OER_INFORMATION_BASICS_TEXT}
+                components={{ bold: <strong /> }}
+              />
+            </Typography>
+
+            <VideoWithCC
+              url="https://www.youtube.com/embed/DfJWqoEc6BI?si=fuhfrbKpqXUN4Vcx"
+              title={t(LIBRARY.OER_INFORMATION_BASICS_TITLE)}
+              production="Kooperative Berlin"
+              duration="3 Min."
+              edition="Bundeszentrale für politische Bildung"
+            />
+          </Container>
+        </StyledBox>
+
+        {/* second section */}
+        <StyledBox>
+          <Container>
+            <Typography variant="h2">
+              {t(LIBRARY.OER_INFORMATION_QUALITY_TITLE)}
+            </Typography>
+
+            <Typography align="justify" py={2}>
+              {t(LIBRARY.OER_INFORMATION_QUALITY_TEXT)}
+            </Typography>
+
+            <VideoWithCC
+              url="https://www.youtube.com/embed/xm0eLHBzO-Y?si=rVroH_jkQ80ZvSZ0"
+              title={t(LIBRARY.OER_INFORMATION_QUALITY_TITLE)}
+              production="Kooperative Berlin"
+              duration="3 Min."
+              edition="Bundeszentrale für politische Bildung"
+            />
+          </Container>
+        </StyledBox>
+
+        {/* discover button */}
+        <Box textAlign="center" my={5}>
+          <DiscoverButton
+            message={t(LIBRARY.OER_INFORMATION_DISCOVER_MORE_BUTTON_TEXT)}
+          />
+        </Box>
+
+        {/* references */}
+        <StyledBox sx={{ borderBottom: '1px solid lightgrey' }}>
+          <Container>
+            <Typography variant="h4">
+              {t(LIBRARY.OER_INFORMATION_MORE_INFORMATION_TITLE)}
+            </Typography>
+            {references.map(({ name, href }) => (
+              <Typography variant="subtitle1">
+                <Link href={href}>{name}</Link>
+              </Typography>
+            ))}
+          </Container>
+        </StyledBox>
       </MainWrapper>
     </StyledBackgroundContainer>
   );

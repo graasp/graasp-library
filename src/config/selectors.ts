@@ -78,6 +78,7 @@ export const SEARCH_ERROR_MESSAGE_ID = 'searchErrorMessage';
 
 export const LIKE_COLLECTION_NOT_LOGGED_ID = 'likeCollectionLoginMessage';
 
+export const OER_INFORMATIONS_DRAWER_ITEM_ID = 'eorInformationDrawerItemId';
 export const SEARCH_ALL_COLLECTIONS_DRAWER_ITEM_ID =
   'searchAllCollectionsDrawerItemId';
 export const GRAASPER_SELECTION_DRAWER_ITEM_ID =

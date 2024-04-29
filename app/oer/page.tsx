@@ -6,6 +6,7 @@ import Wrapper from '../../src/components/common/Wrapper';
 import OERInformation from '../../src/components/pages/OERInformation';
 import { APP_AUTHOR } from '../../src/config/constants';
 import getQueryClient from '../../src/config/get-query-client';
+import LIBRARY from '../../src/langs/constants';
 import en from '../../src/langs/en.json';
 import { buildSeo } from '../seo';
 
@@ -16,8 +17,8 @@ export async function generateMetadata() {
   const t = (s: string): string => en[s];
 
   return buildSeo({
-    title: t('OER information'),
-    description: t('Information about Open Educational Resources OER'),
+    title: t(LIBRARY.OER_INFORMATION_PAGE_TITLE),
+    description: t(LIBRARY.OER_INFORMATION_PAGE_DESCRIPTION),
     author: APP_AUTHOR,
   });
 }

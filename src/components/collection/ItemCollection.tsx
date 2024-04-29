@@ -1,24 +1,12 @@
 import React from 'react';
 
-import {
-  Box,
-  Container,
-  SxProps,
-  Theme,
-  Typography,
-  styled,
-} from '@mui/material';
+import { Container, SxProps, Theme, Typography } from '@mui/material';
 
 import { DiscriminatedItem } from '@graasp/sdk';
 
 import { SECTION_TITLE_ID } from '../../config/selectors';
+import StyledContainer from '../layout/StyledContainer';
 import CollectionsGrid from './CollectionsGrid';
-
-const StyledContainer = styled(Box)(({ theme }) => ({
-  backgroundColor: 'white',
-  ':nth-child(even)': { backgroundColor: '#fafafa' },
-  padding: theme.spacing(4, 3, 8, 3),
-}));
 
 type ItemCollectionProps = {
   id: string;
