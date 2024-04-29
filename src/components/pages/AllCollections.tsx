@@ -41,7 +41,7 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
 
   const [filters, setFilters] = useState<string[][]>([]);
   const [shouldIncludeContent, setShouldIncludeContent] =
-    useState<boolean>(true);
+    useState<boolean>(false);
   const [searchKeywords, setSearchKeywords] = useState<string>('');
   const [prevResults, setPrevResults] = useState<ItemOrSearchedItem[]>([]);
   const [page, setPage] = useState<number>(1);
