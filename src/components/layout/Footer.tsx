@@ -1,3 +1,5 @@
+'use client';
+
 import { useContext, useEffect, useState } from 'react';
 
 import { Grid, styled } from '@mui/material';

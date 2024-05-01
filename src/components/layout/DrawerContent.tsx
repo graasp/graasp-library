@@ -7,6 +7,7 @@ import {
   AutoAwesome,
   BookOutlined,
   Favorite,
+  ImportContacts,
   Search,
   TrendingUp,
 } from '@mui/icons-material';
@@ -26,6 +27,7 @@ import { useLibraryTranslation } from '../../config/i18n';
 import {
   ALL_COLLECTIONS_ROUTE,
   MY_LIKED_ITEMS_ROUTE,
+  OER_INFORMATION_ROUTE,
   buildMemberRoute,
 } from '../../config/routes';
 import {
@@ -35,6 +37,7 @@ import {
   MOST_LIKED_COLLECTIONS_DRAWER_ITEM_ID,
   MOST_LIKED_TITLE_ID,
   MY_PUBLICATIONS_DRAWER_ITEM_ID,
+  OER_INFORMATIONS_DRAWER_ITEM_ID,
   RECENT_COLLECTIONS_DRAWER_ITEM_ID,
   RECENT_PUBLICATIONS_TITLE_ID,
   SEARCH_ALL_COLLECTIONS_DRAWER_ITEM_ID,
@@ -78,6 +81,12 @@ const DrawerContent = () => {
   const { data: currentMember } = hooks.useCurrentMember();
   return (
     <MenuList>
+      <DrawerMenuItem
+        id={OER_INFORMATIONS_DRAWER_ITEM_ID}
+        icon={<ImportContacts />}
+        text={t(LIBRARY.DRAWER_OER_INFORMATION_TEXT)}
+        href={OER_INFORMATION_ROUTE}
+      />
       <DrawerMenuItem
         id={SEARCH_ALL_COLLECTIONS_DRAWER_ITEM_ID}
         icon={<Search />}

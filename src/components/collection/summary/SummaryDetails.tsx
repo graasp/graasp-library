@@ -18,7 +18,6 @@ import {
   DiscriminatedItem,
   formatDate,
 } from '@graasp/sdk';
-import { CCSharingVariant, CreativeCommons } from '@graasp/ui';
 
 import { CATEGORY_COLORS, UrlSearch } from '../../../config/constants';
 import {
@@ -37,6 +36,7 @@ import {
 } from '../../../config/selectors';
 import LIBRARY from '../../../langs/constants';
 import { QueryClientContext } from '../../QueryClientContext';
+import CreativeCommons from '../../common/CreativeCommons';
 
 const DetailCard = styled(Box)(() => ({
   border: '1px solid #ddd',
@@ -44,31 +44,6 @@ const DetailCard = styled(Box)(() => ({
   padding: 20,
   height: '100%',
 }));
-
-const convertLicense = (ccLicenseAdaption: string) => {
-  // Legacy licenses.
-  if (['alike', 'allow'].includes(ccLicenseAdaption)) {
-    return {
-      requireAccreditation: true,
-      allowCommercialUse: true,
-      allowSharing: ccLicenseAdaption === 'alike' ? 'alike' : 'yes',
-    };
-  }
-
-  return {
-    requireAccreditation: ccLicenseAdaption?.includes('BY'),
-    allowCommercialUse: !ccLicenseAdaption?.includes('NC'),
-    allowSharing: (() => {
-      if (!ccLicenseAdaption || !ccLicenseAdaption.length) {
-        return '';
-      }
-      if (ccLicenseAdaption?.includes('SA')) {
-        return 'alike';
-      }
-      return ccLicenseAdaption?.includes('ND') ? 'no' : 'yes';
-    })(),
-  };
-};
 
 type CategoryChipProps = {
   category: Category;
@@ -157,12 +132,6 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
     ?.filter((c) => c.category.type === CategoryType.Language)
     ?.map((c) => c.category);
 
-  const { allowSharing, allowCommercialUse, requireAccreditation } =
-    React.useMemo(
-      () => convertLicense(ccLicenseAdaption ?? ''),
-      [ccLicenseAdaption],
-    );
-
   return (
     <Grid
       container
@@ -244,12 +213,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
             {isLoading ? (
               <Skeleton>
                 <Box maxWidth={600}>
-                  <CreativeCommons
-                    allowCommercialUse
-                    allowSharedAdaptation="yes"
-                    iconSize={48}
-                    sx={{ marginY: 0, paddingY: 0 }}
-                  />
+                  <CreativeCommons ccLicenseAdaption="CC BY-NC" />
                 </Box>
               </Skeleton>
             ) : (
@@ -258,13 +222,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
                 className={ccLicenseAdaption}
               >
                 {ccLicenseAdaption && ccLicenseAdaption.length > 0 ? (
-                  <CreativeCommons
-                    allowSharedAdaptation={allowSharing as CCSharingVariant}
-                    allowCommercialUse={allowCommercialUse}
-                    requireAccreditation={requireAccreditation}
-                    iconSize={48}
-                    sx={{ marginY: 0, paddingY: 0 }}
-                  />
+                  <CreativeCommons ccLicenseAdaption={ccLicenseAdaption} />
                 ) : (
                   <Typography
                     variant="body1"
