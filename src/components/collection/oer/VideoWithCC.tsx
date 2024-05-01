@@ -28,65 +28,59 @@ const VideoWithCC = ({
   return (
     <Stack
       p={3}
+      borderRadius={3}
+      textAlign="center"
+      width="fit-content"
+      margin="auto"
+      border="1px solid lightgrey"
       style={{
-        borderRadius: 20,
-        border: '1px solid lightgrey',
-        textAlign: 'center',
         background: 'white',
-        width: 'fit-content',
-        margin: 'auto',
       }}
       gap={3}
       alignContent="center"
     >
+      <iframe
+        style={{ margin: 'auto', border: 'none', display: 'block' }}
+        width="560"
+        height="315"
+        src={url}
+        title={title}
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowFullScreen
+      />
       <Stack direction="row" justifyContent="center" alignItems="center">
-        <iframe
-          style={{ margin: 'auto', border: 'none', display: 'block' }}
-          width="560"
-          height="315"
-          src={url}
-          title={title}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-        />
-      </Stack>
-      <Stack direction="row" justifyContent="center" alignItems="center">
-        <Stack>
-          <List dense>
-            {production && (
-              <ListItem>
-                <strong>
-                  {t(LIBRARY.OER_INFORMATION_VIDEO_DESCRIPTION_PRODUCTION)}
-                </strong>
-                : {production}
-              </ListItem>
-            )}
-            {duration && (
-              <ListItem>
-                <strong>
-                  {t(LIBRARY.OER_INFORMATION_VIDEO_DESCRIPTION_DURATION)}
-                </strong>
-                : {duration}
-              </ListItem>
-            )}
-            {edition && (
-              <ListItem>
-                <strong>
-                  {t(LIBRARY.OER_INFORMATION_VIDEO_DESCRIPTION_EDITION)}
-                </strong>
-                : {edition}
-              </ListItem>
-            )}
-          </List>
-        </Stack>
-        <Stack>
-          {ccLicenseAdaption && (
-            <CreativeCommons
-              iconSize={30}
-              ccLicenseAdaption={ccLicenseAdaption}
-            />
+        <List dense>
+          {production && (
+            <ListItem>
+              <strong>
+                {t(LIBRARY.OER_INFORMATION_VIDEO_DESCRIPTION_PRODUCTION)}
+              </strong>
+              : {production}
+            </ListItem>
           )}
-        </Stack>
+          {duration && (
+            <ListItem>
+              <strong>
+                {t(LIBRARY.OER_INFORMATION_VIDEO_DESCRIPTION_DURATION)}
+              </strong>
+              : {duration}
+            </ListItem>
+          )}
+          {edition && (
+            <ListItem>
+              <strong>
+                {t(LIBRARY.OER_INFORMATION_VIDEO_DESCRIPTION_EDITION)}
+              </strong>
+              : {edition}
+            </ListItem>
+          )}
+        </List>
+        {ccLicenseAdaption && (
+          <CreativeCommons
+            iconSize={30}
+            ccLicenseAdaption={ccLicenseAdaption}
+          />
+        )}
       </Stack>
     </Stack>
   );

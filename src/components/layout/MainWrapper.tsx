@@ -13,8 +13,10 @@ import useHeader from './useHeader';
 
 const MainWrapper = ({
   children,
+  backgroundColor,
 }: {
   children: JSX.Element | JSX.Element[];
+  backgroundColor?: string;
 }) => {
   const { rightContent } = useHeader();
   const { t } = useLibraryTranslation();
@@ -28,6 +30,7 @@ const MainWrapper = ({
       drawerOpenAriaLabel={t(LIBRARY.DRAWER_ARIA_OPEN)}
       PlatformComponent={<PlatformSwitchComponent />}
       LinkComponent={HeaderLinkComponent}
+      backgroundColor={backgroundColor}
     >
       <Stack direction="column" justifyItems="space-between" height="100%">
         <Box flexGrow={1}>{children}</Box>

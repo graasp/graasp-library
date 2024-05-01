@@ -1,14 +1,17 @@
+'use client';
+
 import { t } from 'i18next';
 import truncate from 'lodash.truncate';
 
 import { useEffect, useState } from 'react';
 
 import { Twitter } from '@mui/icons-material';
-import { IconButton, IconProps, Tooltip } from '@mui/material';
+import { IconProps, Tooltip } from '@mui/material';
 
 import { TWITTER_MESSAGE_MAX_LENGTH } from '../../config/constants';
 import LIBRARY from '../../langs/constants';
 import { openInNewTab } from '../../utils/helpers';
+import StyledIconButton from '../layout/StyledIconButton';
 
 type Props = {
   iconSize: IconProps['fontSize'];
@@ -40,17 +43,9 @@ const TwitterButton = ({
 
   return (
     <Tooltip title={t(LIBRARY.SHARE_TWITTER_TOOLTIP)}>
-      <IconButton
-        sx={{
-          marginLeft: 1,
-          marginRight: 1,
-          border: showBorder ? `1px solid lightgrey` : 'none',
-        }}
-        color="primary"
-        onClick={shareOnTwitter}
-      >
+      <StyledIconButton showBorder={showBorder} onClick={shareOnTwitter}>
         <Twitter fontSize={iconSize} />
-      </IconButton>
+      </StyledIconButton>
     </Tooltip>
   );
 };

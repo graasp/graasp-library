@@ -34,7 +34,7 @@ const OERInformation = () => {
 
   return (
     <StyledBackgroundContainer>
-      <MainWrapper>
+      <MainWrapper backgroundColor="transparent">
         <Box py={10}>
           <Typography variant="h1" align="center" color="white">
             <ImportContacts fontSize="large" sx={{ mr: 1 }} />
@@ -81,7 +81,7 @@ const OERInformation = () => {
               url="https://www.youtube.com/embed/DfJWqoEc6BI?si=fuhfrbKpqXUN4Vcx"
               title={t(LIBRARY.OER_INFORMATION_BASICS_TITLE)}
               production="Kooperative Berlin"
-              duration="3 Min."
+              duration={t(LIBRARY.DURATION_IN_MINUTES, { count: 3 })}
               edition="Bundeszentrale für politische Bildung"
             />
           </Container>
@@ -102,7 +102,7 @@ const OERInformation = () => {
               url="https://www.youtube.com/embed/xm0eLHBzO-Y?si=rVroH_jkQ80ZvSZ0"
               title={t(LIBRARY.OER_INFORMATION_QUALITY_TITLE)}
               production="Kooperative Berlin"
-              duration="3 Min."
+              duration={t(LIBRARY.DURATION_IN_MINUTES, { count: 3 })}
               edition="Bundeszentrale für politische Bildung"
             />
           </Container>

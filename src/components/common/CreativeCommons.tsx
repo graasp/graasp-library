@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import { Typography } from '@mui/material';
 
@@ -10,6 +10,16 @@ import {
 
 import { useLibraryTranslation } from '../../config/i18n';
 import LIBRARY from '../../langs/constants';
+
+const getAllowSharingProperty = (ccLicenseAdaption: string) => {
+  if (!ccLicenseAdaption || !ccLicenseAdaption.length) {
+    return '';
+  }
+  if (ccLicenseAdaption?.includes('SA')) {
+    return 'alike';
+  }
+  return ccLicenseAdaption?.includes('ND') ? 'no' : 'yes';
+};
 
 const convertLicense = (ccLicenseAdaption: string) => {
   // Legacy licenses.
@@ -24,15 +34,7 @@ const convertLicense = (ccLicenseAdaption: string) => {
   return {
     requireAccreditation: ccLicenseAdaption?.includes('BY'),
     allowCommercialUse: !ccLicenseAdaption?.includes('NC'),
-    allowSharing: (() => {
-      if (!ccLicenseAdaption || !ccLicenseAdaption.length) {
-        return '';
-      }
-      if (ccLicenseAdaption?.includes('SA')) {
-        return 'alike';
-      }
-      return ccLicenseAdaption?.includes('ND') ? 'no' : 'yes';
-    })(),
+    allowSharing: getAllowSharingProperty(ccLicenseAdaption),
   };
 };
 
@@ -49,10 +51,8 @@ const CreativeCommons = ({
 }: Props): JSX.Element => {
   const { t } = useLibraryTranslation();
 
-  const { allowSharing, allowCommercialUse, requireAccreditation } = useMemo(
-    () => convertLicense(ccLicenseAdaption ?? ''),
-    [ccLicenseAdaption],
-  );
+  const { allowSharing, allowCommercialUse, requireAccreditation } =
+    convertLicense(ccLicenseAdaption ?? '');
 
   if (ccLicenseAdaption && ccLicenseAdaption.length > 0) {
     return (
