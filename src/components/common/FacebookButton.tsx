@@ -1,12 +1,11 @@
 'use client';
 
-import { t } from 'i18next';
-
 import { useEffect, useState } from 'react';
 
 import { Facebook } from '@mui/icons-material';
 import { IconProps, Tooltip } from '@mui/material';
 
+import { useLibraryTranslation } from '../../config/i18n';
 import LIBRARY from '../../langs/constants';
 import { openInNewTab } from '../../utils/helpers';
 import StyledIconButton from '../layout/StyledIconButton';
@@ -20,6 +19,7 @@ const FacebookButton = ({
   iconSize,
   showBorder = false,
 }: Props): JSX.Element => {
+  const { t } = useLibraryTranslation();
   const [pageLocation, setPageLocation] =
     useState<string>('https://graasp.org');
 
@@ -37,9 +37,12 @@ const FacebookButton = ({
 
   return (
     <Tooltip title={t(LIBRARY.SHARE_FACEBOOK_TOOLTIP)}>
-      <StyledIconButton showBorder={showBorder} onClick={shareOnFacebook}>
-        <Facebook fontSize={iconSize} />
-      </StyledIconButton>
+      {/* necessary span for tooltip to how */}
+      <span>
+        <StyledIconButton showBorder={showBorder} onClick={shareOnFacebook}>
+          <Facebook fontSize={iconSize} />
+        </StyledIconButton>
+      </span>
     </Tooltip>
   );
 };
