@@ -9,6 +9,7 @@ import {
 } from '../../../src/config/selectors';
 import { buildPublicAndPrivateEnvironments } from '../../fixtures/environment';
 import { PUBLISHED_ITEMS } from '../../fixtures/items';
+import { getRootPublishedItems } from '../../support/utils';
 
 // the text doesn't affect the result: results are set in setUpApi
 const keywords = 'keywords';
@@ -47,7 +48,7 @@ describe('Search', () => {
 
         // verify all items are displayed
         // eslint-disable-next-line no-restricted-syntax
-        for (const item of PUBLISHED_ITEMS) {
+        for (const item of getRootPublishedItems(PUBLISHED_ITEMS)) {
           cy.get(`#${ALL_COLLECTIONS_GRID_ID}`).contains(item.name);
         }
 
