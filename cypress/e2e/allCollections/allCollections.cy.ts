@@ -57,19 +57,19 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
       //   'License',
       // );
 
-      // verify 6 item cards are displayed (including children)
-      cy.get(`#${ALL_COLLECTIONS_GRID_ID}`);
-      cy.get(`[id^=${buildCollectionCardGridId('')}]`).should(
-        'have.length',
-        environment.items.length,
-      );
-
       // verify 2 item cards are displayed (without children)
-      cy.get(`#${ENABLE_IN_DEPTH_SEARCH_CHECKBOX_ID}`).uncheck();
       cy.get(`#${ALL_COLLECTIONS_GRID_ID}`);
       cy.get(`[id^=${buildCollectionCardGridId('')}]`).should(
         'have.length',
         getRootPublishedItems(environment.items).length,
+      );
+
+      // verify 6 item cards are displayed (including children)
+      cy.get(`#${ENABLE_IN_DEPTH_SEARCH_CHECKBOX_ID}`).check();
+      cy.get(`#${ALL_COLLECTIONS_GRID_ID}`);
+      cy.get(`[id^=${buildCollectionCardGridId('')}]`).should(
+        'have.length',
+        environment.items.length,
       );
     });
 
@@ -121,7 +121,7 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
       cy.wait('@search').then(() => {
         cy.get(`#${ALL_COLLECTIONS_GRID_ID}`)
           .children()
-          .should('have.length', PUBLISHED_ITEMS.length);
+          .should('have.length', getRootPublishedItems(PUBLISHED_ITEMS).length);
       });
 
       // bug: popup does not open in cypress
@@ -131,7 +131,7 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
       // check default display, show all published with children
       cy.get(`#${ALL_COLLECTIONS_GRID_ID}`)
         .children()
-        .should('have.length', PUBLISHED_ITEMS.length);
+        .should('have.length', getRootPublishedItems(PUBLISHED_ITEMS).length);
     });
   });
 });
