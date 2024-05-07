@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.1](https://github.com/graasp/graasp-library/compare/v1.7.0...v1.7.1) (2024-05-07)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @graasp/query-client to v3.4.2 ([#619](https://github.com/graasp/graasp-library/issues/619)) ([c218f98](https://github.com/graasp/graasp-library/commit/c218f983cf31df8c913437a7de4588b9c4ea8c3e))
+* **deps:** update dependency @graasp/sdk to v4.9.0 ([#593](https://github.com/graasp/graasp-library/issues/593)) ([9c6979e](https://github.com/graasp/graasp-library/commit/9c6979ee4be123fae432c0bc3afcdc64bef09f7d))
+* **deps:** update dependency @graasp/translations to v1.28.0 ([#600](https://github.com/graasp/graasp-library/issues/600)) ([bf87926](https://github.com/graasp/graasp-library/commit/bf87926a0dc4a46346a5429abff5390765caef33))
+* **deps:** update dependency @graasp/ui to v4.17.1 ([#620](https://github.com/graasp/graasp-library/issues/620)) ([78a94a1](https://github.com/graasp/graasp-library/commit/78a94a11b09e756e542f2a0437ff2d02098f6b06))
+* **deps:** update dependency @sentry/nextjs to v7.113.0 ([#590](https://github.com/graasp/graasp-library/issues/590)) ([e8861f2](https://github.com/graasp/graasp-library/commit/e8861f241093f2422d8fdc8db4c6b23dd87a4a7c))
+* **deps:** update dependency katex to v0.16.10 [security] ([#587](https://github.com/graasp/graasp-library/issues/587)) ([ec61751](https://github.com/graasp/graasp-library/commit/ec617516f56eef8aaee710ab922d75552f100d0d))
+* set default for in-depth search to false ([#610](https://github.com/graasp/graasp-library/issues/610)) ([a41709f](https://github.com/graasp/graasp-library/commit/a41709f43dbf4964e76c2f912ae6cfb79c447b0c))
+
 ## [1.7.0](https://github.com/graasp/graasp-library/compare/v1.6.0...v1.7.0) (2024-05-01)
 
 
