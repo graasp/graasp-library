@@ -15,31 +15,6 @@ import Items from '../Items';
 import SummaryDetails from './SummaryDetails';
 import SummaryHeader from './SummaryHeader';
 
-// TODO: To be removed / moved to SDK.
-export const getParentsIdsFromPath = (
-  path?: string,
-  { ignoreSelf = false } = {},
-) => {
-  if (!path) {
-    return [];
-  }
-
-  let p = path;
-  // ignore self item in path
-  if (ignoreSelf) {
-    // split path in half parents / self
-    // eslint-disable-next-line no-useless-escape
-    const els = path.split(/\.[^\.]*$/);
-    // if els has only one element, the item has no parent
-    if (els.length <= 1) {
-      return [];
-    }
-    [p] = els;
-  }
-  const ids = p?.replace(/_/g, '-').split('.');
-  return ids;
-};
-
 type SummaryProps = {
   collection?: DiscriminatedItem;
   publishedRoot?: ItemPublished | null;
