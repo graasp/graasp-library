@@ -180,8 +180,8 @@ export const FileChildrenCard: React.FC<FileChildrenCardProps> = ({
                 ? item.extra
                 : undefined
             }
-            // TODO: replace with theme values
-            sx={{ fontSize: '2.1875rem', color: '#5050d2' }}
+            color="#5050d2"
+            size="2.1875rem"
           />
         </div>
       ),
