@@ -3063,12 +3063,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:20.12.10":
-  version: 20.12.10
-  resolution: "@types/node@npm:20.12.10"
+"@types/node@npm:20.12.14":
+  version: 20.12.14
+  resolution: "@types/node@npm:20.12.14"
   dependencies:
     undici-types: "npm:~5.26.4"
-  checksum: 10/b3ab044969880084e4da22a0173fc234239de81c22fb9418bd992de98369a3065c0c6119216476711af69ff520331cf06711acdeb1959554de6bbf0912a0494e
+  checksum: 10/8ce987f0b7e15116e92894c51ee53fe0cbd98dafb5693a2e7d490f16396552528114d055ca1b144d3fdc5ba7d5f5ce28ad091a693c24337615f047cefc3faa36
   languageName: node
   linkType: hard
 
@@ -7809,7 +7809,7 @@ __metadata:
     "@types/katex": "npm:^0.16.7"
     "@types/lodash.groupby": "npm:4.6.9"
     "@types/lodash.truncate": "npm:4.4.9"
-    "@types/node": "npm:20.12.10"
+    "@types/node": "npm:20.12.14"
     "@types/react": "npm:18.2.79"
     "@types/react-dom": "npm:18.2.25"
     "@types/react-helmet": "npm:6.1.11"
