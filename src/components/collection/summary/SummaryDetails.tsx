@@ -217,10 +217,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
                 </Box>
               </Skeleton>
             ) : (
-              <Box
-                id={SUMMARY_CC_LICENSE_CONTAINER_ID}
-                className={ccLicenseAdaption}
-              >
+              <Box id={SUMMARY_CC_LICENSE_CONTAINER_ID}>
                 {ccLicenseAdaption && ccLicenseAdaption.length > 0 ? (
                   <CreativeCommons ccLicenseAdaption={ccLicenseAdaption} />
                 ) : (
