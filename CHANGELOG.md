@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.2](https://github.com/graasp/graasp-library/compare/v1.7.1...v1.7.2) (2024-07-05)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @graasp/translations to v1.30.3 ([#632](https://github.com/graasp/graasp-library/issues/632)) ([487cc8f](https://github.com/graasp/graasp-library/commit/487cc8fe9164f48e6ed98c1ad5a35885b826ef3e))
+* **deps:** update dependency katex to v0.16.11 ([#635](https://github.com/graasp/graasp-library/issues/635)) ([c44cd82](https://github.com/graasp/graasp-library/commit/c44cd824309a1f71cf32f78363ecbfe24e919afd))
+* **deps:** update dependency react-router-dom to v6.24.1 ([#636](https://github.com/graasp/graasp-library/issues/636)) ([40e25f5](https://github.com/graasp/graasp-library/commit/40e25f5b2271ee9aca5fcb7264e376bfb7cb81e0))
+* **deps:** update mui (non-major) ([#597](https://github.com/graasp/graasp-library/issues/597)) ([7014296](https://github.com/graasp/graasp-library/commit/70142964c3134d1b8970219cc5aa9d5ba8ea4192))
+* update deps and release-please ([#633](https://github.com/graasp/graasp-library/issues/633)) ([44b87ad](https://github.com/graasp/graasp-library/commit/44b87ad334f35747d93ca20ed5d72deb519d7f42))
+
 ## [1.7.1](https://github.com/graasp/graasp-library/compare/v1.7.0...v1.7.1) (2024-05-07)
 
 
