@@ -10,6 +10,7 @@ import {
   CardContent,
   Grid,
   styled,
+  useTheme,
 } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
@@ -139,7 +140,7 @@ export const FileChildrenCard: React.FC<FileChildrenCardProps> = ({
   lang,
 }) => {
   const { t } = useLibraryTranslation();
-
+  const theme = useTheme();
   const { name } = item;
 
   const { hooks } = useContext(QueryClientContext);
@@ -180,7 +181,7 @@ export const FileChildrenCard: React.FC<FileChildrenCardProps> = ({
                 ? item.extra
                 : undefined
             }
-            color="#5050d2"
+            color={theme.palette.primary.main}
             size="2.1875rem"
           />
         </div>
