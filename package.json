@@ -40,7 +40,7 @@
     "@mui/icons-material": "5.15.21",
     "@mui/lab": "5.0.0-alpha.170",
     "@mui/material": "5.15.21",
-    "@sentry/nextjs": "7.118.0",
+    "@sentry/nextjs": "8.15.0",
     "@testing-library/jest-dom": "6.4.6",
     "@testing-library/react": "16.0.0",
     "@testing-library/user-event": "14.5.2",
