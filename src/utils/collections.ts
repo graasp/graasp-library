@@ -13,7 +13,7 @@ export const PLACEHOLDER_COLLECTION: DiscriminatedItem = {
   lang: '',
   creator: null,
   type: ItemType.FOLDER,
-  extra: { [ItemType.FOLDER]: { childrenOrder: [] } },
+  extra: { [ItemType.FOLDER]: {} },
 };
 
 export const PLACEHOLDER_COLLECTIONS = Array.from(

@@ -17,7 +17,7 @@ export const DEFAULT_FOLDER_ITEM: FolderItemType = FolderItemFactory({
   path: 'ecafbd2a_5688_11eb_ae93_0242ac130002',
   createdAt: '2023-02-27T18:20:09.732Z',
   updatedAt: '2023-02-28T18:20:09.732Z',
-  extra: { [ItemType.FOLDER]: { childrenOrder: [] } },
+  extra: { [ItemType.FOLDER]: {} },
   creator: CURRENT_USER,
   type: ItemType.FOLDER,
 });

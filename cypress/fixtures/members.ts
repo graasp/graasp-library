@@ -61,6 +61,7 @@ export const COMPLETE_MEMBERS: {
     extra: {
       lang: 'fr',
     },
+    isValidated: true,
     enableSaveActions: true,
   },
   BOB: {
@@ -71,6 +72,7 @@ export const COMPLETE_MEMBERS: {
     updatedAt: '2021-04-13 14:56:34.749946',
     type: MemberType.Individual,
     extra: { lang: 'en' },
+    isValidated: true,
     enableSaveActions: true,
     thumbnail:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Pedro_Luro_edit.jpg/210px-Pedro_Luro_edit.jpg',
