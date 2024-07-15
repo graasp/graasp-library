@@ -34,12 +34,12 @@ const {
   buildGetItemPublishedInformationRoute,
   buildGetItemRoute,
   buildGetItemTagsRoute,
-  buildGetMember,
+  buildGetMembersByIdRoute,
+  buildGetMemberRoute,
+  buildGetCurrentMemberRoute,
   ITEMS_ROUTE,
-  GET_CURRENT_MEMBER_ROUTE,
   SIGN_IN_ROUTE,
   SIGN_OUT_ROUTE,
-  buildGetMembersRoute,
   buildGetCategoriesRoute,
   SEARCH_PUBLISHED_ITEMS_ROUTE,
 } = API_ROUTES;
@@ -100,7 +100,7 @@ export const mockGetCurrentMember = (
   cy.intercept(
     {
       method: DEFAULT_GET.method,
-      url: `${API_HOST}/${GET_CURRENT_MEMBER_ROUTE}`,
+      url: `${API_HOST}/${buildGetCurrentMemberRoute()}`,
     },
     ({ reply }) => {
       if (shouldThrowError) {
@@ -290,7 +290,7 @@ export const mockGetMember = ({
   cy.intercept(
     {
       method: DEFAULT_GET.method,
-      url: new RegExp(`${API_HOST}/${buildGetMember(ID_FORMAT)}$`),
+      url: new RegExp(`${API_HOST}/${buildGetMemberRoute(ID_FORMAT)}*`),
     },
     ({ url, reply }) => {
       if (!currentMember) {
@@ -325,7 +325,7 @@ export const mockGetMembers = ({
   cy.intercept(
     {
       method: DEFAULT_GET.method,
-      url: `${API_HOST}/${buildGetMembersRoute([''])}*`,
+      url: `${API_HOST}/${buildGetMembersByIdRoute([''])}*`,
     },
     ({ url, reply }) => {
       if (!currentMember) {
