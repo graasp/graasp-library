@@ -15,14 +15,14 @@ export const useDownloadAction = (itemId?: string) => {
     data,
     isSuccess,
     isLoading,
-  } = mutations.useExportZip();
+  } = mutations.useExportItem();
 
   useEffect(() => {
     if (isSuccess) {
-      const url = window.URL.createObjectURL(new Blob([data]));
+      const url = window.URL.createObjectURL(new Blob([data.data]));
       const link = document.createElement('a');
       link.href = url;
-      link.setAttribute('download', `${itemId}.zip`);
+      link.setAttribute('download', data.name);
       document.body.appendChild(link);
       link.click();
     }
