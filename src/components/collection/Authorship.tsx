@@ -5,7 +5,12 @@ import React, { useContext } from 'react';
 import { Stack, Typography } from '@mui/material';
 import Skeleton from '@mui/material/Skeleton';
 
-import { DiscriminatedItem, PermissionLevel, ThumbnailSize } from '@graasp/sdk';
+import {
+  DiscriminatedItem,
+  Member,
+  PermissionLevel,
+  ThumbnailSize,
+} from '@graasp/sdk';
 import { Avatar } from '@graasp/ui';
 
 import { DEFAULT_MEMBER_THUMBNAIL } from '../../config/constants';
@@ -36,8 +41,8 @@ const Authorship = ({ itemId, author, displayCoEditors }: Props) => {
     ?.filter(({ permission }) =>
       [PermissionLevel.Write, PermissionLevel.Admin].includes(permission),
     )
-    ?.filter(({ member }) => member.id !== author?.id)
-    ?.map(({ member }) => member);
+    ?.filter(({ account }) => account.id !== author?.id)
+    ?.map(({ account }) => account) as Member[];
 
   const isLoadingAuthor = !author || isLoadingAuthorAvatar;
 
