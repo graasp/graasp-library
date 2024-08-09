@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.3](https://github.com/graasp/graasp-library/compare/v1.7.2...v1.7.3) (2024-08-09)
+
+
+### Bug Fixes
+
+* **deps:** update dependency i18next to v23.12.1 ([#646](https://github.com/graasp/graasp-library/issues/646)) ([8d29f64](https://github.com/graasp/graasp-library/commit/8d29f640f5ef6b4473148e761e18185dbdbfcfee))
+* **deps:** update dependency next to v14.2.5 ([#645](https://github.com/graasp/graasp-library/issues/645)) ([d8bae96](https://github.com/graasp/graasp-library/commit/d8bae9600a6dcba88b45851048d834b02b88d3be))
+* **deps:** update eslint packages ([#644](https://github.com/graasp/graasp-library/issues/644)) ([2f40ca0](https://github.com/graasp/graasp-library/commit/2f40ca049b515f47243dcf4d5adaa210f91bed5f))
+* **deps:** update graasp packages (minor) ([#637](https://github.com/graasp/graasp-library/issues/637)) ([40fb958](https://github.com/graasp/graasp-library/commit/40fb958e211754d0ea80fcace23d5f272dbcd6da))
+* update dependencies ([#660](https://github.com/graasp/graasp-library/issues/660)) ([f2096e6](https://github.com/graasp/graasp-library/commit/f2096e680206f24e6eeb0db1a3acf4773dc2c74f))
+* update deps ([#664](https://github.com/graasp/graasp-library/issues/664)) ([67c8ee9](https://github.com/graasp/graasp-library/commit/67c8ee94ac3087f95d202a8fe6e0860ae802ec87))
+* update log group for dev ([559e4f2](https://github.com/graasp/graasp-library/commit/559e4f2f27246de752fc8a71f6d04632d80482f4))
+
 ## [1.7.2](https://github.com/graasp/graasp-library/compare/v1.7.1...v1.7.2) (2024-07-05)
 
 
