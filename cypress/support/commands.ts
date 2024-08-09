@@ -15,7 +15,6 @@ import {
   mockGetItemThumbnailUrl,
   mockGetLikedItems,
   mockGetMember,
-  mockGetMembers,
   mockGetPublishItemInformations,
   mockSearch,
   mockSignInRedirection,
@@ -47,8 +46,6 @@ Cypress.Commands.add(
     mockGetChildren({ items, currentMember });
 
     mockGetMember({ members: cachedMembers, currentMember });
-
-    mockGetMembers({ members: cachedMembers, currentMember });
 
     mockGetCurrentMember(currentMember, getCurrentMemberError);
 
