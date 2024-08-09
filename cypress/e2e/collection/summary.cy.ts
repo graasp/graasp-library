@@ -76,11 +76,11 @@ describe('Collection Summary', () => {
 
       // contributors
       const contributors = item.memberships?.filter(
-        ({ permission, member: membershipMember }) =>
+        ({ permission, account: membershipMember }) =>
           permission === PermissionLevel.Admin &&
           membershipMember.id !== item.creator?.id,
       );
-      contributors?.forEach(({ member: membershipMember }) => {
+      contributors?.forEach(({ account: membershipMember }) => {
         cy.get(`#${buildContributorId(membershipMember.id)}`).should('exist');
       });
     });
@@ -112,11 +112,11 @@ describe('Collection Summary', () => {
 
       // contributors
       const contributors = item.memberships?.filter(
-        ({ permission, member: membershipMember }) =>
+        ({ permission, account: membershipMember }) =>
           permission === PermissionLevel.Admin &&
           membershipMember.id !== item.creator?.id,
       );
-      contributors?.forEach(({ member: membershipMember }) => {
+      contributors?.forEach(({ account: membershipMember }) => {
         cy.get(`#${buildContributorId(membershipMember.id)}`).should(
           'not.exist',
         );
