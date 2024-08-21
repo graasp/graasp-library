@@ -18,11 +18,7 @@ import {
 } from '../../../src/config/selectors';
 import { buildPublicAndPrivateEnvironments } from '../../fixtures/environment';
 import { PUBLISHED_ITEMS } from '../../fixtures/items';
-import {
-  COMPLETE_MEMBERS,
-  CURRENT_USER,
-  MEMBERS,
-} from '../../fixtures/members';
+import { COMPLETE_MEMBERS, CURRENT_USER } from '../../fixtures/members';
 
 describe('Collection Summary', () => {
   buildPublicAndPrivateEnvironments().forEach((environment) => {
@@ -49,10 +45,10 @@ describe('Collection Summary', () => {
         .should('have.length', children.length);
 
       // author
-      const authorName = Object.values(MEMBERS).find(
-        ({ id }) => id === item.creator?.id,
-      )?.name;
-      cy.get(`#${SUMMARY_AUTHOR_CONTAINER_ID}`).should('contain', authorName);
+      cy.get(`#${SUMMARY_AUTHOR_CONTAINER_ID}`).should(
+        'contain',
+        item.creator?.name,
+      );
 
       // created at
       if (item.createdAt) {
@@ -105,10 +101,10 @@ describe('Collection Summary', () => {
       cy.visit(buildCollectionRoute(item.id));
 
       // author
-      const authorName = Object.values(MEMBERS).find(
-        ({ id }) => id === item.creator?.id,
-      )?.name;
-      cy.get(`#${SUMMARY_AUTHOR_CONTAINER_ID}`).should('contain', authorName);
+      cy.get(`#${SUMMARY_AUTHOR_CONTAINER_ID}`).should(
+        'contain',
+        item.creator?.name,
+      );
 
       // contributors
       const contributors = item.memberships?.filter(

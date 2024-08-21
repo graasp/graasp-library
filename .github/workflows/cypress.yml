@@ -41,7 +41,8 @@ jobs:
         with:
           install: false
           config: baseUrl=http://localhost:3000
-          start: yarn start:ci
+          build: yarn build
+          start: yarn start:next
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 250
           browser: chrome
