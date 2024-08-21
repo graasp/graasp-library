@@ -35,6 +35,7 @@
     "@emotion/styled": "11.13.0",
     "@graasp/query-client": "github:graasp/graasp-query-client#update-for-item-login",
     "@graasp/sdk": "github:graasp/graasp-sdk#568-new-membertype",
+    "@graasp/translations": "1.35.0",
     "@graasp/ui": "github:graasp/graasp-ui#update-sdk",
     "@mui/icons-material": "5.16.5",
     "@mui/lab": "5.0.0-alpha.170",
