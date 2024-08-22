@@ -6,11 +6,11 @@ import {
   Category,
   HttpMethod,
   ItemTagType,
+  MemberFactory,
   PermissionLevel,
   buildPathFromIds,
   isChildOf,
 } from '@graasp/sdk';
-import { FAILURE_MESSAGES } from '@graasp/translations';
 
 import { builderMeilisearchResults } from '../fixtures/items';
 import {
@@ -34,7 +34,6 @@ const {
   buildGetItemPublishedInformationRoute,
   buildGetItemRoute,
   buildGetItemTagsRoute,
-  buildGetMembersByIdRoute,
   buildGetMemberRoute,
   buildGetCurrentMemberRoute,
   ITEMS_ROUTE,
@@ -58,7 +57,7 @@ const checkMembership = ({
   const creatorId = item?.creator?.id;
   const haveMembership =
     creatorId === currentMember?.id ||
-    item.memberships?.find(({ member }) => member.id === currentMember?.id);
+    item.memberships?.find(({ account }) => account.id === currentMember?.id);
   const isPublic = item.tags.find((t) => t.type === ItemTagType.Public);
   return Boolean(haveMembership) || isPublic;
 };
@@ -315,48 +314,6 @@ export const mockGetMember = ({
   ).as('getMember');
 };
 
-export const mockGetMembers = ({
-  members,
-  currentMember,
-}: {
-  members: MockMember[];
-  currentMember?: MockMember;
-}) => {
-  cy.intercept(
-    {
-      method: DEFAULT_GET.method,
-      url: `${API_HOST}/${buildGetMembersByIdRoute([''])}*`,
-    },
-    ({ url, reply }) => {
-      if (!currentMember) {
-        return reply({ statusCode: StatusCodes.UNAUTHORIZED, body: null });
-      }
-
-      const memberIds = new URLSearchParams(url).getAll('id');
-      const result = {
-        data: {} as { [key: string]: MockMember },
-        errors: [] as { statusCode: number; name: string }[],
-      };
-
-      memberIds.forEach((id) => {
-        const m = getMemberById(members, id);
-        if (!m) {
-          result.errors.push({
-            statusCode: StatusCodes.NOT_FOUND,
-            name: FAILURE_MESSAGES.MEMBER_NOT_FOUND,
-          });
-        } else {
-          result.data[m.id] = m;
-        }
-      });
-      return reply({
-        body: result,
-        statusCode: StatusCodes.OK,
-      });
-    },
-  ).as('getMembers');
-};
-
 export const mockSignInRedirection = () => {
   cy.intercept(
     {
@@ -479,17 +436,17 @@ export const mockGetItemMembershipsForItems = ({
           id: v4(),
           item,
           permission: PermissionLevel.Admin,
-          member: creator,
+          account: MemberFactory(creator),
         };
         const itemMemberships =
-          memberships?.map(({ member, permission }) => ({
+          memberships?.map(({ account, permission }) => ({
             id: v4(),
             item,
             permission,
-            member,
+            account,
           })) || [];
         const creatorHasMembership = memberships?.find(
-          (m) => m.member?.id === creator?.id,
+          (m) => m.account?.id === creator?.id,
         );
         if (!creatorHasMembership) {
           itemMemberships.push(defaultMembership);

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 
 import { Stack, Typography } from '@mui/material';
 import Skeleton from '@mui/material/Skeleton';
@@ -25,6 +25,8 @@ const Authorship = ({ itemId, author, displayCoEditors }: Props) => {
   const { t } = useLibraryTranslation();
   const { hooks } = useContext(QueryClientContext);
 
+  // todo: this call should be replaced by a dedicated call to get the co-editors from the backend.
+  // this call leaks too much data by using the memberships as the source of data.
   const { data: memberships } = hooks.useItemMemberships(itemId);
   const { data: authorUrl, isLoading: isLoadingAuthorAvatar } =
     hooks.useAvatarUrl({
@@ -32,52 +34,60 @@ const Authorship = ({ itemId, author, displayCoEditors }: Props) => {
       size: ThumbnailSize.Small,
     });
 
-  const contributors = memberships
-    ?.filter(({ permission }) =>
-      [PermissionLevel.Write, PermissionLevel.Admin].includes(permission),
-    )
-    ?.filter(({ member }) => member.id !== author?.id)
-    ?.map(({ member }) => member);
+  if (memberships) {
+    const contributors = memberships
+      .filter(({ permission }) =>
+        // todo: to check if writers are considered co-editors
+        [PermissionLevel.Write, PermissionLevel.Admin].includes(permission),
+      )
+      .filter(({ account }) => account.id !== author?.id)
+      .map(({ account }) => account);
 
-  const isLoadingAuthor = !author || isLoadingAuthorAvatar;
+    const isLoadingAuthor = !author || isLoadingAuthorAvatar;
 
-  return (
-    <Stack id={SUMMARY_AUTHOR_CONTAINER_ID} direction="row" alignItems="center">
-      <Stack direction="row" alignItems="center" spacing={1}>
-        {isLoadingAuthor ? (
-          <>
-            <Skeleton variant="circular" width={30} height={30} />
-            <Skeleton variant="rounded" width={100} height={25} />
-          </>
-        ) : (
-          <>
-            <Avatar
-              url={authorUrl ?? DEFAULT_MEMBER_THUMBNAIL}
-              alt={t(LIBRARY.AVATAR_ALT, { name: author?.name })}
-              isLoading={isLoadingAuthorAvatar}
-              component="avatar"
-              maxWidth={30}
-              maxHeight={30}
-              variant="circular"
-              sx={{ maxWidth: 30, maxHeight: 30 }}
-            />
-            <Typography
-              component={Link}
-              href={buildMemberRoute(author.id)}
-              variant="body1"
-            >
-              {author?.name}
-            </Typography>
-          </>
-        )}
+    return (
+      <Stack
+        id={SUMMARY_AUTHOR_CONTAINER_ID}
+        direction="row"
+        alignItems="center"
+      >
+        <Stack direction="row" alignItems="center" spacing={1}>
+          {isLoadingAuthor ? (
+            <>
+              <Skeleton variant="circular" width={30} height={30} />
+              <Skeleton variant="rounded" width={100} height={25} />
+            </>
+          ) : (
+            <>
+              <Avatar
+                url={authorUrl ?? DEFAULT_MEMBER_THUMBNAIL}
+                alt={t(LIBRARY.AVATAR_ALT, { name: author?.name })}
+                isLoading={isLoadingAuthorAvatar}
+                component="avatar"
+                maxWidth={30}
+                maxHeight={30}
+                variant="circular"
+                sx={{ maxWidth: 30, maxHeight: 30 }}
+              />
+              <Typography
+                component={Link}
+                href={buildMemberRoute(author.id)}
+                variant="body1"
+              >
+                {author?.name}
+              </Typography>
+            </>
+          )}
+        </Stack>
+
+        <Contributors
+          contributors={contributors}
+          displayContributors={displayCoEditors ?? true}
+        />
       </Stack>
-
-      <Contributors
-        contributors={contributors}
-        displayContributors={displayCoEditors ?? true}
-      />
-    </Stack>
-  );
+    );
+  }
+  return null;
 };
 
 export default Authorship;

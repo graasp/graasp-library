@@ -52,12 +52,12 @@ export const PUBLISHED_ITEMS: MockItem[] = [
       {
         itemPath: 'ecafbd2a_5688_11eb_ae93_0242ac130002',
         permission: PermissionLevel.Admin,
-        member: MEMBERS.ANNA,
+        account: MEMBERS.ANNA,
       },
       {
         itemPath: 'ecafbd2a_5688_11eb_ae93_0242ac130002',
         permission: PermissionLevel.Admin,
-        member: MEMBERS.BOB,
+        account: MEMBERS.BOB,
       },
     ],
     categories: [
@@ -93,7 +93,7 @@ export const PUBLISHED_ITEMS: MockItem[] = [
       {
         itemPath: 'bdf09f5a_5688_11eb_ae93_0242ac130004',
         permission: PermissionLevel.Admin,
-        member: MEMBERS.ANNA,
+        account: MEMBERS.ANNA,
       },
     ],
     categories: [
@@ -126,12 +126,12 @@ export const PUBLISHED_ITEMS: MockItem[] = [
       {
         itemPath: 'fdf09f5a_5688_11eb_ae93_0242ac130002',
         permission: PermissionLevel.Admin,
-        member: MEMBERS.ANNA,
+        account: MEMBERS.ANNA,
       },
       {
         itemPath: 'fdf09f5a_5688_11eb_ae93_0242ac130002',
         permission: PermissionLevel.Read,
-        member: MEMBERS.BOB,
+        account: MEMBERS.BOB,
       },
     ],
     categories: [
@@ -180,7 +180,7 @@ export const PUBLISHED_ITEMS: MockItem[] = [
       {
         itemPath: 'fdf09f5a_5688_11eb_ae93_0242ac130003',
         permission: PermissionLevel.Admin,
-        member: MEMBERS.ANNA,
+        account: MEMBERS.ANNA,
       },
     ],
     categories: [
@@ -213,12 +213,12 @@ export const PUBLISHED_ITEMS: MockItem[] = [
       {
         itemPath: 'fdf09f5a_5688_11eb_ae93_0242ac130002',
         permission: PermissionLevel.Admin,
-        member: MEMBERS.ANNA,
+        account: MEMBERS.ANNA,
       },
       {
         itemPath: 'fdf09f5a_5688_11eb_ae93_0242ac130002',
         permission: PermissionLevel.Admin,
-        member: MEMBERS.BOB,
+        account: MEMBERS.BOB,
       },
     ],
     categories: [
@@ -254,12 +254,12 @@ export const GRAASPER_ITEMS: MockItem[] = [
       {
         itemPath: 'edafbd2d_5688_11eb_ae93_0242ac130002',
         permission: PermissionLevel.Admin,
-        member: MEMBERS.ANNA,
+        account: MEMBERS.ANNA,
       },
       {
         itemPath: 'edafbd2d_5688_11eb_ae93_0242ac130002',
         permission: PermissionLevel.Read,
-        member: MEMBERS.BOB,
+        account: MEMBERS.BOB,
       },
     ],
     categories: [
@@ -289,12 +289,12 @@ export const GRAASPER_ITEMS: MockItem[] = [
       {
         itemPath: 'ecafbd2d_5688_11eb_ae93_0242ac130002',
         permission: PermissionLevel.Admin,
-        member: MEMBERS.ANNA,
+        account: MEMBERS.ANNA,
       },
       {
         itemPath: 'ecafbd2d_5688_11eb_ae93_0242ac130002',
         permission: PermissionLevel.Read,
-        member: MEMBERS.BOB,
+        account: MEMBERS.BOB,
       },
     ],
     categories: [{ category: SAMPLE_CATEGORIES[0] }],
@@ -320,7 +320,7 @@ export const GRAASPER_ITEMS: MockItem[] = [
       {
         itemPath: 'bdf09f5d_5688_11eb_ae93_0242ac130004',
         permission: PermissionLevel.Admin,
-        member: MEMBERS.ANNA,
+        account: MEMBERS.ANNA,
       },
     ],
     categories: [{ category: SAMPLE_CATEGORIES[1] }],
