@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.0](https://github.com/graasp/graasp-library/compare/v1.7.3...v1.8.0) (2024-08-22)
+
+
+### Features
+
+* add arabic translations ([#673](https://github.com/graasp/graasp-library/issues/673)) ([1847af0](https://github.com/graasp/graasp-library/commit/1847af0cd6bdee5a4cb71fa66fe84bc890d10f98))
+* update for item login ([#671](https://github.com/graasp/graasp-library/issues/671)) ([1ef87dc](https://github.com/graasp/graasp-library/commit/1ef87dccda25e46a9f4aeaa777b7deabd577f353))
+
 ## [1.7.3](https://github.com/graasp/graasp-library/compare/v1.7.2...v1.7.3) (2024-08-20)
 
 
