@@ -42,11 +42,15 @@ const Collection = ({ id }: Props) => {
 
   const { mutate: postView } = mutations.usePostItemAction();
 
-  useEffect(() => {
-    if (id) {
-      postView({ itemId: id, payload: { type: 'collection-view' } });
-    }
-  }, [id]);
+  useEffect(
+    () => {
+      if (id) {
+        postView({ itemId: id, payload: { type: 'collection-view' } });
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [id],
+  );
   // if tags could be fetched then user has at least read access
   const canRead = Boolean(tags);
 

@@ -40,8 +40,6 @@ export const GRAASP_COLOR = '#5050D2';
 export const BACKGROUND_COLOR = 'rgb(248, 247, 254)';
 
 export const CATEGORY_COLORS: Record<
-  // eslint report an error that prettier auto-corrects in the other way, so we disable eslint here
-  // eslint-disable-next-line prettier/prettier
   (typeof CategoryType)[keyof typeof CategoryType] | 'license',
   string
 > = {

@@ -122,7 +122,7 @@ const OERInformation = () => {
               {t(LIBRARY.OER_INFORMATION_MORE_INFORMATION_TITLE)}
             </Typography>
             {references.map(({ name, href }) => (
-              <Typography variant="subtitle1">
+              <Typography key={name} variant="subtitle1">
                 <Link href={href}>{name}</Link>
               </Typography>
             ))}

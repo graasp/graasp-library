@@ -69,7 +69,7 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
         setFilters(Array.isArray(categoryId) ? [categoryId] : [[categoryId]]);
       }
     }
-  }, []);
+  }, [params]);
 
   useEffect(() => {
     if (error) {

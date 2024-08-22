@@ -186,6 +186,7 @@ export const FileChildrenCard: React.FC<FileChildrenCardProps> = ({
           />
         </div>
       ),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [thumbnailUrl],
   );
 

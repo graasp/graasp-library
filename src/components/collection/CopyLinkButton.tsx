@@ -16,11 +16,12 @@ import { copyToClipboard } from '../../utils/clipboard';
 import { QueryClientContext } from '../QueryClientContext';
 
 export const useEmbedAction = (itemId?: DiscriminatedItem['id']) => {
+  const { mutations } = useContext(QueryClientContext);
+  const { mutate: triggerAction } = mutations.usePostItemAction();
+
   const startEmbed = (event: MouseEvent<HTMLButtonElement>) => {
     const link = buildPlayerViewItemRoute(itemId);
-    const { mutations } = useContext(QueryClientContext);
 
-    const { mutate: triggerAction } = mutations.usePostItemAction();
     copyToClipboard(link, {
       onSuccess: () => {
         if (itemId) {
@@ -49,6 +50,7 @@ export const useEmbedAction = (itemId?: DiscriminatedItem['id']) => {
     startEmbed,
   };
 };
+
 type CopyLinkButtonProps = { itemId: DiscriminatedItem['id'] };
 
 const CopyLinkButton = ({ itemId }: CopyLinkButtonProps) => {

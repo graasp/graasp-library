@@ -26,29 +26,37 @@ export default function Providers(props: { children: React.ReactNode }) {
 
   const { children } = props;
 
-  useEffect(() => {
-    // todo: check validation is correct
-    if (
-      pathname !== currentPathState.pathname ||
-      searchParams !== currentPathState.searchParams
-    ) {
-      // REACTGA
-      // Send pageview with a custom path
-      if (GA_MEASUREMENT_ID && hasAcceptedCookies() && NODE_ENV !== ENV.TEST) {
-        ReactGA.initialize(GA_MEASUREMENT_ID);
-        ReactGA.send('pageview');
-      }
-      setCurrentPathState({ pathname, searchParams });
+  useEffect(
+    () => {
+      // todo: check validation is correct
+      if (
+        pathname !== currentPathState.pathname ||
+        searchParams !== currentPathState.searchParams
+      ) {
+        // REACTGA
+        // Send pageview with a custom path
+        if (
+          GA_MEASUREMENT_ID &&
+          hasAcceptedCookies() &&
+          NODE_ENV !== ENV.TEST
+        ) {
+          ReactGA.initialize(GA_MEASUREMENT_ID);
+          ReactGA.send('pageview');
+        }
+        setCurrentPathState({ pathname, searchParams });
 
-      // remove cross domain tracking query params
-      const params = new URLSearchParams(searchParams ?? {});
-      params.delete(UrlSearch.GACrossDomainKey);
-      // todo: check replace correctly
-      // add back shallow
-      // https://github.com/vercel/next.js/discussions/48110#discussioncomment-7563979
-      replace(`${pathname}?${params.toString()}`);
-    }
-  }, [pathname, searchParams]);
+        // remove cross domain tracking query params
+        const params = new URLSearchParams(searchParams ?? {});
+        params.delete(UrlSearch.GACrossDomainKey);
+        // todo: check replace correctly
+        // add back shallow
+        // https://github.com/vercel/next.js/discussions/48110#discussioncomment-7563979
+        replace(`${pathname}?${params.toString()}`);
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [pathname, searchParams],
+  );
 
   return (
     <QueryClientProvider client={client}>

@@ -127,5 +127,6 @@ const FilterPopper = React.forwardRef<HTMLDivElement, FilterPopperProps>(
     );
   },
 );
+FilterPopper.displayName = 'FilterPopper';
 
 export default FilterPopper;
