@@ -63,5 +63,6 @@ const MemberAvatar = React.forwardRef<HTMLDivElement, Props>(
     );
   },
 );
+MemberAvatar.displayName = 'MemberAvatar';
 
 export default MemberAvatar;

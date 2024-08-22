@@ -56,7 +56,6 @@ describe('Search', () => {
 
         cy.wait(['@search', '@search']).then(
           ([
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             _first,
             {
               request: { body },

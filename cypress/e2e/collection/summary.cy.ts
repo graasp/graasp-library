@@ -158,8 +158,7 @@ describe('Collection Summary', () => {
 
       cy.wait('@copy').then(({ request: { url, body } }) => {
         expect(url).to.contain(item.id);
-        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-        expect(body.to).to.be.undefined;
+        expect(body.to).be.undefined;
       });
 
       // copy child item on home
@@ -172,7 +171,6 @@ describe('Collection Summary', () => {
 
       cy.wait('@copy').then(({ request: { url, body } }) => {
         expect(url).to.contain(child.id);
-        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         expect(body.to).to.be.undefined;
       });
     });

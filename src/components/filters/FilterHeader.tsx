@@ -84,14 +84,18 @@ const Filter: React.FC<FilterProps> = ({
     [selectedOptions, options],
   );
 
-  const selectionStr = React.useMemo(() => {
-    const optionsStr =
-      options
-        ?.filter((it) => selectedOptions.includes(it.id))
-        .map((it) => translateCategories(it.name))?.[0] ??
-      t(LIBRARY.FILTER_DROPDOWN_NO_FILTER);
-    return optionsStr;
-  }, [selectedOptions, options]);
+  const selectionStr = React.useMemo(
+    () => {
+      const optionsStr =
+        options
+          ?.filter((it) => selectedOptions.includes(it.id))
+          .map((it) => translateCategories(it.name))?.[0] ??
+        t(LIBRARY.FILTER_DROPDOWN_NO_FILTER);
+      return optionsStr;
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [selectedOptions, options],
+  );
 
   // Listens for clicks outside of the popper to dismiss it when we click outside.
   useEffect(() => {

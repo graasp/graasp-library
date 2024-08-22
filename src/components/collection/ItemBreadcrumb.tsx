@@ -56,7 +56,11 @@ const ItemBreadcrumb = ({
     return (
       <Breadcrumbs>
         {parents?.map((parent) => (
-          <Button component={Link} href={buildCollectionRoute(parent.id)}>
+          <Button
+            key={parent.id}
+            component={Link}
+            href={buildCollectionRoute(parent.id)}
+          >
             {parent.name}
           </Button>
         ))}
