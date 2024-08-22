@@ -21,6 +21,7 @@ import { CURRENT_USER } from '../fixtures/members';
 const expectNewURL = (partialUrl: string) => {
   cy.url({ timeout: 15000 }).should('contain', partialUrl);
 };
+const openMenu = () => cy.get(`svg.lucide-menu`).click();
 
 describe('Header', () => {
   [CURRENT_USER, undefined].forEach((currentMember) => {
@@ -31,21 +32,23 @@ describe('Header', () => {
 
       it('Navigate to Search', () => {
         cy.visit(HOME_ROUTE);
-        cy.get(`svg[data-testid="MenuIcon"]`).click();
+        openMenu();
         cy.get(`#${SEARCH_ALL_COLLECTIONS_DRAWER_ITEM_ID}`).click();
         expectNewURL(ALL_COLLECTIONS_ROUTE);
       });
 
       it('Navigate to Recent', () => {
         cy.visit(ALL_COLLECTIONS_ROUTE);
-        cy.get(`svg[data-testid="MenuIcon"]`).click();
+        openMenu();
+
         cy.get(`#${RECENT_COLLECTIONS_DRAWER_ITEM_ID}`).click();
         expectNewURL(`${HOME_ROUTE}#${RECENT_PUBLICATIONS_TITLE_ID}`);
       });
 
       it('Navigate to Most liked', () => {
         cy.visit(ALL_COLLECTIONS_ROUTE);
-        cy.get(`svg[data-testid="MenuIcon"]`).click();
+        openMenu();
+
         cy.get(`#${MOST_LIKED_COLLECTIONS_DRAWER_ITEM_ID}`).click();
         cy.url({ timeout: 5000 }).should(
           'contain',
@@ -55,7 +58,8 @@ describe('Header', () => {
 
       it('Navigate to Graasp Selection', () => {
         cy.visit(ALL_COLLECTIONS_ROUTE);
-        cy.get(`svg[data-testid="MenuIcon"]`).click();
+        openMenu();
+
         cy.get(`#${GRAASPER_SELECTION_DRAWER_ITEM_ID}`).click();
         expectNewURL(`${HOME_ROUTE}#${GRAASP_SELECTION_TITLE_ID}`);
       });
@@ -66,16 +70,15 @@ describe('Header', () => {
     beforeEach(() => {
       cy.setUpApi({ items: PUBLISHED_ITEMS, currentMember: CURRENT_USER });
       cy.visit(HOME_ROUTE);
+      openMenu();
     });
 
     it('Navigate to My publications', () => {
-      cy.get(`svg[data-testid="MenuIcon"]`).click();
       cy.get(`#${MY_PUBLICATIONS_DRAWER_ITEM_ID}`).click();
       expectNewURL(buildMemberRoute(CURRENT_USER.id));
     });
 
     it('Navigate to Liked collections', () => {
-      cy.get(`svg[data-testid="MenuIcon"]`).click();
       cy.get(`#${LIKED_COLLECTIONS_DRAWER_ITEM_ID}`).click();
       expectNewURL(MY_LIKED_ITEMS_ROUTE);
     });

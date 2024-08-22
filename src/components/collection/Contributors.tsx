@@ -3,7 +3,7 @@ import Link from 'next/link';
 import AvatarGroup from '@mui/lab/AvatarGroup';
 import { Stack, Tooltip, Typography } from '@mui/material';
 
-import { Member } from '@graasp/sdk';
+import { Account } from '@graasp/sdk';
 
 import { useLibraryTranslation } from '../../config/i18n';
 import { buildMemberRoute } from '../../config/routes';
@@ -12,7 +12,7 @@ import LIBRARY from '../../langs/constants';
 import MemberAvatar from '../layout/MemberAvatar';
 
 type Props = {
-  contributors?: Member[];
+  contributors?: Account[];
   displayContributors: boolean;
 };
 
