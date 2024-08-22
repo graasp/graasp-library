@@ -1,4 +1,4 @@
-import { CompleteMember, MemberFactory } from '@graasp/sdk';
+import { MemberFactory } from '@graasp/sdk';
 
 import { MockMember } from '../support/types';
 
@@ -6,13 +6,27 @@ const GRAASPER_ID = Cypress.env('GRAASPER_ID');
 
 export const MEMBERS: { [key: string]: MockMember } = {
   ANNA: MemberFactory({
+    id: 'ecafbd2a-5642-31fb-ae93-0242ac130002',
     name: 'anna',
     email: 'anna@email.com',
+    createdAt: '2021-04-13 14:56:34.749946',
+    updatedAt: '2021-04-13 14:56:34.749946',
+    extra: {
+      lang: 'fr',
+    },
+    isValidated: true,
+    enableSaveActions: true,
   }),
   BOB: {
     ...MemberFactory({
+      id: 'ecafbd2a-5642-31fb-ae93-0242ac130004',
       name: 'bob',
       email: 'bob@email.com',
+      createdAt: '2021-04-13 14:56:34.749946',
+      updatedAt: '2021-04-13 14:56:34.749946',
+      extra: { lang: 'en' },
+      isValidated: true,
+      enableSaveActions: true,
     }),
     thumbnail:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Pedro_Luro_edit.jpg/210px-Pedro_Luro_edit.jpg',
@@ -48,35 +62,4 @@ export const MEMBERS: { [key: string]: MockMember } = {
   }),
 };
 
-export const COMPLETE_MEMBERS: {
-  [key: string]: CompleteMember & { thumbnail?: string };
-} = {
-  ANNA: MemberFactory({
-    id: 'ecafbd2a-5642-31fb-ae93-0242ac130002',
-    name: 'anna',
-    email: 'anna@email.com',
-    createdAt: '2021-04-13 14:56:34.749946',
-    updatedAt: '2021-04-13 14:56:34.749946',
-    extra: {
-      lang: 'fr',
-    },
-    isValidated: true,
-    enableSaveActions: true,
-  }),
-  BOB: {
-    ...MemberFactory({
-      id: 'ecafbd2a-5642-31fb-ae93-0242ac130004',
-      name: 'bob',
-      email: 'bob@email.com',
-      createdAt: '2021-04-13 14:56:34.749946',
-      updatedAt: '2021-04-13 14:56:34.749946',
-      extra: { lang: 'en' },
-      isValidated: true,
-      enableSaveActions: true,
-    }),
-    thumbnail:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Pedro_Luro_edit.jpg/210px-Pedro_Luro_edit.jpg',
-  },
-};
-
-export const CURRENT_USER = COMPLETE_MEMBERS.ANNA;
+export const CURRENT_USER = MEMBERS.ANNA;

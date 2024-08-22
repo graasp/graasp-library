@@ -18,7 +18,7 @@ import {
 } from '../../../src/config/selectors';
 import { buildPublicAndPrivateEnvironments } from '../../fixtures/environment';
 import { PUBLISHED_ITEMS } from '../../fixtures/items';
-import { COMPLETE_MEMBERS, CURRENT_USER } from '../../fixtures/members';
+import { CURRENT_USER, MEMBERS } from '../../fixtures/members';
 
 describe('Collection Summary', () => {
   buildPublicAndPrivateEnvironments().forEach((environment) => {
@@ -29,7 +29,7 @@ describe('Collection Summary', () => {
       cy.visit(buildCollectionRoute(item.id));
 
       // current member
-      const member = Object.values(COMPLETE_MEMBERS).find(
+      const member = Object.values(MEMBERS).find(
         ({ name }) => name === environment.currentMember?.name,
       );
 
