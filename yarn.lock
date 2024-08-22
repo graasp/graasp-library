@@ -8579,6 +8579,7 @@ __metadata:
     lodash.isobject: "npm:3.0.2"
     lodash.isstring: "npm:4.0.1"
     lodash.truncate: "npm:4.4.2"
+    lucide-react: "npm:0.429.0"
     next: "npm:14.2.5"
     nyc: "npm:17.0.0"
     prettier: "npm:3.3.3"
@@ -10262,6 +10263,15 @@ __metadata:
   version: 10.0.1
   resolution: "lru-cache@npm:10.0.1"
   checksum: 10/5bb91a97a342a41fd049c3494b44d9e21a7d4843f9284d0a0b26f00bb0e436f1f627d0641c78f88be16b86b4231546c5ee4f284733fb530c7960f0bcd7579026
+  languageName: node
+  linkType: hard
+
+"lucide-react@npm:0.429.0":
+  version: 0.429.0
+  resolution: "lucide-react@npm:0.429.0"
+  peerDependencies:
+    react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0-rc
+  checksum: 10/dc16ddbac9365f8dd26f714deed947a89b1145a413b3ec7f720c467aa0f978dc53963b595e5cc20cbf9a073326145d5209a632b64f2f1b35a4c73de4da936d01
   languageName: node
   linkType: hard
 
