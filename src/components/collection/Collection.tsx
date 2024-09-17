@@ -6,6 +6,8 @@ import { useContext, useEffect } from 'react';
 
 import { Box } from '@mui/material';
 
+import { AccountType } from '@graasp/sdk';
+
 import {
   ERROR_INVALID_COLLECTION_ID_CODE,
   ERROR_UNEXPECTED_ERROR_CODE,
@@ -70,6 +72,10 @@ const Collection = ({ id }: Props) => {
         <Error code={ERROR_UNEXPECTED_ERROR_CODE} />
       </Box>
     );
+  }
+
+  if (currentMember?.type === AccountType.Guest) {
+    return null;
   }
 
   return (
