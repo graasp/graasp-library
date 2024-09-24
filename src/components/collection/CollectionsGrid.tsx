@@ -20,6 +20,8 @@ type Props = {
   showIsContentTag?: boolean;
 };
 
+const height = 300;
+
 const CollectionsGrid = ({
   collections,
   isLoading,
@@ -30,7 +32,28 @@ const CollectionsGrid = ({
   const { t } = useLibraryTranslation();
 
   if (isLoading) {
-    return <Skeleton />;
+    return (
+      <Grid
+        container
+        spacing={4}
+        alignItems="stretch"
+        justifyContent="flex-start"
+        id={id}
+      >
+        <Grid xs={6} sm={4} md={3} lg={3} xl={2}>
+          <Skeleton height={height} sx={{ transform: 'unset' }} />
+        </Grid>
+        <Grid xs={6} sm={4} md={3} lg={3} xl={2}>
+          <Skeleton height={height} sx={{ transform: 'unset' }} />
+        </Grid>
+        <Grid xs={6} sm={4} md={3} lg={3} xl={2}>
+          <Skeleton height={height} sx={{ transform: 'unset' }} />
+        </Grid>
+        <Grid xs={6} sm={4} md={3} lg={3} xl={2}>
+          <Skeleton height={height} sx={{ transform: 'unset' }} />
+        </Grid>
+      </Grid>
+    );
   }
 
   return (
