@@ -6,6 +6,8 @@ import Skeleton from '@mui/material/Skeleton';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Unstable_Grid2';
 
+import { BigCard } from '@graasp/ui';
+
 import { useLibraryTranslation } from '../../config/i18n';
 import { buildCollectionCardGridId } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
@@ -50,16 +52,21 @@ const CollectionsGrid = ({
           {collections?.map((collection) => (
             <Grid
               key={collection.id}
-              xs={6}
+              xs={4}
               sm={4}
-              md={3}
-              lg={3}
+              md={4}
+              lg={4}
               xl={2}
               id={buildCollectionCardGridId(collection.id)}
             >
-              <CollectionCard
-                showIsContentTag={showIsContentTag}
-                collection={collection}
+              <BigCard
+                name={collection.name}
+                id={collection.id}
+                type={collection.type}
+                tags={collection.settings.tags}
+                creator={collection.creator}
+                description={collection.description ?? undefined}
+                // image={}
               />
             </Grid>
           ))}
