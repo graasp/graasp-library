@@ -15,7 +15,7 @@ import {
 } from '@mui/material';
 
 import { ThumbnailSize } from '@graasp/sdk';
-import { Avatar } from '@graasp/ui';
+import { Avatar, CollapsibleText } from '@graasp/ui';
 
 import { useLibraryTranslation } from '../../config/i18n';
 import { buildCollectionRoute } from '../../config/routes';
@@ -25,7 +25,6 @@ import { ItemOrSearchedItem } from '../../utils/types';
 import { QueryClientContext } from '../QueryClientContext';
 import CardMediaComponent from '../common/CardMediaComponent';
 import { StyledCard } from '../common/StyledCard';
-import ContentDescription from './ContentDescription';
 import CopyButton from './CopyButton';
 import CopyLinkButton from './CopyLinkButton';
 import DownloadButton from './DownloadButton';
@@ -169,7 +168,7 @@ export const CollectionCard = ({ collection, showIsContentTag }: Props) => {
         <CardContent sx={{ pt: 0 }}>
           <Typography fontStyle={description ? 'inherit' : 'italic'}>
             {description ? (
-              <ContentDescription content={description} />
+              <CollapsibleText content={description} />
             ) : (
               t(LIBRARY.COLLECTION_EMPTY_DESCRIPTION_TEXT)
             )}

@@ -5,6 +5,8 @@ import Container from '@mui/material/Container';
 import Skeleton from '@mui/material/Skeleton';
 import Typography from '@mui/material/Typography';
 
+import { BigCard } from '@graasp/ui';
+
 import { useLibraryTranslation } from '../../config/i18n';
 import { buildCollectionCardGridId } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
@@ -74,9 +76,14 @@ const CollectionsGrid = ({
               }}
               id={buildCollectionCardGridId(collection.id)}
             >
-              <CollectionCard
-                showIsContentTag={showIsContentTag}
-                collection={collection}
+              <BigCard
+                name={collection.name}
+                id={collection.id}
+                type={collection.type}
+                tags={collection.settings.tags}
+                creator={collection.creator}
+                description={collection.description ?? undefined}
+                // image={}
               />
             </Grid>
           ))}
