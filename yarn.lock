@@ -1326,7 +1326,7 @@ __metadata:
 
 "@graasp/ui@github:graasp/graasp-ui#library-cards":
   version: 5.2.0
-  resolution: "@graasp/ui@https://github.com/graasp/graasp-ui.git#commit=894ac8be6a226f599854ed86ced8ec8f5fbd4e6f"
+  resolution: "@graasp/ui@https://github.com/graasp/graasp-ui.git#commit=824879e5b3e89b657df9a2d21a1841f7199834d1"
   dependencies:
     http-status-codes: "npm:2.3.0"
     interweave: "npm:13.1.0"
@@ -1355,7 +1355,7 @@ __metadata:
     react-i18next: ^13.0.0 || ^14.0.0 || ^15.0.0
     react-router-dom: ^6.11.0
     stylis: ^4.1.3
-  checksum: 10/b76e7c3c3a2d089fdaf13247eb5789aabd859ad2ef124c4e20424e8b5f877ec47672ebece983017ec1cca8b40a8872d45da25772fef3dc05b3340c3425d659a1
+  checksum: 10/e550772fa5586d5b4231f81af5534f420833ffb94a47143ca99aa70e94d9896d1cf2bf05a3fcf955298f41c8e5d9c3783318073cad623b0549e4470d3a56e36b
   languageName: node
   linkType: hard
 

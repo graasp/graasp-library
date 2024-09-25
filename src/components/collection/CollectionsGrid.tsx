@@ -6,13 +6,11 @@ import Skeleton from '@mui/material/Skeleton';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Unstable_Grid2';
 
-import { BigCard } from '@graasp/ui';
-
 import { useLibraryTranslation } from '../../config/i18n';
 import { buildCollectionCardGridId } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
 import { ItemOrSearchedItem } from '../../utils/types';
-import CollectionCard from './CollectionCard';
+import CollectionCard from './collectionCard/CollectionCard';
 
 type Props = {
   collections?: ItemOrSearchedItem[];
@@ -52,21 +50,13 @@ const CollectionsGrid = ({
           {collections?.map((collection) => (
             <Grid
               key={collection.id}
-              xs={4}
-              sm={4}
-              md={4}
-              lg={4}
-              xl={2}
+              xs={12}
+              sm={12}
               id={buildCollectionCardGridId(collection.id)}
             >
-              <BigCard
-                name={collection.name}
-                id={collection.id}
-                type={collection.type}
-                tags={collection.settings.tags}
-                creator={collection.creator}
-                description={collection.description ?? undefined}
-                // image={}
+              <CollectionCard
+                showIsContentTag={showIsContentTag}
+                collection={collection}
               />
             </Grid>
           ))}
