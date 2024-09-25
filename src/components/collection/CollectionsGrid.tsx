@@ -40,18 +40,11 @@ const CollectionsGrid = ({
         justifyContent="flex-start"
         id={id}
       >
-        <Grid xs={6} sm={4} md={3} lg={3} xl={2}>
-          <Skeleton height={height} sx={{ transform: 'unset' }} />
-        </Grid>
-        <Grid xs={6} sm={4} md={3} lg={3} xl={2}>
-          <Skeleton height={height} sx={{ transform: 'unset' }} />
-        </Grid>
-        <Grid xs={6} sm={4} md={3} lg={3} xl={2}>
-          <Skeleton height={height} sx={{ transform: 'unset' }} />
-        </Grid>
-        <Grid xs={6} sm={4} md={3} lg={3} xl={2}>
-          <Skeleton height={height} sx={{ transform: 'unset' }} />
-        </Grid>
+        {Array.from({ length: 4 }).map(() => (
+          <Grid xs={6} sm={4} md={3} lg={3} xl={2}>
+            <Skeleton height={height} sx={{ transform: 'unset' }} />
+          </Grid>
+        ))}
       </Grid>
     );
   }
