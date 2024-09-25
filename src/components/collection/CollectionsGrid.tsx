@@ -5,13 +5,11 @@ import Container from '@mui/material/Container';
 import Skeleton from '@mui/material/Skeleton';
 import Typography from '@mui/material/Typography';
 
-import { BigCard } from '@graasp/ui';
-
 import { useLibraryTranslation } from '../../config/i18n';
 import { buildCollectionCardGridId } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
 import { ItemOrSearchedItem } from '../../utils/types';
-import CollectionCard from './CollectionCard';
+import CollectionCard from './collectionCard/CollectionCard';
 
 type Props = {
   collections?: ItemOrSearchedItem[];
@@ -76,14 +74,9 @@ const CollectionsGrid = ({
               }}
               id={buildCollectionCardGridId(collection.id)}
             >
-              <BigCard
-                name={collection.name}
-                id={collection.id}
-                type={collection.type}
-                tags={collection.settings.tags}
-                creator={collection.creator}
-                description={collection.description ?? undefined}
-                // image={}
+              <CollectionCard
+                showIsContentTag={showIsContentTag}
+                collection={collection}
               />
             </Grid>
           ))}
