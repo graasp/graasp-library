@@ -26,14 +26,18 @@ const Home = () => {
 
   const { hooks } = useContext(QueryClientContext);
 
-  const { data: graasperCollections } =
+  const { data: graasperCollections, isLoading: isGraasperCollectionsLoading } =
     hooks.usePublishedItemsForMember(GRAASPER_ID);
-  const { data: mostLikedCollections } = hooks.useMostLikedPublishedItems({
+  const {
+    data: mostLikedCollections,
+    isLoading: isMostLikedCollectionsLoading,
+  } = hooks.useMostLikedPublishedItems({
     limit: HOMEPAGE_NB_ELEMENTS_TO_SHOW,
   });
-  const { data: recentCollections } = hooks.useMostRecentPublishedItems({
-    limit: HOMEPAGE_NB_ELEMENTS_TO_SHOW,
-  });
+  const { data: recentCollections, isLoading: isMostRecentLoading } =
+    hooks.useMostRecentPublishedItems({
+      limit: HOMEPAGE_NB_ELEMENTS_TO_SHOW,
+    });
 
   return (
     <MainWrapper>
@@ -41,17 +45,20 @@ const Home = () => {
         <HomeHeader />
 
         <ItemCollection
+          isLoading={isGraasperCollectionsLoading}
           id={GRAASP_SELECTION_TITLE_ID}
           collectionGridId={GRAASPER_COLLECTIONS_GRID_ID}
           collections={graasperCollections}
           title={t(LIBRARY.HOME_GRAASPER_COLLECTIONS_TITLE)}
         />
         <ItemCollection
+          isLoading={isMostLikedCollectionsLoading}
           id={MOST_LIKED_TITLE_ID}
           collections={mostLikedCollections}
           title={t(LIBRARY.HOME_MOST_LIKED_COLLECTIONS_TITLE)}
         />
         <ItemCollection
+          isLoading={isMostRecentLoading}
           id={RECENT_PUBLICATIONS_TITLE_ID}
           collections={recentCollections}
           title={t(LIBRARY.HOME_RECENT_COLLECTIONS_TITLE)}

@@ -14,6 +14,7 @@ type ItemCollectionProps = {
   title: string;
   collections?: DiscriminatedItem[];
   sx?: SxProps<Theme>;
+  isLoading?: boolean;
 };
 
 const ItemCollection = ({
@@ -22,6 +23,7 @@ const ItemCollection = ({
   title,
   collections,
   sx,
+  isLoading = false,
 }: ItemCollectionProps) => {
   return (
     <StyledContainer sx={sx} id={id}>
@@ -34,7 +36,7 @@ const ItemCollection = ({
       <CollectionsGrid
         collections={collections}
         id={collectionGridId}
-        isLoading={false}
+        isLoading={isLoading}
       />
     </StyledContainer>
   );
