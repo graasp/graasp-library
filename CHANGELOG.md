@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.9.0](https://github.com/graasp/graasp-library/compare/v1.8.0...v1.9.0) (2024-09-25)
+
+
+### Features
+
+* show skeleton on loading on home page ([#694](https://github.com/graasp/graasp-library/issues/694)) ([87ec65a](https://github.com/graasp/graasp-library/commit/87ec65abe108bbd86cdbd68b5b0974d45c922405))
+
 ## [1.8.0](https://github.com/graasp/graasp-library/compare/v1.7.3...v1.8.0) (2024-08-22)
 
 
