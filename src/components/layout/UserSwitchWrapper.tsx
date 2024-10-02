@@ -56,9 +56,9 @@ const UserSwitchWrapper = ({ ButtonContent }: Props) => {
       isCurrentMemberLoading={isLoading}
       profilePath={GRAASP_ACCOUNT_HOST}
       redirectPath={redirectUrl.toString()}
-      renderAvatar={(m) => (
-        <MemberAvatar size={MEMBER_AVATAR_ICON_SIZE} memberId={m?.id} />
-      )}
+      avatar={
+        <MemberAvatar size={MEMBER_AVATAR_ICON_SIZE} memberId={member?.id} />
+      }
     />
   );
 };

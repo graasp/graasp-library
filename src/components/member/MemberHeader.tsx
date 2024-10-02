@@ -25,7 +25,7 @@ const MemberHeader = ({ memberId, isOwnProfile }: Props) => {
 
   const { hooks } = useContext(QueryClientContext);
   const { data: member } = hooks.useMember(memberId);
-  const { data: authorUrl, isInitialLoading: isLoadingAuthorAvatar } =
+  const { data: authorUrl, isLoading: isLoadingAuthorAvatar } =
     hooks.useAvatarUrl({
       id: memberId,
       size: ThumbnailSize.Medium,

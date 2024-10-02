@@ -14,7 +14,7 @@ export const useDownloadAction = (itemId?: string) => {
     mutate: exportZip,
     data,
     isSuccess,
-    isLoading,
+    isPending: isLoading,
   } = mutations.useExportItem();
 
   useEffect(() => {

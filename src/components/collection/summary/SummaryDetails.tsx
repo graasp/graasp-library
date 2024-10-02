@@ -104,9 +104,8 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
 }) => {
   const { t } = useLibraryTranslation();
   const { hooks } = useContext(QueryClientContext);
-  const { data: rawItemCategories, isInitialLoading } = hooks.useItemCategories(
-    publishedRootItem?.id,
-  );
+  const { data: rawItemCategories, isLoading: isInitialLoading } =
+    hooks.useItemCategories(publishedRootItem?.id);
 
   const ccLicenseAdaption = publishedRootItem
     ? publishedRootItem.settings?.ccLicenseAdaption

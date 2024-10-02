@@ -18,7 +18,7 @@ export const useCopyAction = (id?: string) => {
   const [showTreeModal, setShowTreeModal] = useState(false);
   const { hooks, mutations } = useContext(QueryClientContext);
   const { data: user } = hooks.useCurrentMember();
-  const { mutate: copyItems, isLoading: isCopying } = mutations.useCopyItems();
+  const { mutate: copyItems, isPending: isCopying } = mutations.useCopyItems();
 
   const startCopy = (event: MouseEvent<HTMLButtonElement>) => {
     if (user?.id) {

@@ -24,7 +24,7 @@ const BioSection = ({ memberId }: Props): JSX.Element | null => {
   const { t } = useLibraryTranslation();
 
   const { hooks } = useContext(QueryClientContext);
-  const { data: publicProfile, isInitialLoading: isLoadingPublicProfile } =
+  const { data: publicProfile, isLoading: isLoadingPublicProfile } =
     hooks.usePublicProfile(memberId);
 
   if (publicProfile !== undefined) {
