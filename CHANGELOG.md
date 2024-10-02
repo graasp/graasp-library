@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.10.0](https://github.com/graasp/graasp-library/compare/v1.9.0...v1.10.0) (2024-10-02)
+
+
+### Features
+
+* **deps:** update TanStack Query to v5 ([#689](https://github.com/graasp/graasp-library/issues/689)) ([26a3367](https://github.com/graasp/graasp-library/commit/26a3367d607c6fa200dadd53dcb3ee19b8cd20f2))
+
 ## [1.9.0](https://github.com/graasp/graasp-library/compare/v1.8.0...v1.9.0) (2024-09-25)
 
 
