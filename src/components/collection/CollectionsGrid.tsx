@@ -10,7 +10,7 @@ import { useLibraryTranslation } from '../../config/i18n';
 import { buildCollectionCardGridId } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
 import { ItemOrSearchedItem } from '../../utils/types';
-import CollectionCard from './CollectionCard';
+import CollectionCard from './collectionCard/CollectionCard';
 
 type Props = {
   collections?: ItemOrSearchedItem[];
@@ -66,11 +66,8 @@ const CollectionsGrid = ({
           {collections?.map((collection) => (
             <Grid
               key={collection.id}
-              xs={6}
-              sm={4}
-              md={3}
-              lg={3}
-              xl={2}
+              xs={12}
+              sm={12}
               id={buildCollectionCardGridId(collection.id)}
             >
               <CollectionCard

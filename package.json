@@ -35,8 +35,9 @@
     "@emotion/styled": "11.13.0",
     "@graasp/query-client": "3.22.2",
     "@graasp/sdk": "4.26.0",
+    "@graasp/stylis-plugin-rtl": "2.2.0",
     "@graasp/translations": "1.35.0",
-    "@graasp/ui": "4.26.0",
+    "@graasp/ui": "github:graasp/graasp-ui#library-cards",
     "@mui/icons-material": "5.16.5",
     "@mui/lab": "5.0.0-alpha.170",
     "@mui/material": "5.16.5",
@@ -67,7 +68,6 @@
     "react-toastify": "10.0.5",
     "social-links": "1.14.0",
     "stylis": "4.3.2",
-    "stylis-plugin-rtl": "2.1.1",
     "uuid": "10.0.0"
   },
   "devDependencies": {
