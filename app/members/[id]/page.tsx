@@ -1,4 +1,4 @@
-import { dehydrate } from 'react-query/core';
+import { dehydrate } from '@tanstack/react-query';
 
 import Hydrate from '../../../src/components/HydrateClient';
 import Wrapper from '../../../src/components/common/Wrapper';

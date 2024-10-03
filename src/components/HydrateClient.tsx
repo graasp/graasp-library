@@ -1,8 +1,11 @@
 'use client';
 
-import { HydrateProps, Hydrate as RQHydrate } from 'react-query';
+import {
+  HydrationBoundaryProps,
+  HydrationBoundary as RQHydrate,
+} from '@tanstack/react-query';
 
-const Hydrate = (props: HydrateProps) => {
+const Hydrate = (props: HydrationBoundaryProps) => {
   // eslint-disable-next-line react/jsx-props-no-spreading
   return <RQHydrate {...props} />;
 };

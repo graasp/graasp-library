@@ -1,10 +1,13 @@
+import { dehydrate } from '@tanstack/react-query';
 import { Metadata } from 'next';
 
-import { dehydrate } from 'react-query/core';
+import { configureQueryClient } from '@graasp/query-client';
 
 import Hydrate from '../src/components/HydrateClient';
 import Wrapper from '../src/components/common/Wrapper';
 import Home from '../src/components/pages/Home';
+import { HOMEPAGE_NB_ELEMENTS_TO_SHOW } from '../src/config/constants';
+import { GRAASPER_ID } from '../src/config/env';
 import getQueryClient from '../src/config/get-query-client';
 import LIBRARY from '../src/langs/constants';
 import en from '../src/langs/en.json';
@@ -32,6 +35,23 @@ const Page = async () => {
   // await queryClient.prefetchQuery(['items', 'collections', 'all'], () =>
   //   Api.getAllPublishedItems({}, { API_HOST: GRAASP_API_HOST, axios }),
   // );
+
+  const { hooks } = configureQueryClient({});
+
+  await queryClient.prefetchQuery(
+    hooks.publishedItemsForMemberOptions(GRAASPER_ID),
+  );
+  await queryClient.prefetchQuery(
+    hooks.mostLikedPublishedItemsOptions({
+      limit: HOMEPAGE_NB_ELEMENTS_TO_SHOW,
+    }),
+  );
+  await queryClient.prefetchQuery(
+    hooks.mostRecentPublishedItemsOptions({
+      limit: HOMEPAGE_NB_ELEMENTS_TO_SHOW,
+    }),
+  );
+
   const dehydratedState = dehydrate(queryClient);
 
   return (

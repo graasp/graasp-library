@@ -1,5 +1,6 @@
+import type { DehydratedState } from '@tanstack/react-query';
+
 import React from 'react';
-import type { DehydratedState } from 'react-query';
 
 import { configureQueryClient } from '@graasp/query-client';
 
