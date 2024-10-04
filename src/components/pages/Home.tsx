@@ -1,5 +1,7 @@
 'use client';
 
+import { useQuery } from '@tanstack/react-query';
+
 import { useContext } from 'react';
 
 import { Box } from '@mui/material';
@@ -27,17 +29,22 @@ const Home = () => {
   const { hooks } = useContext(QueryClientContext);
 
   const { data: graasperCollections, isLoading: isGraasperCollectionsLoading } =
-    hooks.usePublishedItemsForMember(GRAASPER_ID);
+    useQuery(hooks.publishedItemsForMemberOptions(GRAASPER_ID));
+
   const {
     data: mostLikedCollections,
     isLoading: isMostLikedCollectionsLoading,
-  } = hooks.useMostLikedPublishedItems({
-    limit: HOMEPAGE_NB_ELEMENTS_TO_SHOW,
-  });
-  const { data: recentCollections, isLoading: isMostRecentLoading } =
-    hooks.useMostRecentPublishedItems({
+  } = useQuery(
+    hooks.mostLikedPublishedItemsOptions({
       limit: HOMEPAGE_NB_ELEMENTS_TO_SHOW,
-    });
+    }),
+  );
+
+  const { data: recentCollections, isLoading: isMostRecentLoading } = useQuery(
+    hooks.mostRecentPublishedItemsOptions({
+      limit: HOMEPAGE_NB_ELEMENTS_TO_SHOW,
+    }),
+  );
 
   return (
     <MainWrapper>
