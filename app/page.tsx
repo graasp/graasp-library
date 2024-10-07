@@ -3,11 +3,11 @@ import { Metadata } from 'next';
 
 import { configureQueryClient } from '@graasp/query-client';
 
+// import { QueryOptions } from '@graasp/query-client';
 import Hydrate from '../src/components/HydrateClient';
 import Wrapper from '../src/components/common/Wrapper';
 import Home from '../src/components/pages/Home';
 import { HOMEPAGE_NB_ELEMENTS_TO_SHOW } from '../src/config/constants';
-import { GRAASPER_ID, GRAASP_API_HOST } from '../src/config/env';
 import getQueryClient from '../src/config/get-query-client';
 import LIBRARY from '../src/langs/constants';
 import en from '../src/langs/en.json';
@@ -31,25 +31,24 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const Page = async () => {
-  const { hooks } = configureQueryClient({
-    API_HOST: GRAASP_API_HOST,
-  });
+  const { queryOptions } = configureQueryClient({});
   const queryClient = getQueryClient();
 
   await Promise.all([
-    queryClient.prefetchQuery(
-      hooks.publishedItemsForMemberOptions(GRAASPER_ID),
-    ),
+    // TODO: uncomment when prefetch works correctly.
+    // queryClient.prefetchQuery(
+    //   queryOptions.publishedItemsForMemberOptions(GRAASPER_ID),
+    // ),
 
     queryClient.prefetchQuery(
-      hooks.mostLikedPublishedItemsOptions({
+      queryOptions.mostLikedPublishedItemsOptions({
         limit: HOMEPAGE_NB_ELEMENTS_TO_SHOW,
       }),
     ),
 
     // TODO: Error: Hydration failed because the initial UI does not match what was rendered on the server.
     // queryClient.prefetchQuery(
-    //   hooks.mostRecentPublishedItemsOptions({
+    //   queryOptions.mostRecentPublishedItemsOptions({
     //     limit: HOMEPAGE_NB_ELEMENTS_TO_SHOW,
     //   }),
     // ),

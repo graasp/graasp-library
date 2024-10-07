@@ -26,22 +26,22 @@ import StyledBackgroundContainer from '../layout/StyledBackgroundContainer';
 const Home = () => {
   const { t } = useLibraryTranslation();
 
-  const { hooks } = useContext(QueryClientContext);
+  const { queryOptions } = useContext(QueryClientContext);
 
   const { data: graasperCollections, isLoading: isGraasperCollectionsLoading } =
-    useQuery(hooks.publishedItemsForMemberOptions(GRAASPER_ID));
+    useQuery(queryOptions.publishedItemsForMemberOptions(GRAASPER_ID));
 
   const {
     data: mostLikedCollections,
     isLoading: isMostLikedCollectionsLoading,
   } = useQuery(
-    hooks.mostLikedPublishedItemsOptions({
+    queryOptions.mostLikedPublishedItemsOptions({
       limit: HOMEPAGE_NB_ELEMENTS_TO_SHOW,
     }),
   );
 
   const { data: recentCollections, isLoading: isMostRecentLoading } = useQuery(
-    hooks.mostRecentPublishedItemsOptions({
+    queryOptions.mostRecentPublishedItemsOptions({
       limit: HOMEPAGE_NB_ELEMENTS_TO_SHOW,
     }),
   );
