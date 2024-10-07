@@ -114,16 +114,23 @@ const DrawerContent = () => {
 
       {currentMember && currentMember.id
         ? [
-            <Divider component="li" textAlign="left" sx={{ paddingTop: 5 }}>
+            <Divider
+              key="divider"
+              component="li"
+              textAlign="left"
+              sx={{ paddingTop: 5 }}
+            >
               {t(LIBRARY.DRAWER_AUTHENTICATED_USER_LINKS_SECTION)}
             </Divider>,
             <DrawerMenuItem
+              key="my publications"
               id={MY_PUBLICATIONS_DRAWER_ITEM_ID}
               icon={<BookOutlined />}
               text={t(LIBRARY.PUBLISHED_COLLECTIONS)}
               href={buildMemberRoute(currentMember.id)}
             />,
             <DrawerMenuItem
+              key="liked collections"
               id={LIKED_COLLECTIONS_DRAWER_ITEM_ID}
               icon={<Favorite />}
               text={t(LIBRARY.LIKED_ITEMS)}

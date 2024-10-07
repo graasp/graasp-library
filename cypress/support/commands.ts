@@ -16,6 +16,7 @@ import {
   mockGetLikedItems,
   mockGetMember,
   mockGetPublishItemInformations,
+  mockGetRecentCollections,
   mockSearch,
   mockSignInRedirection,
   mockSignOut,
@@ -28,6 +29,8 @@ Cypress.Commands.add(
     members = Object.values(MEMBERS),
     currentMember,
     categories = SAMPLE_CATEGORIES,
+    recentCollections = [],
+    accessibleItems = [],
     getCurrentMemberError = false,
     getCategoriesError = false,
     getItemCategoriesError = false,
@@ -41,7 +44,9 @@ Cypress.Commands.add(
   } = {}) => {
     const cachedMembers = JSON.parse(JSON.stringify(members));
 
-    mockGetAccessibleItems(items);
+    mockGetAccessibleItems(accessibleItems);
+
+    mockGetRecentCollections(recentCollections);
 
     mockGetChildren({ items, currentMember });
 

@@ -92,6 +92,20 @@ export const mockGetAccessibleItems = (items: MockItem[]): void => {
   ).as('getAccessibleItems');
 };
 
+export const mockGetRecentCollections = (
+  recentCollections: MockItem[],
+): void => {
+  cy.intercept(
+    {
+      method: HttpMethod.Get,
+      pathname: `/${ITEMS_ROUTE}/collections/recent`,
+    },
+    ({ reply }) => {
+      reply(recentCollections);
+    },
+  ).as('getRecentCollections');
+};
+
 export const mockGetCurrentMember = (
   currentMember?: MockMember,
   shouldThrowError = false,

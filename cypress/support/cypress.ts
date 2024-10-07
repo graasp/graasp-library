@@ -7,6 +7,8 @@ declare global {
     interface Chainable {
       setUpApi(arg: {
         items: MockItem[];
+        recentCollections?: MockItem[];
+        accessibleItems?: MockItem[];
         members?: MockMember[];
         currentMember?: MockMember;
         categories?: Category[];

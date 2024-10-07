@@ -3,7 +3,11 @@ import { useContext } from 'react';
 import { Alert, Skeleton, Typography } from '@mui/material';
 
 import { ItemType, PermissionLevel } from '@graasp/sdk';
-import { NavigationElement, RowMenuProps, RowMenus } from '@graasp/ui';
+import {
+  type NavigationElement,
+  type RowMenuProps,
+  RowMenus,
+} from '@graasp/ui';
 
 import { useLibraryTranslation } from '../../../config/i18n';
 import LIBRARY from '../../../langs/constants';
@@ -23,12 +27,16 @@ const RootNavigationTree = ({
   onNavigate,
   rootMenuItems,
   selectedId,
-}: RootNavigationTreeProps): JSX.Element => {
-  const { t } = useLibraryTranslation();
-
+}: RootNavigationTreeProps): JSX.Element | null => {
   const { hooks } = useContext(QueryClientContext);
-  // todo: to change with real recent items (most used)
-  const { data: recentItems, isLoading } = hooks.useAccessibleItems(
+  const { t: translateLibrary } = useLibraryTranslation();
+
+  // TODO: to change with real recent items (most used)
+  const {
+    data: recentItems,
+    isLoading,
+    isSuccess,
+  } = hooks.useAccessibleItems(
     // you can move into an item you have at least write permission
     {
       permissions: [PermissionLevel.Admin, PermissionLevel.Write],
@@ -37,23 +45,22 @@ const RootNavigationTree = ({
     { pageSize: 5 },
   );
 
-  if (recentItems?.data?.length) {
+  if (isSuccess) {
     return (
       <>
         <Typography color="darkgrey" variant="subtitle2">
-          {t(LIBRARY.COPY_MODAL_HOME_TITLE)}
+          {translateLibrary(LIBRARY.COPY_MODAL_HOME_TITLE)}
         </Typography>
         <RowMenus
           elements={rootMenuItems}
           onNavigate={onNavigate}
           selectedId={selectedId}
           onClick={onClick}
-          //   root items cannot be disabled - but they are disabled by the button
         />
-        {recentItems && (
+        {Boolean(recentItems.data.length) && (
           <>
             <Typography color="darkgrey" variant="subtitle2">
-              {t(LIBRARY.COPY_MODAL_RECENT_TITLE)}
+              {translateLibrary(LIBRARY.COPY_MODAL_RECENT_TITLE)}
             </Typography>
             <RowMenus
               elements={recentItems.data}
@@ -78,7 +85,11 @@ const RootNavigationTree = ({
     );
   }
 
-  return <Alert severity="error">{t(LIBRARY.UNEXPECTED_ERROR_MESSAGE)}</Alert>;
+  return (
+    <Alert severity="error">
+      {translateLibrary(LIBRARY.UNEXPECTED_ERROR_MESSAGE)}
+    </Alert>
+  );
 };
 
 export default RootNavigationTree;

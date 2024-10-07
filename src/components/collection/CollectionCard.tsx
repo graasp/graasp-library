@@ -19,6 +19,7 @@ import { Avatar } from '@graasp/ui';
 
 import { useLibraryTranslation } from '../../config/i18n';
 import { buildCollectionRoute } from '../../config/routes';
+import { buildCollectionCardCopyButtonId } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
 import { ItemOrSearchedItem } from '../../utils/types';
 import { QueryClientContext } from '../QueryClientContext';
@@ -205,7 +206,9 @@ export const CollectionCard = ({ collection, showIsContentTag }: Props) => {
         </Stack>
         <Box>
           <DownloadButton id={id} />
-          {member?.id && <CopyButton itemId={id} />}
+          {member?.id && (
+            <CopyButton id={buildCollectionCardCopyButtonId(id)} itemId={id} />
+          )}
           <CopyLinkButton itemId={collection.id} />
         </Box>
       </CardActions>
