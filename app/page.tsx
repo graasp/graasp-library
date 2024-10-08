@@ -3,12 +3,12 @@ import { Metadata } from 'next';
 
 import { configureQueryClient } from '@graasp/query-client';
 
-// import { QueryOptions } from '@graasp/query-client';
 import Hydrate from '../src/components/HydrateClient';
 import Wrapper from '../src/components/common/Wrapper';
 import Home from '../src/components/pages/Home';
 import { HOMEPAGE_NB_ELEMENTS_TO_SHOW } from '../src/config/constants';
 import getQueryClient from '../src/config/get-query-client';
+import { QUERY_CLIENT_OPTIONS } from '../src/config/queryClient';
 import LIBRARY from '../src/langs/constants';
 import en from '../src/langs/en.json';
 import { buildSeo } from './seo';
@@ -31,7 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const Page = async () => {
-  const { queryOptions } = configureQueryClient({});
+  const { queryOptions } = configureQueryClient(QUERY_CLIENT_OPTIONS);
   const queryClient = getQueryClient();
 
   await Promise.all([
@@ -39,13 +39,11 @@ const Page = async () => {
     // queryClient.prefetchQuery(
     //   queryOptions.publishedItemsForMemberOptions(GRAASPER_ID),
     // ),
-
     queryClient.prefetchQuery(
       queryOptions.mostLikedPublishedItemsOptions({
         limit: HOMEPAGE_NB_ELEMENTS_TO_SHOW,
       }),
     ),
-
     // TODO: Error: Hydration failed because the initial UI does not match what was rendered on the server.
     // queryClient.prefetchQuery(
     //   queryOptions.mostRecentPublishedItemsOptions({
