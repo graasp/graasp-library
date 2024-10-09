@@ -92,6 +92,20 @@ export const mockGetAccessibleItems = (items: MockItem[]): void => {
   ).as('getAccessibleItems');
 };
 
+export const mockGetRecentCollections = (
+  recentCollections: MockItem[],
+): void => {
+  cy.intercept(
+    {
+      method: HttpMethod.Get,
+      pathname: `/${ITEMS_ROUTE}/collections/recent`,
+    },
+    ({ reply }) => {
+      reply(recentCollections);
+    },
+  ).as('getRecentCollections');
+};
+
 export const mockGetCurrentMember = (
   currentMember?: MockMember,
   shouldThrowError = false,
@@ -534,4 +548,19 @@ export const mockGetPublishItemInformations = (items: MockItem[]): void => {
       return reply({ item });
     },
   ).as('getPublishItemInformations');
+};
+
+export const mockCopyItems = (): void => {
+  cy.intercept(
+    {
+      method: HttpMethod.Post,
+      url: new RegExp(`${API_HOST}/items/copy\\?id\\=`),
+    },
+    ({ reply }) => {
+      // todo: do for all children
+      return reply({
+        statusCode: StatusCodes.ACCEPTED,
+      });
+    },
+  ).as('copyItems');
 };

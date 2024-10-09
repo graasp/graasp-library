@@ -80,7 +80,7 @@
   "COPY_ITEM_TOASTR_LINK": "Klicken Sie hier, um den Artikel auf Graasp zu öffnen.",
   "COPY_LINK_SUCCESS_MESSAGE": "Der Link wurde erfolgreich kopiert.",
   "COPY_LINK_FAILURE_MESSAGE": "Beim Kopieren des Links ist ein Fehler aufgetreten.",
-  "COPY_BUTTON_MODAL_MY_ITEMS_ROOT": "Meine Elemente",
+  "COPY_MODAL_MY_GRAASP_BREADCRUMB": "Mein Graasp",
   "AVATAR_ALT": "Avatar von {{name}}",
   "COLLECTION_EMPTY_DESCRIPTION_TEXT": "Dieses Element hat keine Beschreibung.",
   "COLLECTION_INFO_BUTTON": "Information",

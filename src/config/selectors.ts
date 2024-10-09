@@ -95,3 +95,5 @@ export const LIBRARY_ACTION_GROUP_COPY_BUTTON_ID =
 export const LIBRARY_ACTION_GROUP_POP_UP_BUTTONS_ID =
   'libraryActionGroupPopUpButtons';
 export const CHILD_CARD_COPY_BUTTON_ID = 'childCardCopyButton';
+export const buildCollectionCardCopyButtonId = (id: string) =>
+  `collectionCardCopyButton-${id}`;

@@ -3,6 +3,7 @@ import { ITEM_LIKES } from '../fixtures/itemLikes';
 import { PUBLISHED_ITEMS } from '../fixtures/items';
 import { MEMBERS } from '../fixtures/members';
 import {
+  mockCopyItems,
   mockGetAccessibleItems,
   mockGetAvatarUrl,
   mockGetCategories,
@@ -16,6 +17,7 @@ import {
   mockGetLikedItems,
   mockGetMember,
   mockGetPublishItemInformations,
+  mockGetRecentCollections,
   mockSearch,
   mockSignInRedirection,
   mockSignOut,
@@ -28,6 +30,8 @@ Cypress.Commands.add(
     members = Object.values(MEMBERS),
     currentMember,
     categories = SAMPLE_CATEGORIES,
+    recentCollections = [],
+    accessibleItems = [],
     getCurrentMemberError = false,
     getCategoriesError = false,
     getItemCategoriesError = false,
@@ -41,7 +45,9 @@ Cypress.Commands.add(
   } = {}) => {
     const cachedMembers = JSON.parse(JSON.stringify(members));
 
-    mockGetAccessibleItems(items);
+    mockGetAccessibleItems(accessibleItems);
+
+    mockGetRecentCollections(recentCollections);
 
     mockGetChildren({ items, currentMember });
 
@@ -72,5 +78,7 @@ Cypress.Commands.add(
     mockSearch({ searchResultItems }, searchError);
 
     mockGetLikedItems({ itemLikes }, getLikedItemsError);
+
+    mockCopyItems();
   },
 );

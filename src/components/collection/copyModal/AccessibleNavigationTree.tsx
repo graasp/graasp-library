@@ -1,15 +1,16 @@
 import { useContext, useState } from 'react';
 
-import { Alert, Skeleton } from '@mui/material';
+import { Alert, Pagination, Skeleton, Stack } from '@mui/material';
 
 import { ItemType, PermissionLevel } from '@graasp/sdk';
-import { RowMenuProps, RowMenus } from '@graasp/ui';
+import { type RowMenuProps, RowMenus } from '@graasp/ui';
 
 import { useLibraryTranslation } from '../../../config/i18n';
 import LIBRARY from '../../../langs/constants';
 import { QueryClientContext } from '../../QueryClientContext';
 
 interface AccessibleNavigationTreeProps {
+  isDisabled?: RowMenuProps['isDisabled'];
   onClick: RowMenuProps['onClick'];
   onNavigate: RowMenuProps['onNavigate'];
   selectedId?: string;
@@ -18,13 +19,14 @@ interface AccessibleNavigationTreeProps {
 const PAGE_SIZE = 10;
 
 const AccessibleNavigationTree = ({
+  isDisabled,
   onClick,
   onNavigate,
   selectedId,
 }: AccessibleNavigationTreeProps): JSX.Element => {
-  const { t } = useLibraryTranslation();
-  const [page, setPage] = useState(1);
   const { hooks } = useContext(QueryClientContext);
+  const [page, setPage] = useState(1);
+  const { t: translateLibrary } = useLibraryTranslation();
   const { data: accessibleItems, isLoading } = hooks.useAccessibleItems(
     {
       permissions: [PermissionLevel.Write, PermissionLevel.Admin],
@@ -37,17 +39,35 @@ const AccessibleNavigationTree = ({
     ? Math.ceil(accessibleItems.totalCount / PAGE_SIZE)
     : 0;
 
-  if (accessibleItems) {
+  if (accessibleItems?.data) {
     return (
-      <RowMenus
-        onClick={onClick}
-        onNavigate={onNavigate}
-        selectedId={selectedId}
-        elements={accessibleItems?.data}
-        nbPages={nbPages}
-        page={page}
-        setPage={setPage}
-      />
+      <Stack
+        height="100%"
+        flex={1}
+        direction="column"
+        justifyContent="space-between"
+      >
+        <Stack>
+          <RowMenus
+            elements={accessibleItems.data}
+            onNavigate={onNavigate}
+            selectedId={selectedId}
+            onClick={onClick}
+            isDisabled={isDisabled}
+          />
+        </Stack>
+        <Stack direction="row" justifyContent="end">
+          {nbPages > 1 && (
+            <Pagination
+              sx={{ justifyContent: 'end' }}
+              size="small"
+              count={nbPages}
+              page={page}
+              onChange={(_, p) => setPage(p)}
+            />
+          )}
+        </Stack>
+      </Stack>
     );
   }
 
@@ -61,7 +81,11 @@ const AccessibleNavigationTree = ({
     );
   }
 
-  return <Alert severity="error">{t(LIBRARY.UNEXPECTED_ERROR_MESSAGE)}</Alert>;
+  return (
+    <Alert severity="error">
+      {translateLibrary(LIBRARY.UNEXPECTED_ERROR_MESSAGE)}
+    </Alert>
+  );
 };
 
 export default AccessibleNavigationTree;
