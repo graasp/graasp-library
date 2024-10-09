@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.10.1](https://github.com/graasp/graasp-library/compare/v1.10.0...v1.10.1) (2024-10-09)
+
+
+### Bug Fixes
+
+* show empty accessible ([#701](https://github.com/graasp/graasp-library/issues/701)) ([4f64c21](https://github.com/graasp/graasp-library/commit/4f64c21d384022913649f301d6dc0bddf240a9f0))
+
 ## [1.10.0](https://github.com/graasp/graasp-library/compare/v1.9.0...v1.10.0) (2024-10-02)
 
 
