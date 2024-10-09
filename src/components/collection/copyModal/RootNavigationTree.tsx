@@ -31,7 +31,6 @@ const RootNavigationTree = ({
   const { hooks } = useContext(QueryClientContext);
   const { t: translateLibrary } = useLibraryTranslation();
 
-  // TODO: to change with real recent items (most used)
   const {
     data: recentItems,
     isLoading,

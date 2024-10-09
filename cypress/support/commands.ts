@@ -3,6 +3,7 @@ import { ITEM_LIKES } from '../fixtures/itemLikes';
 import { PUBLISHED_ITEMS } from '../fixtures/items';
 import { MEMBERS } from '../fixtures/members';
 import {
+  mockCopyItems,
   mockGetAccessibleItems,
   mockGetAvatarUrl,
   mockGetCategories,
@@ -77,5 +78,7 @@ Cypress.Commands.add(
     mockSearch({ searchResultItems }, searchError);
 
     mockGetLikedItems({ itemLikes }, getLikedItemsError);
+
+    mockCopyItems();
   },
 );

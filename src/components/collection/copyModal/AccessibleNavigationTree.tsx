@@ -25,7 +25,6 @@ const AccessibleNavigationTree = ({
   selectedId,
 }: AccessibleNavigationTreeProps): JSX.Element => {
   const { hooks } = useContext(QueryClientContext);
-  // todo: to change with real recent items (most used)
   const [page, setPage] = useState(1);
   const { t: translateLibrary } = useLibraryTranslation();
   const { data: accessibleItems, isLoading } = hooks.useAccessibleItems(

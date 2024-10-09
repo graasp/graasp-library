@@ -549,3 +549,18 @@ export const mockGetPublishItemInformations = (items: MockItem[]): void => {
     },
   ).as('getPublishItemInformations');
 };
+
+export const mockCopyItems = (): void => {
+  cy.intercept(
+    {
+      method: HttpMethod.Post,
+      url: new RegExp(`${API_HOST}/items/copy\\?id\\=`),
+    },
+    ({ reply }) => {
+      // todo: do for all children
+      return reply({
+        statusCode: StatusCodes.ACCEPTED,
+      });
+    },
+  ).as('copyItems');
+};
