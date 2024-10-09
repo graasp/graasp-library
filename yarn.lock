@@ -7317,7 +7317,7 @@ __metadata:
     eslint-plugin-react-app: "npm:6.2.2"
     http-status-codes: "npm:2.3.0"
     husky: "npm:9.1.4"
-    i18next: "npm:23.12.2"
+    i18next: "npm:23.15.2"
     interweave: "npm:13.1.0"
     katex: "npm:0.16.11"
     lodash.groupby: "npm:4.6.0"
@@ -7649,12 +7649,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:23.12.2":
-  version: 23.12.2
-  resolution: "i18next@npm:23.12.2"
+"i18next@npm:23.15.2":
+  version: 23.15.2
+  resolution: "i18next@npm:23.15.2"
   dependencies:
     "@babel/runtime": "npm:^7.23.2"
-  checksum: 10/d7a743c54b83acc1203315e547bfe830bfe825dddd7706646aec2a49cb74254bcda70645b568d1bed55ee3610ba5e6f6012fb3c13f03080c1dd0f99db2c45478
+  checksum: 10/ed14a290ba8e761a06b6a6ce5e608861f367eb0806fa1b4eb77494340502ad20491748ab2b27423ba186f5602b89cbcb87565683a03443d0368cd4b182ae6ef9
   languageName: node
   linkType: hard
 
