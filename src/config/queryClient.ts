@@ -1,5 +1,4 @@
 import { DOMAIN, GRAASP_API_HOST } from './env';
-import notifier from './notifier';
 
 // eslint-disable-next-line import/prefer-default-export
 export const QUERY_CLIENT_OPTIONS = {
@@ -11,10 +10,9 @@ export const QUERY_CLIENT_OPTIONS = {
     refetchOnMount: false,
     // avoid refetching when same data are closely fetched
     staleTime: 1000, // ms
-    cacheTime: 1000, // ms
+    gcTime: 1000, // ms
   },
   DOMAIN,
-  notifier,
   SHOW_NOTIFICATIONS: true,
   WS_HOST: `${GRAASP_API_HOST?.replace('http', 'ws')}/ws`,
 };

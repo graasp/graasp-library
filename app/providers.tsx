@@ -1,11 +1,10 @@
 'use client';
 
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-// import { ReactQueryDevtools } from "react-query-devtools";
 import { useEffect, useState } from 'react';
 import ReactGA from 'react-ga4';
-import { QueryClient, QueryClientProvider } from 'react-query';
 import { ToastContainer } from 'react-toastify';
 
 import { hasAcceptedCookies } from '@graasp/sdk';
@@ -15,7 +14,8 @@ import { GA_MEASUREMENT_ID, NODE_ENV } from '../src/config/env';
 
 // eslint-disable-next-line react/function-component-definition
 export default function Providers(props: { children: React.ReactNode }) {
-  const [client] = useState(new QueryClient());
+  // We pass a function to call it only once at initial rendering (see lazy initialization for more).
+  const [client] = useState(() => new QueryClient());
   const pathname = usePathname();
   const { replace } = useRouter();
   const searchParams = useSearchParams();
@@ -53,7 +53,6 @@ export default function Providers(props: { children: React.ReactNode }) {
   return (
     <QueryClientProvider client={client}>
       {children}
-      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
       <ToastContainer stacked theme="colored" />
     </QueryClientProvider>
   );

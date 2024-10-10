@@ -1,14 +1,4 @@
-// import { useRouter } from 'next/navigation';
-// import { useEffect } from 'react';
-// import ReactGA from 'react-ga4';
-// import { hasAcceptedCookies } from '@graasp/sdk';
-// import { ENV, UrlSearch } from '../src/config/constants';
-// import createEmotionCache from '../src/config/createEmotionCache';
-// import { GA_MEASUREMENT_ID, NODE_ENV } from '../src/config/env';
-// Client-side cache, shared for the whole session of the user in the browser.
-// const clientSideEmotionCache = createEmotionCache();
-// import { Api, DATA_KEYS, configureQueryClient } from '@graasp/query-client';
-import { dehydrate } from 'react-query/core';
+import { dehydrate } from '@tanstack/react-query';
 
 import Hydrate from '../../../src/components/HydrateClient';
 import Collection from '../../../src/components/collection/Collection';

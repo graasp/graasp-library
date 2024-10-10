@@ -1,5 +1,7 @@
 'use client';
 
+import { useQuery } from '@tanstack/react-query';
+
 import { useContext } from 'react';
 
 import { Box } from '@mui/material';
@@ -24,20 +26,25 @@ import StyledBackgroundContainer from '../layout/StyledBackgroundContainer';
 const Home = () => {
   const { t } = useLibraryTranslation();
 
-  const { hooks } = useContext(QueryClientContext);
+  const { queryOptions } = useContext(QueryClientContext);
 
   const { data: graasperCollections, isLoading: isGraasperCollectionsLoading } =
-    hooks.usePublishedItemsForMember(GRAASPER_ID);
+    useQuery(queryOptions.publishedItemsForMemberOptions(GRAASPER_ID));
+
   const {
     data: mostLikedCollections,
     isLoading: isMostLikedCollectionsLoading,
-  } = hooks.useMostLikedPublishedItems({
-    limit: HOMEPAGE_NB_ELEMENTS_TO_SHOW,
-  });
-  const { data: recentCollections, isLoading: isMostRecentLoading } =
-    hooks.useMostRecentPublishedItems({
+  } = useQuery(
+    queryOptions.mostLikedPublishedItemsOptions({
       limit: HOMEPAGE_NB_ELEMENTS_TO_SHOW,
-    });
+    }),
+  );
+
+  const { data: recentCollections, isLoading: isMostRecentLoading } = useQuery(
+    queryOptions.mostRecentPublishedItemsOptions({
+      limit: HOMEPAGE_NB_ELEMENTS_TO_SHOW,
+    }),
+  );
 
   return (
     <MainWrapper>

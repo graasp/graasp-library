@@ -1,8 +1,10 @@
+import type { DehydratedState } from '@tanstack/react-query';
+
 import React from 'react';
-import type { DehydratedState } from 'react-query';
 
 import { configureQueryClient } from '@graasp/query-client';
 
+import notifier from '../config/notifier';
 import { QUERY_CLIENT_OPTIONS } from '../config/queryClient';
 
 const QueryClientContext = React.createContext(
@@ -14,7 +16,7 @@ type Props = {
 };
 
 const QueryClientProvider = ({ children, dehydratedState }: Props) => {
-  const value = configureQueryClient(QUERY_CLIENT_OPTIONS);
+  const value = configureQueryClient({ ...QUERY_CLIENT_OPTIONS, notifier });
   const {
     QueryClientProvider: Provider,
     queryClient,
