@@ -24,8 +24,7 @@ const ItemBreadcrumb = ({
   const { data: item } = hooks.useItem(itemId);
 
   const { data: allParents, isLoading: isLoadingParents } = hooks.useParents({
-    id: item?.id,
-    path: item?.path,
+    id: itemId,
   });
   const { data: publishedInformation, isLoading: isLoadingInformation } =
     hooks.useItemPublishedInformation({
