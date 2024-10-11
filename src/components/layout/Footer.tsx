@@ -30,7 +30,7 @@ const usePreferredLanguage = (): {
   const { i18n } = useLibraryTranslation();
   const { hooks, mutations } = useContext(QueryClientContext);
   const { data: member } = hooks.useCurrentMember();
-  const { mutate: editMember } = mutations.useEditMember();
+  const { mutate: editMember } = mutations.useEditCurrentMember();
   const [language, setLanguage] = useState(i18n.language);
 
   useEffect(() => {
@@ -44,7 +44,6 @@ const usePreferredLanguage = (): {
     // on signed in: change user language
     if (member?.id) {
       editMember({
-        id: member.id,
         extra: { lang: newLang },
       });
     }
