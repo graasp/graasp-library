@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.10.2](https://github.com/graasp/graasp-library/compare/v1.10.1...v1.10.2) (2024-10-11)
+
+
+### Bug Fixes
+
+* change usage of edit current member hook ([#704](https://github.com/graasp/graasp-library/issues/704)) ([772d576](https://github.com/graasp/graasp-library/commit/772d576cac9f8e7f88e1a3b0edf5e13295accb12))
+
 ## [1.10.1](https://github.com/graasp/graasp-library/compare/v1.10.0...v1.10.1) (2024-10-09)
 
 
