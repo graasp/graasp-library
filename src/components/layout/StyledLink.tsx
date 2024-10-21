@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+import { ReactNode } from 'react';
+
 import { styled } from '@mui/material';
 
 import { HEADER_GRAASP_LOGO_LINK_ID } from '../../config/selectors';
@@ -12,7 +14,7 @@ const StyledLink = styled(Link)(() => ({
 const HeaderLinkComponent = ({
   children,
 }: {
-  children: JSX.Element;
+  children: ReactNode;
 }): JSX.Element => (
   <StyledLink id={HEADER_GRAASP_LOGO_LINK_ID} href="/">
     {children}

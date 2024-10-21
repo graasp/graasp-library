@@ -6,7 +6,11 @@ import { useContext, useEffect } from 'react';
 
 import { Box } from '@mui/material';
 
-import { AccountType } from '@graasp/sdk';
+import {
+  AccountType,
+  PermissionLevel,
+  PermissionLevelCompare,
+} from '@graasp/sdk';
 
 import {
   ERROR_INVALID_COLLECTION_ID_CODE,
@@ -17,9 +21,6 @@ import Error from '../common/Error';
 import MainWrapper from '../layout/MainWrapper';
 import UnpublishedItemAlert from './UnpublishedItemAlert';
 import Summary from './summary/Summary';
-
-// todo: get similar collections in same call
-// import SimilarCollections from './SimilarCollections';
 
 type Props = {
   id?: string;
@@ -32,7 +33,6 @@ const Collection = ({ id }: Props) => {
     isError,
   } = hooks.useItem(id);
   const { data: currentMember } = hooks.useCurrentMember();
-  const { data: tags } = hooks.useItemTags(id);
   // get item published
   const {
     data: itemPublishEntry,
@@ -49,8 +49,10 @@ const Collection = ({ id }: Props) => {
       postView({ itemId: id, payload: { type: 'collection-view' } });
     }
   }, [id]);
-  // if tags could be fetched then user has at least read access
-  const canRead = Boolean(tags);
+
+  const canRead = collection?.permission
+    ? PermissionLevelCompare.gte(collection.permission, PermissionLevel.Read)
+    : false;
 
   const canPublish =
     (collection &&
@@ -105,7 +107,6 @@ const Collection = ({ id }: Props) => {
           isLoading={isLoadingItem}
           totalViews={itemPublishEntry?.totalViews ?? 0}
         />
-        {/* <Comments comments={comments} members={members} /> */}
       </Box>
     </>
   );
