@@ -54,7 +54,7 @@
   "COLLECTION_CATEGORIES_TITLE": "Kategorien",
   "CREATE_BUTTON_TOOLTIP": "Erstellen Sie Ihre eigene Sammlung",
   "COLLECTION_TAGS_TITLE": "Tags",
-  "COLLECTION_LANGUAGES_TITLE": "Sprachen",
+  "COLLECTION_LANGUAGE_TITLE": "Sprache",
   "PROFILE_BUTTON": "Konto",
   "COLLECTIONS_COUNT_MESSAGE_one": "{{count}} Sammlung verfügbar",
   "COLLECTIONS_COUNT_MESSAGE_other": "{{count}} Sammlungen verfügbar",

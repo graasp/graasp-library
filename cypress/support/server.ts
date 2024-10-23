@@ -33,7 +33,6 @@ const {
   buildGetItemMembershipsForItemsRoute,
   buildGetItemPublishedInformationRoute,
   buildGetItemRoute,
-  buildGetItemTagsRoute,
   buildGetMemberRoute,
   buildGetCurrentMemberRoute,
   ITEMS_ROUTE,
@@ -200,30 +199,6 @@ export const mockGetItem = (
       });
     },
   ).as('getItem');
-};
-
-export const mockGetItemTags = (shouldThrowError: boolean) => {
-  cy.intercept(
-    {
-      method: DEFAULT_GET.method,
-      url: new RegExp(`${API_HOST}/${buildGetItemTagsRoute(ID_FORMAT)}$`),
-    },
-    ({ reply }) => {
-      if (shouldThrowError) {
-        return reply({ statusCode: StatusCodes.UNAUTHORIZED, body: null });
-      }
-
-      const ITEM_PUBLIC_TAG = {
-        id: 'public-tag-id',
-        name: 'public-item',
-      };
-
-      return reply({
-        body: [ITEM_PUBLIC_TAG],
-        statusCode: StatusCodes.OK,
-      });
-    },
-  ).as('getItemTags');
 };
 
 export const mockGetItemThumbnailUrl = (

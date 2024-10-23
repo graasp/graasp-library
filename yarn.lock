@@ -1273,9 +1273,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/query-client@npm:4.2.0":
+"@graasp/query-client@github:graasp/graasp-query-client#search-hook-lang":
   version: 4.2.0
-  resolution: "@graasp/query-client@npm:4.2.0"
+  resolution: "@graasp/query-client@https://github.com/graasp/graasp-query-client.git#commit=6ba6135dbe41ac5c09758266b6d3ee6f04ae2418"
   dependencies:
     "@tanstack/react-query": "npm:5.59.8"
     "@tanstack/react-query-devtools": "npm:5.59.8"
@@ -1285,13 +1285,13 @@ __metadata:
     "@graasp/sdk": ^4.0.0
     "@graasp/translations": "*"
     react: ^18.0.0
-  checksum: 10/fdf06272486d4c9979459c00f7cb0d9f98c027deef0c948ff734679b46435658076aeede49d54730922f0d12e572cf9d3bac045e346ab38629a15fab6b30d00d
+  checksum: 10/49f1d4fdbe2d2d4354eecc8fd9d8b9add2e1266dba6569a29858720d03cbeaec205cf77839ecbc11f943e7985b98e6a0605d458b345e39cb64840a056d821847
   languageName: node
   linkType: hard
 
-"@graasp/sdk@npm:4.32.1":
+"@graasp/sdk@github:graasp/graasp-sdk#index-item-lang":
   version: 4.32.1
-  resolution: "@graasp/sdk@npm:4.32.1"
+  resolution: "@graasp/sdk@https://github.com/graasp/graasp-sdk.git#commit=8028f96c3d4c0346d3b009e23d343df81973464e"
   dependencies:
     "@faker-js/faker": "npm:9.0.3"
     filesize: "npm:10.1.6"
@@ -1300,7 +1300,7 @@ __metadata:
   peerDependencies:
     date-fns: ^3 || ^4.0.0
     uuid: ^9 || ^10
-  checksum: 10/74125fa4c2aed104142cccc77e8a8a90d2ae303dcaae83e40198f7d30d6615ad3136532789b0d1c2f7034847937f238c046b9aee5fcee5d319bbe7be8cb4f257
+  checksum: 10/af9f0af0bf69b3524b2f65fbc29fab45b1cc5984d00c2ade9d66440989c6bc75306aeeb9ae2886776a6357cdeb0fc19f4b71eb2dc20d5d3c05a14f84e634c330
   languageName: node
   linkType: hard
 
@@ -7258,8 +7258,8 @@ __metadata:
     "@emotion/react": "npm:11.13.0"
     "@emotion/server": "npm:11.11.0"
     "@emotion/styled": "npm:11.13.0"
-    "@graasp/query-client": "npm:4.2.0"
-    "@graasp/sdk": "npm:4.32.1"
+    "@graasp/query-client": "github:graasp/graasp-query-client#search-hook-lang"
+    "@graasp/sdk": "github:graasp/graasp-sdk#index-item-lang"
     "@graasp/stylis-plugin-rtl": "npm:2.2.0"
     "@graasp/translations": "npm:1.40.0"
     "@graasp/ui": "npm:5.3.1"

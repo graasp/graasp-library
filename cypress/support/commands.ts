@@ -12,7 +12,6 @@ import {
   mockGetItem,
   mockGetItemCategories,
   mockGetItemMembershipsForItems,
-  mockGetItemTags,
   mockGetItemThumbnailUrl,
   mockGetLikedItems,
   mockGetMember,
@@ -40,7 +39,6 @@ Cypress.Commands.add(
     itemLikes = ITEM_LIKES,
     getLikedItemsError = false,
     getItemError = false,
-    getTagsError = false,
     getItemThumbnailError = false,
   } = {}) => {
     const cachedMembers = JSON.parse(JSON.stringify(members));
@@ -56,8 +54,6 @@ Cypress.Commands.add(
     mockGetCurrentMember(currentMember, getCurrentMemberError);
 
     mockGetItem({ items, currentMember }, getItemError);
-
-    mockGetItemTags(getTagsError);
 
     mockGetAvatarUrl({ members, currentMember });
 

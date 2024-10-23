@@ -2,23 +2,19 @@ import groupBy from 'lodash.groupby';
 
 import React, { FC, useContext, useEffect, useRef, useState } from 'react';
 
-import { ExpandMoreRounded } from '@mui/icons-material';
 import {
   Box,
-  Button,
   Checkbox,
   Container,
   Divider,
   FormControlLabel,
-  Skeleton,
   Stack,
   Typography,
   styled,
 } from '@mui/material';
 
-import { Category, CategoryType } from '@graasp/sdk';
+import { CategoryType } from '@graasp/sdk';
 
-import { GRAASP_COLOR } from '../../config/constants';
 import {
   useCategoriesTranslation,
   useLibraryTranslation,
@@ -26,155 +22,12 @@ import {
 import {
   ALL_COLLECTIONS_TITLE_ID,
   ENABLE_IN_DEPTH_SEARCH_CHECKBOX_ID,
-  buildSearchFilterCategoryId,
-  buildSearchFilterPopperButtonId,
 } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
 import Search from '../search/Search';
-import FilterPopper from './FilterPopper';
-
-type FilterProps = {
-  category: string;
-  title: string;
-  options?: Category[];
-  // IDs of selected options.
-  selectedOptions: string[];
-  onOptionChange: (key: string, newValue: boolean) => void;
-  onClearOptions: () => void;
-  isLoading: boolean;
-};
-
-const Filter: React.FC<FilterProps> = ({
-  category,
-  title,
-  onOptionChange,
-  onClearOptions,
-  options,
-  selectedOptions,
-  isLoading,
-}) => {
-  const { t: translateCategories } = useCategoriesTranslation();
-  const { t } = useLibraryTranslation();
-  const [showPopper, setShowPopper] = useState<boolean>(false);
-  const togglePopper = () => {
-    setShowPopper((oldVal) => !oldVal);
-  };
-
-  const popperAnchor = useRef<null | HTMLDivElement>(null);
-  const popper = useRef<null | HTMLDivElement>(null);
-
-  const onDocumentScrolled = () => {
-    setShowPopper(() => false);
-  };
-
-  const onDocumentClicked = (event: MouseEvent) => {
-    if (
-      !popper.current?.contains(event.target as Node) &&
-      !popperAnchor.current?.contains(event.target as Node)
-    ) {
-      setShowPopper(() => false);
-    }
-  };
-
-  const selectionCount = React.useMemo(
-    () =>
-      selectedOptions.filter((id) => options?.find((opt) => opt.id === id))
-        .length,
-    [selectedOptions, options],
-  );
-
-  const selectionStr = React.useMemo(() => {
-    const optionsStr =
-      options
-        ?.filter((it) => selectedOptions.includes(it.id))
-        .map((it) => translateCategories(it.name))?.[0] ??
-      t(LIBRARY.FILTER_DROPDOWN_NO_FILTER);
-    return optionsStr;
-  }, [selectedOptions, options]);
-
-  // Listens for clicks outside of the popper to dismiss it when we click outside.
-  useEffect(() => {
-    if (showPopper) {
-      document.addEventListener('click', onDocumentClicked);
-      document.addEventListener('scroll', onDocumentScrolled);
-    }
-    return () => {
-      document.removeEventListener('click', onDocumentClicked);
-      document.removeEventListener('scroll', onDocumentScrolled);
-    };
-  }, [showPopper]);
-
-  const content = isLoading ? (
-    <Skeleton width="100%" />
-  ) : (
-    <Button
-      id={buildSearchFilterPopperButtonId(category)}
-      onClick={togglePopper}
-      variant="text"
-      fullWidth
-      endIcon={<ExpandMoreRounded color="primary" />}
-      sx={{
-        textTransform: 'none',
-        alignItems: 'center',
-        paddingRight: 3,
-        justifyContent: 'space-between',
-      }}
-    >
-      <Typography
-        paddingLeft={1}
-        whiteSpace="nowrap"
-        width="100%"
-        textAlign="left"
-        color={selectionCount ? 'black' : 'gray'}
-        variant="h6"
-        textOverflow="ellipsis"
-        overflow="hidden"
-      >
-        {selectionStr}
-      </Typography>
-
-      {selectionCount > 1 && (
-        <Box
-          style={{
-            color: GRAASP_COLOR,
-            fontSize: 14,
-            fontWeight: 'bold',
-          }}
-        >
-          {`+${selectionCount - 1}`}
-        </Box>
-      )}
-    </Button>
-  );
-
-  return (
-    <Stack
-      id={buildSearchFilterCategoryId(category)}
-      flexGrow={1}
-      ref={popperAnchor}
-      flex={1}
-      flexBasis={0}
-      width={0}
-    >
-      <Typography variant="body2" color="#7A7A7A">
-        {title}
-      </Typography>
-      <Stack direction="row" alignItems="center">
-        {content}
-      </Stack>
-      <FilterPopper
-        ref={popper}
-        open={showPopper}
-        anchorEl={popperAnchor.current}
-        options={options}
-        selectedOptions={selectedOptions}
-        onOptionChange={onOptionChange}
-        onClearOptions={onClearOptions}
-      />
-    </Stack>
-  );
-};
+import { CategoryFilter } from './CategoryFilter';
+import { LangFilter } from './LangFilter';
 
 const StyledFilterContainer = styled(Stack)(() => ({
   backgroundColor: 'white',
@@ -212,17 +65,21 @@ type FilterHeaderProps = {
   searchPreset?: string;
   categoryPreset?: string[][];
   isLoadingResults: boolean;
+  setLangs: (langs: string[]) => void;
+  langs: string[];
 };
 
 const FilterHeader: FC<FilterHeaderProps> = ({
   onFiltersChanged,
   onChangeSearch,
+  setLangs,
   onSearch,
   searchPreset,
   categoryPreset,
   isLoadingResults,
   onIncludeContentChange,
   shouldIncludeContent,
+  langs,
 }) => {
   const { t: translateCategories } = useCategoriesTranslation();
   const { t } = useLibraryTranslation();
@@ -239,26 +96,6 @@ const FilterHeader: FC<FilterHeaderProps> = ({
   const allCategories = groupBy(categories, (entry) => entry.type);
   const levelList = allCategories[CategoryType.Level];
   const disciplineList = allCategories[CategoryType.Discipline];
-  const languageList = allCategories[CategoryType.Language];
-
-  // TODO: Replace with real values.
-  // const licenseList: List<Category> = convertJs([
-  //   {
-  //     id: '3f811e5f-5221-4d22-a20c-1086af809bda',
-  //     name: 'Public Domain (CC0)',
-  //     type: '3f811e5f-5221-4d22-a20c-1086af809bd0',
-  //   },
-  //   {
-  //     id: '3f811e5f-5221-4d22-a20c-1086af809bdb',
-  //     name: 'For Commercial Use',
-  //     type: '3f811e5f-5221-4d22-a20c-1086af809bd0',
-  //   },
-  //   {
-  //     id: '3f811e5f-5221-4d22-a20c-1086af809bdc',
-  //     name: 'Derivable',
-  //     type: '3f811e5f-5221-4d22-a20c-1086af809bd0',
-  //   },
-  // ]);
 
   useEffect(() => {
     setSelectedFilters(categoryPreset ? categoryPreset.flat() : []);
@@ -322,47 +159,40 @@ const FilterHeader: FC<FilterHeaderProps> = ({
     />
   );
 
+  const selectedDisciplineOptions = selectedFilters.filter((id) =>
+    disciplineList?.find((opt) => opt.id === id),
+  );
+  const selectedLevelOptions = selectedFilters.filter((id) =>
+    levelList?.find((opt) => opt.id === id),
+  );
+
   const filters = [
-    <Filter
+    <CategoryFilter
       key={CategoryType.Level}
       category={CategoryType.Level}
       title={translateCategories(CategoryType.Level)}
       options={levelList}
-      selectedOptions={selectedFilters}
+      selectedOptions={selectedLevelOptions}
       onOptionChange={onFilterChanged}
       onClearOptions={() => onClearCategory(levelList?.map((l) => l.id))}
       isLoading={isCategoriesLoading}
     />,
-    <Filter
+    <CategoryFilter
       key={CategoryType.Discipline}
       category={CategoryType.Discipline}
       title={translateCategories(CategoryType.Discipline)}
       options={disciplineList}
-      selectedOptions={selectedFilters}
+      selectedOptions={selectedDisciplineOptions}
       onOptionChange={onFilterChanged}
       onClearOptions={() => onClearCategory(disciplineList?.map((d) => d.id))}
       isLoading={isCategoriesLoading}
     />,
-    <Filter
+    <LangFilter
       key={CategoryType.Language}
-      category={CategoryType.Language}
       title={translateCategories(CategoryType.Language)}
-      options={languageList}
-      selectedOptions={selectedFilters}
-      onOptionChange={onFilterChanged}
-      onClearOptions={() => onClearCategory(languageList?.map((d) => d.id))}
-      isLoading={isCategoriesLoading}
+      selectedOptions={langs}
+      setLangs={setLangs}
     />,
-    // <Filter
-    //   key={CATEGORY_TYPES.LICENSE}
-    //   category={CATEGORY_TYPES.LICENSE}
-    //   title="License"
-    //   options={licenseList}
-    //   selectedOptions={selectedFilters}
-    //   onOptionChange={onFilterChanged}
-    //   onClearOptions={() => onClearCategory(licenseList?.map((d) => d.id))}
-    //   isLoading={isCategoriesLoading}
-    // />,
   ];
 
   return (

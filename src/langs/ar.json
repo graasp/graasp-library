@@ -54,7 +54,7 @@
   "COLLECTION_CATEGORIES_TITLE": "فئات",
   "CREATE_BUTTON_TOOLTIP": "إنشاء مجموعتك الخاصة",
   "COLLECTION_TAGS_TITLE": "العلامات",
-  "COLLECTION_LANGUAGES_TITLE": "اللغات",
+  "COLLECTION_LANGUAGE_TITLE": "اللغات",
   "PROFILE_BUTTON": "حساب",
   "COLLECTIONS_COUNT_MESSAGE_one": "مجمواعات متوفّرة {{count}}",
   "COLLECTIONS_COUNT_MESSAGE_other": "مجمواعات متوفّرة {{count}}",
