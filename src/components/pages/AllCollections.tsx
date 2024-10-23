@@ -40,6 +40,7 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
   const { replace } = useRouter();
 
   const [filters, setFilters] = useState<string[][]>([]);
+  const [langs, setLangs] = useState<string[]>([]);
   const [shouldIncludeContent, setShouldIncludeContent] =
     useState<boolean>(false);
   const [searchKeywords, setSearchKeywords] = useState<string>('');
@@ -52,6 +53,7 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
   } = hooks.useSearchPublishedItems({
     query: searchKeywords,
     categories: filters,
+    langs,
     page,
     // does not show children if option is disabled
     isPublishedRoot: !shouldIncludeContent,
@@ -114,6 +116,8 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
             onSearch={setSearchKeywords}
             searchPreset={searchKeywords}
             categoryPreset={filters}
+            langs={langs}
+            setLangs={setLangs}
             isLoadingResults={false}
             onIncludeContentChange={setShouldIncludeContent}
           />

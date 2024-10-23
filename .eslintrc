@@ -39,6 +39,7 @@
     "curly": "error",
     "@typescript-eslint/indent": "off",
     "@typescript-eslint/brace-style": "off",
+    "import/prefer-default-export": "off",
     "no-underscore-dangle": [
       "error",
       {
