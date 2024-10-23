@@ -1314,9 +1314,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/ui@npm:5.3.1":
+"@graasp/ui@github:graasp/graasp-ui#upgrade-mui-v6":
   version: 5.3.1
-  resolution: "@graasp/ui@npm:5.3.1"
+  resolution: "@graasp/ui@https://github.com/graasp/graasp-ui.git#commit=41431156696126b899a81436af4d521c1888b062"
   dependencies:
     http-status-codes: "npm:2.3.0"
     interweave: "npm:13.1.0"
@@ -1334,18 +1334,18 @@ __metadata:
     "@graasp/sdk": ^4.29.0
     "@graasp/stylis-plugin-rtl": ^2
     "@graasp/translations": ^1.23.0
-    "@mui/icons-material": ~5.14.0 || ~5.15.0 || ~5.16.0
-    "@mui/lab": ~5.0.0-alpha.150
-    "@mui/material": ~5.14.0 || ~5.15.0 || ~5.16.0
+    "@mui/icons-material": ^6
+    "@mui/lab": ^6
+    "@mui/material": ^6
     i18next: ^22.4.15 || ^23.0.0
     katex: 0.16.11
     lucide-react: ^0.417.0 || ^0.429.0 || ^0.436.0 || ^0.439.0 || ^0.441.0 || ^0.446.0 || ^0.447.0 || ^0.451.0
     react: ^18.0.0
     react-dom: ^18.0.0
-    react-i18next: ^13.0.0 || ^14.0.0 || ^15.0.0
+    react-i18next: ^15.0.0
     react-router-dom: ^6.11.0
     stylis: ^4.1.3
-  checksum: 10/00185d14f6c0984d90db5a1b63d68b07193e5aee62298b9920489f75df4c46dfc6057605de34660c02b6afa970474bbc3533164d60d4a1d27733b7e3d80b87dd
+  checksum: 10/3f2f65e7d5811f2ecedd04726b8a6592a50f534e69ff55d7856b69a17ca7bbd3c958fea817c180f413b72ad47502140ed938b6ba93309b78fb04768c594d19d8
   languageName: node
   linkType: hard
 
@@ -7248,7 +7248,7 @@ __metadata:
     "@graasp/sdk": "npm:4.32.1"
     "@graasp/stylis-plugin-rtl": "npm:2.2.0"
     "@graasp/translations": "npm:1.40.0"
-    "@graasp/ui": "npm:5.3.1"
+    "@graasp/ui": "github:graasp/graasp-ui#upgrade-mui-v6"
     "@mui/icons-material": "npm:6.1.5"
     "@mui/lab": "npm:6.0.0-beta.13"
     "@mui/material": "npm:6.1.5"
