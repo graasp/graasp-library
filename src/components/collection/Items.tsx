@@ -1,9 +1,14 @@
 import React, { useContext, useState } from 'react';
 
 import { Add, Remove } from '@mui/icons-material';
-import { Button, Grow, useMediaQuery, useTheme } from '@mui/material';
+import {
+  Button,
+  Grid2 as Grid,
+  Grow,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
 import { DiscriminatedItem, ItemType } from '@graasp/sdk';
@@ -71,7 +76,7 @@ const CollapsibleItemCategory: React.FC<CollapsibleItemCategoryProps> = ({
       <Grid container spacing={2} id={CHILDREN_ITEMS_GRID_ID} marginBottom={3}>
         {shownItems.map((item) => (
           <Grow in key={item.id}>
-            <Grid item xs={12} sm={12} md={6} lg={4} xl={3}>
+            <Grid size={{ xs: 12, sm: 12, md: 6, lg: 4, xl: 3 }}>
               {children(item)}
             </Grid>
           </Grow>

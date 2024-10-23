@@ -5,7 +5,7 @@ import React, { useContext } from 'react';
 import {
   Box,
   Chip,
-  Grid,
+  Grid2 as Grid,
   Skeleton,
   Stack,
   Typography,
@@ -138,7 +138,13 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
       alignItems="stretch"
       justifyContent="space-between"
     >
-      <Grid item xs={12} sm={6} md={4}>
+      <Grid
+        size={{
+          xs: 12,
+          sm: 6,
+          md: 4,
+        }}
+      >
         <DetailCard id={SUMMARY_CREATED_AT_CONTAINER_ID}>
           <Typography variant="body1" fontWeight="bold">
             {t(LIBRARY.SUMMARY_DETAILS_CREATED_AT_TITLE)}
@@ -152,7 +158,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
           </Typography>
         </DetailCard>
       </Grid>
-      <Grid item xs={12} sm={6} md={4}>
+      <Grid size={{ xs: 12, sm: 6, md: 4 }}>
         <DetailCard id={SUMMARY_LAST_UPDATE_CONTAINER_ID}>
           <Typography variant="body1" fontWeight="bold">
             {t(LIBRARY.SUMMARY_DETAILS_UPDATED_AT_TITLE)}
@@ -166,7 +172,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
           </Typography>
         </DetailCard>
       </Grid>
-      <Grid item xs={12} sm={6} md={4}>
+      <Grid size={{ xs: 12, sm: 6, md: 4 }}>
         <DetailCard id={SUMMARY_LANGUAGES_CONTAINER_ID}>
           <Typography variant="body1" fontWeight="bold">
             {t(LIBRARY.COLLECTION_LANGUAGES_TITLE)}
@@ -183,7 +189,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
           </Stack>
         </DetailCard>
       </Grid>
-      <Grid item xs={12} sm={6} md={4}>
+      <Grid size={{ xs: 12, sm: 6, md: 4 }}>
         <DetailCard>
           <div id={SUMMARY_CATEGORIES_CONTAINER_ID}>
             <Typography variant="body1" fontWeight="bold">
@@ -203,7 +209,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
         </DetailCard>
       </Grid>
 
-      <Grid item xs={12} sm={12} md={8}>
+      <Grid size={{ xs: 12, sm: 12, md: 8 }}>
         <DetailCard>
           <Typography variant="body1" fontWeight="bold" gutterBottom>
             {t(LIBRARY.SUMMARY_DETAILS_LICENSE_TITLE)}
