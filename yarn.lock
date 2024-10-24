@@ -1263,9 +1263,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/query-client@npm:5.0.0":
-  version: 5.0.0
-  resolution: "@graasp/query-client@npm:5.0.0"
+"@graasp/query-client@npm:5.1.0":
+  version: 5.1.0
+  resolution: "@graasp/query-client@npm:5.1.0"
   dependencies:
     "@tanstack/react-query": "npm:5.59.8"
     "@tanstack/react-query-devtools": "npm:5.59.8"
@@ -1275,7 +1275,7 @@ __metadata:
     "@graasp/sdk": ^4.0.0
     "@graasp/translations": "*"
     react: ^18.0.0
-  checksum: 10/463dd556081d76fb2cb4bcf69b595560eb40ff528de5b1c64f189af106209bf394135d400374c80c031a57b0e3a13fdedd12d4d86988a4533b49d37c405a662a
+  checksum: 10/947d033c1fd0f734fa4a048d40d5f9bbc5f08d97b0eb7268a58046619179d417cbd2ebbe87866f9ffdb6c57de87179699fb9bc95c8682842b3323d2ac0d896f7
   languageName: node
   linkType: hard
 
@@ -7215,7 +7215,7 @@ __metadata:
     "@emotion/react": "npm:11.13.3"
     "@emotion/server": "npm:11.11.0"
     "@emotion/styled": "npm:11.13.0"
-    "@graasp/query-client": "npm:5.0.0"
+    "@graasp/query-client": "npm:5.1.0"
     "@graasp/sdk": "npm:4.33.0"
     "@graasp/stylis-plugin-rtl": "npm:2.2.0"
     "@graasp/translations": "npm:1.40.0"

@@ -55,6 +55,7 @@
   "CREATE_BUTTON_TOOLTIP": "Create your own collection",
   "COLLECTION_TAGS_TITLE": "Tags",
   "COLLECTION_LANGUAGE_TITLE": "Language",
+  "SEARCH_FILTER_LANG_TITLE": "Languages",
   "PROFILE_BUTTON": "Account",
   "COLLECTIONS_COUNT_MESSAGE_one": "{{count}} collection available",
   "COLLECTIONS_COUNT_MESSAGE_other": "{{count}} collections available",
