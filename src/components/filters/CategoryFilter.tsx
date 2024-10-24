@@ -3,7 +3,10 @@ import React from 'react';
 import { Category } from '@graasp/sdk';
 
 import { useCategoriesTranslation } from '../../config/i18n';
-import { buildSearchFilterCategoryId } from '../../config/selectors';
+import {
+  buildSearchFilterCategoryId,
+  buildSearchFilterPopperButtonId,
+} from '../../config/selectors';
 import { Filter } from './Filter';
 
 type FilterProps = {
@@ -32,6 +35,7 @@ export function CategoryFilter({
   return (
     <Filter
       id={buildSearchFilterCategoryId(category)}
+      buttonId={buildSearchFilterPopperButtonId(category)}
       title={title}
       isLoading={isLoading}
       options={options?.map((c) => [c.id, translateCategories(c.name)])}

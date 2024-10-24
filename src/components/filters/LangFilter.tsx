@@ -1,6 +1,9 @@
 import { langs } from '@graasp/translations';
 
-import { buildSearchFilterCategoryId } from '../../config/selectors';
+import {
+  SEARCH_FILTER_LANG_ID,
+  SEARCH_FILTER_POPPER_LANG_ID,
+} from '../../config/selectors';
 import { Filter } from './Filter';
 
 type LangFilterProps = {
@@ -30,12 +33,13 @@ export function LangFilter({
 
   return (
     <Filter
-      id={buildSearchFilterCategoryId('lang')}
+      id={SEARCH_FILTER_LANG_ID}
       title={title}
       options={Object.entries(langs)}
       selectedOptions={selectedOptions}
       onOptionChange={onLangChange}
       onClearOptions={clearLang}
+      buttonId={SEARCH_FILTER_POPPER_LANG_ID}
     />
   );
 }

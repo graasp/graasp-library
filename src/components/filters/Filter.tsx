@@ -5,7 +5,6 @@ import { Box, Button, Skeleton, Stack, Typography } from '@mui/material';
 
 import { GRAASP_COLOR } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';
-import { buildSearchFilterPopperButtonId } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
 import { FilterPopper, FilterPopperProps } from './FilterPopper';
 
@@ -17,6 +16,7 @@ type FilterProps = {
   onClearOptions: FilterPopperProps['onClearOptions'];
   onOptionChange: FilterPopperProps['onOptionChange'];
   id: string;
+  buttonId: string;
   options?: FilterPopperProps['options'];
 };
 
@@ -28,6 +28,7 @@ export const Filter = ({
   onClearOptions,
   onOptionChange,
   id,
+  buttonId,
   options,
 }: FilterProps) => {
   const { t } = useLibraryTranslation();
@@ -67,7 +68,7 @@ export const Filter = ({
     <Skeleton width="100%" />
   ) : (
     <Button
-      id={buildSearchFilterPopperButtonId('lang')}
+      id={buttonId}
       onClick={togglePopper}
       variant="text"
       fullWidth

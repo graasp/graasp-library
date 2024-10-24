@@ -189,7 +189,7 @@ const FilterHeader: FC<FilterHeaderProps> = ({
     />,
     <LangFilter
       key={CategoryType.Language}
-      title={translateCategories(CategoryType.Language)}
+      title={t(LIBRARY.SEARCH_FILTER_LANG_TITLE)}
       selectedOptions={langs}
       setLangs={setLangs}
     />,

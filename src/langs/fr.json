@@ -126,5 +126,6 @@
   "COPY_MODAL_EMPTY_FOLDER": "Le dossier est vide.",
   "COPY_MODAL_HOME_TITLE": "Accueil",
   "COPY_MODAL_RECENT_TITLE": "Éléments récents",
-  "COPY_MODAL_SUBMIT_BUTTON": "Valider"
+  "COPY_MODAL_SUBMIT_BUTTON": "Valider",
+  "SEARCH_FILTER_LANG_TITLE": "Langues"
 }

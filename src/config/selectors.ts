@@ -97,3 +97,5 @@ export const LIBRARY_ACTION_GROUP_POP_UP_BUTTONS_ID =
 export const CHILD_CARD_COPY_BUTTON_ID = 'childCardCopyButton';
 export const buildCollectionCardCopyButtonId = (id: string) =>
   `collectionCardCopyButton-${id}`;
+export const SEARCH_FILTER_LANG_ID = 'searchFilterLang';
+export const SEARCH_FILTER_POPPER_LANG_ID = 'searchFilterPopperLang';
