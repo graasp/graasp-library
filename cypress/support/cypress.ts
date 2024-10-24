@@ -20,7 +20,6 @@ declare global {
         itemLikes?: MockItemLike[];
         getLikedItemsError?: boolean;
         getItemError?: boolean;
-        getTagsError?: boolean;
         getItemThumbnailError?: boolean;
         getPublishedItemsInCategoriesError?: boolean;
         tags?: { id: string; name: string }[];

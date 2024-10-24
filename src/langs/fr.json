@@ -54,7 +54,7 @@
   "COLLECTION_CATEGORIES_TITLE": "Catégories",
   "CREATE_BUTTON_TOOLTIP": "Créez votre propre collection",
   "COLLECTION_TAGS_TITLE": "Tags",
-  "COLLECTION_LANGUAGES_TITLE": "Langues",
+  "COLLECTION_LANGUAGE_TITLE": "Langue",
   "PROFILE_BUTTON": "Compte",
   "COLLECTIONS_COUNT_MESSAGE_one": "{{count}} collection disponible",
   "COLLECTIONS_COUNT_MESSAGE_other": "{{count}} collections disponibles",
@@ -126,5 +126,6 @@
   "COPY_MODAL_EMPTY_FOLDER": "Le dossier est vide.",
   "COPY_MODAL_HOME_TITLE": "Accueil",
   "COPY_MODAL_RECENT_TITLE": "Éléments récents",
-  "COPY_MODAL_SUBMIT_BUTTON": "Valider"
+  "COPY_MODAL_SUBMIT_BUTTON": "Valider",
+  "SEARCH_FILTER_LANG_TITLE": "Langues"
 }
