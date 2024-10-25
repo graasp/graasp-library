@@ -7,14 +7,13 @@ import {
   buildSearchFilterCategoryId,
   buildSearchFilterPopperButtonId,
 } from '../../config/selectors';
-import { Filter } from './Filter';
+import { Filter, FilterProps } from './Filter';
 
-type FilterProps = {
+type CategoryFilterProps = {
   category: string;
   title: string;
   options?: Category[];
-  // IDs of selected options.
-  selectedOptions: string[];
+  selectedOptionIds: FilterProps['selectedOptionIds'];
   onOptionChange: (key: string, newValue: boolean) => void;
   onClearOptions: () => void;
   isLoading: boolean;
@@ -27,9 +26,9 @@ export function CategoryFilter({
   onOptionChange,
   onClearOptions,
   options,
-  selectedOptions,
+  selectedOptionIds,
   isLoading,
-}: FilterProps) {
+}: CategoryFilterProps) {
   const { t: translateCategories } = useCategoriesTranslation();
 
   return (
@@ -39,7 +38,7 @@ export function CategoryFilter({
       title={title}
       isLoading={isLoading}
       options={options?.map((c) => [c.id, translateCategories(c.name)])}
-      selectedOptions={selectedOptions}
+      selectedOptionIds={selectedOptionIds}
       onOptionChange={onOptionChange}
       onClearOptions={onClearOptions}
     />

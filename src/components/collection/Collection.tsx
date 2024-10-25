@@ -76,7 +76,7 @@ const Collection = ({ id }: Props) => {
           canPublish={canPublish}
           isPublished={
             isLoadingPublishedEntry ||
-            (!!itemPublishEntry && !isErrorPublishedEntry)
+            (Boolean(itemPublishEntry) && !isErrorPublishedEntry)
           }
           currentMember={currentMember}
         />

@@ -172,7 +172,7 @@ const FilterHeader: FC<FilterHeaderProps> = ({
       category={CategoryType.Level}
       title={translateCategories(CategoryType.Level)}
       options={levelList}
-      selectedOptions={selectedLevelOptions}
+      selectedOptionIds={selectedLevelOptions}
       onOptionChange={onFilterChanged}
       onClearOptions={() => onClearCategory(levelList?.map((l) => l.id))}
       isLoading={isCategoriesLoading}
@@ -182,7 +182,7 @@ const FilterHeader: FC<FilterHeaderProps> = ({
       category={CategoryType.Discipline}
       title={translateCategories(CategoryType.Discipline)}
       options={disciplineList}
-      selectedOptions={selectedDisciplineOptions}
+      selectedOptionIds={selectedDisciplineOptions}
       onOptionChange={onFilterChanged}
       onClearOptions={() => onClearCategory(disciplineList?.map((d) => d.id))}
       isLoading={isCategoriesLoading}
@@ -190,7 +190,7 @@ const FilterHeader: FC<FilterHeaderProps> = ({
     <LangFilter
       key={CategoryType.Language}
       title={t(LIBRARY.SEARCH_FILTER_LANG_TITLE)}
-      selectedOptions={langs}
+      selectedOptionIds={langs}
       setLangs={setLangs}
     />,
   ];

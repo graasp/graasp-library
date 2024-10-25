@@ -33,8 +33,7 @@ export type FilterPopperProps = {
   open: boolean;
   anchorEl: HTMLElement | null;
   options?: [k: string, v: string][];
-  // IDs of selected options.
-  selectedOptions: string[];
+  selectedOptionIds: string[];
   onOptionChange: (id: string, newSelected: boolean) => void;
   onClearOptions: () => void;
 };
@@ -46,7 +45,7 @@ export const FilterPopper = React.forwardRef<HTMLDivElement, FilterPopperProps>(
       anchorEl,
       onOptionChange,
       open,
-      selectedOptions,
+      selectedOptionIds,
       onClearOptions,
     },
     ref,
@@ -67,7 +66,7 @@ export const FilterPopper = React.forwardRef<HTMLDivElement, FilterPopperProps>(
           <Grow {...TransitionProps}>
             <StyledPopper>
               {options?.sort(compare).map(([k, v], idx) => {
-                const isSelected = selectedOptions.includes(k);
+                const isSelected = selectedOptionIds.includes(k);
                 return (
                   <Stack
                     key={k}

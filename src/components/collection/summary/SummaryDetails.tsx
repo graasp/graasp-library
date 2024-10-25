@@ -127,11 +127,9 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
     ?.filter((c) => c.category.type === CategoryType.Discipline)
     ?.map((c) => c.category);
 
-  let langValue = langs[DEFAULT_LANG];
-  if (collection.lang in langs) {
-    // @ts-ignore
-    langValue = langs[collection.lang];
-  }
+  const langKey = collection.lang in langs ? collection.lang : DEFAULT_LANG;
+  // @ts-ignore
+  const langValue = langs[langKey];
 
   return (
     <Grid

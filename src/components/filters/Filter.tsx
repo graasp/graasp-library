@@ -8,10 +8,9 @@ import { useLibraryTranslation } from '../../config/i18n';
 import LIBRARY from '../../langs/constants';
 import { FilterPopper, FilterPopperProps } from './FilterPopper';
 
-type FilterProps = {
+export type FilterProps = {
   title: string;
-  // IDs of selected options.
-  selectedOptions: string[];
+  selectedOptionIds: string[];
   isLoading?: boolean;
   onClearOptions: FilterPopperProps['onClearOptions'];
   onOptionChange: FilterPopperProps['onOptionChange'];
@@ -20,10 +19,9 @@ type FilterProps = {
   options?: FilterPopperProps['options'];
 };
 
-// eslint-disable-next-line import/prefer-default-export
 export const Filter = ({
   title,
-  selectedOptions,
+  selectedOptionIds,
   isLoading,
   onClearOptions,
   onOptionChange,
@@ -85,16 +83,16 @@ export const Filter = ({
         whiteSpace="nowrap"
         width="100%"
         textAlign="left"
-        color={selectedOptions.length ? 'black' : 'gray'}
+        color={selectedOptionIds.length ? 'black' : 'gray'}
         variant="h6"
         textOverflow="ellipsis"
         overflow="hidden"
       >
-        {options?.find((o) => o[0] === selectedOptions[0])?.[1] ??
+        {options?.find((o) => o[0] === selectedOptionIds[0])?.[1] ??
           t(LIBRARY.FILTER_DROPDOWN_NO_FILTER)}
       </Typography>
 
-      {selectedOptions.length > 1 && (
+      {selectedOptionIds.length > 1 && (
         <Box
           style={{
             color: GRAASP_COLOR,
@@ -102,7 +100,7 @@ export const Filter = ({
             fontWeight: 'bold',
           }}
         >
-          {`+${selectedOptions.length - 1}`}
+          {`+${selectedOptionIds.length - 1}`}
         </Box>
       )}
     </Button>
@@ -128,7 +126,7 @@ export const Filter = ({
         open={showPopper}
         options={options}
         anchorEl={popperAnchor.current}
-        selectedOptions={selectedOptions}
+        selectedOptionIds={selectedOptionIds}
         onOptionChange={onOptionChange}
         onClearOptions={onClearOptions}
       />

@@ -4,26 +4,25 @@ import {
   SEARCH_FILTER_LANG_ID,
   SEARCH_FILTER_POPPER_LANG_ID,
 } from '../../config/selectors';
-import { Filter } from './Filter';
+import { Filter, FilterProps } from './Filter';
 
 type LangFilterProps = {
   title: string;
-  // IDs of selected options.
-  selectedOptions: string[];
+  selectedOptionIds: FilterProps['selectedOptionIds'];
   setLangs: (langs: string[]) => void;
 };
 
 // eslint-disable-next-line react/function-component-definition
 export function LangFilter({
   title,
-  selectedOptions,
+  selectedOptionIds,
   setLangs,
 }: LangFilterProps) {
   const onLangChange = (option: string) => {
-    if (selectedOptions.includes(option)) {
-      setLangs(selectedOptions.filter((l) => l !== option));
+    if (selectedOptionIds.includes(option)) {
+      setLangs(selectedOptionIds.filter((l) => l !== option));
     } else {
-      setLangs([...selectedOptions, option]);
+      setLangs([...selectedOptionIds, option]);
     }
   };
 
@@ -36,7 +35,7 @@ export function LangFilter({
       id={SEARCH_FILTER_LANG_ID}
       title={title}
       options={Object.entries(langs)}
-      selectedOptions={selectedOptions}
+      selectedOptionIds={selectedOptionIds}
       onOptionChange={onLangChange}
       onClearOptions={clearLang}
       buttonId={SEARCH_FILTER_POPPER_LANG_ID}
