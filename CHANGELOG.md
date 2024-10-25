@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.11.0](https://github.com/graasp/graasp-library/compare/v1.10.2...v1.11.0) (2024-10-25)
+
+
+### Features
+
+* use item lang instead of category lang ([#712](https://github.com/graasp/graasp-library/issues/712)) ([5977824](https://github.com/graasp/graasp-library/commit/5977824397671badab2a549dcdfbb4b661e96007))
+
+
+### Bug Fixes
+
+* **deps:** update dependency next to v14.2.10 [security] ([#692](https://github.com/graasp/graasp-library/issues/692)) ([748b2db](https://github.com/graasp/graasp-library/commit/748b2db936ee9cf265c94269dfd02b5c37fc1087))
+* **deps:** update mui (non-major) ([#640](https://github.com/graasp/graasp-library/issues/640)) ([6bcecb5](https://github.com/graasp/graasp-library/commit/6bcecb546ad353f91f4f85ab0f47e45e20aa15fd))
+* upgrade mui v6 ([#711](https://github.com/graasp/graasp-library/issues/711)) ([5e1edb3](https://github.com/graasp/graasp-library/commit/5e1edb3ebe9b0ab8b9530206d9053bc1a0a2004d))
+
 ## [1.10.2](https://github.com/graasp/graasp-library/compare/v1.10.1...v1.10.2) (2024-10-11)
 
 
