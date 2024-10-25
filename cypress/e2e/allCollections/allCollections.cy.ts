@@ -1,17 +1,20 @@
 import { CategoryType } from '@graasp/sdk';
-import { namespaces } from '@graasp/translations';
+import { langs, namespaces } from '@graasp/translations';
 
-import { i18nConfig } from '../../../src/config/i18n';
+import { LIBRARY_NAMESPACE, i18nConfig } from '../../../src/config/i18n';
 import { ALL_COLLECTIONS_ROUTE } from '../../../src/config/routes';
 import {
   ALL_COLLECTIONS_GRID_ID,
   ALL_COLLECTIONS_TITLE_ID,
   ENABLE_IN_DEPTH_SEARCH_CHECKBOX_ID,
+  SEARCH_FILTER_LANG_ID,
+  SEARCH_FILTER_POPPER_LANG_ID,
   buildCategoryOptionSelector,
   buildCollectionCardGridId,
   buildSearchFilterCategoryId,
   buildSearchFilterPopperButtonId,
 } from '../../../src/config/selectors';
+import LIBRARY from '../../../src/langs/constants';
 import { SAMPLE_CATEGORIES } from '../../fixtures/categories';
 import { buildPublicAndPrivateEnvironments } from '../../fixtures/environment';
 import { PUBLISHED_ITEMS } from '../../fixtures/items';
@@ -45,17 +48,10 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
         'contain.text',
         i18n.t(CategoryType.Discipline, { ns: namespaces.categories }),
       );
-      cy.get(`#${buildSearchFilterCategoryId(CategoryType.Language)}`).should(
+      cy.get(`#${SEARCH_FILTER_LANG_ID}`).should(
         'contain.text',
-        i18n.t(CategoryType.Language, { ns: namespaces.categories }),
+        i18n.t(LIBRARY.SEARCH_FILTER_LANG_TITLE, { ns: LIBRARY_NAMESPACE }),
       );
-      // todo: add back when license filtering is enabled
-      // cy.get(`#${buildSearchFilterCategoryId(CATEGORY_TYPES.LICENSE)}`).should(
-      //   'contain.text',
-      //   // todo: add translations
-      //   // i18n.t(CATEGORIES.EDUCATION_LEVEL, { ns: namespaces.categories }),
-      //   'License',
-      // );
 
       // verify 2 item cards are displayed (without children)
       cy.get(`#${ALL_COLLECTIONS_GRID_ID}`);
@@ -75,11 +71,7 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
 
     it('display menu options', () => {
       cy.wait(['@getCategories']);
-      [
-        CategoryType.Level,
-        CategoryType.Discipline,
-        CategoryType.Language,
-      ].forEach((categoryType) => {
+      [CategoryType.Level, CategoryType.Discipline].forEach((categoryType) => {
         cy.get(
           `#not-sticky button#${buildSearchFilterPopperButtonId(categoryType)}`,
         )
@@ -94,6 +86,16 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
           // bug: category pop up does not open
           // .and('be.visible');
         });
+      });
+    });
+
+    it('display language options', () => {
+      cy.wait(['@getCategories']);
+      cy.get(`#not-sticky button#${SEARCH_FILTER_POPPER_LANG_ID}`)
+        .filter(':visible')
+        .click();
+      Object.entries(langs).forEach((l, idx) => {
+        cy.get(buildCategoryOptionSelector(idx)).contains(l[1]);
       });
     });
 

@@ -4,7 +4,7 @@ import { validate } from 'uuid';
 
 import { useContext, useEffect } from 'react';
 
-import { Box } from '@mui/material';
+import { Box, Skeleton } from '@mui/material';
 
 import {
   AccountType,
@@ -27,11 +27,7 @@ type Props = {
 };
 const Collection = ({ id }: Props) => {
   const { hooks, mutations } = useContext(QueryClientContext);
-  const {
-    data: collection,
-    isLoading: isLoadingItem,
-    isError,
-  } = hooks.useItem(id);
+  const { data: collection, isLoading: isLoadingItem } = hooks.useItem(id);
   const { data: currentMember } = hooks.useCurrentMember();
   // get item published
   const {
@@ -68,47 +64,50 @@ const Collection = ({ id }: Props) => {
     );
   }
 
-  if (isError) {
-    return (
-      <Box id={id} p={5}>
-        <Error code={ERROR_UNEXPECTED_ERROR_CODE} />
-      </Box>
-    );
-  }
-
   if (currentMember?.type === AccountType.Guest) {
     return null;
   }
+  if (collection) {
+    return (
+      <>
+        <UnpublishedItemAlert
+          itemId={id}
+          canRead={canRead}
+          canPublish={canPublish}
+          isPublished={
+            isLoadingPublishedEntry ||
+            (Boolean(itemPublishEntry) && !isErrorPublishedEntry)
+          }
+          currentMember={currentMember}
+        />
+        <Box
+          id={id}
+          px={{
+            xs: 0,
+            sm: 2,
+            md: 5,
+          }}
+          py={5}
+        >
+          <Summary
+            collection={collection}
+            publishedRoot={itemPublishEntry}
+            isLoading={isLoadingItem}
+            totalViews={itemPublishEntry?.totalViews ?? 0}
+          />
+        </Box>
+      </>
+    );
+  }
+
+  if (isLoadingItem) {
+    return <Skeleton />;
+  }
 
   return (
-    <>
-      <UnpublishedItemAlert
-        itemId={id}
-        canRead={canRead}
-        canPublish={canPublish}
-        isPublished={
-          isLoadingPublishedEntry ||
-          (!!itemPublishEntry && !isErrorPublishedEntry)
-        }
-        currentMember={currentMember}
-      />
-      <Box
-        id={id}
-        px={{
-          xs: 0,
-          sm: 2,
-          md: 5,
-        }}
-        py={5}
-      >
-        <Summary
-          collection={collection}
-          publishedRoot={itemPublishEntry}
-          isLoading={isLoadingItem}
-          totalViews={itemPublishEntry?.totalViews ?? 0}
-        />
-      </Box>
-    </>
+    <Box id={id} p={5}>
+      <Error code={ERROR_UNEXPECTED_ERROR_CODE} />
+    </Box>
   );
 };
 

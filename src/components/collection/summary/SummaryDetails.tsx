@@ -18,6 +18,7 @@ import {
   DiscriminatedItem,
   formatDate,
 } from '@graasp/sdk';
+import { DEFAULT_LANG, langs } from '@graasp/translations';
 
 import { CATEGORY_COLORS, UrlSearch } from '../../../config/constants';
 import {
@@ -90,7 +91,7 @@ const CategoryDisplay = ({
 };
 
 type SummaryDetailsProps = {
-  collection?: DiscriminatedItem;
+  collection: DiscriminatedItem;
   publishedRootItem?: DiscriminatedItem;
   lang: string;
   isLoading: boolean;
@@ -126,10 +127,9 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
     ?.filter((c) => c.category.type === CategoryType.Discipline)
     ?.map((c) => c.category);
 
-  // TODO: should use item language
-  const languages = itemCategories
-    ?.filter((c) => c.category.type === CategoryType.Language)
-    ?.map((c) => c.category);
+  const langKey = collection.lang in langs ? collection.lang : DEFAULT_LANG;
+  // @ts-ignore
+  const langValue = langs[langKey];
 
   return (
     <Grid
@@ -175,17 +175,10 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
       <Grid size={{ xs: 12, sm: 6, md: 4 }}>
         <DetailCard id={SUMMARY_LANGUAGES_CONTAINER_ID}>
           <Typography variant="body1" fontWeight="bold">
-            {t(LIBRARY.COLLECTION_LANGUAGES_TITLE)}
+            {t(LIBRARY.COLLECTION_LANGUAGE_TITLE)}
           </Typography>
           <Stack gap={1} direction="row" flexWrap="wrap">
-            {languages ? (
-              <CategoryDisplay
-                categories={languages}
-                emptyText={t(LIBRARY.SUMMARY_DETAILS_NO_LANGUAGES)}
-              />
-            ) : (
-              <Skeleton width="100%" />
-            )}
+            <Chip label={langValue} />
           </Stack>
         </DetailCard>
       </Grid>

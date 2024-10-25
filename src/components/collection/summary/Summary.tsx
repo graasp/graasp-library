@@ -16,7 +16,7 @@ import SummaryDetails from './SummaryDetails';
 import SummaryHeader from './SummaryHeader';
 
 type SummaryProps = {
-  collection?: DiscriminatedItem;
+  collection: DiscriminatedItem;
   publishedRoot?: ItemPublished | null;
   isLoading: boolean;
   totalViews: number;
