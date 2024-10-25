@@ -8,7 +8,7 @@ import {
   CardActionArea,
   CardActions,
   CardContent,
-  Grid,
+  Grid2 as Grid,
   styled,
   useTheme,
 } from '@mui/material';
@@ -100,15 +100,14 @@ export const SubItemCard: React.FC<SubItemCardProps> = ({
     >
       <Grid container>
         <Grid
-          item
-          xs={12}
+          size={12}
           display="flex"
           alignItems="center"
           justifyContent="space-between"
         >
           {thumbnail}
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>
           <Typography
             maxHeight="100%"
             noWrap
@@ -120,7 +119,7 @@ export const SubItemCard: React.FC<SubItemCardProps> = ({
             {name}
           </Typography>
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>
           <Typography variant="body1" color="GrayText">
             {subtext}
           </Typography>

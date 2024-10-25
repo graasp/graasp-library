@@ -2,7 +2,7 @@
 
 import { useContext, useEffect, useState } from 'react';
 
-import { Grid, styled } from '@mui/material';
+import { Grid2 as Grid, styled } from '@mui/material';
 import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
@@ -62,13 +62,13 @@ const Footer = () => {
   return (
     <StyledFooter>
       <Grid container justifyContent="space-between" alignItems="center">
-        <Grid item>
+        <Grid>
           <Typography variant="subtitle2">
             &copy;
             {`${new Date().getFullYear()} Graasp Association`}
           </Typography>
         </Grid>
-        <Grid item>
+        <Grid>
           <FormControl size="small">
             <Select
               variant="outlined"
