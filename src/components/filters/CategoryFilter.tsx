@@ -1,22 +1,18 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 
-import { Category } from '@graasp/sdk';
-
-import { useCategoriesTranslation } from '../../config/i18n';
 import {
   buildSearchFilterCategoryId,
   buildSearchFilterPopperButtonId,
 } from '../../config/selectors';
+import { QueryClientContext } from '../QueryClientContext';
 import { Filter, FilterProps } from './Filter';
 
 type CategoryFilterProps = {
   category: string;
   title: string;
-  options?: Category[];
-  selectedOptionIds: FilterProps['selectedOptionIds'];
-  onOptionChange: (key: string, newValue: boolean) => void;
+  selectedOptions: FilterProps['selectedOptions'];
+  onOptionChange: FilterProps['onOptionChange'];
   onClearOptions: () => void;
-  isLoading: boolean;
 };
 
 // eslint-disable-next-line react/function-component-definition
@@ -25,20 +21,25 @@ export function CategoryFilter({
   title,
   onOptionChange,
   onClearOptions,
-  options,
-  selectedOptionIds,
-  isLoading,
+  selectedOptions,
 }: CategoryFilterProps) {
-  const { t: translateCategories } = useCategoriesTranslation();
+  const { hooks } = useContext(QueryClientContext);
+
+  const [facetQuery, setFacetQuery] = useState<string>('');
+  const { data: tags } = hooks.useSearchFacets({
+    facetName: category,
+    facetQuery,
+  });
 
   return (
     <Filter
+      search={facetQuery}
+      setSearch={setFacetQuery}
       id={buildSearchFilterCategoryId(category)}
       buttonId={buildSearchFilterPopperButtonId(category)}
       title={title}
-      isLoading={isLoading}
-      options={options?.map((c) => [c.id, translateCategories(c.name)])}
-      selectedOptionIds={selectedOptionIds}
+      options={tags?.facetHits?.map(({ value }) => value) ?? []}
+      selectedOptions={selectedOptions}
       onOptionChange={onOptionChange}
       onClearOptions={onClearOptions}
     />

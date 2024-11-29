@@ -16,6 +16,7 @@ import {
   Typography,
 } from '@mui/material';
 
+import { TagCategory } from '@graasp/sdk';
 import { Button } from '@graasp/ui';
 
 import { UrlSearch } from '../../config/constants';
@@ -28,7 +29,7 @@ import LIBRARY from '../../langs/constants';
 import { ItemOrSearchedItem } from '../../utils/types';
 import { QueryClientContext } from '../QueryClientContext';
 import CollectionsGrid from '../collection/CollectionsGrid';
-import FilterHeader from '../filters/FilterHeader';
+import FilterHeader, { TagFilters } from '../filters/FilterHeader';
 import MainWrapper from '../layout/MainWrapper';
 
 type AllCollectionsProps = {};
@@ -39,7 +40,11 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
   const params = useSearchParams();
   const { replace } = useRouter();
 
-  const [filters, setFilters] = useState<string[][]>([]);
+  const [filters, setFilters] = useState<TagFilters>({
+    [TagCategory.Discipline]: [],
+    [TagCategory.Level]: [],
+    [TagCategory.ResourceType]: [],
+  });
   const [langs, setLangs] = useState<string[]>([]);
   const [shouldIncludeContent, setShouldIncludeContent] =
     useState<boolean>(false);
@@ -52,24 +57,38 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
     error,
   } = hooks.useSearchPublishedItems({
     query: searchKeywords,
-    categories: filters,
+    tags: filters,
     langs,
     page,
     // does not show children if option is disabled
     isPublishedRoot: !shouldIncludeContent,
   });
 
+  const getArray = (id: string[] | string | null) => {
+    if (!id) {
+      return [];
+    }
+    return Array.isArray(id) ? id : [id];
+  };
+
   useEffect(() => {
     if (params) {
+      // WARNING: suppose only one category is given
       const keywordSearch = params.get(UrlSearch.KeywordSearch);
       if (keywordSearch && !Array.isArray(keywordSearch)) {
         setSearchKeywords(keywordSearch);
       }
-      const categoryId = params.get(UrlSearch.CategorySearch);
-      // todo: this only works when one category is given
-      if (categoryId) {
-        setFilters(Array.isArray(categoryId) ? [categoryId] : [[categoryId]]);
-      }
+      const disciplineId = getArray(params.get(UrlSearch.DisciplineTagSearch));
+      const levelId = getArray(params.get(UrlSearch.LevelTagSearch));
+      const resourceTypeId = getArray(
+        params.get(UrlSearch.ResourceTypeTagSearch),
+      );
+
+      setFilters({
+        [TagCategory.Discipline]: disciplineId,
+        [TagCategory.Level]: levelId,
+        [TagCategory.ResourceType]: resourceTypeId,
+      });
     }
   }, []);
 
@@ -89,7 +108,7 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
     collections?.results?.[0]?.hits ?? [],
   );
 
-  const onFiltersChanged = (newFilters: string[][]) => {
+  const onFiltersChanged = (newFilters: TagFilters) => {
     setFilters(newFilters);
   };
 
@@ -115,7 +134,7 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
             onChangeSearch={setSearchKeywords}
             onSearch={setSearchKeywords}
             searchPreset={searchKeywords}
-            categoryPreset={filters}
+            filters={filters}
             langs={langs}
             setLangs={setLangs}
             isLoadingResults={false}

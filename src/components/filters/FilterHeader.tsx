@@ -1,6 +1,4 @@
-import groupBy from 'lodash.groupby';
-
-import React, { FC, useContext, useEffect, useRef, useState } from 'react';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 
 import {
   Box,
@@ -13,7 +11,7 @@ import {
   styled,
 } from '@mui/material';
 
-import { CategoryType } from '@graasp/sdk';
+import { Tag, TagCategory } from '@graasp/sdk';
 
 import {
   useCategoriesTranslation,
@@ -24,7 +22,6 @@ import {
   ENABLE_IN_DEPTH_SEARCH_CHECKBOX_ID,
 } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
-import { QueryClientContext } from '../QueryClientContext';
 import Search from '../search/Search';
 import { CategoryFilter } from './CategoryFilter';
 import { LangFilter } from './LangFilter';
@@ -56,80 +53,62 @@ const StyledStickyFilters = styled(Box)(() => ({
   },
 }));
 
+export type TagFilters = {
+  [key in TagCategory]: Tag['name'][];
+};
+
 type FilterHeaderProps = {
-  onFiltersChanged: (selectedFilters: string[][]) => void;
+  onFiltersChanged: (selectedFilters: TagFilters) => void;
   onIncludeContentChange: (newValue: boolean) => void;
   shouldIncludeContent: boolean;
   onChangeSearch?: (searchKeywords: string) => void;
   onSearch: (searchKeywords: string) => void;
   searchPreset?: string;
-  categoryPreset?: string[][];
   isLoadingResults: boolean;
   setLangs: (langs: string[]) => void;
   langs: string[];
+
+  filters: TagFilters;
 };
 
-const FilterHeader: FC<FilterHeaderProps> = ({
+// eslint-disable-next-line react/function-component-definition
+export function FilterHeader({
   onFiltersChanged,
   onChangeSearch,
   setLangs,
   onSearch,
   searchPreset,
-  categoryPreset,
   isLoadingResults,
   onIncludeContentChange,
   shouldIncludeContent,
   langs,
-}) => {
+
+  filters,
+}: FilterHeaderProps): ReactNode {
   const { t: translateCategories } = useCategoriesTranslation();
   const { t } = useLibraryTranslation();
 
   // filters are of the form ["a1,a2", "b1"] where the items wanted should have (a1 OR a2) AND b1
-  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const filterContainer = useRef<HTMLDivElement>(null);
   const [sticky, setSticky] = useState<boolean>(false);
 
-  const { hooks } = useContext(QueryClientContext);
-  const { data: categories, isLoading: isCategoriesLoading } =
-    hooks.useCategories();
+  const onFilterChanged =
+    (category: TagCategory) => (id: string, isNewValue: boolean) => {
+      let newFilters;
+      if (isNewValue) {
+        newFilters = { ...filters, [category]: [...filters[category], id] };
+      } else {
+        newFilters = {
+          ...filters,
+          [category]: filters[category].filter((it) => it !== id),
+        };
+      }
+      onFiltersChanged(newFilters);
+    };
 
-  const allCategories = groupBy(categories, (entry) => entry.type);
-  const levelList = allCategories[CategoryType.Level];
-  const disciplineList = allCategories[CategoryType.Discipline];
-
-  useEffect(() => {
-    setSelectedFilters(categoryPreset ? categoryPreset.flat() : []);
-  }, [categoryPreset]);
-
-  const groupedByCategories = (filters: string[]): string[][] => {
-    if (allCategories) {
-      const groupedFilters = Object.values(allCategories)
-        .map((cats) =>
-          cats.filter(({ id }) => filters.includes(id)).map(({ id }) => id),
-        )
-        .filter((r) => r.length);
-      return groupedFilters;
-    }
-    return [filters];
-  };
-
-  const onFilterChanged = (id: string, newValue: boolean) => {
-    let newFilters;
-    if (newValue) {
-      newFilters = [...selectedFilters, id];
-    } else {
-      newFilters = selectedFilters.filter((it) => it !== id);
-    }
-    setSelectedFilters(newFilters);
-    onFiltersChanged(groupedByCategories(newFilters));
-  };
-
-  const onClearCategory = (categoryIds?: string[]) => {
-    const newFilters: string[] = selectedFilters.filter(
-      (activeFilterId) => !categoryIds?.includes(activeFilterId),
-    );
-    setSelectedFilters(newFilters);
-    onFiltersChanged(groupedByCategories(newFilters));
+  const onClearCategory = (category: TagCategory) => {
+    const newFilters = { ...filters, [category]: [] };
+    onFiltersChanged(newFilters);
   };
 
   useEffect(() => {
@@ -159,38 +138,27 @@ const FilterHeader: FC<FilterHeaderProps> = ({
     />
   );
 
-  const selectedDisciplineOptions = selectedFilters.filter((id) =>
-    disciplineList?.find((opt) => opt.id === id),
-  );
-  const selectedLevelOptions = selectedFilters.filter((id) =>
-    levelList?.find((opt) => opt.id === id),
-  );
-
-  const filters = [
+  const categoryFilters = [
     <CategoryFilter
-      key={CategoryType.Level}
-      category={CategoryType.Level}
-      title={translateCategories(CategoryType.Level)}
-      options={levelList}
-      selectedOptionIds={selectedLevelOptions}
-      onOptionChange={onFilterChanged}
-      onClearOptions={() => onClearCategory(levelList?.map((l) => l.id))}
-      isLoading={isCategoriesLoading}
+      key={TagCategory.Level}
+      category={TagCategory.Level}
+      title={translateCategories(TagCategory.Level)}
+      selectedOptions={filters[TagCategory.Level]}
+      onOptionChange={onFilterChanged(TagCategory.Level)}
+      onClearOptions={() => onClearCategory(TagCategory.Level)}
     />,
     <CategoryFilter
-      key={CategoryType.Discipline}
-      category={CategoryType.Discipline}
-      title={translateCategories(CategoryType.Discipline)}
-      options={disciplineList}
-      selectedOptionIds={selectedDisciplineOptions}
-      onOptionChange={onFilterChanged}
-      onClearOptions={() => onClearCategory(disciplineList?.map((d) => d.id))}
-      isLoading={isCategoriesLoading}
+      key={TagCategory.Discipline}
+      category={TagCategory.Discipline}
+      title={translateCategories(TagCategory.Discipline)}
+      selectedOptions={filters[TagCategory.Discipline]}
+      onOptionChange={onFilterChanged(TagCategory.Discipline)}
+      onClearOptions={() => onClearCategory(TagCategory.Discipline)}
     />,
     <LangFilter
-      key={CategoryType.Language}
+      key="language"
       title={t(LIBRARY.SEARCH_FILTER_LANG_TITLE)}
-      selectedOptionIds={langs}
+      selectedOptions={langs}
       setLangs={setLangs}
     />,
   ];
@@ -215,7 +183,7 @@ const FilterHeader: FC<FilterHeaderProps> = ({
             spacing={2}
             justifyContent="space-evenly"
           >
-            {filters}
+            {categoryFilters}
           </Stack>
         </Container>
       </StyledStickyFilters>
@@ -245,7 +213,7 @@ const FilterHeader: FC<FilterHeaderProps> = ({
         justifyContent="space-evenly"
         divider={filterDivider}
       >
-        {filters}
+        {categoryFilters}
       </StyledFilterContainer>
       <Stack alignItems="end">
         <FormControlLabel
@@ -264,6 +232,6 @@ const FilterHeader: FC<FilterHeaderProps> = ({
       </Stack>
     </Stack>
   );
-};
+}
 
 export default FilterHeader;

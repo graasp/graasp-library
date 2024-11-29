@@ -32,8 +32,8 @@ const StyledPopper = styled(Stack)(() => ({
 export type FilterPopperProps = {
   open: boolean;
   anchorEl: HTMLElement | null;
-  options?: [k: string, v: string][];
-  selectedOptionIds: string[];
+  options?: string[];
+  selectedOptions: string[];
   onOptionChange: (id: string, newSelected: boolean) => void;
   onClearOptions: () => void;
 };
@@ -45,7 +45,7 @@ export const FilterPopper = React.forwardRef<HTMLDivElement, FilterPopperProps>(
       anchorEl,
       onOptionChange,
       open,
-      selectedOptionIds,
+      selectedOptions,
       onClearOptions,
     },
     ref,
@@ -62,14 +62,13 @@ export const FilterPopper = React.forwardRef<HTMLDivElement, FilterPopperProps>(
       >
         {/* @ts-ignore */}
         {({ TransitionProps }: { TransitionProps: MUITransitionProps }) => (
-          // eslint-disable-next-line react/jsx-props-no-spreading
           <Grow {...TransitionProps}>
             <StyledPopper>
-              {options?.sort(compare).map(([k, v], idx) => {
-                const isSelected = selectedOptionIds.includes(k);
+              {options?.sort(compare).map((v, idx) => {
+                const isSelected = selectedOptions.includes(v);
                 return (
                   <Stack
-                    key={k}
+                    key={v}
                     id={buildCategoryOptionId(idx)}
                     direction="row"
                     alignItems="center"
@@ -84,7 +83,7 @@ export const FilterPopper = React.forwardRef<HTMLDivElement, FilterPopperProps>(
                         control={
                           <Checkbox
                             checked={isSelected}
-                            onChange={() => onOptionChange(k, !isSelected)}
+                            onChange={() => onOptionChange(v, !isSelected)}
                           />
                         }
                         label={v}

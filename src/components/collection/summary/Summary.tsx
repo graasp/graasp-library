@@ -12,7 +12,7 @@ import { QueryClientContext } from '../../QueryClientContext';
 import BackButton from '../../common/BackButton';
 import ItemBreadcrumb from '../ItemBreadcrumb';
 import Items from '../Items';
-import SummaryDetails from './SummaryDetails';
+import { SummaryDetails } from './SummaryDetails';
 import SummaryHeader from './SummaryHeader';
 
 type SummaryProps = {
@@ -49,7 +49,6 @@ const Summary = ({
         collection={collection}
         isLogged={member?.id !== undefined}
         isLoading={isLoading}
-        tags={collection?.settings?.tags}
         totalViews={totalViews}
       />
       {collection?.type === ItemType.FOLDER && (

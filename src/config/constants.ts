@@ -22,7 +22,9 @@ export const MEMBER_AVATAR_MAIN_SIZE = 256;
 
 export const UrlSearch = {
   KeywordSearch: 's',
-  CategorySearch: 'category',
+  DisciplineTagSearch: 'discipline',
+  LevelTagSearch: 'level',
+  ResourceTypeTagSearch: 'resourceType',
   GACrossDomainKey: '_gl',
 };
 

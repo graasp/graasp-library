@@ -1,5 +1,4 @@
 import truncate from 'lodash.truncate';
-import Link from 'next/link';
 
 import React, { useContext } from 'react';
 
@@ -7,7 +6,6 @@ import { Favorite, Visibility } from '@mui/icons-material';
 import {
   Alert,
   Box,
-  Chip,
   Container,
   Divider,
   Skeleton,
@@ -37,13 +35,13 @@ import CardMedia from '../../common/CardMediaComponent';
 import { StyledCard } from '../../common/StyledCard';
 import Authorship from '../Authorship';
 import Badges from '../Badges';
+import { StyledChip } from './StyledChip';
 import SummaryActionButtons from './SummaryActionButtons';
 import Description from './SummaryDescription';
 
 type SummaryHeaderProps = {
   collection?: DiscriminatedItem;
   isLoading: boolean;
-  tags?: string[];
   isLogged: boolean;
   totalViews: number;
 };
@@ -52,7 +50,6 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
   collection,
   isLogged,
   isLoading,
-  tags,
   totalViews,
 }) => {
   const { t } = useLibraryTranslation();
@@ -65,6 +62,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
   const { data: likedItems } = hooks.useLikesForMember(member?.id);
   const { data: itemLikesForItem } = hooks.useLikesForItem(collection?.id);
   const likes = itemLikesForItem?.length;
+  const { data: tags } = hooks.useTagsByItem({ itemId: collection?.id });
 
   const { mutate: postItemLike } = mutations.usePostItemLike();
   const { mutate: deleteItemLike } = mutations.useDeleteItemLike();
@@ -131,7 +129,6 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
       >
         <Box
           sx={{
-            // '& .MuiPaper-root:has(img[src$=".svg"])': {
             '& .MuiPaper-root': {
               border: '1px solid #ddd',
               boxShadow: 'none',
@@ -189,16 +186,15 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
             </Stack>
             <SummaryActionButtons item={collection} isLogged={isLogged} />
           </Stack>
-          {tags && tags.length && (
+          {tags?.length ? (
             <Stack
               id={SUMMARY_TAGS_CONTAINER_ID}
               direction="row"
               flexWrap="wrap"
               spacing={1}
             >
-              {tags.map((text) => (
-                <Chip
-                  component={Link}
+              {tags.map(({ name: text }) => (
+                <StyledChip
                   href={{
                     pathname: ALL_COLLECTIONS_ROUTE,
                     query: { [UrlSearch.KeywordSearch]: text },
@@ -208,7 +204,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
                 />
               ))}
             </Stack>
-          )}
+          ) : null}
           <Description
             isLoading={isLoading}
             description={collection?.description || ''}

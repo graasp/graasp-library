@@ -1211,10 +1211,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@faker-js/faker@npm:9.0.3":
-  version: 9.0.3
-  resolution: "@faker-js/faker@npm:9.0.3"
-  checksum: 10/60ea71c31d6bd6317184736de17daee415e229cab5e10a4146a19622f3eb22f49f42345ff339dc9261f0214ca1f9b019c63fd9aac842a2d359f135102788ec90
+"@faker-js/faker@npm:9.2.0":
+  version: 9.2.0
+  resolution: "@faker-js/faker@npm:9.2.0"
+  checksum: 10/c233aaa41ebc4f4bed36c1304c399c424b9e5abca9cb8fe54ce73d4162ec7acd66f294b90c85ed7a5df774400e44f0a10364bdd41f49e72cb519a48b5948939f
   languageName: node
   linkType: hard
 
@@ -1263,34 +1263,33 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/query-client@npm:5.1.0":
-  version: 5.1.0
-  resolution: "@graasp/query-client@npm:5.1.0"
+"@graasp/query-client@github:graasp/graasp-query-client#tags":
+  version: 5.6.1
+  resolution: "@graasp/query-client@https://github.com/graasp/graasp-query-client.git#commit=735400fdc6ade17e783d24fdd8454567fc745524"
   dependencies:
-    "@tanstack/react-query": "npm:5.59.8"
-    "@tanstack/react-query-devtools": "npm:5.59.8"
+    "@tanstack/react-query": "npm:5.61.0"
+    "@tanstack/react-query-devtools": "npm:5.61.0"
     axios: "npm:1.7.7"
     http-status-codes: "npm:2.3.0"
   peerDependencies:
-    "@graasp/sdk": ^4.0.0
+    "@graasp/sdk": ^4.0.0 || ^5.0.0
     "@graasp/translations": "*"
     react: ^18.0.0
-  checksum: 10/947d033c1fd0f734fa4a048d40d5f9bbc5f08d97b0eb7268a58046619179d417cbd2ebbe87866f9ffdb6c57de87179699fb9bc95c8682842b3323d2ac0d896f7
+  checksum: 10/11ab9ee158f6a9e3bf5c4979ee4f3d4c1e3bec65003c1ee971344bb7bb66ecbe63e8c6702c1d479c97c7e8ebc1cba61964aea5d108260a35edf05f6c8c435068
   languageName: node
   linkType: hard
 
-"@graasp/sdk@npm:4.33.0":
-  version: 4.33.0
-  resolution: "@graasp/sdk@npm:4.33.0"
+"@graasp/sdk@github:graasp/graasp-sdk#tag-type-search":
+  version: 5.3.1
+  resolution: "@graasp/sdk@https://github.com/graasp/graasp-sdk.git#commit=57ec5c2d502c021a9d1584659fe8cdae24343e6b"
   dependencies:
-    "@faker-js/faker": "npm:9.0.3"
+    "@faker-js/faker": "npm:9.2.0"
     filesize: "npm:10.1.6"
     js-cookie: "npm:3.0.5"
-    validator: "npm:13.12.0"
   peerDependencies:
     date-fns: ^3 || ^4.0.0
-    uuid: ^9 || ^10
-  checksum: 10/6e0b0f661f52e1ca97b48c4b90ddc3c18e2afe7b8d3bf7818010b24bbc57f3c1ddc9bfa90c6fe2a1c05535f73ffe15956523b2557906b4a21a9a9f8b61d1647a
+    uuid: ^9 || ^10 || ^11.0.0
+  checksum: 10/0acfc52304d99d8a92f186d4f3750d2f63b9df831174c406f9c6e9779a39d3698cd89bac8722d36d2b65f07a3c08db3eb16ad4d90c5cf8bc071625e29eefc687
   languageName: node
   linkType: hard
 
@@ -2778,40 +2777,40 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/query-core@npm:5.59.6":
-  version: 5.59.6
-  resolution: "@tanstack/query-core@npm:5.59.6"
-  checksum: 10/4cd634f957175dde80ed8f2b47eb14803d959073b6dccb7868f5dd6ddce26e41820b2dfc879dfc799de0726ae640201440c7d1d95113813bbcb25b03ec05949e
+"@tanstack/query-core@npm:5.60.6":
+  version: 5.60.6
+  resolution: "@tanstack/query-core@npm:5.60.6"
+  checksum: 10/a87613d85b3a280f2fef69037dd0ad512052d49b8dc979ed289ee538452d331926a720678bbd3b4485a8b38d5baf65c42869179f2fdeefa3f7b6dda04e878e56
   languageName: node
   linkType: hard
 
-"@tanstack/query-devtools@npm:5.58.0":
-  version: 5.58.0
-  resolution: "@tanstack/query-devtools@npm:5.58.0"
-  checksum: 10/ca16c47c943ea392dfddc301f7e09ecdb0c8b905fb684b8f26b908a244e2e897679efb0ead5fa8e728711017341fdd91d8c51ebb19f746819e26ade5549f539e
+"@tanstack/query-devtools@npm:5.59.20":
+  version: 5.59.20
+  resolution: "@tanstack/query-devtools@npm:5.59.20"
+  checksum: 10/0bb2995337d78910c7677f780af42cd4285b39d618cd7876e24ec16243783d4cfe9e4d067d210d5337aefaad0a21928c5e4cb30fb4c08a09521625fcfe9c14d4
   languageName: node
   linkType: hard
 
-"@tanstack/react-query-devtools@npm:5.59.8":
-  version: 5.59.8
-  resolution: "@tanstack/react-query-devtools@npm:5.59.8"
+"@tanstack/react-query-devtools@npm:5.61.0":
+  version: 5.61.0
+  resolution: "@tanstack/react-query-devtools@npm:5.61.0"
   dependencies:
-    "@tanstack/query-devtools": "npm:5.58.0"
+    "@tanstack/query-devtools": "npm:5.59.20"
   peerDependencies:
-    "@tanstack/react-query": ^5.59.8
+    "@tanstack/react-query": ^5.61.0
     react: ^18 || ^19
-  checksum: 10/1e84af45cd6c722b296aef39ac2e7c98ef0db8c963bc43ebd802adc7077d514d06189862b02351e85878616542877af64266965147d75470cf834a23a9ee07ea
+  checksum: 10/ac4019ad58a04e21ef8fd2f5ab1e33791e3961979c25538b51a8597e9b2e448326f2d15e407bb89cb53a7f566f9bd15036dcd4573777c4bec428b79e8acdeb96
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:5.59.8":
-  version: 5.59.8
-  resolution: "@tanstack/react-query@npm:5.59.8"
+"@tanstack/react-query@npm:5.61.0":
+  version: 5.61.0
+  resolution: "@tanstack/react-query@npm:5.61.0"
   dependencies:
-    "@tanstack/query-core": "npm:5.59.6"
+    "@tanstack/query-core": "npm:5.60.6"
   peerDependencies:
     react: ^18 || ^19
-  checksum: 10/246cfa18e991782c97631ab30fc95987be81c7a25b057b65c3530a06f9e8acc98475ce8def29486be8d4c8f9ad391b9cfa2195b89e11dcd82f43a4ca172154f6
+  checksum: 10/e98d1396cd157626f29fb0d0d10c75dbdde6e2efa55463540c9d8e33b58ec4b72eeb58b7d2eea6e625a8316235777f128222adeb10533ddfade77b23ec209872
   languageName: node
   linkType: hard
 
@@ -7215,8 +7214,8 @@ __metadata:
     "@emotion/react": "npm:11.13.3"
     "@emotion/server": "npm:11.11.0"
     "@emotion/styled": "npm:11.13.0"
-    "@graasp/query-client": "npm:5.1.0"
-    "@graasp/sdk": "npm:4.33.0"
+    "@graasp/query-client": "github:graasp/graasp-query-client#tags"
+    "@graasp/sdk": "github:graasp/graasp-sdk#tag-type-search"
     "@graasp/stylis-plugin-rtl": "npm:2.2.0"
     "@graasp/translations": "npm:1.40.0"
     "@graasp/ui": "npm:5.4.0"
@@ -12458,13 +12457,6 @@ __metadata:
     spdx-correct: "npm:^3.0.0"
     spdx-expression-parse: "npm:^3.0.0"
   checksum: 10/86242519b2538bb8aeb12330edebb61b4eb37fd35ef65220ab0b03a26c0592c1c8a7300d32da3cde5abd08d18d95e8dabfad684b5116336f6de9e6f207eec224
-  languageName: node
-  linkType: hard
-
-"validator@npm:13.12.0":
-  version: 13.12.0
-  resolution: "validator@npm:13.12.0"
-  checksum: 10/db6eb0725e2b67d60d30073ae8573982713b5903195d031dc3c7db7e82df8b74e8c13baef8e2106d146d979599fd61a06cde1fec5c148e4abd53d52817ff0fd9
   languageName: node
   linkType: hard
 
