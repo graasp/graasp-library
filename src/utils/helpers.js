@@ -14,8 +14,8 @@ const openContentInNewTab = (content) => {
 
 // helper function to sort objects in alphabetical order (by name)
 const compare = (a, b) => {
-  if (a.name < b.name) return -1;
-  if (a.name > b.name) return 1;
+  if (a.toLowerCase() < b.toLowerCase()) return -1;
+  if (a.toLowerCase() > b.toLowerCase()) return 1;
   return 0;
 };
 

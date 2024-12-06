@@ -17,12 +17,11 @@ export type FilterProps = {
   id: string;
   buttonId: string;
   title: string;
-  search: string;
-  setSearch: (newValue: string) => void;
+  isLoading?: boolean;
   selectedOptions: FilterPopperProps['selectedOptions'];
   onClearOptions: FilterPopperProps['onClearOptions'];
   onOptionChange: FilterPopperProps['onOptionChange'];
-  options?: string[];
+  options?: { [key: string]: number };
 };
 
 const InputWrapper = styled(Stack)(({ theme }) => ({
@@ -60,9 +59,8 @@ export const Filter = ({
   onOptionChange,
   id,
   buttonId,
-  options = [],
-  search,
-  setSearch,
+  isLoading = false,
+  options = {},
 }: FilterProps) => {
   const { t } = useLibraryTranslation();
   const [showPopper, setShowPopper] = useState<boolean>(false);
@@ -70,55 +68,36 @@ export const Filter = ({
   const popperAnchor = useRef<null | HTMLDivElement>(null);
   const popper = useRef<null | HTMLDivElement>(null);
 
-  const onDocumentScrolled = () => {
+  const handleClose = () => {
     setShowPopper(() => false);
   };
 
-  const onDocumentClicked = (event: MouseEvent) => {
-    if (
-      !popper.current?.contains(event.target as Node) &&
-      !popperAnchor.current?.contains(event.target as Node)
-    ) {
-      setShowPopper(() => false);
-    }
-  };
   // Listens for clicks outside of the popper to dismiss it when we click outside.
   useEffect(() => {
     if (showPopper) {
-      document.addEventListener('click', onDocumentClicked);
-      document.addEventListener('scroll', onDocumentScrolled);
+      document.addEventListener('scroll', handleClose);
     }
     return () => {
-      document.removeEventListener('click', onDocumentClicked);
-      document.removeEventListener('scroll', onDocumentScrolled);
+      document.removeEventListener('scroll', handleClose);
     };
   }, [showPopper]);
 
-  const { getRootProps, getInputProps, getTagProps, focused } = useAutocomplete(
-    {
-      options,
+  const { getRootProps, getInputProps, getTagProps, groupedOptions } =
+    useAutocomplete({
+      options: Object.keys(options),
       id: buttonId,
       multiple: true,
       value: selectedOptions,
-      filterSelectedOptions: true,
-      inputValue: search,
-      clearOnBlur: true,
-      groupBy: undefined,
-      onInputChange: (e) => {
-        if (e?.target && 'value' in e.target) {
-          setSearch(e.target.value as string);
-        } else {
-          setSearch('');
-        }
-      },
-    },
-  );
+      clearOnBlur: false,
+      // always open to prevent clear
+      // popper is handeld separately
+      open: true,
+    });
 
-  useEffect(() => {
-    if (focused) {
-      setShowPopper(true);
-    }
-  }, [focused]);
+  // map filter options with count value
+  const filteredOptions = Object.fromEntries(
+    (groupedOptions as string[]).map((o) => [o, options[o]]),
+  );
 
   const content = (
     <div {...getRootProps()} style={{ width: '100%', position: 'relative' }}>
@@ -146,6 +125,9 @@ export const Filter = ({
             );
           })}
           <StyledInput
+            onClick={() => {
+              setShowPopper(true);
+            }}
             placeholder={
               selectedOptions.length
                 ? undefined
@@ -167,15 +149,19 @@ export const Filter = ({
       <Stack direction="row" alignItems="center" ref={popperAnchor}>
         {content}
       </Stack>
-      <FilterPopper
-        ref={popper}
-        open={showPopper}
-        options={options}
-        anchorEl={popperAnchor.current}
-        selectedOptions={selectedOptions}
-        onOptionChange={onOptionChange}
-        onClearOptions={onClearOptions}
-      />
+      {showPopper && (
+        <FilterPopper
+          isLoading={isLoading}
+          ref={popper}
+          open={showPopper}
+          options={filteredOptions}
+          anchorEl={popperAnchor.current}
+          selectedOptions={selectedOptions}
+          onOptionChange={onOptionChange}
+          onClearOptions={onClearOptions}
+          handleClose={handleClose}
+        />
+      )}
     </Stack>
   );
 };

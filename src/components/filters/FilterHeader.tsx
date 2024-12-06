@@ -22,6 +22,7 @@ import {
   ENABLE_IN_DEPTH_SEARCH_CHECKBOX_ID,
 } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
+import { useSearchFiltersContext } from '../pages/SearchFiltersContext';
 import Search from '../search/Search';
 import { CategoryFilter } from './CategoryFilter';
 import { LangFilter } from './LangFilter';
@@ -58,58 +59,24 @@ export type TagFilters = {
 };
 
 type FilterHeaderProps = {
-  onFiltersChanged: (selectedFilters: TagFilters) => void;
-  onIncludeContentChange: (newValue: boolean) => void;
-  shouldIncludeContent: boolean;
-  onChangeSearch?: (searchKeywords: string) => void;
-  onSearch: (searchKeywords: string) => void;
-  searchPreset?: string;
   isLoadingResults: boolean;
-  setLangs: (langs: string[]) => void;
-  langs: string[];
-
-  filters: TagFilters;
 };
 
 // eslint-disable-next-line react/function-component-definition
 export function FilterHeader({
-  onFiltersChanged,
-  onChangeSearch,
-  setLangs,
-  onSearch,
-  searchPreset,
   isLoadingResults,
-  onIncludeContentChange,
-  shouldIncludeContent,
-  langs,
-
-  filters,
 }: FilterHeaderProps): ReactNode {
   const { t: translateCategories } = useCategoriesTranslation();
   const { t } = useLibraryTranslation();
-
+  const {
+    searchKeywords,
+    shouldIncludeContent,
+    setShouldIncludeContent,
+    setSearchKeywords,
+  } = useSearchFiltersContext();
   // filters are of the form ["a1,a2", "b1"] where the items wanted should have (a1 OR a2) AND b1
   const filterContainer = useRef<HTMLDivElement>(null);
   const [sticky, setSticky] = useState<boolean>(false);
-
-  const onFilterChanged =
-    (category: TagCategory) => (id: string, isNewValue: boolean) => {
-      let newFilters;
-      if (isNewValue) {
-        newFilters = { ...filters, [category]: [...filters[category], id] };
-      } else {
-        newFilters = {
-          ...filters,
-          [category]: filters[category].filter((it) => it !== id),
-        };
-      }
-      onFiltersChanged(newFilters);
-    };
-
-  const onClearCategory = (category: TagCategory) => {
-    const newFilters = { ...filters, [category]: [] };
-    onFiltersChanged(newFilters);
-  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -143,24 +110,13 @@ export function FilterHeader({
       key={TagCategory.Level}
       category={TagCategory.Level}
       title={translateCategories(TagCategory.Level)}
-      selectedOptions={filters[TagCategory.Level]}
-      onOptionChange={onFilterChanged(TagCategory.Level)}
-      onClearOptions={() => onClearCategory(TagCategory.Level)}
     />,
     <CategoryFilter
       key={TagCategory.Discipline}
       category={TagCategory.Discipline}
       title={translateCategories(TagCategory.Discipline)}
-      selectedOptions={filters[TagCategory.Discipline]}
-      onOptionChange={onFilterChanged(TagCategory.Discipline)}
-      onClearOptions={() => onClearCategory(TagCategory.Discipline)}
     />,
-    <LangFilter
-      key="language"
-      title={t(LIBRARY.SEARCH_FILTER_LANG_TITLE)}
-      selectedOptions={langs}
-      setLangs={setLangs}
-    />,
+    <LangFilter key="language" title={t(LIBRARY.SEARCH_FILTER_LANG_TITLE)} />,
   ];
 
   return (
@@ -199,9 +155,9 @@ export function FilterHeader({
         </Typography>
         <Search
           isLoading={isLoadingResults}
-          onChange={onChangeSearch}
-          handleClick={onSearch}
-          searchPreset={searchPreset}
+          onChange={setSearchKeywords}
+          handleClick={setSearchKeywords}
+          searchPreset={searchKeywords}
         />
       </Stack>
       <StyledFilterContainer
@@ -223,7 +179,7 @@ export function FilterHeader({
               checked={shouldIncludeContent}
               size="small"
               onChange={(e) => {
-                onIncludeContentChange(e.target.checked);
+                setShouldIncludeContent(e.target.checked);
               }}
             />
           }

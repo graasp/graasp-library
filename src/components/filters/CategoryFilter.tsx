@@ -1,47 +1,55 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
+
+import { TagCategory } from '@graasp/sdk';
 
 import {
   buildSearchFilterCategoryId,
   buildSearchFilterPopperButtonId,
 } from '../../config/selectors';
 import { QueryClientContext } from '../QueryClientContext';
-import { Filter, FilterProps } from './Filter';
+import { useSearchFiltersContext } from '../pages/SearchFiltersContext';
+import { Filter } from './Filter';
 
 type CategoryFilterProps = {
-  category: string;
+  category: TagCategory;
   title: string;
-  selectedOptions: FilterProps['selectedOptions'];
-  onOptionChange: FilterProps['onOptionChange'];
-  onClearOptions: () => void;
 };
 
 // eslint-disable-next-line react/function-component-definition
-export function CategoryFilter({
-  category,
-  title,
-  onOptionChange,
-  onClearOptions,
-  selectedOptions,
-}: CategoryFilterProps) {
+export function CategoryFilter({ category, title }: CategoryFilterProps) {
   const { hooks } = useContext(QueryClientContext);
+  const {
+    tags,
+    langsForFilter,
+    searchKeywords,
+    isPublishedRoot,
+    toggleTagByCategory,
+    clearTagsByCategory,
+  } = useSearchFiltersContext();
 
-  const [facetQuery, setFacetQuery] = useState<string>('');
-  const { data: tags } = hooks.useSearchFacets({
+  // ignore current category to get facets
+  // implement OR logic
+  // eg. [biology, chemistry] means getting facets for "category" with other tags set to biology or chemistry
+  const ignoreCurrentCategory = { ...tags };
+  delete ignoreCurrentCategory[category];
+
+  const { data: options } = hooks.useSearchFacets({
     facetName: category,
-    facetQuery,
+    query: searchKeywords,
+    tags: ignoreCurrentCategory,
+    langs: langsForFilter,
+    isPublishedRoot,
   });
 
   return (
     <Filter
-      search={facetQuery}
-      setSearch={setFacetQuery}
       id={buildSearchFilterCategoryId(category)}
       buttonId={buildSearchFilterPopperButtonId(category)}
       title={title}
-      options={tags?.facetHits?.map(({ value }) => value) ?? []}
-      selectedOptions={selectedOptions}
-      onOptionChange={onOptionChange}
-      onClearOptions={onClearOptions}
+      options={options ?? {}}
+      selectedOptions={tags[category]}
+      onOptionChange={toggleTagByCategory(category)}
+      onClearOptions={() => clearTagsByCategory(category)}
     />
   );
 }
