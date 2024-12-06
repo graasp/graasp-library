@@ -9,11 +9,14 @@ import {
   useState,
 } from 'react';
 
-import { TagCategory } from '@graasp/sdk';
+import { Tag, TagCategory } from '@graasp/sdk';
 import { langs as LANGS } from '@graasp/translations';
 
 import { UrlSearch } from '../../config/constants';
-import { TagFilters } from '../filters/FilterHeader';
+
+type TagFilters = {
+  [key in TagCategory]: Tag['name'][];
+};
 
 type ContextType = {
   langs: string[];
@@ -72,10 +75,18 @@ export function SearchFiltersProvider({
 }): ReactNode {
   const { replace } = useRouter();
   const params = useSearchParams();
+
+  // selected languages
   const [langs, setLangs] = useState<string[]>([]);
+
+  // whether search should include published item's content
   const [shouldIncludeContent, setShouldIncludeContent] =
     useState<boolean>(false);
+
+  // query search
   const [searchKeywords, setSearchKeywords] = useState<string>('');
+
+  // selected tags to filter with
   const [tags, setTags] = useState<TagFilters>({
     [TagCategory.Discipline]: [],
     [TagCategory.Level]: [],

@@ -65,11 +65,13 @@ export const Filter = ({
   const { t } = useLibraryTranslation();
   const [showPopper, setShowPopper] = useState<boolean>(false);
 
+  const [inputValue, setInputValue] = useState('');
   const popperAnchor = useRef<null | HTMLDivElement>(null);
   const popper = useRef<null | HTMLDivElement>(null);
 
   const handleClose = () => {
     setShowPopper(() => false);
+    setInputValue('');
   };
 
   // Listens for clicks outside of the popper to dismiss it when we click outside.
@@ -89,9 +91,15 @@ export const Filter = ({
       multiple: true,
       value: selectedOptions,
       clearOnBlur: false,
-      // always open to prevent clear
-      // popper is handeld separately
+      inputValue,
+      // always open to prevent options to be cleared
+      // popper is handled separately
+      // this means we cannot use onClose
       open: true,
+      onInputChange: (e, value) => {
+        setInputValue(value);
+        setShowPopper(true);
+      },
     });
 
   // map filter options with count value

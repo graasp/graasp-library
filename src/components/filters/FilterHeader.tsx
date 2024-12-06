@@ -11,7 +11,7 @@ import {
   styled,
 } from '@mui/material';
 
-import { Tag, TagCategory } from '@graasp/sdk';
+import { TagCategory } from '@graasp/sdk';
 
 import {
   useCategoriesTranslation,
@@ -53,10 +53,6 @@ const StyledStickyFilters = styled(Box)(() => ({
     transform: 'scale(1.02)',
   },
 }));
-
-export type TagFilters = {
-  [key in TagCategory]: Tag['name'][];
-};
 
 type FilterHeaderProps = {
   isLoadingResults: boolean;

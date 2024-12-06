@@ -1265,7 +1265,7 @@ __metadata:
 
 "@graasp/query-client@github:graasp/graasp-query-client#tags":
   version: 5.6.1
-  resolution: "@graasp/query-client@https://github.com/graasp/graasp-query-client.git#commit=ffd68f84fc848e4839b25eb2f566d840a622c284"
+  resolution: "@graasp/query-client@https://github.com/graasp/graasp-query-client.git#commit=9b08c3cd13cf916088b9835eed2925b2e667116d"
   dependencies:
     "@tanstack/react-query": "npm:5.61.0"
     "@tanstack/react-query-devtools": "npm:5.61.0"
@@ -1275,7 +1275,7 @@ __metadata:
     "@graasp/sdk": ^4.0.0 || ^5.0.0
     "@graasp/translations": "*"
     react: ^18.0.0
-  checksum: 10/235a3a767ad00be543e1ff75a413e8aa742122323a2eaaaf6aa296c685375c3c794eca3a372adde3d0da4a86054be47e9dfe4c534485c2412d77ff10f091901d
+  checksum: 10/8c048b6d5c2c94b5f9b12a77b1742580ca1e6719b31044f3d8a29d163e337c51c716de3bf0421f21b7869c683233c16b1c09f89e980a73ff5efc8f9ced64ea36
   languageName: node
   linkType: hard
 

@@ -10,6 +10,7 @@ import {
   Container,
   IconButton,
   Button as MuiButton,
+  Skeleton,
   Stack,
   Typography,
 } from '@mui/material';
@@ -50,6 +51,7 @@ const AllCollectionsContent = (): ReactNode => {
   const {
     data: collections,
     isLoading,
+    isFetching,
     error,
   } = hooks.useSearchPublishedItems({
     query: searchKeywords,
@@ -72,39 +74,38 @@ const AllCollectionsContent = (): ReactNode => {
     setPage(1);
   }, [searchKeywords, tags, shouldIncludeContent]);
 
-  const allCollections = prevResults.concat(
-    collections?.results?.[0]?.hits ?? [],
-  );
+  const allCollections = prevResults.concat(collections?.hits ?? []);
 
-  const hitsNumber =
-    collections?.results?.[0]?.totalHits ??
-    collections?.results?.[0]?.estimatedTotalHits;
+  const hitsNumber = collections?.totalHits ?? collections?.estimatedTotalHits;
 
   return (
     <MainWrapper>
       <Container maxWidth="xl" sx={{ mb: 5 }}>
         <Box py={5}>
-          <FilterHeader
-            isLoadingResults={false}
-            // facetDistribution={collections?.results?.[0]?.facetDistribution}
-          />
+          <FilterHeader isLoadingResults={isLoading} />
         </Box>
         <Stack flexGrow={2} direction="column" spacing={2}>
           {searchKeywords && (
             <Stack direction="row" spacing={1} alignItems="center">
-              <Typography color="#999">
-                <Trans
-                  values={{
-                    search: searchKeywords,
-                    count: hitsNumber ?? 0,
-                  }}
-                  t={t}
-                  i18nKey={LIBRARY.SEARCH_RESULTS_FOR_TEXT}
-                />
-              </Typography>
-              <IconButton onClick={() => setSearchKeywords('')}>
-                <Close />
-              </IconButton>
+              <>
+                <Typography color="#999" width="100%">
+                  {isFetching ? (
+                    <Skeleton width="100%" />
+                  ) : (
+                    <Trans
+                      values={{
+                        search: searchKeywords,
+                        count: hitsNumber ?? 0,
+                      }}
+                      t={t}
+                      i18nKey={LIBRARY.SEARCH_RESULTS_FOR_TEXT}
+                    />
+                  )}
+                </Typography>
+                <IconButton onClick={() => setSearchKeywords('')}>
+                  <Close />
+                </IconButton>
+              </>
             </Stack>
           )}
           {error ? (
