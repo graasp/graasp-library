@@ -8,7 +8,6 @@ export const PLACEHOLDER_COLLECTION: DiscriminatedItem = {
   createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),
   name: 'Loading...',
-  displayName: 'Loading...',
   description: 'loading...',
   lang: '',
   creator: null,

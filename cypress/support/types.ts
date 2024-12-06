@@ -1,25 +1,23 @@
 import {
-  Category,
   CompleteMember,
   DiscriminatedItem,
-  ItemCategory,
   ItemLike,
   ItemMembership,
-  ItemTagType,
+  ItemVisibilityType,
   Member,
   PermissionLevel,
+  Tag,
 } from '@graasp/sdk';
 
 export type MockItemLike = Omit<ItemLike, 'createdAt'> & { creator: Member };
-export type MockItemCategory = Omit<ItemCategory, 'createdAt' | 'creator'>;
 export type MockMember = CompleteMember & { thumbnail?: string };
 export type MockItemMembership = Omit<
   ItemMembership,
   'creator' | 'createdAt' | 'updatedAt'
 >;
-type MockItemTag = {
+type MockItemVisibility = {
   id: string;
-  type: ItemTagType | `${ItemTagType}`;
+  type: ItemVisibilityType | `${ItemVisibilityType}`;
   itemPath: string;
 };
 type MockPublishedInfo = {
@@ -32,10 +30,10 @@ type MockMembership = {
   permission: PermissionLevel; // can't use "read" | "write" | "admin" with `${PermissionLevel}` because it is not allowed in the interface which is an oversight
 };
 export type MockItem = DiscriminatedItem & {
-  tags: MockItemTag[];
+  visibility: MockItemVisibility[];
   publishedInfo?: MockPublishedInfo;
   memberships?: MockMembership[];
-  categories?: { category: Category }[];
+  tags?: Tag[];
   thumbnail?: string;
   isPublishedRoot?: boolean;
 };

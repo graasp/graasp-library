@@ -7,7 +7,6 @@ import {
   Divider,
   FormControlLabel,
   Stack,
-  Typography,
   styled,
 } from '@mui/material';
 
@@ -17,10 +16,7 @@ import {
   useCategoriesTranslation,
   useLibraryTranslation,
 } from '../../config/i18n';
-import {
-  ALL_COLLECTIONS_TITLE_ID,
-  ENABLE_IN_DEPTH_SEARCH_CHECKBOX_ID,
-} from '../../config/selectors';
+import { ENABLE_IN_DEPTH_SEARCH_CHECKBOX_ID } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
 import { useSearchFiltersContext } from '../pages/SearchFiltersContext';
 import Search from '../search/Search';
@@ -30,7 +26,7 @@ import { LangFilter } from './LangFilter';
 const StyledFilterContainer = styled(Stack)(() => ({
   backgroundColor: 'white',
   borderRadius: 12,
-  padding: '30px 40px',
+  padding: '10px 20px',
 }));
 
 const StyledStickyFilters = styled(Box)(() => ({
@@ -102,17 +98,22 @@ export function FilterHeader({
   );
 
   const categoryFilters = [
+    <LangFilter key="language" title={t(LIBRARY.SEARCH_FILTER_LANG_TITLE)} />,
+    <CategoryFilter
+      key={TagCategory.Discipline}
+      category={TagCategory.Discipline}
+      title={translateCategories(TagCategory.Discipline)}
+    />,
     <CategoryFilter
       key={TagCategory.Level}
       category={TagCategory.Level}
       title={translateCategories(TagCategory.Level)}
     />,
     <CategoryFilter
-      key={TagCategory.Discipline}
-      category={TagCategory.Discipline}
-      title={translateCategories(TagCategory.Discipline)}
+      key={TagCategory.ResourceType}
+      category={TagCategory.ResourceType}
+      title={translateCategories(TagCategory.ResourceType)}
     />,
-    <LangFilter key="language" title={t(LIBRARY.SEARCH_FILTER_LANG_TITLE)} />,
   ];
 
   return (
@@ -124,7 +125,7 @@ export function FilterHeader({
         <Container maxWidth="xl">
           <Stack
             sx={{
-              padding: 3,
+              padding: 1,
               borderRadius: 4,
               boxShadow: '0px 10px 51px 0px rgba(0,0,0,0.15)',
               borderBottom: '1px solid #F8F7FE',
@@ -146,9 +147,6 @@ export function FilterHeader({
         justifyContent="space-between"
         width="100%"
       >
-        <Typography variant="h4" width="100%" id={ALL_COLLECTIONS_TITLE_ID}>
-          {t(LIBRARY.SEARCH_PAGE_TITLE)}
-        </Typography>
         <Search
           isLoading={isLoadingResults}
           onChange={setSearchKeywords}

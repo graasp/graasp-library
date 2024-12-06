@@ -20,6 +20,7 @@ import { Button } from '@graasp/ui';
 import { useLibraryTranslation } from '../../config/i18n';
 import {
   ALL_COLLECTIONS_GRID_ID,
+  ALL_COLLECTIONS_TITLE_ID,
   SEARCH_ERROR_MESSAGE_ID,
 } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
@@ -44,6 +45,7 @@ const AllCollectionsContent = (): ReactNode => {
     setSearchKeywords,
     setShouldIncludeContent,
     langsForFilter,
+    isPublishedRoot,
   } = useSearchFiltersContext();
 
   const [prevResults, setPrevResults] = useState<ItemOrSearchedItem[]>([]);
@@ -58,8 +60,7 @@ const AllCollectionsContent = (): ReactNode => {
     tags,
     langs: langsForFilter,
     page,
-    // does not show children if option is disabled
-    isPublishedRoot: !shouldIncludeContent,
+    isPublishedRoot,
   });
 
   useEffect(() => {
@@ -78,10 +79,20 @@ const AllCollectionsContent = (): ReactNode => {
 
   const hitsNumber = collections?.totalHits ?? collections?.estimatedTotalHits;
 
+  let translationKey = isPublishedRoot
+    ? LIBRARY.SEARCH_PAGE_TITLE
+    : LIBRARY.SEARCH_PAGE_TITLE_CONTENT;
+  if (hitsNumber && hitsNumber > 100) {
+    translationKey = LIBRARY.SEARCH_PAGE_TITLE_MORE_CONTENT;
+  }
+
   return (
     <MainWrapper>
-      <Container maxWidth="xl" sx={{ mb: 5 }}>
-        <Box py={5}>
+      <Container maxWidth="xl" sx={{ mb: 5, py: 5 }}>
+        <Typography variant="h4" width="100%" id={ALL_COLLECTIONS_TITLE_ID}>
+          {t(translationKey, { count: hitsNumber })}
+        </Typography>
+        <Box>
           <FilterHeader isLoadingResults={isLoading} />
         </Box>
         <Stack flexGrow={2} direction="column" spacing={2}>

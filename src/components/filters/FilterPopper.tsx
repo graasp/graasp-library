@@ -12,6 +12,7 @@ import {
   Popper,
   Skeleton,
   Stack,
+  Typography,
   styled,
 } from '@mui/material';
 import { TransitionProps as MUITransitionProps } from '@mui/material/transitions';
@@ -76,47 +77,57 @@ export const FilterPopper = React.forwardRef<HTMLDivElement, FilterPopperProps>(
                   <Skeleton />
                 ) : (
                   <Box overflow="auto" maxHeight={300}>
-                    {Object.entries(options)?.map(([tag, nb], idx) => {
-                      const isSelected = selectedOptions.includes(tag);
-                      return (
-                        <Stack
-                          key={tag}
-                          id={buildCategoryOptionId(idx)}
-                          direction="row"
-                          alignItems="center"
-                          justifyContent="space-between"
-                          minWidth={200}
-                        >
-                          <FormControl fullWidth>
-                            <FormControlLabel
-                              sx={{
-                                width: '100%',
-                              }}
-                              control={
-                                <Checkbox
-                                  size="small"
-                                  checked={isSelected}
-                                  onChange={() => {
-                                    onOptionChange(tag, !isSelected);
-                                  }}
-                                />
-                              }
-                              label={
-                                <>
-                                  {tag}
-                                  <Chip
-                                    sx={{ ml: 1 }}
+                    {Object.entries(options).length ? (
+                      Object.entries(options).map(([tag, nb], idx) => {
+                        const isSelected = selectedOptions.includes(tag);
+                        return (
+                          <Stack
+                            key={tag}
+                            id={buildCategoryOptionId(idx)}
+                            direction="row"
+                            alignItems="center"
+                            justifyContent="space-between"
+                            minWidth={200}
+                          >
+                            <FormControl fullWidth>
+                              <FormControlLabel
+                                sx={{
+                                  width: '100%',
+                                }}
+                                control={
+                                  <Checkbox
                                     size="small"
-                                    label={nb}
+                                    checked={isSelected}
+                                    onChange={() => {
+                                      onOptionChange(tag, !isSelected);
+                                    }}
                                   />
-                                </>
-                              }
-                              labelPlacement="end"
-                            />
-                          </FormControl>
-                        </Stack>
-                      );
-                    })}
+                                }
+                                label={
+                                  <>
+                                    {tag}
+                                    <Chip
+                                      sx={{ ml: 1 }}
+                                      size="small"
+                                      label={nb}
+                                    />
+                                  </>
+                                }
+                                labelPlacement="end"
+                              />
+                            </FormControl>
+                          </Stack>
+                        );
+                      })
+                    ) : (
+                      <Typography
+                        fontStyle="italic"
+                        variant="body2"
+                        color="grey"
+                      >
+                        {t(LIBRARY.SEARCH_FILTER_EMPTY)}
+                      </Typography>
+                    )}
                   </Box>
                 )}
                 <Button
