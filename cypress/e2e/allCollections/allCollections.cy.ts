@@ -15,7 +15,6 @@ import {
   buildSearchFilterPopperButtonId,
 } from '../../../src/config/selectors';
 import LIBRARY from '../../../src/langs/constants';
-import { SAMPLE_CATEGORIES } from '../../fixtures/categories';
 import { buildPublicAndPrivateEnvironments } from '../../fixtures/environment';
 import { PUBLISHED_ITEMS } from '../../fixtures/items';
 import { getRootPublishedItems } from '../../support/utils';
@@ -67,26 +66,6 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
         'have.length',
         environment.items.length,
       );
-    });
-
-    it('display menu options', () => {
-      cy.wait(['@getCategories']);
-      [CategoryType.Level, CategoryType.Discipline].forEach((categoryType) => {
-        cy.get(
-          `#not-sticky button#${buildSearchFilterPopperButtonId(categoryType)}`,
-        )
-          .filter(':visible')
-          .click();
-        // cy.scrollTo('top');
-        const categories = SAMPLE_CATEGORIES.filter(
-          (c) => c.type === categoryType,
-        );
-        categories.forEach((cat, idx) => {
-          cy.get(buildCategoryOptionSelector(idx)).contains(cat.name);
-          // bug: category pop up does not open
-          // .and('be.visible');
-        });
-      });
     });
 
     it('display language options', () => {

@@ -3,9 +3,8 @@ import { v4 } from 'uuid';
 
 import { API_ROUTES } from '@graasp/query-client';
 import {
-  Category,
   HttpMethod,
-  ItemTagType,
+  ItemVisibilityType,
   MemberFactory,
   PermissionLevel,
   buildPathFromIds,
@@ -15,7 +14,6 @@ import {
 import { builderMeilisearchResults } from '../fixtures/items';
 import {
   MockItem,
-  MockItemCategory,
   MockItemLike,
   MockItemMembership,
   MockMember,
@@ -38,7 +36,6 @@ const {
   ITEMS_ROUTE,
   SIGN_IN_ROUTE,
   SIGN_OUT_ROUTE,
-  buildGetCategoriesRoute,
   SEARCH_PUBLISHED_ITEMS_ROUTE,
 } = API_ROUTES;
 
@@ -57,7 +54,9 @@ const checkMembership = ({
   const haveMembership =
     creatorId === currentMember?.id ||
     item.memberships?.find(({ account }) => account.id === currentMember?.id);
-  const isPublic = item.tags.find((t) => t.type === ItemTagType.Public);
+  const isPublic = item.visibility.find(
+    (t) => t.type === ItemVisibilityType.Public,
+  );
   return Boolean(haveMembership) || isPublic;
 };
 
@@ -327,29 +326,8 @@ export const mockSignOut = () => {
   ).as('signOut');
 };
 
-export const mockGetCategories = (
-  categories: Category[],
-  shouldThrowError: boolean,
-) => {
-  cy.intercept(
-    {
-      method: DEFAULT_GET.method,
-      url: new RegExp(
-        `${API_HOST}/${parseStringToRegExp(buildGetCategoriesRoute())}`,
-      ),
-    },
-    ({ reply }) => {
-      if (shouldThrowError) {
-        reply({ statusCode: StatusCodes.BAD_REQUEST, body: null });
-        return;
-      }
-      reply(categories);
-    },
-  ).as('getCategories');
-};
-
-export const mockGetItemCategories = (
-  { items, currentMember }: { items: MockItem[]; currentMember?: MockMember },
+export const mockGetItemTags = (
+  { items }: { items: MockItem[] },
   shouldThrowError: boolean,
 ) => {
   cy.intercept(
@@ -369,18 +347,9 @@ export const mockGetItemCategories = (
         return reply({ statusCode: StatusCodes.NOT_FOUND });
       }
 
-      if (!checkMembership({ item, currentMember })) {
-        return reply({ statusCode: StatusCodes.UNAUTHORIZED, body: null });
-      }
-      const itemCategories: MockItemCategory[] =
-        item?.categories?.map(({ category }) => ({
-          category,
-          item,
-          id: v4(),
-        })) || [];
-      return reply(itemCategories);
+      return reply(item.tags as any);
     },
-  ).as('getItemCategories');
+  ).as('getItemTags');
 };
 
 export const mockGetItemMembershipsForItems = ({
