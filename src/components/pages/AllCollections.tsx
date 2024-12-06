@@ -133,7 +133,7 @@ const AllCollectionsContent = (): ReactNode => {
             />
           )}
         </Stack>
-        <Box my={10} textAlign="center">
+        <Stack my={10} textAlign="center" spacing={2}>
           {Boolean((hitsNumber ?? 0) > allCollections.length) && (
             <Button
               onClick={() => {
@@ -164,7 +164,7 @@ const AllCollectionsContent = (): ReactNode => {
               />
             </MuiButton>
           )}
-        </Box>
+        </Stack>
       </Container>
     </MainWrapper>
   );
