@@ -1,4 +1,5 @@
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
   Box,
@@ -11,11 +12,9 @@ import {
 } from '@mui/material';
 
 import { TagCategory } from '@graasp/sdk';
+import { namespaces } from '@graasp/translations';
 
-import {
-  useCategoriesTranslation,
-  useLibraryTranslation,
-} from '../../config/i18n';
+import { useLibraryTranslation } from '../../config/i18n';
 import { ENABLE_IN_DEPTH_SEARCH_CHECKBOX_ID } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
 import { useSearchFiltersContext } from '../pages/SearchFiltersContext';
@@ -51,14 +50,14 @@ const StyledStickyFilters = styled(Box)(() => ({
 }));
 
 type FilterHeaderProps = {
-  isLoadingResults: boolean;
+  readonly isLoadingResults: boolean;
 };
 
 // eslint-disable-next-line react/function-component-definition
 export function FilterHeader({
   isLoadingResults,
 }: FilterHeaderProps): ReactNode {
-  const { t: translateCategories } = useCategoriesTranslation();
+  const { t: translateEnums } = useTranslation(namespaces.enums);
   const { t } = useLibraryTranslation();
   const {
     searchKeywords,
@@ -102,17 +101,17 @@ export function FilterHeader({
     <CategoryFilter
       key={TagCategory.Discipline}
       category={TagCategory.Discipline}
-      title={translateCategories(TagCategory.Discipline)}
+      title={translateEnums(TagCategory.Discipline)}
     />,
     <CategoryFilter
       key={TagCategory.Level}
       category={TagCategory.Level}
-      title={translateCategories(TagCategory.Level)}
+      title={translateEnums(TagCategory.Level)}
     />,
     <CategoryFilter
       key={TagCategory.ResourceType}
       category={TagCategory.ResourceType}
-      title={translateCategories(TagCategory.ResourceType)}
+      title={translateEnums(TagCategory.ResourceType)}
     />,
   ];
 

@@ -45,7 +45,7 @@ export const HOME_SEARCH_ID = 'homeSearch';
 export const HOME_SEARCH_BUTTON_ID = 'homeSearchButton';
 export const ALL_COLLECTIONS_GRID_ID = 'allCollectionsGrid';
 export const SEARCH_RESULTS_GRID_ID = 'searchResultsGrid';
-export const buildSearchFilterCategoryId = (category: string) =>
+export const buildSearchFilterTagCategoryId = (category: string) =>
   `searchFilter-${category}`;
 export const buildSearchFilterPopperButtonId = (category: string) =>
   `searchFilterButton-${category}`;

@@ -1,4 +1,4 @@
-import { CategoryType } from '@graasp/sdk';
+import { TagCategory } from '@graasp/sdk';
 import { langs, namespaces } from '@graasp/translations';
 
 import { LIBRARY_NAMESPACE, i18nConfig } from '../../../src/config/i18n';
@@ -11,8 +11,8 @@ import {
   SEARCH_FILTER_POPPER_LANG_ID,
   buildCategoryOptionSelector,
   buildCollectionCardGridId,
-  buildSearchFilterCategoryId,
   buildSearchFilterPopperButtonId,
+  buildSearchFilterTagCategoryId,
 } from '../../../src/config/selectors';
 import LIBRARY from '../../../src/langs/constants';
 import { buildPublicAndPrivateEnvironments } from '../../fixtures/environment';
@@ -39,13 +39,15 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
       cy.get(`#${ALL_COLLECTIONS_TITLE_ID}`).should('be.visible');
 
       // filter header
-      cy.get(`#${buildSearchFilterCategoryId(CategoryType.Level)}`).should(
+      cy.get(`#${buildSearchFilterTagCategoryId(TagCategory.Level)}`).should(
         'contain.text',
-        i18n.t(CategoryType.Level, { ns: namespaces.categories }),
+        i18n.t(TagCategory.Level, { ns: namespaces.enums }),
       );
-      cy.get(`#${buildSearchFilterCategoryId(CategoryType.Discipline)}`).should(
+      cy.get(
+        `#${buildSearchFilterTagCategoryId(TagCategory.Discipline)}`,
+      ).should(
         'contain.text',
-        i18n.t(CategoryType.Discipline, { ns: namespaces.categories }),
+        i18n.t(TagCategory.Discipline, { ns: namespaces.enums }),
       );
       cy.get(`#${SEARCH_FILTER_LANG_ID}`).should(
         'contain.text',
@@ -83,8 +85,8 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
 
       cy.scrollTo('bottom');
 
-      cy.get(`#${buildSearchFilterPopperButtonId(CategoryType.Level)}`).click();
-      cy.get(`#${buildSearchFilterCategoryId(CategoryType.Level)}`).should(
+      cy.get(`#${buildSearchFilterPopperButtonId(TagCategory.Level)}`).click();
+      cy.get(`#${buildSearchFilterTagCategoryId(TagCategory.Level)}`).should(
         'be.visible',
       );
     });
@@ -95,7 +97,7 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
       // cy.scrollTo('top');
       cy.get(
         `#not-sticky button#${buildSearchFilterPopperButtonId(
-          CategoryType.Level,
+          TagCategory.Level,
         )}`,
       ).click();
       cy.get(buildCategoryOptionSelector(0)).click();

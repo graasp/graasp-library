@@ -36,7 +36,7 @@
     "@graasp/query-client": "github:graasp/graasp-query-client#tags",
     "@graasp/sdk": "github:graasp/graasp-sdk#tag-type-search",
     "@graasp/stylis-plugin-rtl": "2.2.0",
-    "@graasp/translations": "1.40.0",
+    "@graasp/translations": "github:graasp/graasp-translations#tag-categories",
     "@graasp/ui": "5.4.0",
     "@mui/icons-material": "6.1.5",
     "@mui/lab": "6.0.0-beta.13",

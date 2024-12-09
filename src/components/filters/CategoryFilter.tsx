@@ -3,8 +3,8 @@ import React, { useContext } from 'react';
 import { TagCategory } from '@graasp/sdk';
 
 import {
-  buildSearchFilterCategoryId,
   buildSearchFilterPopperButtonId,
+  buildSearchFilterTagCategoryId,
 } from '../../config/selectors';
 import { QueryClientContext } from '../QueryClientContext';
 import { useSearchFiltersContext } from '../pages/SearchFiltersContext';
@@ -43,7 +43,7 @@ export function CategoryFilter({ category, title }: CategoryFilterProps) {
 
   return (
     <Filter
-      id={buildSearchFilterCategoryId(category)}
+      id={buildSearchFilterTagCategoryId(category)}
       buttonId={buildSearchFilterPopperButtonId(category)}
       title={title}
       options={options ?? {}}

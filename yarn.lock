@@ -1304,12 +1304,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/translations@npm:1.40.0":
-  version: 1.40.0
-  resolution: "@graasp/translations@npm:1.40.0"
+"@graasp/translations@github:graasp/graasp-translations#tag-categories":
+  version: 1.42.0
+  resolution: "@graasp/translations@https://github.com/graasp/graasp-translations.git#commit=c27f452ab5396cb1eebbe052c7ac56d4e55d6a9b"
   peerDependencies:
     i18next: ^23.8.1
-  checksum: 10/07f603161644e66541bd88949f7e2edf92355bc735a9a6eafbf7f93eab433c4b21a7a00cbecf61c9650037d81360693d68c997462b9359840e836c80d66fd143
+  checksum: 10/27ef0c8209fe27b67665c7c2b43ad09adb723b44d70dca89bca2fef6986367f20943c5236dcd3b02f11c89508dd382cf202ee695fab87fa34ee7ba11f5dfbdb2
   languageName: node
   linkType: hard
 
@@ -7217,7 +7217,7 @@ __metadata:
     "@graasp/query-client": "github:graasp/graasp-query-client#tags"
     "@graasp/sdk": "github:graasp/graasp-sdk#tag-type-search"
     "@graasp/stylis-plugin-rtl": "npm:2.2.0"
-    "@graasp/translations": "npm:1.40.0"
+    "@graasp/translations": "github:graasp/graasp-translations#tag-categories"
     "@graasp/ui": "npm:5.4.0"
     "@mui/icons-material": "npm:6.1.5"
     "@mui/lab": "npm:6.0.0-beta.13"

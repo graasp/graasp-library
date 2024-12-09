@@ -1,5 +1,3 @@
-import { CategoryType } from '@graasp/sdk';
-
 export const APP_NAME = 'Graasp';
 export const APP_KEYWORDS = ['graasp', 'library'];
 export const APP_AUTHOR = 'Graasp';
@@ -38,20 +36,6 @@ export const TREE_VIEW_MAX_WIDTH = 400;
 
 export const HOMEPAGE_NB_ELEMENTS_TO_SHOW = 12;
 
-export const GRAASP_COLOR = '#5050D2';
 export const BACKGROUND_COLOR = 'rgb(248, 247, 254)';
-
-export const CATEGORY_COLORS: Record<
-  // eslint report an error that prettier auto-corrects in the other way, so we disable eslint here
-  // eslint-disable-next-line prettier/prettier
-  (typeof CategoryType)[keyof typeof CategoryType] | 'license',
-  string
-> = {
-  [CategoryType.Discipline]: '#4997DE',
-  [CategoryType.Language]: '#9A49DE',
-  [CategoryType.Level]: '#5050d2',
-  [CategoryType.ResourceType]: '#E56548',
-  license: '#E56548',
-};
 
 export const MAX_RESULTS_TO_SHOW = 5;
