@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 
 import { useLibraryTranslation } from '../../config/i18n';
+import { FILTER_CHIP_CY } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
 import { FilterPopper, FilterPopperProps } from './FilterPopper';
 
@@ -125,6 +126,7 @@ export const Filter = ({
               <Chip
                 key={key}
                 label={option}
+                data-cy={FILTER_CHIP_CY}
                 onDelete={() => {
                   onOptionChange(option, false);
                 }}

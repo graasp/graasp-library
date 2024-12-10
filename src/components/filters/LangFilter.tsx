@@ -4,7 +4,7 @@ import { langs } from '@graasp/translations';
 
 import {
   SEARCH_FILTER_LANG_ID,
-  SEARCH_FILTER_POPPER_LANG_ID,
+  buildSearchFilterPopperButtonId,
 } from '../../config/selectors';
 import { QueryClientContext } from '../QueryClientContext';
 import { useSearchFiltersContext } from '../pages/SearchFiltersContext';
@@ -55,7 +55,7 @@ export function LangFilter({ title }: LangFilterProps) {
       selectedOptions={selectedOptions}
       onOptionChange={toggleLang}
       onClearOptions={clearLang}
-      buttonId={SEARCH_FILTER_POPPER_LANG_ID}
+      buttonId={buildSearchFilterPopperButtonId('lang')}
       isLoading={isFetching}
     />
   );

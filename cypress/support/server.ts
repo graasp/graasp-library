@@ -326,20 +326,13 @@ export const mockSignOut = () => {
   ).as('signOut');
 };
 
-export const mockGetItemTags = (
-  { items }: { items: MockItem[] },
-  shouldThrowError: boolean,
-) => {
+export const mockGetTagsByItem = ({ items }: { items: MockItem[] }) => {
   cy.intercept(
     {
       method: DEFAULT_GET.method,
-      url: new RegExp(`${API_HOST}/items/${ID_FORMAT}/categories`),
+      url: new RegExp(`${API_HOST}/items/${ID_FORMAT}/tags`),
     },
     ({ reply, url }) => {
-      if (shouldThrowError) {
-        reply({ statusCode: StatusCodes.BAD_REQUEST });
-      }
-
       const itemId = new URL(url).pathname.split('/')[2];
       const item = items.find(({ id }) => id === itemId);
 
@@ -349,7 +342,7 @@ export const mockGetItemTags = (
 
       return reply(item.tags as any);
     },
-  ).as('getItemTags');
+  ).as('getTagsByItem');
 };
 
 export const mockGetItemMembershipsForItems = ({
@@ -440,7 +433,7 @@ export const mockSearch = (
           body: null,
         });
       }
-      if (body.queries[0].filter?.includes('isPublishedRoot = true')) {
+      if (body.isPublishedRoot) {
         return reply(
           builderMeilisearchResults(getRootPublishedItems(searchResultItems)),
         );

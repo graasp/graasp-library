@@ -2,7 +2,10 @@ import { PermissionLevel, formatDate, isChildOf } from '@graasp/sdk';
 import { DEFAULT_LANG } from '@graasp/translations';
 
 import { i18nConfig } from '../../../src/config/i18n';
-import { buildCollectionRoute } from '../../../src/config/routes';
+import {
+  ALL_COLLECTIONS_ROUTE,
+  buildCollectionRoute,
+} from '../../../src/config/routes';
 import {
   CHILDREN_ITEMS_GRID_ID,
   CHILD_CARD_COPY_BUTTON_ID,
@@ -14,6 +17,7 @@ import {
   SUMMARY_AUTHOR_CONTAINER_ID,
   SUMMARY_CREATED_AT_CONTAINER_ID,
   SUMMARY_LAST_UPDATE_CONTAINER_ID,
+  SUMMARY_TAGS_CONTAINER_ID,
   TREE_MODAL_CONFIRM_BUTTON_ID,
   buildContributorId,
 } from '../../../src/config/selectors';
@@ -40,6 +44,15 @@ describe('Collection Summary', () => {
       // name
       cy.get(`#${ITEM_SUMMARY_TITLE_ID}`).should('have.text', item.name);
 
+      // tags
+      // eslint-disable-next-line no-restricted-syntax
+      for (const { name: t } of item.tags ?? []) {
+        cy.get(`#${SUMMARY_TAGS_CONTAINER_ID}`).should('contain', t);
+        // clickable tag
+        cy.get(
+          `#${SUMMARY_TAGS_CONTAINER_ID} a[href="${ALL_COLLECTIONS_ROUTE}?s=${t}"]`,
+        ).should('be.visible');
+      }
       // children
       const children = PUBLISHED_ITEMS.filter(({ path }) =>
         isChildOf(path, item.path),

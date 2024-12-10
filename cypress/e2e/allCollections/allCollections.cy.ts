@@ -1,5 +1,5 @@
-import { TagCategory } from '@graasp/sdk';
-import { langs, namespaces } from '@graasp/translations';
+import { HttpMethod, TagCategory } from '@graasp/sdk';
+import { namespaces } from '@graasp/translations';
 
 import { LIBRARY_NAMESPACE, i18nConfig } from '../../../src/config/i18n';
 import { ALL_COLLECTIONS_ROUTE } from '../../../src/config/routes';
@@ -7,10 +7,13 @@ import {
   ALL_COLLECTIONS_GRID_ID,
   ALL_COLLECTIONS_TITLE_ID,
   ENABLE_IN_DEPTH_SEARCH_CHECKBOX_ID,
+  FILTER_CHIP_CY,
+  FILTER_POPPER_ID,
+  HOME_SEARCH_ID,
   SEARCH_FILTER_LANG_ID,
-  SEARCH_FILTER_POPPER_LANG_ID,
   buildCategoryOptionSelector,
   buildCollectionCardGridId,
+  buildFilterInputSelector,
   buildSearchFilterPopperButtonId,
   buildSearchFilterTagCategoryId,
 } from '../../../src/config/selectors';
@@ -20,6 +23,12 @@ import { PUBLISHED_ITEMS } from '../../fixtures/items';
 import { getRootPublishedItems } from '../../support/utils';
 
 const i18n = i18nConfig();
+
+const removeFirstChip = () => {
+  cy.get(
+    `#not-sticky [data-cy="${FILTER_CHIP_CY}"]:first-child > svg[data-testid="CancelIcon"]`,
+  ).click();
+};
 
 buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
   describe(`All Collections Page for ${
@@ -32,10 +41,23 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
         i18n.changeLanguage(environment.currentMember.extra.lang);
       }
 
-      cy.visit(ALL_COLLECTIONS_ROUTE);
+      // eslint-disable-next-line no-restricted-syntax
+      for (const category of Object.values(TagCategory)) {
+        cy.intercept(
+          {
+            method: HttpMethod.Post,
+            url: /items\/collections\/facets/,
+            query: { facetName: category },
+          },
+          ({ reply }) => {
+            return reply({ facet: 1, hello: 2 });
+          },
+        ).as(`getFacets-${category}`);
+      }
     });
 
     it('Layout', () => {
+      cy.visit(ALL_COLLECTIONS_ROUTE);
       cy.get(`#${ALL_COLLECTIONS_TITLE_ID}`).should('be.visible');
 
       // filter header
@@ -70,17 +92,121 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
       );
     });
 
-    it('display language options', () => {
-      cy.wait(['@getCategories']);
-      cy.get(`#not-sticky button#${SEARCH_FILTER_POPPER_LANG_ID}`)
-        .filter(':visible')
-        .click();
-      Object.entries(langs).forEach((l, idx) => {
-        cy.get(buildCategoryOptionSelector(idx)).contains(l[1]);
+    it('toggle published root', () => {
+      cy.visit(ALL_COLLECTIONS_ROUTE);
+      cy.get(`#${ENABLE_IN_DEPTH_SEARCH_CHECKBOX_ID}`).check();
+
+      // should contain query in search
+      cy.wait(['@search', '@search']).then(([firstCall, secondCall]) => {
+        expect(firstCall.request.body.isPublishedRoot).to.eq(true);
+        expect(secondCall.request.body.isPublishedRoot).to.eq(false);
+      });
+
+      // should contain query in facets
+      cy.wait([
+        `@getFacets-${TagCategory.Discipline}`,
+        `@getFacets-${TagCategory.Discipline}`,
+      ]).then(([firstCall, secondCall]) => {
+        expect(firstCall.request.body.isPublishedRoot).to.eq(true);
+        expect(secondCall.request.body.isPublishedRoot).to.eq(false);
       });
     });
 
+    it('select/unselect language options', () => {
+      cy.visit(ALL_COLLECTIONS_ROUTE);
+      cy.intercept(
+        {
+          method: HttpMethod.Post,
+          url: /items\/collections\/facets/,
+          query: { facetName: 'lang' },
+        },
+        ({ reply }) => {
+          return reply({ en: 1, fr: 2 });
+        },
+      );
+
+      cy.get(buildFilterInputSelector('lang')).click();
+      cy.get(`#${FILTER_POPPER_ID}`).should('contain', 'English');
+      cy.get(`#${FILTER_POPPER_ID}`).should('contain', 'Français');
+
+      // type and should display no option
+      cy.get(buildFilterInputSelector(TagCategory.Level)).type(
+        'some random text',
+      );
+      cy.get(`#${FILTER_POPPER_ID} checkbox`).should('not.exist');
+
+      // type and should display only "facet", select it
+      cy.get(buildFilterInputSelector('lang')).clear().type('En');
+      cy.get(`#${FILTER_POPPER_ID}`).should('contain', 'English');
+      cy.get(`#${FILTER_POPPER_ID}`).should('not.contain', 'Français');
+      cy.get(buildCategoryOptionSelector(0)).click();
+
+      // clear and select 2nd option
+      cy.get(buildFilterInputSelector('lang')).clear().click();
+      cy.get(buildCategoryOptionSelector(1)).click();
+
+      // trigger search
+      cy.wait(['@search', '@search', '@search']).then(
+        ([
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          _firstCall,
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          _secondCall,
+          {
+            request: { body },
+          },
+        ]) => {
+          expect(body.langs).to.contain('en');
+          expect(body.langs).to.contain('fr');
+        },
+      );
+
+      // should update other facets
+      cy.wait([
+        `@getFacets-${TagCategory.Discipline}`,
+        `@getFacets-${TagCategory.Discipline}`,
+        `@getFacets-${TagCategory.Discipline}`,
+      ]).then(
+        ([
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          _firstCall,
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          _secondCall,
+          {
+            request: { body },
+          },
+        ]) => {
+          expect(body.langs).to.include('en');
+          expect(body.langs).to.include('fr');
+        },
+      );
+
+      cy.get(`[data-cy="${FILTER_CHIP_CY}"]`).should('contain', 'English');
+      cy.get(`[data-cy="${FILTER_CHIP_CY}"]`).should('contain', 'Français');
+
+      // remove "English"
+      removeFirstChip();
+
+      // update search
+      cy.wait('@search').then(({ request: { body } }) => {
+        expect(body.langs).to.have.length(1);
+        expect(body.langs).to.contain('fr');
+      });
+
+      // should update other facets
+      cy.wait(`@getFacets-${TagCategory.Discipline}`).then(
+        ({ request: { body } }) => {
+          expect(body.langs).to.have.length(1);
+          expect(body.langs).to.contain('fr');
+        },
+      );
+
+      // remains "Français"
+      cy.get(`[data-cy="${FILTER_CHIP_CY}"]`).should('contain', 'Français');
+    });
+
     it.skip('scroll to bottom and search should pop out', () => {
+      cy.visit(ALL_COLLECTIONS_ROUTE);
       cy.get(`#${ALL_COLLECTIONS_GRID_ID}`);
 
       cy.scrollTo('bottom');
@@ -91,30 +217,143 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
       );
     });
 
-    it('select/unselect categories', () => {
+    it('select/unselect tag categories', () => {
+      cy.visit(ALL_COLLECTIONS_ROUTE);
       // search allows to get all the published items
-      cy.wait(['@getCategories', '@search']);
-      // cy.scrollTo('top');
-      cy.get(
-        `#not-sticky button#${buildSearchFilterPopperButtonId(
-          TagCategory.Level,
-        )}`,
-      ).click();
+      cy.wait('@search');
+
+      // type and should display no option
+      cy.get(buildFilterInputSelector(TagCategory.Level)).type(
+        'some random text',
+      );
+      cy.get(`#${FILTER_POPPER_ID} checkbox`).should('not.exist');
+
+      // type and should display only "facet", select it
+      cy.get(buildFilterInputSelector(TagCategory.Level)).clear().type('facet');
+      cy.get(`#${FILTER_POPPER_ID}`).should('contain', 'facet');
+      cy.get(`#${FILTER_POPPER_ID}`).should('not.contain', 'hello');
       cy.get(buildCategoryOptionSelector(0)).click();
-      cy.wait('@search').then(() => {
-        cy.get(`#${ALL_COLLECTIONS_GRID_ID}`)
-          .children()
-          .should('have.length', getRootPublishedItems(PUBLISHED_ITEMS).length);
+
+      // clear and select 2nd option
+      cy.get(buildFilterInputSelector(TagCategory.Level)).clear().click();
+
+      cy.get(buildCategoryOptionSelector(1)).click();
+      cy.wait(['@search', '@search']).then(
+        ([
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          _firstCall,
+          {
+            request: { body },
+          },
+        ]) => {
+          expect(body.tags.level).to.contain('facet');
+          expect(body.tags.level).to.contain('hello');
+        },
+      );
+
+      // should update other facets
+      cy.wait([
+        `@getFacets-${TagCategory.Discipline}`,
+        `@getFacets-${TagCategory.Discipline}`,
+        `@getFacets-${TagCategory.Discipline}`,
+      ]).then(
+        ([
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          _firstCall,
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          _secondCall,
+          {
+            request: { body },
+          },
+        ]) => {
+          expect(body.tags.level).to.include('facet');
+        },
+      );
+
+      cy.get(`[data-cy="${FILTER_CHIP_CY}"]`).should('contain', 'facet');
+
+      // remove "facet"
+      removeFirstChip();
+
+      // update search
+      cy.wait('@search').then(({ request: { body } }) => {
+        expect(body.tags.level).to.have.length(1);
+        expect(body.tags.level).to.contain('hello');
       });
 
-      // bug: popup does not open in cypress
-      // clear selection
-      // cy.get(`#${CLEAR_FILTER_POPPER_BUTTON_ID}`).click();
+      // should update other facets
+      cy.wait(`@getFacets-${TagCategory.Discipline}`).then(
+        ({ request: { body } }) => {
+          expect(body.tags.level).to.have.length(1);
+          expect(body.tags.level).to.contain('hello');
+        },
+      );
 
-      // check default display, show all published with children
-      cy.get(`#${ALL_COLLECTIONS_GRID_ID}`)
-        .children()
-        .should('have.length', getRootPublishedItems(PUBLISHED_ITEMS).length);
+      // only "hello" remains
+      cy.get(`[data-cy="${FILTER_CHIP_CY}"]`).should('contain', 'hello');
+    });
+
+    it('start with search filter in url', () => {
+      const searchQuery = 'star';
+
+      cy.visit(`${ALL_COLLECTIONS_ROUTE}?s=star`);
+      cy.get(`#${HOME_SEARCH_ID}`).should('have.value', searchQuery);
+
+      // should contain query in search
+      cy.wait(['@search', '@search', '@search']).then(
+        ([
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          _firstCall,
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          _secondCall,
+          {
+            request: { body },
+          },
+        ]) => {
+          expect(body.query).to.eq(searchQuery);
+        },
+      );
+
+      // should contain query in facets
+      cy.wait([
+        `@getFacets-${TagCategory.Discipline}`,
+        `@getFacets-${TagCategory.Discipline}`,
+        `@getFacets-${TagCategory.Discipline}`,
+      ]).then(
+        ([
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          _firstCall,
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          _secondCall,
+          {
+            request: { body },
+          },
+        ]) => {
+          expect(body.query).to.eq(searchQuery);
+        },
+      );
+    });
+
+    it('type search', () => {
+      cy.visit(ALL_COLLECTIONS_ROUTE);
+      const searchQuery = 'star';
+
+      cy.get(`#${HOME_SEARCH_ID}`).type(searchQuery);
+
+      // should contain query in search
+      cy.wait(['@search', '@search']).then(([firstCall, secondCall]) => {
+        expect(firstCall.request.body.query).to.eq('');
+        expect(secondCall.request.body.query).to.eq(searchQuery);
+      });
+
+      // should contain query in facets
+      cy.wait([
+        `@getFacets-${TagCategory.Discipline}`,
+        `@getFacets-${TagCategory.Discipline}`,
+      ]).then(([firstCall, secondCall]) => {
+        expect(firstCall.request.body.query).to.eq('');
+        expect(secondCall.request.body.query).to.eq(searchQuery);
+      });
     });
   });
 });

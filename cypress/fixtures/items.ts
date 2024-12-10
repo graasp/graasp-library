@@ -31,7 +31,6 @@ export const PUBLISHED_ITEMS: MockItem[] = [
     createdAt: '2023-02-27T18:20:09.732Z',
     updatedAt: '2023-02-28T18:20:09.732Z',
     settings: {
-      tags: ['one-tag', 'two-tag'],
       ccLicenseAdaption: 'CC BY-NC-ND',
       displayCoEditors: true,
     },
@@ -296,11 +295,7 @@ export const getNumberOfOwnPublishedItems = (memberId: string) =>
   ).length;
 
 export const builderMeilisearchResults = (items: DiscriminatedItem[]) => ({
-  results: [
-    {
-      hits: items.map((i) => ({ ...i, _formatted: i })),
-      totalHits: items.length,
-      estimatedTotalHits: items.length,
-    },
-  ],
+  hits: items.map((i) => ({ ...i, _formatted: i })),
+  totalHits: items.length,
+  estimatedTotalHits: items.length,
 });

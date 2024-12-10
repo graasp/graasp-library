@@ -9,12 +9,12 @@ import {
   mockGetCurrentMember,
   mockGetItem,
   mockGetItemMembershipsForItems,
-  mockGetItemTags,
   mockGetItemThumbnailUrl,
   mockGetLikedItems,
   mockGetMember,
   mockGetPublishItemInformations,
   mockGetRecentCollections,
+  mockGetTagsByItem,
   mockSearch,
   mockSignInRedirection,
   mockSignOut,
@@ -29,7 +29,6 @@ Cypress.Commands.add(
     recentCollections = [],
     accessibleItems = [],
     getCurrentMemberError = false,
-    getItemCategoriesError = false,
     searchResultItems = PUBLISHED_ITEMS,
     searchError = false,
     itemLikes = ITEM_LIKES,
@@ -61,7 +60,7 @@ Cypress.Commands.add(
 
     mockGetPublishItemInformations(items);
 
-    mockGetItemTags({ items }, getItemCategoriesError);
+    mockGetTagsByItem({ items });
 
     mockGetItemMembershipsForItems({ items, currentMember });
 
