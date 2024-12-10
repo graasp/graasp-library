@@ -69,7 +69,13 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
         `#${buildSearchFilterTagCategoryId(TagCategory.Discipline)}`,
       ).should(
         'contain.text',
-        i18n.t(TagCategory.Discipline, { ns: namespaces.enums }),
+        i18n.t(TagCategory.Discipline, { count: 2, ns: namespaces.enums }),
+      );
+      cy.get(
+        `#${buildSearchFilterTagCategoryId(TagCategory.ResourceType)}`,
+      ).should(
+        'contain.text',
+        i18n.t(TagCategory.ResourceType, { count: 2, ns: namespaces.enums }),
       );
       cy.get(`#${SEARCH_FILTER_LANG_ID}`).should(
         'contain.text',
