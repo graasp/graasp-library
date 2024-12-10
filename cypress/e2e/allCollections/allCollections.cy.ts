@@ -63,7 +63,7 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
       // filter header
       cy.get(`#${buildSearchFilterTagCategoryId(TagCategory.Level)}`).should(
         'contain.text',
-        i18n.t(TagCategory.Level, { ns: namespaces.enums }),
+        i18n.t(TagCategory.Level, { count: 2, ns: namespaces.enums }),
       );
       cy.get(
         `#${buildSearchFilterTagCategoryId(TagCategory.Discipline)}`,
@@ -300,7 +300,7 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
       cy.get(`#${HOME_SEARCH_ID}`).should('have.value', searchQuery);
 
       // should contain query in search
-      cy.wait(['@search', '@search', '@search']).then(
+      cy.wait(['@search', '@search']).then(
         ([
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
           _firstCall,
@@ -314,7 +314,6 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
 
       // should contain query in facets
       cy.wait([
-        `@getFacets-${TagCategory.Discipline}`,
         `@getFacets-${TagCategory.Discipline}`,
         `@getFacets-${TagCategory.Discipline}`,
       ]).then(
