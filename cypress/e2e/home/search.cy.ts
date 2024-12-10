@@ -62,7 +62,7 @@ describe('Search', () => {
               request: { body },
             },
           ]) => {
-            expect(body.queries[0].q).to.eq(keywords);
+            expect(body.query).to.eq(keywords);
           },
         );
 

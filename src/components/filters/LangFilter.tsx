@@ -1,44 +1,62 @@
+import { useContext } from 'react';
+
 import { langs } from '@graasp/translations';
 
 import {
   SEARCH_FILTER_LANG_ID,
-  SEARCH_FILTER_POPPER_LANG_ID,
+  buildSearchFilterPopperButtonId,
 } from '../../config/selectors';
-import { Filter, FilterProps } from './Filter';
+import { QueryClientContext } from '../QueryClientContext';
+import { useSearchFiltersContext } from '../pages/SearchFiltersContext';
+import { Filter } from './Filter';
 
 type LangFilterProps = {
   title: string;
-  selectedOptionIds: FilterProps['selectedOptionIds'];
-  setLangs: (langs: string[]) => void;
 };
 
 // eslint-disable-next-line react/function-component-definition
-export function LangFilter({
-  title,
-  selectedOptionIds,
-  setLangs,
-}: LangFilterProps) {
-  const onLangChange = (option: string) => {
-    if (selectedOptionIds.includes(option)) {
-      setLangs(selectedOptionIds.filter((l) => l !== option));
-    } else {
-      setLangs([...selectedOptionIds, option]);
-    }
-  };
+export function LangFilter({ title }: LangFilterProps) {
+  const {
+    tags,
+    langs: selectedOptions,
+    toggleLang,
+    clearLang,
+    searchKeywords,
+    isPublishedRoot,
+  } = useSearchFiltersContext();
 
-  const clearLang = () => {
-    setLangs([]);
-  };
+  const { hooks } = useContext(QueryClientContext);
+
+  const { data: options, isFetching } = hooks.useSearchFacets({
+    facetName: 'lang',
+    query: searchKeywords,
+    tags,
+    isPublishedRoot,
+  });
+
+  // received langs contain slugs, eg: fr
+  // transform from fr -> Français
+  const langOptions = options
+    ? Object.keys(options).reduce(
+        (acc, key) => ({
+          ...acc,
+          // @ts-expect-error
+          ...{ [langs[key] || key]: options[key] },
+        }),
+        {},
+      )
+    : {};
 
   return (
     <Filter
       id={SEARCH_FILTER_LANG_ID}
       title={title}
-      options={Object.entries(langs)}
-      selectedOptionIds={selectedOptionIds}
-      onOptionChange={onLangChange}
+      options={langOptions}
+      selectedOptions={selectedOptions}
+      onOptionChange={toggleLang}
       onClearOptions={clearLang}
-      buttonId={SEARCH_FILTER_POPPER_LANG_ID}
+      buttonId={buildSearchFilterPopperButtonId('lang')}
+      isLoading={isFetching}
     />
   );
 }

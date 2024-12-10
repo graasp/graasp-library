@@ -2,13 +2,13 @@ import {
   DiscriminatedItem,
   FolderItemFactory,
   FolderItemType,
-  ItemTagType,
   ItemType,
+  ItemVisibilityType,
   PermissionLevel,
+  TagFactory,
 } from '@graasp/sdk';
 
 import { MockItem } from '../support/types';
-import { SAMPLE_CATEGORIES } from './categories';
 import { CURRENT_USER, MEMBERS } from './members';
 
 export const DEFAULT_FOLDER_ITEM: FolderItemType = FolderItemFactory({
@@ -31,7 +31,6 @@ export const PUBLISHED_ITEMS: MockItem[] = [
     createdAt: '2023-02-27T18:20:09.732Z',
     updatedAt: '2023-02-28T18:20:09.732Z',
     settings: {
-      tags: ['one-tag', 'two-tag'],
       ccLicenseAdaption: 'CC BY-NC-ND',
       displayCoEditors: true,
     },
@@ -41,10 +40,10 @@ export const PUBLISHED_ITEMS: MockItem[] = [
       isPublished: true,
       rootPath: 'ecafbd2a_5688_11eb_ae93_0242ac130002',
     },
-    tags: [
+    visibility: [
       {
         id: 'ecbfbd2a-5688-11eb-ae93-0242ac130002',
-        type: ItemTagType.Public,
+        type: ItemVisibilityType.Public,
         itemPath: 'ecafbd2a_5688_11eb_ae93_0242ac130002',
       },
     ],
@@ -60,14 +59,7 @@ export const PUBLISHED_ITEMS: MockItem[] = [
         account: MEMBERS.BOB,
       },
     ],
-    categories: [
-      {
-        category: SAMPLE_CATEGORIES[1],
-      },
-      {
-        category: SAMPLE_CATEGORIES[0],
-      },
-    ],
+    tags: [TagFactory(), TagFactory()],
   },
   {
     ...DEFAULT_FOLDER_ITEM,
@@ -82,10 +74,10 @@ export const PUBLISHED_ITEMS: MockItem[] = [
       isPublished: true,
       rootPath: 'ecafbd2a_5688_11eb_ae93_0242ac130002',
     },
-    tags: [
+    visibility: [
       {
         id: 'ab6e9ab1-b1a2-4ba9-abc2-21d186ef7e84',
-        type: ItemTagType.Public,
+        type: ItemVisibilityType.Public,
         itemPath: 'ecafbd2a_5688_11eb_ae93_0242ac130002',
       },
     ],
@@ -96,11 +88,7 @@ export const PUBLISHED_ITEMS: MockItem[] = [
         account: MEMBERS.ANNA,
       },
     ],
-    categories: [
-      {
-        category: SAMPLE_CATEGORIES[1],
-      },
-    ],
+    tags: [TagFactory()],
   },
   {
     ...DEFAULT_FOLDER_ITEM,
@@ -115,10 +103,10 @@ export const PUBLISHED_ITEMS: MockItem[] = [
       isPublished: true,
       rootPath: 'ecafbd2a_5688_11eb_ae93_0242ac130002',
     },
-    tags: [
+    visibility: [
       {
         id: '323606b8-b8ee-4573-b927-6342e3949d21',
-        type: ItemTagType.Public,
+        type: ItemVisibilityType.Public,
         itemPath: 'ecafbd2a_5688_11eb_ae93_0242ac130002',
       },
     ],
@@ -134,14 +122,7 @@ export const PUBLISHED_ITEMS: MockItem[] = [
         account: MEMBERS.BOB,
       },
     ],
-    categories: [
-      {
-        category: SAMPLE_CATEGORIES[1],
-      },
-      {
-        category: SAMPLE_CATEGORIES[0],
-      },
-    ],
+    tags: [TagFactory(), TagFactory()],
   },
   {
     ...DEFAULT_FOLDER_ITEM,
@@ -156,10 +137,10 @@ export const PUBLISHED_ITEMS: MockItem[] = [
       isPublished: true,
       rootPath: 'egafbd2a_5688_11eb_ae93_0242ac130002',
     },
-    tags: [
+    visibility: [
       {
         id: '26ccc4ff-addc-49aa-978b-60cfdf0d7b1a',
-        type: ItemTagType.Public,
+        type: ItemVisibilityType.Public,
         itemPath: 'egafbd2a_5688_11eb_ae93_0242ac130002',
       },
     ],
@@ -183,15 +164,10 @@ export const PUBLISHED_ITEMS: MockItem[] = [
         account: MEMBERS.ANNA,
       },
     ],
-    categories: [
-      {
-        category: SAMPLE_CATEGORIES[2],
-      },
-    ],
-    tags: [
+    visibility: [
       {
         id: '9c2f7831-327e-46de-ad26-23c0126f1177',
-        type: ItemTagType.Public,
+        type: ItemVisibilityType.Public,
         itemPath: 'egafbd2a_5688_11eb_ae93_0242ac130002',
       },
     ],
@@ -208,7 +184,7 @@ export const PUBLISHED_ITEMS: MockItem[] = [
       tags: ['one-tag', 'two-tag'],
       displayCoEditors: true,
     },
-    tags: [],
+    visibility: [],
     memberships: [
       {
         itemPath: 'fdf09f5a_5688_11eb_ae93_0242ac130002',
@@ -221,14 +197,7 @@ export const PUBLISHED_ITEMS: MockItem[] = [
         account: MEMBERS.BOB,
       },
     ],
-    categories: [
-      {
-        category: SAMPLE_CATEGORIES[1],
-      },
-      {
-        category: SAMPLE_CATEGORIES[0],
-      },
-    ],
+    tags: [TagFactory(), TagFactory()],
   },
 ];
 
@@ -243,10 +212,10 @@ export const GRAASPER_ITEMS: MockItem[] = [
       isPublished: true,
       rootPath: 'edafbd2d_5688_11eb_ae93_0242ac130002',
     },
-    tags: [
+    visibility: [
       {
         id: 'ecbfbd23-5688-11eb-ae93-0242ac130002',
-        type: ItemTagType.Public,
+        type: ItemVisibilityType.Public,
         itemPath: 'edafbd2d_5688_11eb_ae93_0242ac130002',
       },
     ],
@@ -260,11 +229,6 @@ export const GRAASPER_ITEMS: MockItem[] = [
         itemPath: 'edafbd2d_5688_11eb_ae93_0242ac130002',
         permission: PermissionLevel.Read,
         account: MEMBERS.BOB,
-      },
-    ],
-    categories: [
-      {
-        category: SAMPLE_CATEGORIES[0],
       },
     ],
   },
@@ -278,10 +242,10 @@ export const GRAASPER_ITEMS: MockItem[] = [
       isPublished: true,
       rootPath: 'ecafbd2d_5688_11eb_ae93_0242ac130002',
     },
-    tags: [
+    visibility: [
       {
         id: 'ecbfbd23-5688-11eb-ae93-0242ac130002',
-        type: ItemTagType.Public,
+        type: ItemVisibilityType.Public,
         itemPath: 'ecafbd2d_5688_11eb_ae93_0242ac130002',
       },
     ],
@@ -297,7 +261,6 @@ export const GRAASPER_ITEMS: MockItem[] = [
         account: MEMBERS.BOB,
       },
     ],
-    categories: [{ category: SAMPLE_CATEGORIES[0] }],
   },
   {
     ...DEFAULT_FOLDER_ITEM,
@@ -309,10 +272,10 @@ export const GRAASPER_ITEMS: MockItem[] = [
       isPublished: true,
       rootPath: 'ecafbd2d_5688_11eb_ae93_0242ac130002',
     },
-    tags: [
+    visibility: [
       {
         id: 'bdf09f5d_5688_11eb_ae93_0242ac130344',
-        type: ItemTagType.Public,
+        type: ItemVisibilityType.Public,
         itemPath: 'ecafbd2d_5688_11eb_ae93_0242ac130002',
       },
     ],
@@ -323,7 +286,6 @@ export const GRAASPER_ITEMS: MockItem[] = [
         account: MEMBERS.ANNA,
       },
     ],
-    categories: [{ category: SAMPLE_CATEGORIES[1] }],
   },
 ];
 
@@ -333,11 +295,7 @@ export const getNumberOfOwnPublishedItems = (memberId: string) =>
   ).length;
 
 export const builderMeilisearchResults = (items: DiscriminatedItem[]) => ({
-  results: [
-    {
-      hits: items.map((i) => ({ ...i, _formatted: i })),
-      totalHits: items.length,
-      estimatedTotalHits: items.length,
-    },
-  ],
+  hits: items.map((i) => ({ ...i, _formatted: i })),
+  totalHits: items.length,
+  estimatedTotalHits: items.length,
 });

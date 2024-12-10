@@ -1,6 +1,4 @@
-import { useRouter } from 'next/navigation';
-
-import React, { useContext } from 'react';
+import { ReactNode } from 'react';
 
 import {
   Box,
@@ -12,31 +10,18 @@ import {
   styled,
 } from '@mui/material';
 
-import {
-  Category,
-  CategoryType,
-  DiscriminatedItem,
-  formatDate,
-} from '@graasp/sdk';
+import { DiscriminatedItem, formatDate } from '@graasp/sdk';
 import { DEFAULT_LANG, langs } from '@graasp/translations';
 
-import { CATEGORY_COLORS, UrlSearch } from '../../../config/constants';
+import { useLibraryTranslation } from '../../../config/i18n';
 import {
-  useCategoriesTranslation,
-  useLibraryTranslation,
-} from '../../../config/i18n';
-import { ALL_COLLECTIONS_ROUTE } from '../../../config/routes';
-import {
-  SUMMARY_CATEGORIES_CONTAINER_ID,
   SUMMARY_CC_LICENSE_CONTAINER_ID,
   SUMMARY_CC_LICENSE_NO_LICENSE_ID,
   SUMMARY_CREATED_AT_CONTAINER_ID,
   SUMMARY_LANGUAGES_CONTAINER_ID,
   SUMMARY_LAST_UPDATE_CONTAINER_ID,
-  buildCategoryChipId,
 } from '../../../config/selectors';
 import LIBRARY from '../../../langs/constants';
-import { QueryClientContext } from '../../QueryClientContext';
 import CreativeCommons from '../../common/CreativeCommons';
 
 const DetailCard = styled(Box)(() => ({
@@ -46,50 +31,6 @@ const DetailCard = styled(Box)(() => ({
   height: '100%',
 }));
 
-type CategoryChipProps = {
-  category: Category;
-};
-
-const CategoryChip = ({ category }: CategoryChipProps) => {
-  const { t } = useCategoriesTranslation();
-  const router = useRouter();
-
-  const handleCategorySearch = (categoryId: string) => {
-    // navigate to "/all-collections?cat=<categoryId>"
-    router.push(
-      `${ALL_COLLECTIONS_ROUTE}?${UrlSearch.CategorySearch}=${categoryId}`,
-    );
-  };
-  return (
-    <Chip
-      onClick={() => handleCategorySearch(category.id)}
-      key={category.name}
-      id={buildCategoryChipId(category.name)}
-      label={t(category.name)}
-      sx={{
-        color: CATEGORY_COLORS[category.type],
-      }}
-      variant="outlined"
-      component={Typography}
-    />
-  );
-};
-
-const CategoryDisplay = ({
-  categories,
-  emptyText,
-}: {
-  categories: Category[];
-  emptyText: string;
-}) => {
-  if (categories.length > 0) {
-    return categories?.map((entry) => (
-      <CategoryChip key={entry.id} category={entry} />
-    ));
-  }
-  return <Typography color="text.secondary">{emptyText}</Typography>;
-};
-
 type SummaryDetailsProps = {
   collection: DiscriminatedItem;
   publishedRootItem?: DiscriminatedItem;
@@ -97,35 +38,18 @@ type SummaryDetailsProps = {
   isLoading: boolean;
 };
 
-const SummaryDetails: React.FC<SummaryDetailsProps> = ({
+// eslint-disable-next-line react/function-component-definition
+export function SummaryDetails({
   isLoading,
   lang,
   collection,
   publishedRootItem,
-}) => {
+}: SummaryDetailsProps): ReactNode {
   const { t } = useLibraryTranslation();
-  const { hooks } = useContext(QueryClientContext);
-  const { data: rawItemCategories, isLoading: isInitialLoading } =
-    hooks.useItemCategories(publishedRootItem?.id);
 
   const ccLicenseAdaption = publishedRootItem
     ? publishedRootItem.settings?.ccLicenseAdaption
     : collection?.settings?.ccLicenseAdaption;
-
-  const itemCategories =
-    // here we do a little trick to allow to have a loading state while we wait for the published entry.
-    publishedRootItem !== undefined && isInitialLoading === false
-      ? // when we know if the published entry exists or not use the real value
-        rawItemCategories
-      : // set default to be empty array when we do not fetch
-        undefined;
-
-  const levels = itemCategories
-    ?.filter((c) => c.category.type === CategoryType.Level)
-    ?.map((c) => c.category);
-  const disciplines = itemCategories
-    ?.filter((c) => c.category.type === CategoryType.Discipline)
-    ?.map((c) => c.category);
 
   const langKey = collection.lang in langs ? collection.lang : DEFAULT_LANG;
   // @ts-ignore
@@ -142,7 +66,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
         size={{
           xs: 12,
           sm: 6,
-          md: 4,
+          md: 6,
         }}
       >
         <DetailCard id={SUMMARY_CREATED_AT_CONTAINER_ID}>
@@ -158,7 +82,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
           </Typography>
         </DetailCard>
       </Grid>
-      <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+      <Grid size={{ xs: 12, sm: 6, md: 6 }}>
         <DetailCard id={SUMMARY_LAST_UPDATE_CONTAINER_ID}>
           <Typography variant="body1" fontWeight="bold">
             {t(LIBRARY.SUMMARY_DETAILS_UPDATED_AT_TITLE)}
@@ -172,7 +96,7 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
           </Typography>
         </DetailCard>
       </Grid>
-      <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+      <Grid size={{ xs: 12, sm: 6, md: 6 }}>
         <DetailCard id={SUMMARY_LANGUAGES_CONTAINER_ID}>
           <Typography variant="body1" fontWeight="bold">
             {t(LIBRARY.COLLECTION_LANGUAGE_TITLE)}
@@ -182,27 +106,8 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
           </Stack>
         </DetailCard>
       </Grid>
-      <Grid size={{ xs: 12, sm: 6, md: 4 }}>
-        <DetailCard>
-          <div id={SUMMARY_CATEGORIES_CONTAINER_ID}>
-            <Typography variant="body1" fontWeight="bold">
-              {t(LIBRARY.COLLECTION_CATEGORIES_TITLE)}
-            </Typography>
-            {levels || disciplines ? (
-              <Stack gap={1} direction="row" flexWrap="wrap">
-                <CategoryDisplay
-                  categories={[...(levels ?? []), ...(disciplines ?? [])]}
-                  emptyText={t(LIBRARY.SUMMARY_DETAILS_NO_CATEGORIES)}
-                />
-              </Stack>
-            ) : (
-              <Skeleton width="100%" />
-            )}
-          </div>
-        </DetailCard>
-      </Grid>
 
-      <Grid size={{ xs: 12, sm: 12, md: 8 }}>
+      <Grid size={{ xs: 12, sm: 6, md: 6 }}>
         <DetailCard>
           <Typography variant="body1" fontWeight="bold" gutterBottom>
             {t(LIBRARY.SUMMARY_DETAILS_LICENSE_TITLE)}
@@ -234,5 +139,4 @@ const SummaryDetails: React.FC<SummaryDetailsProps> = ({
       </Grid>
     </Grid>
   );
-};
-export default SummaryDetails;
+}

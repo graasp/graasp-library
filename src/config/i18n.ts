@@ -26,6 +26,4 @@ export const i18nConfig = () => {
 
 export const useLibraryTranslation = () => useTranslation(LIBRARY_NAMESPACE);
 export const useCommonTranslation = () => useTranslation(namespaces.common);
-export const useCategoriesTranslation = () =>
-  useTranslation(namespaces.categories);
 export const appI18n = i18nConfig();

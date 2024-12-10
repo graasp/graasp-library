@@ -1,135 +1,177 @@
 import { useEffect, useRef, useState } from 'react';
 
 import { ExpandMoreRounded } from '@mui/icons-material';
-import { Box, Button, Skeleton, Stack, Typography } from '@mui/material';
+import {
+  Chip,
+  Stack,
+  Typography,
+  styled,
+  useAutocomplete,
+} from '@mui/material';
 
-import { GRAASP_COLOR } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';
+import { FILTER_CHIP_CY } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
 import { FilterPopper, FilterPopperProps } from './FilterPopper';
 
 export type FilterProps = {
-  title: string;
-  selectedOptionIds: string[];
-  isLoading?: boolean;
-  onClearOptions: FilterPopperProps['onClearOptions'];
-  onOptionChange: FilterPopperProps['onOptionChange'];
   id: string;
   buttonId: string;
-  options?: FilterPopperProps['options'];
+  title: string;
+  isLoading?: boolean;
+  selectedOptions: FilterPopperProps['selectedOptions'];
+  onClearOptions: FilterPopperProps['onClearOptions'];
+  onOptionChange: FilterPopperProps['onOptionChange'];
+  options?: { [key: string]: number };
 };
+
+const InputWrapper = styled(Stack)(({ theme }) => ({
+  width: '100%',
+  borderRadius: theme.shape.borderRadius,
+  color: 'gray',
+  padding: theme.spacing(0.5),
+  transition: theme.transitions.create(['background-color', 'transform'], {
+    duration: theme.transitions.duration.standard,
+  }),
+  '&:hover': {
+    background: 'rgba(80, 80, 210, 0.04)',
+  },
+}));
+
+const StyledInput = styled('input')(({ theme }) => ({
+  padding: theme.spacing(),
+  fontSize: theme.typography.h6.fontSize,
+  fontFamily: theme.typography.h6.fontFamily,
+  width: 0,
+  flexGrow: 1,
+  minWidth: '30px',
+  margin: 0,
+  border: 0,
+  background: 'transparent',
+  '&:focus': {
+    outline: 0,
+  },
+}));
 
 export const Filter = ({
   title,
-  selectedOptionIds,
-  isLoading,
+  selectedOptions,
   onClearOptions,
   onOptionChange,
   id,
   buttonId,
-  options,
+  isLoading = false,
+  options = {},
 }: FilterProps) => {
   const { t } = useLibraryTranslation();
   const [showPopper, setShowPopper] = useState<boolean>(false);
-  const togglePopper = () => {
-    setShowPopper((oldVal) => !oldVal);
-  };
 
+  const [inputValue, setInputValue] = useState('');
   const popperAnchor = useRef<null | HTMLDivElement>(null);
   const popper = useRef<null | HTMLDivElement>(null);
 
-  const onDocumentScrolled = () => {
+  const handleClose = () => {
     setShowPopper(() => false);
+    setInputValue('');
   };
 
-  const onDocumentClicked = (event: MouseEvent) => {
-    if (
-      !popper.current?.contains(event.target as Node) &&
-      !popperAnchor.current?.contains(event.target as Node)
-    ) {
-      setShowPopper(() => false);
-    }
-  };
   // Listens for clicks outside of the popper to dismiss it when we click outside.
   useEffect(() => {
     if (showPopper) {
-      document.addEventListener('click', onDocumentClicked);
-      document.addEventListener('scroll', onDocumentScrolled);
+      document.addEventListener('scroll', handleClose);
     }
     return () => {
-      document.removeEventListener('click', onDocumentClicked);
-      document.removeEventListener('scroll', onDocumentScrolled);
+      document.removeEventListener('scroll', handleClose);
     };
   }, [showPopper]);
 
-  const content = isLoading ? (
-    <Skeleton width="100%" />
-  ) : (
-    <Button
-      id={buttonId}
-      onClick={togglePopper}
-      variant="text"
-      fullWidth
-      endIcon={<ExpandMoreRounded color="primary" />}
-      sx={{
-        textTransform: 'none',
-        alignItems: 'center',
-        paddingRight: 3,
-        justifyContent: 'space-between',
-      }}
-    >
-      <Typography
-        paddingLeft={1}
-        whiteSpace="nowrap"
-        width="100%"
-        textAlign="left"
-        color={selectedOptionIds.length ? 'black' : 'gray'}
-        variant="h6"
-        textOverflow="ellipsis"
-        overflow="hidden"
-      >
-        {options?.find((o) => o[0] === selectedOptionIds[0])?.[1] ??
-          t(LIBRARY.FILTER_DROPDOWN_NO_FILTER)}
-      </Typography>
+  const { getRootProps, getInputProps, getTagProps, groupedOptions } =
+    useAutocomplete({
+      options: Object.keys(options),
+      id: buttonId,
+      multiple: true,
+      value: selectedOptions,
+      clearOnBlur: false,
+      inputValue,
+      // always open to prevent options to be cleared
+      // popper is handled separately
+      // this means we cannot use onClose
+      open: true,
+      onInputChange: (e, value) => {
+        setInputValue(value);
+        setShowPopper(true);
+      },
+    });
 
-      {selectedOptionIds.length > 1 && (
-        <Box
+  // map filter options with count value
+  const filteredOptions = Object.fromEntries(
+    (groupedOptions as string[]).map((o) => [o, options[o]]),
+  );
+
+  const content = (
+    <div {...getRootProps()} style={{ width: '100%', position: 'relative' }}>
+      <InputWrapper direction="row">
+        <div
           style={{
-            color: GRAASP_COLOR,
-            fontSize: 14,
-            fontWeight: 'bold',
+            display: 'flex',
+            width: '100%',
+            position: 'relative',
+            flexGrow: 1,
+            flexWrap: 'wrap',
           }}
         >
-          {`+${selectedOptionIds.length - 1}`}
-        </Box>
-      )}
-    </Button>
+          {selectedOptions.map((option: string, index: number) => {
+            const { key } = getTagProps({ index });
+            return (
+              <Chip
+                key={key}
+                label={option}
+                data-cy={FILTER_CHIP_CY}
+                onDelete={() => {
+                  onOptionChange(option, false);
+                }}
+                sx={{ mr: 0.5, my: 0.5 }}
+              />
+            );
+          })}
+          <StyledInput
+            onClick={() => {
+              setShowPopper(true);
+            }}
+            placeholder={
+              selectedOptions.length
+                ? undefined
+                : t(LIBRARY.FILTER_DROPDOWN_NO_FILTER)
+            }
+            {...getInputProps()}
+          />
+        </div>
+        <ExpandMoreRounded color="primary" sx={{ mt: 1 }} />
+      </InputWrapper>
+    </div>
   );
 
   return (
-    <Stack
-      id={id}
-      flexGrow={1}
-      ref={popperAnchor}
-      flex={1}
-      flexBasis={0}
-      width={0}
-    >
+    <Stack id={id} flexGrow={1} flex={1} flexBasis={0} width={0}>
       <Typography variant="body2" color="#7A7A7A">
         {title}
       </Typography>
-      <Stack direction="row" alignItems="center">
+      <Stack direction="row" alignItems="center" ref={popperAnchor}>
         {content}
       </Stack>
-      <FilterPopper
-        ref={popper}
-        open={showPopper}
-        options={options}
-        anchorEl={popperAnchor.current}
-        selectedOptionIds={selectedOptionIds}
-        onOptionChange={onOptionChange}
-        onClearOptions={onClearOptions}
-      />
+      {showPopper && (
+        <FilterPopper
+          isLoading={isLoading}
+          ref={popper}
+          open={showPopper}
+          options={filteredOptions}
+          anchorEl={popperAnchor.current}
+          selectedOptions={selectedOptions}
+          onOptionChange={onOptionChange}
+          onClearOptions={onClearOptions}
+          handleClose={handleClose}
+        />
+      )}
     </Stack>
   );
 };

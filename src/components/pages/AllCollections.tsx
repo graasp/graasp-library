@@ -1,8 +1,6 @@
 'use client';
 
-import { useRouter, useSearchParams } from 'next/navigation';
-
-import React, { useContext, useEffect, useState } from 'react';
+import React, { ReactNode, useContext, useEffect, useState } from 'react';
 import { Trans } from 'react-i18next';
 
 import { Close } from '@mui/icons-material';
@@ -12,16 +10,17 @@ import {
   Container,
   IconButton,
   Button as MuiButton,
+  Skeleton,
   Stack,
   Typography,
 } from '@mui/material';
 
 import { Button } from '@graasp/ui';
 
-import { UrlSearch } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';
 import {
   ALL_COLLECTIONS_GRID_ID,
+  ALL_COLLECTIONS_TITLE_ID,
   SEARCH_ERROR_MESSAGE_ID,
 } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
@@ -30,48 +29,39 @@ import { QueryClientContext } from '../QueryClientContext';
 import CollectionsGrid from '../collection/CollectionsGrid';
 import FilterHeader from '../filters/FilterHeader';
 import MainWrapper from '../layout/MainWrapper';
+import {
+  SearchFiltersProvider,
+  useSearchFiltersContext,
+} from './SearchFiltersContext';
 
-type AllCollectionsProps = {};
-
-const AllCollections: React.FC<AllCollectionsProps> = () => {
+const AllCollectionsContent = (): ReactNode => {
   const { t } = useLibraryTranslation();
   const { hooks } = useContext(QueryClientContext);
-  const params = useSearchParams();
-  const { replace } = useRouter();
 
-  const [filters, setFilters] = useState<string[][]>([]);
-  const [langs, setLangs] = useState<string[]>([]);
-  const [shouldIncludeContent, setShouldIncludeContent] =
-    useState<boolean>(false);
-  const [searchKeywords, setSearchKeywords] = useState<string>('');
+  const {
+    tags,
+    searchKeywords,
+    shouldIncludeContent,
+    setSearchKeywords,
+    setShouldIncludeContent,
+    langsForFilter,
+    isPublishedRoot,
+  } = useSearchFiltersContext();
+
   const [prevResults, setPrevResults] = useState<ItemOrSearchedItem[]>([]);
   const [page, setPage] = useState<number>(1);
   const {
     data: collections,
     isLoading,
+    isFetching,
     error,
   } = hooks.useSearchPublishedItems({
     query: searchKeywords,
-    categories: filters,
-    langs,
+    tags,
+    langs: langsForFilter,
     page,
-    // does not show children if option is disabled
-    isPublishedRoot: !shouldIncludeContent,
+    isPublishedRoot,
   });
-
-  useEffect(() => {
-    if (params) {
-      const keywordSearch = params.get(UrlSearch.KeywordSearch);
-      if (keywordSearch && !Array.isArray(keywordSearch)) {
-        setSearchKeywords(keywordSearch);
-      }
-      const categoryId = params.get(UrlSearch.CategorySearch);
-      // todo: this only works when one category is given
-      if (categoryId) {
-        setFilters(Array.isArray(categoryId) ? [categoryId] : [[categoryId]]);
-      }
-    }
-  }, []);
 
   useEffect(() => {
     if (error) {
@@ -83,61 +73,50 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
   useEffect(() => {
     setPrevResults([]);
     setPage(1);
-  }, [searchKeywords, filters, shouldIncludeContent]);
+  }, [searchKeywords, tags, shouldIncludeContent]);
 
-  const allCollections = prevResults.concat(
-    collections?.results?.[0]?.hits ?? [],
-  );
+  const allCollections = prevResults.concat(collections?.hits ?? []);
 
-  const onFiltersChanged = (newFilters: string[][]) => {
-    setFilters(newFilters);
-  };
+  const hitsNumber = collections?.totalHits ?? collections?.estimatedTotalHits;
 
-  const clearAllSearch = () => {
-    setSearchKeywords('');
-    // clear search query params
-    const url = new URL(window.location.toString());
-    url.searchParams.delete(UrlSearch.KeywordSearch);
-    replace(url.toString());
-  };
-
-  const hitsNumber =
-    collections?.results?.[0]?.totalHits ??
-    collections?.results?.[0]?.estimatedTotalHits;
+  let translationKey = isPublishedRoot
+    ? LIBRARY.SEARCH_PAGE_TITLE
+    : LIBRARY.SEARCH_PAGE_TITLE_CONTENT;
+  if (hitsNumber && hitsNumber > 100) {
+    translationKey = LIBRARY.SEARCH_PAGE_TITLE_MORE_CONTENT;
+  }
 
   return (
     <MainWrapper>
-      <Container maxWidth="xl" sx={{ mb: 5 }}>
-        <Box py={5}>
-          <FilterHeader
-            shouldIncludeContent={shouldIncludeContent}
-            onFiltersChanged={onFiltersChanged}
-            onChangeSearch={setSearchKeywords}
-            onSearch={setSearchKeywords}
-            searchPreset={searchKeywords}
-            categoryPreset={filters}
-            langs={langs}
-            setLangs={setLangs}
-            isLoadingResults={false}
-            onIncludeContentChange={setShouldIncludeContent}
-          />
+      <Container maxWidth="xl" sx={{ mb: 5, py: 5 }}>
+        <Typography variant="h4" width="100%" id={ALL_COLLECTIONS_TITLE_ID}>
+          {t(translationKey, { count: hitsNumber })}
+        </Typography>
+        <Box>
+          <FilterHeader isLoadingResults={isLoading} />
         </Box>
         <Stack flexGrow={2} direction="column" spacing={2}>
           {searchKeywords && (
             <Stack direction="row" spacing={1} alignItems="center">
-              <Typography color="#999">
-                <Trans
-                  values={{
-                    search: searchKeywords,
-                    count: hitsNumber ?? 0,
-                  }}
-                  t={t}
-                  i18nKey={LIBRARY.SEARCH_RESULTS_FOR_TEXT}
-                />
-              </Typography>
-              <IconButton onClick={clearAllSearch}>
-                <Close />
-              </IconButton>
+              <>
+                <Typography color="#999" width="100%">
+                  {isFetching ? (
+                    <Skeleton width="100%" />
+                  ) : (
+                    <Trans
+                      values={{
+                        search: searchKeywords,
+                        count: hitsNumber ?? 0,
+                      }}
+                      t={t}
+                      i18nKey={LIBRARY.SEARCH_RESULTS_FOR_TEXT}
+                    />
+                  )}
+                </Typography>
+                <IconButton onClick={() => setSearchKeywords('')}>
+                  <Close />
+                </IconButton>
+              </>
             </Stack>
           )}
           {error ? (
@@ -154,7 +133,7 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
             />
           )}
         </Stack>
-        <Box my={10} textAlign="center">
+        <Stack my={10} textAlign="center" spacing={2}>
           {Boolean((hitsNumber ?? 0) > allCollections.length) && (
             <Button
               onClick={() => {
@@ -185,10 +164,15 @@ const AllCollections: React.FC<AllCollectionsProps> = () => {
               />
             </MuiButton>
           )}
-        </Box>
+        </Stack>
       </Container>
     </MainWrapper>
   );
 };
 
-export default AllCollections;
+// eslint-disable-next-line react/function-component-definition
+export default () => (
+  <SearchFiltersProvider>
+    <AllCollectionsContent />
+  </SearchFiltersProvider>
+);

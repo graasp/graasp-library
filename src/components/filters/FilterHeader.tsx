@@ -1,6 +1,5 @@
-import groupBy from 'lodash.groupby';
-
-import React, { FC, useContext, useEffect, useRef, useState } from 'react';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
   Box,
@@ -9,22 +8,16 @@ import {
   Divider,
   FormControlLabel,
   Stack,
-  Typography,
   styled,
 } from '@mui/material';
 
-import { CategoryType } from '@graasp/sdk';
+import { TagCategory } from '@graasp/sdk';
+import { namespaces } from '@graasp/translations';
 
-import {
-  useCategoriesTranslation,
-  useLibraryTranslation,
-} from '../../config/i18n';
-import {
-  ALL_COLLECTIONS_TITLE_ID,
-  ENABLE_IN_DEPTH_SEARCH_CHECKBOX_ID,
-} from '../../config/selectors';
+import { useLibraryTranslation } from '../../config/i18n';
+import { ENABLE_IN_DEPTH_SEARCH_CHECKBOX_ID } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
-import { QueryClientContext } from '../QueryClientContext';
+import { useSearchFiltersContext } from '../pages/SearchFiltersContext';
 import Search from '../search/Search';
 import { CategoryFilter } from './CategoryFilter';
 import { LangFilter } from './LangFilter';
@@ -32,7 +25,7 @@ import { LangFilter } from './LangFilter';
 const StyledFilterContainer = styled(Stack)(() => ({
   backgroundColor: 'white',
   borderRadius: 12,
-  padding: '30px 40px',
+  padding: '10px 20px',
 }));
 
 const StyledStickyFilters = styled(Box)(() => ({
@@ -57,80 +50,24 @@ const StyledStickyFilters = styled(Box)(() => ({
 }));
 
 type FilterHeaderProps = {
-  onFiltersChanged: (selectedFilters: string[][]) => void;
-  onIncludeContentChange: (newValue: boolean) => void;
-  shouldIncludeContent: boolean;
-  onChangeSearch?: (searchKeywords: string) => void;
-  onSearch: (searchKeywords: string) => void;
-  searchPreset?: string;
-  categoryPreset?: string[][];
-  isLoadingResults: boolean;
-  setLangs: (langs: string[]) => void;
-  langs: string[];
+  readonly isLoadingResults: boolean;
 };
 
-const FilterHeader: FC<FilterHeaderProps> = ({
-  onFiltersChanged,
-  onChangeSearch,
-  setLangs,
-  onSearch,
-  searchPreset,
-  categoryPreset,
+// eslint-disable-next-line react/function-component-definition
+export function FilterHeader({
   isLoadingResults,
-  onIncludeContentChange,
-  shouldIncludeContent,
-  langs,
-}) => {
-  const { t: translateCategories } = useCategoriesTranslation();
+}: FilterHeaderProps): ReactNode {
+  const { t: translateEnums } = useTranslation(namespaces.enums);
   const { t } = useLibraryTranslation();
-
+  const {
+    searchKeywords,
+    shouldIncludeContent,
+    setShouldIncludeContent,
+    setSearchKeywords,
+  } = useSearchFiltersContext();
   // filters are of the form ["a1,a2", "b1"] where the items wanted should have (a1 OR a2) AND b1
-  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const filterContainer = useRef<HTMLDivElement>(null);
   const [sticky, setSticky] = useState<boolean>(false);
-
-  const { hooks } = useContext(QueryClientContext);
-  const { data: categories, isLoading: isCategoriesLoading } =
-    hooks.useCategories();
-
-  const allCategories = groupBy(categories, (entry) => entry.type);
-  const levelList = allCategories[CategoryType.Level];
-  const disciplineList = allCategories[CategoryType.Discipline];
-
-  useEffect(() => {
-    setSelectedFilters(categoryPreset ? categoryPreset.flat() : []);
-  }, [categoryPreset]);
-
-  const groupedByCategories = (filters: string[]): string[][] => {
-    if (allCategories) {
-      const groupedFilters = Object.values(allCategories)
-        .map((cats) =>
-          cats.filter(({ id }) => filters.includes(id)).map(({ id }) => id),
-        )
-        .filter((r) => r.length);
-      return groupedFilters;
-    }
-    return [filters];
-  };
-
-  const onFilterChanged = (id: string, newValue: boolean) => {
-    let newFilters;
-    if (newValue) {
-      newFilters = [...selectedFilters, id];
-    } else {
-      newFilters = selectedFilters.filter((it) => it !== id);
-    }
-    setSelectedFilters(newFilters);
-    onFiltersChanged(groupedByCategories(newFilters));
-  };
-
-  const onClearCategory = (categoryIds?: string[]) => {
-    const newFilters: string[] = selectedFilters.filter(
-      (activeFilterId) => !categoryIds?.includes(activeFilterId),
-    );
-    setSelectedFilters(newFilters);
-    onFiltersChanged(groupedByCategories(newFilters));
-  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -159,39 +96,25 @@ const FilterHeader: FC<FilterHeaderProps> = ({
     />
   );
 
-  const selectedDisciplineOptions = selectedFilters.filter((id) =>
-    disciplineList?.find((opt) => opt.id === id),
-  );
-  const selectedLevelOptions = selectedFilters.filter((id) =>
-    levelList?.find((opt) => opt.id === id),
-  );
-
-  const filters = [
+  const categoryFilters = [
+    <LangFilter key="language" title={t(LIBRARY.SEARCH_FILTER_LANG_TITLE)} />,
     <CategoryFilter
-      key={CategoryType.Level}
-      category={CategoryType.Level}
-      title={translateCategories(CategoryType.Level)}
-      options={levelList}
-      selectedOptionIds={selectedLevelOptions}
-      onOptionChange={onFilterChanged}
-      onClearOptions={() => onClearCategory(levelList?.map((l) => l.id))}
-      isLoading={isCategoriesLoading}
+      key={TagCategory.Discipline}
+      category={TagCategory.Discipline}
+      // show plural
+      title={translateEnums(TagCategory.Discipline, { count: 2 })}
     />,
     <CategoryFilter
-      key={CategoryType.Discipline}
-      category={CategoryType.Discipline}
-      title={translateCategories(CategoryType.Discipline)}
-      options={disciplineList}
-      selectedOptionIds={selectedDisciplineOptions}
-      onOptionChange={onFilterChanged}
-      onClearOptions={() => onClearCategory(disciplineList?.map((d) => d.id))}
-      isLoading={isCategoriesLoading}
+      key={TagCategory.Level}
+      category={TagCategory.Level}
+      // show plural
+      title={translateEnums(TagCategory.Level, { count: 2 })}
     />,
-    <LangFilter
-      key={CategoryType.Language}
-      title={t(LIBRARY.SEARCH_FILTER_LANG_TITLE)}
-      selectedOptionIds={langs}
-      setLangs={setLangs}
+    <CategoryFilter
+      key={TagCategory.ResourceType}
+      category={TagCategory.ResourceType}
+      // show plural
+      title={translateEnums(TagCategory.ResourceType, { count: 2 })}
     />,
   ];
 
@@ -204,7 +127,7 @@ const FilterHeader: FC<FilterHeaderProps> = ({
         <Container maxWidth="xl">
           <Stack
             sx={{
-              padding: 3,
+              padding: 1,
               borderRadius: 4,
               boxShadow: '0px 10px 51px 0px rgba(0,0,0,0.15)',
               borderBottom: '1px solid #F8F7FE',
@@ -215,7 +138,7 @@ const FilterHeader: FC<FilterHeaderProps> = ({
             spacing={2}
             justifyContent="space-evenly"
           >
-            {filters}
+            {categoryFilters}
           </Stack>
         </Container>
       </StyledStickyFilters>
@@ -226,14 +149,11 @@ const FilterHeader: FC<FilterHeaderProps> = ({
         justifyContent="space-between"
         width="100%"
       >
-        <Typography variant="h4" width="100%" id={ALL_COLLECTIONS_TITLE_ID}>
-          {t(LIBRARY.SEARCH_PAGE_TITLE)}
-        </Typography>
         <Search
           isLoading={isLoadingResults}
-          onChange={onChangeSearch}
-          handleClick={onSearch}
-          searchPreset={searchPreset}
+          onChange={setSearchKeywords}
+          handleClick={setSearchKeywords}
+          searchPreset={searchKeywords}
         />
       </Stack>
       <StyledFilterContainer
@@ -245,7 +165,7 @@ const FilterHeader: FC<FilterHeaderProps> = ({
         justifyContent="space-evenly"
         divider={filterDivider}
       >
-        {filters}
+        {categoryFilters}
       </StyledFilterContainer>
       <Stack alignItems="end">
         <FormControlLabel
@@ -255,7 +175,7 @@ const FilterHeader: FC<FilterHeaderProps> = ({
               checked={shouldIncludeContent}
               size="small"
               onChange={(e) => {
-                onIncludeContentChange(e.target.checked);
+                setShouldIncludeContent(e.target.checked);
               }}
             />
           }
@@ -264,6 +184,6 @@ const FilterHeader: FC<FilterHeaderProps> = ({
       </Stack>
     </Stack>
   );
-};
+}
 
 export default FilterHeader;

@@ -1,4 +1,4 @@
-import { ItemTagType } from '@graasp/sdk';
+import { ItemVisibilityType } from '@graasp/sdk';
 
 import { buildCollectionRoute } from '../../../src/config/routes';
 import {
@@ -42,7 +42,7 @@ describe('CC License in Summary', () => {
         cy.visit(buildCollectionRoute(item.id));
         if (
           !environment.currentMember &&
-          item.tags.find((t) => t.type === ItemTagType.Public)
+          item.visibility.find((t) => t.type === ItemVisibilityType.Public)
         ) {
           cy.get(`#${SUMMARY_CC_LICENSE_NO_LICENSE_ID}`)
             .scrollIntoView()
