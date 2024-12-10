@@ -304,8 +304,6 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
         ([
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
           _firstCall,
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          _secondCall,
           {
             request: { body },
           },
@@ -323,8 +321,6 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
         ([
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
           _firstCall,
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          _secondCall,
           {
             request: { body },
           },

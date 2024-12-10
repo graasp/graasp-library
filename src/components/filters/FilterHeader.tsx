@@ -101,17 +101,20 @@ export function FilterHeader({
     <CategoryFilter
       key={TagCategory.Discipline}
       category={TagCategory.Discipline}
-      title={translateEnums(TagCategory.Discipline)}
+      // show plural
+      title={translateEnums(TagCategory.Discipline, { count: 2 })}
     />,
     <CategoryFilter
       key={TagCategory.Level}
       category={TagCategory.Level}
-      title={translateEnums(TagCategory.Level)}
+      // show plural
+      title={translateEnums(TagCategory.Level, { count: 2 })}
     />,
     <CategoryFilter
       key={TagCategory.ResourceType}
       category={TagCategory.ResourceType}
-      title={translateEnums(TagCategory.ResourceType)}
+      // show plural
+      title={translateEnums(TagCategory.ResourceType, { count: 2 })}
     />,
   ];
 
