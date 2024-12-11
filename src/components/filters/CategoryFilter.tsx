@@ -1,46 +1,55 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
-import { Category } from '@graasp/sdk';
+import { TagCategory } from '@graasp/sdk';
 
-import { useCategoriesTranslation } from '../../config/i18n';
 import {
-  buildSearchFilterCategoryId,
   buildSearchFilterPopperButtonId,
+  buildSearchFilterTagCategoryId,
 } from '../../config/selectors';
-import { Filter, FilterProps } from './Filter';
+import { QueryClientContext } from '../QueryClientContext';
+import { useSearchFiltersContext } from '../pages/SearchFiltersContext';
+import { Filter } from './Filter';
 
 type CategoryFilterProps = {
-  category: string;
+  category: TagCategory;
   title: string;
-  options?: Category[];
-  selectedOptionIds: FilterProps['selectedOptionIds'];
-  onOptionChange: (key: string, newValue: boolean) => void;
-  onClearOptions: () => void;
-  isLoading: boolean;
 };
 
 // eslint-disable-next-line react/function-component-definition
-export function CategoryFilter({
-  category,
-  title,
-  onOptionChange,
-  onClearOptions,
-  options,
-  selectedOptionIds,
-  isLoading,
-}: CategoryFilterProps) {
-  const { t: translateCategories } = useCategoriesTranslation();
+export function CategoryFilter({ category, title }: CategoryFilterProps) {
+  const { hooks } = useContext(QueryClientContext);
+  const {
+    tags,
+    langsForFilter,
+    searchKeywords,
+    isPublishedRoot,
+    toggleTagByCategory,
+    clearTagsByCategory,
+  } = useSearchFiltersContext();
+
+  // ignore current category to get facets
+  // implement OR logic
+  // eg. [biology, chemistry] means getting facets for "category" with other tags set to biology or chemistry
+  const ignoreCurrentCategory = { ...tags };
+  delete ignoreCurrentCategory[category];
+
+  const { data: options } = hooks.useSearchFacets({
+    facetName: category,
+    query: searchKeywords,
+    tags: ignoreCurrentCategory,
+    langs: langsForFilter,
+    isPublishedRoot,
+  });
 
   return (
     <Filter
-      id={buildSearchFilterCategoryId(category)}
+      id={buildSearchFilterTagCategoryId(category)}
       buttonId={buildSearchFilterPopperButtonId(category)}
       title={title}
-      isLoading={isLoading}
-      options={options?.map((c) => [c.id, translateCategories(c.name)])}
-      selectedOptionIds={selectedOptionIds}
-      onOptionChange={onOptionChange}
-      onClearOptions={onClearOptions}
+      options={options ?? {}}
+      selectedOptions={tags[category]}
+      onOptionChange={toggleTagByCategory(category)}
+      onClearOptions={() => clearTagsByCategory(category)}
     />
   );
 }

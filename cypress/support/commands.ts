@@ -1,4 +1,3 @@
-import { SAMPLE_CATEGORIES } from '../fixtures/categories';
 import { ITEM_LIKES } from '../fixtures/itemLikes';
 import { PUBLISHED_ITEMS } from '../fixtures/items';
 import { MEMBERS } from '../fixtures/members';
@@ -6,17 +5,16 @@ import {
   mockCopyItems,
   mockGetAccessibleItems,
   mockGetAvatarUrl,
-  mockGetCategories,
   mockGetChildren,
   mockGetCurrentMember,
   mockGetItem,
-  mockGetItemCategories,
   mockGetItemMembershipsForItems,
   mockGetItemThumbnailUrl,
   mockGetLikedItems,
   mockGetMember,
   mockGetPublishItemInformations,
   mockGetRecentCollections,
+  mockGetTagsByItem,
   mockSearch,
   mockSignInRedirection,
   mockSignOut,
@@ -28,12 +26,9 @@ Cypress.Commands.add(
     items,
     members = Object.values(MEMBERS),
     currentMember,
-    categories = SAMPLE_CATEGORIES,
     recentCollections = [],
     accessibleItems = [],
     getCurrentMemberError = false,
-    getCategoriesError = false,
-    getItemCategoriesError = false,
     searchResultItems = PUBLISHED_ITEMS,
     searchError = false,
     itemLikes = ITEM_LIKES,
@@ -63,11 +58,9 @@ Cypress.Commands.add(
 
     mockSignOut();
 
-    mockGetCategories(categories, getCategoriesError);
-
     mockGetPublishItemInformations(items);
 
-    mockGetItemCategories({ items, currentMember }, getItemCategoriesError);
+    mockGetTagsByItem({ items });
 
     mockGetItemMembershipsForItems({ items, currentMember });
 

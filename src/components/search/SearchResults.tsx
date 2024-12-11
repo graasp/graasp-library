@@ -16,7 +16,7 @@ import {
   useTheme,
 } from '@mui/material';
 
-import { Category, MeiliSearchResults } from '@graasp/sdk';
+import { MeiliSearchResults } from '@graasp/sdk';
 
 import { MAX_RESULTS_TO_SHOW, UrlSearch } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';
@@ -67,12 +67,10 @@ const Container = ({
 
 const SearchResults = ({
   query,
-  categories,
   isPublishedRoot = false,
   onOutsideClick,
 }: {
   query?: string;
-  categories?: Category['id'][][];
   isPublishedRoot?: boolean;
   onOutsideClick?: (value: boolean) => void;
 }) => {
@@ -86,7 +84,6 @@ const SearchResults = ({
   const { hooks } = useContext(QueryClientContext);
   const { data: collections } = hooks.useSearchPublishedItems({
     query,
-    categories,
     isPublishedRoot,
     enabled: Boolean(query),
     cropLength: 10,
@@ -160,11 +157,8 @@ const SearchResults = ({
   if (!collections) {
     return null;
   }
-  // eslint-disable-next-line prefer-destructuring
-  const queryResults = collections.results[0];
-  const hits = queryResults?.hits;
-  const nbOfResults =
-    queryResults?.totalHits ?? queryResults?.estimatedTotalHits;
+  const hits = collections?.hits;
+  const nbOfResults = collections?.totalHits ?? collections?.estimatedTotalHits;
   // no result found
   if (!hits?.length) {
     return (
