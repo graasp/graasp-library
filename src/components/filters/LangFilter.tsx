@@ -37,14 +37,13 @@ export function LangFilter({ title }: LangFilterProps) {
   // received langs contain slugs, eg: fr
   // transform from fr -> Français
   const langOptions = options
-    ? Object.keys(options).reduce(
-        (acc, key) => ({
+    ? Object.keys(options).reduce((acc, key) => {
+        const k = key as `${keyof typeof langs}`;
+        return {
           ...acc,
-          // @ts-expect-error
-          ...{ [langs[key] || key]: options[key] },
-        }),
-        {},
-      )
+          ...{ [langs[k] || k]: options[k] },
+        };
+      }, {})
     : {};
 
   return (
