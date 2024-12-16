@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.12.0](https://github.com/graasp/graasp-library/compare/v1.11.0...v1.12.0) (2024-12-11)
+
+
+### Features
+
+* use tags instead of categories ([#724](https://github.com/graasp/graasp-library/issues/724)) ([d5fc569](https://github.com/graasp/graasp-library/commit/d5fc569ac1efc5d13afb760683dfb9241fa173e2))
+
 ## [1.11.0](https://github.com/graasp/graasp-library/compare/v1.10.2...v1.11.0) (2024-10-25)
 
 
