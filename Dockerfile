@@ -1,4 +1,4 @@
-FROM node:20-alpine
+FROM node:22-alpine
 
 # install git, necessary for github dependencies
 RUN apk add --no-cache git
