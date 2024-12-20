@@ -27,7 +27,7 @@ const MemberAvatar = React.forwardRef<HTMLDivElement, Props>(
   ): JSX.Element => {
     const { hooks } = useContext(QueryClientContext);
     const { t } = useLibraryTranslation();
-    const { data: member, isLoading, isFetching } = hooks.useMember(id);
+    const { data: member, isLoading, isFetching } = hooks.useMember(memberId);
     const {
       data: avatarUrl,
       isLoading: isLoadingAvatar,
