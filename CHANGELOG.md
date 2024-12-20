@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.12.1](https://github.com/graasp/graasp-library/compare/v1.12.0...v1.12.1) (2024-12-20)
+
+
+### Bug Fixes
+
+* use correct id for useMember ([#728](https://github.com/graasp/graasp-library/issues/728)) ([1e30fae](https://github.com/graasp/graasp-library/commit/1e30faea972141e6be49c2470d59b7bfe5575397))
+
 ## [1.12.0](https://github.com/graasp/graasp-library/compare/v1.11.0...v1.12.0) (2024-12-11)
 
 
