@@ -1,11 +1,10 @@
-import { Interweave } from 'interweave';
-
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { Box, Button } from '@mui/material';
 
 import { useLibraryTranslation } from '../../config/i18n';
 import LIBRARY from '../../langs/constants';
+import { CollapsibleText } from './CollapsibleText/CollapsibleText';
 
 interface Props {
   content: string;
@@ -27,19 +26,12 @@ const ShowLessAndMoreContent = ({
 
   return (
     <Box my={2} width="100%">
-      <Box
-        sx={{
-          display: '-webkit-box',
-          overflow: 'hidden',
-          WebkitLineClamp: isContentCollapsed ? linesToShow : 'unset',
-          WebkitBoxOrient: 'vertical',
-        }}
-      >
-        <Interweave
-          content={content}
-          noHtml={!parseHtmlOnCollapse && isContentCollapsed}
-        />
-      </Box>
+      <CollapsibleText
+        numberOfLinesToShow={linesToShow}
+        content={content}
+        noHtml={!parseHtmlOnCollapse && isContentCollapsed}
+        collapsed={isContentCollapsed}
+      />
       {content?.length > 0 && (
         <Button
           sx={{ minWidth: 'max-content' }}
