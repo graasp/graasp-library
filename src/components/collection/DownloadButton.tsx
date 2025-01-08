@@ -55,7 +55,7 @@ const DownloadButton = ({ id }: Props) => {
       handleDownload={startDownload}
       title={t(LIBRARY.DOWNLOAD_BUTTON_TOOLTIP)}
       ariaLabel={t(LIBRARY.DOWNLOAD_BUTTON_TOOLTIP)}
-      loaderColor="primary"
+      color="primary"
       loaderSize={20}
     />
   );
