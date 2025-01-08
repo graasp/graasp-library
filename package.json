@@ -73,13 +73,11 @@
     "uuid": "10.0.0"
   },
   "devDependencies": {
-    "@chromatic-com/storybook": "^3.2.3",
     "@commitlint/cli": "19.5.0",
     "@commitlint/config-conventional": "19.5.0",
     "@cypress/code-coverage": "3.13.4",
     "@storybook/addon-essentials": "^8.4.7",
     "@storybook/addon-interactions": "^8.4.7",
-    "@storybook/addon-onboarding": "^8.4.7",
     "@storybook/blocks": "^8.4.7",
     "@storybook/nextjs": "^8.4.7",
     "@storybook/react": "^8.4.7",
