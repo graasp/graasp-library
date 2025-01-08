@@ -79,12 +79,9 @@ const AllCollectionsContent = (): ReactNode => {
 
   const hitsNumber = collections?.totalHits ?? collections?.estimatedTotalHits;
 
-  let translationKey = isPublishedRoot
+  const translationKey = isPublishedRoot
     ? LIBRARY.SEARCH_PAGE_TITLE
     : LIBRARY.SEARCH_PAGE_TITLE_CONTENT;
-  if (hitsNumber && hitsNumber > 100) {
-    translationKey = LIBRARY.SEARCH_PAGE_TITLE_MORE_CONTENT;
-  }
 
   return (
     <MainWrapper>
