@@ -2703,9 +2703,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/sdk@npm:5.4.0":
-  version: 5.4.0
-  resolution: "@graasp/sdk@npm:5.4.0"
+"@graasp/sdk@npm:5.5.0":
+  version: 5.5.0
+  resolution: "@graasp/sdk@npm:5.5.0"
   dependencies:
     "@faker-js/faker": "npm:9.2.0"
     filesize: "npm:10.1.6"
@@ -2713,7 +2713,7 @@ __metadata:
   peerDependencies:
     date-fns: ^3 || ^4.0.0
     uuid: ^9 || ^10 || ^11.0.0
-  checksum: 10/787def776e690aa3a07438c907e6d5adb6c016db243e52fdc1511e35d057380d2d51d98d28bfef5f9f6101987f85c4cf43ba89a0d4d56f970b3801b4b8f2acd7
+  checksum: 10/4ae3ffbe9df6a351d849e30561f248390f0928f2664eb82b6c50c43a88c2f2ad3f76ab8e296296765716541e009262f9c76c3035f5d6da5572501bf9a295e51b
   languageName: node
   linkType: hard
 
@@ -2737,9 +2737,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/ui@npm:5.4.0":
-  version: 5.4.0
-  resolution: "@graasp/ui@npm:5.4.0"
+"@graasp/ui@github:graasp/graasp-ui#library-cards":
+  version: 5.4.7
+  resolution: "@graasp/ui@https://github.com/graasp/graasp-ui.git#commit=02ea9665ca4973c7b4a5becaff9d35cf13924e07"
   dependencies:
     http-status-codes: "npm:2.3.0"
     interweave: "npm:13.1.0"
@@ -2749,26 +2749,26 @@ __metadata:
     react-dnd-html5-backend: "npm:16.0.1"
     react-quill: "npm:2.0.0"
     react-rnd: "npm:10.4.13"
-    uuid: "npm:10.0.0"
+    uuid: "npm:11.0.3"
   peerDependencies:
-    "@emotion/cache": ~11.10.7 || ~11.11.0 || ~11.13.0
-    "@emotion/react": ~11.10.6 || ~11.11.0 || ~11.13.0
-    "@emotion/styled": ~11.10.6 || ~11.11.0 || ~11.13.0
-    "@graasp/sdk": ^4.29.0
+    "@emotion/cache": ~11.10.7 || ~11.11.0 || ~11.13.0 || ~11.14.0
+    "@emotion/react": ~11.10.6 || ~11.11.0 || ~11.13.0 || ~11.14.0
+    "@emotion/styled": ~11.10.6 || ~11.11.0 || ~11.13.0 || ~11.14.0
+    "@graasp/sdk": ^4.29.0 || ^5.0.0
     "@graasp/stylis-plugin-rtl": ^2
     "@graasp/translations": ^1.23.0
     "@mui/icons-material": ^6
     "@mui/lab": ^6
     "@mui/material": ^6
-    i18next: ^22.4.15 || ^23.0.0
-    katex: 0.16.11
-    lucide-react: ^0.417.0 || ^0.429.0 || ^0.436.0 || ^0.439.0 || ^0.441.0 || ^0.446.0 || ^0.447.0 || ^0.451.0
+    i18next: ^22.4.15 || ^23.0.0 || ^24.0.0
+    katex: 0.16.15
+    lucide-react: ^0
     react: ^18.0.0
     react-dom: ^18.0.0
     react-i18next: ^15.0.0
     react-router-dom: ^6.11.0
     stylis: ^4.1.3
-  checksum: 10/cc36962378a4a7921910865584770816666b96c7db9f33fe0db5a927dc067fbbd2bcc3b87b7cd666c8a1592246c704d7ceb04c134339e02d22ffd0cd451bdc0f
+  checksum: 10/813b10d8d8bc06c7b2613c0ba50b17b0fea2237492893bacdd5666f1664b8e840d5db5be0b6e56b67f2cfce65a0b935782c0e18a3f3be3e3430d57185b15e2a5
   languageName: node
   linkType: hard
 
@@ -10975,10 +10975,10 @@ __metadata:
     "@emotion/server": "npm:11.11.0"
     "@emotion/styled": "npm:11.13.0"
     "@graasp/query-client": "npm:5.7.0"
-    "@graasp/sdk": "npm:5.4.0"
+    "@graasp/sdk": "npm:5.5.0"
     "@graasp/stylis-plugin-rtl": "npm:2.2.0"
     "@graasp/translations": "npm:1.43.0"
-    "@graasp/ui": "npm:5.4.0"
+    "@graasp/ui": "github:graasp/graasp-ui#library-cards"
     "@mui/icons-material": "npm:6.1.5"
     "@mui/lab": "npm:6.0.0-beta.13"
     "@mui/material": "npm:6.1.5"
@@ -17707,6 +17707,15 @@ __metadata:
   bin:
     uuid: dist/bin/uuid
   checksum: 10/35aa60614811a201ff90f8ca5e9ecb7076a75c3821e17f0f5ff72d44e36c2d35fcbc2ceee9c4ac7317f4cc41895da30e74f3885e30313bee48fda6338f250538
+  languageName: node
+  linkType: hard
+
+"uuid@npm:11.0.3":
+  version: 11.0.3
+  resolution: "uuid@npm:11.0.3"
+  bin:
+    uuid: dist/esm/bin/uuid
+  checksum: 10/251385563195709eb0697c74a834764eef28e1656d61174e35edbd129288acb4d95a43f4ce8a77b8c2fc128e2b55924296a0945f964b05b9173469d045625ff2
   languageName: node
   linkType: hard
 

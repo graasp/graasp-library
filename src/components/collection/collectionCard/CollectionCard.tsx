@@ -5,14 +5,13 @@ import React, { CSSProperties, useContext } from 'react';
 import { styled } from '@mui/material';
 
 import { ThumbnailSize } from '@graasp/sdk';
-import { BigCard } from '@graasp/ui';
 
 import { useLibraryTranslation } from '../../../config/i18n';
 import { buildCollectionRoute, buildMemberRoute } from '../../../config/routes';
 import { ItemOrSearchedItem } from '../../../utils/types';
-import { useCategoryNames } from '../../../utils/useCategoryNames';
 import { useIsItemLiked } from '../../../utils/useIsItemLiked';
 import { QueryClientContext } from '../../QueryClientContext';
+import { BigCard } from '../../common/Card/BigCard';
 import { ItemTag } from './ItemTag';
 
 type Props = {
@@ -85,7 +84,7 @@ export const CollectionCard = ({ collection, showIsContentTag }: Props) => {
         });
       } else {
         postItemLike({
-          itemId: collection?.id,
+          itemId: collection.id,
           memberId: member.id,
         });
       }
@@ -93,9 +92,17 @@ export const CollectionCard = ({ collection, showIsContentTag }: Props) => {
   };
 
   // normal item does not return categories - this is a hack
-  const translatedCategories = useCategoryNames({
-    categories: 'categories' in collection ? collection.categories : [],
-  });
+  // const translatedCategories = useCategoryNames({
+  //   categories: 'categories' in collection ? collection.categories : [],
+  // });
+
+  const tags = [
+    // @ts-ignore
+    ...(collection.discipline ?? []),
+    // @ts-ignore
+    ...(collection.level ?? []),
+    // ...collection.
+  ];
 
   return (
     <StyledWrapper>
@@ -106,9 +113,10 @@ export const CollectionCard = ({ collection, showIsContentTag }: Props) => {
         id={id}
         type={type}
         image={thumbnailUrl}
+        tags={tags}
         // meilisearch does not return settings/tags
         // normal item does not return categories
-        tags={translatedCategories}
+        // tags={translatedCategories}
         likeCount={itemLikesForItem?.length}
         onLikeToggle={onLikeToggle}
         isLiked={isItemLiked}

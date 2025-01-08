@@ -1,19 +1,16 @@
-import Avatar from '@/Avatar/Avatar.js';
-import { useMobileView } from '@/hooks/useMobileView.js';
+import truncate from 'lodash.truncate';
 
 import { CSSProperties } from 'react';
 
 import { Box, Card as MuiCard, Stack, Typography } from '@mui/material';
 
 import { DiscriminatedItem, UUID } from '@graasp/sdk';
+import { Avatar, useMobileView } from '@graasp/ui';
 
-import { CollapsibleText } from '../../CollapsibleText/CollapsibleText.js';
-import CardThumbnail, { CardThumbnailProps } from '../CardThumbnail.js';
-import {
-  LikeCounterButton,
-  LikeCounterButtonProps,
-} from './LikeCounterButton.jsx';
-import { TagList, TagListProps } from './TagList.jsx';
+import { CollapsibleText } from '../CollapsibleText/CollapsibleText';
+import CardThumbnail, { CardThumbnailProps } from './CardThumbnail';
+import { LikeCounterButton, LikeCounterButtonProps } from './LikeCounterButton';
+import { TagList, TagListProps } from './TagList';
 
 type CardProps = {
   name: string;
@@ -80,7 +77,6 @@ export const BigCard = ({
   likeCount = 0,
   height = 300,
   isLiked = false,
-  numberOfLinesToShow = 7,
   contentOverImage,
   onLikeToggle,
   LinkComponent,
@@ -89,8 +85,26 @@ export const BigCard = ({
   const { isMobile } = useMobileView();
 
   // merge name and description together
-  // so we can count name and description in the same line count and show the full title
+  // so we can count name and description in the same line count
+  // it will take advantage of showing the full title if there's space from no description
   const text = `<h2>${name}</h2>${description ?? ''}`;
+
+  // define number of lines depending on title length
+  let numberOfLinesToShow;
+  switch (true) {
+    case name.length < 70: {
+      numberOfLinesToShow = 7;
+      break;
+    }
+    case name.length < 80: {
+      numberOfLinesToShow = 6;
+      break;
+    }
+    default: {
+      numberOfLinesToShow = 5;
+      break;
+    }
+  }
 
   return (
     <MuiCard id={id}>
@@ -140,12 +154,12 @@ export const BigCard = ({
                   numberOfLinesToShow={numberOfLinesToShow}
                   content={text}
                   style={link ? { cursor: 'pointer' } : undefined}
-                ></CollapsibleText>
+                />
               </LinkWrapper>
             </Stack>
           </Stack>
-          <Stack gap={1} justifyContent={'flex-end'}>
-            <Stack direction="row" justifyContent="space-between">
+          <Stack gap={1} justifyContent="flex-end">
+            <Stack direction="row" gap={1} justifyContent="space-between">
               <LikeCounterButton
                 likeCount={likeCount}
                 isLiked={isLiked}
@@ -157,11 +171,22 @@ export const BigCard = ({
                   style={{
                     textDecoration: 'unset',
                     color: 'unset',
+                    minWidth: 0,
                   }}
                   LinkComponent={LinkComponent}
                 >
-                  <Stack direction="row" alignItems="center" gap={1}>
-                    {!isMobile && <Typography>{creator.name}</Typography>}
+                  <Stack
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="flex-end"
+                    gap={1}
+                    minWidth={0}
+                  >
+                    {!isMobile && (
+                      <Typography align="right" noWrap>
+                        {creator.name}
+                      </Typography>
+                    )}
                     <Avatar
                       alt={creator.name}
                       maxHeight={40}

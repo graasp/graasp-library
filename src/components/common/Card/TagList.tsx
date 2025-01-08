@@ -1,15 +1,15 @@
-import { Stack, Typography } from '@mui/material';
-
 import { ReactNode } from 'react';
 
-import { DEFAULT_LIGHT_PRIMARY_COLOR } from '@/theme.js';
+import { Stack, Typography } from '@mui/material';
+
+import { DEFAULT_LIGHT_PRIMARY_COLOR } from '@graasp/ui';
 
 const Tag = ({ title }: { title: string | ReactNode }): JSX.Element => {
   return (
     <Typography
-      variant='body2'
-      color='primary'
-      component={'span'}
+      variant="body2"
+      color="primary"
+      component="span"
       px={1}
       borderRadius={2}
       mx={0}
@@ -34,9 +34,9 @@ export const TagList = ({ tags }: TagListProps): JSX.Element | null => {
 
   return (
     <Stack
-      direction='row'
+      direction="row"
       maxWidth={'100%'}
-      alignItems='center'
+      alignItems="center"
       gap={1}
       flexWrap={'wrap'}
       sx={{

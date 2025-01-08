@@ -30,6 +30,8 @@ const CollectionsGrid = ({
 }: Props) => {
   const { t } = useLibraryTranslation();
 
+  const size = { xs: 12, sm: 12, md: 6, lg: 4, xl: 3 };
+
   if (isLoading) {
     return (
       <Grid
@@ -40,7 +42,7 @@ const CollectionsGrid = ({
         id={id}
       >
         {Array.from({ length: 4 }, (_, idx) => idx).map((idx) => (
-          <Grid key={idx} size={{ xs: 6, sm: 4, md: 3, lg: 3, xl: 2 }}>
+          <Grid key={idx} size={size}>
             <Skeleton height={height} sx={{ transform: 'unset' }} />
           </Grid>
         ))}
@@ -65,13 +67,7 @@ const CollectionsGrid = ({
           {collections?.map((collection) => (
             <Grid
               key={collection.id}
-              size={{
-                xs: 6,
-                sm: 4,
-                md: 3,
-                lg: 3,
-                xl: 2,
-              }}
+              size={size}
               id={buildCollectionCardGridId(collection.id)}
             >
               <CollectionCard

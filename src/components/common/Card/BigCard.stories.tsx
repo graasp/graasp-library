@@ -8,7 +8,7 @@ import { Chip, Grid2 } from '@mui/material';
 
 import { ItemType } from '@graasp/sdk';
 
-import { BigCard } from './BigCard.jsx';
+import { BigCard } from './BigCard';
 
 const meta = {
   title: 'Common/BigCard',
@@ -102,7 +102,7 @@ export const LongTitleAndLiked = {
     image: '/test-assets/big_photo.jpg',
     isLiked: true,
     creator: {
-      name: 'Name Surname',
+      name: 'Name Surname Is Veryyyyyyy Looooong Too',
       id: v4(),
       avatar: '/test-assets/small_photo.jpg',
     },
@@ -161,6 +161,30 @@ export const Empty = {
     name: 'my card title',
     type: ItemType.DOCUMENT,
     creator: { name: 'member name', id: v4() },
+  },
+  play: async () => {
+    // no link
+    await expect(document.querySelector('#storybook-root a')).toBeNull();
+  },
+} satisfies Story;
+
+export const VeryLongTitle = {
+  args: {
+    name: 'my card title is very long and takes all the space, but we should still see the tags and it will be cut. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt nisl risus, quis mattis ipsum dictum at. Ut ullamcorper rhoncus nisl eu porttitor. Vestibulum rutrum erat ipsum, id lacinia risus iaculis id. Ut eleifend porta libero ac auctor. Pellentesque dui nisl, egestas et imperdiet vel, tempor sed tellus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis quis turpis elementum, elementum orci eu, varius massa. In imperdiet est eget turpis accumsan bibendum. Proin gravida faucibus felis in tempor. Nullam vitae vulputate turpis.',
+    type: ItemType.DOCUMENT,
+    creator: { name: 'member name', id: v4() },
+    tags: [
+      'my tag',
+      'my second tag',
+      'my tag',
+      'my second tag',
+      'my tag',
+      'my second tag',
+      'my tag',
+      'my second tag',
+      'my tag',
+      'my second tag',
+    ],
   },
   play: async () => {
     // no link
