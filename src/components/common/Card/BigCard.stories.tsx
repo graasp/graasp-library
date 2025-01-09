@@ -72,7 +72,7 @@ export const Default = {
     ).toBeVisible();
 
     // tags
-    args.tags!.map((t) => {
+    args.tags!.forEach((t) => {
       expect(canvas.getByText(t as string)).toBeVisible();
     });
 
@@ -150,7 +150,6 @@ export const Smaller = {
       avatar: '/test-assets/small_photo.jpg',
     },
     height: 200,
-    numberOfLinesToShow: 2,
     description:
       'Tempor volutpat eget varius nisl cursus. Fusce cras commodo adipiscing dictumst gravida pharetra velit. Enim cursus ultrices in natoque. Faucibus porttitor posuere consequat congue aliquam. Sapien tempus blandit massa rhoncus',
   },
@@ -211,6 +210,7 @@ export const WithLinkComponent = {
     link: '/href',
     name: 'my card title',
     type: ItemType.DOCUMENT,
+    // eslint-disable-next-line react/prop-types
     LinkComponent: ({ to, style, children }) => (
       <a className="cardLink" style={style} href={to}>
         {children}

@@ -12,7 +12,7 @@ export type CardThumbnailProps = {
   minWidth?: string;
   height?: string;
   maxHeight?: string;
-  mimetype?: any; //ItemIconProps['mimetype'];
+  mimetype?: string;
 };
 const CardThumbnail = ({
   thumbnail,

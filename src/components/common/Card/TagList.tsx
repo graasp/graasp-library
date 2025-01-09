@@ -35,10 +35,10 @@ export const TagList = ({ tags }: TagListProps): JSX.Element | null => {
   return (
     <Stack
       direction="row"
-      maxWidth={'100%'}
+      maxWidth="100%"
       alignItems="center"
       gap={1}
-      flexWrap={'wrap'}
+      flexWrap="wrap"
       sx={{
         overflow: 'hidden',
         height: '100%',

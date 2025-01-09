@@ -1,5 +1,3 @@
-import truncate from 'lodash.truncate';
-
 import { CSSProperties } from 'react';
 
 import { Box, Card as MuiCard, Stack, Typography } from '@mui/material';
@@ -21,10 +19,16 @@ type CardProps = {
   image?: string;
   height?: number;
   description?: string | null;
-  numberOfLinesToShow?: number;
+  // numberOfLinesToShow?: number;
   isLiked?: boolean;
   link?: string;
-  creator?: { name: string; id: UUID; avatar?: string; link?: string };
+  creator?: {
+    name: string;
+    id: UUID;
+    avatar?: string;
+    link?: string;
+    isLoading?: boolean;
+  };
   onLikeToggle?: LikeCounterButtonProps['onClick'];
   contentOverImage?: JSX.Element;
   LinkComponent?: LinkWrapperProps['LinkComponent'];
@@ -192,6 +196,7 @@ export const BigCard = ({
                       maxHeight={40}
                       maxWidth={40}
                       url={creator.avatar}
+                      isLoading={creator.isLoading}
                     />
                   </Stack>
                 </LinkWrapper>

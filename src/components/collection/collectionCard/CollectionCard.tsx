@@ -6,7 +6,6 @@ import { styled } from '@mui/material';
 
 import { ThumbnailSize } from '@graasp/sdk';
 
-import { useLibraryTranslation } from '../../../config/i18n';
 import { buildCollectionRoute, buildMemberRoute } from '../../../config/routes';
 import { ItemOrSearchedItem } from '../../../utils/types';
 import { useIsItemLiked } from '../../../utils/useIsItemLiked';
@@ -51,7 +50,6 @@ export const CollectionCard = ({ collection, showIsContentTag }: Props) => {
     isPublishedRoot,
     type,
   } = collection;
-  const { t } = useLibraryTranslation();
   const { hooks, mutations } = useContext(QueryClientContext);
   const { data: authorAvatarUrl, isLoading: isLoadingAvatar } =
     hooks.useAvatarUrl({
@@ -127,6 +125,7 @@ export const CollectionCard = ({ collection, showIsContentTag }: Props) => {
                 id: collection.creator.id,
                 avatar: authorAvatarUrl,
                 link: memberPageLink,
+                isLoading: isLoadingAvatar,
               }
             : undefined
         }
