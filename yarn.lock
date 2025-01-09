@@ -4418,6 +4418,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@storybook/addon-a11y@npm:8.4.7":
+  version: 8.4.7
+  resolution: "@storybook/addon-a11y@npm:8.4.7"
+  dependencies:
+    "@storybook/addon-highlight": "npm:8.4.7"
+    axe-core: "npm:^4.2.0"
+  peerDependencies:
+    storybook: ^8.4.7
+  checksum: 10/cd4add29f8df32db234515267167d6f0f52ceaf5187dcd60c433ec9e6b9037bcd7582b15ca296aefc69530c7b73b66f5b4b71ee1e13b026e43d82de5988e42cd
+  languageName: node
+  linkType: hard
+
 "@storybook/addon-actions@npm:8.4.7":
   version: 8.4.7
   resolution: "@storybook/addon-actions@npm:8.4.7"
@@ -4519,6 +4531,23 @@ __metadata:
   peerDependencies:
     storybook: ^8.4.7
   checksum: 10/24d5c55eb7f320a002d54cc638a58f196d243b248df7735d68bba21e5b2b4cd0ba0369b78e7b67522ef741516b022e9e627db9a59476e0ea2da153736950d1bc
+  languageName: node
+  linkType: hard
+
+"@storybook/addon-links@npm:8.4.7":
+  version: 8.4.7
+  resolution: "@storybook/addon-links@npm:8.4.7"
+  dependencies:
+    "@storybook/csf": "npm:^0.1.11"
+    "@storybook/global": "npm:^5.0.0"
+    ts-dedent: "npm:^2.0.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
+    storybook: ^8.4.7
+  peerDependenciesMeta:
+    react:
+      optional: true
+  checksum: 10/3d64225348f1c72dec069551044c7781de03a4775acfefb8ebe2d0c1a6e0171692a1222e15191bccd57b76ca9a995032df14974b7a6271f7a9b283c90bff1a00
   languageName: node
   linkType: hard
 
@@ -6638,6 +6667,13 @@ __metadata:
   version: 4.10.1
   resolution: "axe-core@npm:4.10.1"
   checksum: 10/53b53111f18082a40781ff7e405bcf6cbba6c3d9ec6905ee0bdab3704d0062fcee00ceb220adfb73f4787a7fda30b8f6d2edc8f0e70123a589c5f90ce016f6b7
+  languageName: node
+  linkType: hard
+
+"axe-core@npm:^4.2.0":
+  version: 4.10.2
+  resolution: "axe-core@npm:4.10.2"
+  checksum: 10/a69423b2ff16c15922c4ea7cf9cc5112728a2817bbe0f2cc212248d648885ffd1ba554e3a341dfc289cd9e67fc0d06f333b5c6837c5c38ca6652507381216fc1
   languageName: node
   linkType: hard
 
@@ -10983,8 +11019,11 @@ __metadata:
     "@mui/lab": "npm:6.0.0-beta.13"
     "@mui/material": "npm:6.1.5"
     "@sentry/nextjs": "npm:8.35.0"
+    "@storybook/addon-a11y": "npm:8.4.7"
+    "@storybook/addon-docs": "npm:8.4.7"
     "@storybook/addon-essentials": "npm:^8.4.7"
     "@storybook/addon-interactions": "npm:^8.4.7"
+    "@storybook/addon-links": "npm:8.4.7"
     "@storybook/blocks": "npm:^8.4.7"
     "@storybook/nextjs": "npm:^8.4.7"
     "@storybook/react": "npm:^8.4.7"

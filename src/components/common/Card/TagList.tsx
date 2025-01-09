@@ -1,30 +1,44 @@
-import { ReactNode } from 'react';
+import Link from 'next/link';
 
-import { Stack, Typography } from '@mui/material';
+import { Stack, Typography, useTheme } from '@mui/material';
 
 import { DEFAULT_LIGHT_PRIMARY_COLOR } from '@graasp/ui';
 
-const Tag = ({ title }: { title: string | ReactNode }): JSX.Element => {
+import { UrlSearch } from '../../../config/constants';
+import { ALL_COLLECTIONS_ROUTE } from '../../../config/routes';
+
+const Tag = ({ title }: { title: string }): JSX.Element => {
+  const theme = useTheme();
   return (
-    <Typography
-      variant="body2"
-      color="primary"
-      component="span"
-      px={1}
-      borderRadius={2}
-      mx={0}
-      noWrap
-      sx={{
-        backgroundColor: DEFAULT_LIGHT_PRIMARY_COLOR.main,
+    <Link
+      href={{
+        pathname: ALL_COLLECTIONS_ROUTE,
+        query: { [UrlSearch.KeywordSearch]: title },
+      }}
+      style={{
+        textDecoration: 'none',
+        color: theme.palette.primary.main,
       }}
     >
-      {title}
-    </Typography>
+      <Typography
+        variant="body2"
+        component="span"
+        px={1}
+        borderRadius={2}
+        mx={0}
+        noWrap
+        sx={{
+          backgroundColor: DEFAULT_LIGHT_PRIMARY_COLOR.main,
+        }}
+      >
+        {title}
+      </Typography>
+    </Link>
   );
 };
 
 export type TagListProps = {
-  tags?: (string | ReactNode)[];
+  tags?: string[];
 };
 
 export const TagList = ({ tags }: TagListProps): JSX.Element | null => {
@@ -42,7 +56,7 @@ export const TagList = ({ tags }: TagListProps): JSX.Element | null => {
       sx={{
         overflow: 'hidden',
         height: '100%',
-        maxHeight: '50px', // computed height for 2 lines
+        maxHeight: '23px', // computed height for 2 lines
       }}
     >
       {tags.map((t) => (

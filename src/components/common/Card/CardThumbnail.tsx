@@ -1,7 +1,9 @@
-import { Box, useTheme } from '@mui/material';
+import { Box } from '@mui/material';
 
 import { DiscriminatedItem, ItemType } from '@graasp/sdk';
-import { DEFAULT_LIGHT_PRIMARY_COLOR, ItemIcon, Thumbnail } from '@graasp/ui';
+import { ItemIcon, Thumbnail } from '@graasp/ui';
+
+import { getColorFromId } from '../../../utils/colors';
 
 export type CardThumbnailProps = {
   thumbnail?: string;
@@ -13,6 +15,7 @@ export type CardThumbnailProps = {
   height?: string;
   maxHeight?: string;
   mimetype?: string;
+  id: string;
 };
 const CardThumbnail = ({
   thumbnail,
@@ -24,9 +27,8 @@ const CardThumbnail = ({
   maxHeight = '100%',
   type = ItemType.FOLDER,
   mimetype,
+  id,
 }: CardThumbnailProps): JSX.Element => {
-  const theme = useTheme();
-
   if (thumbnail) {
     return (
       <Thumbnail
@@ -45,7 +47,7 @@ const CardThumbnail = ({
       display="flex"
       alignItems="center"
       justifyContent="center"
-      bgcolor={DEFAULT_LIGHT_PRIMARY_COLOR.main}
+      bgcolor={getColorFromId(id, 0.84)}
       width={width}
       height="100%"
       flexShrink={0}
@@ -56,7 +58,7 @@ const CardThumbnail = ({
         mimetype={mimetype}
         type={type}
         alt={alt}
-        color={theme.palette.primary.main}
+        color={getColorFromId(id, 0.5)}
       />
     </Box>
   );
