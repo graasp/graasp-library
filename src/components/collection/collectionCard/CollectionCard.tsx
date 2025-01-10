@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 
 import { styled } from '@mui/material';
 
-import { ThumbnailSize } from '@graasp/sdk';
+import { TagCategory, ThumbnailSize } from '@graasp/sdk';
 
 import { buildCollectionRoute, buildMemberRoute } from '../../../config/routes';
 import { ItemOrSearchedItem } from '../../../utils/types';
@@ -44,7 +44,6 @@ export const CollectionCard = ({ collection, showIsContentTag }: Props) => {
     size: ThumbnailSize.Medium,
   });
 
-  const { data: itemLikesForItem } = hooks.useLikesForItem(collection?.id);
   const link = `${'http://localhost:3005'}${buildCollectionRoute(id)}`;
   const memberPageLink = `${'http://localhost:3005'}${buildMemberRoute(creator?.id)}`;
 
@@ -53,14 +52,17 @@ export const CollectionCard = ({ collection, showIsContentTag }: Props) => {
   //   categories: 'categories' in collection ? collection.categories : [],
   // });
 
-  const tags = [
-    // @ts-ignore
-    ...(collection.discipline ?? []),
-    // @ts-ignore
-    ...(collection.level ?? []),
-    // @ts-ignore
-    ...(collection['resource-type'] ?? []),
-  ].toSorted();
+  const tags = Object.values(TagCategory)
+    .flatMap((category: string) => {
+      if (`${category}` in collection) {
+        // @ts-expect-error
+        return collection[category] ?? [];
+      }
+      return [];
+    })
+    .toSorted((a, b) => (a > b ? 1 : -1));
+
+  const likes = 'likes' in collection ? collection.likes : 0;
 
   return (
     <StyledWrapper>
@@ -71,7 +73,7 @@ export const CollectionCard = ({ collection, showIsContentTag }: Props) => {
         type={type}
         image={thumbnailUrl}
         tags={tags}
-        likeCount={itemLikesForItem?.length}
+        likeCount={likes}
         creator={
           collection.creator
             ? {

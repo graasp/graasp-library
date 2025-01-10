@@ -25,7 +25,8 @@ const Tag = ({ title }: { title: string }): JSX.Element => {
         component="span"
         px={1}
         borderRadius={2}
-        mx={0}
+        ml={0}
+        mr={1}
         noWrap
         sx={{
           backgroundColor: DEFAULT_LIGHT_PRIMARY_COLOR.main,
@@ -51,12 +52,11 @@ export const TagList = ({ tags }: TagListProps): JSX.Element | null => {
       direction="row"
       maxWidth="100%"
       alignItems="center"
-      gap={1}
       flexWrap="wrap"
       sx={{
         overflow: 'hidden',
         height: '100%',
-        maxHeight: '23px', // computed height for 2 lines
+        maxHeight: '50px', // computed height for 2 lines
       }}
     >
       {tags.map((t) => (

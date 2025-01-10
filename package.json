@@ -35,8 +35,8 @@
     "@emotion/react": "11.13.3",
     "@emotion/server": "11.11.0",
     "@emotion/styled": "11.13.0",
-    "@graasp/query-client": "5.7.0",
-    "@graasp/sdk": "5.5.0",
+    "@graasp/query-client": "5.7.1",
+    "@graasp/sdk": "5.6.0",
     "@graasp/stylis-plugin-rtl": "2.2.0",
     "@graasp/translations": "1.43.0",
     "@graasp/ui": "github:graasp/graasp-ui#library-cards",
@@ -122,6 +122,9 @@
     "exclude": [
       "pages/api/__coverage__.js"
     ]
+  },
+  "resolutions": {
+    "@graasp/sdk": "5.6.0"
   },
   "packageManager": "yarn@4.5.1",
   "eslintConfig": {

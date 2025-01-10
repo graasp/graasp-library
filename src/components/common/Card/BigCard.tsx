@@ -10,8 +10,8 @@ import CardThumbnail, { CardThumbnailProps } from './CardThumbnail';
 import { LikeCounter } from './LikeCounter';
 import { TagList, TagListProps } from './TagList';
 
-const MAX_NUMBER_OF_LINES = 3;
-const height = 170;
+const height = 230;
+const MAX_NUMBER_OF_LINES = 4;
 
 type CardProps = {
   name: string;
@@ -76,9 +76,8 @@ export const BigCard = ({
           </Link>
         </Box>
         <Stack
-          mx={{ xs: 1, sm: 2 }}
           gap={1}
-          py={1}
+          p={{ xs: 1, sm: 2 }}
           minWidth={0}
           justifyContent="space-between"
           height="100%"
