@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.13.0](https://github.com/graasp/graasp-library/compare/v1.12.0...v1.13.0) (2025-01-08)
+
+
+### Features
+
+* add storybook and collapsible text ([#732](https://github.com/graasp/graasp-library/issues/732)) ([64916c7](https://github.com/graasp/graasp-library/commit/64916c7f9e0e5f1fa297883eb7118551697a37ab))
+
+
+### Bug Fixes
+
+* fix broken text ([#733](https://github.com/graasp/graasp-library/issues/733)) ([4e8ef71](https://github.com/graasp/graasp-library/commit/4e8ef7170ff7aa8ae98d35e848d26911e96d54ba))
+* use correct id for useMember ([#728](https://github.com/graasp/graasp-library/issues/728)) ([1e30fae](https://github.com/graasp/graasp-library/commit/1e30faea972141e6be49c2470d59b7bfe5575397))
+
 ## [1.12.0](https://github.com/graasp/graasp-library/compare/v1.11.0...v1.12.0) (2024-12-11)
 
 
