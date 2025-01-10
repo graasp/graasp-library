@@ -2687,9 +2687,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/query-client@npm:5.7.0":
-  version: 5.7.0
-  resolution: "@graasp/query-client@npm:5.7.0"
+"@graasp/query-client@npm:5.7.1":
+  version: 5.7.1
+  resolution: "@graasp/query-client@npm:5.7.1"
   dependencies:
     "@tanstack/react-query": "npm:5.61.5"
     "@tanstack/react-query-devtools": "npm:5.61.5"
@@ -2699,7 +2699,7 @@ __metadata:
     "@graasp/sdk": ^4.0.0 || ^5.0.0
     "@graasp/translations": "*"
     react: ^18.0.0
-  checksum: 10/c31a6395da6023332e03b8ee6d950fe7e106ca4e0ca9ce60cd4ecfd737ad12bcebe7ada735ed449120ede430f666f20cc6a026f6174399b0ad736273c8ba0cd0
+  checksum: 10/c3fff96bbce3548baf5c5c9a6b315e934d02bfc07b120d04c8c06b21862827660448a50eaa1bfa2426f549d759629f33e01ed5791d4516eb0a34a8ff01c63f25
   languageName: node
   linkType: hard
 
@@ -2737,9 +2737,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/ui@npm:5.4.0":
-  version: 5.4.0
-  resolution: "@graasp/ui@npm:5.4.0"
+"@graasp/ui@npm:5.4.7":
+  version: 5.4.7
+  resolution: "@graasp/ui@npm:5.4.7"
   dependencies:
     http-status-codes: "npm:2.3.0"
     interweave: "npm:13.1.0"
@@ -2749,26 +2749,26 @@ __metadata:
     react-dnd-html5-backend: "npm:16.0.1"
     react-quill: "npm:2.0.0"
     react-rnd: "npm:10.4.13"
-    uuid: "npm:10.0.0"
+    uuid: "npm:11.0.3"
   peerDependencies:
-    "@emotion/cache": ~11.10.7 || ~11.11.0 || ~11.13.0
-    "@emotion/react": ~11.10.6 || ~11.11.0 || ~11.13.0
-    "@emotion/styled": ~11.10.6 || ~11.11.0 || ~11.13.0
-    "@graasp/sdk": ^4.29.0
+    "@emotion/cache": ~11.10.7 || ~11.11.0 || ~11.13.0 || ~11.14.0
+    "@emotion/react": ~11.10.6 || ~11.11.0 || ~11.13.0 || ~11.14.0
+    "@emotion/styled": ~11.10.6 || ~11.11.0 || ~11.13.0 || ~11.14.0
+    "@graasp/sdk": ^4.29.0 || ^5.0.0
     "@graasp/stylis-plugin-rtl": ^2
     "@graasp/translations": ^1.23.0
     "@mui/icons-material": ^6
     "@mui/lab": ^6
     "@mui/material": ^6
-    i18next: ^22.4.15 || ^23.0.0
-    katex: 0.16.11
-    lucide-react: ^0.417.0 || ^0.429.0 || ^0.436.0 || ^0.439.0 || ^0.441.0 || ^0.446.0 || ^0.447.0 || ^0.451.0
+    i18next: ^22.4.15 || ^23.0.0 || ^24.0.0
+    katex: 0.16.15
+    lucide-react: ^0
     react: ^18.0.0
     react-dom: ^18.0.0
     react-i18next: ^15.0.0
     react-router-dom: ^6.11.0
     stylis: ^4.1.3
-  checksum: 10/cc36962378a4a7921910865584770816666b96c7db9f33fe0db5a927dc067fbbd2bcc3b87b7cd666c8a1592246c704d7ceb04c134339e02d22ffd0cd451bdc0f
+  checksum: 10/ca596d426ce6fbb167564ffae4557642ea187dbbe4570523e60047d72fabd349a82390e8138e7c9259a13438533677b48fd5b07b3be6664d0c2e28f0206539e8
   languageName: node
   linkType: hard
 
@@ -10974,11 +10974,11 @@ __metadata:
     "@emotion/react": "npm:11.13.3"
     "@emotion/server": "npm:11.11.0"
     "@emotion/styled": "npm:11.13.0"
-    "@graasp/query-client": "npm:5.7.0"
+    "@graasp/query-client": "npm:5.7.1"
     "@graasp/sdk": "npm:5.4.0"
     "@graasp/stylis-plugin-rtl": "npm:2.2.0"
     "@graasp/translations": "npm:1.43.0"
-    "@graasp/ui": "npm:5.4.0"
+    "@graasp/ui": "npm:5.4.7"
     "@mui/icons-material": "npm:6.1.5"
     "@mui/lab": "npm:6.0.0-beta.13"
     "@mui/material": "npm:6.1.5"
@@ -17707,6 +17707,15 @@ __metadata:
   bin:
     uuid: dist/bin/uuid
   checksum: 10/35aa60614811a201ff90f8ca5e9ecb7076a75c3821e17f0f5ff72d44e36c2d35fcbc2ceee9c4ac7317f4cc41895da30e74f3885e30313bee48fda6338f250538
+  languageName: node
+  linkType: hard
+
+"uuid@npm:11.0.3":
+  version: 11.0.3
+  resolution: "uuid@npm:11.0.3"
+  bin:
+    uuid: dist/esm/bin/uuid
+  checksum: 10/251385563195709eb0697c74a834764eef28e1656d61174e35edbd129288acb4d95a43f4ce8a77b8c2fc128e2b55924296a0945f964b05b9173469d045625ff2
   languageName: node
   linkType: hard
 
