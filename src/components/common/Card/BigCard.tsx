@@ -6,34 +6,34 @@ import { DiscriminatedItem, UUID } from '@graasp/sdk';
 import { Avatar, useMobileView } from '@graasp/ui';
 
 import { CollapsibleText } from '../CollapsibleText/CollapsibleText';
-import CardThumbnail, { CardThumbnailProps } from './CardThumbnail';
+import CardThumbnail from './CardThumbnail';
 import { LikeCounter } from './LikeCounter';
 import { TagList, TagListProps } from './TagList';
 
-const height = 230;
+const HEIGHT = 230;
 const MAX_NUMBER_OF_LINES = 4;
 
 type CardProps = {
-  name: string;
-  id: string;
-  type: DiscriminatedItem['type'];
-  description: string | null;
-  likeCount?: number;
-  tags?: TagListProps['tags'];
-  image?: string;
-  link: string;
-  creator?: {
+  readonly name: string;
+  readonly id: string;
+  readonly type: DiscriminatedItem['type'];
+  readonly description: string | null;
+  readonly likeCount?: number;
+  readonly tags?: TagListProps['tags'];
+  readonly image?: string;
+  readonly link: string;
+  readonly creator?: {
     name: string;
     id: UUID;
     avatar?: string;
     link: string;
     isLoading?: boolean;
   } | null;
-  contentOverImage?: JSX.Element;
-  mimetype?: CardThumbnailProps['mimetype'];
+  readonly contentOverImage?: JSX.Element;
 };
 
-export const BigCard = ({
+// eslint-disable-next-line react/function-component-definition
+export function BigCard({
   id,
   creator,
   name,
@@ -44,8 +44,7 @@ export const BigCard = ({
   type,
   likeCount = 0,
   contentOverImage,
-  mimetype,
-}: CardProps): JSX.Element => {
+}: CardProps): JSX.Element {
   const { isMobile } = useMobileView();
 
   // merge name and description together
@@ -55,9 +54,9 @@ export const BigCard = ({
 
   return (
     <MuiCard>
-      <Stack height={height} direction="row" alignItems="center">
+      <Stack height={HEIGHT} direction="row" alignItems="center">
         <Box style={{ height: '100%', minWidth: '30%' }}>
-          <Link href={link}>
+          <Link href={link} title={name}>
             <Stack height="100%" position="relative">
               {contentOverImage ? (
                 <Box sx={{ position: 'absolute', p: 1 }} width="100%">
@@ -66,11 +65,10 @@ export const BigCard = ({
               ) : null}
               <CardThumbnail
                 id={id}
-                minHeight={height}
+                minHeight={HEIGHT}
                 thumbnail={image}
-                alt={name}
+                alt={`thumbnail for ${name}`}
                 type={type}
-                mimetype={mimetype}
               />
             </Stack>
           </Link>
@@ -114,6 +112,7 @@ export const BigCard = ({
             >
               {creator && (
                 <Link
+                  title={creator.name}
                   href={creator.link}
                   style={{
                     textDecoration: 'unset',
@@ -131,7 +130,7 @@ export const BigCard = ({
                   >
                     <Avatar
                       component="avatar"
-                      alt={creator.name}
+                      alt={`avatar of ${creator.name}`}
                       sx={{ fontSize: '14px' }}
                       maxHeight={24}
                       maxWidth={24}
@@ -156,4 +155,4 @@ export const BigCard = ({
       </Stack>
     </MuiCard>
   );
-};
+}

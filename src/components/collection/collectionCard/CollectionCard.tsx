@@ -44,13 +44,8 @@ export const CollectionCard = ({ collection, showIsContentTag }: Props) => {
     size: ThumbnailSize.Medium,
   });
 
-  const link = `${'http://localhost:3005'}${buildCollectionRoute(id)}`;
-  const memberPageLink = `${'http://localhost:3005'}${buildMemberRoute(creator?.id)}`;
-
-  // normal item does not return categories - this is a hack
-  // const translatedCategories = useCategoryNames({
-  //   categories: 'categories' in collection ? collection.categories : [],
-  // });
+  const link = buildCollectionRoute(id);
+  const memberPageLink = buildMemberRoute(creator?.id);
 
   const tags = Object.values(TagCategory)
     .flatMap((category: string) => {
@@ -62,6 +57,7 @@ export const CollectionCard = ({ collection, showIsContentTag }: Props) => {
     })
     .toSorted((a, b) => (a > b ? 1 : -1));
 
+  // warning: discriminated item does not have likes, when it is used on the homepage
   const likes = 'likes' in collection ? collection.likes : 0;
 
   return (
@@ -83,10 +79,8 @@ export const CollectionCard = ({ collection, showIsContentTag }: Props) => {
                 link: memberPageLink,
                 isLoading: isLoadingAvatar,
               }
-            : undefined
+            : null
         }
-        // meilisearch does not return extra/mimetype
-        // mimetype={getMimetype(extra)}
         description={description}
         contentOverImage={
           <ItemTag

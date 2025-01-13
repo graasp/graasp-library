@@ -4,10 +4,10 @@ import { useLibraryTranslation } from '../../../config/i18n';
 import LIBRARY from '../../../langs/constants';
 
 type ItemTagProps = {
-  createdAt: string;
-  updatedAt: string;
-  isChild: boolean;
-  showIsContentTag?: boolean;
+  readonly createdAt: string;
+  readonly updatedAt: string;
+  readonly isChild: boolean;
+  readonly showIsContentTag?: boolean;
 };
 
 const MS_PER_DAY = 1000 * 60 * 60 * 24;
@@ -32,13 +32,13 @@ const StyledItemTag = styled(Box)(({ tagColor }: { tagColor: string }) => ({
   },
 }));
 
-// eslint-disable-next-line import/prefer-default-export
-export const ItemTag = ({
+// eslint-disable-next-line import/prefer-default-export, react/function-component-definition
+export function ItemTag({
   isChild,
   createdAt,
   updatedAt,
   showIsContentTag = false,
-}: ItemTagProps): JSX.Element | null => {
+}: ItemTagProps): JSX.Element | null {
   const { t } = useLibraryTranslation();
   const theme = useTheme();
   if (showIsContentTag && isChild) {
@@ -72,4 +72,4 @@ export const ItemTag = ({
   }
 
   return null;
-};
+}

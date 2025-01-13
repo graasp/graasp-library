@@ -2,20 +2,20 @@ import React, { useState } from 'react';
 
 import { Box, Button, Skeleton, Typography } from '@mui/material';
 
-import { CollapsibleText } from '@graasp/ui';
-
 import { useLibraryTranslation } from '../../../config/i18n';
 import LIBRARY from '../../../langs/constants';
+import { CollapsibleText } from '../../common/CollapsibleText/CollapsibleText';
 
 type DescriptionProps = {
-  isLoading: boolean;
-  description: string | null;
+  readonly isLoading: boolean;
+  readonly description: string | null;
 };
 
-const Description = ({
+// eslint-disable-next-line react/function-component-definition
+export function Description({
   description,
   isLoading,
-}: DescriptionProps): JSX.Element => {
+}: DescriptionProps): JSX.Element {
   const { t } = useLibraryTranslation();
 
   const [isCollapsedDescription, setIsCollapsedDescription] = useState(true);
@@ -56,6 +56,4 @@ const Description = ({
       {t(LIBRARY.COLLECTION_EMPTY_DESCRIPTION_TEXT)}
     </Typography>
   );
-};
-
-export default Description;
+}

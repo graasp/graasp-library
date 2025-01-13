@@ -53,7 +53,6 @@ const CardMediaComponent = ({
           width: '100%',
           objectFit: 'cover',
         }}
-        size={size}
       />
     </Box>
   );

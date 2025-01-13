@@ -5,12 +5,13 @@ import { Stack, Typography, useTheme } from '@mui/material';
 import { LIKE_COUNTER_CY } from '../../../config/selectors';
 
 export type LikeCounterProps = {
-  likeCount?: number;
+  readonly likeCount?: number;
 };
 
-export const LikeCounter = ({
+// eslint-disable-next-line react/function-component-definition
+export function LikeCounter({
   likeCount = 0,
-}: LikeCounterProps): JSX.Element | null => {
+}: LikeCounterProps): JSX.Element | null {
   const theme = useTheme();
 
   if (likeCount) {
@@ -32,4 +33,4 @@ export const LikeCounter = ({
     );
   }
   return null;
-};
+}

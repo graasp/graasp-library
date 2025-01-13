@@ -7,7 +7,8 @@ import { DEFAULT_LIGHT_PRIMARY_COLOR } from '@graasp/ui';
 import { UrlSearch } from '../../../config/constants';
 import { ALL_COLLECTIONS_ROUTE } from '../../../config/routes';
 
-const Tag = ({ title }: { title: string }): JSX.Element => {
+// eslint-disable-next-line react/function-component-definition
+function Tag({ title }: { readonly title: string }): JSX.Element {
   const theme = useTheme();
   return (
     <Link
@@ -36,13 +37,14 @@ const Tag = ({ title }: { title: string }): JSX.Element => {
       </Typography>
     </Link>
   );
-};
+}
 
 export type TagListProps = {
   tags?: string[];
 };
 
-export const TagList = ({ tags }: TagListProps): JSX.Element | null => {
+// eslint-disable-next-line react/function-component-definition
+export function TagList({ tags }: TagListProps): JSX.Element | null {
   if (!tags?.length) {
     return null;
   }
@@ -56,7 +58,7 @@ export const TagList = ({ tags }: TagListProps): JSX.Element | null => {
       sx={{
         overflow: 'hidden',
         height: '100%',
-        maxHeight: '50px', // computed height for 2 lines
+        maxHeight: '50px', // computed height to disply maximum 2 lines
       }}
     >
       {tags.map((t) => (
@@ -64,4 +66,4 @@ export const TagList = ({ tags }: TagListProps): JSX.Element | null => {
       ))}
     </Stack>
   );
-};
+}

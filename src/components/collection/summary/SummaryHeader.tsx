@@ -37,7 +37,7 @@ import Authorship from '../Authorship';
 import Badges from '../Badges';
 import { StyledChip } from './StyledChip';
 import SummaryActionButtons from './SummaryActionButtons';
-import Description from './SummaryDescription';
+import { Description } from './SummaryDescription';
 
 type SummaryHeaderProps = {
   collection?: DiscriminatedItem;
