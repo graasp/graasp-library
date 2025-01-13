@@ -11,11 +11,11 @@ import { LikeCounter } from './LikeCounter';
 import { MemberAvatar } from './MemberAvatar';
 import { TagList, TagListProps } from './TagList';
 
-const HEIGHT = 230;
 const MAX_NUMBER_OF_LINES = 4;
 
 type CardProps = {
   readonly name: string;
+  readonly height: number;
   readonly id: string;
   readonly type: DiscriminatedItem['type'];
   readonly description: string | null;
@@ -43,6 +43,7 @@ export function BigCard({
   description,
   tags,
   type,
+  height,
   likeCount = 0,
   contentOverImage,
 }: CardProps): JSX.Element {
@@ -72,8 +73,13 @@ export function BigCard({
           : {}
       }
     >
-      <Stack height={HEIGHT} direction="row" alignItems="center">
-        <Box style={{ height: '100%', minWidth: '30%' }}>
+      <Stack height={height} direction="row" alignItems="center">
+        <Box
+          sx={{
+            height: '100%',
+            minWidth: '30%',
+          }}
+        >
           <Link href={link} title={name}>
             <Stack height="100%" position="relative">
               {contentOverImage ? (
@@ -83,11 +89,10 @@ export function BigCard({
               ) : null}
               <CardThumbnail
                 id={id}
-                minHeight={HEIGHT}
+                minHeight={height}
                 thumbnail={image}
                 alt={`thumbnail for ${name}`}
                 type={type}
-                // width={300}
               />
             </Stack>
           </Link>
@@ -101,7 +106,14 @@ export function BigCard({
           width="100%"
         >
           <Stack gap={1}>
-            <Stack>
+            <Stack
+              sx={{
+                '&:hover': {
+                  cursor: 'pointer',
+                  opacity: 0.9,
+                },
+              }}
+            >
               <Link
                 href={link}
                 style={{
@@ -116,7 +128,7 @@ export function BigCard({
                   collapsed
                   numberOfLinesToShow={MAX_NUMBER_OF_LINES}
                   content={text}
-                  style={link ? { cursor: 'pointer' } : undefined}
+                  style={{ cursor: 'pointer' }}
                 />
               </Link>
             </Stack>

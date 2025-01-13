@@ -19,6 +19,7 @@ const meta = {
 
   args: {
     id: v4(),
+    height: 230,
     link: '/card-link',
     image: '/test-assets/big_photo.jpg',
     likeCount: 213,

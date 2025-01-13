@@ -13,6 +13,7 @@ import { ItemTag } from './ItemTag';
 type Props = {
   collection: ItemOrSearchedItem;
   showIsContentTag?: boolean;
+  height: number;
 };
 // necessary wrapper to force cursor pointer on ql editor
 const StyledWrapper = styled('div')(() => ({
@@ -21,7 +22,11 @@ const StyledWrapper = styled('div')(() => ({
   },
 }));
 
-export const CollectionCard = ({ collection, showIsContentTag }: Props) => {
+export const CollectionCard = ({
+  collection,
+  showIsContentTag,
+  height,
+}: Props) => {
   const {
     name,
     id,
@@ -63,6 +68,7 @@ export const CollectionCard = ({ collection, showIsContentTag }: Props) => {
   return (
     <StyledWrapper>
       <BigCard
+        height={height}
         link={link}
         name={name}
         id={id}

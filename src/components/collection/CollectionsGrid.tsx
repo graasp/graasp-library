@@ -11,6 +11,8 @@ import LIBRARY from '../../langs/constants';
 import { ItemOrSearchedItem } from '../../utils/types';
 import CollectionCard from './collectionCard/CollectionCard';
 
+const HEIGHT = 230;
+
 type Props = {
   collections?: ItemOrSearchedItem[];
   isLoading: boolean;
@@ -18,8 +20,6 @@ type Props = {
   containerWidth?: Breakpoint | false;
   showIsContentTag?: boolean;
 };
-
-const height = 300;
 
 const CollectionsGrid = ({
   collections,
@@ -42,7 +42,7 @@ const CollectionsGrid = ({
       >
         {Array.from({ length: 4 }, (_, idx) => idx).map((idx) => (
           <Grid key={idx} size={size}>
-            <Skeleton height={height} sx={{ transform: 'unset' }} />
+            <Skeleton height={HEIGHT} sx={{ transform: 'unset' }} />
           </Grid>
         ))}
       </Grid>
@@ -70,6 +70,7 @@ const CollectionsGrid = ({
               id={buildCollectionCardGridId(collection.id)}
             >
               <CollectionCard
+                height={HEIGHT}
                 showIsContentTag={showIsContentTag}
                 collection={collection}
               />

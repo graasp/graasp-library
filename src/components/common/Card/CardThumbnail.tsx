@@ -53,6 +53,12 @@ const CardThumbnail = ({
       flexShrink={0}
       minHeight={minHeight}
       minWidth={0}
+      sx={{
+        '&:hover': {
+          cursor: 'pointer',
+          opacity: 0.9,
+        },
+      }}
     >
       <ItemIcon
         mimetype={mimetype}

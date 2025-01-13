@@ -32,6 +32,7 @@ function Tag({ title }: { readonly title: string }): JSX.Element {
         sx={{
           backgroundColor: DEFAULT_LIGHT_PRIMARY_COLOR.main,
           '&:hover': {
+            cursor: 'pointer',
             opacity: 0.8,
           },
         }}

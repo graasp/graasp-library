@@ -40,6 +40,7 @@ export function MemberAvatar({
           variant="body2"
           sx={{
             '&:hover': {
+              cursor: 'pointer',
               opacity: 0.7,
             },
           }}
