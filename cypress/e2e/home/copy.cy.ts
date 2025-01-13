@@ -15,7 +15,7 @@ describe('Signed out', () => {
 });
 
 describe('Signed in', () => {
-  it(`Show copy button and show my graasp root and recent`, () => {
+  it(`Show my graasp root and recent`, () => {
     cy.setUpApi({
       currentMember: CURRENT_USER,
       items: PUBLISHED_ITEMS,
@@ -23,9 +23,6 @@ describe('Signed in', () => {
       recentCollections: PUBLISHED_ITEMS,
     });
     cy.visit(HOME_ROUTE);
-    cy.get(
-      `#${buildCollectionCardCopyButtonId(PUBLISHED_ITEMS[0].id)}`,
-    ).click();
 
     // show root item menu in copy dialog
     cy.get(`[role="dialog"] #root`).should('be.visible');

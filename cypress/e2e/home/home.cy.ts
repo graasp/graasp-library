@@ -3,9 +3,12 @@ import { HOME_ROUTE } from '../../../src/config/routes';
 import {
   GRAASP_SELECTION_TITLE_ID,
   HOME_PAGE_TITLE_TEXT_ID,
+  LIKE_COUNTER_CY,
   MOST_LIKED_TITLE_ID,
   RECENT_PUBLICATIONS_TITLE_ID,
   SECTION_TITLE_ID,
+  buildCollectionCardGridId,
+  dataCyWrapper,
 } from '../../../src/config/selectors';
 import { buildPublicAndPrivateEnvironments } from '../../fixtures/environment';
 import { GRAASPER_ITEMS } from '../../fixtures/items';
@@ -37,6 +40,15 @@ describe('Home Page', () => {
         cy.get(`#${GRAASP_SELECTION_TITLE_ID} #${SECTION_TITLE_ID}`)
           .scrollIntoView()
           .should('be.visible');
+
+        // likes are displayed
+        environment.recentCollections.forEach(({ id, likes }) => {
+          if (likes) {
+            cy.get(
+              `#${buildCollectionCardGridId(id)} ${dataCyWrapper(LIKE_COUNTER_CY)}`,
+            ).should('contain', likes);
+          }
+        });
       });
 
       describe('Graasper items', () => {

@@ -33,7 +33,16 @@ export type MockItem = DiscriminatedItem & {
   visibility: MockItemVisibility[];
   publishedInfo?: MockPublishedInfo;
   memberships?: MockMembership[];
+
+  // used by get tags per item
   tags?: Tag[];
+
+  // used by search
+  discipline?: string[];
+  level?: string[];
+  ['resource-type']?: string[];
+
+  likes?: number;
   thumbnail?: string;
   isPublishedRoot?: boolean;
 };

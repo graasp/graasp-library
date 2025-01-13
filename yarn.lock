@@ -4519,7 +4519,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-interactions@npm:^8.4.7":
+"@storybook/addon-interactions@npm:8.4.7":
   version: 8.4.7
   resolution: "@storybook/addon-interactions@npm:8.4.7"
   dependencies:
@@ -11022,7 +11022,7 @@ __metadata:
     "@storybook/addon-a11y": "npm:8.4.7"
     "@storybook/addon-docs": "npm:8.4.7"
     "@storybook/addon-essentials": "npm:^8.4.7"
-    "@storybook/addon-interactions": "npm:^8.4.7"
+    "@storybook/addon-interactions": "npm:8.4.7"
     "@storybook/addon-links": "npm:8.4.7"
     "@storybook/blocks": "npm:^8.4.7"
     "@storybook/nextjs": "npm:^8.4.7"

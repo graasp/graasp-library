@@ -29,7 +29,6 @@ const CollectionsGrid = ({
   showIsContentTag,
 }: Props) => {
   const { t } = useLibraryTranslation();
-
   const size = { xs: 12, sm: 12, md: 6, lg: 6, xl: 4 };
 
   if (isLoading) {

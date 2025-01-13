@@ -83,3 +83,5 @@ export const SEARCH_FILTER_POPPER_LANG_ID = 'searchFilterPopperLang';
 export const FILTER_CHIP_CY = `filterChip`;
 export const buildFilterInputSelector = (category: string) =>
   `#not-sticky input#${buildSearchFilterPopperButtonId(category)}`;
+export const LIKE_COUNTER_CY = 'likeCounter';
+export const dataCyWrapper = (selector: string) => `[data-cy="${selector}"]`;

@@ -10,13 +10,28 @@ import { ItemType } from '@graasp/sdk';
 
 import { BigCard } from './BigCard';
 
+const LONG_NAME =
+  'my card title is very long and takes all the space, but we should still see the tags and it will be cut. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt nisl risus, quis mattis ipsum dictum at. Ut ullamcorper rhoncus nisl eu porttitor. Vestibulum rutrum erat ipsum, id lacinia risus iaculis id. Ut eleifend porta libero ac auctor. Pellentesque dui nisl, egestas et imperdiet vel, tempor sed tellus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis quis turpis elementum, elementum orci eu, varius massa. In imperdiet est eget turpis accumsan bibendum. Proin gravida faucibus felis in tempor. Nullam vitae vulputate turpis.';
+
 const meta = {
   title: 'Common/BigCard',
   component: BigCard,
 
   args: {
     id: v4(),
-    link: 'mylink',
+    link: '/card-link',
+    image: '/test-assets/big_photo.jpg',
+    likeCount: 213,
+    type: ItemType.DOCUMENT,
+    tags: ['6th grade at school', 'English', 'Mathematics', 'Taylor'],
+    creator: {
+      name: 'Name Surname',
+      id: v4(),
+      link: '/mylink',
+      avatar: '/test-assets/small_photo.jpg',
+    },
+    description:
+      'Tempor volutpat eget varius nisl cursus. Fusce cras commodo adipiscing dictumst gravida pharetra velit. Fusce cras commodo adipiscing dictumst gravida pharetra velit. Fusce cras commodo adipiscing dictumst gravida pharetra velit. Enim cursus ultrices in natoque. Faucibus porttitor posuere consequat congue aliquam. Sapien tempus blandit massa rhoncus',
   },
 
   decorators: [
@@ -46,19 +61,12 @@ export const Default = {
       'exercice',
       'fun',
       'subject',
+      'a longer tag',
+      'title',
+      'Neurology',
+      'stars',
+      'rabbit',
     ],
-    likeCount: 213,
-    type: ItemType.DOCUMENT,
-    image: '/test-assets/big_photo.jpg',
-    creator: {
-      name: 'Name Surname',
-      id: v4(),
-      link: 'mylink',
-      avatar: '/test-assets/small_photo.jpg',
-    },
-    link: '/link',
-    description:
-      'Tempor volutpat eget varius nisl cursus. Fusce cras commodo adipiscing dictumst gravida pharetra velit. Fusce cras commodo adipiscing dictumst gravida pharetra velit. Fusce cras commodo adipiscing dictumst gravida pharetra velit. Enim cursus ultrices in natoque. Faucibus porttitor posuere consequat congue aliquam. Sapien tempus blandit massa rhoncus',
   },
   play: async ({ args, canvasElement }) => {
     const canvas = within(canvasElement);
@@ -70,7 +78,7 @@ export const Default = {
 
     // tags
     args.tags!.forEach((t) => {
-      expect(canvas.getByText(t as string)).toBeVisible();
+      expect(canvas.getByText(t)).toBeVisible();
     });
 
     // creator
@@ -93,37 +101,67 @@ export const Default = {
 export const LongTitleAndLiked = {
   args: {
     name: 'my card title that is very long because I want to show everything and have more lines',
-    tags: ['6th grade at school', 'English', 'Mathematics', 'Taylor'],
-    likeCount: 213,
-    type: ItemType.DOCUMENT,
-    image: '/test-assets/big_photo.jpg',
     creator: {
       name: 'Name Surname Is Veryyyyyyy Looooong Too',
       id: v4(),
-      link: 'mylink',
+      link: '/mylink',
       avatar: '/test-assets/small_photo.jpg',
     },
-    description:
-      'Tempor volutpat eget varius nisl cursus. Fusce cras commodo adipiscing dictumst gravida pharetra velit. Fusce cras commodo adipiscing dictumst gravida pharetra velit. Fusce cras commodo adipiscing dictumst gravida pharetra velit. Enim cursus ultrices in natoque. Faucibus porttitor posuere consequat congue aliquam. Sapien tempus blandit massa rhoncus',
+  },
+  play: async ({ args, canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // tags
+    args.tags!.forEach((t) => {
+      expect(canvas.getByText(t)).toBeVisible();
+    });
+
+    // creator
+    expect(canvas.getByText(args.creator!.name)).toBeVisible();
+
+    // likes
+    expect(canvas.getByText(args.likeCount!)).toBeVisible();
+
+    // name, description
+    expect(canvas.getByText(args.name)).toBeVisible();
+    expect(canvas.getByText(args.description!)).toBeVisible();
+
+    // img
+    await expect(
+      document.querySelector(`img[src="${args.image}"]`),
+    ).toBeVisible();
   },
 } satisfies Story;
 
-export const OneTag = {
+export const ContentOverImage = {
   args: {
-    name: 'my card title that is very long because I want to show everything and have more lines',
-    tags: ['6th grade'],
-    likeCount: 213,
-    type: ItemType.DOCUMENT,
-    image: '/test-assets/big_photo.jpg',
-    creator: {
-      name: 'Name Surname',
-      id: v4(),
-      avatar: '/test-assets/small_photo.jpg',
-      link: 'mylink',
-    },
+    name: 'content over image',
     contentOverImage: <Chip label="mylabel" sx={{ background: 'red' }} />,
-    description:
-      'Tempor volutpat eget varius nisl cursus. Fusce cras commodo adipiscing dictumst gravida pharetra velit. Fusce cras commodo adipiscing dictumst gravida pharetra velit. Fusce cras commodo adipiscing dictumst gravida pharetra velit. Enim cursus ultrices in natoque. Faucibus porttitor posuere consequat congue aliquam. Sapien tempus blandit massa rhoncus',
+  },
+  play: async ({ args, canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // tags
+    args.tags!.forEach((t) => {
+      expect(canvas.getByText(t)).toBeVisible();
+    });
+
+    // creator
+    expect(canvas.getByText(args.creator!.name)).toBeVisible();
+
+    // likes
+    expect(canvas.getByText(args.likeCount!)).toBeVisible();
+
+    // name, description
+    expect(canvas.getByText(args.name)).toBeVisible();
+    expect(canvas.getByText(args.description!)).toBeVisible();
+
+    expect(canvas.getByText('mylabel')).toBeVisible();
+
+    // img
+    await expect(
+      document.querySelector(`img[src="${args.image}"]`),
+    ).toBeVisible();
   },
 } satisfies Story;
 
@@ -131,82 +169,101 @@ export const Empty = {
   args: {
     name: 'my card title',
     description: '',
-    type: ItemType.DOCUMENT,
-    creator: { name: 'member name', id: v4(), link: 'mylink' },
+    creator: null,
+    image: undefined,
+    likeCount: 0,
+    tags: [],
   },
-  play: async () => {
-    // no link
-    await expect(document.querySelector('#storybook-root a')).toBeNull();
+  play: async ({ args, canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // name
+    expect(canvas.getByText(args.name)).toBeVisible();
+  },
+} satisfies Story;
+
+export const NoCreator = {
+  args: {
+    name: 'my card title',
+    creator: null,
+  },
+  play: async ({ args, canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // name
+    expect(canvas.getByText(args.name)).toBeVisible();
   },
 } satisfies Story;
 
 export const VeryLongTitle = {
   args: {
-    description: '',
-    name: 'my card title is very long and takes all the space, but we should still see the tags and it will be cut. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt nisl risus, quis mattis ipsum dictum at. Ut ullamcorper rhoncus nisl eu porttitor. Vestibulum rutrum erat ipsum, id lacinia risus iaculis id. Ut eleifend porta libero ac auctor. Pellentesque dui nisl, egestas et imperdiet vel, tempor sed tellus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis quis turpis elementum, elementum orci eu, varius massa. In imperdiet est eget turpis accumsan bibendum. Proin gravida faucibus felis in tempor. Nullam vitae vulputate turpis.',
-    type: ItemType.DOCUMENT,
-    creator: { name: 'member name', id: v4(), link: 'mylink' },
-    tags: [
-      'my tag',
-      'my second tag',
-      'my tag',
-      'my second tag',
-      'my tag',
-      'my second tag',
-      'my tag',
-      'my second tag',
-      'my tag',
-      'my second tag',
-    ],
+    name: LONG_NAME,
   },
-  play: async () => {
-    // no link
-    await expect(document.querySelector('#storybook-root a')).toBeNull();
+  play: async ({ args, canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // tags
+    args.tags!.forEach((t) => {
+      expect(canvas.getByText(t)).toBeVisible();
+    });
+
+    // creator
+    expect(canvas.getByText(args.creator!.name)).toBeVisible();
+
+    // name
+    expect(canvas.getByText(args.name)).toBeVisible();
+    // description is not visibile but exist in the dom
+    expect(canvas.getByText(args.description!)).toBeVisible();
   },
 } satisfies Story;
 
-export const WithLink = {
+export const Mobile = {
   args: {
-    name: 'my card title',
-    type: ItemType.DOCUMENT,
-    description: '',
+    name: LONG_NAME,
   },
-  play: async () => {
-    // link exists
-    await expect(document.querySelector('#storybook-root a')).toBeVisible();
+  parameters: {
+    viewport: {
+      defaultViewport: 'mobile2',
+    },
+  },
+  play: async ({ args, canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // tags
+    args.tags!.forEach((t) => {
+      expect(canvas.getByText(t)).toBeVisible();
+    });
+
+    // creator name is not displayed
+    await expect(
+      document.querySelector(`a[href="${args.creator!.link}"]`),
+    ).not.toHaveTextContent(args.creator!.name);
+
+    // card name
+    expect(canvas.getByText(args.name)).toBeVisible();
+    // description is not visibile but exist in the dom
+    expect(canvas.getByText(args.description!)).toBeVisible();
   },
 } satisfies Story;
 
 export const WithinGrid = {
   args: {
-    name: 'my card title',
-    tags: ['6th grade at school', 'English', 'Mathematics', 'Taylor'],
-    likeCount: 213,
-    type: ItemType.DOCUMENT,
-    image: '/test-assets/big_photo.jpg',
-    creator: {
-      name: 'Name Surname',
-      id: v4(),
-      link: 'mylink',
-      avatar: '/test-assets/small_photo.jpg',
-    },
-    description:
-      'Tempor volutpat eget varius nisl cursus. Fusce cras commodo adipiscing dictumst gravida pharetra velit. Enim cursus ultrices in natoque. Faucibus porttitor posuere consequat congue aliquam. Sapien tempus blandit massa rhoncus',
+    name: 'card',
   },
   render: (args) => {
     return (
       <Grid2 container spacing={1}>
         <Grid2 size={{ sm: 6, lg: 4 }}>
-          <BigCard {...args} />
+          <BigCard {...args} {...Empty.args} />
         </Grid2>
         <Grid2 size={{ sm: 6, lg: 4 }}>
-          <BigCard {...args} />
+          <BigCard {...args} {...Default.args} />
         </Grid2>
         <Grid2 size={{ sm: 6, lg: 4 }}>
-          <BigCard {...args} />
+          <BigCard {...args} {...NoCreator.args} />
         </Grid2>
         <Grid2 size={{ xs: 12 }}>
-          <BigCard {...args} />
+          <BigCard {...args} {...LongTitleAndLiked.args} />
         </Grid2>
       </Grid2>
     );

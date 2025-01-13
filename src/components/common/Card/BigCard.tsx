@@ -28,7 +28,7 @@ type CardProps = {
     avatar?: string;
     link: string;
     isLoading?: boolean;
-  };
+  } | null;
   contentOverImage?: JSX.Element;
   mimetype?: CardThumbnailProps['mimetype'];
 };
@@ -54,7 +54,7 @@ export const BigCard = ({
   const text = `<h3>${name}</h3>${description ?? ''}`;
 
   return (
-    <MuiCard id={id}>
+    <MuiCard>
       <Stack height={height} direction="row" alignItems="center">
         <Box style={{ height: '100%', minWidth: '30%' }}>
           <Link href={link}>
@@ -147,7 +147,7 @@ export const BigCard = ({
                   </Stack>
                 </Link>
               )}
-              <Stack>
+              <Stack width={creator ? undefined : '100%'} alignItems="flex-end">
                 <LikeCounter likeCount={likeCount} />
               </Stack>
             </Stack>

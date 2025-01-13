@@ -59,7 +59,11 @@ export const PUBLISHED_ITEMS: MockItem[] = [
         account: MEMBERS.BOB,
       },
     ],
+    discipline: ['my discipline'],
+    level: [],
+    'resource-type': ['app'],
     tags: [TagFactory(), TagFactory()],
+    likes: 1,
   },
   {
     ...DEFAULT_FOLDER_ITEM,
@@ -88,7 +92,11 @@ export const PUBLISHED_ITEMS: MockItem[] = [
         account: MEMBERS.ANNA,
       },
     ],
+    discipline: [],
+    level: ['level'],
+    'resource-type': [],
     tags: [TagFactory()],
+    likes: 2,
   },
   {
     ...DEFAULT_FOLDER_ITEM,
@@ -122,7 +130,11 @@ export const PUBLISHED_ITEMS: MockItem[] = [
         account: MEMBERS.BOB,
       },
     ],
+    discipline: [],
+    level: ['level'],
+    'resource-type': ['app'],
     tags: [TagFactory(), TagFactory()],
+    likes: 0,
   },
   {
     ...DEFAULT_FOLDER_ITEM,
@@ -144,6 +156,10 @@ export const PUBLISHED_ITEMS: MockItem[] = [
         itemPath: 'egafbd2a_5688_11eb_ae93_0242ac130002',
       },
     ],
+    discipline: [],
+    level: [],
+    'resource-type': [],
+    likes: 10,
   },
   {
     ...DEFAULT_FOLDER_ITEM,
@@ -171,6 +187,10 @@ export const PUBLISHED_ITEMS: MockItem[] = [
         itemPath: 'egafbd2a_5688_11eb_ae93_0242ac130002',
       },
     ],
+    discipline: [],
+    level: [],
+    'resource-type': [],
+    likes: 1,
   },
   {
     ...DEFAULT_FOLDER_ITEM,
@@ -181,7 +201,6 @@ export const PUBLISHED_ITEMS: MockItem[] = [
     updatedAt: '2023-02-28T18:20:09.732Z',
     creator: MEMBERS.BOB,
     settings: {
-      tags: ['one-tag', 'two-tag'],
       displayCoEditors: true,
     },
     visibility: [],
@@ -197,7 +216,11 @@ export const PUBLISHED_ITEMS: MockItem[] = [
         account: MEMBERS.BOB,
       },
     ],
+    discipline: ['my discipline'],
+    level: ['level'],
+    'resource-type': [],
     tags: [TagFactory(), TagFactory()],
+    likes: 0,
   },
 ];
 
