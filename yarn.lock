@@ -2737,9 +2737,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/ui@github:graasp/graasp-ui#library-cards":
-  version: 5.4.7
-  resolution: "@graasp/ui@https://github.com/graasp/graasp-ui.git#commit=65364d3f5c003debb8f52f0cb89cb24047c0c2bc"
+"@graasp/ui@npm:5.5.0":
+  version: 5.5.0
+  resolution: "@graasp/ui@npm:5.5.0"
   dependencies:
     http-status-codes: "npm:2.3.0"
     interweave: "npm:13.1.0"
@@ -2768,7 +2768,7 @@ __metadata:
     react-i18next: ^15.0.0
     react-router-dom: ^6.11.0
     stylis: ^4.1.3
-  checksum: 10/561bfa6317c5e36a544145d9ec6cd072440785086a0f31eaff9239eb695d5670cd5d9ee32f917180c14067d29ed70e78caf8aa901b18b12e6f5c31d4b734d5d7
+  checksum: 10/08168fa43c1b993c567c0aa32a37b6d83bd7785ead71ec0409c5abeed9474a9de8bde45461963c5a3e5b9c3cfdfbefec611391cb54e930657e827cd225094213
   languageName: node
   linkType: hard
 
@@ -11014,7 +11014,7 @@ __metadata:
     "@graasp/sdk": "npm:5.6.0"
     "@graasp/stylis-plugin-rtl": "npm:2.2.0"
     "@graasp/translations": "npm:1.43.0"
-    "@graasp/ui": "github:graasp/graasp-ui#library-cards"
+    "@graasp/ui": "npm:5.5.0"
     "@mui/icons-material": "npm:6.1.5"
     "@mui/lab": "npm:6.0.0-beta.13"
     "@mui/material": "npm:6.1.5"
