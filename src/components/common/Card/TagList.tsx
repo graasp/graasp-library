@@ -31,6 +31,9 @@ function Tag({ title }: { readonly title: string }): JSX.Element {
         noWrap
         sx={{
           backgroundColor: DEFAULT_LIGHT_PRIMARY_COLOR.main,
+          '&:hover': {
+            opacity: 0.8,
+          },
         }}
       >
         {title}
@@ -40,7 +43,7 @@ function Tag({ title }: { readonly title: string }): JSX.Element {
 }
 
 export type TagListProps = {
-  tags?: string[];
+  readonly tags?: string[];
 };
 
 // eslint-disable-next-line react/function-component-definition

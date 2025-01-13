@@ -1,13 +1,14 @@
 import Link from 'next/link';
 
-import { Box, Card as MuiCard, Stack, Typography } from '@mui/material';
+import { Box, Card as MuiCard, Stack } from '@mui/material';
 
 import { DiscriminatedItem, UUID } from '@graasp/sdk';
-import { Avatar, useMobileView } from '@graasp/ui';
+import { useMobileView } from '@graasp/ui';
 
 import { CollapsibleText } from '../CollapsibleText/CollapsibleText';
 import CardThumbnail from './CardThumbnail';
 import { LikeCounter } from './LikeCounter';
+import { MemberAvatar } from './MemberAvatar';
 import { TagList, TagListProps } from './TagList';
 
 const HEIGHT = 230;
@@ -53,7 +54,24 @@ export function BigCard({
   const text = `<h3>${name}</h3>${description ?? ''}`;
 
   return (
-    <MuiCard>
+    <MuiCard
+      // light zoom effect on hover
+      sx={
+        !isMobile
+          ? {
+              boxShadow:
+                '8px 14px 10px rgba(39,44,49,.06), 1px 3px 8px rgba(39,44,49,.03)',
+              transition: 'all .5s ease' /* back to normal */,
+              '&:hover': {
+                transform: 'translate3D(0,-1px,0) scale(1.03)',
+                boxShadow:
+                  '8px 28px 30px rgba(39,44,49,.07), 1px 6px 12px rgba(39,44,49,.04)',
+                transition: 'all .4s ease' /* zoom in */,
+              },
+            }
+          : {}
+      }
+    >
       <Stack height={HEIGHT} direction="row" alignItems="center">
         <Box style={{ height: '100%', minWidth: '30%' }}>
           <Link href={link} title={name}>
@@ -69,6 +87,7 @@ export function BigCard({
                 thumbnail={image}
                 alt={`thumbnail for ${name}`}
                 type={type}
+                // width={300}
               />
             </Stack>
           </Link>
@@ -120,30 +139,11 @@ export function BigCard({
                     minWidth: 0,
                   }}
                 >
-                  <Stack
-                    direction="row"
-                    alignItems="center"
-                    justifyContent="flex-end"
-                    gap={1}
-                    minWidth={0}
-                    mr={1}
-                  >
-                    <Avatar
-                      component="avatar"
-                      alt={`avatar of ${creator.name}`}
-                      sx={{ fontSize: '14px' }}
-                      maxHeight={24}
-                      maxWidth={24}
-                      // use broken path to show first letter
-                      url={creator.avatar?.length ? creator.avatar : '/broken'}
-                      isLoading={creator.isLoading}
-                    />
-                    {!isMobile && (
-                      <Typography align="right" noWrap variant="body2">
-                        {creator.name}
-                      </Typography>
-                    )}
-                  </Stack>
+                  <MemberAvatar
+                    name={creator.name}
+                    avatar={creator.avatar}
+                    isLoading={creator.isLoading}
+                  />
                 </Link>
               )}
               <Stack width={creator ? undefined : '100%'} alignItems="flex-end">
