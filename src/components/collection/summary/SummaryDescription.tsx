@@ -6,12 +6,11 @@ import { useLibraryTranslation } from '../../../config/i18n';
 import LIBRARY from '../../../langs/constants';
 import { CollapsibleText } from '../../common/CollapsibleText/CollapsibleText';
 
-type DescriptionProps = {
-  readonly isLoading: boolean;
-  readonly description: string | null;
-};
+type DescriptionProps = Readonly<{
+  isLoading: boolean;
+  description: string | null;
+}>;
 
-// eslint-disable-next-line react/function-component-definition
 export function Description({
   description,
   isLoading,

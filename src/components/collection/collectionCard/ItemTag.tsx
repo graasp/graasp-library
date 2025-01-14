@@ -3,12 +3,12 @@ import { Box, Typography, styled, useTheme } from '@mui/material';
 import { useLibraryTranslation } from '../../../config/i18n';
 import LIBRARY from '../../../langs/constants';
 
-type ItemTagProps = {
-  readonly createdAt: string;
-  readonly updatedAt: string;
-  readonly isChild: boolean;
-  readonly showIsContentTag?: boolean;
-};
+type ItemTagProps = Readonly<{
+  createdAt: string;
+  updatedAt: string;
+  isChild: boolean;
+  showIsContentTag?: boolean;
+}>;
 
 const MS_PER_DAY = 1000 * 60 * 60 * 24;
 const RECENT_DAYS = 4;

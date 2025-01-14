@@ -39,7 +39,7 @@
     "@graasp/sdk": "5.6.0",
     "@graasp/stylis-plugin-rtl": "2.2.0",
     "@graasp/translations": "1.43.0",
-    "@graasp/ui": "5.5.0",
+    "@graasp/ui": "5.5.1",
     "@mui/icons-material": "6.1.5",
     "@mui/lab": "6.0.0-beta.13",
     "@mui/material": "6.1.5",
@@ -122,9 +122,6 @@
     "exclude": [
       "pages/api/__coverage__.js"
     ]
-  },
-  "resolutions": {
-    "@graasp/sdk": "5.6.0"
   },
   "packageManager": "yarn@4.5.1",
   "eslintConfig": {

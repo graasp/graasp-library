@@ -49,9 +49,9 @@ const StyledStickyFilters = styled(Box)(() => ({
   },
 }));
 
-type FilterHeaderProps = {
-  readonly isLoadingResults: boolean;
-};
+type FilterHeaderProps = Readonly<{
+  isLoadingResults: boolean;
+}>;
 
 // eslint-disable-next-line react/function-component-definition
 export function FilterHeader({

@@ -30,8 +30,9 @@
         "allow": ["warn", "error"],
       },
     ],
+    // change this rule when uniformizing the syntax
     "react/function-component-definition": [
-      2,
+      0,
       {
         "namedComponents": "arrow-function",
       },

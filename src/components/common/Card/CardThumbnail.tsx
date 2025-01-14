@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Stack } from '@mui/material';
 
 import { DiscriminatedItem, ItemType } from '@graasp/sdk';
 import { ItemIcon, Thumbnail } from '@graasp/ui';
@@ -43,8 +43,7 @@ const CardThumbnail = ({
   }
 
   return (
-    <Box
-      display="flex"
+    <Stack
       alignItems="center"
       justifyContent="center"
       bgcolor={getColorFromId(id, 0.84)}
@@ -66,7 +65,7 @@ const CardThumbnail = ({
         alt={alt}
         color={getColorFromId(id, 0.5)}
       />
-    </Box>
+    </Stack>
   );
 };
 

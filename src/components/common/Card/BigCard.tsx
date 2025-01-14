@@ -5,35 +5,32 @@ import { Box, Card as MuiCard, Stack } from '@mui/material';
 import { DiscriminatedItem, UUID } from '@graasp/sdk';
 import { useMobileView } from '@graasp/ui';
 
-import { CollapsibleText } from '../CollapsibleText/CollapsibleText';
 import CardThumbnail from './CardThumbnail';
 import { LikeCounter } from './LikeCounter';
 import { MemberAvatar } from './MemberAvatar';
 import { TagList, TagListProps } from './TagList';
+import TitleAndDescription from './TitleAndDescription';
 
-const MAX_NUMBER_OF_LINES = 4;
-
-type CardProps = {
-  readonly name: string;
-  readonly height: number;
-  readonly id: string;
-  readonly type: DiscriminatedItem['type'];
-  readonly description: string | null;
-  readonly likeCount?: number;
-  readonly tags?: TagListProps['tags'];
-  readonly image?: string;
-  readonly link: string;
-  readonly creator?: {
+type CardProps = Readonly<{
+  name: string;
+  height: number;
+  id: string;
+  type: DiscriminatedItem['type'];
+  description: string | null;
+  likeCount?: number;
+  tags?: TagListProps['tags'];
+  image?: string;
+  link: string;
+  creator?: {
     name: string;
     id: UUID;
     avatar?: string;
     link: string;
     isLoading?: boolean;
   } | null;
-  readonly contentOverImage?: JSX.Element;
-};
+  contentOverImage?: JSX.Element;
+}>;
 
-// eslint-disable-next-line react/function-component-definition
 export function BigCard({
   id,
   creator,
@@ -48,11 +45,6 @@ export function BigCard({
   contentOverImage,
 }: CardProps): JSX.Element {
   const { isMobile } = useMobileView();
-
-  // merge name and description together
-  // so we can count name and description in the same line count
-  // it will take advantage of showing the full title if there's space from no description
-  const text = `<h3>${name}</h3>${description ?? ''}`;
 
   return (
     <MuiCard
@@ -74,12 +66,7 @@ export function BigCard({
       }
     >
       <Stack height={height} direction="row" alignItems="center">
-        <Box
-          sx={{
-            height: '100%',
-            minWidth: '30%',
-          }}
-        >
+        <Box height="100%" minWidth="30%">
           <Link href={link} title={name}>
             <Stack height="100%" position="relative">
               {contentOverImage ? (
@@ -106,32 +93,11 @@ export function BigCard({
           width="100%"
         >
           <Stack gap={1}>
-            <Stack
-              sx={{
-                '&:hover': {
-                  cursor: 'pointer',
-                  opacity: 0.9,
-                },
-              }}
-            >
-              <Link
-                href={link}
-                style={{
-                  textDecoration: 'unset',
-                  color: 'unset',
-                  cursor: 'pointer !important',
-                  height: '100%',
-                  display: 'block',
-                }}
-              >
-                <CollapsibleText
-                  collapsed
-                  numberOfLinesToShow={MAX_NUMBER_OF_LINES}
-                  content={text}
-                  style={{ cursor: 'pointer' }}
-                />
-              </Link>
-            </Stack>
+            <TitleAndDescription
+              link={link}
+              name={name}
+              description={description}
+            />
           </Stack>
           <Stack gap={1} justifyContent="flex-end">
             <TagList tags={tags} />
@@ -142,23 +108,14 @@ export function BigCard({
               alignItems="center"
             >
               {creator && (
-                <Link
-                  title={creator.name}
-                  href={creator.link}
-                  style={{
-                    textDecoration: 'unset',
-                    color: 'unset',
-                    minWidth: 0,
-                  }}
-                >
-                  <MemberAvatar
-                    name={creator.name}
-                    avatar={creator.avatar}
-                    isLoading={creator.isLoading}
-                  />
-                </Link>
+                <MemberAvatar
+                  link={creator.link}
+                  name={creator.name}
+                  avatar={creator.avatar}
+                  isLoading={creator.isLoading}
+                />
               )}
-              <Stack width={creator ? undefined : '100%'} alignItems="flex-end">
+              <Stack marginLeft="auto">
                 <LikeCounter likeCount={likeCount} />
               </Stack>
             </Stack>

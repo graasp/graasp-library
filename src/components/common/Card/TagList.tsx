@@ -7,7 +7,6 @@ import { DEFAULT_LIGHT_PRIMARY_COLOR } from '@graasp/ui';
 import { UrlSearch } from '../../../config/constants';
 import { ALL_COLLECTIONS_ROUTE } from '../../../config/routes';
 
-// eslint-disable-next-line react/function-component-definition
 function Tag({ title }: { readonly title: string }): JSX.Element {
   const theme = useTheme();
   return (
@@ -43,11 +42,10 @@ function Tag({ title }: { readonly title: string }): JSX.Element {
   );
 }
 
-export type TagListProps = {
-  readonly tags?: string[];
-};
+export type TagListProps = Readonly<{
+  tags?: string[];
+}>;
 
-// eslint-disable-next-line react/function-component-definition
 export function TagList({ tags }: TagListProps): JSX.Element | null {
   if (!tags?.length) {
     return null;
@@ -59,14 +57,12 @@ export function TagList({ tags }: TagListProps): JSX.Element | null {
       maxWidth="100%"
       alignItems="center"
       flexWrap="wrap"
-      sx={{
-        overflow: 'hidden',
-        height: '100%',
-        maxHeight: '50px', // computed height to disply maximum 2 lines
-      }}
+      overflow="hidden"
+      height="100%"
+      maxHeight="50px" // computed height to disply maximum 2 lines
     >
       {tags.map((t) => (
-        <Tag key={t?.toString()} title={t} />
+        <Tag key={t} title={t} />
       ))}
     </Stack>
   );

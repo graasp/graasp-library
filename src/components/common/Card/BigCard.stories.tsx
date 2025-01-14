@@ -196,6 +196,21 @@ export const NoCreator = {
   },
 } satisfies Story;
 
+export const NoAvatarForCreator = {
+  args: {
+    name: 'my card title',
+    creator: { id: v4(), name: 'Bob', link: '/creator-mylink' },
+  },
+  play: async ({ args, canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // show first letter of creator name
+    expect(canvas.getByTitle(`${args.creator!.name} avatar`)).toContainHTML(
+      'B',
+    );
+  },
+} satisfies Story;
+
 export const VeryLongTitle = {
   args: {
     name: LONG_NAME,

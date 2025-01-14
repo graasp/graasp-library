@@ -2737,9 +2737,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/ui@npm:5.5.0":
-  version: 5.5.0
-  resolution: "@graasp/ui@npm:5.5.0"
+"@graasp/ui@npm:5.5.1":
+  version: 5.5.1
+  resolution: "@graasp/ui@npm:5.5.1"
   dependencies:
     http-status-codes: "npm:2.3.0"
     interweave: "npm:13.1.0"
@@ -2768,7 +2768,7 @@ __metadata:
     react-i18next: ^15.0.0
     react-router-dom: ^6.11.0
     stylis: ^4.1.3
-  checksum: 10/08168fa43c1b993c567c0aa32a37b6d83bd7785ead71ec0409c5abeed9474a9de8bde45461963c5a3e5b9c3cfdfbefec611391cb54e930657e827cd225094213
+  checksum: 10/b77a42eca157b5157a817b8937112f78e3a598ff1ecf6483eed721459e6bf1e02c8b3ac3bd9918961d700f6aa97428b10fbdb5aa32384ff17083a8a4f9166a28
   languageName: node
   linkType: hard
 
@@ -11014,7 +11014,7 @@ __metadata:
     "@graasp/sdk": "npm:5.6.0"
     "@graasp/stylis-plugin-rtl": "npm:2.2.0"
     "@graasp/translations": "npm:1.43.0"
-    "@graasp/ui": "npm:5.5.0"
+    "@graasp/ui": "npm:5.5.1"
     "@mui/icons-material": "npm:6.1.5"
     "@mui/lab": "npm:6.0.0-beta.13"
     "@mui/material": "npm:6.1.5"
