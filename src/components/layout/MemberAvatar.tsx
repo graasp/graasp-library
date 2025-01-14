@@ -54,7 +54,6 @@ const MemberAvatar = React.forwardRef<HTMLDivElement, Props>(
           maxWidth={size}
           maxHeight={size}
           sx={{
-            background: 'white',
             maxWidth: size,
             maxHeight: size,
           }}

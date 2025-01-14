@@ -31,7 +31,6 @@ const SearchThumbnail = ({
         objectFit: 'cover',
         marginRight: 1,
       }}
-      size={ThumbnailSize.Small}
     />
   );
 };

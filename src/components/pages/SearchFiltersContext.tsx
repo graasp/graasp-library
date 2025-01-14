@@ -71,7 +71,7 @@ const getArray = (id: string[] | string | null) => {
 export function SearchFiltersProvider({
   children,
 }: {
-  children: JSX.Element;
+  readonly children: JSX.Element;
 }): ReactNode {
   const { replace } = useRouter();
   const params = useSearchParams();
@@ -112,7 +112,7 @@ export function SearchFiltersProvider({
         [TagCategory.ResourceType]: resourceTypeId,
       });
     }
-  }, []);
+  }, [params]);
 
   const clearAllSearch = () => {
     setSearchKeywords('');

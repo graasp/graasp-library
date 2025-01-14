@@ -14,8 +14,8 @@ describe('Tags in Summary', { defaultCommandTimeout: 10000 }, () => {
       const item = PUBLISHED_ITEMS[0];
       cy.visit(buildCollectionRoute(item.id));
 
-      item.settings.tags?.forEach((tag) => {
-        cy.get(`#${SUMMARY_TAGS_CONTAINER_ID}`).should('contain', tag);
+      item.tags?.forEach(({ name }) => {
+        cy.get(`#${SUMMARY_TAGS_CONTAINER_ID}`).should('contain', name);
       });
     });
 

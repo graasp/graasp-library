@@ -54,6 +54,7 @@ export const PlatformSwitchComponent = ({
     <PlatformSwitch
       id={HEADER_NAVIGATION_PLATFORM_SWITCH_ID}
       selected={Platform.Library}
+      color="white"
       platformsProps={platformProps}
     />
   );

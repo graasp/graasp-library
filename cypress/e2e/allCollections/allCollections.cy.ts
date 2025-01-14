@@ -10,12 +10,14 @@ import {
   FILTER_CHIP_CY,
   FILTER_POPPER_ID,
   HOME_SEARCH_ID,
+  LIKE_COUNTER_CY,
   SEARCH_FILTER_LANG_ID,
   buildCategoryOptionSelector,
   buildCollectionCardGridId,
   buildFilterInputSelector,
   buildSearchFilterPopperButtonId,
   buildSearchFilterTagCategoryId,
+  dataCyWrapper,
 } from '../../../src/config/selectors';
 import LIBRARY from '../../../src/langs/constants';
 import { buildPublicAndPrivateEnvironments } from '../../fixtures/environment';
@@ -95,6 +97,27 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
       cy.get(`[id^=${buildCollectionCardGridId('')}]`).should(
         'have.length',
         environment.items.length,
+      );
+
+      environment.items.forEach(
+        ({
+          id,
+          likes,
+          discipline = [],
+          level = [],
+          'resource-type': rt = [],
+        }) => {
+          // likes
+          if (likes) {
+            cy.get(
+              `#${buildCollectionCardGridId(id)} ${dataCyWrapper(LIKE_COUNTER_CY)}`,
+            ).should('contain', likes);
+          }
+          // tags
+          [...discipline, ...level, ...rt].forEach((d) => {
+            cy.get(`#${buildCollectionCardGridId(id)}`).should('contain', d);
+          });
+        },
       );
     });
 

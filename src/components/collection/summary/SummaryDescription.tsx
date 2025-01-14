@@ -4,17 +4,17 @@ import { Box, Button, Skeleton, Typography } from '@mui/material';
 
 import { useLibraryTranslation } from '../../../config/i18n';
 import LIBRARY from '../../../langs/constants';
-import ContentDescription from '../ContentDescription';
+import { CollapsibleText } from '../../common/CollapsibleText/CollapsibleText';
 
-type DescriptionProps = {
+type DescriptionProps = Readonly<{
   isLoading: boolean;
   description: string | null;
-};
+}>;
 
-const Description: React.FC<DescriptionProps> = ({
+export function Description({
   description,
   isLoading,
-}) => {
+}: DescriptionProps): JSX.Element {
   const { t } = useLibraryTranslation();
 
   const [isCollapsedDescription, setIsCollapsedDescription] = useState(true);
@@ -31,9 +31,10 @@ const Description: React.FC<DescriptionProps> = ({
     // Case distinction to allow the show more button to be rendered inline.
     return (
       <Box>
-        <ContentDescription
+        <CollapsibleText
           content={description}
           collapsed={isCollapsedDescription}
+          numberOfLinesToShow={3}
         />
 
         <Button
@@ -54,6 +55,4 @@ const Description: React.FC<DescriptionProps> = ({
       {t(LIBRARY.COLLECTION_EMPTY_DESCRIPTION_TEXT)}
     </Typography>
   );
-};
-
-export default Description;
+}

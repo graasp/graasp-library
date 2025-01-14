@@ -9,7 +9,9 @@ import { useLibraryTranslation } from '../../config/i18n';
 import { buildCollectionCardGridId } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
 import { ItemOrSearchedItem } from '../../utils/types';
-import CollectionCard from './CollectionCard';
+import CollectionCard from './collectionCard/CollectionCard';
+
+const HEIGHT = 230;
 
 type Props = {
   collections?: ItemOrSearchedItem[];
@@ -19,8 +21,6 @@ type Props = {
   showIsContentTag?: boolean;
 };
 
-const height = 300;
-
 const CollectionsGrid = ({
   collections,
   isLoading,
@@ -29,6 +29,7 @@ const CollectionsGrid = ({
   showIsContentTag,
 }: Props) => {
   const { t } = useLibraryTranslation();
+  const size = { xs: 12, sm: 12, md: 6, lg: 6, xl: 4 };
 
   if (isLoading) {
     return (
@@ -40,8 +41,8 @@ const CollectionsGrid = ({
         id={id}
       >
         {Array.from({ length: 4 }, (_, idx) => idx).map((idx) => (
-          <Grid key={idx} size={{ xs: 6, sm: 4, md: 3, lg: 3, xl: 2 }}>
-            <Skeleton height={height} sx={{ transform: 'unset' }} />
+          <Grid key={idx} size={size}>
+            <Skeleton height={HEIGHT} sx={{ transform: 'unset' }} />
           </Grid>
         ))}
       </Grid>
@@ -65,16 +66,11 @@ const CollectionsGrid = ({
           {collections?.map((collection) => (
             <Grid
               key={collection.id}
-              size={{
-                xs: 6,
-                sm: 4,
-                md: 3,
-                lg: 3,
-                xl: 2,
-              }}
+              size={size}
               id={buildCollectionCardGridId(collection.id)}
             >
               <CollectionCard
+                height={HEIGHT}
                 showIsContentTag={showIsContentTag}
                 collection={collection}
               />
