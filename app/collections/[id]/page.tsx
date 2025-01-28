@@ -8,7 +8,7 @@
 // Client-side cache, shared for the whole session of the user in the browser.
 // const clientSideEmotionCache = createEmotionCache();
 // import { Api, DATA_KEYS, configureQueryClient } from '@graasp/query-client';
-import { dehydrate } from 'react-query/core';
+import { dehydrate } from '@tanstack/react-query';
 
 import Hydrate from '../../../src/components/HydrateClient';
 import Collection from '../../../src/components/collection/Collection';

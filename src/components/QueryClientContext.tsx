@@ -1,11 +1,12 @@
-import React from 'react';
-import type { DehydratedState } from 'react-query';
+import type { DehydratedState } from '@tanstack/react-query';
+
+import { createContext } from 'react';
 
 import { configureQueryClient } from '@graasp/query-client';
 
 import { QUERY_CLIENT_OPTIONS } from '../config/queryClient';
 
-const QueryClientContext = React.createContext(
+const QueryClientContext = createContext(
   {} as ReturnType<typeof configureQueryClient>,
 );
 type Props = {
