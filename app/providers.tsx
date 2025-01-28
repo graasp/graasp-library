@@ -1,11 +1,11 @@
 'use client';
 
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 // import { ReactQueryDevtools } from "react-query-devtools";
 import { useEffect, useState } from 'react';
 import ReactGA from 'react-ga4';
-import { QueryClient, QueryClientProvider } from 'react-query';
 import { ToastContainer } from 'react-toastify';
 
 import { hasAcceptedCookies } from '@graasp/sdk';

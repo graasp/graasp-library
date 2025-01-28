@@ -1,9 +1,9 @@
 'use client';
 
 import { ErrorBoundary } from '@sentry/nextjs';
+import type { DehydratedState } from '@tanstack/react-query';
 
 import { Trans } from 'react-i18next';
-import type { DehydratedState } from 'react-query';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { Box, Stack, SxProps } from '@mui/material';
