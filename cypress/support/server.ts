@@ -459,11 +459,10 @@ export const mockGetLikedItems = (
       }
 
       const memberId = new URLSearchParams(new URL(url).search).get('memberId');
-      const results = {
-        hits: itemLikes.filter(({ creator }) => creator?.id === memberId),
-      };
+      const results =
+        itemLikes.filter(({ creator }) => creator?.id === memberId) ?? [];
 
-      return reply(results || []);
+      return reply(results);
     },
   ).as('getLikedItemsForMember');
 };
