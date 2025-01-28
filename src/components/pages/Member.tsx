@@ -1,11 +1,13 @@
 'use client';
 
+import { useQuery } from '@tanstack/react-query';
 import { validate } from 'uuid';
 
 import { useContext } from 'react';
 
 import { Box, Stack } from '@mui/material';
 
+import { collectionSearchOptions } from '../../client/@tanstack/react-query.gen';
 import { useLibraryTranslation } from '../../config/i18n';
 import { ERROR_NOT_A_MEMBER_ID } from '../../config/messages';
 import { MEMBER_COLLECTION_ID } from '../../config/selectors';
@@ -24,8 +26,9 @@ type Props = {
 const MemberPage = ({ id: memberId }: Props) => {
   const { hooks } = useContext(QueryClientContext);
   const { data: member } = hooks.useCurrentMember();
-  const { data: memberPublishedItems } =
-    hooks.usePublishedItemsForMember(memberId);
+  const { data: memberPublishedItems } = useQuery(
+    collectionSearchOptions({ body: { creatorId: memberId } }),
+  );
 
   const { t } = useLibraryTranslation();
 
@@ -43,7 +46,7 @@ const MemberPage = ({ id: memberId }: Props) => {
         <ItemCollection
           id={MEMBER_COLLECTION_ID}
           title={t(LIBRARY.PUBLISHED_COLLECTIONS)}
-          collections={memberPublishedItems}
+          collections={memberPublishedItems?.hits}
         />
       </Stack>
     );

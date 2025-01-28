@@ -99,7 +99,7 @@ export const mockGetRecentCollections = (
       pathname: `/${ITEMS_ROUTE}/collections/recent`,
     },
     ({ reply }) => {
-      reply(recentCollections);
+      reply({ hits: recentCollections });
     },
   ).as('getRecentCollections');
 };
@@ -459,9 +459,9 @@ export const mockGetLikedItems = (
       }
 
       const memberId = new URLSearchParams(new URL(url).search).get('memberId');
-      const results = itemLikes.filter(
-        ({ creator }) => creator?.id === memberId,
-      );
+      const results = {
+        hits: itemLikes.filter(({ creator }) => creator?.id === memberId),
+      };
 
       return reply(results || []);
     },
