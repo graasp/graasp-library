@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Container, SxProps, Theme, Typography } from '@mui/material';
 
-import { DiscriminatedItem } from '@graasp/sdk';
+import { IndexItem } from '@graasp/sdk';
 
 import { SECTION_TITLE_ID } from '../../config/selectors';
 import StyledContainer from '../layout/StyledContainer';
@@ -12,7 +12,7 @@ type ItemCollectionProps = {
   id: string;
   collectionGridId?: string;
   title: string;
-  collections?: DiscriminatedItem[];
+  collections?: IndexItem[];
   sx?: SxProps<Theme>;
   isLoading?: boolean;
 };
