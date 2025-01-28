@@ -1,8 +1,8 @@
-import type { DehydratedState } from '@tanstack/react-query';
-
 import { createContext } from 'react';
 
 import { configureQueryClient } from '@graasp/query-client';
+
+import type { DehydratedState } from '@tanstack/react-query';
 
 import { QUERY_CLIENT_OPTIONS } from '../config/queryClient';
 

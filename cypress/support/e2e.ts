@@ -12,7 +12,6 @@
 // You can read more here:
 // https://on.cypress.io/configuration
 // ***********************************************************
-// eslint-disable-next-line import/no-extraneous-dependencies
 import '@cypress/code-coverage/support';
 
 import './commands';

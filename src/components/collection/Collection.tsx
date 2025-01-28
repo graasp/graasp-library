@@ -1,8 +1,5 @@
 'use client';
 
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { validate } from 'uuid';
-
 import { useContext, useEffect } from 'react';
 
 import { Box, Skeleton } from '@mui/material';
@@ -12,6 +9,9 @@ import {
   PermissionLevel,
   PermissionLevelCompare,
 } from '@graasp/sdk';
+
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { validate } from 'uuid';
 
 import {
   ERROR_INVALID_COLLECTION_ID_CODE,
@@ -116,10 +116,7 @@ const Collection = ({ id }: Props) => {
 
 const CollectionPageWrapper = (props: Props) => (
   <MainWrapper>
-    <Collection
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      {...props}
-    />
+    <Collection {...props} />
   </MainWrapper>
 );
 

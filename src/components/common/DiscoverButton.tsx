@@ -1,9 +1,9 @@
-import Link from 'next/link';
-
 import { ArrowForward } from '@mui/icons-material';
 import { Box, Button, styled } from '@mui/material';
 
 import { LibraryIcon } from '@graasp/ui';
+
+import Link from 'next/link';
 
 import { ALL_COLLECTIONS_ROUTE } from '../../config/routes';
 

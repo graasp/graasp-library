@@ -1,9 +1,9 @@
-import { useRouter } from 'next/navigation';
-
 import { ArrowBack } from '@mui/icons-material';
 import { Button } from '@mui/material';
 
 import { COMMON } from '@graasp/translations';
+
+import { useRouter } from 'next/navigation';
 
 import { useCommonTranslation } from '../../config/i18n';
 

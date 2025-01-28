@@ -12,7 +12,7 @@ export const GRAASP_ANALYTICS_HOST =
   process.env.NEXT_PUBLIC_GRAASP_ANALYTICS_HOST || 'http://localhost:3113';
 export const GRAASP_ACCOUNT_HOST =
   process.env.NEXT_PUBLIC_GRAASP_ACCOUNT_HOST || 'http://localhost:3114';
-// eslint-disable-next-line prefer-destructuring
+
 export const NODE_ENV = process.env.NODE_ENV;
 export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 export const GRAASPER_ID = process.env.NEXT_PUBLIC_GRAASPER_ID;

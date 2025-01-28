@@ -1,11 +1,11 @@
 'use client';
 
-import Link from 'next/link';
-
 import { Trans } from 'react-i18next';
 
 import { ImportContacts } from '@mui/icons-material';
 import { Box, Container, Divider, Typography } from '@mui/material';
+
+import Link from 'next/link';
 
 import { useLibraryTranslation } from '../../config/i18n';
 import LIBRARY from '../../langs/constants';

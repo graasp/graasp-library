@@ -1,10 +1,10 @@
-import Link from 'next/link';
-
 import ArrowForward from '@mui/icons-material/ArrowForward';
 import { Alert, AlertTitle, Button, Stack, Typography } from '@mui/material';
 
 import { CompleteMember } from '@graasp/sdk';
 import { BuildIcon, Platform, usePlatformNavigation } from '@graasp/ui';
+
+import Link from 'next/link';
 
 import { useLibraryTranslation } from '../../config/i18n';
 import LIBRARY from '../../langs/constants';

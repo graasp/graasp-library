@@ -1,11 +1,11 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
-import { validate } from 'uuid';
-
 import { useContext } from 'react';
 
 import { Box, Stack } from '@mui/material';
+
+import { useQuery } from '@tanstack/react-query';
+import { validate } from 'uuid';
 
 import { useLibraryTranslation } from '../../config/i18n';
 import { ERROR_NOT_A_MEMBER_ID } from '../../config/messages';
@@ -61,10 +61,7 @@ const MemberPage = ({ id: memberId }: Props) => {
 
 const MemberPageWrapper = (props: Props) => (
   <MainWrapper>
-    <MemberPage
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      {...props}
-    />
+    <MemberPage {...props} />
   </MainWrapper>
 );
 

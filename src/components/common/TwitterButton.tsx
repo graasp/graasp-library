@@ -1,11 +1,11 @@
 'use client';
 
-import truncate from 'lodash.truncate';
-
 import { useEffect, useState } from 'react';
 
 import { Twitter } from '@mui/icons-material';
 import { IconProps, Tooltip } from '@mui/material';
+
+import truncate from 'lodash.truncate';
 
 import { TWITTER_MESSAGE_MAX_LENGTH } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';

@@ -1,11 +1,11 @@
-import Link from 'next/link';
-
 import { ReactNode } from 'react';
 
 import { Box, Card as MuiCard, Stack } from '@mui/material';
 
 import { DiscriminatedItem } from '@graasp/sdk';
 import { useMobileView } from '@graasp/ui';
+
+import Link from 'next/link';
 
 import CardThumbnail from './CardThumbnail';
 import { LikeCounter } from './LikeCounter';

@@ -3,7 +3,6 @@ import { Metadata } from 'next';
 import { APP_AUTHOR, APP_KEYWORDS } from '../src/config/constants';
 
 // Todo: image generation https://nextjs.org/docs/app/api-reference/file-conventions/metadata/opengraph-image
-// eslint-disable-next-line import/prefer-default-export
 export const buildSeo = ({
   title,
   description,

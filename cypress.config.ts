@@ -1,3 +1,4 @@
+import setupCoverage from '@cypress/code-coverage/task.js';
 import { defineConfig } from 'cypress';
 
 export default defineConfig({
@@ -20,8 +21,7 @@ export default defineConfig({
     // We've imported your old cypress plugins here.
     // You may want to clean this up later by importing these.
     setupNodeEvents(on, config) {
-      // eslint-disable-next-line global-require, import/extensions
-      require('@cypress/code-coverage/task')(on, config);
+      setupCoverage(on, config);
 
       return config;
     },

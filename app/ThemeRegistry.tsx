@@ -1,15 +1,15 @@
 'use client';
 
-import createCache from '@emotion/cache';
-import { CacheProvider } from '@emotion/react';
-import { useServerInsertedHTML } from 'next/navigation';
-
 import { ReactNode, useState } from 'react';
 
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 
 import { createGraaspTheme } from '@graasp/ui';
+
+import createCache from '@emotion/cache';
+import { CacheProvider } from '@emotion/react';
+import { useServerInsertedHTML } from 'next/navigation';
 
 import { nunito } from './fonts';
 
@@ -24,7 +24,7 @@ const theme = createGraaspTheme({
 
 // This implementation is from emotion-js
 // https://github.com/emotion-js/emotion/issues/2928#issuecomment-1319747902
-// eslint-disable-next-line react/function-component-definition
+
 export default function ThemeRegistry(props: Props) {
   const { options, children } = props;
 
@@ -41,6 +41,7 @@ export default function ThemeRegistry(props: Props) {
     newCache.compat = true;
     const prevInsert = newCache.insert;
     let inserted: string[] = [];
+    // eslint-disable-next-line
     // @ts-ignore
     newCache.insert = (...args) => {
       const serialized = args[1];
@@ -63,7 +64,7 @@ export default function ThemeRegistry(props: Props) {
       return null;
     }
     let styles = '';
-    // eslint-disable-next-line no-restricted-syntax
+
     for (const name of names) {
       styles += cache.inserted[name];
     }
@@ -71,7 +72,6 @@ export default function ThemeRegistry(props: Props) {
       <style
         key={cache.key}
         data-emotion={`${cache.key} ${names.join(' ')}`}
-        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{
           __html: styles,
         }}

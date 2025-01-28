@@ -1,6 +1,6 @@
-import Link from 'next/link';
-
 import { Button } from '@mui/material';
+
+import Link from 'next/link';
 
 type Props = {
   href: string;

@@ -1,10 +1,10 @@
-import { useQuery } from '@tanstack/react-query';
-import Link from 'next/link';
-
 import { Stack, Typography } from '@mui/material';
 
 import { ThumbnailSize } from '@graasp/sdk';
 import { Avatar, useMobileView } from '@graasp/ui';
+
+import { useQuery } from '@tanstack/react-query';
+import Link from 'next/link';
 
 import { downloadAvatarOptions } from '../../../openapi/client/@tanstack/react-query.gen';
 

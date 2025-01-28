@@ -43,7 +43,6 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
         i18n.changeLanguage(environment.currentMember.extra.lang);
       }
 
-      // eslint-disable-next-line no-restricted-syntax
       for (const category of Object.values(TagCategory)) {
         cy.intercept(
           {
@@ -177,9 +176,8 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
       // trigger search
       cy.wait(['@search', '@search', '@search']).then(
         ([
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           _firstCall,
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
           _secondCall,
           {
             request: { body },
@@ -197,9 +195,8 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
         `@getFacets-${TagCategory.Discipline}`,
       ]).then(
         ([
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           _firstCall,
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
           _secondCall,
           {
             request: { body },
@@ -269,7 +266,6 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
       cy.get(buildCategoryOptionSelector(1)).click();
       cy.wait(['@search', '@search']).then(
         ([
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           _firstCall,
           {
             request: { body },
@@ -287,9 +283,8 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
         `@getFacets-${TagCategory.Discipline}`,
       ]).then(
         ([
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           _firstCall,
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
           _secondCall,
           {
             request: { body },
@@ -331,7 +326,6 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
       // should contain query in search
       cy.wait(['@search', '@search']).then(
         ([
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           _firstCall,
           {
             request: { body },
@@ -347,7 +341,6 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
         `@getFacets-${TagCategory.Discipline}`,
       ]).then(
         ([
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           _firstCall,
           {
             request: { body },

@@ -20,6 +20,7 @@ export async function generateMetadata() {
 
   // todo: get lang from location and crawler
   // question: how to get language from
+  // eslint-disable-next-line
   // @ts-ignore
   const t = (s: string): string => en[s];
 

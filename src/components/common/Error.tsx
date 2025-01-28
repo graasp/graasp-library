@@ -1,6 +1,6 @@
-import Link from 'next/link';
-
 import { Box, Stack, Typography } from '@mui/material';
+
+import Link from 'next/link';
 
 import { useLibraryTranslation } from '../../config/i18n';
 import {

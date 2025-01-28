@@ -1,6 +1,3 @@
-import { StatusCodes } from 'http-status-codes';
-import { v4 } from 'uuid';
-
 import { API_ROUTES } from '@graasp/query-client';
 import {
   HttpMethod,
@@ -10,6 +7,9 @@ import {
   buildPathFromIds,
   isChildOf,
 } from '@graasp/sdk';
+
+import { StatusCodes } from 'http-status-codes';
+import { v4 } from 'uuid';
 
 import { builderMeilisearchResults } from '../fixtures/items';
 import {

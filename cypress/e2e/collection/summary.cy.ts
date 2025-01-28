@@ -45,7 +45,7 @@ describe('Collection Summary', () => {
       cy.get(`#${ITEM_SUMMARY_TITLE_ID}`).should('have.text', item.name);
 
       // tags
-      // eslint-disable-next-line no-restricted-syntax
+
       for (const { name: t } of item.tags ?? []) {
         cy.get(`#${SUMMARY_TAGS_CONTAINER_ID}`).should('contain', t);
         // clickable tag

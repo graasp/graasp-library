@@ -9,13 +9,10 @@ import LIBRARY from '../src/langs/constants';
 import en from '../src/langs/en.json';
 import { buildSeo } from './seo';
 
-// type Props = {
-//   params: { id: string };
-//   searchParams: { [key: string]: string | string[] | undefined };
-// };
 export async function generateMetadata(): Promise<Metadata> {
   // todo: get lang from location and crawler
   // question: how to get language from
+  // eslint-disable-next-line
   // @ts-ignore
   const t = (s: string): string => en[s];
 

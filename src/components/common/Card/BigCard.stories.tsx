@@ -1,12 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { expect, within } from '@storybook/test';
-import { v4 } from 'uuid';
-
 import { BrowserRouter } from 'react-router-dom';
 
 import { Avatar, Chip, Grid2, Typography } from '@mui/material';
 
 import { ItemType } from '@graasp/sdk';
+
+import type { Meta, StoryObj } from '@storybook/react';
+import { expect, within } from '@storybook/test';
+import { v4 } from 'uuid';
 
 import { BigCard } from './BigCard';
 

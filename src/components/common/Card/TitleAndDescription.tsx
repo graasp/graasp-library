@@ -1,8 +1,8 @@
-import Link from 'next/link';
-
 import React from 'react';
 
 import { Stack } from '@mui/material';
+
+import Link from 'next/link';
 
 import { CollapsibleText } from '../CollapsibleText/CollapsibleText';
 

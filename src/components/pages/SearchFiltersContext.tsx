@@ -1,5 +1,3 @@
-import { useRouter, useSearchParams } from 'next/navigation';
-
 import {
   ReactNode,
   createContext,
@@ -11,6 +9,8 @@ import {
 
 import { Tag, TagCategory } from '@graasp/sdk';
 import { langs as LANGS } from '@graasp/translations';
+
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { UrlSearch } from '../../config/constants';
 
@@ -67,7 +67,6 @@ const getArray = (id: string[] | string | null) => {
   return Array.isArray(id) ? id : [id];
 };
 
-// eslint-disable-next-line react/function-component-definition
 export function SearchFiltersProvider({
   children,
 }: {
