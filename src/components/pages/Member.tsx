@@ -7,11 +7,11 @@ import { useContext } from 'react';
 
 import { Box, Stack } from '@mui/material';
 
-import { collectionSearchOptions } from '../../client/@tanstack/react-query.gen';
 import { useLibraryTranslation } from '../../config/i18n';
 import { ERROR_NOT_A_MEMBER_ID } from '../../config/messages';
 import { MEMBER_COLLECTION_ID } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
+import { collectionSearchOptions } from '../../openapi/client/@tanstack/react-query.gen';
 import { QueryClientContext } from '../QueryClientContext';
 import ItemCollection from '../collection/ItemCollection';
 import BackButton from '../common/BackButton';

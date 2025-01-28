@@ -4,11 +4,6 @@ import { useQuery } from '@tanstack/react-query';
 
 import { Box } from '@mui/material';
 
-import {
-  collectionSearchOptions,
-  getMostLikedCollectionsOptions,
-  getMostRecentCollectionsOptions,
-} from '../../client/@tanstack/react-query.gen';
 import { HOMEPAGE_NB_ELEMENTS_TO_SHOW } from '../../config/constants';
 import { GRAASPER_ID } from '../../config/env';
 import { useLibraryTranslation } from '../../config/i18n';
@@ -19,6 +14,11 @@ import {
   RECENT_PUBLICATIONS_TITLE_ID,
 } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
+import {
+  collectionSearchOptions,
+  getMostLikedCollectionsOptions,
+  getMostRecentCollectionsOptions,
+} from '../../openapi/client/@tanstack/react-query.gen';
 import ItemCollection from '../collection/ItemCollection';
 import DiscoverButton from '../common/DiscoverButton';
 import HomeHeader from '../layout/HomeHeader';

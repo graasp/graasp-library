@@ -28,7 +28,8 @@
     "cypress": "concurrently -k -s first \"yarn start:test\" \"wait-on http://localhost:3005 && yarn cypress:run\"",
     "cypress:run": "env-cmd -f ./.env.test cypress run --headless --browser chrome --spec \"cypress/**/*.(spec|cy).js\"",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "openapi-ts": "openapi-ts"
   },
   "dependencies": {
     "@emotion/cache": "11.13.1",
@@ -78,6 +79,7 @@
     "@commitlint/cli": "19.5.0",
     "@commitlint/config-conventional": "19.5.0",
     "@cypress/code-coverage": "3.13.4",
+    "@hey-api/openapi-ts": "0.63.0",
     "@storybook/addon-a11y": "8.4.7",
     "@storybook/addon-docs": "8.4.7",
     "@storybook/addon-essentials": "^8.4.7",

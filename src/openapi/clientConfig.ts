@@ -1,6 +1,6 @@
 import type { CreateClientConfig } from '@hey-api/client-fetch';
 
-import { GRAASP_API_HOST } from './src/config/env';
+import { GRAASP_API_HOST } from '../config/env';
 
 export const createClientConfig: CreateClientConfig = (config) => ({
   ...config,
