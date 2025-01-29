@@ -45,7 +45,7 @@
     "@mui/icons-material": "6.1.5",
     "@mui/lab": "6.0.0-beta.13",
     "@mui/material": "6.1.5",
-    "@sentry/nextjs": "8.35.0",
+    "@sentry/nextjs": "8.49.0",
     "@tanstack/react-query": "5.65.1",
     "@testing-library/jest-dom": "6.6.2",
     "@testing-library/react": "16.0.1",
