@@ -29,7 +29,7 @@
     "cypress:run": "env-cmd -f ./.env.test cypress run --headless --browser chrome --spec \"cypress/**/*.(spec|cy).js\"",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "openapi-ts": "openapi-ts"
+    "client:generate": "openapi-ts"
   },
   "dependencies": {
     "@emotion/cache": "11.13.1",
