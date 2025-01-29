@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useQuery } from '@tanstack/react-query';
 
 import { TagCategory } from '@graasp/sdk';
 
@@ -6,7 +6,7 @@ import {
   buildSearchFilterPopperButtonId,
   buildSearchFilterTagCategoryId,
 } from '../../config/selectors';
-import { QueryClientContext } from '../QueryClientContext';
+import { getFacetsForNameOptions } from '../../openapi/client/@tanstack/react-query.gen';
 import { useSearchFiltersContext } from '../pages/SearchFiltersContext';
 import { Filter } from './Filter';
 
@@ -16,8 +16,10 @@ type CategoryFilterProps = {
 };
 
 // eslint-disable-next-line react/function-component-definition
-export function CategoryFilter({ category, title }: CategoryFilterProps) {
-  const { hooks } = useContext(QueryClientContext);
+export function CategoryFilter({
+  category,
+  title,
+}: Readonly<CategoryFilterProps>) {
   const {
     tags,
     langsForFilter,
@@ -33,13 +35,19 @@ export function CategoryFilter({ category, title }: CategoryFilterProps) {
   const ignoreCurrentCategory = { ...tags };
   delete ignoreCurrentCategory[category];
 
-  const { data: options } = hooks.useSearchFacets({
-    facetName: category,
-    query: searchKeywords,
-    tags: ignoreCurrentCategory,
-    langs: langsForFilter,
-    isPublishedRoot,
-  });
+  const { data: options } = useQuery(
+    getFacetsForNameOptions({
+      query: {
+        facetName: category,
+      },
+      body: {
+        query: searchKeywords,
+        tags: ignoreCurrentCategory,
+        langs: langsForFilter,
+        isPublishedRoot,
+      },
+    }),
+  );
 
   return (
     <Filter

@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
 
 import React, { useContext } from 'react';
@@ -27,6 +28,7 @@ import { useLibraryTranslation } from '../../config/i18n';
 import { buildCollectionRoute } from '../../config/routes';
 import { CHILD_CARD_COPY_BUTTON_ID } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
+import { getChildrenOptions } from '../../openapi/client/@tanstack/react-query.gen';
 import { QueryClientContext } from '../QueryClientContext';
 import CopyButton from './CopyButton';
 import CopyLinkButton from './CopyLinkButton';
@@ -202,8 +204,7 @@ export const FolderChildrenCard: React.FC<FolderChildrenCardProps> = ({
 
   const { id } = item;
 
-  const { hooks } = useContext(QueryClientContext);
-  const { data: items } = hooks.useChildren(id);
+  const { data: items } = useQuery(getChildrenOptions({ path: { id } }));
 
   const subtext = items
     ? t(LIBRARY.SUMMARY_BROWSE_FOLDER_CONTAINS, { count: items.length })

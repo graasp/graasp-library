@@ -13,14 +13,10 @@ import {
   Stack,
 } from '@mui/material';
 
+import { getParentFromPath } from '@graasp/sdk';
 import { COMMON } from '@graasp/translations';
 import { Breadcrumbs, NavigationElement } from '@graasp/ui';
 
-import { PackedItem } from '../../../client';
-import {
-  getItemOptions,
-  getParentItemsOptions,
-} from '../../../client/@tanstack/react-query.gen';
 import {
   useCommonTranslation,
   useLibraryTranslation,
@@ -30,6 +26,11 @@ import {
   TREE_MODAL_CONFIRM_BUTTON_ID,
 } from '../../../config/selectors';
 import LIBRARY from '../../../langs/constants';
+import { PackedItem } from '../../../openapi/client';
+import {
+  getItemOptions,
+  getParentItemsOptions,
+} from '../../../openapi/client/@tanstack/react-query.gen';
 import AccessibleNavigationTree from './AccessibleNavigationTree';
 import ChildrenNavigationTree from './ChildrenNavigationTree';
 import RootNavigationTree from './RootNavigationTree';
@@ -91,13 +92,14 @@ const ItemSelectionModal = ({
   const [selectedNavigationItem, setSelectedNavigationItem] =
     useState<NavigationElement>(ROOT_BREADCRUMB);
 
-  const { data: navigationParents } = useQuery(
-    getParentItemsOptions({
+  const { data: navigationParents } = useQuery({
+    ...getParentItemsOptions({
       path: {
         id: selectedNavigationItem.id,
       },
     }),
-  );
+    enabled: Boolean(getParentFromPath(selectedNavigationItem.path)),
+  });
 
   const handleClose = () => {
     onClose?.({ id: null, open: false });

@@ -64,6 +64,7 @@ import {
   downloadAppSettingFile,
   downloadAvatar,
   downloadFile,
+  downloadItemThumbnail,
   enroll,
   exportActions,
   exportMemberData,
@@ -97,7 +98,6 @@ import {
   getItemLoginSchemaType,
   getItemMemberships,
   getItemValidationGroup,
-  getItemsByIdThumbnailsBySize,
   getItemsByItemIdMembershipsRequests,
   getItemsByItemIdMembershipsRequestsOwn,
   getItemsCollectionsInformations,
@@ -330,6 +330,7 @@ import type {
   DownloadAppSettingFileData,
   DownloadAvatarData,
   DownloadFileData,
+  DownloadItemThumbnailData,
   EnrollData,
   EnrollResponse,
   ExportActionsData,
@@ -374,7 +375,6 @@ import type {
   GetItemLoginSchemaTypeData,
   GetItemMembershipsData,
   GetItemValidationGroupData,
-  GetItemsByIdThumbnailsBySizeData,
   GetItemsByItemIdMembershipsRequestsData,
   GetItemsByItemIdMembershipsRequestsOwnData,
   GetItemsCollectionsInformationsData,
@@ -2778,16 +2778,16 @@ export const postItemsByIdThumbnailsMutation = (
   return mutationOptions;
 };
 
-export const getItemsByIdThumbnailsBySizeQueryKey = (
-  options: Options<GetItemsByIdThumbnailsBySizeData>,
-) => [createQueryKey('getItemsByIdThumbnailsBySize', options)];
+export const downloadItemThumbnailQueryKey = (
+  options: Options<DownloadItemThumbnailData>,
+) => [createQueryKey('downloadItemThumbnail', options)];
 
-export const getItemsByIdThumbnailsBySizeOptions = (
-  options: Options<GetItemsByIdThumbnailsBySizeData>,
+export const downloadItemThumbnailOptions = (
+  options: Options<DownloadItemThumbnailData>,
 ) => {
   return queryOptions({
     queryFn: async ({ queryKey, signal }) => {
-      const { data } = await getItemsByIdThumbnailsBySize({
+      const { data } = await downloadItemThumbnail({
         ...options,
         ...queryKey[0],
         signal,
@@ -2795,7 +2795,7 @@ export const getItemsByIdThumbnailsBySizeOptions = (
       });
       return data;
     },
-    queryKey: getItemsByIdThumbnailsBySizeQueryKey(options),
+    queryKey: downloadItemThumbnailQueryKey(options),
   });
 };
 

@@ -1,5 +1,6 @@
 'use client';
 
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { validate } from 'uuid';
 
 import { useContext, useEffect } from 'react';
@@ -16,6 +17,10 @@ import {
   ERROR_INVALID_COLLECTION_ID_CODE,
   ERROR_UNEXPECTED_ERROR_CODE,
 } from '../../config/messages';
+import {
+  getCollectionInformationsOptions,
+  postActionMutation,
+} from '../../openapi/client/@tanstack/react-query.gen';
 import { QueryClientContext } from '../QueryClientContext';
 import Error from '../common/Error';
 import MainWrapper from '../layout/MainWrapper';
@@ -23,10 +28,10 @@ import UnpublishedItemAlert from './UnpublishedItemAlert';
 import Summary from './summary/Summary';
 
 type Props = {
-  id?: string;
+  id: string;
 };
 const Collection = ({ id }: Props) => {
-  const { hooks, mutations } = useContext(QueryClientContext);
+  const { hooks } = useContext(QueryClientContext);
   const { data: collection, isLoading: isLoadingItem } = hooks.useItem(id);
   const { data: currentMember } = hooks.useCurrentMember();
   // get item published
@@ -34,15 +39,13 @@ const Collection = ({ id }: Props) => {
     data: itemPublishEntry,
     isLoading: isLoadingPublishedEntry,
     isError: isErrorPublishedEntry,
-  } = hooks.useItemPublishedInformation({
-    itemId: id,
-  });
+  } = useQuery(getCollectionInformationsOptions({ path: { itemId: id } }));
 
-  const { mutate: postView } = mutations.usePostItemAction();
+  const { mutate: postView } = useMutation(postActionMutation());
 
   useEffect(() => {
     if (id) {
-      postView({ itemId: id, payload: { type: 'collection-view' } });
+      postView({ path: { id }, body: { type: 'collection-view' } });
     }
   }, [id]);
 
@@ -91,7 +94,7 @@ const Collection = ({ id }: Props) => {
         >
           <Summary
             collection={collection}
-            publishedRoot={itemPublishEntry}
+            publishedRootItem={itemPublishEntry?.item}
             isLoading={isLoadingItem}
             totalViews={itemPublishEntry?.totalViews ?? 0}
           />

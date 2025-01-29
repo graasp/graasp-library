@@ -1,16 +1,17 @@
-import React, { useContext } from 'react';
+import { useQuery } from '@tanstack/react-query';
+
+import React from 'react';
 
 import { styled } from '@mui/material';
 
 import { TagCategory, ThumbnailSize } from '@graasp/sdk';
 
 import { buildCollectionRoute, buildMemberRoute } from '../../../config/routes';
+import { downloadItemThumbnailOptions } from '../../../openapi/client/@tanstack/react-query.gen';
 import { ItemOrSearchedItem } from '../../../utils/types';
-import { QueryClientContext } from '../../QueryClientContext';
 import { BigCard } from '../../common/Card/BigCard';
+import { MemberAvatar } from '../../common/Card/MemberAvatar';
 import { ItemTag } from './ItemTag';
-import { useQuery } from '@tanstack/react-query';
-import { getItemsByIdThumbnailsBySizeOptions } from '../../../client/@tanstack/react-query.gen';
 
 type Props = {
   collection: ItemOrSearchedItem;
@@ -39,11 +40,9 @@ export const CollectionCard = ({
     isPublishedRoot,
     type,
   } = collection;
-  const { hooks } = useContext(QueryClientContext);
-  const { data: thumbnailUrl } = useQuery() hooks.useItemThumbnailUrl({
-    id,
-    size: ThumbnailSize.Medium,
-  });
+  const { data: thumbnailUrl } = useQuery(
+    downloadItemThumbnailOptions({ path: { id, size: ThumbnailSize.Medium } }),
+  );
 
   const link = buildCollectionRoute(id);
   const memberPageLink = buildMemberRoute(creator?.id);
@@ -61,6 +60,10 @@ export const CollectionCard = ({
   // warning: discriminated item does not have likes, when it is used on the homepage
   const likes = 'likes' in collection ? collection.likes : 0;
 
+  const creatorContent = creator ? (
+    <MemberAvatar id={creator.id} link={memberPageLink} name={creator.name} />
+  ) : null;
+
   return (
     <StyledWrapper>
       <BigCard
@@ -72,15 +75,7 @@ export const CollectionCard = ({
         image={thumbnailUrl}
         tags={tags}
         likeCount={likes}
-        creator={
-          collection.creator
-            ? {
-                name: collection.creator.name,
-                id: collection.creator.id,
-                link: memberPageLink,
-              }
-            : null
-        }
+        creator={creatorContent}
         description={description}
         contentOverImage={
           <ItemTag

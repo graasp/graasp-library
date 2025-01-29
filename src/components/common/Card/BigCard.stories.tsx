@@ -4,7 +4,7 @@ import { v4 } from 'uuid';
 
 import { BrowserRouter } from 'react-router-dom';
 
-import { Chip, Grid2 } from '@mui/material';
+import { Avatar, Chip, Grid2, Typography } from '@mui/material';
 
 import { ItemType } from '@graasp/sdk';
 
@@ -12,6 +12,8 @@ import { BigCard } from './BigCard';
 
 const LONG_NAME =
   'my card title is very long and takes all the space, but we should still see the tags and it will be cut. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt nisl risus, quis mattis ipsum dictum at. Ut ullamcorper rhoncus nisl eu porttitor. Vestibulum rutrum erat ipsum, id lacinia risus iaculis id. Ut eleifend porta libero ac auctor. Pellentesque dui nisl, egestas et imperdiet vel, tempor sed tellus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis quis turpis elementum, elementum orci eu, varius massa. In imperdiet est eget turpis accumsan bibendum. Proin gravida faucibus felis in tempor. Nullam vitae vulputate turpis.';
+
+const memberAvatar = <Avatar alt="avatar" />;
 
 const meta = {
   title: 'Common/BigCard',
@@ -25,12 +27,7 @@ const meta = {
     likeCount: 213,
     type: ItemType.DOCUMENT,
     tags: ['6th grade at school', 'English', 'Mathematics', 'Taylor'],
-    creator: {
-      name: 'Name Surname',
-      id: v4(),
-      link: '/mylink',
-      avatar: '/test-assets/small_photo.jpg',
-    },
+    creator: memberAvatar,
     description:
       'Tempor volutpat eget varius nisl cursus. Fusce cras commodo adipiscing dictumst gravida pharetra velit. Fusce cras commodo adipiscing dictumst gravida pharetra velit. Fusce cras commodo adipiscing dictumst gravida pharetra velit. Enim cursus ultrices in natoque. Faucibus porttitor posuere consequat congue aliquam. Sapien tempus blandit massa rhoncus',
   },
@@ -82,9 +79,6 @@ export const Default = {
       expect(canvas.getByText(t)).toBeVisible();
     });
 
-    // creator
-    expect(canvas.getByText(args.creator!.name)).toBeVisible();
-
     // likes
     expect(canvas.getByText(args.likeCount!)).toBeVisible();
 
@@ -102,12 +96,7 @@ export const Default = {
 export const LongTitleAndLiked = {
   args: {
     name: 'my card title that is very long because I want to show everything and have more lines',
-    creator: {
-      name: 'Name Surname Is Veryyyyyyy Looooong Too',
-      id: v4(),
-      link: '/mylink',
-      avatar: '/test-assets/small_photo.jpg',
-    },
+    creator: <Typography>Name Surname Is Veryyyyyyy Looooong Too</Typography>,
   },
   play: async ({ args, canvasElement }) => {
     const canvas = within(canvasElement);
@@ -116,9 +105,6 @@ export const LongTitleAndLiked = {
     args.tags!.forEach((t) => {
       expect(canvas.getByText(t)).toBeVisible();
     });
-
-    // creator
-    expect(canvas.getByText(args.creator!.name)).toBeVisible();
 
     // likes
     expect(canvas.getByText(args.likeCount!)).toBeVisible();
@@ -146,9 +132,6 @@ export const ContentOverImage = {
     args.tags!.forEach((t) => {
       expect(canvas.getByText(t)).toBeVisible();
     });
-
-    // creator
-    expect(canvas.getByText(args.creator!.name)).toBeVisible();
 
     // likes
     expect(canvas.getByText(args.likeCount!)).toBeVisible();
@@ -196,21 +179,6 @@ export const NoCreator = {
   },
 } satisfies Story;
 
-export const NoAvatarForCreator = {
-  args: {
-    name: 'my card title',
-    creator: { id: v4(), name: 'Bob', link: '/creator-mylink' },
-  },
-  play: async ({ args, canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    // show first letter of creator name
-    expect(canvas.getByTitle(`${args.creator!.name} avatar`)).toContainHTML(
-      'B',
-    );
-  },
-} satisfies Story;
-
 export const VeryLongTitle = {
   args: {
     name: LONG_NAME,
@@ -222,9 +190,6 @@ export const VeryLongTitle = {
     args.tags!.forEach((t) => {
       expect(canvas.getByText(t)).toBeVisible();
     });
-
-    // creator
-    expect(canvas.getByText(args.creator!.name)).toBeVisible();
 
     // name
     expect(canvas.getByText(args.name)).toBeVisible();
@@ -249,11 +214,6 @@ export const Mobile = {
     args.tags!.forEach((t) => {
       expect(canvas.getByText(t)).toBeVisible();
     });
-
-    // creator name is not displayed
-    await expect(
-      document.querySelector(`a[href="${args.creator!.link}"]`),
-    ).not.toHaveTextContent(args.creator!.name);
 
     // card name
     expect(canvas.getByText(args.name)).toBeVisible();

@@ -1,7 +1,7 @@
+import { useQuery } from '@tanstack/react-query';
 import { Interweave } from 'interweave';
 import Link from 'next/link';
 
-import React, { useContext } from 'react';
 import { Trans } from 'react-i18next';
 
 import {
@@ -16,8 +16,6 @@ import {
   useTheme,
 } from '@mui/material';
 
-import { MeiliSearchResults } from '@graasp/sdk';
-
 import { MAX_RESULTS_TO_SHOW, UrlSearch } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';
 import {
@@ -29,8 +27,9 @@ import {
   SEARCH_RESULTS_SHOW_MORE_BUTTON,
 } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
+import { CollectionSearchResponses } from '../../openapi/client';
+import { collectionSearchOptions } from '../../openapi/client/@tanstack/react-query.gen';
 import intersperse from '../../utils/helpers';
-import { QueryClientContext } from '../QueryClientContext';
 import SearchThumbnail from './SearchThumbnail';
 import { useOutsideClick } from './hooks';
 
@@ -81,19 +80,22 @@ const SearchResults = ({
     onOutsideClick?.(false);
   });
   const theme = useTheme();
-  const { hooks } = useContext(QueryClientContext);
-  const { data: collections } = hooks.useSearchPublishedItems({
-    query,
-    isPublishedRoot,
+  const { data: collections } = useQuery({
+    ...collectionSearchOptions({
+      body: {
+        query,
+        isPublishedRoot,
+        cropLength: 10,
+        attributesToCrop: ['content', 'description', 'name'],
+        highlightPostTag: '</span>',
+        highlightPreTag: `<span style="font-weight:bold;color:${theme.palette.primary.main}">`,
+      },
+    }),
     enabled: Boolean(query),
-    cropLength: 10,
-    attributesToCrop: ['content', 'description', 'name'],
-    highlightPostTag: '</span>',
-    highlightPreTag: `<span style="font-weight:bold;color:${theme.palette.primary.main}">`,
   });
 
   const buildResultListItems = (
-    results: MeiliSearchResults['results'][0]['hits'],
+    results: CollectionSearchResponses[200]['hits'],
     nbOfHits: number = 0,
   ) => {
     const list = results.slice(0, MAX_RESULTS_TO_SHOW).map((result) => {

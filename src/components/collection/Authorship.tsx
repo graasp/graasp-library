@@ -9,12 +9,12 @@ import Skeleton from '@mui/material/Skeleton';
 import { DiscriminatedItem, PermissionLevel, ThumbnailSize } from '@graasp/sdk';
 import { Avatar } from '@graasp/ui';
 
-import { downloadAvatarOptions } from '../../client/@tanstack/react-query.gen';
 import { DEFAULT_MEMBER_THUMBNAIL } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';
 import { buildMemberRoute } from '../../config/routes';
 import { SUMMARY_AUTHOR_CONTAINER_ID } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
+import { downloadAvatarOptions } from '../../openapi/client/@tanstack/react-query.gen';
 import { QueryClientContext } from '../QueryClientContext';
 import Contributors from './Contributors';
 

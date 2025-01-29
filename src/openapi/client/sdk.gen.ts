@@ -158,6 +158,9 @@ import type {
   DownloadFileData,
   DownloadFileError,
   DownloadFileResponse,
+  DownloadItemThumbnailData,
+  DownloadItemThumbnailError,
+  DownloadItemThumbnailResponse,
   EnrollData,
   EnrollResponse,
   ExportActionsData,
@@ -255,7 +258,6 @@ import type {
   GetItemValidationGroupData,
   GetItemValidationGroupError,
   GetItemValidationGroupResponse,
-  GetItemsByIdThumbnailsBySizeData,
   GetItemsByItemIdMembershipsRequestsData,
   GetItemsByItemIdMembershipsRequestsOwnData,
   GetItemsByItemIdMembershipsRequestsOwnResponse,
@@ -1837,17 +1839,21 @@ export const postItemsByIdThumbnails = <ThrowOnError extends boolean = false>(
   });
 };
 
-export const getItemsByIdThumbnailsBySize = <
-  ThrowOnError extends boolean = false,
->(
-  options: Options<GetItemsByIdThumbnailsBySizeData, ThrowOnError>,
+/**
+ * Get an item's thumbnail
+ * Get an item's thumbnail at given size. The return value is null if the item did not previously have a thumbnail.
+ */
+export const downloadItemThumbnail = <ThrowOnError extends boolean = false>(
+  options: Options<DownloadItemThumbnailData, ThrowOnError>,
 ) => {
-  return (options?.client ?? _heyApiClient).get<unknown, unknown, ThrowOnError>(
-    {
-      url: '/items/{id}/thumbnails/{size}',
-      ...options,
-    },
-  );
+  return (options?.client ?? _heyApiClient).get<
+    DownloadItemThumbnailResponse,
+    DownloadItemThumbnailError,
+    ThrowOnError
+  >({
+    url: '/items/{id}/thumbnails/{size}',
+    ...options,
+  });
 };
 
 /**

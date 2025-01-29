@@ -6,7 +6,7 @@ import { Stack, Typography } from '@mui/material';
 import { ThumbnailSize } from '@graasp/sdk';
 import { Avatar, useMobileView } from '@graasp/ui';
 
-import { downloadAvatarOptions } from '../../../client/@tanstack/react-query.gen';
+import { downloadAvatarOptions } from '../../../openapi/client/@tanstack/react-query.gen';
 
 export function MemberAvatar({
   name,
