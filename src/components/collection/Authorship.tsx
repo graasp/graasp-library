@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
 
 import { useContext } from 'react';
@@ -8,6 +9,7 @@ import Skeleton from '@mui/material/Skeleton';
 import { DiscriminatedItem, PermissionLevel, ThumbnailSize } from '@graasp/sdk';
 import { Avatar } from '@graasp/ui';
 
+import { downloadAvatarOptions } from '../../client/@tanstack/react-query.gen';
 import { DEFAULT_MEMBER_THUMBNAIL } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';
 import { buildMemberRoute } from '../../config/routes';
@@ -16,23 +18,58 @@ import LIBRARY from '../../langs/constants';
 import { QueryClientContext } from '../QueryClientContext';
 import Contributors from './Contributors';
 
+const Author = ({ author }: any) => {
+  const { t } = useLibraryTranslation();
+  const { data: authorUrl, isLoading: isLoadingAuthorAvatar } = useQuery(
+    downloadAvatarOptions({
+      path: { id: author.id, size: ThumbnailSize.Small },
+      query: { replyUrl: true },
+    }),
+  );
+
+  if (isLoadingAuthorAvatar) {
+    return (
+      <>
+        <Skeleton variant="circular" width={30} height={30} />
+        <Skeleton variant="rounded" width={100} height={25} />
+      </>
+    );
+  }
+
+  return (
+    <>
+      <Avatar
+        url={authorUrl ?? DEFAULT_MEMBER_THUMBNAIL}
+        alt={t(LIBRARY.AVATAR_ALT, { name: author?.name })}
+        isLoading={isLoadingAuthorAvatar}
+        component="avatar"
+        maxWidth={30}
+        maxHeight={30}
+        variant="circular"
+        sx={{ maxWidth: 30, maxHeight: 30 }}
+      />
+      <Typography
+        component={Link}
+        href={buildMemberRoute(author.id)}
+        variant="body1"
+      >
+        {author?.name}
+      </Typography>
+    </>
+  );
+};
+
 type Props = {
-  itemId?: DiscriminatedItem['id'];
-  author?: DiscriminatedItem['creator'];
+  itemId: DiscriminatedItem['id'];
+  author: DiscriminatedItem['creator'];
   displayCoEditors?: boolean;
 };
 const Authorship = ({ itemId, author, displayCoEditors }: Props) => {
-  const { t } = useLibraryTranslation();
   const { hooks } = useContext(QueryClientContext);
 
   // todo: this call should be replaced by a dedicated call to get the co-editors from the backend.
   // this call leaks too much data by using the memberships as the source of data.
   const { data: memberships } = hooks.useItemMemberships(itemId);
-  const { data: authorUrl, isLoading: isLoadingAuthorAvatar } =
-    hooks.useAvatarUrl({
-      id: author?.id,
-      size: ThumbnailSize.Small,
-    });
 
   if (memberships) {
     const contributors = memberships
@@ -43,8 +80,6 @@ const Authorship = ({ itemId, author, displayCoEditors }: Props) => {
       .filter(({ account }) => account.id !== author?.id)
       .map(({ account }) => account);
 
-    const isLoadingAuthor = !author || isLoadingAuthorAvatar;
-
     return (
       <Stack
         id={SUMMARY_AUTHOR_CONTAINER_ID}
@@ -52,32 +87,7 @@ const Authorship = ({ itemId, author, displayCoEditors }: Props) => {
         alignItems="center"
       >
         <Stack direction="row" alignItems="center" spacing={1}>
-          {isLoadingAuthor ? (
-            <>
-              <Skeleton variant="circular" width={30} height={30} />
-              <Skeleton variant="rounded" width={100} height={25} />
-            </>
-          ) : (
-            <>
-              <Avatar
-                url={authorUrl ?? DEFAULT_MEMBER_THUMBNAIL}
-                alt={t(LIBRARY.AVATAR_ALT, { name: author?.name })}
-                isLoading={isLoadingAuthorAvatar}
-                component="avatar"
-                maxWidth={30}
-                maxHeight={30}
-                variant="circular"
-                sx={{ maxWidth: 30, maxHeight: 30 }}
-              />
-              <Typography
-                component={Link}
-                href={buildMemberRoute(author.id)}
-                variant="body1"
-              >
-                {author?.name}
-              </Typography>
-            </>
-          )}
+          {author ? <Author author={author} /> : null}
         </Stack>
 
         <Contributors

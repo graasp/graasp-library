@@ -1,4 +1,6 @@
-import { useContext, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+
+import { useState } from 'react';
 
 import { Home as HomeIcon } from '@mui/icons-material';
 import {
@@ -11,10 +13,14 @@ import {
   Stack,
 } from '@mui/material';
 
-import { DiscriminatedItem } from '@graasp/sdk';
 import { COMMON } from '@graasp/translations';
 import { Breadcrumbs, NavigationElement } from '@graasp/ui';
 
+import { PackedItem } from '../../../client';
+import {
+  getItemOptions,
+  getParentItemsOptions,
+} from '../../../client/@tanstack/react-query.gen';
 import {
   useCommonTranslation,
   useLibraryTranslation,
@@ -24,7 +30,6 @@ import {
   TREE_MODAL_CONFIRM_BUTTON_ID,
 } from '../../../config/selectors';
 import LIBRARY from '../../../langs/constants';
-import { QueryClientContext } from '../../QueryClientContext';
 import AccessibleNavigationTree from './AccessibleNavigationTree';
 import ChildrenNavigationTree from './ChildrenNavigationTree';
 import RootNavigationTree from './RootNavigationTree';
@@ -37,7 +42,7 @@ export type ItemSelectionModalProps = {
    * disabled rows
    *  */
   isDisabled?: (
-    items: DiscriminatedItem[],
+    items: PackedItem[],
     item: NavigationElement,
     homeId: string,
   ) => boolean;
@@ -59,8 +64,9 @@ const ItemSelectionModal = ({
 }: ItemSelectionModalProps): JSX.Element => {
   const { t: translateLibrary } = useLibraryTranslation();
   const { t: translateCommon } = useCommonTranslation();
-  const { hooks } = useContext(QueryClientContext);
-  const { data: itemToCopy, isLoading } = hooks.useItem(itemId);
+  const { data: itemToCopy, isPending } = useQuery(
+    getItemOptions({ path: { id: itemId } }),
+  );
 
   // special elements for breadcrumbs
   // root displays specific paths
@@ -85,10 +91,13 @@ const ItemSelectionModal = ({
   const [selectedNavigationItem, setSelectedNavigationItem] =
     useState<NavigationElement>(ROOT_BREADCRUMB);
 
-  const { data: navigationParents } = hooks.useParents({
-    id: selectedNavigationItem.id,
-    enabled: !SPECIAL_BREADCRUMB_IDS.includes(selectedNavigationItem.id),
-  });
+  const { data: navigationParents } = useQuery(
+    getParentItemsOptions({
+      path: {
+        id: selectedNavigationItem.id,
+      },
+    }),
+  );
 
   const handleClose = () => {
     onClose?.({ id: null, open: false });
@@ -150,7 +159,7 @@ const ItemSelectionModal = ({
               rootMenuItems={[MY_GRAASP_BREADCRUMB]}
             />
           )}
-          {isLoading && (
+          {isPending && (
             <>
               <Skeleton height={50} />
               <Skeleton height={50} />

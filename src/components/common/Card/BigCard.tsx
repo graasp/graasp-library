@@ -24,9 +24,7 @@ type CardProps = Readonly<{
   creator?: {
     name: string;
     id: UUID;
-    avatar?: string;
     link: string;
-    isLoading?: boolean;
   } | null;
   contentOverImage?: JSX.Element;
 }>;
@@ -109,10 +107,9 @@ export function BigCard({
             >
               {creator && (
                 <MemberAvatar
+                  id={creator.id}
                   link={creator.link}
                   name={creator.name}
-                  avatar={creator.avatar}
-                  isLoading={creator.isLoading}
                 />
               )}
               <Stack marginLeft="auto">

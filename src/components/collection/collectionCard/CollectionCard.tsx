@@ -9,6 +9,8 @@ import { ItemOrSearchedItem } from '../../../utils/types';
 import { QueryClientContext } from '../../QueryClientContext';
 import { BigCard } from '../../common/Card/BigCard';
 import { ItemTag } from './ItemTag';
+import { useQuery } from '@tanstack/react-query';
+import { getItemsByIdThumbnailsBySizeOptions } from '../../../client/@tanstack/react-query.gen';
 
 type Props = {
   collection: ItemOrSearchedItem;
@@ -38,13 +40,7 @@ export const CollectionCard = ({
     type,
   } = collection;
   const { hooks } = useContext(QueryClientContext);
-  const { data: authorAvatarUrl, isLoading: isLoadingAvatar } =
-    hooks.useAvatarUrl({
-      id: creator?.id,
-      size: ThumbnailSize.Small,
-    });
-
-  const { data: thumbnailUrl } = hooks.useItemThumbnailUrl({
+  const { data: thumbnailUrl } = useQuery() hooks.useItemThumbnailUrl({
     id,
     size: ThumbnailSize.Medium,
   });
@@ -81,9 +77,7 @@ export const CollectionCard = ({
             ? {
                 name: collection.creator.name,
                 id: collection.creator.id,
-                avatar: authorAvatarUrl,
                 link: memberPageLink,
-                isLoading: isLoadingAvatar,
               }
             : null
         }
