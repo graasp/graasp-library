@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Interweave } from 'interweave';
 import Link from 'next/link';
 
+import { useContext } from 'react';
 import { Trans } from 'react-i18next';
 
 import {
@@ -30,6 +31,7 @@ import LIBRARY from '../../langs/constants';
 import { CollectionSearchResponses } from '../../openapi/client';
 import { collectionSearchOptions } from '../../openapi/client/@tanstack/react-query.gen';
 import intersperse from '../../utils/helpers';
+import { QueryClientContext } from '../QueryClientContext';
 import SearchThumbnail from './SearchThumbnail';
 import { useOutsideClick } from './hooks';
 
@@ -74,16 +76,18 @@ const SearchResults = ({
   onOutsideClick?: (value: boolean) => void;
 }) => {
   const { t } = useLibraryTranslation();
+  const { hooks } = useContext(QueryClientContext);
   // detect click outside event to hide search results
   // cannot use onBlur on Search because it is fired first and the click in the list is canceled
   const ref = useOutsideClick<HTMLUListElement>(() => {
     onOutsideClick?.(false);
   });
   const theme = useTheme();
+  const debouncedQuery = hooks.useDebounce(query, 500);
   const { data: collections } = useQuery({
     ...collectionSearchOptions({
       body: {
-        query,
+        query: debouncedQuery,
         isPublishedRoot,
         cropLength: 10,
         attributesToCrop: ['content', 'description', 'name'],

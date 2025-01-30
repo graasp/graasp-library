@@ -1,5 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
+import { useContext } from 'react';
+
 import { TagCategory } from '@graasp/sdk';
 
 import {
@@ -7,6 +9,7 @@ import {
   buildSearchFilterTagCategoryId,
 } from '../../config/selectors';
 import { getFacetsForNameOptions } from '../../openapi/client/@tanstack/react-query.gen';
+import { QueryClientContext } from '../QueryClientContext';
 import { useSearchFiltersContext } from '../pages/SearchFiltersContext';
 import { Filter } from './Filter';
 
@@ -28,20 +31,21 @@ export function CategoryFilter({
     toggleTagByCategory,
     clearTagsByCategory,
   } = useSearchFiltersContext();
+  const { hooks } = useContext(QueryClientContext);
 
   // ignore current category to get facets
   // implement OR logic
   // eg. [biology, chemistry] means getting facets for "category" with other tags set to biology or chemistry
   const ignoreCurrentCategory = { ...tags };
   delete ignoreCurrentCategory[category];
-
+  const debouncedSearchKeywords = hooks.useDebounce(searchKeywords, 500);
   const { data: options } = useQuery(
     getFacetsForNameOptions({
       query: {
         facetName: category,
       },
       body: {
-        query: searchKeywords,
+        query: debouncedSearchKeywords,
         tags: ignoreCurrentCategory,
         langs: langsForFilter,
         isPublishedRoot,
