@@ -30,7 +30,7 @@ const i18n = i18nConfig();
 
 describe('Collection Summary', () => {
   buildPublicAndPrivateEnvironments().forEach((environment) => {
-    it.only('Layout', { defaultCommandTimeout: 10000 }, () => {
+    it('Layout', { defaultCommandTimeout: 10000 }, () => {
       cy.setUpApi(environment);
 
       const item = PUBLISHED_ITEMS[0];
