@@ -128,10 +128,7 @@ export const mockGetCurrentMember = (
 };
 
 export const mockGetAvatarUrl = (
-  {
-    members,
-    currentMember,
-  }: { members: MockMember[]; currentMember?: MockMember },
+  { members }: { members: MockMember[] },
   shouldThrowError?: boolean,
 ) => {
   cy.intercept(
@@ -146,14 +143,10 @@ export const mockGetAvatarUrl = (
         return reply({ statusCode: StatusCodes.BAD_REQUEST });
       }
 
-      if (!currentMember) {
-        return reply({ statusCode: StatusCodes.UNAUTHORIZED, body: null });
-      }
-
       const memberId = new URL(url).pathname.split('/')[2];
       const thumbnail = members.find(({ id }) => id === memberId)?.thumbnail;
       if (!thumbnail) {
-        return reply({ statusCode: StatusCodes.NOT_FOUND });
+        return reply({ statusCode: StatusCodes.NO_CONTENT });
       }
 
       // todo: return url

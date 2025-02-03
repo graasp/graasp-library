@@ -41,7 +41,7 @@ const Author = ({ author }: { author: Member }) => {
       <>
         <Avatar
           url={authorUrl ?? DEFAULT_MEMBER_THUMBNAIL}
-          alt={t(LIBRARY.AVATAR_ALT, { name: author?.name })}
+          alt={t(LIBRARY.AVATAR_ALT, { name: author.name })}
           isLoading={isPendingAuthorAvatar}
           component="avatar"
           maxWidth={30}
@@ -54,7 +54,7 @@ const Author = ({ author }: { author: Member }) => {
           href={buildMemberRoute(author.id)}
           variant="body1"
         >
-          {author?.name}
+          {author.name}
         </Typography>
       </>
     );
