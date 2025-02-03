@@ -1,13 +1,14 @@
 import Link from 'next/link';
 
+import { ReactNode } from 'react';
+
 import { Box, Card as MuiCard, Stack } from '@mui/material';
 
-import { DiscriminatedItem, UUID } from '@graasp/sdk';
+import { DiscriminatedItem } from '@graasp/sdk';
 import { useMobileView } from '@graasp/ui';
 
 import CardThumbnail from './CardThumbnail';
 import { LikeCounter } from './LikeCounter';
-import { MemberAvatar } from './MemberAvatar';
 import { TagList, TagListProps } from './TagList';
 import TitleAndDescription from './TitleAndDescription';
 
@@ -19,15 +20,9 @@ type CardProps = Readonly<{
   description: string | null;
   likeCount?: number;
   tags?: TagListProps['tags'];
-  image?: string;
+  image?: string | null;
   link: string;
-  creator?: {
-    name: string;
-    id: UUID;
-    avatar?: string;
-    link: string;
-    isLoading?: boolean;
-  } | null;
+  creator: ReactNode;
   contentOverImage?: JSX.Element;
 }>;
 
@@ -107,14 +102,7 @@ export function BigCard({
               justifyContent="space-between"
               alignItems="center"
             >
-              {creator && (
-                <MemberAvatar
-                  link={creator.link}
-                  name={creator.name}
-                  avatar={creator.avatar}
-                  isLoading={creator.isLoading}
-                />
-              )}
+              {creator}
               <Stack marginLeft="auto">
                 <LikeCounter likeCount={likeCount} />
               </Stack>

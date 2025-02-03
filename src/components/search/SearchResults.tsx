@@ -1,7 +1,8 @@
+import { useQuery } from '@tanstack/react-query';
 import { Interweave } from 'interweave';
 import Link from 'next/link';
 
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { Trans } from 'react-i18next';
 
 import {
@@ -16,8 +17,6 @@ import {
   useTheme,
 } from '@mui/material';
 
-import { MeiliSearchResults } from '@graasp/sdk';
-
 import { MAX_RESULTS_TO_SHOW, UrlSearch } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';
 import {
@@ -29,6 +28,8 @@ import {
   SEARCH_RESULTS_SHOW_MORE_BUTTON,
 } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
+import { CollectionSearchResponses } from '../../openapi/client';
+import { collectionSearchOptions } from '../../openapi/client/@tanstack/react-query.gen';
 import intersperse from '../../utils/helpers';
 import { QueryClientContext } from '../QueryClientContext';
 import SearchThumbnail from './SearchThumbnail';
@@ -75,25 +76,30 @@ const SearchResults = ({
   onOutsideClick?: (value: boolean) => void;
 }) => {
   const { t } = useLibraryTranslation();
+  const { hooks } = useContext(QueryClientContext);
   // detect click outside event to hide search results
   // cannot use onBlur on Search because it is fired first and the click in the list is canceled
   const ref = useOutsideClick<HTMLUListElement>(() => {
     onOutsideClick?.(false);
   });
   const theme = useTheme();
-  const { hooks } = useContext(QueryClientContext);
-  const { data: collections } = hooks.useSearchPublishedItems({
-    query,
-    isPublishedRoot,
+  const debouncedQuery = hooks.useDebounce(query, 500);
+  const { data: collections } = useQuery({
+    ...collectionSearchOptions({
+      body: {
+        query: debouncedQuery,
+        isPublishedRoot,
+        cropLength: 10,
+        attributesToCrop: ['content', 'description', 'name'],
+        highlightPostTag: '</span>',
+        highlightPreTag: `<span style="font-weight:bold;color:${theme.palette.primary.main}">`,
+      },
+    }),
     enabled: Boolean(query),
-    cropLength: 10,
-    attributesToCrop: ['content', 'description', 'name'],
-    highlightPostTag: '</span>',
-    highlightPreTag: `<span style="font-weight:bold;color:${theme.palette.primary.main}">`,
   });
 
   const buildResultListItems = (
-    results: MeiliSearchResults['results'][0]['hits'],
+    results: CollectionSearchResponses[200]['hits'],
     nbOfHits: number = 0,
   ) => {
     const list = results.slice(0, MAX_RESULTS_TO_SHOW).map((result) => {

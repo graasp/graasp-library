@@ -1,4 +1,6 @@
-import React, { useContext } from 'react';
+import { useQuery } from '@tanstack/react-query';
+
+import { useContext } from 'react';
 
 import { TagCategory } from '@graasp/sdk';
 
@@ -6,6 +8,7 @@ import {
   buildSearchFilterPopperButtonId,
   buildSearchFilterTagCategoryId,
 } from '../../config/selectors';
+import { getFacetsForNameOptions } from '../../openapi/client/@tanstack/react-query.gen';
 import { QueryClientContext } from '../QueryClientContext';
 import { useSearchFiltersContext } from '../pages/SearchFiltersContext';
 import { Filter } from './Filter';
@@ -16,8 +19,10 @@ type CategoryFilterProps = {
 };
 
 // eslint-disable-next-line react/function-component-definition
-export function CategoryFilter({ category, title }: CategoryFilterProps) {
-  const { hooks } = useContext(QueryClientContext);
+export function CategoryFilter({
+  category,
+  title,
+}: Readonly<CategoryFilterProps>) {
   const {
     tags,
     langsForFilter,
@@ -26,20 +31,27 @@ export function CategoryFilter({ category, title }: CategoryFilterProps) {
     toggleTagByCategory,
     clearTagsByCategory,
   } = useSearchFiltersContext();
+  const { hooks } = useContext(QueryClientContext);
 
   // ignore current category to get facets
   // implement OR logic
   // eg. [biology, chemistry] means getting facets for "category" with other tags set to biology or chemistry
   const ignoreCurrentCategory = { ...tags };
   delete ignoreCurrentCategory[category];
-
-  const { data: options } = hooks.useSearchFacets({
-    facetName: category,
-    query: searchKeywords,
-    tags: ignoreCurrentCategory,
-    langs: langsForFilter,
-    isPublishedRoot,
-  });
+  const debouncedSearchKeywords = hooks.useDebounce(searchKeywords, 500);
+  const { data: options } = useQuery(
+    getFacetsForNameOptions({
+      query: {
+        facetName: category,
+      },
+      body: {
+        query: debouncedSearchKeywords,
+        tags: ignoreCurrentCategory,
+        langs: langsForFilter,
+        isPublishedRoot,
+      },
+    }),
+  );
 
   return (
     <Filter

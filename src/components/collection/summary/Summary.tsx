@@ -4,10 +4,11 @@ import { Stack, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 
-import { DiscriminatedItem, ItemPublished, ItemType } from '@graasp/sdk';
+import { DiscriminatedItem, ItemType } from '@graasp/sdk';
 
 import { useLibraryTranslation } from '../../../config/i18n';
 import LIBRARY from '../../../langs/constants';
+import { Item } from '../../../openapi/client';
 import { QueryClientContext } from '../../QueryClientContext';
 import BackButton from '../../common/BackButton';
 import ItemBreadcrumb from '../ItemBreadcrumb';
@@ -17,22 +18,20 @@ import SummaryHeader from './SummaryHeader';
 
 type SummaryProps = {
   collection: DiscriminatedItem;
-  publishedRoot?: ItemPublished | null;
+  publishedRootItem?: Item;
   isLoading: boolean;
   totalViews: number;
 };
 
 const Summary = ({
   collection,
-  publishedRoot,
+  publishedRootItem,
   isLoading,
   totalViews,
 }: SummaryProps): JSX.Element => {
   const { t, i18n } = useLibraryTranslation();
   const { hooks } = useContext(QueryClientContext);
   const { data: member } = hooks.useCurrentMember();
-
-  const topLevelParent = publishedRoot?.item;
 
   return (
     <Stack
@@ -70,7 +69,7 @@ const Summary = ({
         </Typography>
         <SummaryDetails
           collection={collection}
-          publishedRootItem={topLevelParent}
+          publishedRootItem={publishedRootItem}
           isLoading={isLoading}
           lang={i18n.language}
         />

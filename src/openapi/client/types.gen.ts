@@ -2958,24 +2958,39 @@ export type PostItemsByIdThumbnailsResponses = {
   200: unknown;
 };
 
-export type GetItemsByIdThumbnailsBySizeData = {
+export type DownloadItemThumbnailData = {
   body?: never;
   path: {
     id: string;
     size: 'small' | 'medium' | 'large' | 'original';
   };
-  query: {
-    replyUrl: boolean;
-  };
+  query?: never;
   url: '/items/{id}/thumbnails/{size}';
 };
 
-export type GetItemsByIdThumbnailsBySizeResponses = {
+export type DownloadItemThumbnailErrors = {
   /**
    * Default Response
    */
-  200: unknown;
+  500: _Error;
+  /**
+   * Default Response
+   */
+  '4XX': _Error;
 };
+
+export type DownloadItemThumbnailError =
+  DownloadItemThumbnailErrors[keyof DownloadItemThumbnailErrors];
+
+export type DownloadItemThumbnailResponses = {
+  /**
+   * Url string of the thumbnail, null if it does not exist
+   */
+  200: null | string;
+};
+
+export type DownloadItemThumbnailResponse =
+  DownloadItemThumbnailResponses[keyof DownloadItemThumbnailResponses];
 
 export type UploadFileData = {
   body?: never;

@@ -50,7 +50,7 @@ Cypress.Commands.add(
 
     mockGetItem({ items, currentMember }, getItemError);
 
-    mockGetAvatarUrl({ members, currentMember });
+    mockGetAvatarUrl({ members });
 
     mockGetItemThumbnailUrl({ items, currentMember }, getItemThumbnailError);
 

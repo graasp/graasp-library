@@ -40,7 +40,7 @@ import SummaryActionButtons from './SummaryActionButtons';
 import { Description } from './SummaryDescription';
 
 type SummaryHeaderProps = {
-  collection?: DiscriminatedItem;
+  collection: DiscriminatedItem;
   isLoading: boolean;
   isLogged: boolean;
   totalViews: number;
@@ -86,36 +86,28 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
     setOpen(false);
   };
   const handleLike = () => {
-    if (!collection?.id) {
-      console.error('unable to like an item which id is undefined');
-      return;
-    }
     if (!member?.id) {
       openLoginSnackbarMessage();
-      return;
+    } else {
+      postItemLike({
+        itemId: collection?.id,
+        memberId: member.id,
+      });
     }
-    postItemLike({
-      itemId: collection?.id,
-      memberId: member.id,
-    });
   };
 
   const handleUnlike = () => {
-    if (!collection?.id) {
-      console.error('unable to unlike an item which id is undefined');
-      return;
-    }
     if (!member?.id) {
       openLoginSnackbarMessage();
-      return;
+    } else {
+      deleteItemLike({
+        itemId: collection.id,
+        memberId: member.id,
+      });
     }
-    deleteItemLike({
-      itemId: collection.id,
-      memberId: member.id,
-    });
   };
 
-  const truncatedName = truncate(collection?.name, {
+  const truncatedName = truncate(collection.name, {
     length: MAX_COLLECTION_NAME_LENGTH,
     separator: /,? +/,
   });
@@ -136,15 +128,15 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
           }}
           width={{ xs: '90%', sm: '30%' }}
         >
-          <StyledCard id={collection?.id}>
+          <StyledCard id={collection.id}>
             {isLoading ? (
               <Skeleton variant="rectangular" width="100%">
-                <CardMedia name={collection?.name} />
+                <CardMedia name={collection.name} />
               </Skeleton>
             ) : (
               <CardMedia
-                itemId={collection?.id}
-                name={collection?.name}
+                itemId={collection.id}
+                name={collection.name}
                 size={ThumbnailSize.Medium}
               />
             )}
@@ -207,7 +199,7 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
           ) : null}
           <Description
             isLoading={isLoading}
-            description={collection?.description || ''}
+            description={collection.description ?? ''}
           />
           <Stack
             spacing={{ xs: 1, md: 2 }}
@@ -217,9 +209,9 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
             divider={<Divider orientation="vertical" flexItem />}
           >
             <Authorship
-              itemId={collection?.id}
-              author={collection?.creator}
-              displayCoEditors={collection?.settings?.displayCoEditors}
+              itemId={collection.id}
+              author={collection.creator}
+              displayCoEditors={collection.settings.displayCoEditors}
             />
             <Stack
               direction="row"
@@ -265,8 +257,8 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
               </Tooltip>
             </Stack>
             <Badges
-              name={collection?.name}
-              description={collection?.description}
+              name={collection.name}
+              description={collection.description}
             />
           </Stack>
         </Stack>

@@ -1,5 +1,7 @@
 'use client';
 
+import { useMutation } from '@tanstack/react-query';
+
 import { MouseEvent, useContext, useState } from 'react';
 
 import FileCopyIcon from '@mui/icons-material/FileCopy';
@@ -9,6 +11,7 @@ import Tooltip from '@mui/material/Tooltip';
 
 import { useLibraryTranslation } from '../../config/i18n';
 import LIBRARY from '../../langs/constants';
+import { copyManyItemsMutation } from '../../openapi/client/@tanstack/react-query.gen';
 import { QueryClientContext } from '../QueryClientContext';
 import ItemSelectionModal from './copyModal/ItemSelectionModal';
 
@@ -16,9 +19,11 @@ export const useCopyAction = (id?: string) => {
   const { t } = useLibraryTranslation();
 
   const [showTreeModal, setShowTreeModal] = useState(false);
-  const { hooks, mutations } = useContext(QueryClientContext);
+  const { hooks } = useContext(QueryClientContext);
   const { data: user } = hooks.useCurrentMember();
-  const { mutate: copyItems, isPending: isCopying } = mutations.useCopyItems();
+  const { mutate: copyItems, isPending: isCopying } = useMutation(
+    copyManyItemsMutation(),
+  );
 
   const startCopy = (event: MouseEvent<HTMLButtonElement>) => {
     if (user?.id) {
@@ -36,11 +41,12 @@ export const useCopyAction = (id?: string) => {
     // remove loading icon on callback
     // do not set parent if it is root
     const payload: Parameters<typeof copyItems>[0] = {
-      ids: [id],
+      query: { id: [id] },
     };
-
-    payload.to = to;
-
+    payload.body = {};
+    if (to) {
+      payload.body.parentId = to;
+    }
     copyItems(payload);
   };
 

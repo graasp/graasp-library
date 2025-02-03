@@ -6,7 +6,7 @@ import { ItemIcon, Thumbnail } from '@graasp/ui';
 import { getColorFromId } from '../../../utils/colors';
 
 export type CardThumbnailProps = {
-  thumbnail?: string;
+  thumbnail?: string | null;
   alt: string;
   width?: number;
   minHeight: number;

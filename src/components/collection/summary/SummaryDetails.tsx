@@ -22,6 +22,7 @@ import {
   SUMMARY_LAST_UPDATE_CONTAINER_ID,
 } from '../../../config/selectors';
 import LIBRARY from '../../../langs/constants';
+import { Item } from '../../../openapi/client';
 import CreativeCommons from '../../common/CreativeCommons';
 
 const DetailCard = styled(Box)(() => ({
@@ -33,7 +34,7 @@ const DetailCard = styled(Box)(() => ({
 
 type SummaryDetailsProps = {
   collection: DiscriminatedItem;
-  publishedRootItem?: DiscriminatedItem;
+  publishedRootItem?: Item;
   lang: string;
   isLoading: boolean;
 };
@@ -44,7 +45,7 @@ export function SummaryDetails({
   lang,
   collection,
   publishedRootItem,
-}: SummaryDetailsProps): ReactNode {
+}: Readonly<SummaryDetailsProps>): ReactNode {
   const { t } = useLibraryTranslation();
 
   const ccLicenseAdaption = publishedRootItem
