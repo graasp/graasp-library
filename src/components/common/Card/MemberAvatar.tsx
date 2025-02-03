@@ -18,7 +18,7 @@ export function MemberAvatar({
   id: string;
 }>) {
   const { isMobile } = useMobileView();
-  const { data: authorAvatarUrl, isLoading: isLoadingAvatar } = useQuery(
+  const { data: authorAvatarUrl, isPending: isPendingAvatar } = useQuery(
     downloadAvatarOptions({
       path: { id, size: ThumbnailSize.Small },
       query: { replyUrl: true },
@@ -50,7 +50,7 @@ export function MemberAvatar({
           maxWidth={24}
           // use broken path to show first letter because we use ui avatar wrapper
           url={authorAvatarUrl?.length ? authorAvatarUrl : 'https://broken'}
-          isLoading={isLoadingAvatar}
+          isLoading={isPendingAvatar}
         />
         {!isMobile && (
           <Typography

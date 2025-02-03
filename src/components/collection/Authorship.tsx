@@ -6,7 +6,12 @@ import { useContext } from 'react';
 import { Stack, Typography } from '@mui/material';
 import Skeleton from '@mui/material/Skeleton';
 
-import { DiscriminatedItem, PermissionLevel, ThumbnailSize } from '@graasp/sdk';
+import {
+  DiscriminatedItem,
+  Member,
+  PermissionLevel,
+  ThumbnailSize,
+} from '@graasp/sdk';
 import { Avatar } from '@graasp/ui';
 
 import { DEFAULT_MEMBER_THUMBNAIL } from '../../config/constants';
@@ -18,16 +23,44 @@ import { downloadAvatarOptions } from '../../openapi/client/@tanstack/react-quer
 import { QueryClientContext } from '../QueryClientContext';
 import Contributors from './Contributors';
 
-const Author = ({ author }: any) => {
+const Author = ({ author }: { author: Member }) => {
   const { t } = useLibraryTranslation();
-  const { data: authorUrl, isLoading: isLoadingAuthorAvatar } = useQuery(
+  const {
+    data: authorUrl,
+    isSuccess,
+    isPending: isPendingAuthorAvatar,
+  } = useQuery(
     downloadAvatarOptions({
       path: { id: author.id, size: ThumbnailSize.Small },
       query: { replyUrl: true },
     }),
   );
 
-  if (isLoadingAuthorAvatar) {
+  if (isSuccess) {
+    return (
+      <>
+        <Avatar
+          url={authorUrl ?? DEFAULT_MEMBER_THUMBNAIL}
+          alt={t(LIBRARY.AVATAR_ALT, { name: author?.name })}
+          isLoading={isPendingAuthorAvatar}
+          component="avatar"
+          maxWidth={30}
+          maxHeight={30}
+          variant="circular"
+          sx={{ maxWidth: 30, maxHeight: 30 }}
+        />
+        <Typography
+          component={Link}
+          href={buildMemberRoute(author.id)}
+          variant="body1"
+        >
+          {author?.name}
+        </Typography>
+      </>
+    );
+  }
+
+  if (isPendingAuthorAvatar) {
     return (
       <>
         <Skeleton variant="circular" width={30} height={30} />
@@ -36,27 +69,7 @@ const Author = ({ author }: any) => {
     );
   }
 
-  return (
-    <>
-      <Avatar
-        url={authorUrl ?? DEFAULT_MEMBER_THUMBNAIL}
-        alt={t(LIBRARY.AVATAR_ALT, { name: author?.name })}
-        isLoading={isLoadingAuthorAvatar}
-        component="avatar"
-        maxWidth={30}
-        maxHeight={30}
-        variant="circular"
-        sx={{ maxWidth: 30, maxHeight: 30 }}
-      />
-      <Typography
-        component={Link}
-        href={buildMemberRoute(author.id)}
-        variant="body1"
-      >
-        {author?.name}
-      </Typography>
-    </>
-  );
+  return null;
 };
 
 type Props = {

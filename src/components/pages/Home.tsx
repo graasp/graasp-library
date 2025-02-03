@@ -27,7 +27,7 @@ import StyledBackgroundContainer from '../layout/StyledBackgroundContainer';
 
 const Home = () => {
   const { t } = useLibraryTranslation();
-  const { data: graasperCollections, isLoading: isGraasperCollectionsLoading } =
+  const { data: graasperCollections, isPending: isGraasperCollectionsPending } =
     useQuery(
       collectionSearchOptions({
         body: { creatorId: GRAASPER_ID },
@@ -35,13 +35,13 @@ const Home = () => {
     );
   const {
     data: mostLikedCollections,
-    isLoading: isMostLikedCollectionsLoading,
+    isPending: isMostLikedCollectionsPending,
   } = useQuery(
     getMostLikedCollectionsOptions({
       query: { limit: HOMEPAGE_NB_ELEMENTS_TO_SHOW },
     }),
   );
-  const { data: recentCollections, isLoading: isMostRecentLoading } = useQuery(
+  const { data: recentCollections, isPending: isMostRecentPending } = useQuery(
     getMostRecentCollectionsOptions({
       query: { limit: HOMEPAGE_NB_ELEMENTS_TO_SHOW },
     }),
@@ -53,20 +53,20 @@ const Home = () => {
         <HomeHeader />
 
         <ItemCollection
-          isLoading={isGraasperCollectionsLoading}
+          isLoading={isGraasperCollectionsPending}
           id={GRAASP_SELECTION_TITLE_ID}
           collectionGridId={GRAASPER_COLLECTIONS_GRID_ID}
           collections={graasperCollections?.hits}
           title={t(LIBRARY.HOME_GRAASPER_COLLECTIONS_TITLE)}
         />
         <ItemCollection
-          isLoading={isMostLikedCollectionsLoading}
+          isLoading={isMostLikedCollectionsPending}
           id={MOST_LIKED_TITLE_ID}
           collections={mostLikedCollections?.hits}
           title={t(LIBRARY.HOME_MOST_LIKED_COLLECTIONS_TITLE)}
         />
         <ItemCollection
-          isLoading={isMostRecentLoading}
+          isLoading={isMostRecentPending}
           id={RECENT_PUBLICATIONS_TITLE_ID}
           collections={recentCollections?.hits}
           title={t(LIBRARY.HOME_RECENT_COLLECTIONS_TITLE)}

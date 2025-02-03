@@ -27,10 +27,10 @@ const MemberAvatar = React.forwardRef<HTMLDivElement, Props>(
   ): JSX.Element => {
     const { hooks } = useContext(QueryClientContext);
     const { t } = useLibraryTranslation();
-    const { data: member, isLoading, isFetching } = hooks.useMember(memberId);
+    const { data: member, isPending, isFetching } = hooks.useMember(memberId);
     const {
       data: avatarUrl,
-      isLoading: isLoadingAvatar,
+      isPending: isPendingAvatar,
       isFetching: isFetchingAvatar,
     } = hooks.useAvatarUrl({
       id: memberId,
@@ -38,11 +38,10 @@ const MemberAvatar = React.forwardRef<HTMLDivElement, Props>(
     });
 
     return (
-      // eslint-disable-next-line react/jsx-props-no-spreading
       <Box id={id} ref={ref} {...otherProps}>
         <Avatar
           isLoading={
-            isLoading || isLoadingAvatar || isFetchingAvatar || isFetching
+            isPending || isPendingAvatar || isFetchingAvatar || isFetching
           }
           url={avatarUrl ?? DEFAULT_MEMBER_THUMBNAIL}
           alt={
