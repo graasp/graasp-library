@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/extensions
 import setupCoverage from '@cypress/code-coverage/task.js';
 import { defineConfig } from 'cypress';
 

@@ -18,7 +18,6 @@ import { QueryClientContext } from '../QueryClientContext';
 export const useEmbedAction = (itemId?: DiscriminatedItem['id']) => {
   const startEmbed = (event: MouseEvent<HTMLButtonElement>) => {
     const link = buildPlayerViewItemRoute(itemId);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const { mutations } = useContext(QueryClientContext);
 
     const { mutate: triggerAction } = mutations.usePostItemAction();

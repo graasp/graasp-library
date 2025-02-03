@@ -24,6 +24,7 @@ export default function intersperse(
       output.push(item);
 
       if (index < array.length - 1) {
+        // eslint-disable-next-line react/no-array-index-key
         output.push(cloneElement(separator, { key: `interspersed-${index}` }));
       }
 

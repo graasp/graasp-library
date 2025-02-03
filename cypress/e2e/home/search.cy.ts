@@ -26,6 +26,7 @@ describe('Search', () => {
         // verify result items are displayed
         // only part of the results are displayed
 
+        // eslint-disable-next-line no-restricted-syntax
         for (const item of PUBLISHED_ITEMS.slice(
           0,
           -(PUBLISHED_ITEMS.length - MAX_RESULTS_TO_SHOW),
@@ -48,6 +49,7 @@ describe('Search', () => {
 
         // verify all items are displayed
 
+        // eslint-disable-next-line no-restricted-syntax
         for (const item of getRootPublishedItems(PUBLISHED_ITEMS)) {
           cy.get(`#${ALL_COLLECTIONS_GRID_ID}`).contains(item.name);
         }
@@ -56,6 +58,7 @@ describe('Search', () => {
 
         cy.wait(['@search', '@search']).then(
           ([
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             _first,
             {
               request: { body },

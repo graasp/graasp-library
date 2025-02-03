@@ -118,6 +118,7 @@ const SearchResults = ({
                 <Stack direction="column">
                   <Interweave
                     style={{ paddingRight: 5 }}
+                    // eslint-disable-next-line no-underscore-dangle
                     content={result._formatted.name}
                   />
                 </Stack>
@@ -125,6 +126,7 @@ const SearchResults = ({
                   <Interweave
                     style={{ color: '#999' }}
                     content={
+                      // eslint-disable-next-line no-underscore-dangle
                       result._formatted.description || result._formatted.content
                     }
                   />
