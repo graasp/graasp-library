@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.15.0](https://github.com/graasp/graasp-library/compare/v1.14.0...v1.15.0) (2025-02-05)
+
+
+### Features
+
+* use some generation mutations and hooks  ([#747](https://github.com/graasp/graasp-library/issues/747)) ([c25edd7](https://github.com/graasp/graasp-library/commit/c25edd7e6332b80481872139561333d9ad87ea2b))
+
+
+### Bug Fixes
+
+* **deps:** update dependency katex to v0.16.21 [security] ([#737](https://github.com/graasp/graasp-library/issues/737)) ([728b9e4](https://github.com/graasp/graasp-library/commit/728b9e474836585b6253a8cc2c9c31afc5559426))
+* **deps:** update dependency uuid to v11 ([#719](https://github.com/graasp/graasp-library/issues/719)) ([8d8855b](https://github.com/graasp/graasp-library/commit/8d8855b969e3ec76ee3f0ba8c9599c5ab0bde3dd))
+* update home endpoints with generated api ([#740](https://github.com/graasp/graasp-library/issues/740)) ([066fe63](https://github.com/graasp/graasp-library/commit/066fe63f709d7ebeb5f02b6583dae6b091c6aa83))
+* update library capacity provider ([bdccec6](https://github.com/graasp/graasp-library/commit/bdccec66b194504334f9ffe1194fb90ec87d9e8b))
+
 ## [1.14.0](https://github.com/graasp/graasp-library/compare/v1.13.0...v1.14.0) (2025-01-14)
 
 
