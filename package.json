@@ -54,7 +54,7 @@
     "date-fns": "4.1.0",
     "eslint-config-next": "14.2.16",
     "http-status-codes": "2.3.0",
-    "i18next": "23.16.3",
+    "i18next": "23.16.8",
     "interweave": "13.1.0",
     "katex": "0.16.21",
     "lodash.groupby": "4.6.0",
