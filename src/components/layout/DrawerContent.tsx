@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 import { useContext } from 'react';
 
 import {
@@ -22,6 +20,8 @@ import {
 } from '@mui/material';
 
 import { useMainMenuOpenContext } from '@graasp/ui';
+
+import Link from 'next/link';
 
 import { useLibraryTranslation } from '../../config/i18n';
 import {

@@ -1,9 +1,9 @@
-import { Interweave } from 'interweave';
-import 'katex/dist/katex.min.css';
-
 import 'react-quill/dist/quill.snow.css';
 
 import { Box, styled } from '@mui/material';
+
+import { Interweave } from 'interweave';
+import 'katex/dist/katex.min.css';
 
 const StyledBox = ({
   collapsed,

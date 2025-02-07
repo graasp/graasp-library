@@ -39,7 +39,6 @@ type SummaryDetailsProps = {
   isLoading: boolean;
 };
 
-// eslint-disable-next-line react/function-component-definition
 export function SummaryDetails({
   isLoading,
   lang,
@@ -53,6 +52,8 @@ export function SummaryDetails({
     : collection?.settings?.ccLicenseAdaption;
 
   const langKey = collection.lang in langs ? collection.lang : DEFAULT_LANG;
+
+  // eslint-disable-next-line
   // @ts-ignore
   const langValue = langs[langKey];
 

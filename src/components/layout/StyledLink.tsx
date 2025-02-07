@@ -1,8 +1,8 @@
-import Link from 'next/link';
-
 import { ReactNode } from 'react';
 
 import { styled } from '@mui/material';
+
+import Link from 'next/link';
 
 import { HEADER_GRAASP_LOGO_LINK_ID } from '../../config/selectors';
 

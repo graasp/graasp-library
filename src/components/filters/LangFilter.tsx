@@ -14,7 +14,6 @@ type LangFilterProps = {
   title: string;
 };
 
-// eslint-disable-next-line react/function-component-definition
 export function LangFilter({ title }: LangFilterProps) {
   const {
     tags,

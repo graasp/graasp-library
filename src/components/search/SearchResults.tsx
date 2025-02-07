@@ -1,7 +1,3 @@
-import { useQuery } from '@tanstack/react-query';
-import { Interweave } from 'interweave';
-import Link from 'next/link';
-
 import { useContext } from 'react';
 import { Trans } from 'react-i18next';
 
@@ -16,6 +12,10 @@ import {
   styled,
   useTheme,
 } from '@mui/material';
+
+import { useQuery } from '@tanstack/react-query';
+import { Interweave } from 'interweave';
+import Link from 'next/link';
 
 import { MAX_RESULTS_TO_SHOW, UrlSearch } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';
@@ -118,7 +118,7 @@ const SearchResults = ({
                 <Stack direction="column">
                   <Interweave
                     style={{ paddingRight: 5 }}
-                    //  eslint-disable-next-line no-underscore-dangle
+                    // eslint-disable-next-line no-underscore-dangle
                     content={result._formatted.name}
                   />
                 </Stack>
@@ -127,9 +127,7 @@ const SearchResults = ({
                     style={{ color: '#999' }}
                     content={
                       // eslint-disable-next-line no-underscore-dangle
-                      result._formatted.description ||
-                      // eslint-disable-next-line no-underscore-dangle
-                      result._formatted.content
+                      result._formatted.description || result._formatted.content
                     }
                   />
                 </Stack>

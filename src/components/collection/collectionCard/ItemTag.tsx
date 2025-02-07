@@ -32,7 +32,6 @@ const StyledItemTag = styled(Box)(({ tagColor }: { tagColor: string }) => ({
   },
 }));
 
-// eslint-disable-next-line import/prefer-default-export, react/function-component-definition
 export function ItemTag({
   isChild,
   createdAt,

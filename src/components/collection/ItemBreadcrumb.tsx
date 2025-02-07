@@ -1,10 +1,10 @@
-import Link from 'next/link';
-
 import { useContext } from 'react';
 
 import { Box, Breadcrumbs, Button, Skeleton, Typography } from '@mui/material';
 
 import { getIdsFromPath } from '@graasp/sdk';
+
+import Link from 'next/link';
 
 import { useLibraryTranslation } from '../../config/i18n';
 import { buildCollectionRoute } from '../../config/routes';

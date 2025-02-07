@@ -1,6 +1,6 @@
-import { dehydrate } from '@tanstack/react-query';
-
 import { Suspense } from 'react';
+
+import { dehydrate } from '@tanstack/react-query';
 
 import Hydrate from '../../src/components/HydrateClient';
 import Wrapper from '../../src/components/common/Wrapper';
@@ -14,6 +14,7 @@ import { buildSeo } from '../seo';
 export async function generateMetadata() {
   // todo: get lang from location and crawler
   // question: how to get language from
+  // eslint-disable-next-line
   // @ts-ignore
   const t = (s: string): string => en[s];
 

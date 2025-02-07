@@ -21,7 +21,6 @@ export const COPY_RESOURCE_LINK_TO_CLIPBOARD = {
 
 // TODO: use a universal notifier
 // TODO: improve the type when upgrading query-client
-// @ts-ignore
 const notifier: Notifier = ({ type, payload }) => {
   if (!SHOW_NOTIFICATIONS) {
     return;

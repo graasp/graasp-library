@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 import { ArrowForward } from '@mui/icons-material';
 import {
   Box,
@@ -12,6 +10,8 @@ import {
 } from '@mui/material';
 
 import { GraaspLogo } from '@graasp/ui';
+
+import Link from 'next/link';
 
 import { UrlSearch } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';

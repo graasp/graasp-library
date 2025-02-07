@@ -25,6 +25,7 @@ describe('Search', () => {
 
         // verify result items are displayed
         // only part of the results are displayed
+
         // eslint-disable-next-line no-restricted-syntax
         for (const item of PUBLISHED_ITEMS.slice(
           0,
@@ -47,6 +48,7 @@ describe('Search', () => {
         cy.visit(ALL_COLLECTIONS_ROUTE);
 
         // verify all items are displayed
+
         // eslint-disable-next-line no-restricted-syntax
         for (const item of getRootPublishedItems(PUBLISHED_ITEMS)) {
           cy.get(`#${ALL_COLLECTIONS_GRID_ID}`).contains(item.name);

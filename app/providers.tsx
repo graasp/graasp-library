@@ -1,20 +1,18 @@
 'use client';
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-
-// import { ReactQueryDevtools } from "react-query-devtools";
-import { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import ReactGA from 'react-ga4';
 import { ToastContainer } from 'react-toastify';
 
 import { hasAcceptedCookies } from '@graasp/sdk';
 
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+
 import { ENV, UrlSearch } from '../src/config/constants';
 import { GA_MEASUREMENT_ID, NODE_ENV } from '../src/config/env';
 
-// eslint-disable-next-line react/function-component-definition
-export default function Providers(props: { children: React.ReactNode }) {
+export default function Providers(props: Readonly<{ children: ReactNode }>) {
   const [client] = useState(new QueryClient());
   const pathname = usePathname();
   const { replace } = useRouter();

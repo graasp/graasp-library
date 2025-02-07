@@ -1,10 +1,10 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-
 import { useState } from 'react';
 
 import { Box } from '@mui/material';
+
+import { useRouter } from 'next/navigation';
 
 import { UrlSearch } from '../../config/constants';
 import { ALL_COLLECTIONS_ROUTE } from '../../config/routes';

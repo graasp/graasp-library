@@ -1,7 +1,7 @@
+import { Chip, useTheme } from '@mui/material';
+
 import Link from 'next/link';
 import { ParsedUrlQuery } from 'querystring';
-
-import { Chip, useTheme } from '@mui/material';
 
 export const StyledChip = ({
   href,

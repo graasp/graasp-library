@@ -2,7 +2,6 @@ import { MockItemLike } from '../support/types';
 import { PUBLISHED_ITEMS } from './items';
 import { MEMBERS } from './members';
 
-// eslint-disable-next-line import/prefer-default-export
 export const ITEM_LIKES: MockItemLike[] = [
   {
     id: '92d514fb-2698-4c44-b93f-1214f86e2365',

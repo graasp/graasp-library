@@ -1,5 +1,3 @@
-import truncate from 'lodash.truncate';
-
 import React, { useContext } from 'react';
 
 import { Favorite, Visibility } from '@mui/icons-material';
@@ -17,6 +15,8 @@ import {
 
 import { DiscriminatedItem, ThumbnailSize } from '@graasp/sdk';
 import { LikeButton } from '@graasp/ui';
+
+import truncate from 'lodash.truncate';
 
 import {
   MAX_COLLECTION_NAME_LENGTH,

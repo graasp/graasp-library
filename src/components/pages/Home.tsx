@@ -1,8 +1,8 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
-
 import { Box } from '@mui/material';
+
+import { useQuery } from '@tanstack/react-query';
 
 import { HOMEPAGE_NB_ELEMENTS_TO_SHOW } from '../../config/constants';
 import { GRAASPER_ID } from '../../config/env';

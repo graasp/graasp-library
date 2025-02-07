@@ -1,5 +1,3 @@
-import { Category } from '@graasp/sdk';
-
 import { MockItem, MockItemLike, MockMember } from './types';
 
 declare global {
@@ -11,7 +9,6 @@ declare global {
         accessibleItems?: MockItem[];
         members?: MockMember[];
         currentMember?: MockMember;
-        categories?: Category[];
         getCurrentMemberError?: boolean;
         getCategoriesError?: boolean;
         getItemCategoriesError?: boolean;
@@ -23,6 +20,7 @@ declare global {
         getItemThumbnailError?: boolean;
         getPublishedItemsInCategoriesError?: boolean;
         tags?: { id: string; name: string }[];
+        // eslint-disable-next-line
       }): Chainable<JQuery<HTMLElement>>;
     }
   }

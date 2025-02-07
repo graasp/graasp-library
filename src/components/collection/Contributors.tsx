@@ -1,9 +1,9 @@
-import Link from 'next/link';
-
 import AvatarGroup from '@mui/lab/AvatarGroup';
 import { Stack, Tooltip, Typography } from '@mui/material';
 
 import { Account } from '@graasp/sdk';
+
+import Link from 'next/link';
 
 import { useLibraryTranslation } from '../../config/i18n';
 import { buildMemberRoute } from '../../config/routes';

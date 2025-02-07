@@ -1,8 +1,8 @@
-import { useQuery } from '@tanstack/react-query';
-
 import { useContext } from 'react';
 
 import { TagCategory } from '@graasp/sdk';
+
+import { useQuery } from '@tanstack/react-query';
 
 import {
   buildSearchFilterPopperButtonId,

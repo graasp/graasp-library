@@ -1,11 +1,11 @@
-import { SocialLinks } from 'social-links';
-
 import { useContext } from 'react';
 
 import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { IconButton, Link, Skeleton, Stack, Typography } from '@mui/material';
+
+import { SocialLinks } from 'social-links';
 
 import { useLibraryTranslation } from '../../config/i18n';
 import LIBRARY from '../../langs/constants';

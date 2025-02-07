@@ -1,8 +1,8 @@
-import Link from 'next/link';
-
 import { Stack, Typography, useTheme } from '@mui/material';
 
 import { DEFAULT_LIGHT_PRIMARY_COLOR } from '@graasp/ui';
+
+import Link from 'next/link';
 
 import { UrlSearch } from '../../../config/constants';
 import { ALL_COLLECTIONS_ROUTE } from '../../../config/routes';

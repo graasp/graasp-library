@@ -3,7 +3,7 @@ export const dynamic = 'force-dynamic'; // defaults to force-static
 export async function GET() {
   return new Response(
     JSON.stringify({
-      // eslint-disable-next-line no-underscore-dangle
+      // eslint-disable-next-line
       // @ts-ignore
       coverage: global.__coverage__ || null,
     }),

@@ -53,7 +53,6 @@ type FilterHeaderProps = Readonly<{
   isLoadingResults: boolean;
 }>;
 
-// eslint-disable-next-line react/function-component-definition
 export function FilterHeader({
   isLoadingResults,
 }: FilterHeaderProps): ReactNode {

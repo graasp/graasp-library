@@ -69,6 +69,7 @@ export const FilterPopper = React.forwardRef<HTMLDivElement, FilterPopperProps>(
           style={{ zIndex: 4 }}
           transition
         >
+          {/* eslint-disable-next-line */}
           {/* @ts-ignore */}
           {({ TransitionProps }: { TransitionProps: MUITransitionProps }) => (
             <Grow {...TransitionProps}>

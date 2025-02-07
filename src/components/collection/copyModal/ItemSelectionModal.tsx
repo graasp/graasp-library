@@ -1,5 +1,3 @@
-import { useQuery } from '@tanstack/react-query';
-
 import { useState } from 'react';
 
 import { Home as HomeIcon } from '@mui/icons-material';
@@ -16,6 +14,8 @@ import {
 import { getParentFromPath } from '@graasp/sdk';
 import { COMMON } from '@graasp/translations';
 import { Breadcrumbs, NavigationElement } from '@graasp/ui';
+
+import { useQuery } from '@tanstack/react-query';
 
 import {
   useCommonTranslation,

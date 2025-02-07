@@ -1,6 +1,6 @@
-import { Heart } from 'lucide-react';
-
 import { Stack, Typography, useTheme } from '@mui/material';
+
+import { Heart } from 'lucide-react';
 
 import { LIKE_COUNTER_CY } from '../../../config/selectors';
 

@@ -1,6 +1,3 @@
-import { useQuery } from '@tanstack/react-query';
-import Link from 'next/link';
-
 import { useContext } from 'react';
 
 import { Stack, Typography } from '@mui/material';
@@ -13,6 +10,9 @@ import {
   ThumbnailSize,
 } from '@graasp/sdk';
 import { Avatar } from '@graasp/ui';
+
+import { useQuery } from '@tanstack/react-query';
+import Link from 'next/link';
 
 import { DEFAULT_MEMBER_THUMBNAIL } from '../../config/constants';
 import { useLibraryTranslation } from '../../config/i18n';

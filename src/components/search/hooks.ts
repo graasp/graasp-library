@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 
-// eslint-disable-next-line import/prefer-default-export
 export const useOutsideClick = <T extends HTMLElement>(
   callback: () => void,
 ) => {

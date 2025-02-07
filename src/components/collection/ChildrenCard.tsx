@@ -1,6 +1,3 @@
-import { useQuery } from '@tanstack/react-query';
-import Link from 'next/link';
-
 import React, { useContext } from 'react';
 
 import { Folder } from '@mui/icons-material';
@@ -22,6 +19,9 @@ import {
   formatDate,
 } from '@graasp/sdk';
 import { ItemIcon, Thumbnail } from '@graasp/ui';
+
+import { useQuery } from '@tanstack/react-query';
+import Link from 'next/link';
 
 import { COLLECTION_CARD_BORDER_RADIUS } from '../../config/cssStyles';
 import { useLibraryTranslation } from '../../config/i18n';

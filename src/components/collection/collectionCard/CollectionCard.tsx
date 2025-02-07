@@ -1,10 +1,10 @@
-import { useQuery } from '@tanstack/react-query';
-
 import React from 'react';
 
 import { styled } from '@mui/material';
 
 import { TagCategory, ThumbnailSize } from '@graasp/sdk';
+
+import { useQuery } from '@tanstack/react-query';
 
 import { buildCollectionRoute, buildMemberRoute } from '../../../config/routes';
 import { downloadItemThumbnailOptions } from '../../../openapi/client/@tanstack/react-query.gen';
@@ -50,7 +50,7 @@ export const CollectionCard = ({
   const tags = Object.values(TagCategory)
     .flatMap((category: string) => {
       if (`${category}` in collection) {
-        // @ts-expect-error
+        // @ts-expect-error category exist in collection
         return collection[category] ?? [];
       }
       return [];
