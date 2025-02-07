@@ -68,8 +68,8 @@
     "uuid": "11.0.5"
   },
   "devDependencies": {
-    "@commitlint/cli": "19.6.1",
-    "@commitlint/config-conventional": "19.6.0",
+    "@commitlint/cli": "19.7.1",
+    "@commitlint/config-conventional": "19.7.1",
     "@cypress/code-coverage": "3.13.10",
     "@hey-api/openapi-ts": "0.63.0",
     "@storybook/addon-a11y": "8.5.2",
