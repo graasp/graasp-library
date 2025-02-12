@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.15.1](https://github.com/graasp/graasp-library/compare/v1.15.0...v1.15.1) (2025-02-12)
+
+
+### Bug Fixes
+
+* fix card thumbnail width, fix spacing for better mobile view ([#757](https://github.com/graasp/graasp-library/issues/757)) ([ce3b2ff](https://github.com/graasp/graasp-library/commit/ce3b2ffdc30484ee2d25775b350ce4e02ece9724))
+
 ## [1.15.0](https://github.com/graasp/graasp-library/compare/v1.14.0...v1.15.0) (2025-02-05)
 
 
