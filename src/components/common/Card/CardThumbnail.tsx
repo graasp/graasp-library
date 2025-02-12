@@ -1,6 +1,6 @@
 import { Stack } from '@mui/material';
 
-import { DiscriminatedItem, ItemType } from '@graasp/sdk';
+import { type DiscriminatedItem, ItemType } from '@graasp/sdk';
 import { ItemIcon, Thumbnail } from '@graasp/ui';
 
 import { getColorFromId } from '../../../utils/colors';
@@ -8,7 +8,7 @@ import { getColorFromId } from '../../../utils/colors';
 export type CardThumbnailProps = {
   thumbnail?: string | null;
   alt: string;
-  width?: number;
+  width?: number | string;
   minHeight: number;
   type?: DiscriminatedItem['type'];
   minWidth?: string;
