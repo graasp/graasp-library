@@ -61,7 +61,7 @@ export function BigCard({
       }
     >
       <Stack height={height} direction="row" alignItems="center">
-        <Box height="100%" minWidth="30%">
+        <Box height="100%" width="30%">
           <Link href={link} title={name}>
             <Stack height="100%" position="relative">
               {contentOverImage ? (

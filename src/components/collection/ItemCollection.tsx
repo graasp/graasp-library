@@ -31,13 +31,13 @@ const ItemCollection = ({
         <Typography variant="h4" marginBottom={3} id={SECTION_TITLE_ID}>
           {title}
         </Typography>
-      </Container>
 
-      <CollectionsGrid
-        collections={collections}
-        id={collectionGridId}
-        isLoading={isLoading}
-      />
+        <CollectionsGrid
+          collections={collections}
+          id={collectionGridId}
+          isLoading={isLoading}
+        />
+      </Container>
     </StyledContainer>
   );
 };

@@ -122,7 +122,6 @@ const AllCollectionsContent = (): ReactNode => {
             </Alert>
           ) : (
             <CollectionsGrid
-              containerWidth="xl"
               collections={allCollections}
               id={ALL_COLLECTIONS_GRID_ID}
               isLoading={isLoading}

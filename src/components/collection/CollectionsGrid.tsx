@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { Breakpoint, Grid2 as Grid } from '@mui/material';
-import Container from '@mui/material/Container';
+import { Grid2 as Grid } from '@mui/material';
 import Skeleton from '@mui/material/Skeleton';
 import Typography from '@mui/material/Typography';
 
@@ -17,7 +16,6 @@ type Props = {
   collections?: ItemOrSearchedItem[];
   isLoading: boolean;
   id?: string;
-  containerWidth?: Breakpoint | false;
   showIsContentTag?: boolean;
 };
 
@@ -25,7 +23,6 @@ const CollectionsGrid = ({
   collections,
   isLoading,
   id,
-  containerWidth,
   showIsContentTag,
 }: Props) => {
   const { t } = useLibraryTranslation();
@@ -49,36 +46,32 @@ const CollectionsGrid = ({
     );
   }
 
-  return (
-    <Container maxWidth={containerWidth ?? 'xl'}>
-      {!collections?.length ? (
-        <Typography variant="h5" color="inherit">
-          {t(LIBRARY.EMPTY_COLLECTION_MESSAGE)}
-        </Typography>
-      ) : (
+  return !collections?.length ? (
+    <Typography variant="h5" color="inherit">
+      {t(LIBRARY.EMPTY_COLLECTION_MESSAGE)}
+    </Typography>
+  ) : (
+    <Grid
+      container
+      spacing={4}
+      alignItems="stretch"
+      justifyContent="flex-start"
+      id={id}
+    >
+      {collections?.map((collection) => (
         <Grid
-          container
-          spacing={4}
-          alignItems="stretch"
-          justifyContent="flex-start"
-          id={id}
+          key={collection.id}
+          size={size}
+          id={buildCollectionCardGridId(collection.id)}
         >
-          {collections?.map((collection) => (
-            <Grid
-              key={collection.id}
-              size={size}
-              id={buildCollectionCardGridId(collection.id)}
-            >
-              <CollectionCard
-                height={HEIGHT}
-                showIsContentTag={showIsContentTag}
-                collection={collection}
-              />
-            </Grid>
-          ))}
+          <CollectionCard
+            height={HEIGHT}
+            showIsContentTag={showIsContentTag}
+            collection={collection}
+          />
         </Grid>
-      )}
-    </Container>
+      ))}
+    </Grid>
   );
 };
 
