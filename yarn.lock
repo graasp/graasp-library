@@ -11130,7 +11130,7 @@ __metadata:
     interweave: "npm:13.1.0"
     katex: "npm:0.16.21"
     lodash.truncate: "npm:4.4.2"
-    lucide-react: "npm:0.453.0"
+    lucide-react: "npm:0.475.0"
     next: "npm:14.2.23"
     nyc: "npm:17.1.0"
     prettier: "npm:3.4.2"
@@ -13121,12 +13121,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lucide-react@npm:0.453.0":
-  version: 0.453.0
-  resolution: "lucide-react@npm:0.453.0"
+"lucide-react@npm:0.475.0":
+  version: 0.475.0
+  resolution: "lucide-react@npm:0.475.0"
   peerDependencies:
-    react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0-rc
-  checksum: 10/b49c486ce04ebe3650d756aab0584eb96d4b3c2381ab1185ebedbd00333cfafcfe71766f918bc5ea7538bab0339804363afa5503acb416ee2208af9d31a9fac1
+    react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10/a6a9504b1596dfee3a2a5196d785332dc51f9046dbfc47d73a22eb0b718553244187261b3e11184e6b563483330cb95a846ed213150151b6c0aedd2a1048d638
   languageName: node
   linkType: hard
 
