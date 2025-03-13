@@ -11145,7 +11145,7 @@ __metadata:
     social-links: "npm:1.14.0"
     standard-version: "npm:9.5.0"
     storybook: "npm:^8.5.2"
-    stylis: "npm:4.3.5"
+    stylis: "npm:4.3.6"
     typescript: "npm:5.7.3"
     uuid: "npm:11.0.5"
     wait-on: "npm:8.0.2"
@@ -17114,10 +17114,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylis@npm:4.3.5":
-  version: 4.3.5
-  resolution: "stylis@npm:4.3.5"
-  checksum: 10/4f5901cf7f0cd2cd5a284127a638c267325cf2cfd2a00c86bdc7aa85e370fa4029168ad453d77b67023f80f7e42e13ad6bc6c355391ed8109979ff194f6c8009
+"stylis@npm:4.3.6":
+  version: 4.3.6
+  resolution: "stylis@npm:4.3.6"
+  checksum: 10/6ebe8a37827124e0caf0704c13d39c121f6e6a8433eb8c67cfce508477b24a4434d1731198ba0b6e453655022bbf5beda93585f38ff420545e5356f925f83761
   languageName: node
   linkType: hard
 
