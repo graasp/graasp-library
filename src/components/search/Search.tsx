@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { forwardRef, useEffect, useState } from 'react';
 
 import SearchIcon from '@mui/icons-material/Search';
-import { Divider, IconButton, InputBase, Paper } from '@mui/material';
+import { Divider, IconButton, Input, Paper, TextField } from '@mui/material';
 
 import { useLibraryTranslation } from '../../config/i18n';
 import { HOME_SEARCH_BUTTON_ID, HOME_SEARCH_ID } from '../../config/selectors';
@@ -16,6 +17,7 @@ type SearchProps = {
 };
 
 const Search = forwardRef<HTMLDivElement, SearchProps>(function Search(
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   { searchPreset, onChange, handleClick, isLoading, setIsFocused },
   ref,
 ) {
@@ -41,9 +43,7 @@ const Search = forwardRef<HTMLDivElement, SearchProps>(function Search(
     handleClick(searchInput.trim());
   };
 
-  const handleSearchOnClick = (
-    event: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
+  const handleSearchOnClick = (event: React.KeyboardEvent) => {
     if (event.code === 'Enter') {
       handleClick(searchInput.trim());
     }
@@ -68,12 +68,13 @@ const Search = forwardRef<HTMLDivElement, SearchProps>(function Search(
         },
       }}
     >
-      <InputBase
+      <TextField
         // search on click
         value={searchInput}
         id={HOME_SEARCH_ID}
         disabled={isLoading}
-        sx={{ m: 1 }}
+        variant="standard"
+        sx={{ m: 1, border: 0 }}
         placeholder={t(LIBRARY.SEARCH_PLACEHOLDER)}
         fullWidth
         margin="none"
