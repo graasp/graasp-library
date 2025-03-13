@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.15.2](https://github.com/graasp/graasp-library/compare/v1.15.1...v1.15.2) (2025-03-13)
+
+
+### Bug Fixes
+
+* fix type to build ([#763](https://github.com/graasp/graasp-library/issues/763)) ([b62368d](https://github.com/graasp/graasp-library/commit/b62368d61a4ee683633cb1e77c699de17f711cc1))
+
 ## [1.15.1](https://github.com/graasp/graasp-library/compare/v1.15.0...v1.15.1) (2025-02-12)
 
 
