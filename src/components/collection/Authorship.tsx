@@ -89,7 +89,7 @@ const Authorship = ({ itemId, author, displayCoEditors }: Props) => {
     const contributors = memberships
       .filter(({ permission }) =>
         // todo: to check if writers are considered co-editors
-        PermissionLevelCompare.gte(PermissionLevel.Write, permission),
+        PermissionLevelCompare.gte(permission, PermissionLevel.Write),
       )
       .filter(({ account }) => account.id !== author?.id)
       .map(({ account }) => account);
