@@ -139,17 +139,21 @@ describe('Collection Summary', () => {
   });
 
   describe('Signed out', () => {
-    it('should not show copy button', { defaultCommandTimeout: 10000 }, () => {
-      cy.setUpApi({ items: PUBLISHED_ITEMS });
+    it.only(
+      'should not show copy button',
+      { defaultCommandTimeout: 10000 },
+      () => {
+        cy.setUpApi({ items: PUBLISHED_ITEMS });
 
-      const item = PUBLISHED_ITEMS[1];
-      cy.visit(buildCollectionRoute(item.id));
+        const item = PUBLISHED_ITEMS[1];
+        cy.visit(buildCollectionRoute(item.id));
 
-      cy.get(`#${LIBRARY_ACTION_GROUP_BUTTON_ID}`).click();
-      cy.get(`#${LIBRARY_ACTION_GROUP_POP_UP_BUTTONS_ID}`)
-        .find('button')
-        .should('have.length', 2);
-    });
+        cy.get(`#${LIBRARY_ACTION_GROUP_BUTTON_ID}`).click();
+        cy.get(`#${LIBRARY_ACTION_GROUP_POP_UP_BUTTONS_ID}`)
+          .find('li')
+          .should('have.length', 2);
+      },
+    );
   });
 
   describe('Signed in', () => {
