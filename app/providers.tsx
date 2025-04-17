@@ -52,7 +52,7 @@ export default function Providers(props: Readonly<{ children: ReactNode }>) {
     <QueryClientProvider client={client}>
       {children}
       {/* <ReactQueryDevtools initialIsOpen={false} /> */}
-      <ToastContainer stacked theme="colored" />
+      <ToastContainer stacked theme="colored" position="bottom-left" />
     </QueryClientProvider>
   );
 }

@@ -1,4 +1,4 @@
-import React, { MouseEvent, useContext } from 'react';
+import React, { useContext } from 'react';
 
 import CodeIcon from '@mui/icons-material/Code';
 import IconButton from '@mui/material/IconButton';
@@ -16,7 +16,7 @@ import { copyToClipboard } from '../../utils/clipboard';
 import { QueryClientContext } from '../QueryClientContext';
 
 export const useEmbedAction = (itemId?: DiscriminatedItem['id']) => {
-  const startEmbed = (event: MouseEvent<HTMLButtonElement>) => {
+  const startEmbed = () => {
     const link = buildPlayerViewItemRoute(itemId);
     const { mutations } = useContext(QueryClientContext);
 
@@ -42,8 +42,6 @@ export const useEmbedAction = (itemId?: DiscriminatedItem['id']) => {
         });
       },
     });
-
-    event.stopPropagation();
   };
   return {
     startEmbed,

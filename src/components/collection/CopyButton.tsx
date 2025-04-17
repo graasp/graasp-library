@@ -1,9 +1,9 @@
 'use client';
 
-import { MouseEvent, useContext, useState } from 'react';
+import { useContext, useState } from 'react';
+import { toast } from 'react-toastify';
 
 import FileCopyIcon from '@mui/icons-material/FileCopy';
-import CircularProgress from '@mui/material/CircularProgress';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
@@ -21,15 +21,12 @@ export const useCopyAction = (id?: string) => {
   const [showTreeModal, setShowTreeModal] = useState(false);
   const { hooks } = useContext(QueryClientContext);
   const { data: user } = hooks.useCurrentMember();
-  const { mutate: copyItems, isPending: isCopying } = useMutation(
-    copyManyItemsMutation(),
-  );
+  const { mutateAsync: copyItems } = useMutation(copyManyItemsMutation());
 
-  const startCopy = (event: MouseEvent<HTMLButtonElement>) => {
+  const startCopy = () => {
     if (user?.id) {
       setShowTreeModal(true);
     }
-    event.stopPropagation();
   };
 
   if (!id) {
@@ -37,7 +34,7 @@ export const useCopyAction = (id?: string) => {
   }
 
   // todo: set notifier for copy
-  const copy = (to: string | undefined) => {
+  const copy = async (to: string | undefined) => {
     // remove loading icon on callback
     // do not set parent if it is root
     const payload: Parameters<typeof copyItems>[0] = {
@@ -47,7 +44,8 @@ export const useCopyAction = (id?: string) => {
     if (to) {
       payload.body.parentId = to;
     }
-    copyItems(payload);
+    await copyItems(payload);
+    toast.success(t(LIBRARY.START_COPY_SUCCESS_MESSAGE));
   };
 
   const treeModal = user?.id && id && (
@@ -68,7 +66,6 @@ export const useCopyAction = (id?: string) => {
   return {
     treeModal,
     startCopy,
-    isCopying,
   };
 };
 
@@ -80,19 +77,9 @@ type Props = {
 const CopyButton = ({ id, itemId }: Props) => {
   const { t } = useLibraryTranslation();
 
-  const { treeModal, isCopying, startCopy } = useCopyAction(itemId);
+  const { treeModal, startCopy } = useCopyAction(itemId);
 
   const renderButton = () => {
-    if (isCopying) {
-      return (
-        <CircularProgress
-          id="copyButtonInsideLoader"
-          color="primary"
-          size={10}
-        />
-      );
-    }
-
     return (
       <Tooltip title={t(LIBRARY.COPY_BUTTON_TOOLTIP)}>
         <IconButton

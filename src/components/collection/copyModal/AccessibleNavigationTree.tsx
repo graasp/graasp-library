@@ -1,9 +1,11 @@
 import { useContext, useState } from 'react';
 
-import { Alert, Pagination, Skeleton, Stack } from '@mui/material';
+import { Alert, Button, Skeleton, Stack } from '@mui/material';
 
 import { ItemType, PermissionLevel } from '@graasp/sdk';
 import { type RowMenuProps, RowMenus } from '@graasp/ui';
+
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 import { useLibraryTranslation } from '../../../config/i18n';
 import LIBRARY from '../../../langs/constants';
@@ -35,10 +37,6 @@ const AccessibleNavigationTree = ({
     { page },
   );
 
-  const nbPages = accessibleItems
-    ? Math.ceil(accessibleItems.totalCount / PAGE_SIZE)
-    : 0;
-
   if (accessibleItems?.data) {
     return (
       <Stack
@@ -56,15 +54,26 @@ const AccessibleNavigationTree = ({
             isDisabled={isDisabled}
           />
         </Stack>
-        <Stack direction="row" justifyContent="end">
-          {nbPages > 1 && (
-            <Pagination
-              sx={{ justifyContent: 'end' }}
-              size="small"
-              count={nbPages}
-              page={page}
-              onChange={(_, p) => setPage(p)}
-            />
+        <Stack direction="row" justifyContent="space-between">
+          {page >= 2 ? (
+            <Button
+              variant="text"
+              onClick={() => setPage((p) => p - 1)}
+              startIcon={<ChevronLeft />}
+            >
+              {translateLibrary(LIBRARY.COPY_ITEM_PAGINATION_PREV)}
+            </Button>
+          ) : (
+            <div />
+          )}
+          {accessibleItems.data.length === PAGE_SIZE && (
+            <Button
+              variant="text"
+              onClick={() => setPage((p) => p + 1)}
+              endIcon={<ChevronRight />}
+            >
+              {translateLibrary(LIBRARY.COPY_ITEM_PAGINATION_NEXT)}
+            </Button>
           )}
         </Stack>
       </Stack>

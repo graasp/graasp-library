@@ -8,7 +8,7 @@ import {
   mockGetChildren,
   mockGetCurrentMember,
   mockGetItem,
-  mockGetItemMembershipsForItems,
+  mockGetItemMembershipsForItem,
   mockGetItemThumbnailUrl,
   mockGetLikedItems,
   mockGetMember,
@@ -62,7 +62,7 @@ Cypress.Commands.add(
 
     mockGetTagsByItem({ items });
 
-    mockGetItemMembershipsForItems({ items, currentMember });
+    mockGetItemMembershipsForItem({ items, currentMember });
 
     mockSearch({ searchResultItems }, searchError);
 

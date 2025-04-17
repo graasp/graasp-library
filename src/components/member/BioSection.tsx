@@ -32,36 +32,36 @@ const BioSection = ({ memberId }: Props): JSX.Element | null => {
     if (publicProfile == null) {
       return null;
     }
-    const { bio, linkedinID, facebookID, twitterID } = publicProfile;
+    const { bio, linkedinId, facebookId, twitterId } = publicProfile;
     return (
       <>
         <ShowLessAndMoreContent content={bio} />
-        {(linkedinID || facebookID || twitterID) && (
+        {(linkedinId || facebookId || twitterId) && (
           <Typography variant="body1" fontWeight="bold">
             {t(LIBRARY.SOCIAL_PROFILES)}
           </Typography>
         )}
         <Stack direction="row" spacing={1}>
-          {facebookID && (
+          {facebookId && (
             <IconButton
               component={Link}
-              href={socialLinks.sanitize('facebook', facebookID)}
+              href={socialLinks.sanitize('facebook', facebookId)}
             >
               <FacebookIcon sx={{ fill: '#4267B2' }} />
             </IconButton>
           )}
-          {twitterID && (
+          {twitterId && (
             <IconButton
               component={Link}
-              href={socialLinks.sanitize('twitter', twitterID)}
+              href={socialLinks.sanitize('twitter', twitterId)}
             >
               <TwitterIcon sx={{ fill: '#1DA1F2' }} />
             </IconButton>
           )}
-          {linkedinID && (
+          {linkedinId && (
             <IconButton
               component={Link}
-              href={socialLinks.sanitize('linkedin', linkedinID)}
+              href={socialLinks.sanitize('linkedin', linkedinId)}
             >
               <LinkedInIcon sx={{ fill: '#0077B5' }} />
             </IconButton>

@@ -142,6 +142,7 @@ export type CurrentAccountSchemaRef =
       name: string;
       createdAt: string;
       updatedAt: string;
+      lang: string;
       lastAuthenticatedAt: null | string;
       email?: string;
       type: AccountTypeIndividual;
@@ -157,11 +158,13 @@ export type CurrentAccountSchemaRef =
       name: string;
       createdAt: string;
       updatedAt: string;
+      lang: string;
       lastAuthenticatedAt: null | string;
       type: AccountTypeGuest;
       extra: {
         [key: string]: unknown;
       };
+      email: null;
     };
 
 /**
@@ -173,6 +176,7 @@ export type NullableCurrentAccountSchemaRef =
       name: string;
       createdAt: string;
       updatedAt: string;
+      lang: string;
       lastAuthenticatedAt: null | string;
       email?: string;
       type: AccountTypeIndividual;
@@ -188,11 +192,13 @@ export type NullableCurrentAccountSchemaRef =
       name: string;
       createdAt: string;
       updatedAt: string;
+      lang: string;
       lastAuthenticatedAt: null | string;
       type: AccountTypeGuest;
       extra: {
         [key: string]: unknown;
       };
+      email: null;
     });
 
 /**
@@ -201,7 +207,7 @@ export type NullableCurrentAccountSchemaRef =
 export type ItemVisibility = {
   id: string;
   type: 'public' | 'hidden';
-  item: Item;
+  itemPath: string;
   creator?: NullableMember;
   createdAt: string;
 };
@@ -250,15 +256,28 @@ export type TokensPair = {
 };
 
 /**
+ * Raw data for a message from a member in a chat of an item.
+ */
+export type RawChatMessage = {
+  id: string;
+  creatorId: null | string;
+  createdAt: string;
+  updatedAt: string;
+  body: string;
+  itemId: string;
+};
+
+/**
  * Message from a member in a chat of an item.
  */
 export type ChatMessage = {
   id: string;
+  creatorId: null | string;
   creator: NullableMinimalAccount;
   createdAt: string;
   updatedAt: string;
   body: string;
-  item: Item;
+  itemId: string;
 };
 
 /**
@@ -274,7 +293,7 @@ export type Chat = {
  */
 export type MinimalChatMention = {
   id: string;
-  account: MinimalAccount;
+  accountId: string;
   createdAt: string;
   updatedAt: string;
   status: 'unread' | 'read';
@@ -284,7 +303,9 @@ export type MinimalChatMention = {
  * Mention of a user in a chat including message
  */
 export type CompleteChatMention = MinimalChatMention & {
-  message: ChatMessage;
+  message: RawChatMessage;
+} & {
+  account: MinimalAccount;
 };
 
 /**
@@ -381,7 +402,6 @@ export type AppDataWithLegacyProps = {
 export type AppSetting = {
   id: string;
   name: string;
-  item: Item;
   data: {
     [key: string]: unknown;
   };
@@ -404,6 +424,19 @@ export type ItemMembership = {
 };
 
 /**
+ * Define the permission access between account and item
+ */
+export type RawItemMembership = {
+  id: string;
+  accountId: string;
+  itemPath: string;
+  permission: 'read' | 'write' | 'admin';
+  creator?: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+/**
  * Invitation for a non-registered user to access an item. The user is identified by email.
  */
 export type Invitation = {
@@ -417,18 +450,9 @@ export type Invitation = {
 };
 
 /**
- * Bookmark instance for member of a given item.
- */
-export type Favorite = {
-  id: string;
-  item: Item;
-  createdAt: string;
-};
-
-/**
  * Bookmark instance for member of a given packed item.
  */
-export type PackedFavorite = {
+export type PackedBookmark = {
   id: string;
   item: PackedItem;
   createdAt: string;
@@ -501,9 +525,24 @@ export type SimpleMembershipRequest = {
  */
 export type Profile = {
   bio: string;
-  facebookID: string;
-  linkedinID: string;
-  twitterID: string;
+  facebookId: string;
+  linkedinId: string;
+  twitterId: string;
+  visibility: boolean;
+} & {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+/**
+ * Profile of a member, null if it does not exist
+ */
+export type NullableProfile = {
+  bio: string;
+  facebookId: string;
+  linkedinId: string;
+  twitterId: string;
   visibility: boolean;
 } & {
   id: string;
@@ -1178,7 +1217,6 @@ export type GetStorageFilesResponses = {
         name: string;
       };
     }>;
-    totalCount: number;
     pagination: {
       page: number;
       pageSize: number;
@@ -1216,45 +1254,6 @@ export type GetOneMemberResponses = {
 
 export type GetOneMemberResponse =
   GetOneMemberResponses[keyof GetOneMemberResponses];
-
-export type PatchMembersByIdData = {
-  body?: {
-    name?: string;
-    enableSaveActions?: boolean;
-    extra?: {
-      [key: string]: unknown;
-    };
-  };
-  path: {
-    id: string;
-  };
-  query?: never;
-  url: '/members/{id}';
-};
-
-export type PatchMembersByIdErrors = {
-  /**
-   * Default Response
-   */
-  403: _Error;
-  /**
-   * Default Response
-   */
-  '4XX': _Error;
-};
-
-export type PatchMembersByIdError =
-  PatchMembersByIdErrors[keyof PatchMembersByIdErrors];
-
-export type PatchMembersByIdResponses = {
-  /**
-   * Default Response
-   */
-  200: CurrentAccountSchemaRef;
-};
-
-export type PatchMembersByIdResponse =
-  PatchMembersByIdResponses[keyof PatchMembersByIdResponses];
 
 export type PatchChangeEmailData = {
   body?: never;
@@ -1352,6 +1351,9 @@ export type DownloadAvatarData = {
     size: 'small' | 'medium' | 'large' | 'original';
   };
   query: {
+    /**
+     * @deprecated
+     */
     replyUrl: boolean;
   };
   url: '/members/{id}/avatar/{size}';
@@ -1373,7 +1375,7 @@ export type DownloadAvatarError =
 
 export type DownloadAvatarResponses = {
   /**
-   * Url string of the avatar if replyUrl is true
+   * Url string of the avatar
    */
   200: string;
   /**
@@ -1409,11 +1411,7 @@ export type GetOwnProfileResponses = {
   /**
    * Default Response
    */
-  200: Profile;
-  /**
-   * Default Response
-   */
-  204: void;
+  200: NullableProfile;
 };
 
 export type GetOwnProfileResponse =
@@ -1446,11 +1444,7 @@ export type GetMemberProfileResponses = {
   /**
    * Default Response
    */
-  200: Profile;
-  /**
-   * Default Response
-   */
-  204: void;
+  200: NullableProfile;
 };
 
 export type GetMemberProfileResponse =
@@ -1459,9 +1453,9 @@ export type GetMemberProfileResponse =
 export type UpdateOwnProfileData = {
   body?: {
     bio?: string;
-    facebookID?: string;
-    linkedinID?: string;
-    twitterID?: string;
+    facebookId?: string;
+    linkedinId?: string;
+    twitterId?: string;
     visibility?: boolean;
   };
   path?: never;
@@ -1487,19 +1481,19 @@ export type UpdateOwnProfileResponses = {
   /**
    * Default Response
    */
-  200: Profile;
+  204: void;
 };
 
 export type UpdateOwnProfileResponse =
   UpdateOwnProfileResponses[keyof UpdateOwnProfileResponses];
 
 export type CreateOwnProfileData = {
-  body: {
-    bio: string;
-    facebookID: string;
-    linkedinID: string;
-    twitterID: string;
-    visibility: boolean;
+  body?: {
+    bio?: string;
+    facebookId?: string;
+    linkedinId?: string;
+    twitterId?: string;
+    visibility?: boolean;
   };
   path?: never;
   query?: never;
@@ -1511,6 +1505,10 @@ export type CreateOwnProfileErrors = {
    * Default Response
    */
   401: _Error;
+  /**
+   * Default Response
+   */
+  500: _Error;
   /**
    * Default Response
    */
@@ -1743,7 +1741,7 @@ export type CreateAppDataResponses = {
   /**
    * Default Response
    */
-  200: AppDataWithLegacyProps;
+  204: AppData;
 };
 
 export type CreateAppDataResponse =
@@ -1805,7 +1803,7 @@ export type UpdateAppDataResponses = {
   /**
    * Default Response
    */
-  200: AppDataWithLegacyProps;
+  204: AppData;
 };
 
 export type UpdateAppDataResponse =
@@ -1832,11 +1830,8 @@ export type CreateAppDataFileResponses = {
   /**
    * Default Response
    */
-  200: AppDataWithLegacyProps;
+  200: unknown;
 };
-
-export type CreateAppDataFileResponse =
-  CreateAppDataFileResponses[keyof CreateAppDataFileResponses];
 
 export type DownloadAppDataFileData = {
   body?: never;
@@ -1932,7 +1927,7 @@ export type CreateAppActionResponses = {
   /**
    * Default Response
    */
-  200: AppActionLegacy;
+  204: void;
 };
 
 export type CreateAppActionResponse =
@@ -2030,7 +2025,7 @@ export type DeleteAppSettingResponses = {
   /**
    * Successful Response
    */
-  200: string;
+  204: void;
 };
 
 export type DeleteAppSettingResponse =
@@ -2356,90 +2351,90 @@ export type LoginOrRegisterAsGuestResponses = {
 export type LoginOrRegisterAsGuestResponse =
   LoginOrRegisterAsGuestResponses[keyof LoginOrRegisterAsGuestResponses];
 
-export type GetOwnFavoriteData = {
+export type GetOwnBookmarkData = {
   body?: never;
   path?: never;
   query?: never;
-  url: '/items/favorite';
+  url: '/items/bookmarks';
 };
 
-export type GetOwnFavoriteErrors = {
+export type GetOwnBookmarkErrors = {
   /**
    * Default Response
    */
   '4XX': _Error;
 };
 
-export type GetOwnFavoriteError =
-  GetOwnFavoriteErrors[keyof GetOwnFavoriteErrors];
+export type GetOwnBookmarkError =
+  GetOwnBookmarkErrors[keyof GetOwnBookmarkErrors];
 
-export type GetOwnFavoriteResponses = {
+export type GetOwnBookmarkResponses = {
   /**
    * Default Response
    */
-  200: Array<PackedFavorite>;
+  200: Array<PackedBookmark>;
 };
 
-export type GetOwnFavoriteResponse =
-  GetOwnFavoriteResponses[keyof GetOwnFavoriteResponses];
+export type GetOwnBookmarkResponse =
+  GetOwnBookmarkResponses[keyof GetOwnBookmarkResponses];
 
-export type DeleteFavoriteData = {
+export type DeleteBookmarkData = {
   body?: never;
   path: {
     itemId: string;
   };
   query?: never;
-  url: '/items/favorite/{itemId}';
+  url: '/items/bookmarks/{itemId}';
 };
 
-export type DeleteFavoriteErrors = {
+export type DeleteBookmarkErrors = {
   /**
    * Default Response
    */
   '4XX': _Error;
 };
 
-export type DeleteFavoriteError =
-  DeleteFavoriteErrors[keyof DeleteFavoriteErrors];
+export type DeleteBookmarkError =
+  DeleteBookmarkErrors[keyof DeleteBookmarkErrors];
 
-export type DeleteFavoriteResponses = {
+export type DeleteBookmarkResponses = {
   /**
    * Successful Response
    */
-  200: string;
+  204: void;
 };
 
-export type DeleteFavoriteResponse =
-  DeleteFavoriteResponses[keyof DeleteFavoriteResponses];
+export type DeleteBookmarkResponse =
+  DeleteBookmarkResponses[keyof DeleteBookmarkResponses];
 
-export type CreateFavoriteData = {
+export type CreateBookmarkData = {
   body?: never;
   path: {
     itemId: string;
   };
   query?: never;
-  url: '/items/favorite/{itemId}';
+  url: '/items/bookmarks/{itemId}';
 };
 
-export type CreateFavoriteErrors = {
+export type CreateBookmarkErrors = {
   /**
    * Default Response
    */
   '4XX': _Error;
 };
 
-export type CreateFavoriteError =
-  CreateFavoriteErrors[keyof CreateFavoriteErrors];
+export type CreateBookmarkError =
+  CreateBookmarkErrors[keyof CreateBookmarkErrors];
 
-export type CreateFavoriteResponses = {
+export type CreateBookmarkResponses = {
   /**
    * Default Response
    */
-  200: Favorite;
+  204: void;
 };
 
-export type CreateFavoriteResponse =
-  CreateFavoriteResponses[keyof CreateFavoriteResponses];
+export type CreateBookmarkResponse =
+  CreateBookmarkResponses[keyof CreateBookmarkResponses];
 
 export type GetCollectionsForMemberData = {
   body?: never;
@@ -2505,35 +2500,6 @@ export type GetCollectionInformationsResponses = {
 export type GetCollectionInformationsResponse =
   GetCollectionInformationsResponses[keyof GetCollectionInformationsResponses];
 
-export type GetItemsCollectionsInformationsData = {
-  body?: never;
-  path?: never;
-  query: {
-    itemId: Array<string>;
-  };
-  url: '/items/collections/informations';
-};
-
-export type GetItemsCollectionsInformationsResponses = {
-  /**
-   * Default Response
-   */
-  200: {
-    data: {
-      [key: string]: {
-        id: string;
-        item: Item;
-        creator: NullableMember;
-        createdAt: string;
-      };
-    };
-    errors: Array<_Error>;
-  };
-};
-
-export type GetItemsCollectionsInformationsResponse =
-  GetItemsCollectionsInformationsResponses[keyof GetItemsCollectionsInformationsResponses];
-
 export type PublishItemData = {
   body?: never;
   path: {
@@ -2554,14 +2520,9 @@ export type PublishItemError = PublishItemErrors[keyof PublishItemErrors];
 
 export type PublishItemResponses = {
   /**
-   * Information of a published item
+   * Default Response
    */
-  200: {
-    id: string;
-    item: Item;
-    creator: NullableMember;
-    createdAt: string;
-  };
+  204: void;
 };
 
 export type PublishItemResponse =
@@ -2587,14 +2548,9 @@ export type UnpublishItemError = UnpublishItemErrors[keyof UnpublishItemErrors];
 
 export type UnpublishItemResponses = {
   /**
-   * Information of a published item
+   * Default Response
    */
-  200: {
-    id: string;
-    item: Item;
-    creator: NullableMember;
-    createdAt: string;
-  };
+  204: void;
 };
 
 export type UnpublishItemResponse =
@@ -2926,6 +2882,172 @@ export type GetItemsCollectionsSearchRebuildResponses = {
   200: unknown;
 };
 
+export type CreateShortcutData = {
+  body: {
+    target: string;
+    name?: string;
+    description?: null | string;
+  };
+  path?: never;
+  query?: {
+    parentId?: string;
+    previousItemId?: string;
+  };
+  url: '/items/shortcuts';
+};
+
+export type CreateShortcutErrors = {
+  /**
+   * Default Response
+   */
+  '4XX': _Error;
+};
+
+export type CreateShortcutError =
+  CreateShortcutErrors[keyof CreateShortcutErrors];
+
+export type CreateShortcutResponses = {
+  /**
+   * Default Response
+   */
+  200: {
+    id: string;
+    name: string;
+    description?: null | string;
+    type: string;
+    path: string;
+    lang: string;
+    extra: {
+      [key: string]: unknown;
+    } & {
+      shortcut: {
+        target: string;
+      };
+    };
+    /**
+     * Parameters, mostly visual, common to all types of items.
+     */
+    settings: {
+      /**
+       * @deprecated
+       */
+      lang?: string;
+      isPinned?: boolean;
+      /**
+       * @deprecated
+       */
+      tags?: Array<string>;
+      showChatbox?: boolean;
+      isResizable?: boolean;
+      hasThumbnail?: boolean;
+      ccLicenseAdaption?:
+        | 'CC BY'
+        | 'CC BY-NC'
+        | 'CC BY-SA'
+        | 'CC BY-NC-SA'
+        | 'CC BY-ND'
+        | 'CC BY-NC-ND'
+        | 'CC0';
+      displayCoEditors?: boolean;
+      descriptionPlacement?: 'above' | 'below';
+      isCollapsible?: boolean;
+      enableSaveActions?: boolean;
+      showLinkIframe?: boolean;
+      showLinkButton?: boolean;
+      maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+      alignment?: 'center' | 'left' | 'right';
+    };
+    creator?: NullableMinimalAccount;
+    createdAt: string;
+    updatedAt: string;
+  };
+};
+
+export type CreateShortcutResponse =
+  CreateShortcutResponses[keyof CreateShortcutResponses];
+
+export type UpdateShortcutData = {
+  body?: {
+    name?: string;
+    description?: null | string;
+  };
+  path: {
+    id: string;
+  };
+  query?: never;
+  url: '/items/shortcuts/{id}';
+};
+
+export type UpdateShortcutErrors = {
+  /**
+   * Default Response
+   */
+  '4XX': _Error;
+};
+
+export type UpdateShortcutError =
+  UpdateShortcutErrors[keyof UpdateShortcutErrors];
+
+export type UpdateShortcutResponses = {
+  /**
+   * Default Response
+   */
+  200: {
+    id: string;
+    name: string;
+    description?: null | string;
+    type: string;
+    path: string;
+    lang: string;
+    extra: {
+      [key: string]: unknown;
+    } & {
+      shortcut: {
+        target: string;
+      };
+    };
+    /**
+     * Parameters, mostly visual, common to all types of items.
+     */
+    settings: {
+      /**
+       * @deprecated
+       */
+      lang?: string;
+      isPinned?: boolean;
+      /**
+       * @deprecated
+       */
+      tags?: Array<string>;
+      showChatbox?: boolean;
+      isResizable?: boolean;
+      hasThumbnail?: boolean;
+      ccLicenseAdaption?:
+        | 'CC BY'
+        | 'CC BY-NC'
+        | 'CC BY-SA'
+        | 'CC BY-NC-SA'
+        | 'CC BY-ND'
+        | 'CC BY-NC-ND'
+        | 'CC0';
+      displayCoEditors?: boolean;
+      descriptionPlacement?: 'above' | 'below';
+      isCollapsible?: boolean;
+      enableSaveActions?: boolean;
+      showLinkIframe?: boolean;
+      showLinkButton?: boolean;
+      maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+      alignment?: 'center' | 'left' | 'right';
+    };
+    creator?: NullableMinimalAccount;
+    createdAt: string;
+    updatedAt: string;
+  };
+};
+
+export type UpdateShortcutResponse =
+  UpdateShortcutResponses[keyof UpdateShortcutResponses];
+
 export type DeleteItemsByIdThumbnailsData = {
   body?: never;
   path: {
@@ -3037,6 +3159,9 @@ export type DownloadFileData = {
     id: string;
   };
   query: {
+    /**
+     * @deprecated
+     */
     replyUrl: boolean;
   };
   url: '/items/{id}/download';
@@ -3060,6 +3185,71 @@ export type DownloadFileResponses = {
 
 export type DownloadFileResponse =
   DownloadFileResponses[keyof DownloadFileResponses];
+
+export type UpdateFileData = {
+  /**
+   * Smallest unit of a learning collection
+   */
+  body?: {
+    name?: string;
+    description?: null | string;
+    lang?: string;
+    /**
+     * Parameters, mostly visual, common to all types of items.
+     */
+    settings?: {
+      /**
+       * @deprecated
+       */
+      lang?: string;
+      isPinned?: boolean;
+      /**
+       * @deprecated
+       */
+      tags?: Array<string>;
+      showChatbox?: boolean;
+      isResizable?: boolean;
+      hasThumbnail?: boolean;
+      ccLicenseAdaption?:
+        | 'CC BY'
+        | 'CC BY-NC'
+        | 'CC BY-SA'
+        | 'CC BY-NC-SA'
+        | 'CC BY-ND'
+        | 'CC BY-NC-ND'
+        | 'CC0';
+      displayCoEditors?: boolean;
+      descriptionPlacement?: 'above' | 'below';
+      isCollapsible?: boolean;
+      enableSaveActions?: boolean;
+      showLinkIframe?: boolean;
+      showLinkButton?: boolean;
+      maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+      alignment?: 'center' | 'left' | 'right';
+    };
+  };
+  path: {
+    id: string;
+  };
+  query?: never;
+  url: '/items/files/{id}';
+};
+
+export type UpdateFileErrors = {
+  /**
+   * Default Response
+   */
+  '4XX': _Error;
+};
+
+export type UpdateFileError = UpdateFileErrors[keyof UpdateFileErrors];
+
+export type UpdateFileResponses = {
+  /**
+   * Successful Response
+   */
+  200: unknown;
+};
 
 export type DeleteVisibilityData = {
   body?: never;
@@ -3085,11 +3275,7 @@ export type DeleteVisibilityResponses = {
   /**
    * Successful Response
    */
-  200: {
-    item: {
-      path: string;
-    };
-  };
+  204: void;
 };
 
 export type DeleteVisibilityResponse =
@@ -3880,20 +4066,6 @@ export type GetItemsPublicationByItemIdStatusResponses = {
   200: unknown;
 };
 
-export type GetItemsH5pAssetsIntegrationHtmlData = {
-  body?: never;
-  path?: never;
-  query?: never;
-  url: '/items/h5p-assets/integration.html';
-};
-
-export type GetItemsH5pAssetsIntegrationHtmlResponses = {
-  /**
-   * Default Response
-   */
-  200: unknown;
-};
-
 export type ImportH5pData = {
   body?: never;
   path?: never;
@@ -3931,6 +4103,7 @@ export type ImportH5pResponse = ImportH5pResponses[keyof ImportH5pResponses];
 export type CreateEtherpadData = {
   body: {
     name: string;
+    readerPermission?: 'read' | 'write';
   };
   path?: never;
   query?: {
@@ -3960,8 +4133,44 @@ export type CreateEtherpadResponse =
   CreateEtherpadResponses[keyof CreateEtherpadResponses];
 
 export type UpdateEtherpadData = {
-  body: {
-    readerPermission: 'read' | 'write';
+  body?: {
+    name?: string;
+    description?: null | string;
+    lang?: string;
+    /**
+     * Parameters, mostly visual, common to all types of items.
+     */
+    settings?: {
+      /**
+       * @deprecated
+       */
+      lang?: string;
+      isPinned?: boolean;
+      /**
+       * @deprecated
+       */
+      tags?: Array<string>;
+      showChatbox?: boolean;
+      isResizable?: boolean;
+      hasThumbnail?: boolean;
+      ccLicenseAdaption?:
+        | 'CC BY'
+        | 'CC BY-NC'
+        | 'CC BY-SA'
+        | 'CC BY-NC-SA'
+        | 'CC BY-ND'
+        | 'CC BY-NC-ND'
+        | 'CC0';
+      displayCoEditors?: boolean;
+      descriptionPlacement?: 'above' | 'below';
+      isCollapsible?: boolean;
+      enableSaveActions?: boolean;
+      showLinkIframe?: boolean;
+      showLinkButton?: boolean;
+      maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+      alignment?: 'center' | 'left' | 'right';
+    };
+    readerPermission?: 'read' | 'write';
   };
   path: {
     id: string;
@@ -4079,6 +4288,37 @@ export type ExportZipResponses = {
 };
 
 export type ExportZipResponse = ExportZipResponses[keyof ExportZipResponses];
+
+export type GraaspZipExportData = {
+  body?: never;
+  path: {
+    itemId: string;
+  };
+  query?: never;
+  url: '/items/{itemId}/graasp-export';
+};
+
+export type GraaspZipExportErrors = {
+  /**
+   * Default Response
+   */
+  '4XX': _Error;
+};
+
+export type GraaspZipExportError =
+  GraaspZipExportErrors[keyof GraaspZipExportErrors];
+
+export type GraaspZipExportResponses = {
+  /**
+   * Default Response
+   */
+  200: {
+    content?: string;
+  };
+};
+
+export type GraaspZipExportResponse =
+  GraaspZipExportResponses[keyof GraaspZipExportResponses];
 
 export type GetLinkMetadataData = {
   body?: never;
@@ -4245,6 +4485,9 @@ export type UpdateLinkData = {
     name?: string;
     description?: null | string;
     lang?: string;
+    /**
+     * Parameters, mostly visual, common to all types of items.
+     */
     settings?: {
       /**
        * @deprecated
@@ -4274,9 +4517,6 @@ export type UpdateLinkData = {
       showLinkButton?: boolean;
       maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
       alignment?: 'center' | 'left' | 'right';
-    } & {
-      showLinkIframe?: boolean;
-      showLinkButton?: boolean;
     };
     url?: string;
     showLinkIframe?: boolean;
@@ -4679,10 +4919,7 @@ export type CreateInvitationResponses = {
   /**
    * Successful Response
    */
-  200: {
-    memberships: Array<ItemMembership>;
-    invitations: Array<Invitation>;
-  };
+  204: void;
 };
 
 export type CreateInvitationResponse =
@@ -4772,9 +5009,9 @@ export type UpdateInvitationError =
 
 export type UpdateInvitationResponses = {
   /**
-   * Default Response
+   * Successful Response
    */
-  200: Invitation;
+  204: void;
 };
 
 export type UpdateInvitationResponse =
@@ -4889,7 +5126,7 @@ export type EnrollResponses = {
   /**
    * Default Response
    */
-  200: ItemMembership;
+  204: void;
 };
 
 export type EnrollResponse = EnrollResponses[keyof EnrollResponses];
@@ -4958,7 +5195,7 @@ export type CreateItemFlagResponses = {
   /**
    * Default Response
    */
-  201: ItemFlag;
+  204: void;
 };
 
 export type CreateItemFlagResponse =
@@ -4990,7 +5227,6 @@ export type GetOwnRecycledItemsResponses = {
    */
   200: {
     data: Array<Item>;
-    totalCount: number;
     pagination: {
       page: number;
       pageSize: number;
@@ -5090,7 +5326,7 @@ export type GetLatestItemValidationGroupResponses = {
       id: string;
       process: 'bad-words-detection' | 'image-classification';
       status: 'success' | 'failure' | 'pending' | 'pending-manual';
-      result: string;
+      result: null | string;
       createdAt: string;
       updatedAt: string;
     }>;
@@ -5099,52 +5335,6 @@ export type GetLatestItemValidationGroupResponses = {
 
 export type GetLatestItemValidationGroupResponse =
   GetLatestItemValidationGroupResponses[keyof GetLatestItemValidationGroupResponses];
-
-export type GetItemValidationGroupData = {
-  body?: never;
-  path: {
-    itemId: string;
-    itemValidationGroupId: string;
-  };
-  query?: never;
-  url: '/items/{itemId}/validations/{itemValidationGroupId}';
-};
-
-export type GetItemValidationGroupErrors = {
-  /**
-   * Default Response
-   */
-  '4XX': _Error;
-};
-
-export type GetItemValidationGroupError =
-  GetItemValidationGroupErrors[keyof GetItemValidationGroupErrors];
-
-export type GetItemValidationGroupResponses = {
-  /**
-   * Group of validations for an item, with nested items
-   */
-  200: {
-    id: string;
-    item: Item;
-    createdAt: string;
-    itemValidations: Array<{
-      id: string;
-      process: 'bad-words-detection' | 'image-classification';
-      status: 'success' | 'failure' | 'pending' | 'pending-manual';
-      result: string;
-      createdAt: string;
-      updatedAt: string;
-    }>;
-  } & {
-    itemValidations: Array<{
-      item: Item;
-    }>;
-  };
-};
-
-export type GetItemValidationGroupResponse =
-  GetItemValidationGroupResponses[keyof GetItemValidationGroupResponses];
 
 export type ValidateItemData = {
   body?: never;
@@ -5309,7 +5499,7 @@ export type ClearAllMentionsResponses = {
   /**
    * Default Response
    */
-  200: Array<CompleteChatMention>;
+  204: void;
 };
 
 export type ClearAllMentionsResponse =
@@ -5423,7 +5613,7 @@ export type ClearChatMessageResponses = {
   /**
    * Default Response
    */
-  200: Chat;
+  204: void;
 };
 
 export type ClearChatMessageResponse =
@@ -5550,131 +5740,6 @@ export type PatchChatMessageResponses = {
 export type PatchChatMessageResponse =
   PatchChatMessageResponses[keyof PatchChatMessageResponses];
 
-export type GetItemActionsData = {
-  body?: never;
-  path: {
-    id: string;
-  };
-  query?: {
-    requestedSampleSize?: number;
-    view?:
-      | 'builder'
-      | 'player'
-      | 'library'
-      | 'analytics'
-      | 'account'
-      | 'auth'
-      | 'unknown';
-    startDate?: string;
-    endDate?: string;
-  };
-  url: '/items/{id}/actions';
-};
-
-export type GetItemActionsErrors = {
-  /**
-   * Default Response
-   */
-  '4XX': _Error;
-};
-
-export type GetItemActionsError =
-  GetItemActionsErrors[keyof GetItemActionsErrors];
-
-export type GetItemActionsResponses = {
-  /**
-   * Default Response
-   */
-  200: {
-    actions: Array<{
-      id: string;
-      account?: NullableMinimalAccount;
-      /**
-       * Smallest unit of a learning collection
-       */
-      item?: null | {
-        id: string;
-        name: string;
-        description?: null | string;
-        type: string;
-        path: string;
-        lang: string;
-        extra: {
-          [key: string]: unknown;
-        };
-        /**
-         * Parameters, mostly visual, common to all types of items.
-         */
-        settings: {
-          /**
-           * @deprecated
-           */
-          lang?: string;
-          isPinned?: boolean;
-          /**
-           * @deprecated
-           */
-          tags?: Array<string>;
-          showChatbox?: boolean;
-          isResizable?: boolean;
-          hasThumbnail?: boolean;
-          ccLicenseAdaption?:
-            | 'CC BY'
-            | 'CC BY-NC'
-            | 'CC BY-SA'
-            | 'CC BY-NC-SA'
-            | 'CC BY-ND'
-            | 'CC BY-NC-ND'
-            | 'CC0';
-          displayCoEditors?: boolean;
-          descriptionPlacement?: 'above' | 'below';
-          isCollapsible?: boolean;
-          enableSaveActions?: boolean;
-          showLinkIframe?: boolean;
-          showLinkButton?: boolean;
-          maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-          alignment?: 'center' | 'left' | 'right';
-        };
-        createdAt: string;
-        updatedAt: string;
-      };
-      view:
-        | 'builder'
-        | 'player'
-        | 'library'
-        | 'analytics'
-        | 'account'
-        | 'auth'
-        | 'unknown';
-      type: string;
-      extra: {
-        [key: string]: unknown;
-      };
-      geolocation?: null | {
-        [key: string]: unknown;
-      };
-      createdAt: string;
-    }>;
-    members: Array<MinimalAccount>;
-    descendants: Array<Item>;
-    item: Item;
-    apps: {
-      [key: string]: {
-        data: Array<AppData>;
-        settings: Array<AppSetting>;
-        actions: Array<AppAction>;
-      };
-    };
-    metadata: {
-      numActionsRetrieved: number;
-      requestedSampleSize: number;
-    };
-  };
-};
-
-export type GetItemActionsResponse =
-  GetItemActionsResponses[keyof GetItemActionsResponses];
-
 export type PostActionData = {
   body: {
     type: string;
@@ -5710,121 +5775,6 @@ export type PostActionResponses = {
 
 export type PostActionResponse = PostActionResponses[keyof PostActionResponses];
 
-export type GetAggregateActionsData = {
-  body?: never;
-  path: {
-    /**
-     * Item id to get aggregation from.
-     */
-    id: string;
-  };
-  query: {
-    requestedSampleSize?: number;
-    /**
-     * Filter by view
-     */
-    view?:
-      | 'builder'
-      | 'player'
-      | 'library'
-      | 'analytics'
-      | 'account'
-      | 'auth'
-      | 'unknown';
-    /**
-     * Filter by type
-     */
-    type?: Array<string>;
-    /**
-     * Field to group by on
-     */
-    countGroupBy: Array<
-      | 'actionType'
-      | 'actionLocation'
-      | 'createdDay'
-      | 'createdDayOfWeek'
-      | 'createdTimeOfDay'
-      | 'itemId'
-      | 'user'
-    >;
-    /**
-     * Function used when aggregating actions
-     */
-    aggregateFunction: 'avg' | 'count' | 'sum';
-    aggregateMetric:
-      | 'actionCount'
-      | 'actionLocation'
-      | 'actionType'
-      | 'createdDay'
-      | 'createdDayOfWeek'
-      | 'createdTimeOfDay'
-      | 'itemId'
-      | 'user';
-    aggregateBy?: Array<
-      | 'actionCount'
-      | 'actionLocation'
-      | 'actionType'
-      | 'createdDay'
-      | 'createdDayOfWeek'
-      | 'createdTimeOfDay'
-      | 'itemId'
-    >;
-    startDate?: string;
-    endDate?: string;
-  };
-  url: '/items/{id}/actions/aggregation';
-};
-
-export type GetAggregateActionsErrors = {
-  /**
-   * Default Response
-   */
-  '4XX': _Error;
-};
-
-export type GetAggregateActionsError =
-  GetAggregateActionsErrors[keyof GetAggregateActionsErrors];
-
-export type GetAggregateActionsResponses = {
-  /**
-   * Default Response
-   */
-  200: Array<{
-    aggregateResult: number;
-    createdTimeOfDay?: string;
-    actionType?:
-      | ('update' | 'create' | 'delete' | 'copy' | 'move')
-      | (
-          | 'collection-view'
-          | 'item-view'
-          | 'link-open'
-          | 'item-download'
-          | 'item-like'
-          | 'item-unlike'
-          | 'item-embed'
-          | 'item-search'
-          | 'move'
-          | 'create'
-          | 'copy'
-          | 'update'
-          | 'delete'
-          | 'chat_create'
-          | 'chat_update'
-          | 'chat_delete'
-          | 'chat_clear'
-          | 'member-login'
-          | 'ask-reset-password'
-          | 'reset-password'
-          | 'collapse-item'
-          | 'uncollapse-item'
-        );
-    createdDay?: string;
-  }>;
-};
-
-export type GetAggregateActionsResponse =
-  GetAggregateActionsResponses[keyof GetAggregateActionsResponses];
-
 export type ExportActionsData = {
   body?: never;
   path: {
@@ -5857,6 +5807,108 @@ export type ExportActionsResponses = {
 
 export type ExportActionsResponse =
   ExportActionsResponses[keyof ExportActionsResponses];
+
+export type GetItemActionsByDayData = {
+  body?: never;
+  path: {
+    id: string;
+  };
+  query?: {
+    startDate?: string;
+    endDate?: string;
+  };
+  url: '/items/{id}/actions/actions-by-day';
+};
+
+export type GetItemActionsByDayErrors = {
+  /**
+   * Default Response
+   */
+  '4XX': _Error;
+};
+
+export type GetItemActionsByDayError =
+  GetItemActionsByDayErrors[keyof GetItemActionsByDayErrors];
+
+export type GetItemActionsByDayResponses = {
+  /**
+   * Default Response
+   */
+  200: {
+    [key: string]: unknown;
+  };
+};
+
+export type GetItemActionsByDayResponse =
+  GetItemActionsByDayResponses[keyof GetItemActionsByDayResponses];
+
+export type GetItemActionsByHourData = {
+  body?: never;
+  path: {
+    id: string;
+  };
+  query?: {
+    startDate?: string;
+    endDate?: string;
+  };
+  url: '/items/{id}/actions/actions-by-hour';
+};
+
+export type GetItemActionsByHourErrors = {
+  /**
+   * Default Response
+   */
+  '4XX': _Error;
+};
+
+export type GetItemActionsByHourError =
+  GetItemActionsByHourErrors[keyof GetItemActionsByHourErrors];
+
+export type GetItemActionsByHourResponses = {
+  /**
+   * Default Response
+   */
+  200: {
+    [key: string]: unknown;
+  };
+};
+
+export type GetItemActionsByHourResponse =
+  GetItemActionsByHourResponses[keyof GetItemActionsByHourResponses];
+
+export type GetItemActionsByWeekdayData = {
+  body?: never;
+  path: {
+    id: string;
+  };
+  query?: {
+    startDate?: string;
+    endDate?: string;
+  };
+  url: '/items/{id}/actions/actions-by-weekday';
+};
+
+export type GetItemActionsByWeekdayErrors = {
+  /**
+   * Default Response
+   */
+  '4XX': _Error;
+};
+
+export type GetItemActionsByWeekdayError =
+  GetItemActionsByWeekdayErrors[keyof GetItemActionsByWeekdayErrors];
+
+export type GetItemActionsByWeekdayResponses = {
+  /**
+   * Default Response
+   */
+  200: {
+    [key: string]: unknown;
+  };
+};
+
+export type GetItemActionsByWeekdayResponse =
+  GetItemActionsByWeekdayResponses[keyof GetItemActionsByWeekdayResponses];
 
 export type DeleteGeolocationData = {
   body?: never;
@@ -6850,67 +6902,11 @@ export type GetAccessibleItemsResponses = {
    */
   200: {
     data: Array<PackedItem>;
-    totalCount: number;
   };
 };
 
 export type GetAccessibleItemsResponse =
   GetAccessibleItemsResponses[keyof GetAccessibleItemsResponses];
-
-export type GetItemsOwnData = {
-  body?: never;
-  path?: never;
-  query?: never;
-  url: '/items/own';
-};
-
-export type GetItemsOwnErrors = {
-  /**
-   * Default Response
-   */
-  '4XX': _Error;
-};
-
-export type GetItemsOwnError = GetItemsOwnErrors[keyof GetItemsOwnErrors];
-
-export type GetItemsOwnResponses = {
-  /**
-   * Default Response
-   */
-  200: Array<Item>;
-};
-
-export type GetItemsOwnResponse =
-  GetItemsOwnResponses[keyof GetItemsOwnResponses];
-
-export type GetItemsSharedWithData = {
-  body?: never;
-  path?: never;
-  query?: {
-    permission?: 'read' | 'write' | 'admin';
-  };
-  url: '/items/shared-with';
-};
-
-export type GetItemsSharedWithErrors = {
-  /**
-   * Default Response
-   */
-  '4XX': _Error;
-};
-
-export type GetItemsSharedWithError =
-  GetItemsSharedWithErrors[keyof GetItemsSharedWithErrors];
-
-export type GetItemsSharedWithResponses = {
-  /**
-   * Default Response
-   */
-  200: Array<Item>;
-};
-
-export type GetItemsSharedWithResponse =
-  GetItemsSharedWithResponses[keyof GetItemsSharedWithResponses];
 
 export type GetChildrenData = {
   body?: never;
@@ -6918,7 +6914,6 @@ export type GetChildrenData = {
     id: string;
   };
   query?: {
-    ordered?: boolean;
     keywords?: Array<string>;
     types?: Array<
       | 'app'
@@ -7194,7 +7189,7 @@ export type PostItemsByItemIdMembershipsRequestsResponses = {
   /**
    * Default Response
    */
-  200: CompleteMembershipRequest;
+  204: void;
 };
 
 export type PostItemsByItemIdMembershipsRequestsResponse =
@@ -7235,45 +7230,40 @@ export type DeleteItemsByItemIdMembershipsRequestsByMemberIdResponses = {
   /**
    * Default Response
    */
-  200: CompleteMembershipRequest;
+  204: void;
 };
 
 export type DeleteItemsByItemIdMembershipsRequestsByMemberIdResponse =
   DeleteItemsByItemIdMembershipsRequestsByMemberIdResponses[keyof DeleteItemsByItemIdMembershipsRequestsByMemberIdResponses];
 
-export type GetItemMembershipsData = {
+export type GetItemMembershipsForItemData = {
   body?: never;
   path?: never;
   query: {
-    itemId: Array<string>;
+    itemId: string;
   };
   url: '/item-memberships/';
 };
 
-export type GetItemMembershipsErrors = {
+export type GetItemMembershipsForItemErrors = {
   /**
    * Default Response
    */
   '4XX': _Error;
 };
 
-export type GetItemMembershipsError =
-  GetItemMembershipsErrors[keyof GetItemMembershipsErrors];
+export type GetItemMembershipsForItemError =
+  GetItemMembershipsForItemErrors[keyof GetItemMembershipsForItemErrors];
 
-export type GetItemMembershipsResponses = {
+export type GetItemMembershipsForItemResponses = {
   /**
    * Default Response
    */
-  200: {
-    data: {
-      [key: string]: Array<ItemMembership>;
-    };
-    errors: Array<_Error>;
-  };
+  200: Array<ItemMembership>;
 };
 
-export type GetItemMembershipsResponse =
-  GetItemMembershipsResponses[keyof GetItemMembershipsResponses];
+export type GetItemMembershipsForItemResponse =
+  GetItemMembershipsForItemResponses[keyof GetItemMembershipsForItemResponses];
 
 export type CreateItemMembershipData = {
   body: {
@@ -7307,40 +7297,6 @@ export type CreateItemMembershipResponses = {
 export type CreateItemMembershipResponse =
   CreateItemMembershipResponses[keyof CreateItemMembershipResponses];
 
-export type CreateManyItemMembershipsData = {
-  body: {
-    memberships: Array<{
-      accountId: string;
-      permission: 'read' | 'write' | 'admin';
-    }>;
-  };
-  path: {
-    itemId: string;
-  };
-  query?: never;
-  url: '/item-memberships/{itemId}';
-};
-
-export type CreateManyItemMembershipsErrors = {
-  /**
-   * Default Response
-   */
-  '4XX': _Error;
-};
-
-export type CreateManyItemMembershipsError =
-  CreateManyItemMembershipsErrors[keyof CreateManyItemMembershipsErrors];
-
-export type CreateManyItemMembershipsResponses = {
-  /**
-   * Default Response
-   */
-  200: Array<ItemMembership>;
-};
-
-export type CreateManyItemMembershipsResponse =
-  CreateManyItemMembershipsResponses[keyof CreateManyItemMembershipsResponses];
-
 export type DeleteItemMembershipData = {
   body?: never;
   path: {
@@ -7366,7 +7322,7 @@ export type DeleteItemMembershipResponses = {
   /**
    * Default Response
    */
-  200: ItemMembership;
+  204: void;
 };
 
 export type DeleteItemMembershipResponse =
@@ -7397,7 +7353,7 @@ export type UpdateItemMembershipResponses = {
   /**
    * Default Response
    */
-  200: ItemMembership;
+  204: void;
 };
 
 export type UpdateItemMembershipResponse =
@@ -7408,7 +7364,7 @@ export type GetCountForTagsData = {
   path?: never;
   query: {
     search: string;
-    category?: 'level' | 'discipline' | 'resource-type';
+    category: 'level' | 'discipline' | 'resource-type';
   };
   url: '/tags/';
 };

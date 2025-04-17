@@ -3,9 +3,9 @@ import {
   DiscriminatedItem,
   ItemLike,
   ItemMembership,
-  ItemVisibilityType,
+  ItemVisibilityOptionsType,
   Member,
-  PermissionLevel,
+  PermissionLevelOptions,
   Tag,
 } from '@graasp/sdk';
 
@@ -17,7 +17,7 @@ export type MockItemMembership = Omit<
 >;
 type MockItemVisibility = {
   id: string;
-  type: ItemVisibilityType | `${ItemVisibilityType}`;
+  type: ItemVisibilityOptionsType;
   itemPath: string;
 };
 type MockPublishedInfo = {
@@ -27,7 +27,7 @@ type MockPublishedInfo = {
 type MockMembership = {
   itemPath: string;
   account: ItemMembership['account'];
-  permission: PermissionLevel; // can't use "read" | "write" | "admin" with `${PermissionLevel}` because it is not allowed in the interface which is an oversight
+  permission: PermissionLevelOptions;
 };
 export type MockItem = DiscriminatedItem & {
   visibility: MockItemVisibility[];

@@ -1,5 +1,3 @@
-import { useContext } from 'react';
-
 import { Stack, Typography } from '@mui/material';
 import Skeleton from '@mui/material/Skeleton';
 
@@ -7,6 +5,7 @@ import {
   DiscriminatedItem,
   Member,
   PermissionLevel,
+  PermissionLevelCompare,
   ThumbnailSize,
 } from '@graasp/sdk';
 import { Avatar } from '@graasp/ui';
@@ -19,8 +18,10 @@ import { useLibraryTranslation } from '../../config/i18n';
 import { buildMemberRoute } from '../../config/routes';
 import { SUMMARY_AUTHOR_CONTAINER_ID } from '../../config/selectors';
 import LIBRARY from '../../langs/constants';
-import { downloadAvatarOptions } from '../../openapi/client/@tanstack/react-query.gen';
-import { QueryClientContext } from '../QueryClientContext';
+import {
+  downloadAvatarOptions,
+  getItemMembershipsForItemOptions,
+} from '../../openapi/client/@tanstack/react-query.gen';
 import Contributors from './Contributors';
 
 const Author = ({ author }: { author: Member }) => {
@@ -78,17 +79,17 @@ type Props = {
   displayCoEditors?: boolean;
 };
 const Authorship = ({ itemId, author, displayCoEditors }: Props) => {
-  const { hooks } = useContext(QueryClientContext);
-
   // todo: this call should be replaced by a dedicated call to get the co-editors from the backend.
   // this call leaks too much data by using the memberships as the source of data.
-  const { data: memberships } = hooks.useItemMemberships(itemId);
+  const { data: memberships } = useQuery(
+    getItemMembershipsForItemOptions({ query: { itemId } }),
+  );
 
   if (memberships) {
     const contributors = memberships
       .filter(({ permission }) =>
         // todo: to check if writers are considered co-editors
-        [PermissionLevel.Write, PermissionLevel.Admin].includes(permission),
+        PermissionLevelCompare.gte(permission, PermissionLevel.Write),
       )
       .filter(({ account }) => account.id !== author?.id)
       .map(({ account }) => account);

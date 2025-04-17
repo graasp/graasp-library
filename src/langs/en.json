@@ -156,5 +156,8 @@
   "OER_INFORMATION_VIDEO_DESCRIPTION_DURATION": "Duration",
   "OER_INFORMATION_VIDEO_DESCRIPTION_EDITION": "Edition",
   "DURATION_IN_MINUTES_one": "{{count}} minute",
-  "DURATION_IN_MINUTES_other": "{{count}} minutes"
+  "DURATION_IN_MINUTES_other": "{{count}} minutes",
+  "START_COPY_SUCCESS_MESSAGE": "The elements are being copied...",
+  "COPY_ITEM_PAGINATION_NEXT": "Next",
+  "COPY_ITEM_PAGINATION_PREV": "Previous"
 }
