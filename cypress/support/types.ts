@@ -27,7 +27,7 @@ type MockPublishedInfo = {
 type MockMembership = {
   itemPath: string;
   account: ItemMembership['account'];
-  permission: PermissionLevelOptions; // can't use "read" | "write" | "admin" with `${PermissionLevel}` because it is not allowed in the interface which is an oversight
+  permission: PermissionLevelOptions;
 };
 export type MockItem = DiscriminatedItem & {
   visibility: MockItemVisibility[];
