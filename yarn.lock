@@ -2691,9 +2691,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/sdk@github:graasp/graasp-sdk#drizzle":
-  version: 5.10.2
-  resolution: "@graasp/sdk@https://github.com/graasp/graasp-sdk.git#commit=1f92f9dae402b1ad7735c80b1c1f38f00f3b21ac"
+"@graasp/sdk@npm:5.11.0":
+  version: 5.11.0
+  resolution: "@graasp/sdk@npm:5.11.0"
   dependencies:
     "@faker-js/faker": "npm:9.5.0"
     filesize: "npm:10.1.6"
@@ -2701,7 +2701,7 @@ __metadata:
   peerDependencies:
     date-fns: ^3 || ^4.0.0
     uuid: ^9 || ^10 || ^11.0.0
-  checksum: 10/46b22cb99f8c08566b4acd15418cbdc47e997c88a9acb4313c507b66d6b99fc0f8f3943912efa50ab91f82110485828c8686d25107209d63af3ff042cbe29595
+  checksum: 10/5044771c5fdc3d5d7c35c291e74962d347fb9fff703e7d832f0d3ddbcbd691f30a637c72854c0057de589d33e17cd0fb0f4e88e7302b5eec7ef2e56ab28ec68d
   languageName: node
   linkType: hard
 
@@ -11075,7 +11075,7 @@ __metadata:
     "@emotion/server": "npm:11.11.0"
     "@emotion/styled": "npm:11.14.0"
     "@graasp/query-client": "npm:5.8.0"
-    "@graasp/sdk": "github:graasp/graasp-sdk#drizzle"
+    "@graasp/sdk": "npm:5.11.0"
     "@graasp/stylis-plugin-rtl": "npm:2.2.0"
     "@graasp/translations": "npm:1.43.0"
     "@graasp/ui": "npm:5.5.1"
