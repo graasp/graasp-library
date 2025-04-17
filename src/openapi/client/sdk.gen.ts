@@ -30,7 +30,6 @@ import type {
   CreateAppDataError,
   CreateAppDataFileData,
   CreateAppDataFileError,
-  CreateAppDataFileResponse,
   CreateAppDataResponse,
   CreateAppError,
   CreateAppResponse,
@@ -40,6 +39,9 @@ import type {
   CreateAppSettingFileError,
   CreateAppSettingFileResponse,
   CreateAppSettingResponse,
+  CreateBookmarkData,
+  CreateBookmarkError,
+  CreateBookmarkResponse,
   CreateChatMessageData,
   CreateChatMessageError,
   CreateChatMessageResponse,
@@ -52,9 +54,6 @@ import type {
   CreateEtherpadData,
   CreateEtherpadError,
   CreateEtherpadResponse,
-  CreateFavoriteData,
-  CreateFavoriteError,
-  CreateFavoriteResponse,
   CreateFolderData,
   CreateFolderError,
   CreateFolderResponse,
@@ -82,15 +81,15 @@ import type {
   CreateLinkData,
   CreateLinkError,
   CreateLinkResponse,
-  CreateManyItemMembershipsData,
-  CreateManyItemMembershipsError,
-  CreateManyItemMembershipsResponse,
   CreateOwnProfileData,
   CreateOwnProfileError,
   CreateOwnProfileResponse,
   CreateShortLinkData,
   CreateShortLinkError,
   CreateShortLinkResponse,
+  CreateShortcutData,
+  CreateShortcutError,
+  CreateShortcutResponse,
   CreateTagForItemData,
   CreateTagForItemError,
   CreateTagForItemResponse,
@@ -106,15 +105,15 @@ import type {
   DeleteAppSettingData,
   DeleteAppSettingError,
   DeleteAppSettingResponse,
+  DeleteBookmarkData,
+  DeleteBookmarkError,
+  DeleteBookmarkResponse,
   DeleteChatMessageData,
   DeleteChatMessageError,
   DeleteChatMessageResponse,
   DeleteCurrentAccountData,
   DeleteCurrentAccountError,
   DeleteCurrentAccountResponse,
-  DeleteFavoriteData,
-  DeleteFavoriteError,
-  DeleteFavoriteResponse,
   DeleteGeolocationData,
   DeleteGeolocationError,
   DeleteGeolocationResponse,
@@ -184,9 +183,6 @@ import type {
   GetAccessibleItemsData,
   GetAccessibleItemsError,
   GetAccessibleItemsResponse,
-  GetAggregateActionsData,
-  GetAggregateActionsError,
-  GetAggregateActionsResponse,
   GetAppActionsForAppData,
   GetAppActionsForAppError,
   GetAppActionsForAppResponse,
@@ -240,9 +236,15 @@ import type {
   GetInvitationForItemData,
   GetInvitationForItemError,
   GetInvitationForItemResponse,
-  GetItemActionsData,
-  GetItemActionsError,
-  GetItemActionsResponse,
+  GetItemActionsByDayData,
+  GetItemActionsByDayError,
+  GetItemActionsByDayResponse,
+  GetItemActionsByHourData,
+  GetItemActionsByHourError,
+  GetItemActionsByHourResponse,
+  GetItemActionsByWeekdayData,
+  GetItemActionsByWeekdayError,
+  GetItemActionsByWeekdayResponse,
   GetItemData,
   GetItemError,
   GetItemLoginSchemaData,
@@ -251,31 +253,19 @@ import type {
   GetItemLoginSchemaTypeData,
   GetItemLoginSchemaTypeError,
   GetItemLoginSchemaTypeResponse,
-  GetItemMembershipsData,
-  GetItemMembershipsError,
-  GetItemMembershipsResponse,
+  GetItemMembershipsForItemData,
+  GetItemMembershipsForItemError,
+  GetItemMembershipsForItemResponse,
   GetItemResponse,
-  GetItemValidationGroupData,
-  GetItemValidationGroupError,
-  GetItemValidationGroupResponse,
   GetItemsByItemIdMembershipsRequestsData,
   GetItemsByItemIdMembershipsRequestsOwnData,
   GetItemsByItemIdMembershipsRequestsOwnResponse,
   GetItemsByItemIdMembershipsRequestsResponse,
-  GetItemsCollectionsInformationsData,
-  GetItemsCollectionsInformationsResponse,
   GetItemsCollectionsSearchRebuildData,
-  GetItemsH5pAssetsIntegrationHtmlData,
   GetItemsInBoxData,
   GetItemsInBoxError,
   GetItemsInBoxResponse,
-  GetItemsOwnData,
-  GetItemsOwnError,
-  GetItemsOwnResponse,
   GetItemsPublicationByItemIdStatusData,
-  GetItemsSharedWithData,
-  GetItemsSharedWithError,
-  GetItemsSharedWithResponse,
   GetLatestItemValidationGroupData,
   GetLatestItemValidationGroupError,
   GetLatestItemValidationGroupResponse,
@@ -308,9 +298,9 @@ import type {
   GetOneMemberData,
   GetOneMemberError,
   GetOneMemberResponse,
-  GetOwnFavoriteData,
-  GetOwnFavoriteError,
-  GetOwnFavoriteResponse,
+  GetOwnBookmarkData,
+  GetOwnBookmarkError,
+  GetOwnBookmarkResponse,
   GetOwnMentionsData,
   GetOwnMentionsError,
   GetOwnMentionsResponse,
@@ -345,6 +335,9 @@ import type {
   GetTagsForItemError,
   GetTagsForItemResponse,
   GetWsData,
+  GraaspZipExportData,
+  GraaspZipExportError,
+  GraaspZipExportResponse,
   HealthData,
   HealthResponse,
   ImportH5pData,
@@ -379,9 +372,6 @@ import type {
   PatchChatMessageData,
   PatchChatMessageError,
   PatchChatMessageResponse,
-  PatchMembersByIdData,
-  PatchMembersByIdError,
-  PatchMembersByIdResponse,
   PatchMentionData,
   PatchMentionError,
   PatchMentionResponse,
@@ -454,6 +444,8 @@ import type {
   UpdateEtherpadData,
   UpdateEtherpadError,
   UpdateEtherpadResponse,
+  UpdateFileData,
+  UpdateFileError,
   UpdateFolderData,
   UpdateFolderError,
   UpdateFolderResponse,
@@ -478,6 +470,9 @@ import type {
   UpdateShortLinkData,
   UpdateShortLinkError,
   UpdateShortLinkResponse,
+  UpdateShortcutData,
+  UpdateShortcutError,
+  UpdateShortcutResponse,
   UploadFileData,
   UploadFileError,
   UploadFileResponse,
@@ -964,26 +959,6 @@ export const getOneMember = <ThrowOnError extends boolean = false>(
 };
 
 /**
- * @deprecated
- */
-export const patchMembersById = <ThrowOnError extends boolean = false>(
-  options: Options<PatchMembersByIdData, ThrowOnError>,
-) => {
-  return (options?.client ?? _heyApiClient).patch<
-    PatchMembersByIdResponse,
-    PatchMembersByIdError,
-    ThrowOnError
-  >({
-    url: '/members/{id}',
-    ...options,
-    headers: {
-      'Content-Type': 'application/json',
-      ...options?.headers,
-    },
-  });
-};
-
-/**
  * Change email
  * Change email for current authenticated member.
  */
@@ -1111,7 +1086,7 @@ export const updateOwnProfile = <ThrowOnError extends boolean = false>(
  * Create profile for current member.
  */
 export const createOwnProfile = <ThrowOnError extends boolean = false>(
-  options: Options<CreateOwnProfileData, ThrowOnError>,
+  options?: Options<CreateOwnProfileData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).post<
     CreateOwnProfileResponse,
@@ -1300,7 +1275,7 @@ export const createAppDataFile = <ThrowOnError extends boolean = false>(
   options?: Options<CreateAppDataFileData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).post<
-    CreateAppDataFileResponse,
+    unknown,
     CreateAppDataFileError,
     ThrowOnError
   >({
@@ -1594,15 +1569,15 @@ export const loginOrRegisterAsGuest = <ThrowOnError extends boolean = false>(
  * Get all bookmarked instances of the current member
  * Get all bookmarked instances of the current member
  */
-export const getOwnFavorite = <ThrowOnError extends boolean = false>(
-  options?: Options<GetOwnFavoriteData, ThrowOnError>,
+export const getOwnBookmark = <ThrowOnError extends boolean = false>(
+  options?: Options<GetOwnBookmarkData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).get<
-    GetOwnFavoriteResponse,
-    GetOwnFavoriteError,
+    GetOwnBookmarkResponse,
+    GetOwnBookmarkError,
     ThrowOnError
   >({
-    url: '/items/favorite',
+    url: '/items/bookmarks',
     ...options,
   });
 };
@@ -1611,15 +1586,15 @@ export const getOwnFavorite = <ThrowOnError extends boolean = false>(
  * Remove item from bookmarks
  * Remove item from bookmarks
  */
-export const deleteFavorite = <ThrowOnError extends boolean = false>(
-  options: Options<DeleteFavoriteData, ThrowOnError>,
+export const deleteBookmark = <ThrowOnError extends boolean = false>(
+  options: Options<DeleteBookmarkData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).delete<
-    DeleteFavoriteResponse,
-    DeleteFavoriteError,
+    DeleteBookmarkResponse,
+    DeleteBookmarkError,
     ThrowOnError
   >({
-    url: '/items/favorite/{itemId}',
+    url: '/items/bookmarks/{itemId}',
     ...options,
   });
 };
@@ -1628,15 +1603,15 @@ export const deleteFavorite = <ThrowOnError extends boolean = false>(
  * Bookmark item
  * Bookmark item
  */
-export const createFavorite = <ThrowOnError extends boolean = false>(
-  options: Options<CreateFavoriteData, ThrowOnError>,
+export const createBookmark = <ThrowOnError extends boolean = false>(
+  options: Options<CreateBookmarkData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).post<
-    CreateFavoriteResponse,
-    CreateFavoriteError,
+    CreateBookmarkResponse,
+    CreateBookmarkError,
     ThrowOnError
   >({
-    url: '/items/favorite/{itemId}',
+    url: '/items/bookmarks/{itemId}',
     ...options,
   });
 };
@@ -1671,21 +1646,6 @@ export const getCollectionInformations = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     url: '/items/collections/{itemId}/informations',
-    ...options,
-  });
-};
-
-export const getItemsCollectionsInformations = <
-  ThrowOnError extends boolean = false,
->(
-  options: Options<GetItemsCollectionsInformationsData, ThrowOnError>,
-) => {
-  return (options?.client ?? _heyApiClient).get<
-    GetItemsCollectionsInformationsResponse,
-    unknown,
-    ThrowOnError
-  >({
-    url: '/items/collections/informations',
     ...options,
   });
 };
@@ -1813,6 +1773,48 @@ export const getItemsCollectionsSearchRebuild = <
   );
 };
 
+/**
+ * Create shortcut
+ * Create shortcut. If not provided, the name of the shortcut is infered from the actor's language.
+ */
+export const createShortcut = <ThrowOnError extends boolean = false>(
+  options: Options<CreateShortcutData, ThrowOnError>,
+) => {
+  return (options?.client ?? _heyApiClient).post<
+    CreateShortcutResponse,
+    CreateShortcutError,
+    ThrowOnError
+  >({
+    url: '/items/shortcuts',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options?.headers,
+    },
+  });
+};
+
+/**
+ * Update shortcut
+ * Update shortcut given body.
+ */
+export const updateShortcut = <ThrowOnError extends boolean = false>(
+  options: Options<UpdateShortcutData, ThrowOnError>,
+) => {
+  return (options?.client ?? _heyApiClient).patch<
+    UpdateShortcutResponse,
+    UpdateShortcutError,
+    ThrowOnError
+  >({
+    url: '/items/shortcuts/{id}',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options?.headers,
+    },
+  });
+};
+
 export const deleteItemsByIdThumbnails = <ThrowOnError extends boolean = false>(
   options: Options<DeleteItemsByIdThumbnailsData, ThrowOnError>,
 ) => {
@@ -1887,6 +1889,27 @@ export const downloadFile = <ThrowOnError extends boolean = false>(
   >({
     url: '/items/{id}/download',
     ...options,
+  });
+};
+
+/**
+ * Update file
+ * Update file.
+ */
+export const updateFile = <ThrowOnError extends boolean = false>(
+  options: Options<UpdateFileData, ThrowOnError>,
+) => {
+  return (options?.client ?? _heyApiClient).patch<
+    unknown,
+    UpdateFileError,
+    ThrowOnError
+  >({
+    url: '/items/files/{id}',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options?.headers,
+    },
   });
 };
 
@@ -2148,19 +2171,6 @@ export const getItemsPublicationByItemIdStatus = <
   );
 };
 
-export const getItemsH5pAssetsIntegrationHtml = <
-  ThrowOnError extends boolean = false,
->(
-  options?: Options<GetItemsH5pAssetsIntegrationHtmlData, ThrowOnError>,
-) => {
-  return (options?.client ?? _heyApiClient).get<unknown, unknown, ThrowOnError>(
-    {
-      url: '/items/h5p-assets/integration.html',
-      ...options,
-    },
-  );
-};
-
 /**
  * Import H5P file
  * Import H5P file and create corresponding item.
@@ -2201,7 +2211,7 @@ export const createEtherpad = <ThrowOnError extends boolean = false>(
 
 /**
  * Update etherpad
- * Update etherpad permission of readers.
+ * Update etherpad properties, including permission of readers.
  */
 export const updateEtherpad = <ThrowOnError extends boolean = false>(
   options: Options<UpdateEtherpadData, ThrowOnError>,
@@ -2267,6 +2277,23 @@ export const exportZip = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     url: '/items/{itemId}/export',
+    ...options,
+  });
+};
+
+/**
+ * Export content
+ * Export content. Return raw file for single item, or a ZIP with structure and items for a folder.
+ */
+export const graaspZipExport = <ThrowOnError extends boolean = false>(
+  options: Options<GraaspZipExportData, ThrowOnError>,
+) => {
+  return (options?.client ?? _heyApiClient).get<
+    GraaspZipExportResponse,
+    GraaspZipExportError,
+    ThrowOnError
+  >({
+    url: '/items/{itemId}/graasp-export',
     ...options,
   });
 };
@@ -2643,23 +2670,6 @@ export const getLatestItemValidationGroup = <
 };
 
 /**
- * Get item validation group by id
- * Get item validation group by id.
- */
-export const getItemValidationGroup = <ThrowOnError extends boolean = false>(
-  options: Options<GetItemValidationGroupData, ThrowOnError>,
-) => {
-  return (options?.client ?? _heyApiClient).get<
-    GetItemValidationGroupResponse,
-    GetItemValidationGroupError,
-    ThrowOnError
-  >({
-    url: '/items/{itemId}/validations/{itemValidationGroupId}',
-    ...options,
-  });
-};
-
-/**
  * Validate item
  * Validate item's tree against many processes, such as nudity detection.
  */
@@ -2910,23 +2920,6 @@ export const patchChatMessage = <ThrowOnError extends boolean = false>(
 };
 
 /**
- * Get actions for item and its descendants
- * Get actions generated by users for the given item and its descendants.
- */
-export const getItemActions = <ThrowOnError extends boolean = false>(
-  options: Options<GetItemActionsData, ThrowOnError>,
-) => {
-  return (options?.client ?? _heyApiClient).get<
-    GetItemActionsResponse,
-    GetItemActionsError,
-    ThrowOnError
-  >({
-    url: '/items/{id}/actions',
-    ...options,
-  });
-};
-
-/**
  * Save action for item
  * Save action for item with given type and extra.
  */
@@ -2948,23 +2941,6 @@ export const postAction = <ThrowOnError extends boolean = false>(
 };
 
 /**
- * Get aggregation of actions given query strings
- * Get aggregation of actions given query strings. It is interesting for rendering anonymous average data.
- */
-export const getAggregateActions = <ThrowOnError extends boolean = false>(
-  options: Options<GetAggregateActionsData, ThrowOnError>,
-) => {
-  return (options?.client ?? _heyApiClient).get<
-    GetAggregateActionsResponse,
-    GetAggregateActionsError,
-    ThrowOnError
-  >({
-    url: '/items/{id}/actions/aggregation',
-    ...options,
-  });
-};
-
-/**
  * Send request to export actions
  * Send request to export actions for given item. The user receives an email with a download link. The generated export is available for a week, and can be generated only once a day.
  */
@@ -2977,6 +2953,57 @@ export const exportActions = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     url: '/items/{id}/actions/export',
+    ...options,
+  });
+};
+
+/**
+ * Get actions for item and its descendants by day
+ * Get sum of actions count per type generated by users for the given item and its descendants by day.
+ */
+export const getItemActionsByDay = <ThrowOnError extends boolean = false>(
+  options: Options<GetItemActionsByDayData, ThrowOnError>,
+) => {
+  return (options?.client ?? _heyApiClient).get<
+    GetItemActionsByDayResponse,
+    GetItemActionsByDayError,
+    ThrowOnError
+  >({
+    url: '/items/{id}/actions/actions-by-day',
+    ...options,
+  });
+};
+
+/**
+ * Get actions for item and its descendants by hour
+ * Get sum of actions count per type generated by users for the given item and its descendants by hour.
+ */
+export const getItemActionsByHour = <ThrowOnError extends boolean = false>(
+  options: Options<GetItemActionsByHourData, ThrowOnError>,
+) => {
+  return (options?.client ?? _heyApiClient).get<
+    GetItemActionsByHourResponse,
+    GetItemActionsByHourError,
+    ThrowOnError
+  >({
+    url: '/items/{id}/actions/actions-by-hour',
+    ...options,
+  });
+};
+
+/**
+ * Get actions for item and its descendants by weekday
+ * Get sum of actions count per type generated by users for the given item and its descendants by weekday.
+ */
+export const getItemActionsByWeekday = <ThrowOnError extends boolean = false>(
+  options: Options<GetItemActionsByWeekdayData, ThrowOnError>,
+) => {
+  return (options?.client ?? _heyApiClient).get<
+    GetItemActionsByWeekdayResponse,
+    GetItemActionsByWeekdayError,
+    ThrowOnError
+  >({
+    url: '/items/{id}/actions/actions-by-weekday',
     ...options,
   });
 };
@@ -3253,38 +3280,6 @@ export const getAccessibleItems = <ThrowOnError extends boolean = false>(
 };
 
 /**
- * @deprecated
- */
-export const getItemsOwn = <ThrowOnError extends boolean = false>(
-  options?: Options<GetItemsOwnData, ThrowOnError>,
-) => {
-  return (options?.client ?? _heyApiClient).get<
-    GetItemsOwnResponse,
-    GetItemsOwnError,
-    ThrowOnError
-  >({
-    url: '/items/own',
-    ...options,
-  });
-};
-
-/**
- * @deprecated
- */
-export const getItemsSharedWith = <ThrowOnError extends boolean = false>(
-  options?: Options<GetItemsSharedWithData, ThrowOnError>,
-) => {
-  return (options?.client ?? _heyApiClient).get<
-    GetItemsSharedWithResponse,
-    GetItemsSharedWithError,
-    ThrowOnError
-  >({
-    url: '/items/shared-with',
-    ...options,
-  });
-};
-
-/**
  * Get children of item
  * Get children of item given its id.
  */
@@ -3496,12 +3491,16 @@ export const deleteItemsByItemIdMembershipsRequestsByMemberId = <
   });
 };
 
-export const getItemMemberships = <ThrowOnError extends boolean = false>(
-  options: Options<GetItemMembershipsData, ThrowOnError>,
+/**
+ * Get memberships for one item
+ * Get memberships for one item
+ */
+export const getItemMembershipsForItem = <ThrowOnError extends boolean = false>(
+  options: Options<GetItemMembershipsForItemData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).get<
-    GetItemMembershipsResponse,
-    GetItemMembershipsError,
+    GetItemMembershipsForItemResponse,
+    GetItemMembershipsForItemError,
     ThrowOnError
   >({
     url: '/item-memberships/',
@@ -3522,27 +3521,6 @@ export const createItemMembership = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     url: '/item-memberships/',
-    ...options,
-    headers: {
-      'Content-Type': 'application/json',
-      ...options?.headers,
-    },
-  });
-};
-
-/**
- * Create access to item for many accounts
- * Create access to item for many account, given permissions
- */
-export const createManyItemMemberships = <ThrowOnError extends boolean = false>(
-  options: Options<CreateManyItemMembershipsData, ThrowOnError>,
-) => {
-  return (options?.client ?? _heyApiClient).post<
-    CreateManyItemMembershipsResponse,
-    CreateManyItemMembershipsError,
-    ThrowOnError
-  >({
-    url: '/item-memberships/{itemId}',
     ...options,
     headers: {
       'Content-Type': 'application/json',

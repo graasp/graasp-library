@@ -12,23 +12,16 @@ import { StatusCodes } from 'http-status-codes';
 import { v4 } from 'uuid';
 
 import { builderMeilisearchResults } from '../fixtures/items';
-import {
-  MockItem,
-  MockItemLike,
-  MockItemMembership,
-  MockMember,
-} from './types';
+import { MockItem, MockItemLike, MockMember } from './types';
 import {
   DEFAULT_GET,
   ID_FORMAT,
   getItemById,
   getMemberById,
   getRootPublishedItems,
-  parseStringToRegExp,
 } from './utils';
 
 const {
-  buildGetItemMembershipsForItemsRoute,
   buildGetItemPublishedInformationRoute,
   buildGetItemRoute,
   buildGetMemberRoute,
@@ -85,7 +78,7 @@ export const mockGetAccessibleItems = (items: MockItem[]): void => {
 
       const result = root.slice((page - 1) * pageSize, page * pageSize);
 
-      reply({ data: result, totalCount: root.length });
+      reply({ data: result, pagination: { page, pageSize } });
     },
   ).as('getAccessibleItems');
 };
@@ -338,7 +331,7 @@ export const mockGetTagsByItem = ({ items }: { items: MockItem[] }) => {
   ).as('getTagsByItem');
 };
 
-export const mockGetItemMembershipsForItems = ({
+export const mockGetItemMembershipsForItem = ({
   items,
 }: {
   items: MockItem[];
@@ -347,64 +340,43 @@ export const mockGetItemMembershipsForItems = ({
   cy.intercept(
     {
       method: DEFAULT_GET.method,
-      url: new RegExp(
-        `${API_HOST}/${parseStringToRegExp(
-          buildGetItemMembershipsForItemsRoute([]),
-        )}`,
-      ),
+      url: new RegExp(`${API_HOST}/item-memberships`),
     },
     ({ reply, url }) => {
-      const itemIds = new URLSearchParams(new URL(url).search).getAll('itemId');
-      const selectedItems = items.filter(({ id }) => itemIds.includes(id));
-      const allMemberships: {
-        data: {
-          [key: string]: MockItemMembership[];
-        };
-        errors: { statusCode: number }[];
-      } = { data: {}, errors: [] };
+      const itemId = new URLSearchParams(new URL(url).search).get('itemId');
 
-      selectedItems.forEach(({ creator, id, memberships }) => {
-        const item = selectedItems.find((i) => i.id === id);
-        if (!item) {
-          allMemberships.errors.push({ statusCode: StatusCodes.NOT_FOUND });
-          return;
-        }
-        if (!creator) {
-          allMemberships.errors.push({ statusCode: StatusCodes.NOT_FOUND });
-          return;
-        }
-        // build default membership depending on current member
-        // if the current member is the creator, it has membership
-        // otherwise it should return an error
-        const defaultMembership = {
+      const item = items.find((i) => i.id === itemId);
+      if (!item) {
+        reply({ statusCode: StatusCodes.NOT_FOUND });
+        return;
+      }
+      if (!item.creator) {
+        reply({ statusCode: StatusCodes.NOT_FOUND });
+        return;
+      }
+      // build default membership depending on current member
+      // if the current member is the creator, it has membership
+      // otherwise it should return an error
+      const defaultMembership = {
+        id: v4(),
+        item,
+        permission: PermissionLevel.Admin,
+        account: MemberFactory(item.creator),
+      };
+      const itemMemberships =
+        item.memberships?.map(({ account, permission }) => ({
           id: v4(),
           item,
-          permission: PermissionLevel.Admin,
-          account: MemberFactory(creator),
-        };
-        const itemMemberships =
-          memberships?.map(({ account, permission }) => ({
-            id: v4(),
-            item,
-            permission,
-            account,
-          })) || [];
-        const creatorHasMembership = memberships?.find(
-          (m) => m.account?.id === creator?.id,
-        );
-        if (!creatorHasMembership) {
-          itemMemberships.push(defaultMembership);
-        }
-
-        if (!itemMemberships?.length) {
-          allMemberships.errors.push({
-            statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
-          });
-        } else {
-          allMemberships.data[id] = itemMemberships;
-        }
-      });
-      reply(allMemberships);
+          permission,
+          account,
+        })) || [];
+      const creatorHasMembership = item.memberships?.find(
+        (m) => m.account?.id === item.creator?.id,
+      );
+      if (!creatorHasMembership) {
+        itemMemberships.push(defaultMembership);
+      }
+      reply(itemMemberships);
     },
   ).as('getItemMemberships');
 };

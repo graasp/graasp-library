@@ -7,8 +7,11 @@ import {
   ButtonGroup,
   ClickAwayListener,
   Grow,
+  MenuItem,
+  MenuList,
+  Paper,
   Popper,
-  styled,
+  Stack,
 } from '@mui/material';
 
 import { DiscriminatedItem } from '@graasp/sdk';
@@ -25,11 +28,6 @@ import { openInNewTab } from '../../../utils/helpers';
 import { useCopyAction } from '../CopyButton';
 import { useEmbedAction } from '../CopyLinkButton';
 import { useDownloadAction } from '../DownloadButton';
-
-const StyledButton = styled(Button)(() => ({
-  color: '#504FD2',
-  border: '1px solid #eee !important',
-}));
 
 type SummaryActionButtonsProps = {
   item?: DiscriminatedItem;
@@ -101,7 +99,6 @@ const SummaryActionButtons = ({
       <Popper
         sx={{
           zIndex: 1,
-          minWidth: 250,
         }}
         anchorEl={anchorRef.current}
         open={open}
@@ -117,41 +114,35 @@ const SummaryActionButtons = ({
               transformOrigin: placement === 'bottom' ? 'top' : 'bottom',
             }}
           >
-            <div>
+            <Paper>
               <ClickAwayListener onClickAway={handleClose}>
-                <ButtonGroup
-                  variant="contained"
-                  orientation="vertical"
-                  fullWidth
-                  id={LIBRARY_ACTION_GROUP_POP_UP_BUTTONS_ID}
-                >
-                  <StyledButton
-                    color="secondary"
-                    onClick={startDownload}
-                    startIcon={<Download />}
-                  >
-                    {t(LIBRARY.SUMMARY_ACTIONS_DOWNLOAD)}
-                  </StyledButton>
+                <MenuList id={LIBRARY_ACTION_GROUP_POP_UP_BUTTONS_ID}>
+                  <MenuItem onClick={startDownload}>
+                    <Stack direction="row" gap={1}>
+                      <Download />
+                      {t(LIBRARY.SUMMARY_ACTIONS_DOWNLOAD)}
+                    </Stack>
+                  </MenuItem>
                   {isLogged && (
-                    <StyledButton
-                      color="secondary"
+                    <MenuItem
                       onClick={startCopy}
-                      startIcon={<CopyAll />}
                       id={LIBRARY_ACTION_GROUP_COPY_BUTTON_ID}
                     >
-                      {t(LIBRARY.SUMMARY_ACTIONS_COPY)}
-                    </StyledButton>
+                      <Stack direction="row" gap={1}>
+                        <CopyAll />
+                        {t(LIBRARY.SUMMARY_ACTIONS_COPY)}
+                      </Stack>
+                    </MenuItem>
                   )}
-                  <StyledButton
-                    color="secondary"
-                    onClick={startEmbed}
-                    startIcon={<Code />}
-                  >
-                    {t(LIBRARY.SUMMARY_ACTIONS_EMBED)}
-                  </StyledButton>
-                </ButtonGroup>
+                  <MenuItem onClick={startEmbed}>
+                    <Stack direction="row" gap={1}>
+                      <Code />
+                      {t(LIBRARY.SUMMARY_ACTIONS_EMBED)}
+                    </Stack>
+                  </MenuItem>
+                </MenuList>
               </ClickAwayListener>
-            </div>
+            </Paper>
           </Grow>
         )}
       </Popper>

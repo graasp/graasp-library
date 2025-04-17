@@ -23,11 +23,11 @@ import {
   createAppDataFile,
   createAppSetting,
   createAppSettingFile,
+  createBookmark,
   createChatMessage,
   createChatbotCompletionPrompt,
   createDocument,
   createEtherpad,
-  createFavorite,
   createFolder,
   createFolderWithThumbnail,
   createInvitation,
@@ -37,17 +37,17 @@ import {
   createItemMembership,
   createItemWithThumbnail,
   createLink,
-  createManyItemMemberships,
   createOwnProfile,
   createShortLink,
+  createShortcut,
   createTagForItem,
   createVisibility,
   deleteAlias,
   deleteAppData,
   deleteAppSetting,
+  deleteBookmark,
   deleteChatMessage,
   deleteCurrentAccount,
-  deleteFavorite,
   deleteGeolocation,
   deleteInvitation,
   deleteItemLike,
@@ -73,7 +73,6 @@ import {
   geolocationReverse,
   geolocationSearch,
   getAccessibleItems,
-  getAggregateActions,
   getAppActionsForApp,
   getAppContext,
   getAppDataForApp,
@@ -93,20 +92,17 @@ import {
   getInvitationById,
   getInvitationForItem,
   getItem,
-  getItemActions,
+  getItemActionsByDay,
+  getItemActionsByHour,
+  getItemActionsByWeekday,
   getItemLoginSchema,
   getItemLoginSchemaType,
-  getItemMemberships,
-  getItemValidationGroup,
+  getItemMembershipsForItem,
   getItemsByItemIdMembershipsRequests,
   getItemsByItemIdMembershipsRequestsOwn,
-  getItemsCollectionsInformations,
   getItemsCollectionsSearchRebuild,
-  getItemsH5pAssetsIntegrationHtml,
   getItemsInBox,
-  getItemsOwn,
   getItemsPublicationByItemIdStatus,
-  getItemsSharedWith,
   getLatestItemValidationGroup,
   getLikesForCurrentMember,
   getLikesForItem,
@@ -120,7 +116,7 @@ import {
   getMostLikedCollections,
   getMostRecentCollections,
   getOneMember,
-  getOwnFavorite,
+  getOwnBookmark,
   getOwnMentions,
   getOwnMostUsedApps,
   getOwnProfile,
@@ -134,6 +130,7 @@ import {
   getStorageFiles,
   getTagsForItem,
   getWs,
+  graaspZipExport,
   health,
   importH5P,
   importZip,
@@ -146,7 +143,6 @@ import {
   moveManyItems,
   patchChangeEmail,
   patchChatMessage,
-  patchMembersById,
   patchMention,
   patchPassword,
   patchPasswordReset,
@@ -173,6 +169,7 @@ import {
   updateCurrentAccount,
   updateDocument,
   updateEtherpad,
+  updateFile,
   updateFolder,
   updateInvitation,
   updateItem,
@@ -181,6 +178,7 @@ import {
   updateLink,
   updateOwnProfile,
   updateShortLink,
+  updateShortcut,
   uploadFile,
   validateItem,
 } from '../sdk.gen';
@@ -210,7 +208,6 @@ import type {
   CreateAppDataError,
   CreateAppDataFileData,
   CreateAppDataFileError,
-  CreateAppDataFileResponse,
   CreateAppDataResponse,
   CreateAppError,
   CreateAppResponse,
@@ -220,6 +217,9 @@ import type {
   CreateAppSettingFileError,
   CreateAppSettingFileResponse,
   CreateAppSettingResponse,
+  CreateBookmarkData,
+  CreateBookmarkError,
+  CreateBookmarkResponse,
   CreateChatMessageData,
   CreateChatMessageError,
   CreateChatMessageResponse,
@@ -232,9 +232,6 @@ import type {
   CreateEtherpadData,
   CreateEtherpadError,
   CreateEtherpadResponse,
-  CreateFavoriteData,
-  CreateFavoriteError,
-  CreateFavoriteResponse,
   CreateFolderData,
   CreateFolderError,
   CreateFolderResponse,
@@ -262,15 +259,15 @@ import type {
   CreateLinkData,
   CreateLinkError,
   CreateLinkResponse,
-  CreateManyItemMembershipsData,
-  CreateManyItemMembershipsError,
-  CreateManyItemMembershipsResponse,
   CreateOwnProfileData,
   CreateOwnProfileError,
   CreateOwnProfileResponse,
   CreateShortLinkData,
   CreateShortLinkError,
   CreateShortLinkResponse,
+  CreateShortcutData,
+  CreateShortcutError,
+  CreateShortcutResponse,
   CreateTagForItemData,
   CreateTagForItemError,
   CreateTagForItemResponse,
@@ -286,15 +283,15 @@ import type {
   DeleteAppSettingData,
   DeleteAppSettingError,
   DeleteAppSettingResponse,
+  DeleteBookmarkData,
+  DeleteBookmarkError,
+  DeleteBookmarkResponse,
   DeleteChatMessageData,
   DeleteChatMessageError,
   DeleteChatMessageResponse,
   DeleteCurrentAccountData,
   DeleteCurrentAccountError,
   DeleteCurrentAccountResponse,
-  DeleteFavoriteData,
-  DeleteFavoriteError,
-  DeleteFavoriteResponse,
   DeleteGeolocationData,
   DeleteGeolocationError,
   DeleteGeolocationResponse,
@@ -348,7 +345,6 @@ import type {
   GetAccessibleItemsData,
   GetAccessibleItemsError,
   GetAccessibleItemsResponse,
-  GetAggregateActionsData,
   GetAppActionsForAppData,
   GetAppContextData,
   GetAppDataForAppData,
@@ -369,21 +365,18 @@ import type {
   GetGeolocationByItemData,
   GetInvitationByIdData,
   GetInvitationForItemData,
-  GetItemActionsData,
+  GetItemActionsByDayData,
+  GetItemActionsByHourData,
+  GetItemActionsByWeekdayData,
   GetItemData,
   GetItemLoginSchemaData,
   GetItemLoginSchemaTypeData,
-  GetItemMembershipsData,
-  GetItemValidationGroupData,
+  GetItemMembershipsForItemData,
   GetItemsByItemIdMembershipsRequestsData,
   GetItemsByItemIdMembershipsRequestsOwnData,
-  GetItemsCollectionsInformationsData,
   GetItemsCollectionsSearchRebuildData,
-  GetItemsH5pAssetsIntegrationHtmlData,
   GetItemsInBoxData,
-  GetItemsOwnData,
   GetItemsPublicationByItemIdStatusData,
-  GetItemsSharedWithData,
   GetLatestItemValidationGroupData,
   GetLikesForCurrentMemberData,
   GetLikesForItemData,
@@ -397,7 +390,7 @@ import type {
   GetMostLikedCollectionsData,
   GetMostRecentCollectionsData,
   GetOneMemberData,
-  GetOwnFavoriteData,
+  GetOwnBookmarkData,
   GetOwnMentionsData,
   GetOwnMostUsedAppsData,
   GetOwnProfileData,
@@ -415,6 +408,7 @@ import type {
   GetStorageFilesResponse,
   GetTagsForItemData,
   GetWsData,
+  GraaspZipExportData,
   HealthData,
   ImportH5pData,
   ImportH5pError,
@@ -448,9 +442,6 @@ import type {
   PatchChatMessageData,
   PatchChatMessageError,
   PatchChatMessageResponse,
-  PatchMembersByIdData,
-  PatchMembersByIdError,
-  PatchMembersByIdResponse,
   PatchMentionData,
   PatchMentionError,
   PatchMentionResponse,
@@ -523,6 +514,8 @@ import type {
   UpdateEtherpadData,
   UpdateEtherpadError,
   UpdateEtherpadResponse,
+  UpdateFileData,
+  UpdateFileError,
   UpdateFolderData,
   UpdateFolderError,
   UpdateFolderResponse,
@@ -547,6 +540,9 @@ import type {
   UpdateShortLinkData,
   UpdateShortLinkError,
   UpdateShortLinkResponse,
+  UpdateShortcutData,
+  UpdateShortcutError,
+  UpdateShortcutResponse,
   UploadFileData,
   UploadFileError,
   UploadFileResponse,
@@ -1386,26 +1382,6 @@ export const getOneMemberOptions = (options: Options<GetOneMemberData>) => {
   });
 };
 
-export const patchMembersByIdMutation = (
-  options?: Partial<Options<PatchMembersByIdData>>,
-) => {
-  const mutationOptions: UseMutationOptions<
-    PatchMembersByIdResponse,
-    PatchMembersByIdError,
-    Options<PatchMembersByIdData>
-  > = {
-    mutationFn: async (localOptions) => {
-      const { data } = await patchMembersById({
-        ...options,
-        ...localOptions,
-        throwOnError: true,
-      });
-      return data;
-    },
-  };
-  return mutationOptions;
-};
-
 export const patchChangeEmailMutation = (
   options?: Partial<Options<PatchChangeEmailData>>,
 ) => {
@@ -1588,11 +1564,11 @@ export const updateOwnProfileMutation = (
 };
 
 export const createOwnProfileQueryKey = (
-  options: Options<CreateOwnProfileData>,
+  options?: Options<CreateOwnProfileData>,
 ) => [createQueryKey('createOwnProfile', options)];
 
 export const createOwnProfileOptions = (
-  options: Options<CreateOwnProfileData>,
+  options?: Options<CreateOwnProfileData>,
 ) => {
   return queryOptions({
     queryFn: async ({ queryKey, signal }) => {
@@ -1894,7 +1870,7 @@ export const createAppDataFileMutation = (
   options?: Partial<Options<CreateAppDataFileData>>,
 ) => {
   const mutationOptions: UseMutationOptions<
-    CreateAppDataFileResponse,
+    unknown,
     CreateAppDataFileError,
     Options<CreateAppDataFileData>
   > = {
@@ -2321,16 +2297,16 @@ export const loginOrRegisterAsGuestMutation = (
   return mutationOptions;
 };
 
-export const getOwnFavoriteQueryKey = (
-  options?: Options<GetOwnFavoriteData>,
-) => [createQueryKey('getOwnFavorite', options)];
+export const getOwnBookmarkQueryKey = (
+  options?: Options<GetOwnBookmarkData>,
+) => [createQueryKey('getOwnBookmark', options)];
 
-export const getOwnFavoriteOptions = (
-  options?: Options<GetOwnFavoriteData>,
+export const getOwnBookmarkOptions = (
+  options?: Options<GetOwnBookmarkData>,
 ) => {
   return queryOptions({
     queryFn: async ({ queryKey, signal }) => {
-      const { data } = await getOwnFavorite({
+      const { data } = await getOwnBookmark({
         ...options,
         ...queryKey[0],
         signal,
@@ -2338,20 +2314,20 @@ export const getOwnFavoriteOptions = (
       });
       return data;
     },
-    queryKey: getOwnFavoriteQueryKey(options),
+    queryKey: getOwnBookmarkQueryKey(options),
   });
 };
 
-export const deleteFavoriteMutation = (
-  options?: Partial<Options<DeleteFavoriteData>>,
+export const deleteBookmarkMutation = (
+  options?: Partial<Options<DeleteBookmarkData>>,
 ) => {
   const mutationOptions: UseMutationOptions<
-    DeleteFavoriteResponse,
-    DeleteFavoriteError,
-    Options<DeleteFavoriteData>
+    DeleteBookmarkResponse,
+    DeleteBookmarkError,
+    Options<DeleteBookmarkData>
   > = {
     mutationFn: async (localOptions) => {
-      const { data } = await deleteFavorite({
+      const { data } = await deleteBookmark({
         ...options,
         ...localOptions,
         throwOnError: true,
@@ -2362,14 +2338,14 @@ export const deleteFavoriteMutation = (
   return mutationOptions;
 };
 
-export const createFavoriteQueryKey = (
-  options: Options<CreateFavoriteData>,
-) => [createQueryKey('createFavorite', options)];
+export const createBookmarkQueryKey = (
+  options: Options<CreateBookmarkData>,
+) => [createQueryKey('createBookmark', options)];
 
-export const createFavoriteOptions = (options: Options<CreateFavoriteData>) => {
+export const createBookmarkOptions = (options: Options<CreateBookmarkData>) => {
   return queryOptions({
     queryFn: async ({ queryKey, signal }) => {
-      const { data } = await createFavorite({
+      const { data } = await createBookmark({
         ...options,
         ...queryKey[0],
         signal,
@@ -2377,20 +2353,20 @@ export const createFavoriteOptions = (options: Options<CreateFavoriteData>) => {
       });
       return data;
     },
-    queryKey: createFavoriteQueryKey(options),
+    queryKey: createBookmarkQueryKey(options),
   });
 };
 
-export const createFavoriteMutation = (
-  options?: Partial<Options<CreateFavoriteData>>,
+export const createBookmarkMutation = (
+  options?: Partial<Options<CreateBookmarkData>>,
 ) => {
   const mutationOptions: UseMutationOptions<
-    CreateFavoriteResponse,
-    CreateFavoriteError,
-    Options<CreateFavoriteData>
+    CreateBookmarkResponse,
+    CreateBookmarkError,
+    Options<CreateBookmarkData>
   > = {
     mutationFn: async (localOptions) => {
-      const { data } = await createFavorite({
+      const { data } = await createBookmark({
         ...options,
         ...localOptions,
         throwOnError: true,
@@ -2440,27 +2416,6 @@ export const getCollectionInformationsOptions = (
       return data;
     },
     queryKey: getCollectionInformationsQueryKey(options),
-  });
-};
-
-export const getItemsCollectionsInformationsQueryKey = (
-  options: Options<GetItemsCollectionsInformationsData>,
-) => [createQueryKey('getItemsCollectionsInformations', options)];
-
-export const getItemsCollectionsInformationsOptions = (
-  options: Options<GetItemsCollectionsInformationsData>,
-) => {
-  return queryOptions({
-    queryFn: async ({ queryKey, signal }) => {
-      const { data } = await getItemsCollectionsInformations({
-        ...options,
-        ...queryKey[0],
-        signal,
-        throwOnError: true,
-      });
-      return data;
-    },
-    queryKey: getItemsCollectionsInformationsQueryKey(options),
   });
 };
 
@@ -2717,6 +2672,65 @@ export const getItemsCollectionsSearchRebuildOptions = (
   });
 };
 
+export const createShortcutQueryKey = (
+  options: Options<CreateShortcutData>,
+) => [createQueryKey('createShortcut', options)];
+
+export const createShortcutOptions = (options: Options<CreateShortcutData>) => {
+  return queryOptions({
+    queryFn: async ({ queryKey, signal }) => {
+      const { data } = await createShortcut({
+        ...options,
+        ...queryKey[0],
+        signal,
+        throwOnError: true,
+      });
+      return data;
+    },
+    queryKey: createShortcutQueryKey(options),
+  });
+};
+
+export const createShortcutMutation = (
+  options?: Partial<Options<CreateShortcutData>>,
+) => {
+  const mutationOptions: UseMutationOptions<
+    CreateShortcutResponse,
+    CreateShortcutError,
+    Options<CreateShortcutData>
+  > = {
+    mutationFn: async (localOptions) => {
+      const { data } = await createShortcut({
+        ...options,
+        ...localOptions,
+        throwOnError: true,
+      });
+      return data;
+    },
+  };
+  return mutationOptions;
+};
+
+export const updateShortcutMutation = (
+  options?: Partial<Options<UpdateShortcutData>>,
+) => {
+  const mutationOptions: UseMutationOptions<
+    UpdateShortcutResponse,
+    UpdateShortcutError,
+    Options<UpdateShortcutData>
+  > = {
+    mutationFn: async (localOptions) => {
+      const { data } = await updateShortcut({
+        ...options,
+        ...localOptions,
+        throwOnError: true,
+      });
+      return data;
+    },
+  };
+  return mutationOptions;
+};
+
 export const deleteItemsByIdThumbnailsMutation = (
   options?: Partial<Options<DeleteItemsByIdThumbnailsData>>,
 ) => {
@@ -2855,6 +2869,26 @@ export const downloadFileOptions = (options: Options<DownloadFileData>) => {
     },
     queryKey: downloadFileQueryKey(options),
   });
+};
+
+export const updateFileMutation = (
+  options?: Partial<Options<UpdateFileData>>,
+) => {
+  const mutationOptions: UseMutationOptions<
+    unknown,
+    UpdateFileError,
+    Options<UpdateFileData>
+  > = {
+    mutationFn: async (localOptions) => {
+      const { data } = await updateFile({
+        ...options,
+        ...localOptions,
+        throwOnError: true,
+      });
+      return data;
+    },
+  };
+  return mutationOptions;
 };
 
 export const deleteVisibilityMutation = (
@@ -3242,27 +3276,6 @@ export const getItemsPublicationByItemIdStatusOptions = (
   });
 };
 
-export const getItemsH5pAssetsIntegrationHtmlQueryKey = (
-  options?: Options<GetItemsH5pAssetsIntegrationHtmlData>,
-) => [createQueryKey('getItemsH5pAssetsIntegrationHtml', options)];
-
-export const getItemsH5pAssetsIntegrationHtmlOptions = (
-  options?: Options<GetItemsH5pAssetsIntegrationHtmlData>,
-) => {
-  return queryOptions({
-    queryFn: async ({ queryKey, signal }) => {
-      const { data } = await getItemsH5pAssetsIntegrationHtml({
-        ...options,
-        ...queryKey[0],
-        signal,
-        throwOnError: true,
-      });
-      return data;
-    },
-    queryKey: getItemsH5pAssetsIntegrationHtmlQueryKey(options),
-  });
-};
-
 export const importH5PQueryKey = (options?: Options<ImportH5pData>) => [
   createQueryKey('importH5P', options),
 ];
@@ -3437,6 +3450,27 @@ export const exportZipOptions = (options: Options<ExportZipData>) => {
       return data;
     },
     queryKey: exportZipQueryKey(options),
+  });
+};
+
+export const graaspZipExportQueryKey = (
+  options: Options<GraaspZipExportData>,
+) => [createQueryKey('graaspZipExport', options)];
+
+export const graaspZipExportOptions = (
+  options: Options<GraaspZipExportData>,
+) => {
+  return queryOptions({
+    queryFn: async ({ queryKey, signal }) => {
+      const { data } = await graaspZipExport({
+        ...options,
+        ...queryKey[0],
+        signal,
+        throwOnError: true,
+      });
+      return data;
+    },
+    queryKey: graaspZipExportQueryKey(options),
   });
 };
 
@@ -4089,27 +4123,6 @@ export const getLatestItemValidationGroupOptions = (
   });
 };
 
-export const getItemValidationGroupQueryKey = (
-  options: Options<GetItemValidationGroupData>,
-) => [createQueryKey('getItemValidationGroup', options)];
-
-export const getItemValidationGroupOptions = (
-  options: Options<GetItemValidationGroupData>,
-) => {
-  return queryOptions({
-    queryFn: async ({ queryKey, signal }) => {
-      const { data } = await getItemValidationGroup({
-        ...options,
-        ...queryKey[0],
-        signal,
-        throwOnError: true,
-      });
-      return data;
-    },
-    queryKey: getItemValidationGroupQueryKey(options),
-  });
-};
-
 export const validateItemQueryKey = (options: Options<ValidateItemData>) => [
   createQueryKey('validateItem', options),
 ];
@@ -4451,25 +4464,6 @@ export const patchChatMessageMutation = (
   return mutationOptions;
 };
 
-export const getItemActionsQueryKey = (
-  options: Options<GetItemActionsData>,
-) => [createQueryKey('getItemActions', options)];
-
-export const getItemActionsOptions = (options: Options<GetItemActionsData>) => {
-  return queryOptions({
-    queryFn: async ({ queryKey, signal }) => {
-      const { data } = await getItemActions({
-        ...options,
-        ...queryKey[0],
-        signal,
-        throwOnError: true,
-      });
-      return data;
-    },
-    queryKey: getItemActionsQueryKey(options),
-  });
-};
-
 export const postActionQueryKey = (options: Options<PostActionData>) => [
   createQueryKey('postAction', options),
 ];
@@ -4509,27 +4503,6 @@ export const postActionMutation = (
   return mutationOptions;
 };
 
-export const getAggregateActionsQueryKey = (
-  options: Options<GetAggregateActionsData>,
-) => [createQueryKey('getAggregateActions', options)];
-
-export const getAggregateActionsOptions = (
-  options: Options<GetAggregateActionsData>,
-) => {
-  return queryOptions({
-    queryFn: async ({ queryKey, signal }) => {
-      const { data } = await getAggregateActions({
-        ...options,
-        ...queryKey[0],
-        signal,
-        throwOnError: true,
-      });
-      return data;
-    },
-    queryKey: getAggregateActionsQueryKey(options),
-  });
-};
-
 export const exportActionsQueryKey = (options: Options<ExportActionsData>) => [
   createQueryKey('exportActions', options),
 ];
@@ -4567,6 +4540,69 @@ export const exportActionsMutation = (
     },
   };
   return mutationOptions;
+};
+
+export const getItemActionsByDayQueryKey = (
+  options: Options<GetItemActionsByDayData>,
+) => [createQueryKey('getItemActionsByDay', options)];
+
+export const getItemActionsByDayOptions = (
+  options: Options<GetItemActionsByDayData>,
+) => {
+  return queryOptions({
+    queryFn: async ({ queryKey, signal }) => {
+      const { data } = await getItemActionsByDay({
+        ...options,
+        ...queryKey[0],
+        signal,
+        throwOnError: true,
+      });
+      return data;
+    },
+    queryKey: getItemActionsByDayQueryKey(options),
+  });
+};
+
+export const getItemActionsByHourQueryKey = (
+  options: Options<GetItemActionsByHourData>,
+) => [createQueryKey('getItemActionsByHour', options)];
+
+export const getItemActionsByHourOptions = (
+  options: Options<GetItemActionsByHourData>,
+) => {
+  return queryOptions({
+    queryFn: async ({ queryKey, signal }) => {
+      const { data } = await getItemActionsByHour({
+        ...options,
+        ...queryKey[0],
+        signal,
+        throwOnError: true,
+      });
+      return data;
+    },
+    queryKey: getItemActionsByHourQueryKey(options),
+  });
+};
+
+export const getItemActionsByWeekdayQueryKey = (
+  options: Options<GetItemActionsByWeekdayData>,
+) => [createQueryKey('getItemActionsByWeekday', options)];
+
+export const getItemActionsByWeekdayOptions = (
+  options: Options<GetItemActionsByWeekdayData>,
+) => {
+  return queryOptions({
+    queryFn: async ({ queryKey, signal }) => {
+      const { data } = await getItemActionsByWeekday({
+        ...options,
+        ...queryKey[0],
+        signal,
+        throwOnError: true,
+      });
+      return data;
+    },
+    queryKey: getItemActionsByWeekdayQueryKey(options),
+  });
 };
 
 export const deleteGeolocationMutation = (
@@ -4958,46 +4994,6 @@ export const getAccessibleItemsInfiniteOptions = (
   );
 };
 
-export const getItemsOwnQueryKey = (options?: Options<GetItemsOwnData>) => [
-  createQueryKey('getItemsOwn', options),
-];
-
-export const getItemsOwnOptions = (options?: Options<GetItemsOwnData>) => {
-  return queryOptions({
-    queryFn: async ({ queryKey, signal }) => {
-      const { data } = await getItemsOwn({
-        ...options,
-        ...queryKey[0],
-        signal,
-        throwOnError: true,
-      });
-      return data;
-    },
-    queryKey: getItemsOwnQueryKey(options),
-  });
-};
-
-export const getItemsSharedWithQueryKey = (
-  options?: Options<GetItemsSharedWithData>,
-) => [createQueryKey('getItemsSharedWith', options)];
-
-export const getItemsSharedWithOptions = (
-  options?: Options<GetItemsSharedWithData>,
-) => {
-  return queryOptions({
-    queryFn: async ({ queryKey, signal }) => {
-      const { data } = await getItemsSharedWith({
-        ...options,
-        ...queryKey[0],
-        signal,
-        throwOnError: true,
-      });
-      return data;
-    },
-    queryKey: getItemsSharedWithQueryKey(options),
-  });
-};
-
 export const getChildrenQueryKey = (options: Options<GetChildrenData>) => [
   createQueryKey('getChildren', options),
 ];
@@ -5301,16 +5297,16 @@ export const deleteItemsByItemIdMembershipsRequestsByMemberIdMutation = (
   return mutationOptions;
 };
 
-export const getItemMembershipsQueryKey = (
-  options: Options<GetItemMembershipsData>,
-) => [createQueryKey('getItemMemberships', options)];
+export const getItemMembershipsForItemQueryKey = (
+  options: Options<GetItemMembershipsForItemData>,
+) => [createQueryKey('getItemMembershipsForItem', options)];
 
-export const getItemMembershipsOptions = (
-  options: Options<GetItemMembershipsData>,
+export const getItemMembershipsForItemOptions = (
+  options: Options<GetItemMembershipsForItemData>,
 ) => {
   return queryOptions({
     queryFn: async ({ queryKey, signal }) => {
-      const { data } = await getItemMemberships({
+      const { data } = await getItemMembershipsForItem({
         ...options,
         ...queryKey[0],
         signal,
@@ -5318,7 +5314,7 @@ export const getItemMembershipsOptions = (
       });
       return data;
     },
-    queryKey: getItemMembershipsQueryKey(options),
+    queryKey: getItemMembershipsForItemQueryKey(options),
   });
 };
 
@@ -5353,47 +5349,6 @@ export const createItemMembershipMutation = (
   > = {
     mutationFn: async (localOptions) => {
       const { data } = await createItemMembership({
-        ...options,
-        ...localOptions,
-        throwOnError: true,
-      });
-      return data;
-    },
-  };
-  return mutationOptions;
-};
-
-export const createManyItemMembershipsQueryKey = (
-  options: Options<CreateManyItemMembershipsData>,
-) => [createQueryKey('createManyItemMemberships', options)];
-
-export const createManyItemMembershipsOptions = (
-  options: Options<CreateManyItemMembershipsData>,
-) => {
-  return queryOptions({
-    queryFn: async ({ queryKey, signal }) => {
-      const { data } = await createManyItemMemberships({
-        ...options,
-        ...queryKey[0],
-        signal,
-        throwOnError: true,
-      });
-      return data;
-    },
-    queryKey: createManyItemMembershipsQueryKey(options),
-  });
-};
-
-export const createManyItemMembershipsMutation = (
-  options?: Partial<Options<CreateManyItemMembershipsData>>,
-) => {
-  const mutationOptions: UseMutationOptions<
-    CreateManyItemMembershipsResponse,
-    CreateManyItemMembershipsError,
-    Options<CreateManyItemMembershipsData>
-  > = {
-    mutationFn: async (localOptions) => {
-      const { data } = await createManyItemMemberships({
         ...options,
         ...localOptions,
         throwOnError: true,
