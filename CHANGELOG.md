@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.16.0](https://github.com/graasp/graasp-library/compare/v1.15.2...v1.16.0) (2025-04-17)
+
+
+### Features
+
+* adapt for drizzle ([#766](https://github.com/graasp/graasp-library/issues/766)) ([6f27bb5](https://github.com/graasp/graasp-library/commit/6f27bb5fc75d7868f72511e7ead30ee69815ce27))
+
 ## [1.15.2](https://github.com/graasp/graasp-library/compare/v1.15.1...v1.15.2) (2025-03-13)
 
 
