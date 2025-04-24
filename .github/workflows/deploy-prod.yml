@@ -6,6 +6,14 @@ on:
   repository_dispatch:
     types: [production-deployment]
 
+  # Allows to run the workflow manually from the Actions tab
+  workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        description: "Tagged version to deploy"
+        required: true
+
 # This workflow is made up of one job that calls the reusable workflow in graasp-deploy
 jobs:
   graasp-deploy-ecs-workflow:
@@ -20,10 +28,10 @@ jobs:
     # Replace input ecs-task-definition with template file. Format: '.aws/<name>-prod.json'
     with:
       app-name: graasp-library
-      app-version: ${{ github.event.client_payload.tag }}
+      app-version: ${{ github.event.client_payload.tag || inputs.version }}
       next-public-graasp-account-host: ${{ vars.NEXT_PUBLIC_GRAASP_ACCOUNT_HOST_PROD }}
-      ecs-task-definition: '.aws/graasp-library-prod.json'
-      tag: ${{ github.event.client_payload.tag }}
+      ecs-task-definition: ".aws/graasp-library-prod.json"
+      tag: ${{ github.event.client_payload.tag || inputs.version }}
     # Insert required secrets based on repository with the following format: ${{ secrets.SECRET_NAME }}
     secrets:
       aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_PROD }}
