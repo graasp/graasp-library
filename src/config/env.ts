@@ -2,7 +2,8 @@
 export const SENTRY_DSN = process.env.NEXT_PUBLIC_SENTRY_DSN;
 
 export const SENTRY_ENV = process.env.NEXT_PUBLIC_SENTRY_ENV;
-export const GRAASP_AUTH_HOST = process.env.NEXT_PUBLIC_GRAASP_AUTH_HOST;
+export const GRAASP_AUTH_HOST =
+  process.env.NEXT_PUBLIC_GRAASP_AUTH_HOST ?? 'http://localhost:3114/auth';
 export const GRAASP_API_HOST =
   process.env.NEXT_PUBLIC_API_HOST || 'http://localhost:3000';
 export const GRAASP_PLAYER_HOST =
