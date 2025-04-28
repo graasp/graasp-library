@@ -29,25 +29,21 @@ Download or clone the repository to your local machine, preferably using [Git](h
 
 ### Installation
 
-Inside the project directory, run `yarn` to install the project dependencies.
+1. Inside the project directory, run `yarn` to install the project dependencies.
+1. Optionally create a `.env.local` file to override some settings. This is not required. The content should be the following:
 
-You will also need to create a file called `.env.local` with the following contents.
+    ```dotenv
+    # URL of the backend server. Uncomment to override the default value
+    # NEXT_PUBLIC_API_HOST=http://localhost:3000
 
-```dotenv
-# URL of the backend server uncomment if you need a value different from the default
-# NEXT_PUBLIC_API_HOST=http
-
-# to override the defaults provided, uncomment these and set your own values
-# NEXT_PUBLIC_GRAASP_AUTH_HOST=<value>
-# NEXT_PUBLIC_GRAASP_BUILDER_HOST=<value>
-# NEXT_PUBLIC_GRAASP_PERFORM_HOST=<value>
-# NEXT_PUBLIC_GRAASP_ANALYTICS_HOST=<value>
-```
-
-In order to ensure that you can contribute and test, also create a file called `.env.test`.
-You can leave this file empty.
+    # Uncomment to override the default value
+    # NEXT_PUBLIC_GRAASP_AUTH_HOST=http://localhost:3114/auth
+    # NEXT_PUBLIC_GRAASP_BUILDER_HOST=http://localhost:3114/builder
+    # NEXT_PUBLIC_GRAASP_PERFORM_HOST=http://localhost:3114/player
+    # NEXT_PUBLIC_GRAASP_ANALYTICS_HOST=http://localhost:3114/analytics
+    ```
 
 ### Running Locally
 
-Navigate to the cloned or forked project directory using the command-line, then type `yarn start`.
-The app will automatically run on [`http://localhost:3005`](http://localhost:3005). Any changes you make should be automatically rendered in the browser.
+Inside the project directory, run: `yarn start`.
+The app will be available on [`http://localhost:3005`](http://localhost:3005). Open this url in your browser. Any changes you make should be automatically rendered in the browser.
