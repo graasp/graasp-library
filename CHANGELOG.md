@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.16.1](https://github.com/graasp/graasp-library/compare/v1.16.0...v1.16.1) (2025-05-20)
+
+
+### Bug Fixes
+
+* add manual deploy ([8ac2ed1](https://github.com/graasp/graasp-library/commit/8ac2ed17b9517986490ea2f00efb6cd3fc1bbea1))
+* update docs ([#771](https://github.com/graasp/graasp-library/issues/771)) ([f3d4e3f](https://github.com/graasp/graasp-library/commit/f3d4e3fe5700faebd7657685713eafba1ca1b966))
+
 ## [1.16.0](https://github.com/graasp/graasp-library/compare/v1.15.2...v1.16.0) (2025-04-17)
 
 
