@@ -64,7 +64,7 @@
     "react-router-dom": "6.28.2",
     "react-toastify": "10.0.6",
     "social-links": "1.14.0",
-    "stylis": "4.3.5",
+    "stylis": "4.3.6",
     "uuid": "11.0.5"
   },
   "devDependencies": {
