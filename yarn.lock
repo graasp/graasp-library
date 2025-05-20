@@ -2776,10 +2776,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hey-api/client-fetch@npm:0.7.2":
-  version: 0.7.2
-  resolution: "@hey-api/client-fetch@npm:0.7.2"
-  checksum: 10/6c5085424c0a799e579496d07d6d824940d915dbdbb20aa9ed4f3a790ebb95019092a6ed44948e64dc6d69fea64997668d59a122dbb24b11c9b7ee9c08eb8a60
+"@hey-api/client-fetch@npm:0.7.3":
+  version: 0.7.3
+  resolution: "@hey-api/client-fetch@npm:0.7.3"
+  checksum: 10/8cff86f347988f07df4e74d2c9b0a44f1552f8d6ae150af3b04e82a12c10d3ed7b4808caaa5e2485d76c1d54a600a5b52e114f6f3908b13e912fda2c19583ef4
   languageName: node
   linkType: hard
 
@@ -11079,7 +11079,7 @@ __metadata:
     "@graasp/stylis-plugin-rtl": "npm:2.2.0"
     "@graasp/translations": "npm:1.43.0"
     "@graasp/ui": "npm:5.5.1"
-    "@hey-api/client-fetch": "npm:0.7.2"
+    "@hey-api/client-fetch": "npm:0.7.3"
     "@hey-api/openapi-ts": "npm:0.63.0"
     "@mui/icons-material": "npm:6.4.1"
     "@mui/lab": "npm:6.0.0-beta.24"
