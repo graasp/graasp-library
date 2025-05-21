@@ -6,9 +6,9 @@
   "type": "module",
   "scripts": {
     "dev": "vinxi dev --port 3002",
-    "build": "vinxi build",
     "start": "vinxi start",
-    "lint": "eslint .",
+    "build": "vinxi build",
+    "preview": "node .output/server/index.mjs",
     "prettier:write": "prettier --write '{src,cypress}/**/*.{js,ts,tsx}'",
     "check:prettier": "prettier --check '{src,cypress}/**/*.{js,ts,tsx}'",
     "check:lint": "eslint .",

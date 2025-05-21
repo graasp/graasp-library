@@ -7,16 +7,11 @@ export default defineConfig({
     runMode: 1,
   },
   chromeWebSecurity: false,
-  env: {
-    codeCoverage: {
-      url: '/api/__coverage__',
-    },
-  },
   e2e: {
     env: {
-      API_HOST: process.env.NEXT_PUBLIC_API_HOST,
-      AUTHENTICATION_HOST: process.env.NEXT_PUBLIC_GRAASP_AUTH_HOST,
-      GRAASPER_ID: process.env.NEXT_PUBLIC_GRAASPER_ID,
+      API_HOST: process.env.VITE_API_HOST,
+      CLIENT_HOST: process.env.VITE_CLIENT_HOST,
+      GRAASPER_ID: process.env.VITE_GRAASPER_ID,
     },
     // We've imported your old cypress plugins here.
     // You may want to clean this up later by importing these.
@@ -25,6 +20,6 @@ export default defineConfig({
 
       return config;
     },
-    baseUrl: 'http://localhost:3005',
+    baseUrl: `http://localhost:${process.env.VITE_PORT ?? '3002'}`,
   },
 });

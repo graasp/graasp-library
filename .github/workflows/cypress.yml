@@ -89,19 +89,15 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           install: false
-          build: pnpm build:test
-          # we launch the app in preview mode to avoid issues with hmr websockets from vite polluting the mocks
-          start: pnpm preview:test
+          build: pnpm build
+          start: pnpm preview
           browser: chrome
           quiet: true
           config-file: cypress.config.ts
         env:
-          VITE_PORT: ${{ vars.VITE_PORT }}
-          VITE_VERSION: ${{ vars.VITE_VERSION }}
-          VITE_GRAASP_API_HOST: ${{ vars.VITE_GRAASP_API_HOST }}
-          VITE_GRAASP_LIBRARY_HOST: ${{ vars.VITE_GRAASP_LIBRARY_HOST }}
-          VITE_SHOW_NOTIFICATIONS: ${{ vars.VITE_SHOW_NOTIFICATIONS }}
-          VITE_GRAASP_REDIRECTION_HOST: ${{ vars.VITE_GRAASP_REDIRECTION_HOST }}
+          VITE_PORT: 3000
+          VITE_API_HOST: http://localhost:3333
+          VITE_CLIENT_HOST: http://localhost:4444
 
       # after the test run completes
       # store any screenshots
