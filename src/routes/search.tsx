@@ -115,8 +115,8 @@ function RouteComponent() {
                 <IconButton
                   onClick={() =>
                     navigate({
-                      from: Route.fullPath,
-                      search: (prev) => ({ ...prev, search: '' }),
+                      to: Route.fullPath,
+                      search: (prev) => ({ ...prev, s: '' }),
                     })
                   }
                 >
@@ -151,7 +151,7 @@ function RouteComponent() {
             onClick={() => {
               navigate({
                 to: '.',
-                search: { ...search, page: search.page + 1 },
+                search: (prev) => ({ ...prev, page: prev.page + 1 }),
               });
             }}
             loading={isFetchingNextPage}
