@@ -1,9 +1,9 @@
 import { defineConfig } from '@hey-api/openapi-ts';
 
-import { GRAASP_API_HOST } from './src/config/env';
+import { API_HOST } from './src/config/env';
 
 export default defineConfig({
-  input: `${GRAASP_API_HOST}/docs/json`,
+  input: `${API_HOST}/docs/json`,
   output: {
     format: 'prettier',
     lint: 'eslint',

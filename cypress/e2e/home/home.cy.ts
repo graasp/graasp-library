@@ -1,4 +1,3 @@
-import { i18nConfig } from '../../../src/config/i18n';
 import { HOME_ROUTE } from '../../../src/config/routes';
 import {
   GRAASP_SELECTION_TITLE_ID,
@@ -14,8 +13,6 @@ import { buildPublicAndPrivateEnvironments } from '../../fixtures/environment';
 import { GRAASPER_ITEMS } from '../../fixtures/items';
 import { SIGNED_OUT_USER } from '../../support/constants';
 
-const i18n = i18nConfig();
-
 describe('Home Page', () => {
   buildPublicAndPrivateEnvironments().forEach((environment) => {
     describe(`Home Layout for ${
@@ -25,7 +22,8 @@ describe('Home Page', () => {
       it('display headings & collections', () => {
         cy.setUpApi(environment);
         if (environment.currentMember?.extra?.lang) {
-          i18n.changeLanguage(environment.currentMember?.extra?.lang);
+          // FIXME: find a way to make translations work
+          // i18n.changeLanguage(environment.currentMember?.extra?.lang);
         }
         cy.visit(HOME_ROUTE);
 

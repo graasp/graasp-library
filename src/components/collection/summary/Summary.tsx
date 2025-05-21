@@ -1,37 +1,34 @@
-import { useContext } from 'react';
+import type { JSX } from 'react';
 
 import { Stack, Typography } from '@mui/material';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
 
-import { DiscriminatedItem, ItemType } from '@graasp/sdk';
+import { ItemType } from '@graasp/sdk';
 
-import { useLibraryTranslation } from '../../../config/i18n';
-import LIBRARY from '../../../langs/constants';
-import { Item } from '../../../openapi/client';
-import { QueryClientContext } from '../../QueryClientContext';
+import { useQuery } from '@tanstack/react-query';
+
+import { getCurrentAccountOptions } from '~/openapi/client/@tanstack/react-query.gen';
+import { m } from '~/paraglide/messages';
+import { getLocale } from '~/paraglide/runtime';
+
+import { Item, PackedItem } from '../../../openapi/client';
 import BackButton from '../../common/BackButton';
+import { ChildrenItems } from '../ChildrenItems';
 import ItemBreadcrumb from '../ItemBreadcrumb';
-import Items from '../Items';
 import { SummaryDetails } from './SummaryDetails';
-import SummaryHeader from './SummaryHeader';
+import { SummaryHeader } from './SummaryHeader';
 
 type SummaryProps = {
-  collection: DiscriminatedItem;
+  collection: PackedItem;
   publishedRootItem?: Item;
-  isLoading: boolean;
   totalViews: number;
 };
 
 const Summary = ({
   collection,
   publishedRootItem,
-  isLoading,
   totalViews,
 }: SummaryProps): JSX.Element => {
-  const { t, i18n } = useLibraryTranslation();
-  const { hooks } = useContext(QueryClientContext);
-  const { data: member } = hooks.useCurrentMember();
+  const { data: member } = useQuery(getCurrentAccountOptions());
 
   return (
     <Stack
@@ -40,40 +37,35 @@ const Summary = ({
       alignItems="flex-start"
       justifyItems="flex-start"
       justifySelf="center"
-      spacing={2}
+      gap={{ xs: 4, sm: 6 }}
     >
-      <BackButton />
-      <ItemBreadcrumb itemId={collection?.id} />
+      <Stack direction="row" gap={2}>
+        <BackButton />
+        <ItemBreadcrumb itemId={collection.id} />
+      </Stack>
       <SummaryHeader
         collection={collection}
         isLogged={member?.id !== undefined}
-        isLoading={isLoading}
         totalViews={totalViews}
       />
-      {collection?.type === ItemType.FOLDER && (
-        <>
-          <Box sx={{ my: 4 }} />
-          <Container maxWidth="lg">
-            <Items
-              parentId={collection?.id}
-              lang={i18n.language}
-              isTopLevel={collection?.path.indexOf('.') < 0}
-            />
-          </Container>
-        </>
-      )}
-      <Box sx={{ my: 6 }} />
-      <Container maxWidth="lg">
+      <Stack direction="column" width="100%">
         <Typography variant="h6" fontWeight="bold">
-          {t(LIBRARY.SUMMARY_DETAILS_TITLE)}
+          {m.SUMMARY_DETAILS_TITLE()}
         </Typography>
         <SummaryDetails
           collection={collection}
           publishedRootItem={publishedRootItem}
-          isLoading={isLoading}
-          lang={i18n.language}
+          lang={getLocale()}
         />
-      </Container>
+      </Stack>
+      {collection?.type === ItemType.FOLDER && (
+        <Stack direction="column" width="100%">
+          <ChildrenItems
+            collectionId={collection.id}
+            isTopLevel={collection?.path.indexOf('.') < 0}
+          />
+        </Stack>
+      )}
     </Stack>
   );
 };

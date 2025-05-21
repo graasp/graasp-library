@@ -1,35 +1,33 @@
-import { useContext } from 'react';
+import type { JSX } from 'react';
 
 import { Box, Breadcrumbs, Button, Skeleton, Typography } from '@mui/material';
 
 import { getIdsFromPath } from '@graasp/sdk';
 
-import Link from 'next/link';
+import { useQuery } from '@tanstack/react-query';
 
-import { useLibraryTranslation } from '../../config/i18n';
-import { buildCollectionRoute } from '../../config/routes';
-import LIBRARY from '../../langs/constants';
-import { QueryClientContext } from '../QueryClientContext';
+import {
+  getCollectionInformationsOptions,
+  getItemOptions,
+  getParentItemsOptions,
+} from '~/openapi/client/@tanstack/react-query.gen';
+import { m } from '~/paraglide/messages';
+
+import { ButtonLink } from '../common/links/ButtonLink';
 
 type ItemBreadcrumbProps = {
-  itemId?: string;
+  itemId: string;
 };
 
 const ItemBreadcrumb = ({
   itemId,
 }: ItemBreadcrumbProps): JSX.Element | null => {
-  const { hooks } = useContext(QueryClientContext);
-  const { t } = useLibraryTranslation();
-
-  const { data: item } = hooks.useItem(itemId);
-
-  const { data: allParents, isLoading: isLoadingParents } = hooks.useParents({
-    id: itemId,
-  });
-  const { data: publishedInformation, isLoading: isLoadingInformation } =
-    hooks.useItemPublishedInformation({
-      itemId,
-    });
+  const { data: item } = useQuery(getItemOptions({ path: { id: itemId } }));
+  const { data: allParents, isPending: isLoadingParents } = useQuery(
+    getParentItemsOptions({ path: { id: itemId } }),
+  );
+  const { data: publishedInformation, isPending: isLoadingInformation } =
+    useQuery(getCollectionInformationsOptions({ path: { itemId } }));
 
   if (publishedInformation && allParents) {
     const publishedParentId = publishedInformation.item.id;
@@ -46,7 +44,7 @@ const ItemBreadcrumb = ({
       return (
         <Box visibility="hidden">
           <Breadcrumbs>
-            <Button>{t(LIBRARY.LOADING_TEXT)}</Button>
+            <Button>{m.LOADING_TEXT()}</Button>
           </Breadcrumbs>
         </Box>
       );
@@ -55,9 +53,13 @@ const ItemBreadcrumb = ({
     return (
       <Breadcrumbs>
         {parents?.map((parent) => (
-          <Button component={Link} href={buildCollectionRoute(parent.id)}>
+          <ButtonLink
+            key={parent.id}
+            to="/collections/$id"
+            params={{ id: parent.id }}
+          >
             {parent.name}
-          </Button>
+          </ButtonLink>
         ))}
         <Typography color="text.primary">{item?.name}</Typography>
       </Breadcrumbs>
@@ -69,7 +71,7 @@ const ItemBreadcrumb = ({
       <Breadcrumbs>
         <Skeleton variant="text">
           {/* This text is not show, it is just used to size the skeleton above */}
-          <Button>{t(LIBRARY.LOADING_TEXT)}</Button>
+          <Button>{m.LOADING_TEXT()}</Button>
         </Skeleton>
       </Breadcrumbs>
     );

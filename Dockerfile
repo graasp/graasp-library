@@ -1,41 +1,61 @@
-FROM node:20-alpine
+FROM node:22.15-bookworm-slim AS base
 
-# install git, necessary for github dependencies
-RUN apk add --no-cache git
+# -------------------------------------------------------
+# Install dependencies only when needed
+FROM base AS deps
+WORKDIR /app
 
-ARG NEXT_PUBLIC_API_HOST=${NEXT_PUBLIC_API_HOST}
-ARG NEXT_PUBLIC_GOOGLE_ANALYTICS_ID=${NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}
-ARG NEXT_PUBLIC_GRAASP_ANALYTICS_HOST=${NEXT_PUBLIC_GRAASP_ANALYTICS_HOST}
-ARG NEXT_PUBLIC_GRAASP_AUTH_HOST=${NEXT_PUBLIC_GRAASP_AUTH_HOST}
-ARG NEXT_PUBLIC_GRAASP_ACCOUNT_HOST=${NEXT_PUBLIC_GRAASP_ACCOUNT_HOST}
-ARG NEXT_PUBLIC_GRAASP_BUILDER_HOST=${NEXT_PUBLIC_GRAASP_BUILDER_HOST}
-ARG NEXT_PUBLIC_GRAASP_PERFORM_HOST=${NEXT_PUBLIC_GRAASP_PERFORM_HOST}
-ARG NEXT_PUBLIC_GRAASPER_ID=${NEXT_PUBLIC_GRAASPER_ID}
-ARG NEXT_PUBLIC_GA_MEASUREMENT_ID=${NEXT_PUBLIC_GA_MEASUREMENT_ID}
-ARG NEXT_PUBLIC_SENTRY_DSN=${NEXT_PUBLIC_SENTRY_DSN}
-ARG NEXT_PUBLIC_SENTRY_ENV=${NEXT_PUBLIC_SENTRY_ENV}
-ARG NEXT_PUBLIC_DOMAIN=${NEXT_PUBLIC_DOMAIN}
-ARG NEXT_PUBLIC_SHOW_NOTIFICATIONS=${NEXT_PUBLIC_SHOW_NOTIFICATIONS}
-ARG NEXT_PUBLIC_APP_NAME=${NEXT_PUBLIC_APP_NAME}
-ARG NEXT_PUBLIC_APP_VERSION=${NEXT_PUBLIC_APP_VERSION}
+# Install dependencies based on the preferred package manager
+COPY package.json pnpm-lock.yaml ./
+RUN npm install -g pnpm && pnpm install --frozen-lockfile
 
-WORKDIR /usr/src/app
-RUN mkdir -p .
-
-# install app dependencies with yarn 3
-COPY package.json .
-COPY .yarnrc.yml .
-COPY .yarn .yarn
-
-
-RUN yarn install
-
-# bundle app source
+# -------------------------------------------------------
+# Rebuild the source code only when needed
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# build with babel
-RUN yarn build
+ARG VITE_API_HOST
+ENV VITE_API_HOST=${VITE_API_HOST}
+ARG VITE_CLIENT_HOST
+ENV VITE_CLIENT_HOST=${VITE_CLIENT_HOST}
+ARG VITE_GRAASPER_ID
+ENV VITE_GRAASPER_ID=${VITE_GRAASPER_ID}
 
-EXPOSE 3005
+# Install pnpm in the builder stage
+RUN npm install -g pnpm
 
-CMD ["yarn", "start:next"]
+# Build the application
+RUN pnpm build
+
+# -------------------------------------------------------
+# Production image, copy all the files and run the server
+FROM node:22.15-bookworm-slim AS runner
+WORKDIR /app
+
+ENV NODE_ENV=production
+
+ARG APP_VERSION
+ENV APP_VERSION=${APP_VERSION:-latest}
+ARG BUILD_TIMESTAMP
+ENV BUILD_TIMESTAMP=${BUILD_TIMESTAMP:-not-provided}
+
+# Create a non-root user
+RUN addgroup --system --gid 1001 nodejs && \
+  adduser --system --uid 1001 nodejs
+
+# Create directory for writable files with proper permissions
+RUN mkdir -p /app/data && \
+  chown -R nodejs:nodejs /app/data
+
+# Copy only necessary files
+COPY --from=builder /app/.output ./.output
+
+# Expose the port the app will run on
+EXPOSE 3000
+
+USER nodejs
+
+# Start the Node.js server
+CMD ["node", ".output/server/index.mjs"]

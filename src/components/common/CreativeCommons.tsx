@@ -1,24 +1,17 @@
-import React from 'react';
+import type { JSX } from 'react';
 
 import { Typography } from '@mui/material';
 
 import { DiscriminatedItem } from '@graasp/sdk';
-import {
-  CCSharingVariant,
-  CreativeCommons as GraaspCreativeCommons,
-} from '@graasp/ui';
 
-import { useLibraryTranslation } from '../../config/i18n';
-import LIBRARY from '../../langs/constants';
+import { CreativeCommonsComponent } from '~/components/ui/CreativeCommons/CreativeCommons';
+import { m } from '~/paraglide/messages';
 
 const getAllowSharingProperty = (ccLicenseAdaption: string) => {
-  if (!ccLicenseAdaption || !ccLicenseAdaption.length) {
-    return '';
-  }
   if (ccLicenseAdaption?.includes('SA')) {
-    return 'alike';
+    return 'alike' as const;
   }
-  return ccLicenseAdaption?.includes('ND') ? 'no' : 'yes';
+  return ccLicenseAdaption?.includes('ND') ? ('no' as const) : ('yes' as const);
 };
 
 const convertLicense = (ccLicenseAdaption: string) => {
@@ -27,7 +20,8 @@ const convertLicense = (ccLicenseAdaption: string) => {
     return {
       requireAccreditation: true,
       allowCommercialUse: true,
-      allowSharing: ccLicenseAdaption === 'alike' ? 'alike' : 'yes',
+      allowSharing:
+        ccLicenseAdaption === 'alike' ? ('alike' as const) : ('yes' as const),
     };
   }
 
@@ -49,15 +43,13 @@ const CreativeCommons = ({
   ccLicenseAdaption,
   iconSize = 48,
 }: Props): JSX.Element => {
-  const { t } = useLibraryTranslation();
-
   const { allowSharing, allowCommercialUse, requireAccreditation } =
     convertLicense(ccLicenseAdaption ?? '');
 
   if (ccLicenseAdaption && ccLicenseAdaption.length > 0) {
     return (
-      <GraaspCreativeCommons
-        allowSharedAdaptation={allowSharing as CCSharingVariant}
+      <CreativeCommonsComponent
+        allowSharedAdaptation={allowSharing}
         allowCommercialUse={allowCommercialUse}
         requireAccreditation={requireAccreditation}
         iconSize={iconSize}
@@ -68,7 +60,7 @@ const CreativeCommons = ({
 
   return (
     <Typography variant="body1" color="text.secondary" id={id}>
-      {t(LIBRARY.SUMMARY_DETAILS_EMPTY_LICENSE_TEXT)}
+      {m.SUMMARY_DETAILS_EMPTY_LICENSE_TEXT()}
     </Typography>
   );
 };

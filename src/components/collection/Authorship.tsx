@@ -1,31 +1,27 @@
-import { Stack, Typography } from '@mui/material';
-import Skeleton from '@mui/material/Skeleton';
+import { Skeleton, Stack } from '@mui/material';
 
 import {
-  DiscriminatedItem,
   Member,
   PermissionLevel,
   PermissionLevelCompare,
   ThumbnailSize,
 } from '@graasp/sdk';
-import { Avatar } from '@graasp/ui';
 
 import { useQuery } from '@tanstack/react-query';
-import Link from 'next/link';
 
-import { DEFAULT_MEMBER_THUMBNAIL } from '../../config/constants';
-import { useLibraryTranslation } from '../../config/i18n';
-import { buildMemberRoute } from '../../config/routes';
+import { PackedItem } from '~/openapi/client';
+import { m } from '~/paraglide/messages';
+
 import { SUMMARY_AUTHOR_CONTAINER_ID } from '../../config/selectors';
-import LIBRARY from '../../langs/constants';
 import {
   downloadAvatarOptions,
   getItemMembershipsForItemOptions,
 } from '../../openapi/client/@tanstack/react-query.gen';
+import { TypographyLink } from '../common/links/TypographyLink';
+import Avatar from '../ui/Avatar/Avatar';
 import Contributors from './Contributors';
 
 const Author = ({ author }: { author: Member }) => {
-  const { t } = useLibraryTranslation();
   const {
     data: authorUrl,
     isSuccess,
@@ -33,16 +29,14 @@ const Author = ({ author }: { author: Member }) => {
   } = useQuery(
     downloadAvatarOptions({
       path: { id: author.id, size: ThumbnailSize.Small },
-      query: { replyUrl: true },
     }),
   );
-
   if (isSuccess) {
     return (
       <>
         <Avatar
-          url={authorUrl ?? DEFAULT_MEMBER_THUMBNAIL}
-          alt={t(LIBRARY.AVATAR_ALT, { name: author.name })}
+          url={authorUrl}
+          alt={m.AVATAR_ALT({ name: author.name })}
           isLoading={isPendingAuthorAvatar}
           component="avatar"
           maxWidth={30}
@@ -50,13 +44,13 @@ const Author = ({ author }: { author: Member }) => {
           variant="circular"
           sx={{ maxWidth: 30, maxHeight: 30 }}
         />
-        <Typography
-          component={Link}
-          href={buildMemberRoute(author.id)}
+        <TypographyLink
+          to="/members/$memberId"
+          params={{ memberId: author.id }}
           variant="body1"
         >
           {author.name}
-        </Typography>
+        </TypographyLink>
       </>
     );
   }
@@ -74,8 +68,8 @@ const Author = ({ author }: { author: Member }) => {
 };
 
 type Props = {
-  itemId: DiscriminatedItem['id'];
-  author: DiscriminatedItem['creator'];
+  itemId: PackedItem['id'];
+  author: PackedItem['creator'];
   displayCoEditors?: boolean;
 };
 const Authorship = ({ itemId, author, displayCoEditors }: Props) => {

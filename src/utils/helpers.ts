@@ -1,4 +1,4 @@
-import { cloneElement } from 'react';
+import { type JSX, cloneElement } from 'react';
 
 export const openInNewTab = (url: string) => {
   const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
@@ -24,7 +24,6 @@ export default function intersperse(
       output.push(item);
 
       if (index < array.length - 1) {
-        // eslint-disable-next-line react/no-array-index-key
         output.push(cloneElement(separator, { key: `interspersed-${index}` }));
       }
 

@@ -1,49 +1,41 @@
-import { Stack, Typography, useTheme } from '@mui/material';
+import type { JSX } from 'react';
 
-import { DEFAULT_LIGHT_PRIMARY_COLOR } from '@graasp/ui';
+import { Stack } from '@mui/material';
 
-import Link from 'next/link';
+import { categoryToQueryParams } from '~/components/filters/constants';
+import { DEFAULT_LIGHT_PRIMARY_COLOR } from '~/components/ui/theme';
+import { Tag } from '~/openapi/client';
 
-import { UrlSearch } from '../../../config/constants';
-import { ALL_COLLECTIONS_ROUTE } from '../../../config/routes';
+import { TypographyLink } from '../links/TypographyLink';
 
-function Tag({ title }: { readonly title: string }): JSX.Element {
-  const theme = useTheme();
+type TagInfo = Pick<Tag, 'name' | 'category'>;
+
+function TagComponent({ tag }: Readonly<{ tag: TagInfo }>): JSX.Element {
   return (
-    <Link
-      href={{
-        pathname: ALL_COLLECTIONS_ROUTE,
-        query: { [UrlSearch.KeywordSearch]: title },
-      }}
-      style={{
+    <TypographyLink
+      to="/search"
+      search={{ [categoryToQueryParams[tag.category]]: [tag.name] }}
+      variant="body2"
+      px={1}
+      borderRadius={2}
+      noWrap
+      sx={{
+        color: 'primary.main',
         textDecoration: 'none',
-        color: theme.palette.primary.main,
+        backgroundColor: DEFAULT_LIGHT_PRIMARY_COLOR.main,
+        '&:hover': {
+          cursor: 'pointer',
+          opacity: 0.8,
+        },
       }}
     >
-      <Typography
-        variant="body2"
-        component="span"
-        px={1}
-        borderRadius={2}
-        ml={0}
-        mr={1}
-        noWrap
-        sx={{
-          backgroundColor: DEFAULT_LIGHT_PRIMARY_COLOR.main,
-          '&:hover': {
-            cursor: 'pointer',
-            opacity: 0.8,
-          },
-        }}
-      >
-        {title}
-      </Typography>
-    </Link>
+      {tag.name}
+    </TypographyLink>
   );
 }
 
 export type TagListProps = Readonly<{
-  tags?: string[];
+  tags?: TagInfo[];
 }>;
 
 export function TagList({ tags }: TagListProps): JSX.Element | null {
@@ -54,15 +46,14 @@ export function TagList({ tags }: TagListProps): JSX.Element | null {
   return (
     <Stack
       direction="row"
-      maxWidth="100%"
       alignItems="center"
       flexWrap="wrap"
+      gap="4px"
       overflow="hidden"
-      height="100%"
-      maxHeight="50px" // computed height to disply maximum 2 lines
+      maxHeight="2lh" // display maximum 2 lines
     >
       {tags.map((t) => (
-        <Tag key={t} title={t} />
+        <TagComponent key={`${t.category}-${t.name}`} tag={t} />
       ))}
     </Stack>
   );

@@ -1,24 +1,16 @@
+import type { JSX } from 'react';
+
 import { ArrowForward } from '@mui/icons-material';
-import {
-  Box,
-  Button,
-  Chip,
-  Container,
-  Stack,
-  Typography,
-  useTheme,
-} from '@mui/material';
+import { Box, Container, Stack, Typography, useTheme } from '@mui/material';
 
-import { GraaspLogo } from '@graasp/ui';
-
-import Link from 'next/link';
+import { m } from '~/paraglide/messages';
 
 import { UrlSearch } from '../../config/constants';
-import { useLibraryTranslation } from '../../config/i18n';
-import { ALL_COLLECTIONS_ROUTE } from '../../config/routes';
 import { HOME_PAGE_TITLE_TEXT_ID } from '../../config/selectors';
-import LIBRARY from '../../langs/constants';
+import { ButtonLink } from '../common/links/ButtonLink';
+import { ChipLink } from '../common/links/ChipLink';
 import HomeSearchBox from '../search/HomeSearchBox';
+import GraaspLogo from '../ui/icons/GraaspLogo';
 
 type PopularSearchItemProps = {
   text: string;
@@ -27,12 +19,9 @@ type PopularSearchItemProps = {
 const PopularSearchItem = ({ text }: PopularSearchItemProps): JSX.Element => {
   const theme = useTheme();
   return (
-    <Chip
-      component={Link}
-      href={{
-        pathname: ALL_COLLECTIONS_ROUTE,
-        query: { [UrlSearch.KeywordSearch]: text },
-      }}
+    <ChipLink
+      to="/search"
+      search={{ [UrlSearch.KeywordSearch]: text }}
       variant="filled"
       sx={{
         color: theme.palette.primary.contrastText,
@@ -48,8 +37,6 @@ const PopularSearchItem = ({ text }: PopularSearchItemProps): JSX.Element => {
 };
 
 const HomeHeader = () => {
-  const { t } = useLibraryTranslation();
-
   // TODO: Feed from real data.
   const popularSearches = ['Climate', 'App', 'Science', 'Education'];
 
@@ -63,7 +50,7 @@ const HomeHeader = () => {
           md: 6,
           lg: 15,
         }}
-        paddingTop={14}
+        paddingTop={{ xs: 4, sm: 14 }}
         spacing={4}
       >
         <Box display="flex" flexDirection="row" alignItems="center">
@@ -74,7 +61,7 @@ const HomeHeader = () => {
             variant="display"
             marginLeft={2}
           >
-            {t(LIBRARY.HOME_TITLE)}
+            {m.HOME_TITLE()}
           </Typography>
         </Box>
         <Box>
@@ -84,7 +71,7 @@ const HomeHeader = () => {
             fontWeight={300}
             textAlign="center"
           >
-            {t(LIBRARY.HOME_SUBTITLE)}
+            {m.HOME_SUBTITLE()}
           </Typography>
         </Box>
         <HomeSearchBox />
@@ -96,7 +83,7 @@ const HomeHeader = () => {
         >
           <Box>
             <Typography color="white" variant="h6" gutterBottom>
-              {t(LIBRARY.HOME_POPULAR_SEARCHES_TITLE)}
+              {m.HOME_POPULAR_SEARCHES_TITLE()}
             </Typography>
             <Stack
               direction="row"
@@ -110,20 +97,19 @@ const HomeHeader = () => {
               ))}
             </Stack>
           </Box>
-          <Button
-            component={Link}
-            href={ALL_COLLECTIONS_ROUTE}
+          <ButtonLink
+            to="/search"
             sx={{
               textTransform: 'none',
               ':hover': {
                 backgroundColor: 'rgba(255, 255, 255, 0.15)',
               },
+              color: 'white',
             }}
-            color="secondary"
             endIcon={<ArrowForward />}
           >
-            {t(LIBRARY.HOME_BROWSE_ALL_COLLECTIONS)}
-          </Button>
+            {m.HOME_BROWSE_ALL_COLLECTIONS()}
+          </ButtonLink>
         </Stack>
       </Stack>
     </Container>

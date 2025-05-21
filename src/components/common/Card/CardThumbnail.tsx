@@ -1,7 +1,11 @@
+import type { JSX } from 'react';
+
 import { Stack } from '@mui/material';
 
 import { type DiscriminatedItem, ItemType } from '@graasp/sdk';
-import { ItemIcon, Thumbnail } from '@graasp/ui';
+
+import Thumbnail from '~/components/ui/Thumbnail/Thumbnail';
+import { ItemIcon } from '~/components/ui/icons/ItemIcon';
 
 import { getColorFromId } from '../../../utils/colors';
 
@@ -52,12 +56,14 @@ const CardThumbnail = ({
       flexShrink={0}
       minHeight={minHeight}
       minWidth={0}
-      sx={{
-        '&:hover': {
-          cursor: 'pointer',
-          opacity: 0.9,
-        },
-      }}
+      sx={
+        {
+          //   '&:hover': {
+          //     cursor: 'pointer',
+          // opacity: 0.9,
+          //   },
+        }
+      }
     >
       <ItemIcon
         mimetype={mimetype}

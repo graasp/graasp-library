@@ -1,9 +1,15 @@
+import { CssBaseline, ThemeProvider } from '@mui/material';
+
 import type { Preview } from '@storybook/react';
-
-import * as React from 'react';
-
-import { CssBaseline } from '@mui/material';
-import { ThemeProvider } from '@mui/system';
+import { StoryContext } from '@storybook/react';
+import {
+  RouterProvider,
+  createMemoryHistory,
+  createRootRoute,
+  createRoute,
+  createRouter,
+} from '@tanstack/react-router';
+import { PartialStoryFn } from 'storybook/internal/types';
 
 import { theme } from '../src/config/theme';
 
@@ -18,6 +24,47 @@ const preview: Preview = {
   },
 
   decorators: [
+    // some components use tanstack router functions
+    // so we need to provide a router when displaying stories.
+    (Story: PartialStoryFn, { parameters }: StoryContext) => {
+      const {
+        initialEntries = ['/'],
+        initialIndex,
+        routes = ['/'],
+        routeParams = {},
+      } = parameters?.router || {};
+
+      const rootRoute = createRootRoute();
+
+      const children = routes.map((path: string) =>
+        createRoute({
+          path,
+          getParentRoute: () => rootRoute,
+          component: Story,
+        }),
+      );
+
+      rootRoute.addChildren(children);
+
+      // Ensure initialEntries are strings
+      const formattedInitialEntries = initialEntries.map((entry: string) => {
+        // If the entry includes parameters, replace them with the provided values
+        return Object.keys(routeParams).reduce((acc, key) => {
+          return acc.replace(`:${key}`, routeParams[key]);
+        }, entry);
+      });
+
+      const router = createRouter({
+        history: createMemoryHistory({
+          initialEntries: formattedInitialEntries,
+          initialIndex,
+        }),
+        routeTree: rootRoute,
+        context: routeParams,
+      });
+
+      return <RouterProvider router={router} />;
+    },
     (Story, { globals }) => {
       return (
         <ThemeProvider

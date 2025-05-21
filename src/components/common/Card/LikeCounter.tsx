@@ -1,3 +1,5 @@
+import type { JSX } from 'react';
+
 import { Stack, Typography, useTheme } from '@mui/material';
 
 import { Heart } from 'lucide-react';

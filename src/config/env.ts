@@ -1,31 +1,22 @@
-/* eslint-disable prefer-destructuring */
-export const SENTRY_DSN = process.env.NEXT_PUBLIC_SENTRY_DSN;
+// FIXME: to be moved to the sentry specific files
+export const SENTRY_DSN = import.meta.env.VITE_SENTRY_DSN;
+export const SENTRY_ENV = import.meta.env.VITE_SENTRY_ENV;
 
-export const SENTRY_ENV = process.env.NEXT_PUBLIC_SENTRY_ENV;
-export const GRAASP_AUTH_HOST =
-  process.env.NEXT_PUBLIC_GRAASP_AUTH_HOST ?? 'http://localhost:3114/auth';
-export const GRAASP_API_HOST =
-  process.env.NEXT_PUBLIC_API_HOST || 'http://localhost:3000';
-export const GRAASP_PLAYER_HOST =
-  process.env.NEXT_PUBLIC_GRAASP_PERFORM_HOST || 'http://localhost:3114/player';
-export const GRAASP_BUILDER_HOST =
-  process.env.NEXT_PUBLIC_GRAASP_BUILDER_HOST ||
-  'http://localhost:3114/builder';
-export const GRAASP_ANALYTICS_HOST =
-  process.env.NEXT_PUBLIC_GRAASP_ANALYTICS_HOST ||
-  'http://localhost:3114/analytics';
-export const GRAASP_ACCOUNT_HOST =
-  process.env.NEXT_PUBLIC_GRAASP_ACCOUNT_HOST ||
-  'http://localhost:3114/account';
+export const CLIENT_HOST =
+  process.env.VITE_CLIENT_HOST ?? import.meta.env.VITE_CLIENT_HOST; // ?? 'http://localhost:3114';
+export const API_HOST =
+  process.env.VITE_API_HOST ?? import.meta.env.VITE_API_HOST; // ?? 'http://localhost:3000';
 
-export const NODE_ENV = process.env.NODE_ENV;
-export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
-export const GRAASPER_ID = process.env.NEXT_PUBLIC_GRAASPER_ID;
+// FIXME: may be we should have a specific endpoint for the graasper collections so we do not rely on this env var
+export const GRAASPER_ID = import.meta.env.VITE_GRAASPER_ID;
+
+// TODO: NOT USED anymore, remove
 export const SHOW_NOTIFICATIONS =
-  process.env.NEXT_PUBLIC_SHOW_NOTIFICATIONS === 'true' || false;
+  import.meta.env.VITE_SHOW_NOTIFICATIONS === 'true' || false;
 
-export const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN ?? 'localhost';
+// runtime env vars that should be accessed only on the server side
+export const APP_VERSION = process.env.VITE_APP_VERSION ?? 'not-defined';
+export const BUILD_TIMESTAMP =
+  process.env.VITE_BUILD_TIMESTAMP ?? 'not-defined';
 
-export const APP_VERSION = process.env.NEXT_PUBLIC_APP_VERSION;
-const projectName = 'graasp-library';
-export const SENTRY_RELEASE = `${projectName}@${APP_VERSION}`;
+export const SENTRY_RELEASE = `graasp-library@${APP_VERSION}`;

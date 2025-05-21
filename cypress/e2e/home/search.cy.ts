@@ -1,5 +1,5 @@
 import { MAX_RESULTS_TO_SHOW } from '../../../src/config/constants';
-import { ALL_COLLECTIONS_ROUTE, HOME_ROUTE } from '../../../src/config/routes';
+import { HOME_ROUTE } from '../../../src/config/routes';
 import {
   ALL_COLLECTIONS_GRID_ID,
   HOME_SEARCH_ID,
@@ -7,6 +7,7 @@ import {
   SEARCH_RESULTS_LIST_ID,
   SEARCH_RESULTS_SHOW_MORE_BUTTON,
 } from '../../../src/config/selectors';
+import { ALL_COLLECTIONS_ROUTE } from '../../fixtures/constants';
 import { buildPublicAndPrivateEnvironments } from '../../fixtures/environment';
 import { PUBLISHED_ITEMS } from '../../fixtures/items';
 import { getRootPublishedItems } from '../../support/utils';

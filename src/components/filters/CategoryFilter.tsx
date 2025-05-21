@@ -1,57 +1,57 @@
-import { useContext } from 'react';
-
-import { TagCategory } from '@graasp/sdk';
-
-import { useQuery } from '@tanstack/react-query';
+import { getRouteApi } from '@tanstack/react-router';
 
 import {
   buildSearchFilterPopperButtonId,
   buildSearchFilterTagCategoryId,
 } from '../../config/selectors';
-import { getFacetsForNameOptions } from '../../openapi/client/@tanstack/react-query.gen';
-import { QueryClientContext } from '../QueryClientContext';
-import { useSearchFiltersContext } from '../pages/SearchFiltersContext';
 import { Filter } from './Filter';
+import { queryParamsToCategory } from './constants';
+import { useSearchFacets } from './useSearchFacets';
 
 type CategoryFilterProps = {
-  category: TagCategory;
+  category: 'levels' | 'disciplines' | 'resourceTypes';
   title: string;
 };
 
-// eslint-disable-next-line react/function-component-definition
+const SearchRoute = getRouteApi('/search');
+
 export function CategoryFilter({
   category,
   title,
 }: Readonly<CategoryFilterProps>) {
-  const {
-    tags,
-    langsForFilter,
-    searchKeywords,
-    isPublishedRoot,
-    toggleTagByCategory,
-    clearTagsByCategory,
-  } = useSearchFiltersContext();
-  const { hooks } = useContext(QueryClientContext);
+  const search = SearchRoute.useSearch();
+  const { s, levels, disciplines, resourceTypes, rootOnly } = search;
+  const navigate = SearchRoute.useNavigate();
+  const { data: options } = useSearchFacets({
+    facetName: queryParamsToCategory[category],
+    keywordSearch: s,
+    tags: {
+      // we should not search over the selected category in order to have accurate facets for the current category
+      level: category !== 'levels' ? levels : undefined,
+      discipline: category !== 'disciplines' ? disciplines : undefined,
+      'resource-type': category !== 'resourceTypes' ? resourceTypes : undefined,
+    },
+    isPublishedRoot: rootOnly,
+  });
 
-  // ignore current category to get facets
-  // implement OR logic
-  // eg. [biology, chemistry] means getting facets for "category" with other tags set to biology or chemistry
-  const ignoreCurrentCategory = { ...tags };
-  delete ignoreCurrentCategory[category];
-  const debouncedSearchKeywords = hooks.useDebounce(searchKeywords, 500);
-  const { data: options } = useQuery(
-    getFacetsForNameOptions({
-      query: {
-        facetName: category,
-      },
-      body: {
-        query: debouncedSearchKeywords,
-        tags: ignoreCurrentCategory,
-        langs: langsForFilter,
-        isPublishedRoot,
-      },
-    }),
-  );
+  const toggleCategory = (value: string, newSelected: boolean) => {
+    navigate({
+      from: '/search',
+      search: (prev) => ({
+        ...prev,
+        [category]: newSelected
+          ? [...prev[category], value]
+          : prev[category].filter((c) => c !== value),
+      }),
+    });
+  };
+
+  const clearCategory = () => {
+    navigate({
+      from: '/search',
+      search: (prev) => ({ ...prev, [category]: [] }),
+    });
+  };
 
   return (
     <Filter
@@ -59,9 +59,9 @@ export function CategoryFilter({
       buttonId={buildSearchFilterPopperButtonId(category)}
       title={title}
       options={options ?? {}}
-      selectedOptions={tags[category]}
-      onOptionChange={toggleTagByCategory(category)}
-      onClearOptions={() => clearTagsByCategory(category)}
+      selectedOptions={search[category]}
+      onOptionChange={toggleCategory}
+      onClearOptions={clearCategory}
     />
   );
 }

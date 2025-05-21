@@ -1,25 +1,17 @@
 import { ArrowBack } from '@mui/icons-material';
 import { Button } from '@mui/material';
 
-import { COMMON } from '@graasp/translations';
+import { useCanGoBack, useRouter } from '@tanstack/react-router';
 
-import { useRouter } from 'next/navigation';
-
-import { useCommonTranslation } from '../../config/i18n';
+import { m } from '~/paraglide/messages';
 
 const BackButton = () => {
-  const { t } = useCommonTranslation();
   const router = useRouter();
-  return (
-    <Button
-      startIcon={<ArrowBack />}
-      onClick={() =>
-        // check if history is empty (length == 1) and close the tab instead of going back
-        window && window.history.length > 1 ? router.back() : window.close()
-      }
-    >
-      {t(COMMON.BACK_BUTTON)}
+  const canGoBack = useCanGoBack();
+  return canGoBack ? (
+    <Button startIcon={<ArrowBack />} onClick={() => router.history.back()}>
+      {m.BACK()}
     </Button>
-  );
+  ) : null;
 };
 export default BackButton;

@@ -1,32 +1,31 @@
-import React, { useContext } from 'react';
-
 import { Box } from '@mui/material';
 
 import { ThumbnailSize, ThumbnailSizeType } from '@graasp/sdk';
-import { Thumbnail } from '@graasp/ui';
+
+import { useQuery } from '@tanstack/react-query';
+
+import { downloadItemThumbnailOptions } from '~/openapi/client/@tanstack/react-query.gen';
 
 import {
   DEFAULT_ITEM_IMAGE_PATH,
   DEFAULT_THUMBNAIL_ALT_TEXT,
 } from '../../config/constants';
-import { QueryClientContext } from '../QueryClientContext';
+import Thumbnail from '../ui/Thumbnail/Thumbnail';
 
 type Props = {
-  name?: string;
-  itemId?: string;
-  size?: ThumbnailSizeType;
-  svgPadding?: number;
+  name: string;
+  itemId: string;
+  size: ThumbnailSizeType;
 };
 
 const CardMediaComponent = ({
   name,
   itemId,
   size = ThumbnailSize.Small,
-  svgPadding = 15,
 }: Props) => {
-  const { hooks } = useContext(QueryClientContext);
-  const { data: thumbnailUrl, isLoading: isThumbnailLoading } =
-    hooks.useItemThumbnailUrl({ id: itemId, size });
+  const { data: thumbnailUrl, isPending: isThumbnailLoading } = useQuery(
+    downloadItemThumbnailOptions({ path: { id: itemId, size } }),
+  );
   return (
     <Box
       title={name}
@@ -37,7 +36,7 @@ const CardMediaComponent = ({
         '& img[src$=".svg"]': {
           maxHeight: `100%`,
           maxWidth: `100%`,
-          padding: `${svgPadding}%`,
+          padding: `15%`,
         },
         justifyContent: 'center',
         alignItems: 'center',

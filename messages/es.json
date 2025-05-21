@@ -1,0 +1,276 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "GRAASP_LIBRARY": "Biblioteca de Graasp",
+  "GRAASP_LIBRARY_DESCRIPTION": "La Biblioteca de Graasp es una plataforma de código abierto que proporciona recursos de aprendizaje en forma de colecciones.",
+  "GUEST": "Invitado",
+  "SHARE_TWITTER_MESSAGE": "Echa un vistazo a {name} en Graasp",
+  "SHARE_FACEBOOK_SUBJECT": "Echa un vistazo a {name} en Graasp",
+  "SHARE_FACEBOOK_MESSAGE": "Echa un vistazo a {name} en Graasp",
+  "AUTHORSHIP_AUTHOR_TITLE": "Autor",
+  "COLLECTION_ITEMS_EMPTY_MESSAGE": "Esta colección está vacía.",
+  "COLLECTION_ITEMS_EMPTY_FOLDER_MESSAGE": "Esta carpeta está vacía.",
+  "COLLECTION_ITEMS_TITLE": "Elementos",
+  "COLLECTION_ITEMS_TOOLTIP_MESSAGE": "Estos son los artículos de esta colección.",
+  "COLLECTION_CARD_TAG_NEW": "Nuevo",
+  "COLLECTION_CARD_TAG_UPDATED": "Actualizado",
+  "SIGN_IN_MODAL_SIGN_IN_BUTTON": "Iniciar sesión",
+  "SIGN_IN_MODAL_SIGN_UP_BUTTON": "Crea una cuenta",
+  "COPY_BUTTON_MODAL_TITLE": "Copiar artículo",
+  "SIGN_IN_MODAL_TITLE": "Necesario iniciar sesión",
+  "SIGN_IN_MODAL_CONTENT": "Para continuar, debes iniciar sesión en Graasp.",
+  "TREE_MODAL_CANCEL_BUTTON": "Cancelar",
+  "TREE_MODAL_CONFIRM_BUTTON": "Confirmar",
+  "COPY_BUTTON_TOOLTIP": "Copiar",
+  "COPY_BUTTON_MODAL_DESCRIPTION": "Selecciona una carpeta de la lista a continuación",
+  "COMMENTS_TITLE": "Comentarios",
+  "COMMENT_NO_CONTENT_MESSAGE": "El comentario fue eliminado.",
+  "COMMENTS_TOOLTIP": "Estos son los comentarios de esta colección.",
+  "UNEXPECTED_ERROR_MESSAGE": "Se ha producido un error",
+  "ALL_COLLECTIONS_RESET_ALL_BUTTON": "Todas las colecciones",
+  "ALL_COLLECTIONS_TITLE": "Todas las colecciones",
+  "HEADER_ALL_COLLECTIONS": "Todas las colecciones",
+  "ALL_COLLECTIONS_OPEN_MENU": "Menú abierto",
+  "ALL_COLLECTIONS_CLEAR_SELECTION_BUTTON": "Selección clara",
+  "ALL_COLLECTIONS_SELECTION_BY_CATEGORIES_TITLE": "Colecciones en categorías seleccionadas",
+  "HEADER_MY_LISTS": "Mis listas",
+  "SEARCH_PAGE_TITLE": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [],
+      "match": {
+        "count=*": "Buscar entre {count} colecciones",
+        "countPlural=other": "Buscar entre {count} recursos",
+        "countPlural=one": "Buscar entre los recursos {count}"
+      }
+    }
+  ],
+  "SEARCH_RANGE_LABEL": "Rango de búsqueda",
+  "SEARCH_RANGES_TITLE": "Título",
+  "SEARCH_RANGES_TAGS": "Etiqueta",
+  "SEARCH_RANGES_AUTHOR": "Autor",
+  "SEARCH_BUTTON_ARIA_LABEL": "buscar",
+  "SEARCH_ARIA_LABEL": "Buscar colecciones",
+  "SEARCH_PLACEHOLDER": "Buscar colecciones…",
+  "SEARCH_RESULTS_FOR_TEXT_one": "Se encontró {count} resultado para: {search} ",
+  "SEARCH_RESULTS_FOR_TEXT_other": "Se encontraron {count} resultados para: {search} ",
+  "COLLECTION_PLAYER_BUTTON": "Ver elemento en el reproductor ",
+  "ERROR_TITLE": "Error",
+  "ERROR_RETURN_TO_HOME": "Vuelve al inicio",
+  "CONTRIBUTORS_TITLE": "con",
+  "CONTRIBUTORS_TOOLTIP": "Estas son colecciones similares.",
+  "SIMILAR_COLLECTIONS_TITLE": "Colecciones similares",
+  "EMPTY_COLLECTION_MESSAGE": "No hay colecciones disponibles.",
+  "ALL_COLLECTIONS_CATEGORIES_TITLE": "Categorías",
+  "COLLECTION_CATEGORIES_TITLE": "Categorías",
+  "CREATE_BUTTON_TOOLTIP": "Crea tu propia colección",
+  "COLLECTION_TAGS_TITLE": "Etiquetas",
+  "PROFILE_BUTTON": "Cuenta",
+  "COLLECTIONS_COUNT_MESSAGE_one": "{count} colección disponible",
+  "COLLECTIONS_COUNT_MESSAGE_other": "{count} colecciones disponibles",
+  "HOME_TITLE": "Biblioteca de comprensión",
+  "HOME_SUBTITLE": "Explore y descubra recursos educativos abiertos",
+  "HOME_POPULAR_SEARCHES_TITLE": "Búsquedas populares",
+  "HOME_MORE_COLLECTIONS_TITLE": "Descubrir",
+  "HOME_GRAASPER_COLLECTIONS_TITLE": "Selección de agarre",
+  "HOME_POPULAR_THIS_WEEK_COLLECTIONS_TITLE": "Popular esta semana",
+  "HOME_RECENT_COLLECTIONS_TITLE": "Recientemente creado",
+  "HOME_MOST_LIKED_COLLECTIONS_TITLE": "El mas gustado",
+  "HOME_VIEW_MORE_IN_LIBRARY_BUTTON": "Ver más en la Biblioteca",
+  "HOME_BROWSE_ALL_COLLECTIONS": "Explorar todas las colecciones",
+  "MY_LISTS_MY_FAVORITES_TAB": "Mis favoritos",
+  "MY_LISTS_MY_PUBLISHMENTS_TAB": "Mis publicaciones",
+  "MY_LISTS_MY_LIKES_TAB": "Colecciones que me gustan",
+  "MY_LISTS_TAB_ARIA_LABEL": "Mis pestañas de listas",
+  "COLLECTION_CC_LICENSE_TITLE": "Licencia Creative Commons",
+  "COPY_LINK_BUTTON_TOOLTIP": "Incrustrar",
+  "SEARCH_NO_RESULT_MESSAGE": "No se han encontrado resultados.",
+  "SEARCH_RESULTS_TITLE": "Resultados de la búsqueda",
+  "DOWNLOAD_BUTTON_TOOLTIP": "Descargar",
+  "COPY_ITEM_TOASTR_LINK": "Haz clic aquí para abrir el artículo en Graasp.",
+  "COPY_LINK_SUCCESS_MESSAGE": "El enlace del recurso del artículo se copió correctamente.",
+  "COPY_LINK_FAILURE_MESSAGE": "Se produjo un error al copiar el enlace del recurso.",
+  "AVATAR_ALT": "Avatar de {name}",
+  "COLLECTION_EMPTY_DESCRIPTION_TEXT": "Este artículo no tiene descripción.",
+  "COLLECTION_INFO_BUTTON": "Información",
+  "SIGN_IN_MODAL_CLOSE_BUTTON_ARIA_LABEL": "Cerrar modal de iniciar de sesión ",
+  "VIEW_BUTTON_TOOLTIP": "Ver ítem",
+  "SUMMARY_CONTENT_TITLE": "Contenido",
+  "SUMMARY_DETAILS_TITLE": "Detalles",
+  "SUMMARY_DETAILS_CREATED_AT_TITLE": "Creado",
+  "SUMMARY_DETAILS_UPDATED_AT_TITLE": "Actualizado",
+  "SUMMARY_DETAILS_NO_LANGUAGES": "Este artículo no tiene idioma definido.",
+  "SUMMARY_DETAILS_NO_CATEGORIES": "Este artículo no tiene categorías.",
+  "SUMMARY_DETAILS_LICENSE_TITLE": "Licencia",
+  "SUMMARY_DETAILS_EMPTY_LICENSE_TEXT": "Este artículo no tiene una licencia definida.",
+  "SUMMARY_BROWSE_FILE_UPDATED": "Actualizado {date}",
+  "SUMMARY_BROWSE_FOLDER_CONTAINS_zero": "Carpeta vacía",
+  "SUMMARY_BROWSE_FOLDER_CONTAINS_one": "Archivo {count}",
+  "SUMMARY_BROWSE_FOLDER_CONTAINS_other": "Archivo {count}",
+  "SUMMARY_DESCRIPTION_SHOW_MORE": "Mostrar más",
+  "SUMMARY_DESCRIPTION_SHOW_LESS": "Mostrar menos",
+  "SUMMARY_ITEMS_SHOW_LESS_one": "Ocultar {count} elemento",
+  "SUMMARY_ITEMS_SHOW_LESS_other": "Ocultar {count} elementos",
+  "SUMMARY_ITEMS_SHOW_MORE": "Ver {count} más",
+  "SUMMARY_ACTIONS_PREVIEW_CONTENT": "Previsualizar",
+  "SUMMARY_ACTIONS_DOWNLOAD": "Descargar",
+  "SUMMARY_ACTIONS_COPY": "Copiar",
+  "SUMMARY_ACTIONS_EMBED": "Insertar",
+  "FILTER_DROPDOWN_NO_FILTER": "Sin filtro…",
+  "FILTER_DROPDOWN_CLEAR_FILTERS": "Limpiar",
+  "FILTER_DROPDOWN_NO_CATEGORIES_AVAILABLE": "No hay categorías disponibles",
+  "ENABLE_IN_DEPTH_SEARCH_LABEL": "Habilitar búsqueda en profundidad",
+  "SEE_MORE_RESULTS_SEARCH": "Ver {total} más resultados",
+  "SUGGESTION_TO_ENABLE_IN_DEPTH_SEARCH_TEXT": "¿No encuentras lo que buscas?<br/>Intenta habilitar la búsqueda en profundidad para incluir contenido",
+  "SEARCH_NO_RESULTS": "Nada corresponde a tu búsqueda",
+  "SEARCH_RESULTS_LOAD_MORE": "Carga más",
+  "CONTENT_CHIP": "Contenido",
+  "PUBLISHED_COLLECTIONS": "Colecciones publicadas",
+  "LIKED_ITEMS": "Artículos que me gustan",
+  "SIGNIN_MESSAGE": "Necesitas iniciar sesión primero",
+  "PUBLIC_PROFILE": "Mis colecciones",
+  "PROFILE_SETTINGS": "Perfil",
+  "EDIT": "Editar",
+  "SOCIAL_PROFILES": "Perfiles sociales",
+  "DRAWER_AUTHENTICATED_USER_LINKS_SECTION": "Mis enlaces",
+  "DRAWER_ALL_COLLECTIONS_TEXT": "Buscar",
+  "DRAWER_OER_INFORMATION_TEXT": "Información sobre REA",
+  "DRAWER_ARIA_OPEN": "Cajón abierto",
+  "PREVIEW_ALERT_TITLE": "Esta es una vista previa",
+  "PREVIEW_ALERT_DESCRIPTION": "Este artículo no está publicado. Lo que estás viendo aquí es solo una vista previa. Puedes ver esto porque tienes acceso al artículo. No se puede ver públicamente.",
+  "PREVIEW_ALERT_ADMIN_ACTION": "Si desea compartir esta colección con todos, puede publicar este elemento en el Generador utilizando el siguiente enlace.",
+  "PUBLISH_ITEM_BUTTON": "Publicar ahora",
+  "LOADING_TEXT": "Cargando",
+  "COPY_MODAL_EMPTY_FOLDER": "La carpeta está vacía.",
+  "COPY_MODAL_HOME_TITLE": "Hogar",
+  "COPY_MODAL_RECENT_TITLE": "Artículos recientes",
+  "COPY_MODAL_SUBMIT_BUTTON": "Entregar",
+  "COPY_MODAL_MY_GRAASP_BREADCRUMB": "Mi Graasp",
+  "OER_INFORMATION_BASICS_TEXT": "¿Está preparando su clase y el libro de texto está desactualizado? Los REA</bold>, o recursos educativos abiertos</bold> en la web, pueden ser una gran alternativa. Ya sean hojas de trabajo, fotos o gráficos: según la licencia, los docentes no solo pueden usar los materiales, sino también adaptarlos directamente para su clase. Este video explica exactamente cómo funciona.",
+  "OER_INFORMATION_QUALITY_TEXT": "Hasta el momento, no existe un sello de calidad para los materiales REA, lo que resulta desconcertante para muchos educadores. Sin embargo, al igual que en Wikipedia, los materiales REA están supervisados por miembros de comunidades en línea. Y a medida que estas comunidades crecen, se combinan más conocimientos especializados y pedagógicos.",
+  "OER_INFORMATION_PAGE_TITLE": "¿Qué son los REA?",
+  "OER_INFORMATION_PAGE_DESCRIPTION": "Información sobre Recursos Educativos Abiertos REA",
+  "OER_INFORMATION_SUBTITLE": "Fundamentos y calidad del trabajo",
+  "OER_INFORMATION_BASICS_TITLE": "Los conceptos básicos",
+  "OER_INFORMATION_QUALITY_TITLE": "Sobre la calidad de los materiales",
+  "OER_INFORMATION_MORE_INFORMATION_TITLE": "Más información",
+  "SHARE_FACEBOOK_TOOLTIP": "Compartir en Facebook",
+  "SHARE_TWITTER_TOOLTIP": "Compartir en Twitter",
+  "SHARE_EMAIL_TOOLTIP": "Compartir por correo electrónico",
+  "OER_INFORMATION_DISCOVER_MORE_BUTTON_TEXT": "Descubra los recursos educativos abiertos publicados",
+  "OER_INFORMATION_VIDEO_DESCRIPTION_PRODUCTION": "Producción",
+  "OER_INFORMATION_VIDEO_DESCRIPTION_DURATION": "Duración",
+  "OER_INFORMATION_VIDEO_DESCRIPTION_EDITION": "Edición",
+  "DURATION_IN_MINUTES_one": "{count} minuto",
+  "DURATION_IN_MINUTES_other": "{count} minutos",
+  "SEARCH_PAGE_TITLE_CONTENT": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "count"
+      ],
+      "match": {
+        "count=*": "Buscar entre {count} } recursos",
+        "countPlural=one": "Buscar entre {count} recursos",
+        "countPlural=many": "Buscar entre {count} recursos",
+        "countPlural=other": "Buscar entre más de {count} recursos",
+        "countPlural=zero": "No hay colecciones disponibles para buscar"
+      }
+    }
+  ],
+  "SEARCH_PAGE_TITLE_CONTENT_many": "Buscar entre {count} } recursos",
+  "SEARCH_PAGE_TITLE_CONTENT_other": "Buscar entre más de {count} } recursos",
+  "SEARCH_FILTER_EMPTY": "No hay filtro correspondiente",
+  "COLLECTION_LANGUAGE_TITLE": "Idioma",
+  "SEARCH_FILTER_LANG_TITLE": "Idiomas",
+  "DURATION_IN_MINUTES": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "countPlural"
+      ],
+      "match": {
+        "countPlural=one": "{count} minutos",
+        "countPlural=other": "{count} minutos"
+      }
+    }
+  ],
+  "START_COPY_SUCCESS_MESSAGE": "Los elementos se están copiando...",
+  "COPY_ITEM_PAGINATION_NEXT": "Próximo",
+  "COPY_ITEM_PAGINATION_PREV": "Anterior",
+  "SEARCH_RESULTS_FOR_TEXT": [
+    {
+      "declarations": [
+        "input count",
+        "input search",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "count",
+        "countPlural",
+        "search"
+      ],
+      "match": {
+        "count=*, search=*": "Se encontró el resultado {count} para: {search}",
+        "countPlural=one": "Se encontró el resultado {count} para: {search}",
+        "countPlural=other": "Resultados encontrados para: {count} {search}"
+      }
+    }
+  ],
+  "CANCEL_BUTTON": "Cancelar",
+  "COPY_ITEM_SUCCESS": "El artículo se copió correctamente",
+  "BACK": "Atrás",
+  "SUMMARY_ITEMS_SHOW_LESS": "Ocultar elemento {count}",
+  "DISCIPLINES_LABEL": "Disciplinas",
+  "LEVEL_LABEL": "Niveles",
+  "RESOURCE_TYPE_LABEL": "Tipos de recursos",
+  "COLLECTION_NOT_FOUND": "Colección no encontrada",
+  "RESET": "Reiniciar",
+  "COLLECTION_ERROR_TITLE": "Error al cargar la colección",
+  "HEADER_INDEX": "Biblioteca",
+  "HEADER_SEARCH": "Buscar",
+  "COPY_ITEM_TO_CLIPBOARD_SUCCESS": "El elemento se copió correctamente al portapapeles.",
+  "COPY_ITEM_TO_CLIPBOARD_ERROR": "Se encontró un error al copiar el elemento al portapapeles",
+  "SUMMARY_BROWSE_FOLDER_CONTAINS": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "countPlural"
+      ],
+      "match": {
+        "countPlural=zero": "Carpeta vacía",
+        "countPlural=one": "{count}",
+        "countPlural=other": "Archivos {count}"
+      }
+    }
+  ],
+  "COLLECTIONS_COUNT_MESSAGE": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "count",
+        "countPlural"
+      ],
+      "match": {
+        "count=*": "Colección disponible {count}",
+        "countPlural=one": "Colección disponible {count}",
+        "countPlural=other": "{count} colecciones disponibles"
+      }
+    }
+  ],
+  "LOGIN_REQUIRED": "Necesita iniciar sesión para realizar esta acción."
+}

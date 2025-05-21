@@ -1,12 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { forwardRef, useEffect, useState } from 'react';
 
 import SearchIcon from '@mui/icons-material/Search';
-import { Divider, IconButton, Input, Paper, TextField } from '@mui/material';
+import { IconButton, TextField } from '@mui/material';
 
-import { useLibraryTranslation } from '../../config/i18n';
+import { m } from '~/paraglide/messages';
+
 import { HOME_SEARCH_BUTTON_ID, HOME_SEARCH_ID } from '../../config/selectors';
-import LIBRARY from '../../langs/constants';
 
 type SearchProps = {
   searchPreset?: string;
@@ -16,14 +15,11 @@ type SearchProps = {
   setIsFocused?: (value: boolean) => void;
 };
 
-const Search = forwardRef<HTMLDivElement, SearchProps>(function Search(
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const Search = forwardRef<HTMLDivElement, SearchProps>(function Search(
   { searchPreset, onChange, handleClick, isLoading, setIsFocused },
   ref,
 ) {
-  const [searchInput, setSearchInput] = useState(searchPreset || '');
-
-  const { t } = useLibraryTranslation();
+  const [searchInput, setSearchInput] = useState(searchPreset ?? '');
 
   useEffect(() => {
     if (searchPreset !== undefined) {
@@ -50,54 +46,44 @@ const Search = forwardRef<HTMLDivElement, SearchProps>(function Search(
   };
 
   return (
-    <Paper
+    <TextField
       sx={{
         boxShadow: 'none',
-        py: 1,
-        pl: 2,
         display: 'flex',
         alignItems: 'center',
         width: '100%',
-        my: 1,
         borderRadius: 2,
-        border: '1px solid transparent',
+        outline: '1px solid transparent',
         transition: 'all 0.3s ease-in-out',
         '&:hover, &:has(.Mui-focused)': {
-          border: '1px solid #5050d230',
+          outline: '1px solid #5050d230',
           boxShadow: '0px 0px 30px 2px #5050d230',
         },
       }}
-    >
-      <TextField
-        // search on click
-        value={searchInput}
-        id={HOME_SEARCH_ID}
-        disabled={isLoading}
-        variant="standard"
-        sx={{ m: 1, border: 0 }}
-        placeholder={t(LIBRARY.SEARCH_PLACEHOLDER)}
-        fullWidth
-        margin="none"
-        inputProps={{
-          'aria-label': LIBRARY.SEARCH_ARIA_LABEL,
-        }}
-        ref={ref}
-        onChange={handleChange}
-        onKeyDown={handleSearchOnClick}
-        onFocus={() => setIsFocused?.(true)}
-      />
-      <Divider sx={{ m: 1 }} orientation="vertical" />
-      <IconButton
-        id={HOME_SEARCH_BUTTON_ID}
-        color="primary"
-        sx={{ p: 1 }}
-        aria-label={t(LIBRARY.SEARCH_BUTTON_ARIA_LABEL)}
-        onClick={handleSearch}
-      >
-        <SearchIcon />
-      </IconButton>
-    </Paper>
+      value={searchInput}
+      id={HOME_SEARCH_ID}
+      disabled={isLoading}
+      placeholder={m.SEARCH_PLACEHOLDER()}
+      fullWidth
+      slotProps={{
+        input: {
+          'aria-label': m.SEARCH_ARIA_LABEL(),
+          endAdornment: (
+            <IconButton
+              id={HOME_SEARCH_BUTTON_ID}
+              color="primary"
+              aria-label={m.SEARCH_BUTTON_ARIA_LABEL()}
+              onClick={handleSearch}
+            >
+              <SearchIcon />
+            </IconButton>
+          ),
+        },
+      }}
+      ref={ref}
+      onChange={handleChange}
+      onKeyDown={handleSearchOnClick}
+      onFocus={() => setIsFocused?.(true)}
+    />
   );
 });
-
-export default Search;
