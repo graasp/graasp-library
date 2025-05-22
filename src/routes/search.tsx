@@ -24,7 +24,6 @@ import {
 } from '~/components/ui/CollectionItem';
 import {
   ALL_COLLECTIONS_GRID_ID,
-  ALL_COLLECTIONS_TITLE_ID,
   SEARCH_ERROR_MESSAGE_ID,
 } from '~/config/selectors';
 import useDebounce from '~/hooks/useDebounce';
@@ -92,7 +91,7 @@ function RouteComponent() {
   return (
     <Container maxWidth="xl" sx={{ mb: 5, py: 5 }}>
       <Stack gap={3}>
-        <Typography variant="h4" width="100%" id={ALL_COLLECTIONS_TITLE_ID}>
+        <Typography component="h1" variant="h4" width="100%">
           {isPublishedRoot
             ? m.SEARCH_PAGE_TITLE({ count: hitsNumber })
             : m.SEARCH_PAGE_TITLE_CONTENT({ count: hitsNumber })}

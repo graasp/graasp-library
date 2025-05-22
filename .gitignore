@@ -10,6 +10,7 @@ jspm_packages
 
 # testing
 /coverage
+playwright-report
 
 # misc
 .DS_Store
@@ -30,6 +31,7 @@ yarn-error.log*
 # build
 .webpack
 tsconfig.tsbuildinfo
+*.timestamp_*.js
 
 # vim settings
 .rootdir
@@ -78,3 +80,10 @@ next-env.d.ts
 *storybook.log
 
 openapi.json
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

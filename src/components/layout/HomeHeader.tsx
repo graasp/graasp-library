@@ -53,7 +53,12 @@ const HomeHeader = () => {
         paddingTop={{ xs: 4, sm: 14 }}
         spacing={4}
       >
-        <Box display="flex" flexDirection="row" alignItems="center">
+        <Box
+          component="h1"
+          display="flex"
+          flexDirection="row"
+          alignItems="center"
+        >
           <GraaspLogo height={120} sx={{ fill: 'white' }} />
           <Typography
             id={HOME_PAGE_TITLE_TEXT_ID}

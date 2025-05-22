@@ -24,6 +24,13 @@ import {
 import { m } from '~/paraglide/messages';
 
 export const Route = createFileRoute('/')({
+  head: () => ({
+    meta: [
+      {
+        title: m.GRAASP_LIBRARY(),
+      },
+    ],
+  }),
   component: RouteComponent,
 });
 

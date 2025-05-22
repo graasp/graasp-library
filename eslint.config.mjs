@@ -26,6 +26,7 @@ export default [
       'storybook-static/*',
       'public/*',
       'dist/*',
+      'playwright-report',
       'build',
       '.yarn/*',
       '.vinxi',

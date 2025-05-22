@@ -1,6 +1,8 @@
 import { ReactNode, Suspense } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 
 import {
+  Alert,
   Container,
   Grid,
   Skeleton,
@@ -8,6 +10,8 @@ import {
   Theme,
   Typography,
 } from '@mui/material';
+
+import { m } from '~/paraglide/messages';
 
 import { SECTION_TITLE_ID } from '../../config/selectors';
 import StyledContainer from '../layout/StyledContainer';
@@ -46,10 +50,16 @@ export function HighlightCollectionSection({
               ))
             }
           >
-            {children}
+            <ErrorBoundary fallback={<ErrorLoadingCollections />}>
+              {children}
+            </ErrorBoundary>
           </Suspense>
         </CollectionContainer>
       </Container>
     </StyledContainer>
   );
+}
+
+function ErrorLoadingCollections() {
+  return <Alert severity="error">{m.ERROR_LOADING_COLLECTIONS()}</Alert>;
 }

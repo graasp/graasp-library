@@ -18,6 +18,12 @@
     },
     "noEmit": true
   },
-  "include": ["**/*.ts", "**/*.tsx", "public/script*.js"],
-  "exclude": ["node_modules", "public", ".next"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "public/script*.js",
+    "playwright.config.ts",
+    "vite.config.js"
+  ],
+  "exclude": ["node_modules", "public", ".output", ".vinxi", "cypress"]
 }

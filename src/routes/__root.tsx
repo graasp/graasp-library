@@ -33,6 +33,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   {
     head: () => ({
       meta: [
+        { title: 'Graasp Library' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       ],
       links: [

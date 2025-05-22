@@ -11,7 +11,7 @@ import {
 } from '@tanstack/react-router';
 import { PartialStoryFn } from 'storybook/internal/types';
 
-import { theme } from '../src/config/theme';
+import { createGraaspTheme } from '../src/components/ui/theme';
 
 const preview: Preview = {
   parameters: {
@@ -66,11 +66,12 @@ const preview: Preview = {
       return <RouterProvider router={router} />;
     },
     (Story, { globals }) => {
+      const theme = createGraaspTheme({ direction: globals.direction });
+
       return (
         <ThemeProvider
           theme={{
             ...theme,
-            direction: globals.direction,
             palette: {
               ...theme.palette,
               mode: globals.theme,

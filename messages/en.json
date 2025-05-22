@@ -186,6 +186,7 @@
   "USER_MENU_SETTINGS": "Settings",
   "LOG_OUT": "Log out",
   "LOG_IN": "Log in",
+  "ERROR_LOADING_COLLECTIONS": "There was an error loading these collections.",
   "COPY_ITEM_TO_CLIPBOARD_SUCCESS": "The item was successfully copied to the clipboard",
   "COPY_ITEM_TO_CLIPBOARD_ERROR": "An error was encountered while copying item to clipboard",
   "SUMMARY_BROWSE_FOLDER_CONTAINS": [

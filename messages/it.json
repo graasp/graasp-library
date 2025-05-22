@@ -153,16 +153,10 @@
   "DURATION_IN_MINUTES_other": "{count} minuti",
   "SEARCH_PAGE_TITLE_CONTENT": [
     {
-      "declarations": [
-        "input count",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [
-        "count",
-        "countPlural"
-      ],
+      "declarations": ["input count", "local countPlural = count: plural"],
+      "selectors": ["count", "countPlural"],
       "match": {
-        "count=*": "Cerca tra {count} } risorse",
+        "count=*": "Cerca tra {count} risorse",
         "countPlural=one": "Cerca tra {count} risorse",
         "countPlural=many": "Cerca tra {count} risorse",
         "countPlural=other": "Cerca tra più di {count} risorse",
@@ -171,20 +165,13 @@
       }
     }
   ],
-  "SEARCH_PAGE_TITLE_CONTENT_many": "Cerca tra {count} } risorse",
-  "SEARCH_PAGE_TITLE_CONTENT_other": "Cerca tra più di {count} } risorse",
   "SEARCH_FILTER_EMPTY": "Nessun filtro corrispondente",
   "COLLECTION_LANGUAGE_TITLE": "Lingua",
   "SEARCH_FILTER_LANG_TITLE": "Lingue",
   "DURATION_IN_MINUTES": [
     {
-      "declarations": [
-        "input count",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [
-        "countPlural"
-      ],
+      "declarations": ["input count", "local countPlural = count: plural"],
+      "selectors": ["countPlural"],
       "match": {
         "countPlural=one": "{count} minuto",
         "countPlural=other": "{count} minuti"
@@ -201,11 +188,7 @@
         "input search",
         "local countPlural = count: plural"
       ],
-      "selectors": [
-        "count",
-        "countPlural",
-        "search"
-      ],
+      "selectors": ["count", "countPlural", "search"],
       "match": {
         "count=*, search=*": "Trovati {count} risultati per: {search}",
         "countPlural=one": "Trovati {count} risultati per: {search}",
@@ -229,13 +212,8 @@
   "COPY_ITEM_TO_CLIPBOARD_ERROR": "Si è verificato un errore durante la copia dell'elemento negli appunti",
   "SUMMARY_BROWSE_FOLDER_CONTAINS": [
     {
-      "declarations": [
-        "input count",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [
-        "countPlural"
-      ],
+      "declarations": ["input count", "local countPlural = count: plural"],
+      "selectors": ["countPlural"],
       "match": {
         "countPlural=zero": "Cartella vuota",
         "countPlural=one": "{count}",
@@ -245,14 +223,8 @@
   ],
   "COLLECTIONS_COUNT_MESSAGE": [
     {
-      "declarations": [
-        "input count",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [
-        "count",
-        "countPlural"
-      ],
+      "declarations": ["input count", "local countPlural = count: plural"],
+      "selectors": ["count", "countPlural"],
       "match": {
         "count=*": "Raccolta disponibile {count}",
         "countPlural=one": "Raccolta disponibile {count}",
@@ -262,13 +234,8 @@
   ],
   "SEARCH_PAGE_TITLE": [
     {
-      "declarations": [
-        "input count",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [
-        "countPlural"
-      ],
+      "declarations": ["input count", "local countPlural = count: plural"],
+      "selectors": ["countPlural"],
       "match": {
         "countPlural=other": "Cerca tra {count} risorse",
         "countPlural=one": "Cerca tra le risorse {count}"

@@ -4,11 +4,11 @@
   </a>
 </p>
 
-<h1 align="center">Graasp Library</h1>
+# Graasp Library
 
 ![GitHub Release](https://img.shields.io/github/release/graasp/graasp-library)
 ![typescript version](https://img.shields.io/github/package-json/dependency-version/graasp/graasp-library/dev/typescript)
-[![gitlocalized ](https://gitlocalize.com/repo/8977/whole_project/badge.svg)](https://gitlocalize.com/repo/8977?utm_source=badge)
+[![gitlocalized](https://gitlocalize.com/repo/8977/whole_project/badge.svg)](https://gitlocalize.com/repo/8977?utm_source=badge)
 
 <p align="center">
   <img
@@ -21,7 +21,7 @@
 ## Getting Started
 
 To run this app locally you need to have [Node](https://nodejs.org) and
-[NPM](https://www.npmjs.com) installed on your operating system. You will also need [PNPM](https://pnpm.io/installation) to use as the package manager.
+[NPM](https://www.npmjs.com) installed on your operating system. You will also need [PNPM](https://pnpm.io/installation) for managing packages.
 
 Download or clone the repository to your local machine, preferably using [Git](https://git-scm.com).
 
@@ -32,14 +32,11 @@ Download or clone the repository to your local machine, preferably using [Git](h
 
     ```dotenv
     # URL of the backend server. Uncomment to override the default value
-    # API_HOST=http://localhost:3000
-    # CLIENT_HOST=http://localhost:3114
+    # VITE_API_HOST=http://localhost:3000
+    # VITE_CLIENT_HOST=http://localhost:3114
 
     # The id of the Graasper user to show collections on the home page
-    # GRAASPER_ID=
-
-    # Uncomment to override the default value
-    # SHOW_NOTIFICATIONS=true
+    # VITE_GRAASPER_ID=
 
     # Uncomment to use Sentry locally (not recommended)
     # SENTRY_DSN=
@@ -55,6 +52,21 @@ Download or clone the repository to your local machine, preferably using [Git](h
 Inside the project directory, run: `pnpm dev`.
 The app will be available on [`http://localhost:3002`](http://localhost:3002). Open this url in your browser. Any changes you make should be automatically rendered in the browser.
 If you update env variables you will have to restart the server.
+
+### Running on a different port
+
+If you wish to run the application on a different port, use the following command (replace `<other-port>` with e.g. `3333` for the app to be accessible at `http://localhost:3333`):
+
+```sh
+pnpm vinxi dev --port <other-port>
+```
+
+## Testing
+
+### Unit tests
+
+Unit tests are performed with [`vitest`](https://vitest.dev/).
+Start tests with `pnpm vitest`
 
 ## Technology stack
 
