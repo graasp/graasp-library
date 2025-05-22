@@ -53,6 +53,7 @@ coverage.lcov
 # cypress generated files
 /cypress/screenshots
 /cypress/videos
+/cypress/downloads
 
 # production
 build/*
