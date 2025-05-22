@@ -38,7 +38,7 @@ test('test', async ({ page }) => {
   await page.getByRole('button', { name: 'Back' }).click();
   // filter by language
   await page.locator('#searchFilterButton-lang').click();
-  await page.getByRole('checkbox', { name: 'Español' }).check();
+  await page.getByRole('checkbox', { name: 'Español' }).click();
   await expect(page).toHaveURL((url) => {
     const params = url.searchParams;
     return params.has('langs') && params.get('langs') === '["es"]';

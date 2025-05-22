@@ -75,7 +75,9 @@ export default defineConfig({
     // The command to start the webserver does 2 things:
     // - build the server in test mode
     // - serve the build assets in test mode exposing it on the port that is defined in the .env.test file
-    command: `pnpm vinxi build --mode test && pnpm vinxi start --mode test --port ${process.env.VITE_PORT}`,
+    command: process.env.CI
+      ? `pnpm vinxi build --mode test && pnpm vinxi start --mode test --port ${process.env.VITE_PORT}`
+      : `pnpm vinxi dev --mode test --port ${process.env.VITE_PORT}`,
     // allow for 2min until the server is ready (since we built it first)
     timeout: 120 * 1000, // 2 minutes (default 60 seconds)
     url: `http://localhost:${process.env.VITE_PORT}`,
