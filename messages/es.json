@@ -167,7 +167,7 @@
       "declarations": ["input count", "local countPlural = count: plural"],
       "selectors": ["count"],
       "match": {
-        "count=*": "Buscar entre {count} } recursos",
+        "count=*": "Buscar entre {count} recursos",
         "countPlural=one": "Buscar entre {count} recursos",
         "countPlural=many": "Buscar entre {count} recursos",
         "countPlural=other": "Buscar entre más de {count} recursos",
@@ -175,8 +175,6 @@
       }
     }
   ],
-  "SEARCH_PAGE_TITLE_CONTENT_many": "Buscar entre {count} } recursos",
-  "SEARCH_PAGE_TITLE_CONTENT_other": "Buscar entre más de {count} } recursos",
   "SEARCH_FILTER_EMPTY": "No hay filtro correspondiente",
   "COLLECTION_LANGUAGE_TITLE": "Idioma",
   "SEARCH_FILTER_LANG_TITLE": "Idiomas",

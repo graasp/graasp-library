@@ -4,12 +4,17 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { Divider, IconButton, Menu, MenuItem, Skeleton } from '@mui/material';
 import type { MenuItemProps } from '@mui/material';
 
+import { ThumbnailSize } from '@graasp/sdk';
+
 import { useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 import { createLink, useLoaderData } from '@tanstack/react-router';
 import type { LinkComponent } from '@tanstack/react-router';
 
 import { getLogout } from '~/openapi/client';
-import { getCurrentAccountOptions } from '~/openapi/client/@tanstack/react-query.gen';
+import {
+  downloadAvatarOptions,
+  getCurrentAccountOptions,
+} from '~/openapi/client/@tanstack/react-query.gen';
 import { m } from '~/paraglide/messages';
 
 import { useCurrentLocation } from '../common/ShareButtons';
@@ -34,6 +39,12 @@ export function SuspendedUserAvatar() {
     ...getCurrentAccountOptions(),
     retry: 0,
   });
+  const { data: avatarUrl } = useSuspenseQuery({
+    ...downloadAvatarOptions({
+      path: { id: currentMember?.id ?? '', size: ThumbnailSize.Small },
+    }),
+    retry: 0,
+  });
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -48,7 +59,7 @@ export function SuspendedUserAvatar() {
   return (
     <>
       <IconButton onClick={handleClick}>
-        <Avatar alt={currentMember?.name ?? ''} />
+        <Avatar alt={currentMember?.name ?? ''} url={avatarUrl} />
       </IconButton>
       <Menu
         anchorEl={anchorEl}
