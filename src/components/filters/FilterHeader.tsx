@@ -29,7 +29,7 @@ const StyledFilterContainer = styled(Stack)(() => ({
 
 export function FilterHeader() {
   const navigate = useNavigate();
-  const { s, includeContent } = getRouteApi('/search').useSearch();
+  const { s, rootOnly } = getRouteApi('/search').useSearch();
   const [searchKeywords, setSearchKeywords] = useState(s);
 
   const filterDivider = (
@@ -63,12 +63,6 @@ export function FilterHeader() {
   const onChangeKeywords = (newSearch: string) => {
     setSearchKeywords(newSearch);
     navigate({ to: '/search', search: (prev) => ({ ...prev, s: newSearch }) });
-  };
-  const setShouldIncludeContent = (newIncludeContent: boolean) => {
-    navigate({
-      to: '/search',
-      search: (prev) => ({ ...prev, includeContent: newIncludeContent }),
-    });
   };
 
   return (
@@ -149,10 +143,20 @@ export function FilterHeader() {
           control={
             <Checkbox
               id={ENABLE_IN_DEPTH_SEARCH_CHECKBOX_ID}
-              checked={includeContent}
+              checked={
+                // invert value from url since we store it as "only roots" but the label is "include non-roots"
+                !rootOnly
+              }
               size="small"
               onChange={(e) => {
-                setShouldIncludeContent(e.target.checked);
+                navigate({
+                  to: '/search',
+                  search: (prev) => ({
+                    ...prev,
+                    // invert value of the checkbox because we store it as "only roots" and the label is "include non-root"
+                    rootOnly: !e.target.checked,
+                  }),
+                });
               }}
             />
           }

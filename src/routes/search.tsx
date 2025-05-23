@@ -40,8 +40,7 @@ const schema = z.object({
   disciplines: fallback(z.array(z.string()).optional(), []).default([]),
   resourceTypes: fallback(z.array(z.string()).optional(), []).default([]),
   page: fallback(z.number().optional(), 1).default(1),
-  rootOnly: z.boolean().optional(),
-  includeContent: fallback(z.boolean().optional(), false).default(false),
+  rootOnly: fallback(z.boolean().optional(), true).default(true),
 });
 
 export const Route = createFileRoute('/search')({
@@ -51,8 +50,7 @@ export const Route = createFileRoute('/search')({
 
 function RouteComponent() {
   const search = Route.useSearch();
-  const { rootOnly: isPublishedRoot, includeContent: shouldIncludeContent } =
-    search;
+  const { rootOnly } = search;
   const navigate = Route.useNavigate();
   const debouncedSearch = useDebounce(search.s, 500);
   const {
@@ -71,7 +69,7 @@ function RouteComponent() {
         },
         langs: search.langs,
         page: search.page,
-        isPublishedRoot,
+        isPublishedRoot: rootOnly,
         limit: PAGE_SIZE,
       },
     }),
@@ -92,7 +90,7 @@ function RouteComponent() {
     <Container maxWidth="xl" sx={{ mb: 5, py: 5 }}>
       <Stack gap={3}>
         <Typography component="h1" variant="h4" width="100%">
-          {isPublishedRoot
+          {rootOnly
             ? m.SEARCH_PAGE_TITLE({ count: hitsNumber })
             : m.SEARCH_PAGE_TITLE_CONTENT({ count: hitsNumber })}
         </Typography>
@@ -158,11 +156,15 @@ function RouteComponent() {
             {m.SEARCH_RESULTS_LOAD_MORE()}
           </Button>
         )}
-        {!shouldIncludeContent && Boolean(search.s) && (
+        {rootOnly && Boolean(search.s) && (
           <ButtonLink
             disableElevation
             from={Route.fullPath}
-            search={(prev) => ({ ...prev, includeContent: true })}
+            search={(prev) => ({
+              ...prev,
+              // search inside content too
+              rootOnly: false,
+            })}
             sx={{
               textTransform: 'none',
               paddingLeft: 5,
