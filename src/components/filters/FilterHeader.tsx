@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import {
   Checkbox,
   Divider,
@@ -27,10 +25,15 @@ const StyledFilterContainer = styled(Stack)(() => ({
   padding: '10px 20px',
 }));
 
-export function FilterHeader() {
+export function FilterHeader({
+  searchKeywords,
+  onChangeKeywords,
+}: Readonly<{
+  searchKeywords: string;
+  onChangeKeywords: (newValue: string) => void;
+}>) {
   const navigate = useNavigate();
-  const { s, rootOnly } = getRouteApi('/search').useSearch();
-  const [searchKeywords, setSearchKeywords] = useState(s);
+  const { rootOnly } = getRouteApi('/search').useSearch();
 
   const filterDivider = (
     <Divider
@@ -59,11 +62,6 @@ export function FilterHeader() {
       title={m.RESOURCE_TYPE_LABEL()}
     />,
   ];
-
-  const onChangeKeywords = (newSearch: string) => {
-    setSearchKeywords(newSearch);
-    navigate({ to: '/search', search: (prev) => ({ ...prev, s: newSearch }) });
-  };
 
   return (
     <Stack

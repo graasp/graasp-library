@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Close } from '@mui/icons-material';
 import {
@@ -52,7 +52,9 @@ function RouteComponent() {
   const search = Route.useSearch();
   const { rootOnly } = search;
   const navigate = Route.useNavigate();
-  const debouncedSearch = useDebounce(search.s, 500);
+  // local state to keep input fluid
+  const [searchKeywords, setSearchKeywords] = useState(search.s);
+  const debouncedSearch = useDebounce(searchKeywords, 500);
   const {
     data: collections,
     isFetching,
@@ -82,6 +84,11 @@ function RouteComponent() {
     placeholderData: keepPreviousData,
   });
 
+  const onChangeKeywords = (newSearch: string) => {
+    setSearchKeywords(newSearch);
+    navigate({ to: '/search', search: (prev) => ({ ...prev, s: newSearch }) });
+  };
+
   const hitsNumber =
     collections?.pages[0]?.totalHits ??
     collections?.pages[0]?.estimatedTotalHits ??
@@ -94,7 +101,10 @@ function RouteComponent() {
             ? m.SEARCH_PAGE_TITLE({ count: hitsNumber })
             : m.SEARCH_PAGE_TITLE_CONTENT({ count: hitsNumber })}
         </Typography>
-        <FilterHeader />
+        <FilterHeader
+          searchKeywords={searchKeywords}
+          onChangeKeywords={onChangeKeywords}
+        />
       </Stack>
       <Stack flexGrow={2} direction="column" spacing={2}>
         {search.s && (
@@ -110,11 +120,9 @@ function RouteComponent() {
                   })}
                 </Typography>
                 <IconButton
-                  onClick={() =>
-                    navigate({
-                      to: Route.fullPath,
-                      search: (prev) => ({ ...prev, s: '' }),
-                    })
+                  onClick={
+                    // clear search
+                    () => onChangeKeywords('')
                   }
                 >
                   <Close />
