@@ -35,6 +35,7 @@ import {
   createItemMembership,
   createItemWithThumbnail,
   createLink,
+  createMembershipRequest,
   createOwnProfile,
   createShortLink,
   createShortcut,
@@ -52,9 +53,9 @@ import {
   deleteItemLoginSchema,
   deleteItemMembership,
   deleteItemsByIdThumbnails,
-  deleteItemsByItemIdMembershipsRequestsByMemberId,
   deleteManyItems,
   deleteMembersMembersByIdDelete,
+  deleteMembershipRequest,
   deleteMention,
   deleteTagForItem,
   deleteVisibility,
@@ -96,8 +97,6 @@ import {
   getItemLoginSchema,
   getItemLoginSchemaType,
   getItemMembershipsForItem,
-  getItemsByItemIdMembershipsRequests,
-  getItemsByItemIdMembershipsRequestsOwn,
   getItemsCollectionsSearchRebuild,
   getItemsH5pAssetsIntegrationHtml,
   getItemsInBox,
@@ -110,11 +109,13 @@ import {
   getMemberProfile,
   getMembersActions,
   getMembersCurrentPasswordStatus,
+  getMembershipRequestsByItemId,
   getMostLikedCollections,
   getMostRecentCollections,
   getNextMaintenance,
   getOneMember,
   getOwnBookmark,
+  getOwnMembershipRequestByItemId,
   getOwnMentions,
   getOwnMostUsedApps,
   getOwnProfile,
@@ -146,7 +147,6 @@ import {
   postAction,
   postChangeEmail,
   postItemsByIdThumbnails,
-  postItemsByItemIdMembershipsRequests,
   postLoginPassword,
   postMembersAvatar,
   postPassword,
@@ -251,6 +251,8 @@ import type {
   CreateLinkData,
   CreateLinkError,
   CreateLinkResponse,
+  CreateMembershipRequestData,
+  CreateMembershipRequestResponse,
   CreateOwnProfileData,
   CreateOwnProfileError,
   CreateOwnProfileResponse,
@@ -299,12 +301,12 @@ import type {
   DeleteItemMembershipError,
   DeleteItemMembershipResponse,
   DeleteItemsByIdThumbnailsData,
-  DeleteItemsByItemIdMembershipsRequestsByMemberIdData,
-  DeleteItemsByItemIdMembershipsRequestsByMemberIdResponse,
   DeleteManyItemsData,
   DeleteManyItemsError,
   DeleteManyItemsResponse,
   DeleteMembersMembersByIdDeleteData,
+  DeleteMembershipRequestData,
+  DeleteMembershipRequestResponse,
   DeleteMentionData,
   DeleteMentionError,
   DeleteMentionResponse,
@@ -363,8 +365,6 @@ import type {
   GetItemLoginSchemaData,
   GetItemLoginSchemaTypeData,
   GetItemMembershipsForItemData,
-  GetItemsByItemIdMembershipsRequestsData,
-  GetItemsByItemIdMembershipsRequestsOwnData,
   GetItemsCollectionsSearchRebuildData,
   GetItemsH5pAssetsIntegrationHtmlData,
   GetItemsInBoxData,
@@ -377,11 +377,13 @@ import type {
   GetMemberProfileData,
   GetMembersActionsData,
   GetMembersCurrentPasswordStatusData,
+  GetMembershipRequestsByItemIdData,
   GetMostLikedCollectionsData,
   GetMostRecentCollectionsData,
   GetNextMaintenanceData,
   GetOneMemberData,
   GetOwnBookmarkData,
+  GetOwnMembershipRequestByItemIdData,
   GetOwnMentionsData,
   GetOwnMostUsedAppsData,
   GetOwnProfileData,
@@ -444,8 +446,6 @@ import type {
   PostItemsByIdThumbnailsData,
   PostItemsByIdThumbnailsError,
   PostItemsByIdThumbnailsResponse,
-  PostItemsByItemIdMembershipsRequestsData,
-  PostItemsByItemIdMembershipsRequestsResponse,
   PostLoginPasswordData,
   PostMembersAvatarData,
   PostMembersAvatarResponse,
@@ -2611,6 +2611,231 @@ export const getItemsCollectionsSearchRebuildOptions = (
     },
     queryKey: getItemsCollectionsSearchRebuildQueryKey(options),
   });
+};
+
+export const getItemMembershipsForItemQueryKey = (
+  options: Options<GetItemMembershipsForItemData>,
+) => createQueryKey('getItemMembershipsForItem', options);
+
+export const getItemMembershipsForItemOptions = (
+  options: Options<GetItemMembershipsForItemData>,
+) => {
+  return queryOptions({
+    queryFn: async ({ queryKey, signal }) => {
+      const { data } = await getItemMembershipsForItem({
+        ...options,
+        ...queryKey[0],
+        signal,
+        throwOnError: true,
+      });
+      return data;
+    },
+    queryKey: getItemMembershipsForItemQueryKey(options),
+  });
+};
+
+export const createItemMembershipQueryKey = (
+  options: Options<CreateItemMembershipData>,
+) => createQueryKey('createItemMembership', options);
+
+export const createItemMembershipOptions = (
+  options: Options<CreateItemMembershipData>,
+) => {
+  return queryOptions({
+    queryFn: async ({ queryKey, signal }) => {
+      const { data } = await createItemMembership({
+        ...options,
+        ...queryKey[0],
+        signal,
+        throwOnError: true,
+      });
+      return data;
+    },
+    queryKey: createItemMembershipQueryKey(options),
+  });
+};
+
+export const createItemMembershipMutation = (
+  options?: Partial<Options<CreateItemMembershipData>>,
+): UseMutationOptions<
+  CreateItemMembershipResponse,
+  CreateItemMembershipError,
+  Options<CreateItemMembershipData>
+> => {
+  const mutationOptions: UseMutationOptions<
+    CreateItemMembershipResponse,
+    CreateItemMembershipError,
+    Options<CreateItemMembershipData>
+  > = {
+    mutationFn: async (localOptions) => {
+      const { data } = await createItemMembership({
+        ...options,
+        ...localOptions,
+        throwOnError: true,
+      });
+      return data;
+    },
+  };
+  return mutationOptions;
+};
+
+export const deleteItemMembershipMutation = (
+  options?: Partial<Options<DeleteItemMembershipData>>,
+): UseMutationOptions<
+  DeleteItemMembershipResponse,
+  DeleteItemMembershipError,
+  Options<DeleteItemMembershipData>
+> => {
+  const mutationOptions: UseMutationOptions<
+    DeleteItemMembershipResponse,
+    DeleteItemMembershipError,
+    Options<DeleteItemMembershipData>
+  > = {
+    mutationFn: async (localOptions) => {
+      const { data } = await deleteItemMembership({
+        ...options,
+        ...localOptions,
+        throwOnError: true,
+      });
+      return data;
+    },
+  };
+  return mutationOptions;
+};
+
+export const updateItemMembershipMutation = (
+  options?: Partial<Options<UpdateItemMembershipData>>,
+): UseMutationOptions<
+  UpdateItemMembershipResponse,
+  UpdateItemMembershipError,
+  Options<UpdateItemMembershipData>
+> => {
+  const mutationOptions: UseMutationOptions<
+    UpdateItemMembershipResponse,
+    UpdateItemMembershipError,
+    Options<UpdateItemMembershipData>
+  > = {
+    mutationFn: async (localOptions) => {
+      const { data } = await updateItemMembership({
+        ...options,
+        ...localOptions,
+        throwOnError: true,
+      });
+      return data;
+    },
+  };
+  return mutationOptions;
+};
+
+export const getMembershipRequestsByItemIdQueryKey = (
+  options: Options<GetMembershipRequestsByItemIdData>,
+) => createQueryKey('getMembershipRequestsByItemId', options);
+
+export const getMembershipRequestsByItemIdOptions = (
+  options: Options<GetMembershipRequestsByItemIdData>,
+) => {
+  return queryOptions({
+    queryFn: async ({ queryKey, signal }) => {
+      const { data } = await getMembershipRequestsByItemId({
+        ...options,
+        ...queryKey[0],
+        signal,
+        throwOnError: true,
+      });
+      return data;
+    },
+    queryKey: getMembershipRequestsByItemIdQueryKey(options),
+  });
+};
+
+export const createMembershipRequestQueryKey = (
+  options: Options<CreateMembershipRequestData>,
+) => createQueryKey('createMembershipRequest', options);
+
+export const createMembershipRequestOptions = (
+  options: Options<CreateMembershipRequestData>,
+) => {
+  return queryOptions({
+    queryFn: async ({ queryKey, signal }) => {
+      const { data } = await createMembershipRequest({
+        ...options,
+        ...queryKey[0],
+        signal,
+        throwOnError: true,
+      });
+      return data;
+    },
+    queryKey: createMembershipRequestQueryKey(options),
+  });
+};
+
+export const createMembershipRequestMutation = (
+  options?: Partial<Options<CreateMembershipRequestData>>,
+): UseMutationOptions<
+  CreateMembershipRequestResponse,
+  DefaultError,
+  Options<CreateMembershipRequestData>
+> => {
+  const mutationOptions: UseMutationOptions<
+    CreateMembershipRequestResponse,
+    DefaultError,
+    Options<CreateMembershipRequestData>
+  > = {
+    mutationFn: async (localOptions) => {
+      const { data } = await createMembershipRequest({
+        ...options,
+        ...localOptions,
+        throwOnError: true,
+      });
+      return data;
+    },
+  };
+  return mutationOptions;
+};
+
+export const getOwnMembershipRequestByItemIdQueryKey = (
+  options: Options<GetOwnMembershipRequestByItemIdData>,
+) => createQueryKey('getOwnMembershipRequestByItemId', options);
+
+export const getOwnMembershipRequestByItemIdOptions = (
+  options: Options<GetOwnMembershipRequestByItemIdData>,
+) => {
+  return queryOptions({
+    queryFn: async ({ queryKey, signal }) => {
+      const { data } = await getOwnMembershipRequestByItemId({
+        ...options,
+        ...queryKey[0],
+        signal,
+        throwOnError: true,
+      });
+      return data;
+    },
+    queryKey: getOwnMembershipRequestByItemIdQueryKey(options),
+  });
+};
+
+export const deleteMembershipRequestMutation = (
+  options?: Partial<Options<DeleteMembershipRequestData>>,
+): UseMutationOptions<
+  DeleteMembershipRequestResponse,
+  DefaultError,
+  Options<DeleteMembershipRequestData>
+> => {
+  const mutationOptions: UseMutationOptions<
+    DeleteMembershipRequestResponse,
+    DefaultError,
+    Options<DeleteMembershipRequestData>
+  > = {
+    mutationFn: async (localOptions) => {
+      const { data } = await deleteMembershipRequest({
+        ...options,
+        ...localOptions,
+        throwOnError: true,
+      });
+      return data;
+    },
+  };
+  return mutationOptions;
 };
 
 export const createShortcutQueryKey = (options: Options<CreateShortcutData>) =>
@@ -5311,233 +5536,6 @@ export const createItemWithThumbnailMutation = (
   > = {
     mutationFn: async (localOptions) => {
       const { data } = await createItemWithThumbnail({
-        ...options,
-        ...localOptions,
-        throwOnError: true,
-      });
-      return data;
-    },
-  };
-  return mutationOptions;
-};
-
-export const getItemsByItemIdMembershipsRequestsQueryKey = (
-  options: Options<GetItemsByItemIdMembershipsRequestsData>,
-) => createQueryKey('getItemsByItemIdMembershipsRequests', options);
-
-export const getItemsByItemIdMembershipsRequestsOptions = (
-  options: Options<GetItemsByItemIdMembershipsRequestsData>,
-) => {
-  return queryOptions({
-    queryFn: async ({ queryKey, signal }) => {
-      const { data } = await getItemsByItemIdMembershipsRequests({
-        ...options,
-        ...queryKey[0],
-        signal,
-        throwOnError: true,
-      });
-      return data;
-    },
-    queryKey: getItemsByItemIdMembershipsRequestsQueryKey(options),
-  });
-};
-
-export const postItemsByItemIdMembershipsRequestsQueryKey = (
-  options: Options<PostItemsByItemIdMembershipsRequestsData>,
-) => createQueryKey('postItemsByItemIdMembershipsRequests', options);
-
-export const postItemsByItemIdMembershipsRequestsOptions = (
-  options: Options<PostItemsByItemIdMembershipsRequestsData>,
-) => {
-  return queryOptions({
-    queryFn: async ({ queryKey, signal }) => {
-      const { data } = await postItemsByItemIdMembershipsRequests({
-        ...options,
-        ...queryKey[0],
-        signal,
-        throwOnError: true,
-      });
-      return data;
-    },
-    queryKey: postItemsByItemIdMembershipsRequestsQueryKey(options),
-  });
-};
-
-export const postItemsByItemIdMembershipsRequestsMutation = (
-  options?: Partial<Options<PostItemsByItemIdMembershipsRequestsData>>,
-): UseMutationOptions<
-  PostItemsByItemIdMembershipsRequestsResponse,
-  DefaultError,
-  Options<PostItemsByItemIdMembershipsRequestsData>
-> => {
-  const mutationOptions: UseMutationOptions<
-    PostItemsByItemIdMembershipsRequestsResponse,
-    DefaultError,
-    Options<PostItemsByItemIdMembershipsRequestsData>
-  > = {
-    mutationFn: async (localOptions) => {
-      const { data } = await postItemsByItemIdMembershipsRequests({
-        ...options,
-        ...localOptions,
-        throwOnError: true,
-      });
-      return data;
-    },
-  };
-  return mutationOptions;
-};
-
-export const getItemsByItemIdMembershipsRequestsOwnQueryKey = (
-  options: Options<GetItemsByItemIdMembershipsRequestsOwnData>,
-) => createQueryKey('getItemsByItemIdMembershipsRequestsOwn', options);
-
-export const getItemsByItemIdMembershipsRequestsOwnOptions = (
-  options: Options<GetItemsByItemIdMembershipsRequestsOwnData>,
-) => {
-  return queryOptions({
-    queryFn: async ({ queryKey, signal }) => {
-      const { data } = await getItemsByItemIdMembershipsRequestsOwn({
-        ...options,
-        ...queryKey[0],
-        signal,
-        throwOnError: true,
-      });
-      return data;
-    },
-    queryKey: getItemsByItemIdMembershipsRequestsOwnQueryKey(options),
-  });
-};
-
-export const deleteItemsByItemIdMembershipsRequestsByMemberIdMutation = (
-  options?: Partial<
-    Options<DeleteItemsByItemIdMembershipsRequestsByMemberIdData>
-  >,
-): UseMutationOptions<
-  DeleteItemsByItemIdMembershipsRequestsByMemberIdResponse,
-  DefaultError,
-  Options<DeleteItemsByItemIdMembershipsRequestsByMemberIdData>
-> => {
-  const mutationOptions: UseMutationOptions<
-    DeleteItemsByItemIdMembershipsRequestsByMemberIdResponse,
-    DefaultError,
-    Options<DeleteItemsByItemIdMembershipsRequestsByMemberIdData>
-  > = {
-    mutationFn: async (localOptions) => {
-      const { data } = await deleteItemsByItemIdMembershipsRequestsByMemberId({
-        ...options,
-        ...localOptions,
-        throwOnError: true,
-      });
-      return data;
-    },
-  };
-  return mutationOptions;
-};
-
-export const getItemMembershipsForItemQueryKey = (
-  options: Options<GetItemMembershipsForItemData>,
-) => createQueryKey('getItemMembershipsForItem', options);
-
-export const getItemMembershipsForItemOptions = (
-  options: Options<GetItemMembershipsForItemData>,
-) => {
-  return queryOptions({
-    queryFn: async ({ queryKey, signal }) => {
-      const { data } = await getItemMembershipsForItem({
-        ...options,
-        ...queryKey[0],
-        signal,
-        throwOnError: true,
-      });
-      return data;
-    },
-    queryKey: getItemMembershipsForItemQueryKey(options),
-  });
-};
-
-export const createItemMembershipQueryKey = (
-  options: Options<CreateItemMembershipData>,
-) => createQueryKey('createItemMembership', options);
-
-export const createItemMembershipOptions = (
-  options: Options<CreateItemMembershipData>,
-) => {
-  return queryOptions({
-    queryFn: async ({ queryKey, signal }) => {
-      const { data } = await createItemMembership({
-        ...options,
-        ...queryKey[0],
-        signal,
-        throwOnError: true,
-      });
-      return data;
-    },
-    queryKey: createItemMembershipQueryKey(options),
-  });
-};
-
-export const createItemMembershipMutation = (
-  options?: Partial<Options<CreateItemMembershipData>>,
-): UseMutationOptions<
-  CreateItemMembershipResponse,
-  CreateItemMembershipError,
-  Options<CreateItemMembershipData>
-> => {
-  const mutationOptions: UseMutationOptions<
-    CreateItemMembershipResponse,
-    CreateItemMembershipError,
-    Options<CreateItemMembershipData>
-  > = {
-    mutationFn: async (localOptions) => {
-      const { data } = await createItemMembership({
-        ...options,
-        ...localOptions,
-        throwOnError: true,
-      });
-      return data;
-    },
-  };
-  return mutationOptions;
-};
-
-export const deleteItemMembershipMutation = (
-  options?: Partial<Options<DeleteItemMembershipData>>,
-): UseMutationOptions<
-  DeleteItemMembershipResponse,
-  DeleteItemMembershipError,
-  Options<DeleteItemMembershipData>
-> => {
-  const mutationOptions: UseMutationOptions<
-    DeleteItemMembershipResponse,
-    DeleteItemMembershipError,
-    Options<DeleteItemMembershipData>
-  > = {
-    mutationFn: async (localOptions) => {
-      const { data } = await deleteItemMembership({
-        ...options,
-        ...localOptions,
-        throwOnError: true,
-      });
-      return data;
-    },
-  };
-  return mutationOptions;
-};
-
-export const updateItemMembershipMutation = (
-  options?: Partial<Options<UpdateItemMembershipData>>,
-): UseMutationOptions<
-  UpdateItemMembershipResponse,
-  UpdateItemMembershipError,
-  Options<UpdateItemMembershipData>
-> => {
-  const mutationOptions: UseMutationOptions<
-    UpdateItemMembershipResponse,
-    UpdateItemMembershipError,
-    Options<UpdateItemMembershipData>
-  > = {
-    mutationFn: async (localOptions) => {
-      const { data } = await updateItemMembership({
         ...options,
         ...localOptions,
         throwOnError: true,

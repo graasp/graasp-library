@@ -326,6 +326,43 @@ export type ItemLoginSchema = {
 };
 
 /**
+ * Define the permission access between account and item
+ */
+export type ItemMembership = {
+  id: string;
+  account: AugmentedAccount;
+  item: Item;
+  permission: 'read' | 'write' | 'admin';
+  creator?: NullableAugmentedAccount;
+  createdAt: string;
+  updatedAt: string;
+};
+
+/**
+ * Define the permission access between account and item
+ */
+export type RawItemMembership = {
+  id: string;
+  accountId: string;
+  itemPath: string;
+  permission: 'read' | 'write' | 'admin';
+  creator?: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CompleteMembershipRequest = {
+  member: Member;
+  item: Item;
+  createdAt: string;
+};
+
+export type SimpleMembershipRequest = {
+  member: Member;
+  createdAt: string;
+};
+
+/**
  * Activity trace saved by an app.
  */
 export type AppAction = {
@@ -405,32 +442,6 @@ export type AppSetting = {
     [key: string]: unknown;
   };
   creator?: NullableMember;
-  createdAt: string;
-  updatedAt: string;
-};
-
-/**
- * Define the permission access between account and item
- */
-export type ItemMembership = {
-  id: string;
-  account: AugmentedAccount;
-  item: Item;
-  permission: 'read' | 'write' | 'admin';
-  creator?: NullableAugmentedAccount;
-  createdAt: string;
-  updatedAt: string;
-};
-
-/**
- * Define the permission access between account and item
- */
-export type RawItemMembership = {
-  id: string;
-  accountId: string;
-  itemPath: string;
-  permission: 'read' | 'write' | 'admin';
-  creator?: string;
   createdAt: string;
   updatedAt: string;
 };
@@ -570,17 +581,6 @@ export type Tag = {
   id: string;
   name: string;
   category: 'level' | 'discipline' | 'resource-type';
-};
-
-export type CompleteMembershipRequest = {
-  member: Member;
-  item: Item;
-  createdAt: string;
-};
-
-export type SimpleMembershipRequest = {
-  member: Member;
-  createdAt: string;
 };
 
 /**
@@ -2665,6 +2665,210 @@ export type GetItemsCollectionsSearchRebuildResponses = {
   200: unknown;
 };
 
+export type GetItemMembershipsForItemData = {
+  body?: never;
+  path: {
+    itemId: string;
+  };
+  query?: never;
+  url: '/items/{itemId}/memberships';
+};
+
+export type GetItemMembershipsForItemErrors = {
+  /**
+   * Error object with useful information about the unexpected behavior that occured
+   */
+  '4XX': _Error;
+};
+
+export type GetItemMembershipsForItemError =
+  GetItemMembershipsForItemErrors[keyof GetItemMembershipsForItemErrors];
+
+export type GetItemMembershipsForItemResponses = {
+  /**
+   * Default Response
+   */
+  200: Array<ItemMembership>;
+};
+
+export type GetItemMembershipsForItemResponse =
+  GetItemMembershipsForItemResponses[keyof GetItemMembershipsForItemResponses];
+
+export type CreateItemMembershipData = {
+  body: {
+    accountId: string;
+    permission: 'read' | 'write' | 'admin';
+  };
+  path: {
+    itemId: string;
+  };
+  query?: never;
+  url: '/items/{itemId}/memberships';
+};
+
+export type CreateItemMembershipErrors = {
+  /**
+   * Error object with useful information about the unexpected behavior that occured
+   */
+  '4XX': _Error;
+};
+
+export type CreateItemMembershipError =
+  CreateItemMembershipErrors[keyof CreateItemMembershipErrors];
+
+export type CreateItemMembershipResponses = {
+  /**
+   * Successful Response
+   */
+  204: void;
+};
+
+export type CreateItemMembershipResponse =
+  CreateItemMembershipResponses[keyof CreateItemMembershipResponses];
+
+export type DeleteItemMembershipData = {
+  body?: never;
+  path: {
+    id: string;
+    itemId: string;
+  };
+  query?: {
+    purgeBelow?: boolean;
+  };
+  url: '/items/{itemId}/memberships/{id}';
+};
+
+export type DeleteItemMembershipErrors = {
+  /**
+   * Error object with useful information about the unexpected behavior that occured
+   */
+  '4XX': _Error;
+};
+
+export type DeleteItemMembershipError =
+  DeleteItemMembershipErrors[keyof DeleteItemMembershipErrors];
+
+export type DeleteItemMembershipResponses = {
+  /**
+   * Successful Response
+   */
+  204: void;
+};
+
+export type DeleteItemMembershipResponse =
+  DeleteItemMembershipResponses[keyof DeleteItemMembershipResponses];
+
+export type UpdateItemMembershipData = {
+  body: {
+    permission: 'read' | 'write' | 'admin';
+  };
+  path: {
+    id: string;
+    itemId: string;
+  };
+  query?: never;
+  url: '/items/{itemId}/memberships/{id}';
+};
+
+export type UpdateItemMembershipErrors = {
+  /**
+   * Error object with useful information about the unexpected behavior that occured
+   */
+  '4XX': _Error;
+};
+
+export type UpdateItemMembershipError =
+  UpdateItemMembershipErrors[keyof UpdateItemMembershipErrors];
+
+export type UpdateItemMembershipResponses = {
+  /**
+   * Successful Response
+   */
+  204: void;
+};
+
+export type UpdateItemMembershipResponse =
+  UpdateItemMembershipResponses[keyof UpdateItemMembershipResponses];
+
+export type GetMembershipRequestsByItemIdData = {
+  body?: never;
+  path: {
+    itemId: string;
+  };
+  query?: never;
+  url: '/items/{itemId}/memberships/requests';
+};
+
+export type GetMembershipRequestsByItemIdResponses = {
+  /**
+   * Default Response
+   */
+  200: Array<SimpleMembershipRequest>;
+};
+
+export type GetMembershipRequestsByItemIdResponse =
+  GetMembershipRequestsByItemIdResponses[keyof GetMembershipRequestsByItemIdResponses];
+
+export type CreateMembershipRequestData = {
+  body?: never;
+  path: {
+    itemId: string;
+  };
+  query?: never;
+  url: '/items/{itemId}/memberships/requests';
+};
+
+export type CreateMembershipRequestResponses = {
+  /**
+   * Default Response
+   */
+  204: void;
+};
+
+export type CreateMembershipRequestResponse =
+  CreateMembershipRequestResponses[keyof CreateMembershipRequestResponses];
+
+export type GetOwnMembershipRequestByItemIdData = {
+  body?: never;
+  path: {
+    itemId: string;
+  };
+  query?: never;
+  url: '/items/{itemId}/memberships/requests/own';
+};
+
+export type GetOwnMembershipRequestByItemIdResponses = {
+  /**
+   * Default Response
+   */
+  200: {
+    status: 'notSubmittedOrDeleted' | 'pending' | 'approved';
+  };
+};
+
+export type GetOwnMembershipRequestByItemIdResponse =
+  GetOwnMembershipRequestByItemIdResponses[keyof GetOwnMembershipRequestByItemIdResponses];
+
+export type DeleteMembershipRequestData = {
+  body?: never;
+  path: {
+    itemId: string;
+    memberId: string;
+  };
+  query?: never;
+  url: '/items/{itemId}/memberships/requests/{memberId}';
+};
+
+export type DeleteMembershipRequestResponses = {
+  /**
+   * Default Response
+   */
+  204: void;
+};
+
+export type DeleteMembershipRequestResponse =
+  DeleteMembershipRequestResponses[keyof DeleteMembershipRequestResponses];
+
 export type CreateShortcutData = {
   body: {
     target: string;
@@ -2941,14 +3145,9 @@ export type UploadFileError = UploadFileErrors[keyof UploadFileErrors];
 
 export type UploadFileResponses = {
   /**
-   * Default Response
+   * Successful response
    */
-  200: {
-    data: {
-      [key: string]: Item;
-    };
-    errors: Array<_Error>;
-  };
+  204: void;
 };
 
 export type UploadFileResponse = UploadFileResponses[keyof UploadFileResponses];
@@ -6868,208 +7067,6 @@ export type CreateItemWithThumbnailResponses = {
 
 export type CreateItemWithThumbnailResponse =
   CreateItemWithThumbnailResponses[keyof CreateItemWithThumbnailResponses];
-
-export type GetItemsByItemIdMembershipsRequestsData = {
-  body?: never;
-  path: {
-    itemId: string;
-  };
-  query?: never;
-  url: '/items/{itemId}/memberships/requests/';
-};
-
-export type GetItemsByItemIdMembershipsRequestsResponses = {
-  /**
-   * Default Response
-   */
-  200: Array<SimpleMembershipRequest>;
-};
-
-export type GetItemsByItemIdMembershipsRequestsResponse =
-  GetItemsByItemIdMembershipsRequestsResponses[keyof GetItemsByItemIdMembershipsRequestsResponses];
-
-export type PostItemsByItemIdMembershipsRequestsData = {
-  body?: never;
-  path: {
-    itemId: string;
-  };
-  query?: never;
-  url: '/items/{itemId}/memberships/requests/';
-};
-
-export type PostItemsByItemIdMembershipsRequestsResponses = {
-  /**
-   * Default Response
-   */
-  204: void;
-};
-
-export type PostItemsByItemIdMembershipsRequestsResponse =
-  PostItemsByItemIdMembershipsRequestsResponses[keyof PostItemsByItemIdMembershipsRequestsResponses];
-
-export type GetItemsByItemIdMembershipsRequestsOwnData = {
-  body?: never;
-  path: {
-    itemId: string;
-  };
-  query?: never;
-  url: '/items/{itemId}/memberships/requests/own';
-};
-
-export type GetItemsByItemIdMembershipsRequestsOwnResponses = {
-  /**
-   * Default Response
-   */
-  200: {
-    status: 'notSubmittedOrDeleted' | 'pending' | 'approved';
-  };
-};
-
-export type GetItemsByItemIdMembershipsRequestsOwnResponse =
-  GetItemsByItemIdMembershipsRequestsOwnResponses[keyof GetItemsByItemIdMembershipsRequestsOwnResponses];
-
-export type DeleteItemsByItemIdMembershipsRequestsByMemberIdData = {
-  body?: never;
-  path: {
-    itemId: string;
-    memberId: string;
-  };
-  query?: never;
-  url: '/items/{itemId}/memberships/requests/{memberId}';
-};
-
-export type DeleteItemsByItemIdMembershipsRequestsByMemberIdResponses = {
-  /**
-   * Default Response
-   */
-  204: void;
-};
-
-export type DeleteItemsByItemIdMembershipsRequestsByMemberIdResponse =
-  DeleteItemsByItemIdMembershipsRequestsByMemberIdResponses[keyof DeleteItemsByItemIdMembershipsRequestsByMemberIdResponses];
-
-export type GetItemMembershipsForItemData = {
-  body?: never;
-  path?: never;
-  query: {
-    itemId: string;
-  };
-  url: '/item-memberships/';
-};
-
-export type GetItemMembershipsForItemErrors = {
-  /**
-   * Error object with useful information about the unexpected behavior that occured
-   */
-  '4XX': _Error;
-};
-
-export type GetItemMembershipsForItemError =
-  GetItemMembershipsForItemErrors[keyof GetItemMembershipsForItemErrors];
-
-export type GetItemMembershipsForItemResponses = {
-  /**
-   * Default Response
-   */
-  200: Array<ItemMembership>;
-};
-
-export type GetItemMembershipsForItemResponse =
-  GetItemMembershipsForItemResponses[keyof GetItemMembershipsForItemResponses];
-
-export type CreateItemMembershipData = {
-  body: {
-    accountId: string;
-    permission: 'read' | 'write' | 'admin';
-  };
-  path?: never;
-  query: {
-    itemId: string;
-  };
-  url: '/item-memberships/';
-};
-
-export type CreateItemMembershipErrors = {
-  /**
-   * Error object with useful information about the unexpected behavior that occured
-   */
-  '4XX': _Error;
-};
-
-export type CreateItemMembershipError =
-  CreateItemMembershipErrors[keyof CreateItemMembershipErrors];
-
-export type CreateItemMembershipResponses = {
-  /**
-   * Successful Response
-   */
-  204: void;
-};
-
-export type CreateItemMembershipResponse =
-  CreateItemMembershipResponses[keyof CreateItemMembershipResponses];
-
-export type DeleteItemMembershipData = {
-  body?: never;
-  path: {
-    id: string;
-  };
-  query?: {
-    purgeBelow?: boolean;
-  };
-  url: '/item-memberships/{id}';
-};
-
-export type DeleteItemMembershipErrors = {
-  /**
-   * Error object with useful information about the unexpected behavior that occured
-   */
-  '4XX': _Error;
-};
-
-export type DeleteItemMembershipError =
-  DeleteItemMembershipErrors[keyof DeleteItemMembershipErrors];
-
-export type DeleteItemMembershipResponses = {
-  /**
-   * Successful Response
-   */
-  204: void;
-};
-
-export type DeleteItemMembershipResponse =
-  DeleteItemMembershipResponses[keyof DeleteItemMembershipResponses];
-
-export type UpdateItemMembershipData = {
-  body: {
-    permission: 'read' | 'write' | 'admin';
-  };
-  path: {
-    id: string;
-  };
-  query?: never;
-  url: '/item-memberships/{id}';
-};
-
-export type UpdateItemMembershipErrors = {
-  /**
-   * Error object with useful information about the unexpected behavior that occured
-   */
-  '4XX': _Error;
-};
-
-export type UpdateItemMembershipError =
-  UpdateItemMembershipErrors[keyof UpdateItemMembershipErrors];
-
-export type UpdateItemMembershipResponses = {
-  /**
-   * Successful Response
-   */
-  204: void;
-};
-
-export type UpdateItemMembershipResponse =
-  UpdateItemMembershipResponses[keyof UpdateItemMembershipResponses];
 
 export type GetCountForTagsData = {
   body?: never;

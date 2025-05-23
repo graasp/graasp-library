@@ -76,7 +76,7 @@ const Authorship = ({ itemId, author, displayCoEditors }: Props) => {
   // todo: this call should be replaced by a dedicated call to get the co-editors from the backend.
   // this call leaks too much data by using the memberships as the source of data.
   const { data: memberships } = useQuery(
-    getItemMembershipsForItemOptions({ query: { itemId } }),
+    getItemMembershipsForItemOptions({ path: { itemId } }),
   );
 
   if (memberships) {

@@ -117,6 +117,7 @@ export function SummaryHeader({
       direction={{ xs: 'column', sm: 'row' }}
       spacing={{ xs: 2, sm: 6 }}
       alignItems={{ xs: 'center', sm: 'start' }}
+      width="100%"
     >
       <Box
         sx={{

@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import { Box, Grid, Skeleton, Stack, Typography } from '@mui/material';
+import { Grid, Skeleton, Stack, Typography } from '@mui/material';
 
 import { CCLicenseAdaptions, formatDate } from '@graasp/sdk';
 
@@ -9,7 +9,6 @@ import { m } from '~/paraglide/messages';
 import { baseLocale, locales } from '~/paraglide/runtime';
 
 import {
-  SUMMARY_CC_LICENSE_CONTAINER_ID,
   SUMMARY_CC_LICENSE_NO_LICENSE_ID,
   SUMMARY_CREATED_AT_CONTAINER_ID,
   SUMMARY_LANGUAGES_CONTAINER_ID,
@@ -44,7 +43,12 @@ export function SummaryDetails({
   const langValue = Langs[langKey];
 
   return (
-    <Grid container direction="row" gap={1} width="100%">
+    <Grid
+      container
+      direction={{ xs: 'column', sm: 'row' }}
+      gap={1}
+      width="100%"
+    >
       <Grid p={2} borderRadius={2} border="1px solid #ddd" flex={1}>
         <Stack direction="column" height="100%" justifyContent="space-between">
           <Stack direction="row" gap={1} id={SUMMARY_CREATED_AT_CONTAINER_ID}>
@@ -96,20 +100,19 @@ export function SummaryDetails({
           <Typography variant="body1" fontWeight="bold">
             {m.SUMMARY_DETAILS_LICENSE_TITLE()}
           </Typography>
-          <Stack justifyContent="flex-start" display="flex">
-            <Box id={SUMMARY_CC_LICENSE_CONTAINER_ID}>
-              {ccLicenseAdaption && ccLicenseAdaption.length > 0 ? (
-                <CreativeCommons ccLicenseAdaption={ccLicenseAdaption} />
-              ) : (
-                <Typography
-                  variant="body1"
-                  color="text.secondary"
-                  id={SUMMARY_CC_LICENSE_NO_LICENSE_ID}
-                >
-                  {m.SUMMARY_DETAILS_EMPTY_LICENSE_TEXT()}
-                </Typography>
-              )}
-            </Box>
+          <Stack alignItems={{ xs: 'center', sm: 'flex-start' }}>
+            {ccLicenseAdaption && ccLicenseAdaption.length > 0 ? (
+              <CreativeCommons ccLicenseAdaption={ccLicenseAdaption} />
+            ) : (
+              <Typography
+                variant="body1"
+                color="text.secondary"
+                fontStyle="italic"
+                id={SUMMARY_CC_LICENSE_NO_LICENSE_ID}
+              >
+                {m.SUMMARY_DETAILS_EMPTY_LICENSE_TEXT()}
+              </Typography>
+            )}
           </Stack>
         </Stack>
       </Grid>

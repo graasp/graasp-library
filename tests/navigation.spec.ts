@@ -4,9 +4,10 @@ test.use({
   serviceWorkers: 'block',
 });
 
-test('test', async ({ page }) => {
+test('Simple user flow', async ({ page }) => {
   await page.routeFromHAR('./tests/fixtures/api_mock.har', {
     url: 'http://localhost:3000/**',
+    update: false,
   });
 
   await page.goto('/');

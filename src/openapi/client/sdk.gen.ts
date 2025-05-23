@@ -80,6 +80,8 @@ import type {
   CreateLinkData,
   CreateLinkError,
   CreateLinkResponse,
+  CreateMembershipRequestData,
+  CreateMembershipRequestResponse,
   CreateOwnProfileData,
   CreateOwnProfileError,
   CreateOwnProfileResponse,
@@ -128,12 +130,12 @@ import type {
   DeleteItemMembershipError,
   DeleteItemMembershipResponse,
   DeleteItemsByIdThumbnailsData,
-  DeleteItemsByItemIdMembershipsRequestsByMemberIdData,
-  DeleteItemsByItemIdMembershipsRequestsByMemberIdResponse,
   DeleteManyItemsData,
   DeleteManyItemsError,
   DeleteManyItemsResponse,
   DeleteMembersMembersByIdDeleteData,
+  DeleteMembershipRequestData,
+  DeleteMembershipRequestResponse,
   DeleteMentionData,
   DeleteMentionError,
   DeleteMentionResponse,
@@ -254,10 +256,6 @@ import type {
   GetItemMembershipsForItemError,
   GetItemMembershipsForItemResponse,
   GetItemResponse,
-  GetItemsByItemIdMembershipsRequestsData,
-  GetItemsByItemIdMembershipsRequestsOwnData,
-  GetItemsByItemIdMembershipsRequestsOwnResponse,
-  GetItemsByItemIdMembershipsRequestsResponse,
   GetItemsCollectionsSearchRebuildData,
   GetItemsH5pAssetsIntegrationHtmlData,
   GetItemsInBoxData,
@@ -285,6 +283,8 @@ import type {
   GetMembersActionsResponse,
   GetMembersCurrentPasswordStatusData,
   GetMembersCurrentPasswordStatusResponse,
+  GetMembershipRequestsByItemIdData,
+  GetMembershipRequestsByItemIdResponse,
   GetMostLikedCollectionsData,
   GetMostLikedCollectionsError,
   GetMostLikedCollectionsResponse,
@@ -300,6 +300,8 @@ import type {
   GetOwnBookmarkData,
   GetOwnBookmarkError,
   GetOwnBookmarkResponse,
+  GetOwnMembershipRequestByItemIdData,
+  GetOwnMembershipRequestByItemIdResponse,
   GetOwnMentionsData,
   GetOwnMentionsError,
   GetOwnMentionsResponse,
@@ -381,8 +383,6 @@ import type {
   PostItemsByIdThumbnailsData,
   PostItemsByIdThumbnailsError,
   PostItemsByIdThumbnailsResponse,
-  PostItemsByItemIdMembershipsRequestsData,
-  PostItemsByItemIdMembershipsRequestsResponse,
   PostLoginPasswordData,
   PostMembersAvatarData,
   PostMembersAvatarResponse,
@@ -1689,6 +1689,156 @@ export const getItemsCollectionsSearchRebuild = <
       ...options,
     },
   );
+};
+
+/**
+ * Get memberships for one item
+ * Get memberships for one item
+ */
+export const getItemMembershipsForItem = <ThrowOnError extends boolean = false>(
+  options: Options<GetItemMembershipsForItemData, ThrowOnError>,
+) => {
+  return (options.client ?? _heyApiClient).get<
+    GetItemMembershipsForItemResponse,
+    GetItemMembershipsForItemError,
+    ThrowOnError
+  >({
+    url: '/items/{itemId}/memberships',
+    ...options,
+  });
+};
+
+/**
+ * Create access to item for account
+ * Create access to item for account, given permission
+ */
+export const createItemMembership = <ThrowOnError extends boolean = false>(
+  options: Options<CreateItemMembershipData, ThrowOnError>,
+) => {
+  return (options.client ?? _heyApiClient).post<
+    CreateItemMembershipResponse,
+    CreateItemMembershipError,
+    ThrowOnError
+  >({
+    url: '/items/{itemId}/memberships',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options?.headers,
+    },
+  });
+};
+
+/**
+ * Delete access to item for account
+ * Delete access to item for account
+ */
+export const deleteItemMembership = <ThrowOnError extends boolean = false>(
+  options: Options<DeleteItemMembershipData, ThrowOnError>,
+) => {
+  return (options.client ?? _heyApiClient).delete<
+    DeleteItemMembershipResponse,
+    DeleteItemMembershipError,
+    ThrowOnError
+  >({
+    url: '/items/{itemId}/memberships/{id}',
+    ...options,
+  });
+};
+
+/**
+ * Update permission for item membership
+ * Update permission for item membership
+ */
+export const updateItemMembership = <ThrowOnError extends boolean = false>(
+  options: Options<UpdateItemMembershipData, ThrowOnError>,
+) => {
+  return (options.client ?? _heyApiClient).patch<
+    UpdateItemMembershipResponse,
+    UpdateItemMembershipError,
+    ThrowOnError
+  >({
+    url: '/items/{itemId}/memberships/{id}',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options?.headers,
+    },
+  });
+};
+
+/**
+ * Get all membership requests for an item
+ * Get all membership requests with member information for an item by its ID
+ */
+export const getMembershipRequestsByItemId = <
+  ThrowOnError extends boolean = false,
+>(
+  options: Options<GetMembershipRequestsByItemIdData, ThrowOnError>,
+) => {
+  return (options.client ?? _heyApiClient).get<
+    GetMembershipRequestsByItemIdResponse,
+    unknown,
+    ThrowOnError
+  >({
+    url: '/items/{itemId}/memberships/requests',
+    ...options,
+  });
+};
+
+/**
+ * Create a membership request
+ * Create a membership request for an item with the authenticated member.
+ * The member should not have any permission on the item.
+ * If there is an Item Login associated with the item, the request will be rejected.
+ */
+export const createMembershipRequest = <ThrowOnError extends boolean = false>(
+  options: Options<CreateMembershipRequestData, ThrowOnError>,
+) => {
+  return (options.client ?? _heyApiClient).post<
+    CreateMembershipRequestResponse,
+    unknown,
+    ThrowOnError
+  >({
+    url: '/items/{itemId}/memberships/requests',
+    ...options,
+  });
+};
+
+/**
+ * Get the status of the membership request for the authenticated member
+ * Get the status of the membership request for the authenticated member for an item by its ID
+ */
+export const getOwnMembershipRequestByItemId = <
+  ThrowOnError extends boolean = false,
+>(
+  options: Options<GetOwnMembershipRequestByItemIdData, ThrowOnError>,
+) => {
+  return (options.client ?? _heyApiClient).get<
+    GetOwnMembershipRequestByItemIdResponse,
+    unknown,
+    ThrowOnError
+  >({
+    url: '/items/{itemId}/memberships/requests/own',
+    ...options,
+  });
+};
+
+/**
+ * Delete a membership request
+ * Delete a membership request from a member id and an item id.
+ */
+export const deleteMembershipRequest = <ThrowOnError extends boolean = false>(
+  options: Options<DeleteMembershipRequestData, ThrowOnError>,
+) => {
+  return (options.client ?? _heyApiClient).delete<
+    DeleteMembershipRequestResponse,
+    unknown,
+    ThrowOnError
+  >({
+    url: '/items/{itemId}/memberships/requests/{memberId}',
+    ...options,
+  });
 };
 
 /**
@@ -3319,163 +3469,6 @@ export const createItemWithThumbnail = <ThrowOnError extends boolean = false>(
   >({
     url: '/items/with-thumbnail',
     ...options,
-  });
-};
-
-/**
- * Get all membership requests for an item
- * Get all membership requests with member information for an item by its ID
- */
-export const getItemsByItemIdMembershipsRequests = <
-  ThrowOnError extends boolean = false,
->(
-  options: Options<GetItemsByItemIdMembershipsRequestsData, ThrowOnError>,
-) => {
-  return (options.client ?? _heyApiClient).get<
-    GetItemsByItemIdMembershipsRequestsResponse,
-    unknown,
-    ThrowOnError
-  >({
-    url: '/items/{itemId}/memberships/requests/',
-    ...options,
-  });
-};
-
-/**
- * Create a membership request
- * Create a membership request for an item with the authenticated member.
- * The member should not have any permission on the item.
- * If there is an Item Login associated with the item, the request will be rejected.
- */
-export const postItemsByItemIdMembershipsRequests = <
-  ThrowOnError extends boolean = false,
->(
-  options: Options<PostItemsByItemIdMembershipsRequestsData, ThrowOnError>,
-) => {
-  return (options.client ?? _heyApiClient).post<
-    PostItemsByItemIdMembershipsRequestsResponse,
-    unknown,
-    ThrowOnError
-  >({
-    url: '/items/{itemId}/memberships/requests/',
-    ...options,
-  });
-};
-
-/**
- * Get the status of the membership request for the authenticated member
- * Get the status of the membership request for the authenticated member for an item by its ID
- */
-export const getItemsByItemIdMembershipsRequestsOwn = <
-  ThrowOnError extends boolean = false,
->(
-  options: Options<GetItemsByItemIdMembershipsRequestsOwnData, ThrowOnError>,
-) => {
-  return (options.client ?? _heyApiClient).get<
-    GetItemsByItemIdMembershipsRequestsOwnResponse,
-    unknown,
-    ThrowOnError
-  >({
-    url: '/items/{itemId}/memberships/requests/own',
-    ...options,
-  });
-};
-
-/**
- * Delete a membership request
- * Delete a membership request from a member id and an item id.
- */
-export const deleteItemsByItemIdMembershipsRequestsByMemberId = <
-  ThrowOnError extends boolean = false,
->(
-  options: Options<
-    DeleteItemsByItemIdMembershipsRequestsByMemberIdData,
-    ThrowOnError
-  >,
-) => {
-  return (options.client ?? _heyApiClient).delete<
-    DeleteItemsByItemIdMembershipsRequestsByMemberIdResponse,
-    unknown,
-    ThrowOnError
-  >({
-    url: '/items/{itemId}/memberships/requests/{memberId}',
-    ...options,
-  });
-};
-
-/**
- * Get memberships for one item
- * Get memberships for one item
- */
-export const getItemMembershipsForItem = <ThrowOnError extends boolean = false>(
-  options: Options<GetItemMembershipsForItemData, ThrowOnError>,
-) => {
-  return (options.client ?? _heyApiClient).get<
-    GetItemMembershipsForItemResponse,
-    GetItemMembershipsForItemError,
-    ThrowOnError
-  >({
-    url: '/item-memberships/',
-    ...options,
-  });
-};
-
-/**
- * Create access to item for account
- * Create access to item for account, given permission
- */
-export const createItemMembership = <ThrowOnError extends boolean = false>(
-  options: Options<CreateItemMembershipData, ThrowOnError>,
-) => {
-  return (options.client ?? _heyApiClient).post<
-    CreateItemMembershipResponse,
-    CreateItemMembershipError,
-    ThrowOnError
-  >({
-    url: '/item-memberships/',
-    ...options,
-    headers: {
-      'Content-Type': 'application/json',
-      ...options?.headers,
-    },
-  });
-};
-
-/**
- * Delete access to item for account
- * Delete access to item for account
- */
-export const deleteItemMembership = <ThrowOnError extends boolean = false>(
-  options: Options<DeleteItemMembershipData, ThrowOnError>,
-) => {
-  return (options.client ?? _heyApiClient).delete<
-    DeleteItemMembershipResponse,
-    DeleteItemMembershipError,
-    ThrowOnError
-  >({
-    url: '/item-memberships/{id}',
-    ...options,
-  });
-};
-
-/**
- * Update permission for item membership
- * Update permission for item membership
- */
-export const updateItemMembership = <ThrowOnError extends boolean = false>(
-  options: Options<UpdateItemMembershipData, ThrowOnError>,
-) => {
-  return (options.client ?? _heyApiClient).patch<
-    UpdateItemMembershipResponse,
-    UpdateItemMembershipError,
-    ThrowOnError
-  >({
-    url: '/item-memberships/{id}',
-    ...options,
-    headers: {
-      'Content-Type': 'application/json',
-      ...options?.headers,
-    },
   });
 };
 
