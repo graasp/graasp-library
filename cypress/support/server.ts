@@ -1,4 +1,3 @@
-import { API_ROUTES } from '@graasp/query-client';
 import {
   HttpMethod,
   ItemVisibilityType,
@@ -21,19 +20,8 @@ import {
   getRootPublishedItems,
 } from './utils';
 
-const {
-  buildGetItemPublishedInformationRoute,
-  buildGetItemRoute,
-  buildGetMemberRoute,
-  buildGetCurrentMemberRoute,
-  ITEMS_ROUTE,
-  SIGN_IN_ROUTE,
-  SIGN_OUT_ROUTE,
-  SEARCH_PUBLISHED_ITEMS_ROUTE,
-} = API_ROUTES;
-
 const API_HOST = Cypress.env('API_HOST');
-const AUTHENTICATION_HOST = Cypress.env('AUTHENTICATION_HOST');
+const CLIENT_HOST = Cypress.env('CLIENT_HOST');
 
 const checkMembership = ({
   item,
@@ -63,7 +51,7 @@ export const mockGetAccessibleItems = (items: MockItem[]): void => {
   cy.intercept(
     {
       method: HttpMethod.Get,
-      pathname: `/${ITEMS_ROUTE}/accessible`,
+      pathname: `/items/accessible`,
     },
     ({ url, reply }) => {
       const params = new URL(url).searchParams;
@@ -89,7 +77,7 @@ export const mockGetRecentCollections = (
   cy.intercept(
     {
       method: HttpMethod.Get,
-      pathname: `/${ITEMS_ROUTE}/collections/recent`,
+      pathname: `/items/collections/recent`,
     },
     ({ reply }) => {
       reply({ hits: recentCollections });
@@ -104,7 +92,7 @@ export const mockGetCurrentMember = (
   cy.intercept(
     {
       method: DEFAULT_GET.method,
-      url: `${API_HOST}/${buildGetCurrentMemberRoute()}`,
+      url: `${API_HOST}/members/current`,
     },
     ({ reply }) => {
       if (shouldThrowError) {
@@ -155,7 +143,7 @@ export const mockGetItem = (
   cy.intercept(
     {
       method: DEFAULT_GET.method,
-      url: new RegExp(`${API_HOST}/${buildGetItemRoute(ID_FORMAT)}$`),
+      url: new RegExp(`${API_HOST}/items/${ID_FORMAT}$`),
     },
     ({ url, reply }) => {
       const itemId = url.split('/').at(-1);
@@ -193,7 +181,7 @@ export const mockGetItemThumbnailUrl = (
   cy.intercept(
     {
       method: DEFAULT_GET.method,
-      url: new RegExp(`${API_HOST}/${ITEMS_ROUTE}/${ID_FORMAT}/thumbnails`),
+      url: new RegExp(`${API_HOST}/items/${ID_FORMAT}/thumbnails`),
     },
     ({ reply, url }) => {
       if (shouldThrowError) {
@@ -232,7 +220,7 @@ export const mockGetChildren = ({
   cy.intercept(
     {
       method: DEFAULT_GET.method,
-      url: new RegExp(`${API_HOST}/${ITEMS_ROUTE}/${ID_FORMAT}/children`),
+      url: new RegExp(`${API_HOST}/items/${ID_FORMAT}/children`),
     },
     ({ url, reply }) => {
       const id = new URL(url).pathname.split('/')[2];
@@ -263,7 +251,7 @@ export const mockGetMember = ({
   cy.intercept(
     {
       method: DEFAULT_GET.method,
-      url: new RegExp(`${API_HOST}/${buildGetMemberRoute(ID_FORMAT)}*`),
+      url: new RegExp(`${API_HOST}/members/${ID_FORMAT}*`),
     },
     ({ url, reply }) => {
       if (!currentMember) {
@@ -292,7 +280,7 @@ export const mockSignInRedirection = () => {
   cy.intercept(
     {
       method: DEFAULT_GET.method,
-      url: `${AUTHENTICATION_HOST}/${SIGN_IN_ROUTE}`,
+      url: `${CLIENT_HOST}/auth/login`,
     },
     ({ reply }) => {
       reply(redirectionReply);
@@ -304,7 +292,7 @@ export const mockSignOut = () => {
   cy.intercept(
     {
       method: DEFAULT_GET.method,
-      url: new RegExp(SIGN_OUT_ROUTE),
+      url: `${API_HOST}/logout`,
     },
     ({ reply }) => {
       reply(redirectionReply);
@@ -326,7 +314,7 @@ export const mockGetTagsByItem = ({ items }: { items: MockItem[] }) => {
         return reply({ statusCode: StatusCodes.NOT_FOUND });
       }
 
-      return reply(item.tags as any);
+      return reply(item.tags ?? []);
     },
   ).as('getTagsByItem');
 };
@@ -389,7 +377,7 @@ export const mockSearch = (
   cy.intercept(
     {
       method: HttpMethod.Post,
-      url: new RegExp(`${API_HOST}/${SEARCH_PUBLISHED_ITEMS_ROUTE}`),
+      url: new RegExp(`${API_HOST}/items/collections/search`),
     },
     ({ reply, body }) => {
       if (shouldThrowError) {
@@ -437,7 +425,7 @@ export const mockGetPublishItemInformations = (items: MockItem[]): void => {
     {
       method: HttpMethod.Get,
       url: new RegExp(
-        `${API_HOST}/${buildGetItemPublishedInformationRoute(ID_FORMAT)}`,
+        `${API_HOST}/items/collections/${ID_FORMAT}/informations`,
       ),
     },
     ({ reply, url }) => {

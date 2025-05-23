@@ -9,9 +9,9 @@ import {
   useAutocomplete,
 } from '@mui/material';
 
-import { useLibraryTranslation } from '../../config/i18n';
+import { m } from '~/paraglide/messages';
+
 import { FILTER_CHIP_CY } from '../../config/selectors';
-import LIBRARY from '../../langs/constants';
 import { FilterPopper, FilterPopperProps } from './FilterPopper';
 
 export type FilterProps = {
@@ -63,7 +63,6 @@ export const Filter = ({
   isLoading = false,
   options = {},
 }: FilterProps) => {
-  const { t } = useLibraryTranslation();
   const [showPopper, setShowPopper] = useState<boolean>(false);
 
   const [inputValue, setInputValue] = useState('');
@@ -139,14 +138,18 @@ export const Filter = ({
               setShowPopper(true);
             }}
             placeholder={
-              selectedOptions.length
-                ? undefined
-                : t(LIBRARY.FILTER_DROPDOWN_NO_FILTER)
+              selectedOptions.length ? undefined : m.FILTER_DROPDOWN_NO_FILTER()
             }
             {...getInputProps()}
           />
         </div>
-        <ExpandMoreRounded color="primary" sx={{ mt: 1 }} />
+        <ExpandMoreRounded
+          color="primary"
+          sx={{ mt: 1 }}
+          onClick={() => {
+            setShowPopper(true);
+          }}
+        />
       </InputWrapper>
     </div>
   );

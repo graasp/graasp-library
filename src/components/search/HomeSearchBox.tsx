@@ -1,19 +1,16 @@
-'use client';
-
 import { useState } from 'react';
+import type { JSX } from 'react';
 
 import { Box } from '@mui/material';
 
-import { useRouter } from 'next/navigation';
+import { useNavigate } from '@tanstack/react-router';
 
 import { UrlSearch } from '../../config/constants';
-import { ALL_COLLECTIONS_ROUTE } from '../../config/routes';
-import Search from './Search';
-import SearchResults from './SearchResults';
+import { Search } from './Search';
+import { SearchResults } from './SearchResults';
 
 const HomeSearchBox = (): JSX.Element => {
-  const router = useRouter();
-
+  const navigate = useNavigate();
   const [searchInput, setSearchInput] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
 
@@ -21,7 +18,10 @@ const HomeSearchBox = (): JSX.Element => {
     const searchParams = new URLSearchParams();
     searchParams.set(UrlSearch.KeywordSearch, searchKeywords);
 
-    router.push(`${ALL_COLLECTIONS_ROUTE}?${searchParams.toString()}`);
+    navigate({
+      to: '/search',
+      search: { [UrlSearch.KeywordSearch]: searchKeywords },
+    });
   };
 
   return (

@@ -1,39 +1,56 @@
-import { useContext } from 'react';
-import { Trans } from 'react-i18next';
+import React, { ReactElement } from 'react';
 
 import {
   Divider,
   List,
   ListItemButton,
+  ListItemButtonProps,
   ListItemText,
   Paper,
   Stack,
   SxProps,
+  Typography,
   styled,
   useTheme,
 } from '@mui/material';
 
 import { useQuery } from '@tanstack/react-query';
+import { LinkComponent, createLink } from '@tanstack/react-router';
 import { Interweave } from 'interweave';
-import Link from 'next/link';
+
+import useDebounce from '~/hooks/useDebounce';
+import { m } from '~/paraglide/messages';
 
 import { MAX_RESULTS_TO_SHOW, UrlSearch } from '../../config/constants';
-import { useLibraryTranslation } from '../../config/i18n';
-import {
-  ALL_COLLECTIONS_ROUTE,
-  buildCollectionRoute,
-} from '../../config/routes';
 import {
   SEARCH_RESULTS_LIST_ID,
   SEARCH_RESULTS_SHOW_MORE_BUTTON,
 } from '../../config/selectors';
-import LIBRARY from '../../langs/constants';
 import { CollectionSearchResponses } from '../../openapi/client';
 import { collectionSearchOptions } from '../../openapi/client/@tanstack/react-query.gen';
 import intersperse from '../../utils/helpers';
-import { QueryClientContext } from '../QueryClientContext';
 import SearchThumbnail from './SearchThumbnail';
 import { useOutsideClick } from './hooks';
+
+const MUIListItemButtonComponent = React.forwardRef<
+  HTMLDivElement,
+  ListItemButtonProps
+>((props, ref) => {
+  const { children, ...restProps } = props;
+  return (
+    <ListItemButton ref={ref} {...restProps}>
+      {children}
+    </ListItemButton>
+  );
+});
+
+const CreatedLinkComponent = createLink(MUIListItemButtonComponent);
+
+const ListItemLink: LinkComponent<typeof MUIListItemButtonComponent> = (
+  props,
+) => {
+  return <CreatedLinkComponent preload="intent" {...props} />;
+};
 
 const LoadMoreResultsText = styled(ListItemText)(({ theme }) => ({
   color: theme.palette.primary.main,
@@ -45,7 +62,7 @@ const Container = ({
   children,
   sx = {},
 }: {
-  children: React.ReactElement;
+  children: ReactElement;
   sx?: SxProps;
 }) => (
   <Paper
@@ -66,7 +83,7 @@ const Container = ({
   </Paper>
 );
 
-const SearchResults = ({
+export function SearchResults({
   query,
   isPublishedRoot = false,
   onOutsideClick,
@@ -74,16 +91,14 @@ const SearchResults = ({
   query?: string;
   isPublishedRoot?: boolean;
   onOutsideClick?: (value: boolean) => void;
-}) => {
-  const { t } = useLibraryTranslation();
-  const { hooks } = useContext(QueryClientContext);
+}) {
   // detect click outside event to hide search results
   // cannot use onBlur on Search because it is fired first and the click in the list is canceled
   const ref = useOutsideClick<HTMLUListElement>(() => {
     onOutsideClick?.(false);
   });
   const theme = useTheme();
-  const debouncedQuery = hooks.useDebounce(query, 500);
+  const debouncedQuery = useDebounce(query, 500);
   const { data: collections } = useQuery({
     ...collectionSearchOptions({
       body: {
@@ -104,10 +119,10 @@ const SearchResults = ({
   ) => {
     const list = results.slice(0, MAX_RESULTS_TO_SHOW).map((result) => {
       return (
-        <ListItemButton
+        <ListItemLink
           key={result.id}
-          component={Link}
-          href={buildCollectionRoute(result.id)}
+          to="/collections/$id"
+          params={{ id: result.id }}
         >
           <ListItemText>
             <Stack direction="row" alignItems="center">
@@ -118,7 +133,6 @@ const SearchResults = ({
                 <Stack direction="column">
                   <Interweave
                     style={{ paddingRight: 5 }}
-                    // eslint-disable-next-line no-underscore-dangle
                     content={result._formatted.name}
                   />
                 </Stack>
@@ -126,7 +140,6 @@ const SearchResults = ({
                   <Interweave
                     style={{ color: '#999' }}
                     content={
-                      // eslint-disable-next-line no-underscore-dangle
                       result._formatted.description || result._formatted.content
                     }
                   />
@@ -134,25 +147,22 @@ const SearchResults = ({
               </Stack>
             </Stack>
           </ListItemText>
-        </ListItemButton>
+        </ListItemLink>
       );
     });
     if (nbOfHits > MAX_RESULTS_TO_SHOW) {
       list.push(
-        <ListItemButton
-          component={Link}
+        <ListItemLink
           id={SEARCH_RESULTS_SHOW_MORE_BUTTON}
-          href={{
-            pathname: ALL_COLLECTIONS_ROUTE,
-            query: { [UrlSearch.KeywordSearch]: query },
-          }}
+          to="/all-collections"
+          search={{ [UrlSearch.KeywordSearch]: query }}
         >
           <LoadMoreResultsText>
-            {t(LIBRARY.SEE_MORE_RESULTS_SEARCH, {
+            {m.SEE_MORE_RESULTS_SEARCH({
               total: nbOfHits - MAX_RESULTS_TO_SHOW,
             })}
           </LoadMoreResultsText>
-        </ListItemButton>,
+        </ListItemLink>,
       );
     }
     return list;
@@ -172,7 +182,7 @@ const SearchResults = ({
           pl: 2,
         }}
       >
-        <Trans t={t} i18nKey={LIBRARY.SEARCH_NO_RESULTS} />
+        <Typography>{m.SEARCH_NO_RESULTS()}</Typography>
       </Container>
     );
   }
@@ -184,6 +194,4 @@ const SearchResults = ({
       </List>
     </Container>
   );
-};
-
-export default SearchResults;
+}

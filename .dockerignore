@@ -1,6 +1,9 @@
 node_modules
 .dockerignore
 Dockerfile
-Dockerfile.prod
 docs
+cypress
+.storybook
+.husky
+.github
 .env.*

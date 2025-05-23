@@ -1,66 +1,11 @@
-'use client';
-
-import { useContext, useEffect, useState } from 'react';
-
-import { Grid2 as Grid, styled } from '@mui/material';
-import FormControl from '@mui/material/FormControl';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
+import { Grid, Stack } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
-import { setLangCookie } from '@graasp/sdk';
-import { langs } from '@graasp/translations';
-
-import { BACKGROUND_COLOR } from '../../config/constants';
-import { DOMAIN } from '../../config/env';
-import { useLibraryTranslation } from '../../config/i18n';
-import { QueryClientContext } from '../QueryClientContext';
-
-const StyledFooter = styled('footer')(({ theme }) => ({
-  flexGrow: 0,
-  flexShrink: 0,
-  padding: theme.spacing(1, 2),
-  backgroundColor: BACKGROUND_COLOR,
-}));
-
-const usePreferredLanguage = (): {
-  language: string;
-  onLanguageChange: (newLang: string) => void;
-} => {
-  const { i18n } = useLibraryTranslation();
-  const { hooks, mutations } = useContext(QueryClientContext);
-  const { data: member } = hooks.useCurrentMember();
-  const { mutate: editMember } = mutations.useEditCurrentMember();
-  const [language, setLanguage] = useState(i18n.language);
-
-  useEffect(() => {
-    setLanguage(i18n.language);
-  }, [i18n.language]);
-
-  const onLanguageChange = (newLang: string) => {
-    // change in i18n
-    i18n.changeLanguage(newLang);
-
-    // on signed in: change user language
-    if (member?.id) {
-      editMember({
-        extra: { lang: newLang },
-      });
-    }
-    // otherwise set cookie
-    else {
-      setLangCookie(newLang, DOMAIN);
-    }
-  };
-
-  return { language, onLanguageChange };
-};
+import { LanguageSwitch } from '../LanguageSwitch';
 
 const Footer = () => {
-  const { language, onLanguageChange } = usePreferredLanguage();
-
   return (
-    <StyledFooter>
+    <Stack m={2}>
       <Grid container justifyContent="space-between" alignItems="center">
         <Grid>
           <Typography variant="subtitle2">
@@ -69,22 +14,10 @@ const Footer = () => {
           </Typography>
         </Grid>
         <Grid>
-          <FormControl size="small">
-            <Select
-              variant="outlined"
-              value={language}
-              onChange={(e) => onLanguageChange(e.target.value)}
-            >
-              {Object.entries(langs).map(([key, lang]) => (
-                <MenuItem value={key} key={key}>
-                  {lang}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+          <LanguageSwitch popDirection="top" />
         </Grid>
       </Grid>
-    </StyledFooter>
+    </Stack>
   );
 };
 

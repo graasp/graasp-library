@@ -1,1 +1,1 @@
-yarn lint && yarn build
+pnpm check && pnpm build
