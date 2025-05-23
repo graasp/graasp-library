@@ -188,7 +188,7 @@ export function SummaryHeader({
             id={SUMMARY_TAGS_CONTAINER_ID}
             direction="row"
             flexWrap="wrap"
-            spacing={1}
+            gap={1}
           >
             {tags.map(({ name: text, category }) => (
               <ChipLink
