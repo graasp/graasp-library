@@ -10,7 +10,30 @@ test.describe('Home page', () => {
     // navigate to home page
     await page.goto('/');
   });
+  test('App Header', async ({ page }) => {
+    await expect(page.getByRole('link', { name: 'Graasp' })).toBeVisible();
+    await expect(
+      page.getByRole('link', { name: 'Library', exact: true }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole('link', { name: 'Search', exact: true }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole('link', { name: 'OER', exact: true }),
+    ).toBeVisible();
+  });
+  test('Language Switcher', async ({ page }) => {
+    await page
+      .getByRole('banner')
+      .getByRole('button', { name: 'language switch' })
+      .click();
+    await page.getByRole('menuitem', { name: 'Français' }).click();
 
+    // The title should have changed to display the french version
+    await expect(
+      page.getByRole('heading', { name: 'Bibliothèque Graasp' }),
+    ).toBeVisible();
+  });
   test('Header information', async ({ page }) => {
     // title
     const title = page.getByRole('heading', {

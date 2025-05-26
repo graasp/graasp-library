@@ -102,7 +102,7 @@ export function HomeHeader() {
           justifyContent="space-between"
           alignItems="end"
         >
-          <Box data-testId="popularSearches">
+          <Box data-testid="popularSearches">
             <Typography color="white" variant="h6" gutterBottom>
               {m.HOME_POPULAR_SEARCHES_TITLE()}
             </Typography>

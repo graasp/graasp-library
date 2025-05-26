@@ -6,7 +6,11 @@ import type { MenuItemProps } from '@mui/material';
 
 import { ThumbnailSize } from '@graasp/sdk';
 
-import { useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
+import {
+  useQuery,
+  useQueryClient,
+  useSuspenseQuery,
+} from '@tanstack/react-query';
 import { createLink, useLoaderData } from '@tanstack/react-router';
 import type { LinkComponent } from '@tanstack/react-router';
 
@@ -39,7 +43,7 @@ export function SuspendedUserAvatar() {
     ...getCurrentAccountOptions(),
     retry: 0,
   });
-  const { data: avatarUrl } = useSuspenseQuery({
+  const { data: avatarUrl } = useQuery({
     ...downloadAvatarOptions({
       path: { id: currentMember?.id ?? '', size: ThumbnailSize.Small },
     }),

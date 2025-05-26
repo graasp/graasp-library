@@ -27,7 +27,7 @@ export function LanguageSwitch({
 
   return (
     <>
-      <IconButton onClick={handleClick}>
+      <IconButton onClick={handleClick} aria-label="language switch">
         <LanguagesIcon color={iconColor} />
       </IconButton>
       <Menu
