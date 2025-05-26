@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import useDebounce from '~/hooks/useDebounce';
+import { useDebounce } from '~/hooks/useDebounce';
 import { GetFacetsForNameData } from '~/openapi/client';
 import { getFacetsForNameOptions } from '~/openapi/client/@tanstack/react-query.gen';
 

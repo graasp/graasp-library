@@ -26,7 +26,7 @@ import {
   ALL_COLLECTIONS_GRID_ID,
   SEARCH_ERROR_MESSAGE_ID,
 } from '~/config/selectors';
-import useDebounce from '~/hooks/useDebounce';
+import { useDebounce } from '~/hooks/useDebounce';
 import { collectionSearchInfiniteOptions } from '~/openapi/client/@tanstack/react-query.gen';
 import { m } from '~/paraglide/messages';
 import { locales } from '~/paraglide/runtime';

@@ -223,6 +223,9 @@ import type {
   GetFacetsForNameData,
   GetFacetsForNameError,
   GetFacetsForNameResponse,
+  GetFeaturedCollectionsData,
+  GetFeaturedCollectionsError,
+  GetFeaturedCollectionsResponse,
   GetFlagTypesData,
   GetFlagTypesError,
   GetFlagTypesResponse,
@@ -1641,6 +1644,23 @@ export const getFacetsForName = <ThrowOnError extends boolean = false>(
       'Content-Type': 'application/json',
       ...options?.headers,
     },
+  });
+};
+
+/**
+ * Get featured collections
+ * Get collections that we want to feature on the library home page.
+ */
+export const getFeaturedCollections = <ThrowOnError extends boolean = false>(
+  options?: Options<GetFeaturedCollectionsData, ThrowOnError>,
+) => {
+  return (options?.client ?? _heyApiClient).get<
+    GetFeaturedCollectionsResponse,
+    GetFeaturedCollectionsError,
+    ThrowOnError
+  >({
+    url: '/items/collections/featured',
+    ...options,
   });
 };
 

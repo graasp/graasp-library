@@ -5,11 +5,10 @@ import { createFileRoute } from '@tanstack/react-router';
 
 import { HighlightCollectionSection } from '~/components/collection/HighlightCollectionSection';
 import { DiscoverButton } from '~/components/common/DiscoverButton';
-import HomeHeader from '~/components/layout/HomeHeader';
+import { HomeHeader } from '~/components/layout/HomeHeader';
 import StyledBackgroundContainer from '~/components/layout/StyledBackgroundContainer';
 import { CollectionItem } from '~/components/ui/CollectionItem';
 import { HOMEPAGE_NB_ELEMENTS_TO_SHOW } from '~/config/constants';
-import { GRAASPER_ID } from '~/config/env';
 import {
   GRAASPER_COLLECTIONS_GRID_ID,
   GRAASP_SELECTION_TITLE_ID,
@@ -17,7 +16,7 @@ import {
   RECENT_PUBLICATIONS_TITLE_ID,
 } from '~/config/selectors';
 import {
-  collectionSearchOptions,
+  getFeaturedCollectionsOptions,
   getMostLikedCollectionsOptions,
   getMostRecentCollectionsOptions,
 } from '~/openapi/client/@tanstack/react-query.gen';
@@ -68,8 +67,8 @@ function RouteComponent() {
 
 function GraasperCollections() {
   const { data } = useSuspenseQuery(
-    collectionSearchOptions({
-      body: { creatorId: GRAASPER_ID },
+    getFeaturedCollectionsOptions({
+      query: { limit: HOMEPAGE_NB_ELEMENTS_TO_SHOW },
     }),
   );
   return data.hits.map((collection) => (

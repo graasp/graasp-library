@@ -2581,6 +2581,41 @@ export type GetFacetsForNameResponses = {
 export type GetFacetsForNameResponse =
   GetFacetsForNameResponses[keyof GetFacetsForNameResponses];
 
+export type GetFeaturedCollectionsData = {
+  body?: never;
+  path?: never;
+  query?: {
+    limit?: number;
+  };
+  url: '/items/collections/featured';
+};
+
+export type GetFeaturedCollectionsErrors = {
+  /**
+   * Error object with useful information about the unexpected behavior that occured
+   */
+  '4XX': _Error;
+};
+
+export type GetFeaturedCollectionsError =
+  GetFeaturedCollectionsErrors[keyof GetFeaturedCollectionsErrors];
+
+export type GetFeaturedCollectionsResponses = {
+  /**
+   * Default Response
+   */
+  200: {
+    totalHits?: number;
+    estimatedTotalHits?: number;
+    processingTimeMs: number;
+    query: string;
+    hits: Array<SearchHit>;
+  };
+};
+
+export type GetFeaturedCollectionsResponse =
+  GetFeaturedCollectionsResponses[keyof GetFeaturedCollectionsResponses];
+
 export type GetMostLikedCollectionsData = {
   body?: never;
   path?: never;

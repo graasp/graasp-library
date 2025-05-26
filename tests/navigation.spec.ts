@@ -5,9 +5,9 @@ test.use({
 });
 
 test('Simple user flow', async ({ page }) => {
-  await page.routeFromHAR('./tests/fixtures/api_mock.har', {
+  await page.routeFromHAR('./tests/fixtures/nav.har.zip', {
     url: 'http://localhost:3000/**',
-    update: false,
+    update: Boolean(process.env.UPDATE_HAR ?? false),
   });
 
   await page.goto('/');
@@ -24,16 +24,20 @@ test('Simple user flow', async ({ page }) => {
   // expect title of the page
   await expect(
     page.getByRole('heading', { name: 'Search among' }),
-  ).toContainText('Search among more than 9 resources');
+  ).toContainText('Search among 991 resources');
 
   // expect first collection to have card title text
-  await expect(page.getByRole('link', { name: 'App tests' })).toBeVisible();
+  await expect(
+    page.locator('a').filter({ hasText: 'Virus SARS' }),
+  ).toBeVisible();
 
   // navigate to collection page
-  await page.getByRole('link', { name: 'App tests' }).click();
+  await page.locator('a').filter({ hasText: 'Virus SARS' }).click();
 
   // expect collection title to be displayed
-  await expect(page.locator('#summaryTitle')).toContainText('App tests');
+  await expect(page.locator('#summaryTitle')).toContainText(
+    'Virus SARS-CoV-2, observation et représentation de',
+  );
 
   // go back
   await page.getByRole('button', { name: 'Back' }).click();
@@ -47,9 +51,9 @@ test('Simple user flow', async ({ page }) => {
 
   await expect(
     page.getByRole('heading', { name: 'Search among' }),
-  ).toContainText('Search among 1 resource');
+  ).toContainText('Search among 209 resource');
 
   await expect(
-    page.getByRole('link', { name: 'dsnfadsnfgmasdfg (3)' }),
+    page.getByRole('heading', { name: 'Proyecto periódico escolar' }),
   ).toBeVisible();
 });

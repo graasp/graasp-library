@@ -86,6 +86,7 @@ import {
   getDescendantItems,
   getEtherpadFromItem,
   getFacetsForName,
+  getFeaturedCollections,
   getFlagTypes,
   getGeolocationByItem,
   getInvitationById,
@@ -354,6 +355,7 @@ import type {
   GetFacetsForNameData,
   GetFacetsForNameError,
   GetFacetsForNameResponse,
+  GetFeaturedCollectionsData,
   GetFlagTypesData,
   GetGeolocationByItemData,
   GetInvitationByIdData,
@@ -2548,6 +2550,27 @@ export const getFacetsForNameMutation = (
     },
   };
   return mutationOptions;
+};
+
+export const getFeaturedCollectionsQueryKey = (
+  options?: Options<GetFeaturedCollectionsData>,
+) => createQueryKey('getFeaturedCollections', options);
+
+export const getFeaturedCollectionsOptions = (
+  options?: Options<GetFeaturedCollectionsData>,
+) => {
+  return queryOptions({
+    queryFn: async ({ queryKey, signal }) => {
+      const { data } = await getFeaturedCollections({
+        ...options,
+        ...queryKey[0],
+        signal,
+        throwOnError: true,
+      });
+      return data;
+    },
+    queryKey: getFeaturedCollectionsQueryKey(options),
+  });
 };
 
 export const getMostLikedCollectionsQueryKey = (
