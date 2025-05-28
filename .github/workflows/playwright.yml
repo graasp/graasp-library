@@ -21,9 +21,11 @@ jobs:
       - name: Run Playwright tests
         run: pnpm exec playwright test
         env:
+          CI: true
           VITE_PORT: 3002
           VITE_API_HOST: http://localhost:3000
           VITE_CLIENT_HOST: http://localhost:3114
+          VITE_CURRENT_HOST: http://localhost:3002
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
