@@ -14,7 +14,7 @@ import {
 import { createLink, useLoaderData } from '@tanstack/react-router';
 import type { LinkComponent } from '@tanstack/react-router';
 
-import { getLogout } from '~/openapi/client';
+import { getCurrentAccount, getLogout } from '~/openapi/client';
 import {
   downloadAvatarOptions,
   getCurrentAccountOptions,
@@ -28,11 +28,11 @@ import Avatar from '../ui/Avatar/Avatar';
 // User avatar component that uses suspense for loading
 export function UserAvatar() {
   return (
-    <Suspense fallback={<LoadingUserAvatar />}>
-      <ErrorBoundary fallback={<LoggedOutUser />}>
+    <ErrorBoundary fallback={<LoggedOutUser />}>
+      <Suspense fallback={<LoadingUserAvatar />}>
         <SuspendedUserAvatar />
-      </ErrorBoundary>
-    </Suspense>
+      </Suspense>
+    </ErrorBoundary>
   );
 }
 
@@ -41,62 +41,84 @@ export function SuspendedUserAvatar() {
   const { clientOrigin } = useLoaderData({ from: '__root__' });
   const { data: currentMember } = useSuspenseQuery({
     ...getCurrentAccountOptions(),
+    queryFn: async ({ queryKey, signal }) => {
+      const { data } = await getCurrentAccount({
+        ...queryKey[0],
+        signal,
+        throwOnError: false,
+      });
+      return data ?? null;
+    },
     retry: 0,
   });
+
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+  if (currentMember) {
+    const open = Boolean(anchorEl);
+    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+      setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
+    const homeLink = `${clientOrigin}/home`;
+    const settingsLink = `${clientOrigin}/account/settings`;
+
+    return (
+      <>
+        <IconButton onClick={handleClick}>
+          <AvatarDisplay currentUserId={currentMember.id} />
+        </IconButton>
+        <Menu
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          onClick={handleClose}
+          transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+          anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+        >
+          <MenuItemLink to={homeLink}>{m.USER_MENU_HOME()}</MenuItemLink>
+          <MenuItemLink to={settingsLink}>
+            {m.USER_MENU_SETTINGS()}
+          </MenuItemLink>
+          <Divider flexItem />
+          <MenuItem
+            onClick={async () => {
+              await getLogout();
+              // force-reload of queries
+              queryClient.resetQueries();
+            }}
+          >
+            {m.LOG_OUT()}
+          </MenuItem>
+        </Menu>
+      </>
+    );
+  }
+
+  //default to logged out user if we can't fetch
+  return <LoggedOutUser />;
+}
+
+function AvatarDisplay({ currentUserId }: Readonly<{ currentUserId: string }>) {
   const { data: avatarUrl } = useQuery({
     ...downloadAvatarOptions({
-      path: { id: currentMember?.id ?? '', size: ThumbnailSize.Small },
+      path: { id: currentUserId, size: ThumbnailSize.Small },
     }),
     retry: 0,
   });
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-  const homeLink = `${clientOrigin}/home`;
-  const settingsLink = `${clientOrigin}/account/settings`;
-
-  return (
-    <>
-      <IconButton onClick={handleClick}>
-        <Avatar alt={currentMember?.name ?? ''} url={avatarUrl} />
-      </IconButton>
-      <Menu
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        // onClick={handleClose}
-        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-      >
-        <MenuItemLink to={homeLink}>{m.USER_MENU_HOME()}</MenuItemLink>
-        <MenuItemLink to={settingsLink}>{m.USER_MENU_SETTINGS()}</MenuItemLink>
-        <Divider flexItem />
-        <MenuItem
-          onClick={async () => {
-            await getLogout();
-            // force-reload of queries
-            queryClient.resetQueries();
-          }}
-        >
-          {m.LOG_OUT()}
-        </MenuItem>
-      </Menu>
-    </>
-  );
+  return <Avatar alt={currentUserId} url={avatarUrl} />;
 }
 
 export function LoadingUserAvatar() {
   return <Skeleton variant="circular" sx={{ m: 1 }} width={40} height={40} />;
 }
 
-export function LoggedOutUser() {
+function LoggedOutUser() {
   const { clientOrigin } = useLoaderData({ from: '__root__' });
-  const { data: currentLocation } = useCurrentLocation();
+  const currentLocation = useCurrentLocation();
+
   const logInLink = `${clientOrigin}/auth/login?url=${
     // need to url encode the return url
     encodeURIComponent(currentLocation ?? '')

@@ -20,8 +20,8 @@ import {
   getRootPublishedItems,
 } from './utils';
 
-const API_HOST = Cypress.env('API_HOST');
-const CLIENT_HOST = Cypress.env('CLIENT_HOST');
+const API_HOST = Cypress.env('VITE_API_HOST');
+const CLIENT_HOST = Cypress.env('VITE_CLIENT_HOST');
 
 const checkMembership = ({
   item,
@@ -85,14 +85,42 @@ export const mockGetRecentCollections = (
   ).as('getRecentCollections');
 };
 
+export const mockGetMostLikedCollections = (
+  mostLikedCollections: MockItem[],
+): void => {
+  cy.intercept(
+    {
+      method: HttpMethod.Get,
+      pathname: `/items/collections/liked`,
+    },
+    ({ reply }) => {
+      reply({ hits: mostLikedCollections });
+    },
+  ).as('getMostLikedCollections');
+};
+
+export const mockGetFeaturedCollections = (
+  featuredCollections: MockItem[],
+): void => {
+  cy.intercept(
+    {
+      method: HttpMethod.Get,
+      pathname: `/items/collections/featured`,
+    },
+    ({ reply }) => {
+      reply({ hits: featuredCollections });
+    },
+  ).as('getFeaturedCollections');
+};
+
 export const mockGetCurrentMember = (
   currentMember?: MockMember,
   shouldThrowError = false,
 ) => {
   cy.intercept(
     {
-      method: DEFAULT_GET.method,
-      url: `${API_HOST}/members/current`,
+      method: HttpMethod.Get,
+      url: `/members/current`,
     },
     ({ reply }) => {
       if (shouldThrowError) {
@@ -114,10 +142,8 @@ export const mockGetAvatarUrl = (
 ) => {
   cy.intercept(
     {
-      method: DEFAULT_GET.method,
-      url: new RegExp(
-        `${API_HOST}/members/${ID_FORMAT}/avatar/small\\?replyUrl\\=true`,
-      ),
+      method: HttpMethod.Get,
+      url: new RegExp(`/members/${ID_FORMAT}/avatar/small\\?replyUrl\\=true`),
     },
     ({ reply, url }) => {
       if (shouldThrowError) {
@@ -142,8 +168,8 @@ export const mockGetItem = (
 ) => {
   cy.intercept(
     {
-      method: DEFAULT_GET.method,
-      url: new RegExp(`${API_HOST}/items/${ID_FORMAT}$`),
+      method: HttpMethod.Get,
+      url: new RegExp(`/items/${ID_FORMAT}$`),
     },
     ({ url, reply }) => {
       const itemId = url.split('/').at(-1);
@@ -180,8 +206,8 @@ export const mockGetItemThumbnailUrl = (
 ) => {
   cy.intercept(
     {
-      method: DEFAULT_GET.method,
-      url: new RegExp(`${API_HOST}/items/${ID_FORMAT}/thumbnails`),
+      method: HttpMethod.Get,
+      url: new RegExp(`/items/${ID_FORMAT}/thumbnails`),
     },
     ({ reply, url }) => {
       if (shouldThrowError) {
@@ -377,7 +403,7 @@ export const mockSearch = (
   cy.intercept(
     {
       method: HttpMethod.Post,
-      url: new RegExp(`${API_HOST}/items/collections/search`),
+      pathname: `/items/collections/search`,
     },
     ({ reply, body }) => {
       if (shouldThrowError) {
@@ -404,7 +430,7 @@ export const mockGetLikedItems = (
   cy.intercept(
     {
       method: DEFAULT_GET.method,
-      url: new RegExp(`${API_HOST}/items/liked`),
+      pathname: `/items/liked`,
     },
     ({ reply, url }) => {
       if (shouldThrowError) {

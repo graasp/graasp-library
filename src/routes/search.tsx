@@ -31,7 +31,7 @@ import { collectionSearchInfiniteOptions } from '~/openapi/client/@tanstack/reac
 import { m } from '~/paraglide/messages';
 import { locales } from '~/paraglide/runtime';
 
-const PAGE_SIZE = 3;
+const PAGE_SIZE = 24; // multiple of 3 and 2
 
 const schema = z.object({
   s: fallback(z.string().optional(), '').default(''),
@@ -39,7 +39,6 @@ const schema = z.object({
   levels: fallback(z.array(z.string()).optional(), []).default([]),
   disciplines: fallback(z.array(z.string()).optional(), []).default([]),
   resourceTypes: fallback(z.array(z.string()).optional(), []).default([]),
-  page: fallback(z.number().optional(), 1).default(1),
   rootOnly: fallback(z.boolean().optional(), true).default(true),
 });
 
@@ -60,6 +59,7 @@ function RouteComponent() {
     isFetching,
     isFetchingNextPage,
     error,
+    fetchNextPage,
   } = useInfiniteQuery({
     ...collectionSearchInfiniteOptions({
       body: {
@@ -70,7 +70,6 @@ function RouteComponent() {
           'resource-type': search.resourceTypes,
         },
         langs: search.langs,
-        page: search.page,
         isPublishedRoot: rootOnly,
         limit: PAGE_SIZE,
       },
@@ -96,7 +95,12 @@ function RouteComponent() {
   return (
     <Container maxWidth="xl" sx={{ mb: 5, py: 5 }}>
       <Stack gap={3}>
-        <Typography component="h1" variant="h4" width="100%">
+        <Typography
+          id="allCollectionsTitle"
+          component="h1"
+          variant="h4"
+          width="100%"
+        >
           {rootOnly
             ? m.SEARCH_PAGE_TITLE({ count: hitsNumber })
             : m.SEARCH_PAGE_TITLE_CONTENT({ count: hitsNumber })}
@@ -154,10 +158,7 @@ function RouteComponent() {
         ) && (
           <Button
             onClick={() => {
-              navigate({
-                to: '.',
-                search: (prev) => ({ ...prev, page: prev.page + 1 }),
-              });
+              fetchNextPage();
             }}
             loading={isFetchingNextPage}
           >

@@ -25,7 +25,7 @@ import { Header } from '~/components/Header';
 import ErrorComponent from '~/components/common/Error';
 import Footer from '~/components/layout/Footer';
 import { createGraaspTheme } from '~/components/ui/theme';
-import { getClientOriginFn } from '~/lib/routes';
+import { getClientOriginFn, getCurrentLocationFn } from '~/lib/routes';
 import { getLocale } from '~/paraglide/runtime';
 import { getDirectionFromLocale } from '~/utils/locale';
 
@@ -44,7 +44,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     }),
     loader: async () => {
       const clientOrigin = await getClientOriginFn();
-      return { clientOrigin };
+      const currentLocation = await getCurrentLocationFn();
+      return { clientOrigin, currentLocation };
     },
     component: RootComponent,
     errorComponent: ErrorComponent,

@@ -145,6 +145,7 @@ function HomeSearchBox(): JSX.Element {
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
+    setIsSearchFocused(true);
     const newValue = event.target.value;
     setSearchInput(newValue.trim());
   };

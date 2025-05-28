@@ -58,25 +58,21 @@ buildPublicAndPrivateEnvironments(PUBLISHED_ITEMS).forEach((environment) => {
       cy.get(`#${ALL_COLLECTIONS_TITLE_ID}`).should('be.visible');
 
       // filter header
-      cy.get(`#${buildSearchFilterTagCategoryId(TagCategory.Level)}`).should(
+      cy.get(`#${buildSearchFilterTagCategoryId('levels')}`).should(
         'contain.text',
         'Level',
         // FIXME: find a way to make translations work
         // i18n.t(TagCategory.Level, { count: 2, ns: namespaces.enums }),
       );
-      cy.get(
-        `#${buildSearchFilterTagCategoryId(TagCategory.Discipline)}`,
-      ).should(
+      cy.get(`#${buildSearchFilterTagCategoryId('disciplines')}`).should(
         'contain.text',
         'Discipline',
         // FIXME: find a way to make translations work
         // i18n.t(TagCategory.Discipline, { count: 2, ns: namespaces.enums }),
       );
-      cy.get(
-        `#${buildSearchFilterTagCategoryId(TagCategory.ResourceType)}`,
-      ).should(
+      cy.get(`#${buildSearchFilterTagCategoryId('resourceTypes')}`).should(
         'contain.text',
-        'Resource type',
+        'Resource Types',
         // FIXME: find a way to make translations work
         // i18n.t(TagCategory.ResourceType, { count: 2, ns: namespaces.enums }),
       );

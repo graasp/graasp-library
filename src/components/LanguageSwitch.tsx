@@ -25,6 +25,8 @@ export function LanguageSwitch({
     setAnchorEl(null);
   };
 
+  const currentLocale = getLocale();
+
   return (
     <>
       <IconButton onClick={handleClick} aria-label="language switch">
@@ -55,7 +57,7 @@ export function LanguageSwitch({
           <MenuItem
             key={key}
             onClick={() => setLocale(key)}
-            selected={key === getLocale()}
+            selected={key === currentLocale}
           >
             {Langs[key]}
           </MenuItem>

@@ -5,7 +5,7 @@ import { LanguageSwitch } from '../LanguageSwitch';
 
 const Footer = () => {
   return (
-    <Stack m={2}>
+    <Stack component="footer" m={2}>
       <Grid container justifyContent="space-between" alignItems="center">
         <Grid>
           <Typography variant="subtitle2">
@@ -13,7 +13,7 @@ const Footer = () => {
             {`${new Date().getFullYear()} Graasp Association`}
           </Typography>
         </Grid>
-        <Grid>
+        <Grid data-testid="footer">
           <LanguageSwitch popDirection="top" />
         </Grid>
       </Grid>

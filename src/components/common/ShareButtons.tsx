@@ -3,25 +3,18 @@ import type { JSX } from 'react';
 import { Facebook, Twitter } from '@mui/icons-material';
 import { IconButton, IconProps, Tooltip } from '@mui/material';
 
-import { useQuery } from '@tanstack/react-query';
-import { createIsomorphicFn } from '@tanstack/react-start';
+import { useLoaderData, useLocation } from '@tanstack/react-router';
 import truncate from 'lodash.truncate';
 import { MailIcon } from 'lucide-react';
 
 import { m } from '~/paraglide/messages';
 import { removeTagsFromString } from '~/utils/text';
 
-export const currentLocationFn = createIsomorphicFn()
-  .client(async () => {
-    return `${window.location.href}`;
-  })
-  .server(async () => {
-    return '';
-  });
-
-export const useCurrentLocation = () =>
-  useQuery({ queryKey: ['utils', 'location'], queryFn: currentLocationFn });
-
+export function useCurrentLocation() {
+  const { currentLocation } = useLoaderData({ from: '__root__' });
+  const { pathname } = useLocation();
+  return `${currentLocation}${pathname}`;
+}
 const ShareButton = ({
   children,
   showBorder = false,
@@ -57,7 +50,7 @@ export function TwitterButton({
   message,
   showBorder = false,
 }: Readonly<Props>): JSX.Element {
-  const { data: currentLocation } = useCurrentLocation();
+  const currentLocation = useCurrentLocation();
 
   const msg = truncate(`${message} ${currentLocation}`, {
     length: TWITTER_MESSAGE_MAX_LENGTH,
@@ -85,7 +78,7 @@ export function FacebookButton({
   iconSize: IconProps['fontSize'];
   showBorder?: boolean;
 }>): JSX.Element {
-  const { data: currentLocation } = useCurrentLocation();
+  const currentLocation = useCurrentLocation();
 
   return (
     <Tooltip title={m.SHARE_FACEBOOK_TOOLTIP()}>
@@ -115,7 +108,7 @@ export function EmailButton({
   description?: string | null;
   showBorder?: boolean;
 }>): JSX.Element {
-  const { data: currentLocation } = useCurrentLocation();
+  const currentLocation = useCurrentLocation();
 
   const parsedDescription = removeTagsFromString(description);
 

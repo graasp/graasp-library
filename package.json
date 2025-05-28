@@ -2,7 +2,6 @@
   "name": "graasp-library",
   "version": "1.16.0",
   "license": "AGPL-3.0-only",
-  "sideEffects": false,
   "type": "module",
   "scripts": {
     "dev": "vinxi dev --port 3002",
