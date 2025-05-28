@@ -1,31 +1,22 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import type { JSX } from 'react';
 
-import { Box, Button, Skeleton, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 
-import { useLibraryTranslation } from '../../../config/i18n';
-import LIBRARY from '../../../langs/constants';
+import { m } from '~/paraglide/messages';
+
 import { CollapsibleText } from '../../common/CollapsibleText/CollapsibleText';
 
 type DescriptionProps = Readonly<{
-  isLoading: boolean;
   description: string | null;
 }>;
 
-export function Description({
-  description,
-  isLoading,
-}: DescriptionProps): JSX.Element {
-  const { t } = useLibraryTranslation();
-
+export function Description({ description }: DescriptionProps): JSX.Element {
   const [isCollapsedDescription, setIsCollapsedDescription] = useState(true);
 
   const handleShowMoreButton = () => {
     setIsCollapsedDescription((prev) => !prev);
   };
-
-  if (isLoading) {
-    return <Skeleton />;
-  }
 
   if (description) {
     // Case distinction to allow the show more button to be rendered inline.
@@ -43,8 +34,8 @@ export function Description({
           onClick={handleShowMoreButton}
         >
           {isCollapsedDescription
-            ? t(LIBRARY.SUMMARY_DESCRIPTION_SHOW_MORE)
-            : t(LIBRARY.SUMMARY_DESCRIPTION_SHOW_LESS)}
+            ? m.SUMMARY_DESCRIPTION_SHOW_MORE()
+            : m.SUMMARY_DESCRIPTION_SHOW_LESS()}
         </Button>
       </Box>
     );
@@ -52,7 +43,7 @@ export function Description({
 
   return (
     <Typography sx={{ fontStyle: 'italic' }} variant="body2">
-      {t(LIBRARY.COLLECTION_EMPTY_DESCRIPTION_TEXT)}
+      {m.COLLECTION_EMPTY_DESCRIPTION_TEXT()}
     </Typography>
   );
 }

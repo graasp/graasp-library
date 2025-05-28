@@ -1,34 +1,33 @@
 import { Stack, Typography } from '@mui/material';
 
 import { ThumbnailSize } from '@graasp/sdk';
-import { Avatar, useMobileView } from '@graasp/ui';
 
 import { useQuery } from '@tanstack/react-query';
-import Link from 'next/link';
+import { Link } from '@tanstack/react-router';
+
+import Avatar from '~/components/ui/Avatar/Avatar';
+import { useMobileView } from '~/components/ui/hooks/useMobileView';
 
 import { downloadAvatarOptions } from '../../../openapi/client/@tanstack/react-query.gen';
 
 export function MemberAvatar({
   name,
-  link,
   id,
 }: Readonly<{
   name: string;
-  link: string;
   id: string;
 }>) {
   const { isMobile } = useMobileView();
   const { data: authorAvatarUrl, isPending: isPendingAvatar } = useQuery(
     downloadAvatarOptions({
       path: { id, size: ThumbnailSize.Small },
-      query: { replyUrl: true },
     }),
   );
-
   return (
     <Link
       title={name}
-      href={link}
+      to="/members/$memberId"
+      params={{ memberId: id }}
       style={{
         textDecoration: 'unset',
         color: 'unset',
@@ -49,7 +48,7 @@ export function MemberAvatar({
           maxHeight={24}
           maxWidth={24}
           // use broken path to show first letter because we use ui avatar wrapper
-          url={authorAvatarUrl?.length ? authorAvatarUrl : 'https://broken'}
+          url={authorAvatarUrl}
           isLoading={isPendingAvatar}
         />
         {!isMobile && (

@@ -1,8 +1,4 @@
-'use client';
-
-import { useContext, useEffect } from 'react';
-
-import { Box, Skeleton } from '@mui/material';
+import { Box } from '@mui/material';
 
 import {
   AccountType,
@@ -10,44 +6,27 @@ import {
   PermissionLevelCompare,
 } from '@graasp/sdk';
 
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { validate } from 'uuid';
+import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
+
+import { PackedItem } from '~/openapi/client';
 
 import {
-  ERROR_INVALID_COLLECTION_ID_CODE,
-  ERROR_UNEXPECTED_ERROR_CODE,
-} from '../../config/messages';
-import {
   getCollectionInformationsOptions,
-  postActionMutation,
+  getCurrentAccountOptions,
 } from '../../openapi/client/@tanstack/react-query.gen';
-import { QueryClientContext } from '../QueryClientContext';
-import Error from '../common/Error';
-import MainWrapper from '../layout/MainWrapper';
 import UnpublishedItemAlert from './UnpublishedItemAlert';
 import Summary from './summary/Summary';
 
 type Props = {
-  id: string;
+  collection: PackedItem;
 };
-const Collection = ({ id }: Props) => {
-  const { hooks } = useContext(QueryClientContext);
-  const { data: collection, isLoading: isLoadingItem } = hooks.useItem(id);
-  const { data: currentMember } = hooks.useCurrentMember();
+export function Collection({ collection }: Readonly<Props>) {
+  // FIXME: once we figure out how to use auth, fetch current member
+  const { data: currentMember } = useQuery(getCurrentAccountOptions());
   // get item published
-  const {
-    data: itemPublishEntry,
-    isLoading: isLoadingPublishedEntry,
-    isError: isErrorPublishedEntry,
-  } = useQuery(getCollectionInformationsOptions({ path: { itemId: id } }));
-
-  const { mutate: postView } = useMutation(postActionMutation());
-
-  useEffect(() => {
-    if (id) {
-      postView({ path: { id }, body: { type: 'collection-view' } });
-    }
-  }, [id]);
+  const { data: itemPublishEntry } = useSuspenseQuery(
+    getCollectionInformationsOptions({ path: { itemId: collection.id } }),
+  );
 
   const canRead = collection?.permission
     ? PermissionLevelCompare.gte(collection.permission, PermissionLevel.Read)
@@ -59,65 +38,33 @@ const Collection = ({ id }: Props) => {
       collection.creator?.id === currentMember.id) ||
     false;
 
-  if (!id || !validate(id)) {
-    return (
-      <Box id={id} p={5}>
-        <Error code={ERROR_INVALID_COLLECTION_ID_CODE} />
-      </Box>
-    );
-  }
-
   if (currentMember?.type === AccountType.Guest) {
     return null;
   }
-  if (collection) {
-    return (
-      <>
-        <UnpublishedItemAlert
-          itemId={id}
-          canRead={canRead}
-          canPublish={canPublish}
-          isPublished={
-            isLoadingPublishedEntry ||
-            (Boolean(itemPublishEntry) && !isErrorPublishedEntry)
-          }
-          currentMember={currentMember}
-        />
-        <Box
-          id={id}
-          px={{
-            xs: 0,
-            sm: 2,
-            md: 5,
-          }}
-          py={5}
-        >
-          <Summary
-            collection={collection}
-            publishedRootItem={itemPublishEntry?.item}
-            isLoading={isLoadingItem}
-            totalViews={itemPublishEntry?.totalViews ?? 0}
-          />
-        </Box>
-      </>
-    );
-  }
-
-  if (isLoadingItem) {
-    return <Skeleton />;
-  }
-
   return (
-    <Box id={id} p={5}>
-      <Error code={ERROR_UNEXPECTED_ERROR_CODE} />
-    </Box>
+    <>
+      <UnpublishedItemAlert
+        itemId={collection.id}
+        canRead={canRead}
+        canPublish={canPublish}
+        isPublished={Boolean(itemPublishEntry)}
+        currentMember={currentMember}
+      />
+      <Box
+        id={collection.id}
+        px={{
+          xs: 1,
+          sm: 2,
+          md: 5,
+        }}
+        py={{ xs: 2, md: 5 }}
+      >
+        <Summary
+          collection={collection}
+          publishedRootItem={itemPublishEntry?.item}
+          totalViews={itemPublishEntry?.totalViews ?? 0}
+        />
+      </Box>
+    </>
   );
-};
-
-const CollectionPageWrapper = (props: Props) => (
-  <MainWrapper>
-    <Collection {...props} />
-  </MainWrapper>
-);
-
-export default CollectionPageWrapper;
+}

@@ -1,14 +1,12 @@
-import AvatarGroup from '@mui/lab/AvatarGroup';
-import { Stack, Tooltip, Typography } from '@mui/material';
+import { AvatarGroup, Stack, Tooltip, Typography } from '@mui/material';
 
 import { Account } from '@graasp/sdk';
 
-import Link from 'next/link';
+import { Link } from '@tanstack/react-router';
 
-import { useLibraryTranslation } from '../../config/i18n';
-import { buildMemberRoute } from '../../config/routes';
+import { m } from '~/paraglide/messages';
+
 import { buildContributorId } from '../../config/selectors';
-import LIBRARY from '../../langs/constants';
 import MemberAvatar from '../layout/MemberAvatar';
 
 type Props = {
@@ -17,8 +15,6 @@ type Props = {
 };
 
 const Contributors = ({ contributors, displayContributors }: Props) => {
-  const { t } = useLibraryTranslation();
-
   if (!contributors?.length) {
     return null;
   }
@@ -30,14 +26,14 @@ const Contributors = ({ contributors, displayContributors }: Props) => {
   return (
     <Stack direction="row" alignItems="center">
       <Typography variant="subtitle2" mx={1} color="primary" fontWeight="bold">
-        {t(LIBRARY.CONTRIBUTORS_TITLE)}
+        {m.CONTRIBUTORS_TITLE()}
       </Typography>
       <AvatarGroup max={8}>
         {contributors.map((contributor) => {
           const { id, name: contributorName } = contributor;
           return (
             <Tooltip title={contributorName} key={id} arrow>
-              <Link href={buildMemberRoute(id)}>
+              <Link to="/members/$memberId" params={{ memberId: id }}>
                 <MemberAvatar id={buildContributorId(id)} memberId={id} />
               </Link>
             </Tooltip>

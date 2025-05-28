@@ -1,9 +1,11 @@
+import type { JSX } from 'react';
+
 import { List, ListItem, Stack } from '@mui/material';
 
 import { CCLicenseAdaptions } from '@graasp/sdk';
 
-import { useLibraryTranslation } from '../../../config/i18n';
-import LIBRARY from '../../../langs/constants';
+import { m } from '~/paraglide/messages';
+
 import CreativeCommons from '../../common/CreativeCommons';
 
 type Props = {
@@ -23,11 +25,9 @@ const VideoWithCC = ({
   duration,
   edition,
 }: Props): JSX.Element => {
-  const { t } = useLibraryTranslation();
-
   return (
     <Stack
-      p={3}
+      p={{ xs: 1, sm: 3 }}
       borderRadius={3}
       textAlign="center"
       width="fit-content"
@@ -40,38 +40,52 @@ const VideoWithCC = ({
       alignContent="center"
     >
       <iframe
-        style={{ margin: 'auto', border: 'none', display: 'block' }}
-        width="560"
-        height="315"
+        style={{
+          margin: 'auto',
+          border: 'none',
+          display: 'block',
+          borderRadius: '8px',
+          aspectRatio: '16/9',
+        }}
+        width="100%"
         src={url}
         title={title}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowFullScreen
       />
-      <Stack direction="row" justifyContent="center" alignItems="center">
+      <Stack
+        direction={{ xs: 'column', sm: 'row' }}
+        gap={2}
+        justifyContent="center"
+        alignItems="center"
+      >
         <List dense>
           {production && (
             <ListItem>
-              <strong>
-                {t(LIBRARY.OER_INFORMATION_VIDEO_DESCRIPTION_PRODUCTION)}
-              </strong>
-              : {production}
+              <span>
+                <strong>
+                  {m.OER_INFORMATION_VIDEO_DESCRIPTION_PRODUCTION()}
+                </strong>
+                : {production}
+              </span>
             </ListItem>
           )}
           {duration && (
             <ListItem>
-              <strong>
-                {t(LIBRARY.OER_INFORMATION_VIDEO_DESCRIPTION_DURATION)}
-              </strong>
-              : {duration}
+              <span>
+                <strong>
+                  {m.OER_INFORMATION_VIDEO_DESCRIPTION_DURATION()}
+                </strong>
+                : {duration}
+              </span>
             </ListItem>
           )}
           {edition && (
             <ListItem>
-              <strong>
-                {t(LIBRARY.OER_INFORMATION_VIDEO_DESCRIPTION_EDITION)}
-              </strong>
-              : {edition}
+              <span>
+                <strong>{m.OER_INFORMATION_VIDEO_DESCRIPTION_EDITION()}</strong>
+                : {edition}
+              </span>
             </ListItem>
           )}
         </List>

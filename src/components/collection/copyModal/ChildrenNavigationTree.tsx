@@ -1,62 +1,61 @@
-import { useContext } from 'react';
+// import { useContext } from 'react';
 
-import { Alert, Box, Skeleton } from '@mui/material';
+// import { Alert, Box, Skeleton } from '@mui/material';
 
-import { ItemType } from '@graasp/sdk';
-import { NavigationElement, RowMenuProps, RowMenus } from '@graasp/ui';
+// import { ItemType } from '@graasp/sdk';
+// import { NavigationElement, RowMenuProps, RowMenus } from '@graasp/ui';
 
-import { useLibraryTranslation } from '../../../config/i18n';
-import LIBRARY from '../../../langs/constants';
-import { QueryClientContext } from '../../QueryClientContext';
+// import { m } from '~/paraglide/messages';
 
-interface ChildrenNavigationTreeProps {
-  isDisabled?: RowMenuProps['isDisabled'];
-  selectedId?: string;
-  selectedNavigationItem: NavigationElement;
-  onClick: RowMenuProps['onClick'];
-  onNavigate: RowMenuProps['onNavigate'];
-}
+// import { QueryClientContext } from '../../QueryClientContext';
 
-const ChildrenNavigationTree = ({
-  onClick,
-  selectedId,
-  selectedNavigationItem,
-  onNavigate,
-  isDisabled,
-}: ChildrenNavigationTreeProps): JSX.Element => {
-  const { t } = useLibraryTranslation();
-  const { hooks } = useContext(QueryClientContext);
-  const { data: children, isLoading } = hooks.useChildren(
-    selectedNavigationItem.id,
-    { types: [ItemType.FOLDER] },
-  );
+// interface ChildrenNavigationTreeProps {
+//   isDisabled?: RowMenuProps['isDisabled'];
+//   selectedId?: string;
+//   selectedNavigationItem: NavigationElement;
+//   onClick: RowMenuProps['onClick'];
+//   onNavigate: RowMenuProps['onNavigate'];
+// }
 
-  if (children) {
-    return (
-      <RowMenus
-        elements={children}
-        onNavigate={onNavigate}
-        selectedId={selectedId}
-        onClick={onClick}
-        isDisabled={isDisabled}
-        emptyContent={
-          <Box sx={{ color: 'darkgrey', pt: 1 }}>
-            {t(LIBRARY.COPY_MODAL_EMPTY_FOLDER)}
-          </Box>
-        }
-      />
-    );
-  }
-  if (isLoading) {
-    return (
-      <>
-        <Skeleton height={50} />
-        <Skeleton height={50} />
-        <Skeleton height={50} />
-      </>
-    );
-  }
-  return <Alert severity="error">{t(LIBRARY.UNEXPECTED_ERROR_MESSAGE)}</Alert>;
-};
+// const ChildrenNavigationTree = ({
+//   onClick,
+//   selectedId,
+//   selectedNavigationItem,
+//   onNavigate,
+//   isDisabled,
+// }: ChildrenNavigationTreeProps): JSX.Element => {
+//   const { hooks } = useContext(QueryClientContext);
+//   const { data: children, isPending } = hooks.useChildren(
+//     selectedNavigationItem.id,
+//     { types: [ItemType.FOLDER] },
+//   );
 
-export default ChildrenNavigationTree;
+//   if (children) {
+//     return (
+//       <RowMenus
+//         elements={children}
+//         onNavigate={onNavigate}
+//         selectedId={selectedId}
+//         onClick={onClick}
+//         isDisabled={isDisabled}
+//         emptyContent={
+//           <Box sx={{ color: 'darkgrey', pt: 1 }}>
+//             {m.COPY_MODAL_EMPTY_FOLDER()}
+//           </Box>
+//         }
+//       />
+//     );
+//   }
+//   if (isPending) {
+//     return (
+//       <>
+//         <Skeleton height={50} />
+//         <Skeleton height={50} />
+//         <Skeleton height={50} />
+//       </>
+//     );
+//   }
+//   return <Alert severity="error">{m.UNEXPECTED_ERROR_MESSAGE()}</Alert>;
+// };
+
+// export default ChildrenNavigationTree;

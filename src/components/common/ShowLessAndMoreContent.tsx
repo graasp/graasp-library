@@ -1,9 +1,10 @@
 import { useState } from 'react';
+import type { JSX } from 'react';
 
 import { Box, Button } from '@mui/material';
 
-import { useLibraryTranslation } from '../../config/i18n';
-import LIBRARY from '../../langs/constants';
+import { m } from '~/paraglide/messages';
+
 import { CollapsibleText } from './CollapsibleText/CollapsibleText';
 
 interface Props {
@@ -16,8 +17,6 @@ const ShowLessAndMoreContent = ({
   linesToShow = 3,
   parseHtmlOnCollapse = true,
 }: Props): JSX.Element => {
-  const { t } = useLibraryTranslation();
-
   const [isContentCollapsed, setIsContentCollapsed] = useState(true);
 
   const handleToggleButton = () => {
@@ -39,8 +38,8 @@ const ShowLessAndMoreContent = ({
           onClick={handleToggleButton}
         >
           {isContentCollapsed
-            ? t(LIBRARY.SUMMARY_DESCRIPTION_SHOW_MORE)
-            : t(LIBRARY.SUMMARY_DESCRIPTION_SHOW_LESS)}
+            ? m.SUMMARY_DESCRIPTION_SHOW_MORE()
+            : m.SUMMARY_DESCRIPTION_SHOW_LESS()}
         </Button>
       )}
     </Box>

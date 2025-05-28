@@ -164,7 +164,6 @@ export type CurrentAccountSchemaRef =
       extra: {
         [key: string]: unknown;
       };
-      email: null;
     };
 
 /**
@@ -198,7 +197,6 @@ export type NullableCurrentAccountSchemaRef =
       extra: {
         [key: string]: unknown;
       };
-      email: null;
     });
 
 /**
@@ -219,7 +217,15 @@ export type PackedItem = {
   id: string;
   name: string;
   description?: null | string;
-  type: string;
+  type:
+    | 'app'
+    | 'document'
+    | 'folder'
+    | 'embeddedLink'
+    | 'file'
+    | 'shortcut'
+    | 'h5p'
+    | 'etherpad';
   path: string;
   lang: string;
   extra: {
@@ -235,7 +241,8 @@ export type PackedItem = {
   hidden?: ItemVisibility;
   public?: ItemVisibility;
   thumbnails?: {
-    [key: string]: unknown;
+    small: string;
+    medium: string;
   };
 };
 
@@ -248,17 +255,9 @@ export type GeoCoordinate = {
 };
 
 /**
- * Pair of tokens used for authentication in mobile
- */
-export type TokensPair = {
-  authToken: string;
-  refreshToken: string;
-};
-
-/**
  * Raw data for a message from a member in a chat of an item.
  */
-export type RawChatMessage = {
+export type ChatMessageRaw = {
   id: string;
   creatorId: null | string;
   createdAt: string;
@@ -270,7 +269,7 @@ export type RawChatMessage = {
 /**
  * Message from a member in a chat of an item.
  */
-export type ChatMessage = {
+export type ChatMessageWithCreator = {
   id: string;
   creatorId: null | string;
   creator: NullableMinimalAccount;
@@ -285,7 +284,7 @@ export type ChatMessage = {
  */
 export type Chat = {
   id: string;
-  messages: Array<ChatMessage>;
+  messages: Array<ChatMessageWithCreator>;
 };
 
 /**
@@ -302,8 +301,8 @@ export type MinimalChatMention = {
 /**
  * Mention of a user in a chat including message
  */
-export type CompleteChatMention = MinimalChatMention & {
-  message: RawChatMessage;
+export type ChatMentionWithMessageAndAccount = MinimalChatMention & {
+  message: ChatMessageRaw;
 } & {
   account: MinimalAccount;
 };
@@ -324,6 +323,43 @@ export type ItemLoginSchema = {
   item?: Item;
   createdAt: string;
   updatedAt: string;
+};
+
+/**
+ * Define the permission access between account and item
+ */
+export type ItemMembership = {
+  id: string;
+  account: AugmentedAccount;
+  item: Item;
+  permission: 'read' | 'write' | 'admin';
+  creator?: NullableAugmentedAccount;
+  createdAt: string;
+  updatedAt: string;
+};
+
+/**
+ * Define the permission access between account and item
+ */
+export type RawItemMembership = {
+  id: string;
+  accountId: string;
+  itemPath: string;
+  permission: 'read' | 'write' | 'admin';
+  creator?: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CompleteMembershipRequest = {
+  member: Member;
+  item: Item;
+  createdAt: string;
+};
+
+export type SimpleMembershipRequest = {
+  member: Member;
+  createdAt: string;
 };
 
 /**
@@ -411,32 +447,6 @@ export type AppSetting = {
 };
 
 /**
- * Define the permission access between account and item
- */
-export type ItemMembership = {
-  id: string;
-  account: AugmentedAccount;
-  item: Item;
-  permission: 'read' | 'write' | 'admin';
-  creator?: NullableAugmentedAccount;
-  createdAt: string;
-  updatedAt: string;
-};
-
-/**
- * Define the permission access between account and item
- */
-export type RawItemMembership = {
-  id: string;
-  accountId: string;
-  itemPath: string;
-  permission: 'read' | 'write' | 'admin';
-  creator?: string;
-  createdAt: string;
-  updatedAt: string;
-};
-
-/**
  * Invitation for a non-registered user to access an item. The user is identified by email.
  */
 export type Invitation = {
@@ -445,6 +455,19 @@ export type Invitation = {
   name?: null | string;
   permission: 'read' | 'write' | 'admin';
   item: Item;
+  createdAt: string;
+  updatedAt: string;
+};
+
+/**
+ * Invitation for a non-registered user to access an item. The user is identified by email.
+ */
+export type InvitationWithoutRelations = {
+  id: string;
+  email: string;
+  name?: null | string;
+  permission: 'read' | 'write' | 'admin';
+  itemPath: string;
   createdAt: string;
   updatedAt: string;
 };
@@ -491,6 +514,57 @@ export type PackedItemLike = {
   item: PackedItem;
 };
 
+export type SearchHit = {
+  name: string;
+  description: string;
+  content: string;
+  creator: {
+    id: string;
+    name: string;
+  };
+  level: Array<string>;
+  discipline: Array<string>;
+  'resource-type': Array<string>;
+  id: string;
+  type:
+    | 'app'
+    | 'document'
+    | 'folder'
+    | 'embeddedLink'
+    | 'file'
+    | 'shortcut'
+    | 'h5p'
+    | 'etherpad';
+  isPublishedRoot: boolean;
+  isHidden: boolean;
+  createdAt: string;
+  updatedAt: string;
+  publicationUpdatedAt: string;
+  lang: string;
+  likes: number;
+  _formatted: {
+    name: string;
+    description: string;
+    content: string;
+    creator: {
+      id: string;
+      name: string;
+    };
+    level: Array<string>;
+    discipline: Array<string>;
+    'resource-type': Array<string>;
+    id: string;
+    type: string;
+    isPublishedRoot: boolean;
+    publicationUpdatedAt: string;
+    isHidden: boolean;
+    createdAt: string;
+    updatedAt: string;
+    lang: string;
+    likes: number;
+  };
+};
+
 /**
  * Instance representing a deleted item and its deleted descendants. A recycled item is not permanently deleted, it's still possible to recover it.
  */
@@ -507,17 +581,6 @@ export type Tag = {
   id: string;
   name: string;
   category: 'level' | 'discipline' | 'resource-type';
-};
-
-export type CompleteMembershipRequest = {
-  member: Member;
-  item: Item;
-  createdAt: string;
-};
-
-export type SimpleMembershipRequest = {
-  member: Member;
-  createdAt: string;
 };
 
 /**
@@ -580,6 +643,51 @@ export type GetStatusResponses = {
   200: unknown;
 };
 
+export type GetVersionData = {
+  body?: never;
+  path?: never;
+  query?: never;
+  url: '/version';
+};
+
+export type GetVersionResponses = {
+  /**
+   * Default Response
+   */
+  200: unknown;
+};
+
+export type GetNextMaintenanceData = {
+  body?: never;
+  path?: never;
+  query?: never;
+  url: '/maintenance/next';
+};
+
+export type GetNextMaintenanceErrors = {
+  /**
+   * Error object with useful information about the unexpected behavior that occured
+   */
+  '4XX': _Error;
+};
+
+export type GetNextMaintenanceError =
+  GetNextMaintenanceErrors[keyof GetNextMaintenanceErrors];
+
+export type GetNextMaintenanceResponses = {
+  /**
+   * Entry of a maintenance period, usually to perform a migration.
+   */
+  200: null | {
+    slug: string;
+    startAt: string;
+    endAt: string;
+  };
+};
+
+export type GetNextMaintenanceResponse =
+  GetNextMaintenanceResponses[keyof GetNextMaintenanceResponses];
+
 export type RegisterData = {
   body: {
     name: string;
@@ -597,7 +705,7 @@ export type RegisterData = {
 
 export type RegisterErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -626,7 +734,7 @@ export type LoginData = {
 
 export type LoginErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -654,7 +762,7 @@ export type AuthenticateData = {
 
 export type AuthenticateErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -708,11 +816,11 @@ export type PatchPasswordData = {
 
 export type PatchPasswordErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   400: _Error;
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   401: _Error;
 };
@@ -740,7 +848,7 @@ export type PostPasswordData = {
 
 export type PostPasswordErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   409: _Error;
 };
@@ -773,25 +881,15 @@ export type PatchPasswordResetErrors = {
   /**
    * Default Response
    */
-  400: {
-    [key: string]: unknown;
-  };
+  400: unknown;
 };
-
-export type PatchPasswordResetError =
-  PatchPasswordResetErrors[keyof PatchPasswordResetErrors];
 
 export type PatchPasswordResetResponses = {
   /**
    * Default Response
    */
-  204: {
-    [key: string]: unknown;
-  };
+  204: unknown;
 };
-
-export type PatchPasswordResetResponse =
-  PatchPasswordResetResponses[keyof PatchPasswordResetResponses];
 
 export type PostPasswordResetData = {
   body: {
@@ -807,25 +905,15 @@ export type PostPasswordResetErrors = {
   /**
    * Default Response
    */
-  400: {
-    [key: string]: unknown;
-  };
+  400: unknown;
 };
-
-export type PostPasswordResetError =
-  PostPasswordResetErrors[keyof PostPasswordResetErrors];
 
 export type PostPasswordResetResponses = {
   /**
    * Default Response
    */
-  204: {
-    [key: string]: unknown;
-  };
+  204: unknown;
 };
-
-export type PostPasswordResetResponse =
-  PostPasswordResetResponses[keyof PostPasswordResetResponses];
 
 export type GetMembersCurrentPasswordStatusData = {
   body?: never;
@@ -845,169 +933,6 @@ export type GetMembersCurrentPasswordStatusResponses = {
 
 export type GetMembersCurrentPasswordStatusResponse =
   GetMembersCurrentPasswordStatusResponses[keyof GetMembersCurrentPasswordStatusResponses];
-
-export type RegisterMobileData = {
-  body: {
-    name: string;
-    email: string;
-    challenge: string;
-    captcha: string;
-    enableSaveActions?: boolean;
-  };
-  path?: never;
-  query?: {
-    lang?: string;
-  };
-  url: '/m/register';
-};
-
-export type RegisterMobileErrors = {
-  /**
-   * Default Response
-   */
-  '4XX': _Error;
-};
-
-export type RegisterMobileError =
-  RegisterMobileErrors[keyof RegisterMobileErrors];
-
-export type RegisterMobileResponses = {
-  /**
-   * Successful Response
-   */
-  204: void;
-};
-
-export type RegisterMobileResponse =
-  RegisterMobileResponses[keyof RegisterMobileResponses];
-
-export type LoginMobileData = {
-  body: {
-    email: string;
-    challenge: string;
-    captcha: string;
-  };
-  path?: never;
-  query?: never;
-  url: '/m/login';
-};
-
-export type LoginMobileErrors = {
-  /**
-   * Default Response
-   */
-  '4XX': _Error;
-};
-
-export type LoginMobileError = LoginMobileErrors[keyof LoginMobileErrors];
-
-export type LoginMobileResponses = {
-  /**
-   * Successful Response
-   */
-  204: void;
-};
-
-export type LoginMobileResponse =
-  LoginMobileResponses[keyof LoginMobileResponses];
-
-export type LoginWithPasswordMobileData = {
-  body: {
-    email: string;
-    challenge: string;
-    password: string;
-    captcha: string;
-  };
-  path?: never;
-  query?: never;
-  url: '/m/login-password';
-};
-
-export type LoginWithPasswordMobileErrors = {
-  /**
-   * Default Response
-   */
-  '4XX': _Error;
-};
-
-export type LoginWithPasswordMobileError =
-  LoginWithPasswordMobileErrors[keyof LoginWithPasswordMobileErrors];
-
-export type LoginWithPasswordMobileResponses = {
-  /**
-   * Successful Response
-   */
-  200: {
-    resource: string;
-  };
-};
-
-export type LoginWithPasswordMobileResponse =
-  LoginWithPasswordMobileResponses[keyof LoginWithPasswordMobileResponses];
-
-export type AuthenticateMobileData = {
-  body: {
-    t: string;
-    verifier: string;
-  };
-  path?: never;
-  query?: never;
-  url: '/m/auth';
-};
-
-export type AuthenticateMobileErrors = {
-  /**
-   * Default Response
-   */
-  '4XX': _Error;
-};
-
-export type AuthenticateMobileError =
-  AuthenticateMobileErrors[keyof AuthenticateMobileErrors];
-
-export type AuthenticateMobileResponses = {
-  /**
-   * Default Response
-   */
-  200: TokensPair;
-};
-
-export type AuthenticateMobileResponse =
-  AuthenticateMobileResponses[keyof AuthenticateMobileResponses];
-
-export type GetMAuthRefreshData = {
-  body?: never;
-  path?: never;
-  query?: never;
-  url: '/m/auth/refresh';
-};
-
-export type GetMAuthRefreshResponses = {
-  /**
-   * Default Response
-   */
-  200: unknown;
-};
-
-export type AuthenticateMobileToWebData = {
-  body?: never;
-  path?: never;
-  query: {
-    token: string;
-    url?: string;
-  };
-  url: '/m/auth/web';
-};
-
-export type AuthenticateMobileToWebErrors = {
-  /**
-   * Default Response
-   */
-  '4XX': _Error;
-};
-
-export type AuthenticateMobileToWebError =
-  AuthenticateMobileToWebErrors[keyof AuthenticateMobileToWebErrors];
 
 export type GetWsData = {
   body?: never;
@@ -1033,12 +958,27 @@ export type GetMembersActionsData = {
   url: '/members/actions';
 };
 
+export type GetMembersActionsErrors = {
+  /**
+   * Error object with useful information about the unexpected behavior that occured
+   */
+  '4XX': _Error;
+};
+
+export type GetMembersActionsError =
+  GetMembersActionsErrors[keyof GetMembersActionsErrors];
+
 export type GetMembersActionsResponses = {
   /**
    * Default Response
    */
-  200: unknown;
+  200: Array<{
+    [key: string]: unknown;
+  }>;
 };
+
+export type GetMembersActionsResponse =
+  GetMembersActionsResponses[keyof GetMembersActionsResponses];
 
 export type DeleteMembersMembersByIdDeleteData = {
   body?: never;
@@ -1065,7 +1005,7 @@ export type DeleteCurrentAccountData = {
 
 export type DeleteCurrentAccountErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -1092,7 +1032,7 @@ export type GetCurrentAccountData = {
 
 export type GetCurrentAccountErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -1102,7 +1042,7 @@ export type GetCurrentAccountError =
 
 export type GetCurrentAccountResponses = {
   /**
-   * Default Response
+   * Current authenticated account, that can be a member or a guest, or null
    */
   200: NullableCurrentAccountSchemaRef;
 };
@@ -1125,11 +1065,11 @@ export type UpdateCurrentAccountData = {
 
 export type UpdateCurrentAccountErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   403: _Error;
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -1139,7 +1079,7 @@ export type UpdateCurrentAccountError =
 
 export type UpdateCurrentAccountResponses = {
   /**
-   * Default Response
+   * Current authenticated account, that can be a member or a guest
    */
   200: CurrentAccountSchemaRef;
 };
@@ -1156,7 +1096,7 @@ export type GetStorageData = {
 
 export type GetStorageErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -1193,7 +1133,7 @@ export type GetStorageFilesData = {
 
 export type GetStorageFilesErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -1238,7 +1178,7 @@ export type GetOneMemberData = {
 
 export type GetOneMemberErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -1247,7 +1187,7 @@ export type GetOneMemberError = GetOneMemberErrors[keyof GetOneMemberErrors];
 
 export type GetOneMemberResponses = {
   /**
-   * Default Response
+   * Member sharable information
    */
   200: Member;
 };
@@ -1264,15 +1204,15 @@ export type PatchChangeEmailData = {
 
 export type PatchChangeEmailErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   401: _Error;
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   409: _Error;
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -1301,15 +1241,15 @@ export type PostChangeEmailData = {
 
 export type PostChangeEmailErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   401: _Error;
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   409: _Error;
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -1350,22 +1290,17 @@ export type DownloadAvatarData = {
     id: string;
     size: 'small' | 'medium' | 'large' | 'original';
   };
-  query: {
-    /**
-     * @deprecated
-     */
-    replyUrl: boolean;
-  };
+  query?: never;
   url: '/members/{id}/avatar/{size}';
 };
 
 export type DownloadAvatarErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   500: _Error;
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -1396,11 +1331,11 @@ export type GetOwnProfileData = {
 
 export type GetOwnProfileErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   401: _Error;
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -1409,7 +1344,7 @@ export type GetOwnProfileError = GetOwnProfileErrors[keyof GetOwnProfileErrors];
 
 export type GetOwnProfileResponses = {
   /**
-   * Default Response
+   * Profile of a member, null if it does not exist
    */
   200: NullableProfile;
 };
@@ -1428,11 +1363,11 @@ export type GetMemberProfileData = {
 
 export type GetMemberProfileErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   401: _Error;
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -1442,7 +1377,7 @@ export type GetMemberProfileError =
 
 export type GetMemberProfileResponses = {
   /**
-   * Default Response
+   * Profile of a member, null if it does not exist
    */
   200: NullableProfile;
 };
@@ -1465,11 +1400,11 @@ export type UpdateOwnProfileData = {
 
 export type UpdateOwnProfileErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   401: _Error;
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -1502,15 +1437,15 @@ export type CreateOwnProfileData = {
 
 export type CreateOwnProfileErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   401: _Error;
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   500: _Error;
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -1520,7 +1455,7 @@ export type CreateOwnProfileError =
 
 export type CreateOwnProfileResponses = {
   /**
-   * Default Response
+   * Profile of a member
    */
   201: Profile;
 };
@@ -1537,7 +1472,7 @@ export type ExportMemberDataData = {
 
 export type ExportMemberDataErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -1564,7 +1499,7 @@ export type GetAppListData = {
 
 export type GetAppListErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -1596,7 +1531,7 @@ export type GetOwnMostUsedAppsData = {
 
 export type GetOwnMostUsedAppsErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -1632,7 +1567,7 @@ export type GenerateAppTokenData = {
 
 export type GenerateAppTokenErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -1690,7 +1625,7 @@ export type GetAppDataForAppData = {
 
 export type GetAppDataForAppErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -1730,7 +1665,7 @@ export type CreateAppDataData = {
 
 export type CreateAppDataErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -1739,7 +1674,7 @@ export type CreateAppDataError = CreateAppDataErrors[keyof CreateAppDataErrors];
 
 export type CreateAppDataResponses = {
   /**
-   * Default Response
+   * User data saved for an app.
    */
   204: AppData;
 };
@@ -1759,7 +1694,7 @@ export type DeleteAppDataData = {
 
 export type DeleteAppDataErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -1792,7 +1727,7 @@ export type UpdateAppDataData = {
 
 export type UpdateAppDataErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -1801,7 +1736,7 @@ export type UpdateAppDataError = UpdateAppDataErrors[keyof UpdateAppDataErrors];
 
 export type UpdateAppDataResponses = {
   /**
-   * Default Response
+   * User data saved for an app.
    */
   204: AppData;
 };
@@ -1818,7 +1753,7 @@ export type CreateAppDataFileData = {
 
 export type CreateAppDataFileErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -1849,7 +1784,7 @@ export type DownloadAppDataFileData = {
 
 export type DownloadAppDataFileErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -1881,7 +1816,7 @@ export type GetAppActionsForAppData = {
 
 export type GetAppActionsForAppErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -1915,7 +1850,7 @@ export type CreateAppActionData = {
 
 export type CreateAppActionErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -1949,7 +1884,7 @@ export type GetAppSettingsForAppData = {
 
 export type GetAppSettingsForAppErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -1983,7 +1918,7 @@ export type CreateAppSettingData = {
 
 export type CreateAppSettingErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -1993,7 +1928,7 @@ export type CreateAppSettingError =
 
 export type CreateAppSettingResponses = {
   /**
-   * Default Response
+   * Settings for an app.
    */
   200: AppSetting;
 };
@@ -2013,7 +1948,7 @@ export type DeleteAppSettingData = {
 
 export type DeleteAppSettingErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -2023,9 +1958,9 @@ export type DeleteAppSettingError =
 
 export type DeleteAppSettingResponses = {
   /**
-   * Successful Response
+   * Default Response
    */
-  204: void;
+  200: string;
 };
 
 export type DeleteAppSettingResponse =
@@ -2047,7 +1982,7 @@ export type UpdateAppSettingData = {
 
 export type UpdateAppSettingErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -2057,7 +1992,7 @@ export type UpdateAppSettingError =
 
 export type UpdateAppSettingResponses = {
   /**
-   * Default Response
+   * Settings for an app.
    */
   200: AppSetting;
 };
@@ -2074,7 +2009,7 @@ export type CreateAppSettingFileData = {
 
 export type CreateAppSettingFileErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -2084,7 +2019,7 @@ export type CreateAppSettingFileError =
 
 export type CreateAppSettingFileResponses = {
   /**
-   * Default Response
+   * Settings for an app.
    */
   200: AppSetting;
 };
@@ -2108,7 +2043,7 @@ export type DownloadAppSettingFileData = {
 
 export type DownloadAppSettingFileErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -2146,7 +2081,7 @@ export type CreateChatbotCompletionPromptData = {
 
 export type CreateChatbotCompletionPromptErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -2178,11 +2113,11 @@ export type GetItemLoginSchemaTypeData = {
 
 export type GetItemLoginSchemaTypeErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '5XX': _Error;
 };
@@ -2211,11 +2146,11 @@ export type DeleteItemLoginSchemaData = {
 
 export type DeleteItemLoginSchemaErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '5XX': _Error;
 };
@@ -2227,11 +2162,8 @@ export type DeleteItemLoginSchemaResponses = {
   /**
    * Default Response
    */
-  200: ItemLoginSchema;
+  200: unknown;
 };
-
-export type DeleteItemLoginSchemaResponse =
-  DeleteItemLoginSchemaResponses[keyof DeleteItemLoginSchemaResponses];
 
 export type GetItemLoginSchemaData = {
   body?: never;
@@ -2244,11 +2176,11 @@ export type GetItemLoginSchemaData = {
 
 export type GetItemLoginSchemaErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '5XX': _Error;
 };
@@ -2258,9 +2190,13 @@ export type GetItemLoginSchemaError =
 
 export type GetItemLoginSchemaResponses = {
   /**
-   * Default Response
+   * Instance allowing to login without a member on related item and its descendants. The required credentials are defined given the type.
    */
   200: ItemLoginSchema;
+  /**
+   * Response if item does not have an item login
+   */
+  204: void;
 };
 
 export type GetItemLoginSchemaResponse =
@@ -2293,11 +2229,11 @@ export type UpdateItemLoginSchemaData = {
 
 export type UpdateItemLoginSchemaErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '5XX': _Error;
 };
@@ -2309,11 +2245,8 @@ export type UpdateItemLoginSchemaResponses = {
   /**
    * Default Response
    */
-  200: ItemLoginSchema;
+  200: unknown;
 };
-
-export type UpdateItemLoginSchemaResponse =
-  UpdateItemLoginSchemaResponses[keyof UpdateItemLoginSchemaResponses];
 
 export type LoginOrRegisterAsGuestData = {
   body: {
@@ -2329,11 +2262,11 @@ export type LoginOrRegisterAsGuestData = {
 
 export type LoginOrRegisterAsGuestErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '5XX': _Error;
 };
@@ -2343,7 +2276,7 @@ export type LoginOrRegisterAsGuestError =
 
 export type LoginOrRegisterAsGuestResponses = {
   /**
-   * Default Response
+   * Minimal sharable account properties
    */
   200: MinimalAccount;
 };
@@ -2360,7 +2293,7 @@ export type GetOwnBookmarkData = {
 
 export type GetOwnBookmarkErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -2389,7 +2322,7 @@ export type DeleteBookmarkData = {
 
 export type DeleteBookmarkErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -2418,7 +2351,7 @@ export type CreateBookmarkData = {
 
 export type CreateBookmarkErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -2428,7 +2361,7 @@ export type CreateBookmarkError =
 
 export type CreateBookmarkResponses = {
   /**
-   * Default Response
+   * Successful Response
    */
   204: void;
 };
@@ -2447,7 +2380,7 @@ export type GetCollectionsForMemberData = {
 
 export type GetCollectionsForMemberErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -2476,7 +2409,7 @@ export type GetCollectionInformationsData = {
 
 export type GetCollectionInformationsErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -2511,7 +2444,7 @@ export type PublishItemData = {
 
 export type PublishItemErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -2539,7 +2472,7 @@ export type UnpublishItemData = {
 
 export type UnpublishItemErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -2583,7 +2516,7 @@ export type CollectionSearchData = {
 
 export type CollectionSearchErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -2600,57 +2533,7 @@ export type CollectionSearchResponses = {
     estimatedTotalHits?: number;
     processingTimeMs: number;
     query: string;
-    hits: Array<{
-      name: string;
-      description: string;
-      content: string;
-      creator: {
-        id: string;
-        name: string;
-      };
-      level: Array<string>;
-      discipline: Array<string>;
-      'resource-type': Array<string>;
-      id: string;
-      type:
-        | 'app'
-        | 'document'
-        | 'folder'
-        | 'embeddedLink'
-        | 'file'
-        | 's3File'
-        | 'shortcut'
-        | 'h5p'
-        | 'etherpad';
-      isPublishedRoot: boolean;
-      isHidden: boolean;
-      createdAt: string;
-      updatedAt: string;
-      publicationUpdatedAt: string;
-      lang: string;
-      likes: number;
-      _formatted: {
-        name: string;
-        description: string;
-        content: string;
-        creator: {
-          id: string;
-          name: string;
-        };
-        level: Array<string>;
-        discipline: Array<string>;
-        'resource-type': Array<string>;
-        id: string;
-        type: string;
-        isPublishedRoot: boolean;
-        publicationUpdatedAt: string;
-        isHidden: boolean;
-        createdAt: string;
-        updatedAt: string;
-        lang: string;
-        likes: number;
-      };
-    }>;
+    hits: Array<SearchHit>;
   };
 };
 
@@ -2678,7 +2561,7 @@ export type GetFacetsForNameData = {
 
 export type GetFacetsForNameErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -2698,6 +2581,41 @@ export type GetFacetsForNameResponses = {
 export type GetFacetsForNameResponse =
   GetFacetsForNameResponses[keyof GetFacetsForNameResponses];
 
+export type GetFeaturedCollectionsData = {
+  body?: never;
+  path?: never;
+  query?: {
+    limit?: number;
+  };
+  url: '/items/collections/featured';
+};
+
+export type GetFeaturedCollectionsErrors = {
+  /**
+   * Error object with useful information about the unexpected behavior that occured
+   */
+  '4XX': _Error;
+};
+
+export type GetFeaturedCollectionsError =
+  GetFeaturedCollectionsErrors[keyof GetFeaturedCollectionsErrors];
+
+export type GetFeaturedCollectionsResponses = {
+  /**
+   * Default Response
+   */
+  200: {
+    totalHits?: number;
+    estimatedTotalHits?: number;
+    processingTimeMs: number;
+    query: string;
+    hits: Array<SearchHit>;
+  };
+};
+
+export type GetFeaturedCollectionsResponse =
+  GetFeaturedCollectionsResponses[keyof GetFeaturedCollectionsResponses];
+
 export type GetMostLikedCollectionsData = {
   body?: never;
   path?: never;
@@ -2709,7 +2627,7 @@ export type GetMostLikedCollectionsData = {
 
 export type GetMostLikedCollectionsErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -2726,57 +2644,7 @@ export type GetMostLikedCollectionsResponses = {
     estimatedTotalHits?: number;
     processingTimeMs: number;
     query: string;
-    hits: Array<{
-      name: string;
-      description: string;
-      content: string;
-      creator: {
-        id: string;
-        name: string;
-      };
-      level: Array<string>;
-      discipline: Array<string>;
-      'resource-type': Array<string>;
-      id: string;
-      type:
-        | 'app'
-        | 'document'
-        | 'folder'
-        | 'embeddedLink'
-        | 'file'
-        | 's3File'
-        | 'shortcut'
-        | 'h5p'
-        | 'etherpad';
-      isPublishedRoot: boolean;
-      isHidden: boolean;
-      createdAt: string;
-      updatedAt: string;
-      publicationUpdatedAt: string;
-      lang: string;
-      likes: number;
-      _formatted: {
-        name: string;
-        description: string;
-        content: string;
-        creator: {
-          id: string;
-          name: string;
-        };
-        level: Array<string>;
-        discipline: Array<string>;
-        'resource-type': Array<string>;
-        id: string;
-        type: string;
-        isPublishedRoot: boolean;
-        publicationUpdatedAt: string;
-        isHidden: boolean;
-        createdAt: string;
-        updatedAt: string;
-        lang: string;
-        likes: number;
-      };
-    }>;
+    hits: Array<SearchHit>;
   };
 };
 
@@ -2794,7 +2662,7 @@ export type GetMostRecentCollectionsData = {
 
 export type GetMostRecentCollectionsErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -2811,57 +2679,7 @@ export type GetMostRecentCollectionsResponses = {
     estimatedTotalHits?: number;
     processingTimeMs: number;
     query: string;
-    hits: Array<{
-      name: string;
-      description: string;
-      content: string;
-      creator: {
-        id: string;
-        name: string;
-      };
-      level: Array<string>;
-      discipline: Array<string>;
-      'resource-type': Array<string>;
-      id: string;
-      type:
-        | 'app'
-        | 'document'
-        | 'folder'
-        | 'embeddedLink'
-        | 'file'
-        | 's3File'
-        | 'shortcut'
-        | 'h5p'
-        | 'etherpad';
-      isPublishedRoot: boolean;
-      isHidden: boolean;
-      createdAt: string;
-      updatedAt: string;
-      publicationUpdatedAt: string;
-      lang: string;
-      likes: number;
-      _formatted: {
-        name: string;
-        description: string;
-        content: string;
-        creator: {
-          id: string;
-          name: string;
-        };
-        level: Array<string>;
-        discipline: Array<string>;
-        'resource-type': Array<string>;
-        id: string;
-        type: string;
-        isPublishedRoot: boolean;
-        publicationUpdatedAt: string;
-        isHidden: boolean;
-        createdAt: string;
-        updatedAt: string;
-        lang: string;
-        likes: number;
-      };
-    }>;
+    hits: Array<SearchHit>;
   };
 };
 
@@ -2882,6 +2700,210 @@ export type GetItemsCollectionsSearchRebuildResponses = {
   200: unknown;
 };
 
+export type GetItemMembershipsForItemData = {
+  body?: never;
+  path: {
+    itemId: string;
+  };
+  query?: never;
+  url: '/items/{itemId}/memberships';
+};
+
+export type GetItemMembershipsForItemErrors = {
+  /**
+   * Error object with useful information about the unexpected behavior that occured
+   */
+  '4XX': _Error;
+};
+
+export type GetItemMembershipsForItemError =
+  GetItemMembershipsForItemErrors[keyof GetItemMembershipsForItemErrors];
+
+export type GetItemMembershipsForItemResponses = {
+  /**
+   * Default Response
+   */
+  200: Array<ItemMembership>;
+};
+
+export type GetItemMembershipsForItemResponse =
+  GetItemMembershipsForItemResponses[keyof GetItemMembershipsForItemResponses];
+
+export type CreateItemMembershipData = {
+  body: {
+    accountId: string;
+    permission: 'read' | 'write' | 'admin';
+  };
+  path: {
+    itemId: string;
+  };
+  query?: never;
+  url: '/items/{itemId}/memberships';
+};
+
+export type CreateItemMembershipErrors = {
+  /**
+   * Error object with useful information about the unexpected behavior that occured
+   */
+  '4XX': _Error;
+};
+
+export type CreateItemMembershipError =
+  CreateItemMembershipErrors[keyof CreateItemMembershipErrors];
+
+export type CreateItemMembershipResponses = {
+  /**
+   * Successful Response
+   */
+  204: void;
+};
+
+export type CreateItemMembershipResponse =
+  CreateItemMembershipResponses[keyof CreateItemMembershipResponses];
+
+export type DeleteItemMembershipData = {
+  body?: never;
+  path: {
+    id: string;
+    itemId: string;
+  };
+  query?: {
+    purgeBelow?: boolean;
+  };
+  url: '/items/{itemId}/memberships/{id}';
+};
+
+export type DeleteItemMembershipErrors = {
+  /**
+   * Error object with useful information about the unexpected behavior that occured
+   */
+  '4XX': _Error;
+};
+
+export type DeleteItemMembershipError =
+  DeleteItemMembershipErrors[keyof DeleteItemMembershipErrors];
+
+export type DeleteItemMembershipResponses = {
+  /**
+   * Successful Response
+   */
+  204: void;
+};
+
+export type DeleteItemMembershipResponse =
+  DeleteItemMembershipResponses[keyof DeleteItemMembershipResponses];
+
+export type UpdateItemMembershipData = {
+  body: {
+    permission: 'read' | 'write' | 'admin';
+  };
+  path: {
+    id: string;
+    itemId: string;
+  };
+  query?: never;
+  url: '/items/{itemId}/memberships/{id}';
+};
+
+export type UpdateItemMembershipErrors = {
+  /**
+   * Error object with useful information about the unexpected behavior that occured
+   */
+  '4XX': _Error;
+};
+
+export type UpdateItemMembershipError =
+  UpdateItemMembershipErrors[keyof UpdateItemMembershipErrors];
+
+export type UpdateItemMembershipResponses = {
+  /**
+   * Successful Response
+   */
+  204: void;
+};
+
+export type UpdateItemMembershipResponse =
+  UpdateItemMembershipResponses[keyof UpdateItemMembershipResponses];
+
+export type GetMembershipRequestsByItemIdData = {
+  body?: never;
+  path: {
+    itemId: string;
+  };
+  query?: never;
+  url: '/items/{itemId}/memberships/requests';
+};
+
+export type GetMembershipRequestsByItemIdResponses = {
+  /**
+   * Default Response
+   */
+  200: Array<SimpleMembershipRequest>;
+};
+
+export type GetMembershipRequestsByItemIdResponse =
+  GetMembershipRequestsByItemIdResponses[keyof GetMembershipRequestsByItemIdResponses];
+
+export type CreateMembershipRequestData = {
+  body?: never;
+  path: {
+    itemId: string;
+  };
+  query?: never;
+  url: '/items/{itemId}/memberships/requests';
+};
+
+export type CreateMembershipRequestResponses = {
+  /**
+   * Default Response
+   */
+  204: void;
+};
+
+export type CreateMembershipRequestResponse =
+  CreateMembershipRequestResponses[keyof CreateMembershipRequestResponses];
+
+export type GetOwnMembershipRequestByItemIdData = {
+  body?: never;
+  path: {
+    itemId: string;
+  };
+  query?: never;
+  url: '/items/{itemId}/memberships/requests/own';
+};
+
+export type GetOwnMembershipRequestByItemIdResponses = {
+  /**
+   * Default Response
+   */
+  200: {
+    status: 'notSubmittedOrDeleted' | 'pending' | 'approved';
+  };
+};
+
+export type GetOwnMembershipRequestByItemIdResponse =
+  GetOwnMembershipRequestByItemIdResponses[keyof GetOwnMembershipRequestByItemIdResponses];
+
+export type DeleteMembershipRequestData = {
+  body?: never;
+  path: {
+    itemId: string;
+    memberId: string;
+  };
+  query?: never;
+  url: '/items/{itemId}/memberships/requests/{memberId}';
+};
+
+export type DeleteMembershipRequestResponses = {
+  /**
+   * Default Response
+   */
+  204: void;
+};
+
+export type DeleteMembershipRequestResponse =
+  DeleteMembershipRequestResponses[keyof DeleteMembershipRequestResponses];
+
 export type CreateShortcutData = {
   body: {
     target: string;
@@ -2898,7 +2920,7 @@ export type CreateShortcutData = {
 
 export type CreateShortcutErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -2980,7 +3002,7 @@ export type UpdateShortcutData = {
 
 export type UpdateShortcutErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -3073,12 +3095,29 @@ export type PostItemsByIdThumbnailsData = {
   url: '/items/{id}/thumbnails';
 };
 
+export type PostItemsByIdThumbnailsErrors = {
+  /**
+   * Error object with useful information about the unexpected behavior that occured
+   */
+  500: _Error;
+  /**
+   * Error object with useful information about the unexpected behavior that occured
+   */
+  '4XX': _Error;
+};
+
+export type PostItemsByIdThumbnailsError =
+  PostItemsByIdThumbnailsErrors[keyof PostItemsByIdThumbnailsErrors];
+
 export type PostItemsByIdThumbnailsResponses = {
   /**
-   * Default Response
+   * Successful Response
    */
-  200: unknown;
+  204: void;
 };
+
+export type PostItemsByIdThumbnailsResponse =
+  PostItemsByIdThumbnailsResponses[keyof PostItemsByIdThumbnailsResponses];
 
 export type DownloadItemThumbnailData = {
   body?: never;
@@ -3092,11 +3131,11 @@ export type DownloadItemThumbnailData = {
 
 export type DownloadItemThumbnailErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   500: _Error;
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -3132,7 +3171,7 @@ export type UploadFileData = {
 
 export type UploadFileErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -3141,14 +3180,9 @@ export type UploadFileError = UploadFileErrors[keyof UploadFileErrors];
 
 export type UploadFileResponses = {
   /**
-   * Default Response
+   * Successful response
    */
-  200: {
-    data: {
-      [key: string]: Item;
-    };
-    errors: Array<_Error>;
-  };
+  204: void;
 };
 
 export type UploadFileResponse = UploadFileResponses[keyof UploadFileResponses];
@@ -3158,18 +3192,13 @@ export type DownloadFileData = {
   path: {
     id: string;
   };
-  query: {
-    /**
-     * @deprecated
-     */
-    replyUrl: boolean;
-  };
+  query?: never;
   url: '/items/{id}/download';
 };
 
 export type DownloadFileErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -3237,7 +3266,7 @@ export type UpdateFileData = {
 
 export type UpdateFileErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -3263,7 +3292,7 @@ export type DeleteVisibilityData = {
 
 export type DeleteVisibilityErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -3293,7 +3322,7 @@ export type CreateVisibilityData = {
 
 export type CreateVisibilityErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -3305,15 +3334,7 @@ export type CreateVisibilityResponses = {
   /**
    * Successful Response
    */
-  201: {
-    id: string;
-    type: 'public' | 'hidden';
-    item: {
-      path: string;
-    };
-    creator?: NullableMember;
-    createdAt: string;
-  };
+  204: void;
 };
 
 export type CreateVisibilityResponse =
@@ -3369,7 +3390,7 @@ export type CreateFolderData = {
 
 export type CreateFolderErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -3484,7 +3505,7 @@ export type UpdateFolderData = {
 
 export type UpdateFolderErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -3562,7 +3583,7 @@ export type CreateFolderWithThumbnailData = {
 
 export type CreateFolderWithThumbnailErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -3681,7 +3702,7 @@ export type CreateAppData = {
 
 export type CreateAppErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -3795,7 +3816,7 @@ export type UpdateAppData = {
 
 export type UpdateAppErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -3872,7 +3893,7 @@ export type DeleteAliasData = {
 
 export type DeleteAliasErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -3904,7 +3925,7 @@ export type GetShortLinkRedirectionData = {
 
 export type GetShortLinkRedirectionErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -3925,7 +3946,7 @@ export type UpdateShortLinkData = {
 
 export type UpdateShortLinkErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -3958,7 +3979,7 @@ export type GetShortLinkAvailabilityData = {
 
 export type GetShortLinkAvailabilityErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -3989,7 +4010,7 @@ export type GetShortLinksForItemData = {
 
 export type GetShortLinksForItemErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -4028,7 +4049,7 @@ export type CreateShortLinkData = {
 
 export type CreateShortLinkErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -4066,6 +4087,20 @@ export type GetItemsPublicationByItemIdStatusResponses = {
   200: unknown;
 };
 
+export type GetItemsH5pAssetsIntegrationHtmlData = {
+  body?: never;
+  path?: never;
+  query?: never;
+  url: '/items/h5p-assets/integration.html';
+};
+
+export type GetItemsH5pAssetsIntegrationHtmlResponses = {
+  /**
+   * Default Response
+   */
+  200: unknown;
+};
+
 export type ImportH5pData = {
   body?: never;
   path?: never;
@@ -4084,7 +4119,7 @@ export type ImportH5pData = {
 
 export type ImportH5pErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -4093,7 +4128,7 @@ export type ImportH5pError = ImportH5pErrors[keyof ImportH5pErrors];
 
 export type ImportH5pResponses = {
   /**
-   * Default Response
+   * Smallest unit of a learning collection
    */
   200: Item;
 };
@@ -4114,7 +4149,7 @@ export type CreateEtherpadData = {
 
 export type CreateEtherpadErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -4124,7 +4159,7 @@ export type CreateEtherpadError =
 
 export type CreateEtherpadResponses = {
   /**
-   * Default Response
+   * Smallest unit of a learning collection
    */
   200: Item;
 };
@@ -4181,7 +4216,7 @@ export type UpdateEtherpadData = {
 
 export type UpdateEtherpadErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -4212,7 +4247,7 @@ export type GetEtherpadFromItemData = {
 
 export type GetEtherpadFromItemErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -4246,7 +4281,7 @@ export type ImportZipData = {
 
 export type ImportZipErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -4271,7 +4306,7 @@ export type ExportZipData = {
 
 export type ExportZipErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -4280,14 +4315,10 @@ export type ExportZipError = ExportZipErrors[keyof ExportZipErrors];
 
 export type ExportZipResponses = {
   /**
-   * Default Response
+   * a stream of data for the export zip content
    */
-  200: {
-    content?: string;
-  };
+  200: unknown;
 };
-
-export type ExportZipResponse = ExportZipResponses[keyof ExportZipResponses];
 
 export type GraaspZipExportData = {
   body?: never;
@@ -4300,7 +4331,7 @@ export type GraaspZipExportData = {
 
 export type GraaspZipExportErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -4310,15 +4341,10 @@ export type GraaspZipExportError =
 
 export type GraaspZipExportResponses = {
   /**
-   * Default Response
+   * a stream of data for the graasp export content
    */
-  200: {
-    content?: string;
-  };
+  200: unknown;
 };
-
-export type GraaspZipExportResponse =
-  GraaspZipExportResponses[keyof GraaspZipExportResponses];
 
 export type GetLinkMetadataData = {
   body?: never;
@@ -4331,7 +4357,7 @@ export type GetLinkMetadataData = {
 
 export type GetLinkMetadataErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -4409,7 +4435,7 @@ export type CreateLinkData = {
 
 export type CreateLinkErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -4531,7 +4557,7 @@ export type UpdateLinkData = {
 
 export type UpdateLinkErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -4655,7 +4681,7 @@ export type CreateDocumentData = {
 
 export type CreateDocumentErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -4782,7 +4808,7 @@ export type UpdateDocumentData = {
 
 export type UpdateDocumentErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -4869,7 +4895,7 @@ export type GetInvitationByIdData = {
 
 export type GetInvitationByIdErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -4879,7 +4905,7 @@ export type GetInvitationByIdError =
 
 export type GetInvitationByIdResponses = {
   /**
-   * Default Response
+   * Invitation for a non-registered user to access an item. The user is identified by email.
    */
   200: Invitation;
 };
@@ -4903,11 +4929,11 @@ export type CreateInvitationData = {
 
 export type CreateInvitationErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   500: _Error;
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -4936,7 +4962,7 @@ export type GetInvitationForItemData = {
 
 export type GetInvitationForItemErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -4966,7 +4992,7 @@ export type DeleteInvitationData = {
 
 export type DeleteInvitationErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -4978,7 +5004,7 @@ export type DeleteInvitationResponses = {
   /**
    * Successful Response
    */
-  200: string;
+  204: void;
 };
 
 export type DeleteInvitationResponse =
@@ -4999,7 +5025,7 @@ export type UpdateInvitationData = {
 
 export type UpdateInvitationErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -5029,7 +5055,7 @@ export type SendInvitationData = {
 
 export type SendInvitationErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -5060,7 +5086,7 @@ export type InviteFromCsvWithTemplateData = {
 
 export type InviteFromCsvWithTemplateErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -5074,8 +5100,8 @@ export type InviteFromCsvWithTemplateResponses = {
    */
   200: Array<{
     groupName: string;
-    memberships: Array<ItemMembership>;
-    invitations: Array<Invitation>;
+    memberships: Array<RawItemMembership>;
+    invitations: Array<InvitationWithoutRelations>;
   }>;
 };
 
@@ -5093,7 +5119,7 @@ export type InviteFromCsvData = {
 
 export type InviteFromCsvErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -5104,10 +5130,7 @@ export type InviteFromCsvResponses = {
   /**
    * Successful Response
    */
-  200: {
-    memberships: Array<ItemMembership>;
-    invitations: Array<Invitation>;
-  };
+  204: void;
 };
 
 export type InviteFromCsvResponse =
@@ -5140,7 +5163,7 @@ export type GetFlagTypesData = {
 
 export type GetFlagTypesErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -5183,7 +5206,7 @@ export type CreateItemFlagData = {
 
 export type CreateItemFlagErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -5213,7 +5236,7 @@ export type GetOwnRecycledItemsData = {
 
 export type GetOwnRecycledItemsErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -5248,7 +5271,7 @@ export type RecycleManyItemsData = {
 
 export type RecycleManyItemsErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -5277,7 +5300,7 @@ export type RestoreManyItemsData = {
 
 export type RestoreManyItemsErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -5306,7 +5329,7 @@ export type GetLatestItemValidationGroupData = {
 
 export type GetLatestItemValidationGroupErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -5347,7 +5370,7 @@ export type ValidateItemData = {
 
 export type ValidateItemErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -5373,7 +5396,7 @@ export type GetLikesForCurrentMemberData = {
 
 export type GetLikesForCurrentMemberErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -5402,7 +5425,7 @@ export type GetLikesForItemData = {
 
 export type GetLikesForItemErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -5431,7 +5454,7 @@ export type DeleteItemLikeData = {
 
 export type DeleteItemLikeErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -5460,7 +5483,7 @@ export type CreateItemLikeData = {
 
 export type CreateItemLikeErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -5470,7 +5493,7 @@ export type CreateItemLikeError =
 
 export type CreateItemLikeResponses = {
   /**
-   * Default Response
+   * Like object of an item when a member likes it.
    */
   200: ItemLike;
 };
@@ -5487,7 +5510,7 @@ export type ClearAllMentionsData = {
 
 export type ClearAllMentionsErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -5514,7 +5537,7 @@ export type GetOwnMentionsData = {
 
 export type GetOwnMentionsErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -5526,7 +5549,7 @@ export type GetOwnMentionsResponses = {
   /**
    * Default Response
    */
-  200: Array<CompleteChatMention>;
+  200: Array<ChatMentionWithMessageAndAccount>;
 };
 
 export type GetOwnMentionsResponse =
@@ -5543,7 +5566,7 @@ export type DeleteMentionData = {
 
 export type DeleteMentionErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -5552,7 +5575,7 @@ export type DeleteMentionError = DeleteMentionErrors[keyof DeleteMentionErrors];
 
 export type DeleteMentionResponses = {
   /**
-   * Default Response
+   * Mention of a user in a chat, without message
    */
   200: MinimalChatMention;
 };
@@ -5573,7 +5596,7 @@ export type PatchMentionData = {
 
 export type PatchMentionErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -5582,7 +5605,7 @@ export type PatchMentionError = PatchMentionErrors[keyof PatchMentionErrors];
 
 export type PatchMentionResponses = {
   /**
-   * Default Response
+   * Mention of a user in a chat, without message
    */
   200: MinimalChatMention;
 };
@@ -5601,7 +5624,7 @@ export type ClearChatMessageData = {
 
 export type ClearChatMessageErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -5630,7 +5653,7 @@ export type GetChatData = {
 
 export type GetChatErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -5641,7 +5664,7 @@ export type GetChatResponses = {
   /**
    * Successful Response
    */
-  200: Array<ChatMessage>;
+  200: Array<ChatMessageWithCreator>;
 };
 
 export type GetChatResponse = GetChatResponses[keyof GetChatResponses];
@@ -5660,7 +5683,7 @@ export type CreateChatMessageData = {
 
 export type CreateChatMessageErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -5670,9 +5693,9 @@ export type CreateChatMessageError =
 
 export type CreateChatMessageResponses = {
   /**
-   * Default Response
+   * Message from a member in a chat of an item.
    */
-  201: ChatMessage;
+  201: ChatMessageWithCreator;
 };
 
 export type CreateChatMessageResponse =
@@ -5690,7 +5713,7 @@ export type DeleteChatMessageData = {
 
 export type DeleteChatMessageErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -5700,9 +5723,9 @@ export type DeleteChatMessageError =
 
 export type DeleteChatMessageResponses = {
   /**
-   * Default Response
+   * Message from a member in a chat of an item.
    */
-  200: ChatMessage;
+  200: ChatMessageWithCreator;
 };
 
 export type DeleteChatMessageResponse =
@@ -5722,7 +5745,7 @@ export type PatchChatMessageData = {
 
 export type PatchChatMessageErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -5732,9 +5755,9 @@ export type PatchChatMessageError =
 
 export type PatchChatMessageResponses = {
   /**
-   * Default Response
+   * Message from a member in a chat of an item.
    */
-  200: ChatMessage;
+  200: ChatMessageWithCreator;
 };
 
 export type PatchChatMessageResponse =
@@ -5759,7 +5782,7 @@ export type PostActionData = {
 
 export type PostActionErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -5791,7 +5814,7 @@ export type ExportActionsData = {
 
 export type ExportActionsErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -5822,7 +5845,7 @@ export type GetItemActionsByDayData = {
 
 export type GetItemActionsByDayErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -5856,7 +5879,7 @@ export type GetItemActionsByHourData = {
 
 export type GetItemActionsByHourErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -5890,7 +5913,7 @@ export type GetItemActionsByWeekdayData = {
 
 export type GetItemActionsByWeekdayErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -5921,7 +5944,7 @@ export type DeleteGeolocationData = {
 
 export type DeleteGeolocationErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -5950,7 +5973,7 @@ export type GetGeolocationByItemData = {
 
 export type GetGeolocationByItemErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -5996,7 +6019,7 @@ export type PutGeolocationData = {
 
 export type PutGeolocationErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -6030,7 +6053,7 @@ export type GetItemsInBoxData = {
 
 export type GetItemsInBoxErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -6070,7 +6093,7 @@ export type GeolocationReverseData = {
 
 export type GeolocationReverseErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -6103,7 +6126,7 @@ export type GeolocationSearchData = {
 
 export type GeolocationSearchErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -6138,11 +6161,11 @@ export type GetTagsForItemData = {
 
 export type GetTagsForItemErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '5XX': _Error;
 };
@@ -6174,11 +6197,11 @@ export type CreateTagForItemData = {
 
 export type CreateTagForItemErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '5XX': _Error;
 };
@@ -6208,11 +6231,11 @@ export type DeleteTagForItemData = {
 
 export type DeleteTagForItemErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '5XX': _Error;
 };
@@ -6241,7 +6264,7 @@ export type DeleteManyItemsData = {
 
 export type DeleteManyItemsErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -6258,39 +6281,6 @@ export type DeleteManyItemsResponses = {
 
 export type DeleteManyItemsResponse =
   DeleteManyItemsResponses[keyof DeleteManyItemsResponses];
-
-export type GetManyItemsData = {
-  body?: never;
-  path?: never;
-  query: {
-    id: Array<string>;
-  };
-  url: '/items/';
-};
-
-export type GetManyItemsErrors = {
-  /**
-   * Default Response
-   */
-  '4XX': _Error;
-};
-
-export type GetManyItemsError = GetManyItemsErrors[keyof GetManyItemsErrors];
-
-export type GetManyItemsResponses = {
-  /**
-   * Default Response
-   */
-  200: {
-    data: {
-      [key: string]: PackedItem;
-    };
-    errors: Array<_Error>;
-  };
-};
-
-export type GetManyItemsResponse =
-  GetManyItemsResponses[keyof GetManyItemsResponses];
 
 export type CreateItemData = {
   body?:
@@ -6527,51 +6517,6 @@ export type CreateItemData = {
         description?: null | string;
         lang?: string;
         geolocation?: GeoCoordinate;
-        type: 's3File';
-        /**
-         * Parameters, mostly visual, common to all types of items.
-         */
-        settings?: {
-          /**
-           * @deprecated
-           */
-          lang?: string;
-          isPinned?: boolean;
-          /**
-           * @deprecated
-           */
-          tags?: Array<string>;
-          showChatbox?: boolean;
-          isResizable?: boolean;
-          hasThumbnail?: boolean;
-          ccLicenseAdaption?:
-            | 'CC BY'
-            | 'CC BY-NC'
-            | 'CC BY-SA'
-            | 'CC BY-NC-SA'
-            | 'CC BY-ND'
-            | 'CC BY-NC-ND'
-            | 'CC0';
-          displayCoEditors?: boolean;
-          descriptionPlacement?: 'above' | 'below';
-          isCollapsible?: boolean;
-          enableSaveActions?: boolean;
-          showLinkIframe?: boolean;
-          showLinkButton?: boolean;
-          maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-          alignment?: 'center' | 'left' | 'right';
-        };
-        extra?: {
-          s3File: {
-            name: string;
-          };
-        };
-      }
-    | {
-        name: string;
-        description?: null | string;
-        lang?: string;
-        geolocation?: GeoCoordinate;
         type: 'etherpad';
         /**
          * Parameters, mostly visual, common to all types of items.
@@ -6715,7 +6660,7 @@ export type CreateItemData = {
 
 export type CreateItemErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -6724,7 +6669,7 @@ export type CreateItemError = CreateItemErrors[keyof CreateItemErrors];
 
 export type CreateItemResponses = {
   /**
-   * Default Response
+   * Smallest unit of a learning collection
    */
   200: Item;
 };
@@ -6742,7 +6687,7 @@ export type GetItemData = {
 
 export type GetItemErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -6751,7 +6696,7 @@ export type GetItemError = GetItemErrors[keyof GetItemErrors];
 
 export type GetItemResponses = {
   /**
-   * Default Response
+   * Item with additional information
    */
   200: PackedItem;
 };
@@ -6808,7 +6753,7 @@ export type UpdateItemData = {
           };
         }
       | {
-          s3File: {
+          file: {
             altText: string;
           };
         }
@@ -6839,7 +6784,7 @@ export type UpdateItemData = {
 
 export type UpdateItemErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -6848,7 +6793,7 @@ export type UpdateItemError = UpdateItemErrors[keyof UpdateItemErrors];
 
 export type UpdateItemResponses = {
   /**
-   * Default Response
+   * Smallest unit of a learning collection
    */
   200: Item;
 };
@@ -6869,7 +6814,6 @@ export type GetAccessibleItemsData = {
       | 'folder'
       | 'embeddedLink'
       | 'file'
-      | 's3File'
       | 'shortcut'
       | 'h5p'
       | 'etherpad'
@@ -6888,7 +6832,7 @@ export type GetAccessibleItemsData = {
 
 export type GetAccessibleItemsErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -6902,6 +6846,10 @@ export type GetAccessibleItemsResponses = {
    */
   200: {
     data: Array<PackedItem>;
+    pagination: {
+      page: number;
+      pageSize: number;
+    };
   };
 };
 
@@ -6921,7 +6869,6 @@ export type GetChildrenData = {
       | 'folder'
       | 'embeddedLink'
       | 'file'
-      | 's3File'
       | 'shortcut'
       | 'h5p'
       | 'etherpad'
@@ -6932,7 +6879,7 @@ export type GetChildrenData = {
 
 export type GetChildrenErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -6962,7 +6909,6 @@ export type GetDescendantItemsData = {
       | 'folder'
       | 'embeddedLink'
       | 'file'
-      | 's3File'
       | 'shortcut'
       | 'h5p'
       | 'etherpad'
@@ -6973,7 +6919,7 @@ export type GetDescendantItemsData = {
 
 export type GetDescendantItemsErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -7002,7 +6948,7 @@ export type GetParentItemsData = {
 
 export type GetParentItemsErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -7039,7 +6985,7 @@ export type ReorderItemData = {
 
 export type ReorderItemErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -7048,7 +6994,7 @@ export type ReorderItemError = ReorderItemErrors[keyof ReorderItemErrors];
 
 export type ReorderItemResponses = {
   /**
-   * Default Response
+   * Smallest unit of a learning collection
    */
   200: Item;
 };
@@ -7075,7 +7021,7 @@ export type MoveManyItemsData = {
 
 export type MoveManyItemsErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -7111,7 +7057,7 @@ export type CopyManyItemsData = {
 
 export type CopyManyItemsErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -7139,7 +7085,7 @@ export type CreateItemWithThumbnailData = {
 
 export type CreateItemWithThumbnailErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
 };
@@ -7149,215 +7095,13 @@ export type CreateItemWithThumbnailError =
 
 export type CreateItemWithThumbnailResponses = {
   /**
-   * Default Response
+   * Smallest unit of a learning collection
    */
   200: Item;
 };
 
 export type CreateItemWithThumbnailResponse =
   CreateItemWithThumbnailResponses[keyof CreateItemWithThumbnailResponses];
-
-export type GetItemsByItemIdMembershipsRequestsData = {
-  body?: never;
-  path: {
-    itemId: string;
-  };
-  query?: never;
-  url: '/items/{itemId}/memberships/requests/';
-};
-
-export type GetItemsByItemIdMembershipsRequestsResponses = {
-  /**
-   * Default Response
-   */
-  200: Array<SimpleMembershipRequest>;
-};
-
-export type GetItemsByItemIdMembershipsRequestsResponse =
-  GetItemsByItemIdMembershipsRequestsResponses[keyof GetItemsByItemIdMembershipsRequestsResponses];
-
-export type PostItemsByItemIdMembershipsRequestsData = {
-  body?: never;
-  path: {
-    itemId: string;
-  };
-  query?: never;
-  url: '/items/{itemId}/memberships/requests/';
-};
-
-export type PostItemsByItemIdMembershipsRequestsResponses = {
-  /**
-   * Default Response
-   */
-  204: void;
-};
-
-export type PostItemsByItemIdMembershipsRequestsResponse =
-  PostItemsByItemIdMembershipsRequestsResponses[keyof PostItemsByItemIdMembershipsRequestsResponses];
-
-export type GetItemsByItemIdMembershipsRequestsOwnData = {
-  body?: never;
-  path: {
-    itemId: string;
-  };
-  query?: never;
-  url: '/items/{itemId}/memberships/requests/own';
-};
-
-export type GetItemsByItemIdMembershipsRequestsOwnResponses = {
-  /**
-   * Default Response
-   */
-  200: {
-    status: 'notSubmittedOrDeleted' | 'pending' | 'approved';
-  };
-};
-
-export type GetItemsByItemIdMembershipsRequestsOwnResponse =
-  GetItemsByItemIdMembershipsRequestsOwnResponses[keyof GetItemsByItemIdMembershipsRequestsOwnResponses];
-
-export type DeleteItemsByItemIdMembershipsRequestsByMemberIdData = {
-  body?: never;
-  path: {
-    itemId: string;
-    memberId: string;
-  };
-  query?: never;
-  url: '/items/{itemId}/memberships/requests/{memberId}';
-};
-
-export type DeleteItemsByItemIdMembershipsRequestsByMemberIdResponses = {
-  /**
-   * Default Response
-   */
-  204: void;
-};
-
-export type DeleteItemsByItemIdMembershipsRequestsByMemberIdResponse =
-  DeleteItemsByItemIdMembershipsRequestsByMemberIdResponses[keyof DeleteItemsByItemIdMembershipsRequestsByMemberIdResponses];
-
-export type GetItemMembershipsForItemData = {
-  body?: never;
-  path?: never;
-  query: {
-    itemId: string;
-  };
-  url: '/item-memberships/';
-};
-
-export type GetItemMembershipsForItemErrors = {
-  /**
-   * Default Response
-   */
-  '4XX': _Error;
-};
-
-export type GetItemMembershipsForItemError =
-  GetItemMembershipsForItemErrors[keyof GetItemMembershipsForItemErrors];
-
-export type GetItemMembershipsForItemResponses = {
-  /**
-   * Default Response
-   */
-  200: Array<ItemMembership>;
-};
-
-export type GetItemMembershipsForItemResponse =
-  GetItemMembershipsForItemResponses[keyof GetItemMembershipsForItemResponses];
-
-export type CreateItemMembershipData = {
-  body: {
-    accountId: string;
-    permission: 'read' | 'write' | 'admin';
-  };
-  path?: never;
-  query: {
-    itemId: string;
-  };
-  url: '/item-memberships/';
-};
-
-export type CreateItemMembershipErrors = {
-  /**
-   * Default Response
-   */
-  '4XX': _Error;
-};
-
-export type CreateItemMembershipError =
-  CreateItemMembershipErrors[keyof CreateItemMembershipErrors];
-
-export type CreateItemMembershipResponses = {
-  /**
-   * Default Response
-   */
-  200: ItemMembership;
-};
-
-export type CreateItemMembershipResponse =
-  CreateItemMembershipResponses[keyof CreateItemMembershipResponses];
-
-export type DeleteItemMembershipData = {
-  body?: never;
-  path: {
-    id: string;
-  };
-  query?: {
-    purgeBelow?: boolean;
-  };
-  url: '/item-memberships/{id}';
-};
-
-export type DeleteItemMembershipErrors = {
-  /**
-   * Default Response
-   */
-  '4XX': _Error;
-};
-
-export type DeleteItemMembershipError =
-  DeleteItemMembershipErrors[keyof DeleteItemMembershipErrors];
-
-export type DeleteItemMembershipResponses = {
-  /**
-   * Default Response
-   */
-  204: void;
-};
-
-export type DeleteItemMembershipResponse =
-  DeleteItemMembershipResponses[keyof DeleteItemMembershipResponses];
-
-export type UpdateItemMembershipData = {
-  body: {
-    permission: 'read' | 'write' | 'admin';
-  };
-  path: {
-    id: string;
-  };
-  query?: never;
-  url: '/item-memberships/{id}';
-};
-
-export type UpdateItemMembershipErrors = {
-  /**
-   * Default Response
-   */
-  '4XX': _Error;
-};
-
-export type UpdateItemMembershipError =
-  UpdateItemMembershipErrors[keyof UpdateItemMembershipErrors];
-
-export type UpdateItemMembershipResponses = {
-  /**
-   * Default Response
-   */
-  204: void;
-};
-
-export type UpdateItemMembershipResponse =
-  UpdateItemMembershipResponses[keyof UpdateItemMembershipResponses];
 
 export type GetCountForTagsData = {
   body?: never;
@@ -7371,11 +7115,11 @@ export type GetCountForTagsData = {
 
 export type GetCountForTagsErrors = {
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '4XX': _Error;
   /**
-   * Default Response
+   * Error object with useful information about the unexpected behavior that occured
    */
   '5XX': _Error;
 };
@@ -7397,3 +7141,7 @@ export type GetCountForTagsResponses = {
 
 export type GetCountForTagsResponse =
   GetCountForTagsResponses[keyof GetCountForTagsResponses];
+
+export type ClientOptions = {
+  baseUrl: 'http://localhost:3000' | (string & {});
+};
