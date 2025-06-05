@@ -1,6 +1,4 @@
-import { BrowserRouter } from 'react-router-dom';
-
-import { Avatar, Chip, Grid2, Typography } from '@mui/material';
+import { Avatar, Chip, Grid, Typography } from '@mui/material';
 
 import { ItemType } from '@graasp/sdk';
 
@@ -26,17 +24,17 @@ const meta = {
     image: '/test-assets/big_photo.jpg',
     likeCount: 213,
     type: ItemType.DOCUMENT,
-    tags: ['6th grade at school', 'English', 'Mathematics', 'Taylor'],
+    tags: [
+      { name: '6th grade at school', category: 'level' },
+      { name: 'English', category: 'discipline' },
+      { name: 'Mathematics', category: 'discipline' },
+      { name: 'Taylor', category: 'discipline' },
+    ],
     creator: memberAvatar,
     description:
       'Tempor volutpat eget varius nisl cursus. Fusce cras commodo adipiscing dictumst gravida pharetra velit. Fusce cras commodo adipiscing dictumst gravida pharetra velit. Fusce cras commodo adipiscing dictumst gravida pharetra velit. Enim cursus ultrices in natoque. Faucibus porttitor posuere consequat congue aliquam. Sapien tempus blandit massa rhoncus',
   },
 
-  decorators: [
-    (story) => {
-      return <BrowserRouter>{story()}</BrowserRouter>;
-    },
-  ],
   argTypes: {},
 } satisfies Meta<typeof BigCard>;
 
@@ -47,23 +45,23 @@ export const Default = {
   args: {
     name: 'my card title',
     tags: [
-      '6th grade at school',
-      'English',
-      'Mathematics',
-      'Taylor',
-      'Biology',
-      'French',
-      'Good',
-      'secondary',
-      'dialogue',
-      'exercice',
-      'fun',
-      'subject',
-      'a longer tag',
-      'title',
-      'Neurology',
-      'stars',
-      'rabbit',
+      { name: '6th grade at school', category: 'level' },
+      { name: 'English', category: 'discipline' },
+      { name: 'Mathematics', category: 'discipline' },
+      { name: 'Taylor', category: 'discipline' },
+      { name: 'Biology', category: 'discipline' },
+      { name: 'French', category: 'discipline' },
+      { name: 'Good', category: 'level' },
+      { name: 'secondary', category: 'level' },
+      { name: 'dialogue', category: 'level' },
+      { name: 'exercice', category: 'level' },
+      { name: 'fun', category: 'level' },
+      { name: 'subject', category: 'resource-type' },
+      { name: 'a longer tag', category: 'level' },
+      { name: 'title', category: 'resource-type' },
+      { name: 'Neurology', category: 'discipline' },
+      { name: 'stars', category: 'resource-type' },
+      { name: 'rabbit', category: 'resource-type' },
     ],
   },
   play: async ({ args, canvasElement }) => {
@@ -76,7 +74,7 @@ export const Default = {
 
     // tags
     args.tags!.forEach((t) => {
-      expect(canvas.getByText(t)).toBeVisible();
+      expect(canvas.getByText(t.name)).toBeVisible();
     });
 
     // likes
@@ -103,7 +101,7 @@ export const LongTitleAndLiked = {
 
     // tags
     args.tags!.forEach((t) => {
-      expect(canvas.getByText(t)).toBeVisible();
+      expect(canvas.getByText(t.name)).toBeVisible();
     });
 
     // likes
@@ -130,7 +128,7 @@ export const ContentOverImage = {
 
     // tags
     args.tags!.forEach((t) => {
-      expect(canvas.getByText(t)).toBeVisible();
+      expect(canvas.getByText(t.name)).toBeVisible();
     });
 
     // likes
@@ -188,7 +186,7 @@ export const VeryLongTitle = {
 
     // tags
     args.tags!.forEach((t) => {
-      expect(canvas.getByText(t)).toBeVisible();
+      expect(canvas.getByText(t.name)).toBeVisible();
     });
 
     // name
@@ -212,7 +210,7 @@ export const Mobile = {
 
     // tags
     args.tags!.forEach((t) => {
-      expect(canvas.getByText(t)).toBeVisible();
+      expect(canvas.getByText(t.name)).toBeVisible();
     });
 
     // card name
@@ -228,20 +226,20 @@ export const WithinGrid = {
   },
   render: (args) => {
     return (
-      <Grid2 container spacing={1}>
-        <Grid2 size={{ sm: 6, lg: 4 }}>
+      <Grid container spacing={1}>
+        <Grid size={{ sm: 6, lg: 4 }}>
           <BigCard {...args} {...Empty.args} />
-        </Grid2>
-        <Grid2 size={{ sm: 6, lg: 4 }}>
+        </Grid>
+        <Grid size={{ sm: 6, lg: 4 }}>
           <BigCard {...args} {...Default.args} />
-        </Grid2>
-        <Grid2 size={{ sm: 6, lg: 4 }}>
+        </Grid>
+        <Grid size={{ sm: 6, lg: 4 }}>
           <BigCard {...args} {...NoCreator.args} />
-        </Grid2>
-        <Grid2 size={{ xs: 12 }}>
+        </Grid>
+        <Grid size={{ xs: 12 }}>
           <BigCard {...args} {...LongTitleAndLiked.args} />
-        </Grid2>
-      </Grid2>
+        </Grid>
+      </Grid>
     );
   },
 } satisfies Story;

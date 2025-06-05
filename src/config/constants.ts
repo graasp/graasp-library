@@ -1,10 +1,9 @@
+import { locales } from '~/paraglide/runtime';
+
 export const APP_NAME = 'Graasp';
 export const APP_KEYWORDS = ['graasp', 'library'];
 export const APP_AUTHOR = 'Graasp';
 export const DEFAULT_THUMBNAIL_ALT_TEXT = 'Thumbnail';
-
-export const TWITTER_MESSAGE_MAX_LENGTH = 270;
-export const MAIL_BREAK_LINE = '%0D%0A';
 
 export const MAX_COLLECTION_NAME_LENGTH = 100;
 
@@ -24,7 +23,7 @@ export const UrlSearch = {
   LevelTagSearch: 'level',
   ResourceTypeTagSearch: 'resourceType',
   GACrossDomainKey: '_gl',
-};
+} as const;
 
 export const ENV = {
   DEVELOPMENT: 'development',
@@ -39,3 +38,38 @@ export const HOMEPAGE_NB_ELEMENTS_TO_SHOW = 6;
 export const BACKGROUND_COLOR = 'rgb(248, 247, 254)';
 
 export const MAX_RESULTS_TO_SHOW = 5;
+
+export const Langs = {
+  // bg: "български",
+  // ca: "Català",
+  // cs: "čeština",
+  de: 'Deutsch',
+  // el: "Ελληνικά",
+  en: 'English',
+  es: 'Español',
+  // et: "Eesti",
+  // fi: "Suomi",
+  fr: 'Français',
+  // hu: "Magyar",
+  it: 'Italiano',
+  // ja: '日本語',
+  // ka: "ქართული",
+  // lt: "lietuvių kalba",
+  // lv: "Latviešu",
+  // nl: "Nederlands",
+  // pt: "Português",
+  // ro: "Română",
+  // ru: "Русский",
+  // sk: "Slovenský",
+  // sl: "Slovenščina",
+  // sr: "српски језик",
+  // sw: 'Kiswahili',
+  // tr: "Türkçe",
+  // uk: "Українська",
+  // vi: "Tiếng Việt",
+  // zh: "简体中文",
+  // zh_tw: "繁體中文",
+  ar: 'العربية',
+} as const satisfies {
+  [lang in (typeof locales)[number]]: string;
+};

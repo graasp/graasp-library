@@ -1,13 +1,10 @@
 import { ArrowForward } from '@mui/icons-material';
-import { Box, Button, styled } from '@mui/material';
+import { Box, styled } from '@mui/material';
 
-import { LibraryIcon } from '@graasp/ui';
+import LibraryIcon from '../ui/icons/LibraryIcon';
+import { ButtonLink } from './links/ButtonLink';
 
-import Link from 'next/link';
-
-import { ALL_COLLECTIONS_ROUTE } from '../../config/routes';
-
-const StyledButton = styled(Button)(({ theme }) => ({
+const StyledButtonLink = styled(ButtonLink)(({ theme }) => ({
   fontSize: '1.2rem',
   padding: theme.spacing(1, 2),
   margin: theme.spacing(3),
@@ -32,17 +29,12 @@ const StyledButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-type Props = {
-  message: string;
-};
-
-const DiscoverButton = ({ message }: Props) => {
+export function DiscoverButton({ message }: Readonly<{ message: string }>) {
   return (
-    <StyledButton
-      LinkComponent={Link}
-      href={ALL_COLLECTIONS_ROUTE}
+    <StyledButtonLink
+      to="/search"
       endIcon={<ArrowForward />}
-      color="secondary"
+      sx={{ color: 'white' }}
     >
       <Box display="inline">
         <LibraryIcon
@@ -53,8 +45,6 @@ const DiscoverButton = ({ message }: Props) => {
         />
         {message}
       </Box>
-    </StyledButton>
+    </StyledButtonLink>
   );
-};
-
-export default DiscoverButton;
+}

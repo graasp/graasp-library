@@ -1,0 +1,289 @@
+[
+  {
+    "id": "ce8453df-9cb9-41bf-b530-cbaa26637cee",
+    "name": "Mean Value Theorem",
+    "type": "embeddedLink",
+    "path": "47238afb_5e21_4cf8_b2b1_5904af82a155.ce8453df_9cb9_41bf_b530_cbaa26637cee",
+    "lang": "en",
+    "extra": {
+      "embeddedLink": {
+        "url": "https://www.geogebra.org/material/iframe/id/ssmedexb/width/886/height/515/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/true/sdz/true/ctl/false",
+        "html": "<div style=\"left: 0; width: 100%; height: 0; position: relative; padding-bottom: 58.1264%;\"><iframe src=\"https://www.geogebra.org/material/iframe/id/ssmedexb/width/886/height/515/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/true/sdz/true/ctl/false\" style=\"border: 0; top: 0; left: 0; width: 100%; height: 100%; position: absolute;\" allowfullscreen></iframe></div>",
+        "icons": [],
+        "thumbnails": []
+      }
+    },
+    "settings": {
+      "showLinkIframe": true
+    },
+    "creator": {
+      "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+      "name": "Graasper",
+      "email": "graasper@gmail.com"
+    },
+    "createdAt": "2021-10-20 13:24:41.380015+00",
+    "updatedAt": "2022-03-06 11:22:40.510249+00",
+    "permission": null,
+    "description": null,
+    "public": {
+      "id": "14715a9b-3805-4555-8aea-be15a50f20cd",
+      "type": "public",
+      "itemPath": "47238afb_5e21_4cf8_b2b1_5904af82a155",
+      "createdAt": "2021-10-23 09:38:38.780116+00"
+    }
+  },
+  {
+    "id": "ddd2faa4-209d-49af-9852-efa898ef9d0e",
+    "name": "Building Surfaces with Cross Sections and Function Modeling",
+    "type": "embeddedLink",
+    "path": "47238afb_5e21_4cf8_b2b1_5904af82a155.ddd2faa4_209d_49af_9852_efa898ef9d0e",
+    "lang": "en",
+    "extra": {
+      "embeddedLink": {
+        "url": "https://www.geogebra.org/m/n6ugwqav",
+        "html": "<div style=\"left: 0; width: 100%; height: 0; position: relative; padding-bottom: 61.1111%;\"><iframe src=\"https://www.geogebra.org/material/iframe/id/n6ugwqav\" style=\"border: 0; top: 0; left: 0; width: 100%; height: 100%; position: absolute;\" allowfullscreen></iframe></div>",
+        "icons": ["https://www.geogebra.org/favicon.ico"],
+        "thumbnails": [
+          "https://www.geogebra.org/resource/n6ugwqav/BNGgI3oMXVrgj6wr/material-n6ugwqav-thumb@l.png"
+        ]
+      }
+    },
+    "settings": {
+      "hasThumbnail": false,
+      "showLinkButton": false,
+      "showLinkIframe": true
+    },
+    "creator": {
+      "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+      "name": "Graasper",
+      "email": "graasper@gmail.com"
+    },
+    "createdAt": "2022-03-06 11:26:51.366566+00",
+    "updatedAt": "2022-11-23 23:17:58.882054+00",
+    "permission": null,
+    "description": "Calculus Exercises: Creating 3D Solids with Specified Cross Sections",
+    "public": {
+      "id": "14715a9b-3805-4555-8aea-be15a50f20cd",
+      "type": "public",
+      "itemPath": "47238afb_5e21_4cf8_b2b1_5904af82a155",
+      "createdAt": "2021-10-23 09:38:38.780116+00"
+    }
+  },
+  {
+    "id": "c36f8c2d-2451-4d1e-93e6-01c3442f3511",
+    "name": "Exploring Intersections of Planes",
+    "type": "embeddedLink",
+    "path": "47238afb_5e21_4cf8_b2b1_5904af82a155.c36f8c2d_2451_4d1e_93e6_01c3442f3511",
+    "lang": "en",
+    "extra": {
+      "embeddedLink": {
+        "url": "https://www.geogebra.org/m/yaxtcg8x",
+        "html": "<div style=\"left: 0; width: 100%; height: 0; position: relative; padding-bottom: 62.5%;\"><iframe src=\"https://www.geogebra.org/material/iframe/id/yaxtcg8x\" style=\"border: 0; top: 0; left: 0; width: 100%; height: 100%; position: absolute;\" allowfullscreen></iframe></div>",
+        "icons": ["https://www.geogebra.org/favicon.ico"],
+        "thumbnails": [
+          "https://www.geogebra.org/resource/yaxtcg8x/lYpGVuUoRJBmhezV/material-yaxtcg8x-thumb@l.png"
+        ]
+      }
+    },
+    "settings": {
+      "hasThumbnail": false,
+      "showLinkButton": false,
+      "showLinkIframe": true
+    },
+    "creator": {
+      "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+      "name": "Graasper",
+      "email": "graasper@gmail.com"
+    },
+    "createdAt": "2022-03-06 11:27:54.645721+00",
+    "updatedAt": "2022-11-23 23:18:22.629861+00",
+    "permission": null,
+    "description": "Exploring Intersections of Planes: Quick Discovery",
+    "public": {
+      "id": "14715a9b-3805-4555-8aea-be15a50f20cd",
+      "type": "public",
+      "itemPath": "47238afb_5e21_4cf8_b2b1_5904af82a155",
+      "createdAt": "2021-10-23 09:38:38.780116+00"
+    }
+  },
+  {
+    "id": "0e1870d5-35d6-41e8-8eed-29803bd16e1e",
+    "name": "Correlation Exploration",
+    "type": "embeddedLink",
+    "path": "47238afb_5e21_4cf8_b2b1_5904af82a155.0e1870d5_35d6_41e8_8eed_29803bd16e1e",
+    "lang": "en",
+    "extra": {
+      "embeddedLink": {
+        "url": "https://www.geogebra.org/m/w5q22bzu",
+        "html": "<div style=\"left: 0; width: 100%; height: 0; position: relative; padding-bottom: 70.0565%;\"><iframe src=\"https://www.geogebra.org/material/iframe/id/w5q22bzu\" style=\"border: 0; top: 0; left: 0; width: 100%; height: 100%; position: absolute;\" allowfullscreen></iframe></div>",
+        "icons": ["https://www.geogebra.org/favicon.ico"],
+        "thumbnails": [
+          "https://www.geogebra.org/resource/w5q22bzu/TvGWhmjxJxvpGvrV/material-w5q22bzu-thumb@l.png"
+        ]
+      }
+    },
+    "settings": {
+      "hasThumbnail": false,
+      "showLinkIframe": true
+    },
+    "creator": {
+      "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+      "name": "Graasper",
+      "email": "graasper@gmail.com"
+    },
+    "createdAt": "2022-03-06 11:28:12.9558+00",
+    "updatedAt": "2022-03-06 11:28:12.9558+00",
+    "permission": null,
+    "description": "What does \"r\" tell us? Guided discovery lesson re: correlation coefficient (without using this term)",
+    "public": {
+      "id": "14715a9b-3805-4555-8aea-be15a50f20cd",
+      "type": "public",
+      "itemPath": "47238afb_5e21_4cf8_b2b1_5904af82a155",
+      "createdAt": "2021-10-23 09:38:38.780116+00"
+    }
+  },
+  {
+    "id": "070d5628-e533-4d73-ad5e-6a8996a7b203",
+    "name": "Parallel Lines and the Angle in a Triangle",
+    "type": "embeddedLink",
+    "path": "47238afb_5e21_4cf8_b2b1_5904af82a155.070d5628_e533_4d73_ad5e_6a8996a7b203",
+    "lang": "en",
+    "extra": {
+      "embeddedLink": {
+        "url": "https://www.geogebra.org/m/z9dkac9e",
+        "icons": ["https://www.geogebra.org/favicon.ico"],
+        "thumbnails": [
+          "https://www.geogebra.org/resource/z9dkac9e/cImqbtmnRWaJCm6F/material-z9dkac9e-thumb@l.png"
+        ]
+      }
+    },
+    "settings": {
+      "hasThumbnail": false,
+      "showLinkButton": false,
+      "showLinkIframe": true
+    },
+    "creator": {
+      "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+      "name": "Graasper",
+      "email": "graasper@gmail.com"
+    },
+    "createdAt": "2022-03-06 11:29:00.405088+00",
+    "updatedAt": "2022-11-23 23:18:42.719852+00",
+    "permission": null,
+    "description": "[url=https://im.kendallhunt.com/MS/teachers/3/1/16/preparation.html]“Parallel Lines and the Angles in a Triangle”[/url] from IM Grade 8 by [url=https…",
+    "public": {
+      "id": "14715a9b-3805-4555-8aea-be15a50f20cd",
+      "type": "public",
+      "itemPath": "47238afb_5e21_4cf8_b2b1_5904af82a155",
+      "createdAt": "2021-10-23 09:38:38.780116+00"
+    }
+  },
+  {
+    "id": "0877467c-88a2-4d52-85ed-9271969fbd51",
+    "name": "Pythagorean Spiral",
+    "type": "embeddedLink",
+    "path": "47238afb_5e21_4cf8_b2b1_5904af82a155.0877467c_88a2_4d52_85ed_9271969fbd51",
+    "lang": "en",
+    "extra": {
+      "embeddedLink": {
+        "url": "https://www.geogebra.org/m/DpXGKYsZ",
+        "html": "<div style=\"left: 0; width: 100%; height: 0; position: relative; padding-bottom: 75%;\"><iframe src=\"https://www.geogebra.org/material/iframe/id/DpXGKYsZ\" style=\"border: 0; top: 0; left: 0; width: 100%; height: 100%; position: absolute;\" allowfullscreen></iframe></div>",
+        "icons": ["https://www.geogebra.org/favicon.ico"],
+        "thumbnails": [
+          "https://www.geogebra.org/resource/DpXGKYsZ/q4vAyRwzODpzjGQr/material-DpXGKYsZ-thumb@l.png"
+        ]
+      }
+    },
+    "settings": {
+      "hasThumbnail": false,
+      "showLinkIframe": true
+    },
+    "creator": {
+      "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+      "name": "Graasper",
+      "email": "graasper@gmail.com"
+    },
+    "createdAt": "2022-03-06 11:31:12.261215+00",
+    "updatedAt": "2022-03-06 11:31:12.261215+00",
+    "permission": null,
+    "description": "Some math art that has Pythagorean connections, logarithmic spirals, similar figures, exponential growth and decay.   Super fun.  Think aloud abo…",
+    "public": {
+      "id": "14715a9b-3805-4555-8aea-be15a50f20cd",
+      "type": "public",
+      "itemPath": "47238afb_5e21_4cf8_b2b1_5904af82a155",
+      "createdAt": "2021-10-23 09:38:38.780116+00"
+    }
+  },
+  {
+    "id": "43a4727e-9911-4920-a84a-0369acc77661",
+    "name": "The Defintion of the Golden Ratio",
+    "type": "embeddedLink",
+    "path": "47238afb_5e21_4cf8_b2b1_5904af82a155.43a4727e_9911_4920_a84a_0369acc77661",
+    "lang": "en",
+    "extra": {
+      "embeddedLink": {
+        "url": "https://www.geogebra.org/m/UqYzxKR9",
+        "icons": ["https://www.geogebra.org/favicon.ico"],
+        "thumbnails": [
+          "https://www.geogebra.org/resource/ErdKqjKv/wQcc5iK5Fk185P3a/material-ErdKqjKv-thumb@l.png"
+        ]
+      }
+    },
+    "settings": {
+      "hasThumbnail": false,
+      "showLinkButton": false,
+      "showLinkIframe": true
+    },
+    "creator": {
+      "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+      "name": "Graasper",
+      "email": "graasper@gmail.com"
+    },
+    "createdAt": "2022-03-06 11:33:08.58347+00",
+    "updatedAt": "2022-11-23 23:19:05.216796+00",
+    "permission": null,
+    "description": null,
+    "public": {
+      "id": "14715a9b-3805-4555-8aea-be15a50f20cd",
+      "type": "public",
+      "itemPath": "47238afb_5e21_4cf8_b2b1_5904af82a155",
+      "createdAt": "2021-10-23 09:38:38.780116+00"
+    }
+  },
+  {
+    "id": "39fd1fb6-1458-4fc0-9d0f-7728b97630e8",
+    "name": "Golden Ratio Examples? - Art & Architecture",
+    "type": "embeddedLink",
+    "path": "47238afb_5e21_4cf8_b2b1_5904af82a155.39fd1fb6_1458_4fc0_9d0f_7728b97630e8",
+    "lang": "en",
+    "extra": {
+      "embeddedLink": {
+        "url": "https://www.geogebra.org/m/nmuaSXrK",
+        "icons": ["https://www.geogebra.org/favicon.ico"],
+        "thumbnails": [
+          "https://www.geogebra.org/resource/g2uNnvCb/Eux5PZVnOIsovY0V/material-g2uNnvCb-thumb@l.png"
+        ]
+      }
+    },
+    "settings": {
+      "hasThumbnail": false,
+      "showLinkButton": false,
+      "showLinkIframe": true
+    },
+    "creator": {
+      "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+      "name": "Graasper",
+      "email": "graasper@gmail.com"
+    },
+    "createdAt": "2022-03-06 11:34:33.91009+00",
+    "updatedAt": "2022-11-23 23:17:47.272532+00",
+    "permission": null,
+    "description": null,
+    "public": {
+      "id": "14715a9b-3805-4555-8aea-be15a50f20cd",
+      "type": "public",
+      "itemPath": "47238afb_5e21_4cf8_b2b1_5904af82a155",
+      "createdAt": "2021-10-23 09:38:38.780116+00"
+    }
+  }
+]
