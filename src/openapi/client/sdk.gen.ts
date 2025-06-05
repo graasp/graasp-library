@@ -8,467 +8,491 @@ import type {
 import { client as _heyApiClient } from './client.gen';
 import type {
   AuthenticateData,
-  AuthenticateError,
+  AuthenticateErrors,
   ClearAllMentionsData,
-  ClearAllMentionsError,
-  ClearAllMentionsResponse,
+  ClearAllMentionsErrors,
+  ClearAllMentionsResponses,
   ClearChatMessageData,
-  ClearChatMessageError,
-  ClearChatMessageResponse,
+  ClearChatMessageErrors,
+  ClearChatMessageResponses,
   CollectionSearchData,
-  CollectionSearchError,
-  CollectionSearchResponse,
+  CollectionSearchErrors,
+  CollectionSearchResponses,
   CopyManyItemsData,
-  CopyManyItemsError,
-  CopyManyItemsResponse,
+  CopyManyItemsErrors,
+  CopyManyItemsResponses,
   CreateAppActionData,
-  CreateAppActionError,
-  CreateAppActionResponse,
+  CreateAppActionErrors,
+  CreateAppActionResponses,
   CreateAppData,
   CreateAppDataData,
-  CreateAppDataError,
+  CreateAppDataErrors,
   CreateAppDataFileData,
-  CreateAppDataFileError,
-  CreateAppDataResponse,
-  CreateAppError,
-  CreateAppResponse,
+  CreateAppDataFileErrors,
+  CreateAppDataFileResponses,
+  CreateAppDataResponses,
+  CreateAppErrors,
+  CreateAppResponses,
   CreateAppSettingData,
-  CreateAppSettingError,
+  CreateAppSettingErrors,
   CreateAppSettingFileData,
-  CreateAppSettingFileError,
-  CreateAppSettingFileResponse,
-  CreateAppSettingResponse,
+  CreateAppSettingFileErrors,
+  CreateAppSettingFileResponses,
+  CreateAppSettingResponses,
   CreateBookmarkData,
-  CreateBookmarkError,
-  CreateBookmarkResponse,
+  CreateBookmarkErrors,
+  CreateBookmarkResponses,
   CreateChatMessageData,
-  CreateChatMessageError,
-  CreateChatMessageResponse,
+  CreateChatMessageErrors,
+  CreateChatMessageResponses,
   CreateChatbotCompletionPromptData,
-  CreateChatbotCompletionPromptError,
-  CreateChatbotCompletionPromptResponse,
+  CreateChatbotCompletionPromptErrors,
+  CreateChatbotCompletionPromptResponses,
   CreateDocumentData,
-  CreateDocumentError,
-  CreateDocumentResponse,
+  CreateDocumentErrors,
+  CreateDocumentResponses,
   CreateEtherpadData,
-  CreateEtherpadError,
-  CreateEtherpadResponse,
+  CreateEtherpadErrors,
+  CreateEtherpadResponses,
   CreateFolderData,
-  CreateFolderError,
-  CreateFolderResponse,
+  CreateFolderErrors,
+  CreateFolderResponses,
   CreateFolderWithThumbnailData,
-  CreateFolderWithThumbnailError,
-  CreateFolderWithThumbnailResponse,
+  CreateFolderWithThumbnailErrors,
+  CreateFolderWithThumbnailResponses,
   CreateInvitationData,
-  CreateInvitationError,
-  CreateInvitationResponse,
+  CreateInvitationErrors,
+  CreateInvitationResponses,
   CreateItemData,
-  CreateItemError,
+  CreateItemErrors,
   CreateItemFlagData,
-  CreateItemFlagError,
-  CreateItemFlagResponse,
+  CreateItemFlagErrors,
+  CreateItemFlagResponses,
   CreateItemLikeData,
-  CreateItemLikeError,
-  CreateItemLikeResponse,
+  CreateItemLikeErrors,
+  CreateItemLikeResponses,
   CreateItemMembershipData,
-  CreateItemMembershipError,
-  CreateItemMembershipResponse,
-  CreateItemResponse,
+  CreateItemMembershipErrors,
+  CreateItemMembershipResponses,
+  CreateItemResponses,
   CreateItemWithThumbnailData,
-  CreateItemWithThumbnailError,
-  CreateItemWithThumbnailResponse,
+  CreateItemWithThumbnailErrors,
+  CreateItemWithThumbnailResponses,
   CreateLinkData,
-  CreateLinkError,
-  CreateLinkResponse,
+  CreateLinkErrors,
+  CreateLinkResponses,
   CreateMembershipRequestData,
-  CreateMembershipRequestResponse,
+  CreateMembershipRequestResponses,
   CreateOwnProfileData,
-  CreateOwnProfileError,
-  CreateOwnProfileResponse,
+  CreateOwnProfileErrors,
+  CreateOwnProfileResponses,
   CreateShortLinkData,
-  CreateShortLinkError,
-  CreateShortLinkResponse,
+  CreateShortLinkErrors,
+  CreateShortLinkResponses,
   CreateShortcutData,
-  CreateShortcutError,
-  CreateShortcutResponse,
+  CreateShortcutErrors,
+  CreateShortcutResponses,
   CreateTagForItemData,
-  CreateTagForItemError,
-  CreateTagForItemResponse,
+  CreateTagForItemErrors,
+  CreateTagForItemResponses,
   CreateVisibilityData,
-  CreateVisibilityError,
-  CreateVisibilityResponse,
+  CreateVisibilityErrors,
+  CreateVisibilityResponses,
   DeleteAliasData,
-  DeleteAliasError,
-  DeleteAliasResponse,
+  DeleteAliasErrors,
+  DeleteAliasResponses,
   DeleteAppDataData,
-  DeleteAppDataError,
-  DeleteAppDataResponse,
+  DeleteAppDataErrors,
+  DeleteAppDataResponses,
   DeleteAppSettingData,
-  DeleteAppSettingError,
-  DeleteAppSettingResponse,
+  DeleteAppSettingErrors,
+  DeleteAppSettingResponses,
   DeleteBookmarkData,
-  DeleteBookmarkError,
-  DeleteBookmarkResponse,
+  DeleteBookmarkErrors,
+  DeleteBookmarkResponses,
   DeleteChatMessageData,
-  DeleteChatMessageError,
-  DeleteChatMessageResponse,
+  DeleteChatMessageErrors,
+  DeleteChatMessageResponses,
   DeleteCurrentAccountData,
-  DeleteCurrentAccountError,
-  DeleteCurrentAccountResponse,
+  DeleteCurrentAccountErrors,
+  DeleteCurrentAccountResponses,
   DeleteGeolocationData,
-  DeleteGeolocationError,
-  DeleteGeolocationResponse,
+  DeleteGeolocationErrors,
+  DeleteGeolocationResponses,
   DeleteInvitationData,
-  DeleteInvitationError,
-  DeleteInvitationResponse,
+  DeleteInvitationErrors,
+  DeleteInvitationResponses,
   DeleteItemLikeData,
-  DeleteItemLikeError,
-  DeleteItemLikeResponse,
+  DeleteItemLikeErrors,
+  DeleteItemLikeResponses,
   DeleteItemLoginSchemaData,
-  DeleteItemLoginSchemaError,
+  DeleteItemLoginSchemaErrors,
+  DeleteItemLoginSchemaResponses,
   DeleteItemMembershipData,
-  DeleteItemMembershipError,
-  DeleteItemMembershipResponse,
+  DeleteItemMembershipErrors,
+  DeleteItemMembershipResponses,
   DeleteItemsByIdThumbnailsData,
+  DeleteItemsByIdThumbnailsResponses,
   DeleteManyItemsData,
-  DeleteManyItemsError,
-  DeleteManyItemsResponse,
+  DeleteManyItemsErrors,
+  DeleteManyItemsResponses,
   DeleteMembersMembersByIdDeleteData,
+  DeleteMembersMembersByIdDeleteResponses,
   DeleteMembershipRequestData,
-  DeleteMembershipRequestResponse,
+  DeleteMembershipRequestResponses,
   DeleteMentionData,
-  DeleteMentionError,
-  DeleteMentionResponse,
+  DeleteMentionErrors,
+  DeleteMentionResponses,
   DeleteTagForItemData,
-  DeleteTagForItemError,
-  DeleteTagForItemResponse,
+  DeleteTagForItemErrors,
+  DeleteTagForItemResponses,
   DeleteVisibilityData,
-  DeleteVisibilityError,
-  DeleteVisibilityResponse,
+  DeleteVisibilityErrors,
+  DeleteVisibilityResponses,
   DownloadAppDataFileData,
-  DownloadAppDataFileError,
-  DownloadAppDataFileResponse,
+  DownloadAppDataFileErrors,
+  DownloadAppDataFileResponses,
   DownloadAppSettingFileData,
-  DownloadAppSettingFileError,
-  DownloadAppSettingFileResponse,
+  DownloadAppSettingFileErrors,
+  DownloadAppSettingFileResponses,
   DownloadAvatarData,
-  DownloadAvatarError,
-  DownloadAvatarResponse,
+  DownloadAvatarErrors,
+  DownloadAvatarResponses,
   DownloadFileData,
-  DownloadFileError,
-  DownloadFileResponse,
+  DownloadFileErrors,
+  DownloadFileResponses,
   DownloadItemThumbnailData,
-  DownloadItemThumbnailError,
-  DownloadItemThumbnailResponse,
+  DownloadItemThumbnailErrors,
+  DownloadItemThumbnailResponses,
   EnrollData,
-  EnrollResponse,
+  EnrollResponses,
   ExportActionsData,
-  ExportActionsError,
-  ExportActionsResponse,
+  ExportActionsErrors,
+  ExportActionsResponses,
   ExportMemberDataData,
-  ExportMemberDataError,
-  ExportMemberDataResponse,
+  ExportMemberDataErrors,
+  ExportMemberDataResponses,
   ExportZipData,
-  ExportZipError,
+  ExportZipErrors,
+  ExportZipResponses,
   GenerateAppTokenData,
-  GenerateAppTokenError,
-  GenerateAppTokenResponse,
+  GenerateAppTokenErrors,
+  GenerateAppTokenResponses,
   GeolocationReverseData,
-  GeolocationReverseError,
-  GeolocationReverseResponse,
+  GeolocationReverseErrors,
+  GeolocationReverseResponses,
   GeolocationSearchData,
-  GeolocationSearchError,
-  GeolocationSearchResponse,
+  GeolocationSearchErrors,
+  GeolocationSearchResponses,
   GetAccessibleItemsData,
-  GetAccessibleItemsError,
-  GetAccessibleItemsResponse,
+  GetAccessibleItemsErrors,
+  GetAccessibleItemsResponses,
   GetAppActionsForAppData,
-  GetAppActionsForAppError,
-  GetAppActionsForAppResponse,
+  GetAppActionsForAppErrors,
+  GetAppActionsForAppResponses,
   GetAppContextData,
-  GetAppContextResponse,
+  GetAppContextResponses,
   GetAppDataForAppData,
-  GetAppDataForAppError,
-  GetAppDataForAppResponse,
+  GetAppDataForAppErrors,
+  GetAppDataForAppResponses,
   GetAppListData,
-  GetAppListError,
-  GetAppListResponse,
+  GetAppListErrors,
+  GetAppListResponses,
   GetAppSettingsForAppData,
-  GetAppSettingsForAppError,
-  GetAppSettingsForAppResponse,
+  GetAppSettingsForAppErrors,
+  GetAppSettingsForAppResponses,
   GetChatData,
-  GetChatError,
-  GetChatResponse,
+  GetChatErrors,
+  GetChatResponses,
   GetChildrenData,
-  GetChildrenError,
-  GetChildrenResponse,
+  GetChildrenErrors,
+  GetChildrenResponses,
   GetCollectionInformationsData,
-  GetCollectionInformationsError,
-  GetCollectionInformationsResponse,
+  GetCollectionInformationsErrors,
+  GetCollectionInformationsResponses,
   GetCollectionsForMemberData,
-  GetCollectionsForMemberError,
-  GetCollectionsForMemberResponse,
+  GetCollectionsForMemberErrors,
+  GetCollectionsForMemberResponses,
   GetCountForTagsData,
-  GetCountForTagsError,
-  GetCountForTagsResponse,
+  GetCountForTagsErrors,
+  GetCountForTagsResponses,
   GetCurrentAccountData,
-  GetCurrentAccountError,
-  GetCurrentAccountResponse,
+  GetCurrentAccountErrors,
+  GetCurrentAccountResponses,
   GetDescendantItemsData,
-  GetDescendantItemsError,
-  GetDescendantItemsResponse,
+  GetDescendantItemsErrors,
+  GetDescendantItemsResponses,
   GetEtherpadFromItemData,
-  GetEtherpadFromItemError,
-  GetEtherpadFromItemResponse,
+  GetEtherpadFromItemErrors,
+  GetEtherpadFromItemResponses,
   GetFacetsForNameData,
-  GetFacetsForNameError,
-  GetFacetsForNameResponse,
+  GetFacetsForNameErrors,
+  GetFacetsForNameResponses,
   GetFeaturedCollectionsData,
-  GetFeaturedCollectionsError,
-  GetFeaturedCollectionsResponse,
+  GetFeaturedCollectionsErrors,
+  GetFeaturedCollectionsResponses,
   GetFlagTypesData,
-  GetFlagTypesError,
-  GetFlagTypesResponse,
+  GetFlagTypesErrors,
+  GetFlagTypesResponses,
   GetGeolocationByItemData,
-  GetGeolocationByItemError,
-  GetGeolocationByItemResponse,
+  GetGeolocationByItemErrors,
+  GetGeolocationByItemResponses,
   GetInvitationByIdData,
-  GetInvitationByIdError,
-  GetInvitationByIdResponse,
+  GetInvitationByIdErrors,
+  GetInvitationByIdResponses,
   GetInvitationForItemData,
-  GetInvitationForItemError,
-  GetInvitationForItemResponse,
+  GetInvitationForItemErrors,
+  GetInvitationForItemResponses,
   GetItemActionsByDayData,
-  GetItemActionsByDayError,
-  GetItemActionsByDayResponse,
+  GetItemActionsByDayErrors,
+  GetItemActionsByDayResponses,
   GetItemActionsByHourData,
-  GetItemActionsByHourError,
-  GetItemActionsByHourResponse,
+  GetItemActionsByHourErrors,
+  GetItemActionsByHourResponses,
   GetItemActionsByWeekdayData,
-  GetItemActionsByWeekdayError,
-  GetItemActionsByWeekdayResponse,
+  GetItemActionsByWeekdayErrors,
+  GetItemActionsByWeekdayResponses,
   GetItemData,
-  GetItemError,
+  GetItemErrors,
   GetItemLoginSchemaData,
-  GetItemLoginSchemaError,
-  GetItemLoginSchemaResponse,
+  GetItemLoginSchemaErrors,
+  GetItemLoginSchemaResponses,
   GetItemLoginSchemaTypeData,
-  GetItemLoginSchemaTypeError,
-  GetItemLoginSchemaTypeResponse,
+  GetItemLoginSchemaTypeErrors,
+  GetItemLoginSchemaTypeResponses,
   GetItemMembershipsForItemData,
-  GetItemMembershipsForItemError,
-  GetItemMembershipsForItemResponse,
-  GetItemResponse,
+  GetItemMembershipsForItemErrors,
+  GetItemMembershipsForItemResponses,
+  GetItemResponses,
   GetItemsCollectionsSearchRebuildData,
+  GetItemsCollectionsSearchRebuildResponses,
   GetItemsH5pAssetsIntegrationHtmlData,
+  GetItemsH5pAssetsIntegrationHtmlResponses,
   GetItemsInBoxData,
-  GetItemsInBoxError,
-  GetItemsInBoxResponse,
+  GetItemsInBoxErrors,
+  GetItemsInBoxResponses,
   GetItemsPublicationByItemIdStatusData,
+  GetItemsPublicationByItemIdStatusResponses,
   GetLatestItemValidationGroupData,
-  GetLatestItemValidationGroupError,
-  GetLatestItemValidationGroupResponse,
+  GetLatestItemValidationGroupErrors,
+  GetLatestItemValidationGroupResponses,
   GetLikesForCurrentMemberData,
-  GetLikesForCurrentMemberError,
-  GetLikesForCurrentMemberResponse,
+  GetLikesForCurrentMemberErrors,
+  GetLikesForCurrentMemberResponses,
   GetLikesForItemData,
-  GetLikesForItemError,
-  GetLikesForItemResponse,
+  GetLikesForItemErrors,
+  GetLikesForItemResponses,
   GetLinkMetadataData,
-  GetLinkMetadataError,
-  GetLinkMetadataResponse,
+  GetLinkMetadataErrors,
+  GetLinkMetadataResponses,
   GetLogoutData,
+  GetLogoutResponses,
   GetMemberProfileData,
-  GetMemberProfileError,
-  GetMemberProfileResponse,
+  GetMemberProfileErrors,
+  GetMemberProfileResponses,
   GetMembersActionsData,
-  GetMembersActionsError,
-  GetMembersActionsResponse,
+  GetMembersActionsErrors,
+  GetMembersActionsResponses,
   GetMembersCurrentPasswordStatusData,
-  GetMembersCurrentPasswordStatusResponse,
+  GetMembersCurrentPasswordStatusResponses,
   GetMembershipRequestsByItemIdData,
-  GetMembershipRequestsByItemIdResponse,
+  GetMembershipRequestsByItemIdResponses,
   GetMostLikedCollectionsData,
-  GetMostLikedCollectionsError,
-  GetMostLikedCollectionsResponse,
+  GetMostLikedCollectionsErrors,
+  GetMostLikedCollectionsResponses,
   GetMostRecentCollectionsData,
-  GetMostRecentCollectionsError,
-  GetMostRecentCollectionsResponse,
+  GetMostRecentCollectionsErrors,
+  GetMostRecentCollectionsResponses,
   GetNextMaintenanceData,
-  GetNextMaintenanceError,
-  GetNextMaintenanceResponse,
+  GetNextMaintenanceErrors,
+  GetNextMaintenanceResponses,
   GetOneMemberData,
-  GetOneMemberError,
-  GetOneMemberResponse,
+  GetOneMemberErrors,
+  GetOneMemberResponses,
   GetOwnBookmarkData,
-  GetOwnBookmarkError,
-  GetOwnBookmarkResponse,
+  GetOwnBookmarkErrors,
+  GetOwnBookmarkResponses,
   GetOwnMembershipRequestByItemIdData,
-  GetOwnMembershipRequestByItemIdResponse,
+  GetOwnMembershipRequestByItemIdResponses,
   GetOwnMentionsData,
-  GetOwnMentionsError,
-  GetOwnMentionsResponse,
+  GetOwnMentionsErrors,
+  GetOwnMentionsResponses,
   GetOwnMostUsedAppsData,
-  GetOwnMostUsedAppsError,
-  GetOwnMostUsedAppsResponse,
+  GetOwnMostUsedAppsErrors,
+  GetOwnMostUsedAppsResponses,
   GetOwnProfileData,
-  GetOwnProfileError,
-  GetOwnProfileResponse,
+  GetOwnProfileErrors,
+  GetOwnProfileResponses,
   GetOwnRecycledItemsData,
-  GetOwnRecycledItemsError,
-  GetOwnRecycledItemsResponse,
+  GetOwnRecycledItemsErrors,
+  GetOwnRecycledItemsResponses,
   GetParentItemsData,
-  GetParentItemsError,
-  GetParentItemsResponse,
+  GetParentItemsErrors,
+  GetParentItemsResponses,
   GetShortLinkAvailabilityData,
-  GetShortLinkAvailabilityError,
-  GetShortLinkAvailabilityResponse,
+  GetShortLinkAvailabilityErrors,
+  GetShortLinkAvailabilityResponses,
   GetShortLinkRedirectionData,
-  GetShortLinkRedirectionError,
+  GetShortLinkRedirectionErrors,
   GetShortLinksForItemData,
-  GetShortLinksForItemError,
-  GetShortLinksForItemResponse,
+  GetShortLinksForItemErrors,
+  GetShortLinksForItemResponses,
   GetStatusData,
+  GetStatusResponses,
   GetStorageData,
-  GetStorageError,
+  GetStorageErrors,
   GetStorageFilesData,
-  GetStorageFilesError,
-  GetStorageFilesResponse,
-  GetStorageResponse,
+  GetStorageFilesErrors,
+  GetStorageFilesResponses,
+  GetStorageResponses,
   GetTagsForItemData,
-  GetTagsForItemError,
-  GetTagsForItemResponse,
+  GetTagsForItemErrors,
+  GetTagsForItemResponses,
+  GetUrlData,
+  GetUrlErrors,
+  GetUrlResponses,
   GetVersionData,
+  GetVersionResponses,
   GetWsData,
+  GetWsResponses,
   GraaspZipExportData,
-  GraaspZipExportError,
+  GraaspZipExportErrors,
+  GraaspZipExportResponses,
   HealthData,
-  HealthResponse,
+  HealthResponses,
   ImportH5pData,
-  ImportH5pError,
-  ImportH5pResponse,
+  ImportH5pErrors,
+  ImportH5pResponses,
   ImportZipData,
-  ImportZipError,
+  ImportZipErrors,
+  ImportZipResponses,
   InviteFromCsvData,
-  InviteFromCsvError,
-  InviteFromCsvResponse,
+  InviteFromCsvErrors,
+  InviteFromCsvResponses,
   InviteFromCsvWithTemplateData,
-  InviteFromCsvWithTemplateError,
-  InviteFromCsvWithTemplateResponse,
+  InviteFromCsvWithTemplateErrors,
+  InviteFromCsvWithTemplateResponses,
   LoginData,
-  LoginError,
+  LoginErrors,
   LoginOrRegisterAsGuestData,
-  LoginOrRegisterAsGuestError,
-  LoginOrRegisterAsGuestResponse,
-  LoginResponse,
+  LoginOrRegisterAsGuestErrors,
+  LoginOrRegisterAsGuestResponses,
+  LoginResponses,
   MoveManyItemsData,
-  MoveManyItemsError,
-  MoveManyItemsResponse,
+  MoveManyItemsErrors,
+  MoveManyItemsResponses,
   PatchChangeEmailData,
-  PatchChangeEmailError,
-  PatchChangeEmailResponse,
+  PatchChangeEmailErrors,
+  PatchChangeEmailResponses,
   PatchChatMessageData,
-  PatchChatMessageError,
-  PatchChatMessageResponse,
+  PatchChatMessageErrors,
+  PatchChatMessageResponses,
   PatchMentionData,
-  PatchMentionError,
-  PatchMentionResponse,
+  PatchMentionErrors,
+  PatchMentionResponses,
   PatchPasswordData,
-  PatchPasswordError,
+  PatchPasswordErrors,
   PatchPasswordResetData,
-  PatchPasswordResponse,
+  PatchPasswordResetErrors,
+  PatchPasswordResetResponses,
+  PatchPasswordResponses,
   PostActionData,
-  PostActionError,
-  PostActionResponse,
+  PostActionErrors,
+  PostActionResponses,
   PostChangeEmailData,
-  PostChangeEmailError,
-  PostChangeEmailResponse,
+  PostChangeEmailErrors,
+  PostChangeEmailResponses,
   PostItemsByIdThumbnailsData,
-  PostItemsByIdThumbnailsError,
-  PostItemsByIdThumbnailsResponse,
+  PostItemsByIdThumbnailsErrors,
+  PostItemsByIdThumbnailsResponses,
   PostLoginPasswordData,
+  PostLoginPasswordResponses,
   PostMembersAvatarData,
-  PostMembersAvatarResponse,
+  PostMembersAvatarResponses,
   PostPasswordData,
-  PostPasswordError,
+  PostPasswordErrors,
   PostPasswordResetData,
-  PostPasswordResponse,
+  PostPasswordResetErrors,
+  PostPasswordResetResponses,
+  PostPasswordResponses,
   PublishItemData,
-  PublishItemError,
-  PublishItemResponse,
+  PublishItemErrors,
+  PublishItemResponses,
   PutGeolocationData,
-  PutGeolocationError,
-  PutGeolocationResponse,
+  PutGeolocationErrors,
+  PutGeolocationResponses,
   RecycleManyItemsData,
-  RecycleManyItemsError,
-  RecycleManyItemsResponse,
+  RecycleManyItemsErrors,
+  RecycleManyItemsResponses,
   RegisterData,
-  RegisterError,
-  RegisterResponse,
+  RegisterErrors,
+  RegisterResponses,
   ReorderItemData,
-  ReorderItemError,
-  ReorderItemResponse,
+  ReorderItemErrors,
+  ReorderItemResponses,
   RestoreManyItemsData,
-  RestoreManyItemsError,
-  RestoreManyItemsResponse,
+  RestoreManyItemsErrors,
+  RestoreManyItemsResponses,
   SendInvitationData,
-  SendInvitationError,
-  SendInvitationResponse,
+  SendInvitationErrors,
+  SendInvitationResponses,
   UnpublishItemData,
-  UnpublishItemError,
-  UnpublishItemResponse,
+  UnpublishItemErrors,
+  UnpublishItemResponses,
   UpdateAppData,
   UpdateAppDataData,
-  UpdateAppDataError,
-  UpdateAppDataResponse,
-  UpdateAppError,
-  UpdateAppResponse,
+  UpdateAppDataErrors,
+  UpdateAppDataResponses,
+  UpdateAppErrors,
+  UpdateAppResponses,
   UpdateAppSettingData,
-  UpdateAppSettingError,
-  UpdateAppSettingResponse,
+  UpdateAppSettingErrors,
+  UpdateAppSettingResponses,
   UpdateCurrentAccountData,
-  UpdateCurrentAccountError,
-  UpdateCurrentAccountResponse,
+  UpdateCurrentAccountErrors,
+  UpdateCurrentAccountResponses,
   UpdateDocumentData,
-  UpdateDocumentError,
-  UpdateDocumentResponse,
+  UpdateDocumentErrors,
+  UpdateDocumentResponses,
   UpdateEtherpadData,
-  UpdateEtherpadError,
-  UpdateEtherpadResponse,
+  UpdateEtherpadErrors,
+  UpdateEtherpadResponses,
   UpdateFileData,
-  UpdateFileError,
+  UpdateFileErrors,
+  UpdateFileResponses,
   UpdateFolderData,
-  UpdateFolderError,
-  UpdateFolderResponse,
+  UpdateFolderErrors,
+  UpdateFolderResponses,
   UpdateInvitationData,
-  UpdateInvitationError,
-  UpdateInvitationResponse,
+  UpdateInvitationErrors,
+  UpdateInvitationResponses,
   UpdateItemData,
-  UpdateItemError,
+  UpdateItemErrors,
   UpdateItemLoginSchemaData,
-  UpdateItemLoginSchemaError,
+  UpdateItemLoginSchemaErrors,
+  UpdateItemLoginSchemaResponses,
   UpdateItemMembershipData,
-  UpdateItemMembershipError,
-  UpdateItemMembershipResponse,
-  UpdateItemResponse,
+  UpdateItemMembershipErrors,
+  UpdateItemMembershipResponses,
+  UpdateItemResponses,
   UpdateLinkData,
-  UpdateLinkError,
-  UpdateLinkResponse,
+  UpdateLinkErrors,
+  UpdateLinkResponses,
   UpdateOwnProfileData,
-  UpdateOwnProfileError,
-  UpdateOwnProfileResponse,
+  UpdateOwnProfileErrors,
+  UpdateOwnProfileResponses,
   UpdateShortLinkData,
-  UpdateShortLinkError,
-  UpdateShortLinkResponse,
+  UpdateShortLinkErrors,
+  UpdateShortLinkResponses,
   UpdateShortcutData,
-  UpdateShortcutError,
-  UpdateShortcutResponse,
+  UpdateShortcutErrors,
+  UpdateShortcutResponses,
   UploadFileData,
-  UploadFileError,
-  UploadFileResponse,
+  UploadFileErrors,
+  UploadFileResponses,
   ValidateItemData,
-  ValidateItemError,
-  ValidateItemResponse,
+  ValidateItemErrors,
+  ValidateItemResponses,
 } from './types.gen';
 
 export type Options<
@@ -496,7 +520,7 @@ export const health = <ThrowOnError extends boolean = false>(
   options?: Options<HealthData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).get<
-    HealthResponse,
+    HealthResponses,
     unknown,
     ThrowOnError
   >({
@@ -508,23 +532,27 @@ export const health = <ThrowOnError extends boolean = false>(
 export const getStatus = <ThrowOnError extends boolean = false>(
   options?: Options<GetStatusData, ThrowOnError>,
 ) => {
-  return (options?.client ?? _heyApiClient).get<unknown, unknown, ThrowOnError>(
-    {
-      url: '/status',
-      ...options,
-    },
-  );
+  return (options?.client ?? _heyApiClient).get<
+    GetStatusResponses,
+    unknown,
+    ThrowOnError
+  >({
+    url: '/status',
+    ...options,
+  });
 };
 
 export const getVersion = <ThrowOnError extends boolean = false>(
   options?: Options<GetVersionData, ThrowOnError>,
 ) => {
-  return (options?.client ?? _heyApiClient).get<unknown, unknown, ThrowOnError>(
-    {
-      url: '/version',
-      ...options,
-    },
-  );
+  return (options?.client ?? _heyApiClient).get<
+    GetVersionResponses,
+    unknown,
+    ThrowOnError
+  >({
+    url: '/version',
+    ...options,
+  });
 };
 
 /**
@@ -535,8 +563,8 @@ export const getNextMaintenance = <ThrowOnError extends boolean = false>(
   options?: Options<GetNextMaintenanceData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).get<
-    GetNextMaintenanceResponse,
-    GetNextMaintenanceError,
+    GetNextMaintenanceResponses,
+    GetNextMaintenanceErrors,
     ThrowOnError
   >({
     url: '/maintenance/next',
@@ -552,15 +580,15 @@ export const register = <ThrowOnError extends boolean = false>(
   options: Options<RegisterData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    RegisterResponse,
-    RegisterError,
+    RegisterResponses,
+    RegisterErrors,
     ThrowOnError
   >({
     url: '/register',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -573,15 +601,15 @@ export const login = <ThrowOnError extends boolean = false>(
   options: Options<LoginData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    LoginResponse,
-    LoginError,
+    LoginResponses,
+    LoginErrors,
     ThrowOnError
   >({
     url: '/login',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -595,7 +623,7 @@ export const authenticate = <ThrowOnError extends boolean = false>(
 ) => {
   return (options.client ?? _heyApiClient).get<
     unknown,
-    AuthenticateError,
+    AuthenticateErrors,
     ThrowOnError
   >({
     url: '/auth',
@@ -606,12 +634,14 @@ export const authenticate = <ThrowOnError extends boolean = false>(
 export const getLogout = <ThrowOnError extends boolean = false>(
   options?: Options<GetLogoutData, ThrowOnError>,
 ) => {
-  return (options?.client ?? _heyApiClient).get<unknown, unknown, ThrowOnError>(
-    {
-      url: '/logout',
-      ...options,
-    },
-  );
+  return (options?.client ?? _heyApiClient).get<
+    GetLogoutResponses,
+    unknown,
+    ThrowOnError
+  >({
+    url: '/logout',
+    ...options,
+  });
 };
 
 /**
@@ -621,16 +651,18 @@ export const getLogout = <ThrowOnError extends boolean = false>(
 export const postLoginPassword = <ThrowOnError extends boolean = false>(
   options: Options<PostLoginPasswordData, ThrowOnError>,
 ) => {
-  return (options.client ?? _heyApiClient).post<unknown, unknown, ThrowOnError>(
-    {
-      url: '/login-password',
-      ...options,
-      headers: {
-        'Content-Type': 'application/json',
-        ...options?.headers,
-      },
+  return (options.client ?? _heyApiClient).post<
+    PostLoginPasswordResponses,
+    unknown,
+    ThrowOnError
+  >({
+    url: '/login-password',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
     },
-  );
+  });
 };
 
 /**
@@ -641,15 +673,15 @@ export const patchPassword = <ThrowOnError extends boolean = false>(
   options: Options<PatchPasswordData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).patch<
-    PatchPasswordResponse,
-    PatchPasswordError,
+    PatchPasswordResponses,
+    PatchPasswordErrors,
     ThrowOnError
   >({
     url: '/password',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -662,15 +694,15 @@ export const postPassword = <ThrowOnError extends boolean = false>(
   options: Options<PostPasswordData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    PostPasswordResponse,
-    PostPasswordError,
+    PostPasswordResponses,
+    PostPasswordErrors,
     ThrowOnError
   >({
     url: '/password',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -683,15 +715,15 @@ export const patchPasswordReset = <ThrowOnError extends boolean = false>(
   options: Options<PatchPasswordResetData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).patch<
-    unknown,
-    unknown,
+    PatchPasswordResetResponses,
+    PatchPasswordResetErrors,
     ThrowOnError
   >({
     url: '/password/reset',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -703,16 +735,18 @@ export const patchPasswordReset = <ThrowOnError extends boolean = false>(
 export const postPasswordReset = <ThrowOnError extends boolean = false>(
   options: Options<PostPasswordResetData, ThrowOnError>,
 ) => {
-  return (options.client ?? _heyApiClient).post<unknown, unknown, ThrowOnError>(
-    {
-      url: '/password/reset',
-      ...options,
-      headers: {
-        'Content-Type': 'application/json',
-        ...options?.headers,
-      },
+  return (options.client ?? _heyApiClient).post<
+    PostPasswordResetResponses,
+    PostPasswordResetErrors,
+    ThrowOnError
+  >({
+    url: '/password/reset',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
     },
-  );
+  });
 };
 
 /**
@@ -725,7 +759,7 @@ export const getMembersCurrentPasswordStatus = <
   options?: Options<GetMembersCurrentPasswordStatusData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).get<
-    GetMembersCurrentPasswordStatusResponse,
+    GetMembersCurrentPasswordStatusResponses,
     unknown,
     ThrowOnError
   >({
@@ -737,20 +771,22 @@ export const getMembersCurrentPasswordStatus = <
 export const getWs = <ThrowOnError extends boolean = false>(
   options?: Options<GetWsData, ThrowOnError>,
 ) => {
-  return (options?.client ?? _heyApiClient).get<unknown, unknown, ThrowOnError>(
-    {
-      url: '/ws',
-      ...options,
-    },
-  );
+  return (options?.client ?? _heyApiClient).get<
+    GetWsResponses,
+    unknown,
+    ThrowOnError
+  >({
+    url: '/ws',
+    ...options,
+  });
 };
 
 export const getMembersActions = <ThrowOnError extends boolean = false>(
   options?: Options<GetMembersActionsData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).get<
-    GetMembersActionsResponse,
-    GetMembersActionsError,
+    GetMembersActionsResponses,
+    GetMembersActionsErrors,
     ThrowOnError
   >({
     url: '/members/actions',
@@ -764,7 +800,7 @@ export const deleteMembersMembersByIdDelete = <
   options: Options<DeleteMembersMembersByIdDeleteData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).delete<
-    unknown,
+    DeleteMembersMembersByIdDeleteResponses,
     unknown,
     ThrowOnError
   >({
@@ -781,8 +817,8 @@ export const deleteCurrentAccount = <ThrowOnError extends boolean = false>(
   options?: Options<DeleteCurrentAccountData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).delete<
-    DeleteCurrentAccountResponse,
-    DeleteCurrentAccountError,
+    DeleteCurrentAccountResponses,
+    DeleteCurrentAccountErrors,
     ThrowOnError
   >({
     url: '/members/current',
@@ -798,8 +834,8 @@ export const getCurrentAccount = <ThrowOnError extends boolean = false>(
   options?: Options<GetCurrentAccountData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).get<
-    GetCurrentAccountResponse,
-    GetCurrentAccountError,
+    GetCurrentAccountResponses,
+    GetCurrentAccountErrors,
     ThrowOnError
   >({
     url: '/members/current',
@@ -815,8 +851,8 @@ export const updateCurrentAccount = <ThrowOnError extends boolean = false>(
   options?: Options<UpdateCurrentAccountData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).patch<
-    UpdateCurrentAccountResponse,
-    UpdateCurrentAccountError,
+    UpdateCurrentAccountResponses,
+    UpdateCurrentAccountErrors,
     ThrowOnError
   >({
     url: '/members/current',
@@ -836,8 +872,8 @@ export const getStorage = <ThrowOnError extends boolean = false>(
   options?: Options<GetStorageData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).get<
-    GetStorageResponse,
-    GetStorageError,
+    GetStorageResponses,
+    GetStorageErrors,
     ThrowOnError
   >({
     url: '/members/current/storage',
@@ -853,8 +889,8 @@ export const getStorageFiles = <ThrowOnError extends boolean = false>(
   options: Options<GetStorageFilesData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetStorageFilesResponse,
-    GetStorageFilesError,
+    GetStorageFilesResponses,
+    GetStorageFilesErrors,
     ThrowOnError
   >({
     url: '/members/current/storage/files',
@@ -870,8 +906,8 @@ export const getOneMember = <ThrowOnError extends boolean = false>(
   options: Options<GetOneMemberData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetOneMemberResponse,
-    GetOneMemberError,
+    GetOneMemberResponses,
+    GetOneMemberErrors,
     ThrowOnError
   >({
     url: '/members/{id}',
@@ -887,8 +923,8 @@ export const patchChangeEmail = <ThrowOnError extends boolean = false>(
   options?: Options<PatchChangeEmailData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).patch<
-    PatchChangeEmailResponse,
-    PatchChangeEmailError,
+    PatchChangeEmailResponses,
+    PatchChangeEmailErrors,
     ThrowOnError
   >({
     url: '/members/current/email/change',
@@ -904,15 +940,15 @@ export const postChangeEmail = <ThrowOnError extends boolean = false>(
   options: Options<PostChangeEmailData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    PostChangeEmailResponse,
-    PostChangeEmailError,
+    PostChangeEmailResponses,
+    PostChangeEmailErrors,
     ThrowOnError
   >({
     url: '/members/current/email/change',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -921,7 +957,7 @@ export const postMembersAvatar = <ThrowOnError extends boolean = false>(
   options?: Options<PostMembersAvatarData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).post<
-    PostMembersAvatarResponse,
+    PostMembersAvatarResponses,
     unknown,
     ThrowOnError
   >({
@@ -938,8 +974,8 @@ export const downloadAvatar = <ThrowOnError extends boolean = false>(
   options: Options<DownloadAvatarData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    DownloadAvatarResponse,
-    DownloadAvatarError,
+    DownloadAvatarResponses,
+    DownloadAvatarErrors,
     ThrowOnError
   >({
     url: '/members/{id}/avatar/{size}',
@@ -955,8 +991,8 @@ export const getOwnProfile = <ThrowOnError extends boolean = false>(
   options?: Options<GetOwnProfileData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).get<
-    GetOwnProfileResponse,
-    GetOwnProfileError,
+    GetOwnProfileResponses,
+    GetOwnProfileErrors,
     ThrowOnError
   >({
     url: '/members/profile/own',
@@ -972,8 +1008,8 @@ export const getMemberProfile = <ThrowOnError extends boolean = false>(
   options: Options<GetMemberProfileData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetMemberProfileResponse,
-    GetMemberProfileError,
+    GetMemberProfileResponses,
+    GetMemberProfileErrors,
     ThrowOnError
   >({
     url: '/members/profile/{memberId}',
@@ -989,8 +1025,8 @@ export const updateOwnProfile = <ThrowOnError extends boolean = false>(
   options?: Options<UpdateOwnProfileData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).patch<
-    UpdateOwnProfileResponse,
-    UpdateOwnProfileError,
+    UpdateOwnProfileResponses,
+    UpdateOwnProfileErrors,
     ThrowOnError
   >({
     url: '/members/profile/',
@@ -1010,8 +1046,8 @@ export const createOwnProfile = <ThrowOnError extends boolean = false>(
   options?: Options<CreateOwnProfileData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).post<
-    CreateOwnProfileResponse,
-    CreateOwnProfileError,
+    CreateOwnProfileResponses,
+    CreateOwnProfileErrors,
     ThrowOnError
   >({
     url: '/members/profile/',
@@ -1031,8 +1067,8 @@ export const exportMemberData = <ThrowOnError extends boolean = false>(
   options?: Options<ExportMemberDataData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).post<
-    ExportMemberDataResponse,
-    ExportMemberDataError,
+    ExportMemberDataResponses,
+    ExportMemberDataErrors,
     ThrowOnError
   >({
     url: '/members/export-data/',
@@ -1048,8 +1084,8 @@ export const getAppList = <ThrowOnError extends boolean = false>(
   options?: Options<GetAppListData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).get<
-    GetAppListResponse,
-    GetAppListError,
+    GetAppListResponses,
+    GetAppListErrors,
     ThrowOnError
   >({
     url: '/app-items/list',
@@ -1065,8 +1101,8 @@ export const getOwnMostUsedApps = <ThrowOnError extends boolean = false>(
   options?: Options<GetOwnMostUsedAppsData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).get<
-    GetOwnMostUsedAppsResponse,
-    GetOwnMostUsedAppsError,
+    GetOwnMostUsedAppsResponses,
+    GetOwnMostUsedAppsErrors,
     ThrowOnError
   >({
     url: '/app-items/most-used',
@@ -1082,15 +1118,15 @@ export const generateAppToken = <ThrowOnError extends boolean = false>(
   options: Options<GenerateAppTokenData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    GenerateAppTokenResponse,
-    GenerateAppTokenError,
+    GenerateAppTokenResponses,
+    GenerateAppTokenErrors,
     ThrowOnError
   >({
     url: '/app-items/{itemId}/api-access-token',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -1103,7 +1139,7 @@ export const getAppContext = <ThrowOnError extends boolean = false>(
   options: Options<GetAppContextData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetAppContextResponse,
+    GetAppContextResponses,
     unknown,
     ThrowOnError
   >({
@@ -1120,8 +1156,8 @@ export const getAppDataForApp = <ThrowOnError extends boolean = false>(
   options: Options<GetAppDataForAppData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetAppDataForAppResponse,
-    GetAppDataForAppError,
+    GetAppDataForAppResponses,
+    GetAppDataForAppErrors,
     ThrowOnError
   >({
     url: '/app-items/{itemId}/app-data',
@@ -1137,15 +1173,15 @@ export const createAppData = <ThrowOnError extends boolean = false>(
   options: Options<CreateAppDataData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    CreateAppDataResponse,
-    CreateAppDataError,
+    CreateAppDataResponses,
+    CreateAppDataErrors,
     ThrowOnError
   >({
     url: '/app-items/{itemId}/app-data',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -1158,8 +1194,8 @@ export const deleteAppData = <ThrowOnError extends boolean = false>(
   options: Options<DeleteAppDataData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).delete<
-    DeleteAppDataResponse,
-    DeleteAppDataError,
+    DeleteAppDataResponses,
+    DeleteAppDataErrors,
     ThrowOnError
   >({
     url: '/app-items/{itemId}/app-data/{id}',
@@ -1175,15 +1211,15 @@ export const updateAppData = <ThrowOnError extends boolean = false>(
   options: Options<UpdateAppDataData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).patch<
-    UpdateAppDataResponse,
-    UpdateAppDataError,
+    UpdateAppDataResponses,
+    UpdateAppDataErrors,
     ThrowOnError
   >({
     url: '/app-items/{itemId}/app-data/{id}',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -1196,8 +1232,8 @@ export const createAppDataFile = <ThrowOnError extends boolean = false>(
   options?: Options<CreateAppDataFileData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).post<
-    unknown,
-    CreateAppDataFileError,
+    CreateAppDataFileResponses,
+    CreateAppDataFileErrors,
     ThrowOnError
   >({
     url: '/app-items/app-data/upload',
@@ -1213,8 +1249,8 @@ export const downloadAppDataFile = <ThrowOnError extends boolean = false>(
   options: Options<DownloadAppDataFileData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    DownloadAppDataFileResponse,
-    DownloadAppDataFileError,
+    DownloadAppDataFileResponses,
+    DownloadAppDataFileErrors,
     ThrowOnError
   >({
     url: '/app-items/app-data/{id}/download',
@@ -1230,8 +1266,8 @@ export const getAppActionsForApp = <ThrowOnError extends boolean = false>(
   options: Options<GetAppActionsForAppData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetAppActionsForAppResponse,
-    GetAppActionsForAppError,
+    GetAppActionsForAppResponses,
+    GetAppActionsForAppErrors,
     ThrowOnError
   >({
     url: '/app-items/{itemId}/app-action',
@@ -1247,15 +1283,15 @@ export const createAppAction = <ThrowOnError extends boolean = false>(
   options: Options<CreateAppActionData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    CreateAppActionResponse,
-    CreateAppActionError,
+    CreateAppActionResponses,
+    CreateAppActionErrors,
     ThrowOnError
   >({
     url: '/app-items/{itemId}/app-action',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -1268,8 +1304,8 @@ export const getAppSettingsForApp = <ThrowOnError extends boolean = false>(
   options: Options<GetAppSettingsForAppData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetAppSettingsForAppResponse,
-    GetAppSettingsForAppError,
+    GetAppSettingsForAppResponses,
+    GetAppSettingsForAppErrors,
     ThrowOnError
   >({
     url: '/app-items/{itemId}/app-settings',
@@ -1285,15 +1321,15 @@ export const createAppSetting = <ThrowOnError extends boolean = false>(
   options: Options<CreateAppSettingData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    CreateAppSettingResponse,
-    CreateAppSettingError,
+    CreateAppSettingResponses,
+    CreateAppSettingErrors,
     ThrowOnError
   >({
     url: '/app-items/{itemId}/app-settings',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -1306,8 +1342,8 @@ export const deleteAppSetting = <ThrowOnError extends boolean = false>(
   options: Options<DeleteAppSettingData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).delete<
-    DeleteAppSettingResponse,
-    DeleteAppSettingError,
+    DeleteAppSettingResponses,
+    DeleteAppSettingErrors,
     ThrowOnError
   >({
     url: '/app-items/{itemId}/app-settings/{id}',
@@ -1323,15 +1359,15 @@ export const updateAppSetting = <ThrowOnError extends boolean = false>(
   options: Options<UpdateAppSettingData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).patch<
-    UpdateAppSettingResponse,
-    UpdateAppSettingError,
+    UpdateAppSettingResponses,
+    UpdateAppSettingErrors,
     ThrowOnError
   >({
     url: '/app-items/{itemId}/app-settings/{id}',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -1344,8 +1380,8 @@ export const createAppSettingFile = <ThrowOnError extends boolean = false>(
   options?: Options<CreateAppSettingFileData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).post<
-    CreateAppSettingFileResponse,
-    CreateAppSettingFileError,
+    CreateAppSettingFileResponses,
+    CreateAppSettingFileErrors,
     ThrowOnError
   >({
     url: '/app-items/app-settings/upload',
@@ -1361,8 +1397,8 @@ export const downloadAppSettingFile = <ThrowOnError extends boolean = false>(
   options: Options<DownloadAppSettingFileData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    DownloadAppSettingFileResponse,
-    DownloadAppSettingFileError,
+    DownloadAppSettingFileResponses,
+    DownloadAppSettingFileErrors,
     ThrowOnError
   >({
     url: '/app-items/app-settings/{id}/download',
@@ -1380,15 +1416,15 @@ export const createChatbotCompletionPrompt = <
   options: Options<CreateChatbotCompletionPromptData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    CreateChatbotCompletionPromptResponse,
-    CreateChatbotCompletionPromptError,
+    CreateChatbotCompletionPromptResponses,
+    CreateChatbotCompletionPromptErrors,
     ThrowOnError
   >({
     url: '/app-items/{itemId}/chat-bot',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -1401,8 +1437,8 @@ export const getItemLoginSchemaType = <ThrowOnError extends boolean = false>(
   options: Options<GetItemLoginSchemaTypeData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetItemLoginSchemaTypeResponse,
-    GetItemLoginSchemaTypeError,
+    GetItemLoginSchemaTypeResponses,
+    GetItemLoginSchemaTypeErrors,
     ThrowOnError
   >({
     url: '/items/{id}/login-schema-type',
@@ -1418,8 +1454,8 @@ export const deleteItemLoginSchema = <ThrowOnError extends boolean = false>(
   options: Options<DeleteItemLoginSchemaData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).delete<
-    unknown,
-    DeleteItemLoginSchemaError,
+    DeleteItemLoginSchemaResponses,
+    DeleteItemLoginSchemaErrors,
     ThrowOnError
   >({
     url: '/items/{id}/login-schema',
@@ -1435,8 +1471,8 @@ export const getItemLoginSchema = <ThrowOnError extends boolean = false>(
   options: Options<GetItemLoginSchemaData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetItemLoginSchemaResponse,
-    GetItemLoginSchemaError,
+    GetItemLoginSchemaResponses,
+    GetItemLoginSchemaErrors,
     ThrowOnError
   >({
     url: '/items/{id}/login-schema',
@@ -1452,15 +1488,15 @@ export const updateItemLoginSchema = <ThrowOnError extends boolean = false>(
   options: Options<UpdateItemLoginSchemaData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).put<
-    unknown,
-    UpdateItemLoginSchemaError,
+    UpdateItemLoginSchemaResponses,
+    UpdateItemLoginSchemaErrors,
     ThrowOnError
   >({
     url: '/items/{id}/login-schema',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -1473,15 +1509,15 @@ export const loginOrRegisterAsGuest = <ThrowOnError extends boolean = false>(
   options: Options<LoginOrRegisterAsGuestData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    LoginOrRegisterAsGuestResponse,
-    LoginOrRegisterAsGuestError,
+    LoginOrRegisterAsGuestResponses,
+    LoginOrRegisterAsGuestErrors,
     ThrowOnError
   >({
     url: '/items/{id}/login',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -1494,8 +1530,8 @@ export const getOwnBookmark = <ThrowOnError extends boolean = false>(
   options?: Options<GetOwnBookmarkData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).get<
-    GetOwnBookmarkResponse,
-    GetOwnBookmarkError,
+    GetOwnBookmarkResponses,
+    GetOwnBookmarkErrors,
     ThrowOnError
   >({
     url: '/items/bookmarks',
@@ -1511,8 +1547,8 @@ export const deleteBookmark = <ThrowOnError extends boolean = false>(
   options: Options<DeleteBookmarkData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).delete<
-    DeleteBookmarkResponse,
-    DeleteBookmarkError,
+    DeleteBookmarkResponses,
+    DeleteBookmarkErrors,
     ThrowOnError
   >({
     url: '/items/bookmarks/{itemId}',
@@ -1528,8 +1564,8 @@ export const createBookmark = <ThrowOnError extends boolean = false>(
   options: Options<CreateBookmarkData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    CreateBookmarkResponse,
-    CreateBookmarkError,
+    CreateBookmarkResponses,
+    CreateBookmarkErrors,
     ThrowOnError
   >({
     url: '/items/bookmarks/{itemId}',
@@ -1545,8 +1581,8 @@ export const getCollectionsForMember = <ThrowOnError extends boolean = false>(
   options: Options<GetCollectionsForMemberData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetCollectionsForMemberResponse,
-    GetCollectionsForMemberError,
+    GetCollectionsForMemberResponses,
+    GetCollectionsForMemberErrors,
     ThrowOnError
   >({
     url: '/items/collections/members/{memberId}',
@@ -1562,8 +1598,8 @@ export const getCollectionInformations = <ThrowOnError extends boolean = false>(
   options: Options<GetCollectionInformationsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetCollectionInformationsResponse,
-    GetCollectionInformationsError,
+    GetCollectionInformationsResponses,
+    GetCollectionInformationsErrors,
     ThrowOnError
   >({
     url: '/items/collections/{itemId}/informations',
@@ -1579,8 +1615,8 @@ export const publishItem = <ThrowOnError extends boolean = false>(
   options: Options<PublishItemData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    PublishItemResponse,
-    PublishItemError,
+    PublishItemResponses,
+    PublishItemErrors,
     ThrowOnError
   >({
     url: '/items/collections/{itemId}/publish',
@@ -1596,8 +1632,8 @@ export const unpublishItem = <ThrowOnError extends boolean = false>(
   options: Options<UnpublishItemData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).delete<
-    UnpublishItemResponse,
-    UnpublishItemError,
+    UnpublishItemResponses,
+    UnpublishItemErrors,
     ThrowOnError
   >({
     url: '/items/collections/{itemId}/unpublish',
@@ -1613,8 +1649,8 @@ export const collectionSearch = <ThrowOnError extends boolean = false>(
   options?: Options<CollectionSearchData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).post<
-    CollectionSearchResponse,
-    CollectionSearchError,
+    CollectionSearchResponses,
+    CollectionSearchErrors,
     ThrowOnError
   >({
     url: '/items/collections/search',
@@ -1634,15 +1670,15 @@ export const getFacetsForName = <ThrowOnError extends boolean = false>(
   options: Options<GetFacetsForNameData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    GetFacetsForNameResponse,
-    GetFacetsForNameError,
+    GetFacetsForNameResponses,
+    GetFacetsForNameErrors,
     ThrowOnError
   >({
     url: '/items/collections/facets',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -1655,8 +1691,8 @@ export const getFeaturedCollections = <ThrowOnError extends boolean = false>(
   options?: Options<GetFeaturedCollectionsData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).get<
-    GetFeaturedCollectionsResponse,
-    GetFeaturedCollectionsError,
+    GetFeaturedCollectionsResponses,
+    GetFeaturedCollectionsErrors,
     ThrowOnError
   >({
     url: '/items/collections/featured',
@@ -1672,8 +1708,8 @@ export const getMostLikedCollections = <ThrowOnError extends boolean = false>(
   options?: Options<GetMostLikedCollectionsData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).get<
-    GetMostLikedCollectionsResponse,
-    GetMostLikedCollectionsError,
+    GetMostLikedCollectionsResponses,
+    GetMostLikedCollectionsErrors,
     ThrowOnError
   >({
     url: '/items/collections/liked',
@@ -1689,8 +1725,8 @@ export const getMostRecentCollections = <ThrowOnError extends boolean = false>(
   options?: Options<GetMostRecentCollectionsData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).get<
-    GetMostRecentCollectionsResponse,
-    GetMostRecentCollectionsError,
+    GetMostRecentCollectionsResponses,
+    GetMostRecentCollectionsErrors,
     ThrowOnError
   >({
     url: '/items/collections/recent',
@@ -1703,12 +1739,14 @@ export const getItemsCollectionsSearchRebuild = <
 >(
   options?: Options<GetItemsCollectionsSearchRebuildData, ThrowOnError>,
 ) => {
-  return (options?.client ?? _heyApiClient).get<unknown, unknown, ThrowOnError>(
-    {
-      url: '/items/collections/search/rebuild',
-      ...options,
-    },
-  );
+  return (options?.client ?? _heyApiClient).get<
+    GetItemsCollectionsSearchRebuildResponses,
+    unknown,
+    ThrowOnError
+  >({
+    url: '/items/collections/search/rebuild',
+    ...options,
+  });
 };
 
 /**
@@ -1719,8 +1757,8 @@ export const getItemMembershipsForItem = <ThrowOnError extends boolean = false>(
   options: Options<GetItemMembershipsForItemData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetItemMembershipsForItemResponse,
-    GetItemMembershipsForItemError,
+    GetItemMembershipsForItemResponses,
+    GetItemMembershipsForItemErrors,
     ThrowOnError
   >({
     url: '/items/{itemId}/memberships',
@@ -1736,15 +1774,15 @@ export const createItemMembership = <ThrowOnError extends boolean = false>(
   options: Options<CreateItemMembershipData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    CreateItemMembershipResponse,
-    CreateItemMembershipError,
+    CreateItemMembershipResponses,
+    CreateItemMembershipErrors,
     ThrowOnError
   >({
     url: '/items/{itemId}/memberships',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -1757,8 +1795,8 @@ export const deleteItemMembership = <ThrowOnError extends boolean = false>(
   options: Options<DeleteItemMembershipData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).delete<
-    DeleteItemMembershipResponse,
-    DeleteItemMembershipError,
+    DeleteItemMembershipResponses,
+    DeleteItemMembershipErrors,
     ThrowOnError
   >({
     url: '/items/{itemId}/memberships/{id}',
@@ -1774,15 +1812,15 @@ export const updateItemMembership = <ThrowOnError extends boolean = false>(
   options: Options<UpdateItemMembershipData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).patch<
-    UpdateItemMembershipResponse,
-    UpdateItemMembershipError,
+    UpdateItemMembershipResponses,
+    UpdateItemMembershipErrors,
     ThrowOnError
   >({
     url: '/items/{itemId}/memberships/{id}',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -1797,7 +1835,7 @@ export const getMembershipRequestsByItemId = <
   options: Options<GetMembershipRequestsByItemIdData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetMembershipRequestsByItemIdResponse,
+    GetMembershipRequestsByItemIdResponses,
     unknown,
     ThrowOnError
   >({
@@ -1816,7 +1854,7 @@ export const createMembershipRequest = <ThrowOnError extends boolean = false>(
   options: Options<CreateMembershipRequestData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    CreateMembershipRequestResponse,
+    CreateMembershipRequestResponses,
     unknown,
     ThrowOnError
   >({
@@ -1835,7 +1873,7 @@ export const getOwnMembershipRequestByItemId = <
   options: Options<GetOwnMembershipRequestByItemIdData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetOwnMembershipRequestByItemIdResponse,
+    GetOwnMembershipRequestByItemIdResponses,
     unknown,
     ThrowOnError
   >({
@@ -1852,7 +1890,7 @@ export const deleteMembershipRequest = <ThrowOnError extends boolean = false>(
   options: Options<DeleteMembershipRequestData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).delete<
-    DeleteMembershipRequestResponse,
+    DeleteMembershipRequestResponses,
     unknown,
     ThrowOnError
   >({
@@ -1869,15 +1907,15 @@ export const createShortcut = <ThrowOnError extends boolean = false>(
   options: Options<CreateShortcutData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    CreateShortcutResponse,
-    CreateShortcutError,
+    CreateShortcutResponses,
+    CreateShortcutErrors,
     ThrowOnError
   >({
     url: '/items/shortcuts',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -1890,15 +1928,15 @@ export const updateShortcut = <ThrowOnError extends boolean = false>(
   options: Options<UpdateShortcutData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).patch<
-    UpdateShortcutResponse,
-    UpdateShortcutError,
+    UpdateShortcutResponses,
+    UpdateShortcutErrors,
     ThrowOnError
   >({
     url: '/items/shortcuts/{id}',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -1907,7 +1945,7 @@ export const deleteItemsByIdThumbnails = <ThrowOnError extends boolean = false>(
   options: Options<DeleteItemsByIdThumbnailsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).delete<
-    unknown,
+    DeleteItemsByIdThumbnailsResponses,
     unknown,
     ThrowOnError
   >({
@@ -1920,8 +1958,8 @@ export const postItemsByIdThumbnails = <ThrowOnError extends boolean = false>(
   options: Options<PostItemsByIdThumbnailsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    PostItemsByIdThumbnailsResponse,
-    PostItemsByIdThumbnailsError,
+    PostItemsByIdThumbnailsResponses,
+    PostItemsByIdThumbnailsErrors,
     ThrowOnError
   >({
     url: '/items/{id}/thumbnails',
@@ -1937,8 +1975,8 @@ export const downloadItemThumbnail = <ThrowOnError extends boolean = false>(
   options: Options<DownloadItemThumbnailData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    DownloadItemThumbnailResponse,
-    DownloadItemThumbnailError,
+    DownloadItemThumbnailResponses,
+    DownloadItemThumbnailErrors,
     ThrowOnError
   >({
     url: '/items/{id}/thumbnails/{size}',
@@ -1954,8 +1992,8 @@ export const uploadFile = <ThrowOnError extends boolean = false>(
   options?: Options<UploadFileData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).post<
-    UploadFileResponse,
-    UploadFileError,
+    UploadFileResponses,
+    UploadFileErrors,
     ThrowOnError
   >({
     url: '/items/upload',
@@ -1964,15 +2002,15 @@ export const uploadFile = <ThrowOnError extends boolean = false>(
 };
 
 /**
- * Download file
- * Download file.
+ * Get file URL
+ * Get file URL.
  */
-export const downloadFile = <ThrowOnError extends boolean = false>(
-  options: Options<DownloadFileData, ThrowOnError>,
+export const getUrl = <ThrowOnError extends boolean = false>(
+  options: Options<GetUrlData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    DownloadFileResponse,
-    DownloadFileError,
+    GetUrlResponses,
+    GetUrlErrors,
     ThrowOnError
   >({
     url: '/items/{id}/download',
@@ -1988,15 +2026,15 @@ export const updateFile = <ThrowOnError extends boolean = false>(
   options: Options<UpdateFileData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).patch<
-    unknown,
-    UpdateFileError,
+    UpdateFileResponses,
+    UpdateFileErrors,
     ThrowOnError
   >({
     url: '/items/files/{id}',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -2009,8 +2047,8 @@ export const deleteVisibility = <ThrowOnError extends boolean = false>(
   options: Options<DeleteVisibilityData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).delete<
-    DeleteVisibilityResponse,
-    DeleteVisibilityError,
+    DeleteVisibilityResponses,
+    DeleteVisibilityErrors,
     ThrowOnError
   >({
     url: '/items/{itemId}/visibilities/{type}',
@@ -2026,8 +2064,8 @@ export const createVisibility = <ThrowOnError extends boolean = false>(
   options: Options<CreateVisibilityData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    CreateVisibilityResponse,
-    CreateVisibilityError,
+    CreateVisibilityResponses,
+    CreateVisibilityErrors,
     ThrowOnError
   >({
     url: '/items/{itemId}/visibilities/{type}',
@@ -2043,15 +2081,15 @@ export const createFolder = <ThrowOnError extends boolean = false>(
   options: Options<CreateFolderData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    CreateFolderResponse,
-    CreateFolderError,
+    CreateFolderResponses,
+    CreateFolderErrors,
     ThrowOnError
   >({
     url: '/items/folders',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -2064,15 +2102,15 @@ export const updateFolder = <ThrowOnError extends boolean = false>(
   options: Options<UpdateFolderData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).patch<
-    UpdateFolderResponse,
-    UpdateFolderError,
+    UpdateFolderResponses,
+    UpdateFolderErrors,
     ThrowOnError
   >({
     url: '/items/folders/{id}',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -2085,8 +2123,8 @@ export const createFolderWithThumbnail = <ThrowOnError extends boolean = false>(
   options?: Options<CreateFolderWithThumbnailData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).post<
-    CreateFolderWithThumbnailResponse,
-    CreateFolderWithThumbnailError,
+    CreateFolderWithThumbnailResponses,
+    CreateFolderWithThumbnailErrors,
     ThrowOnError
   >({
     url: '/items/folders-with-thumbnail',
@@ -2102,15 +2140,15 @@ export const createApp = <ThrowOnError extends boolean = false>(
   options: Options<CreateAppData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    CreateAppResponse,
-    CreateAppError,
+    CreateAppResponses,
+    CreateAppErrors,
     ThrowOnError
   >({
     url: '/items/apps',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -2123,15 +2161,15 @@ export const updateApp = <ThrowOnError extends boolean = false>(
   options: Options<UpdateAppData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).patch<
-    UpdateAppResponse,
-    UpdateAppError,
+    UpdateAppResponses,
+    UpdateAppErrors,
     ThrowOnError
   >({
     url: '/items/apps/{id}',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -2144,8 +2182,8 @@ export const deleteAlias = <ThrowOnError extends boolean = false>(
   options: Options<DeleteAliasData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).delete<
-    DeleteAliasResponse,
-    DeleteAliasError,
+    DeleteAliasResponses,
+    DeleteAliasErrors,
     ThrowOnError
   >({
     url: '/items/short-links/{alias}',
@@ -2162,7 +2200,7 @@ export const getShortLinkRedirection = <ThrowOnError extends boolean = false>(
 ) => {
   return (options.client ?? _heyApiClient).get<
     unknown,
-    GetShortLinkRedirectionError,
+    GetShortLinkRedirectionErrors,
     ThrowOnError
   >({
     url: '/items/short-links/{alias}',
@@ -2178,15 +2216,15 @@ export const updateShortLink = <ThrowOnError extends boolean = false>(
   options: Options<UpdateShortLinkData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).patch<
-    UpdateShortLinkResponse,
-    UpdateShortLinkError,
+    UpdateShortLinkResponses,
+    UpdateShortLinkErrors,
     ThrowOnError
   >({
     url: '/items/short-links/{alias}',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -2199,8 +2237,8 @@ export const getShortLinkAvailability = <ThrowOnError extends boolean = false>(
   options: Options<GetShortLinkAvailabilityData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetShortLinkAvailabilityResponse,
-    GetShortLinkAvailabilityError,
+    GetShortLinkAvailabilityResponses,
+    GetShortLinkAvailabilityErrors,
     ThrowOnError
   >({
     url: '/items/short-links/available/{alias}',
@@ -2216,8 +2254,8 @@ export const getShortLinksForItem = <ThrowOnError extends boolean = false>(
   options: Options<GetShortLinksForItemData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetShortLinksForItemResponse,
-    GetShortLinksForItemError,
+    GetShortLinksForItemResponses,
+    GetShortLinksForItemErrors,
     ThrowOnError
   >({
     url: '/items/short-links/list/{itemId}',
@@ -2233,15 +2271,15 @@ export const createShortLink = <ThrowOnError extends boolean = false>(
   options: Options<CreateShortLinkData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    CreateShortLinkResponse,
-    CreateShortLinkError,
+    CreateShortLinkResponses,
+    CreateShortLinkErrors,
     ThrowOnError
   >({
     url: '/items/short-links/',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -2251,7 +2289,11 @@ export const getItemsPublicationByItemIdStatus = <
 >(
   options: Options<GetItemsPublicationByItemIdStatusData, ThrowOnError>,
 ) => {
-  return (options.client ?? _heyApiClient).get<unknown, unknown, ThrowOnError>({
+  return (options.client ?? _heyApiClient).get<
+    GetItemsPublicationByItemIdStatusResponses,
+    unknown,
+    ThrowOnError
+  >({
     url: '/items/publication/{itemId}/status',
     ...options,
   });
@@ -2262,12 +2304,14 @@ export const getItemsH5pAssetsIntegrationHtml = <
 >(
   options?: Options<GetItemsH5pAssetsIntegrationHtmlData, ThrowOnError>,
 ) => {
-  return (options?.client ?? _heyApiClient).get<unknown, unknown, ThrowOnError>(
-    {
-      url: '/items/h5p-assets/integration.html',
-      ...options,
-    },
-  );
+  return (options?.client ?? _heyApiClient).get<
+    GetItemsH5pAssetsIntegrationHtmlResponses,
+    unknown,
+    ThrowOnError
+  >({
+    url: '/items/h5p-assets/integration.html',
+    ...options,
+  });
 };
 
 /**
@@ -2278,8 +2322,8 @@ export const importH5P = <ThrowOnError extends boolean = false>(
   options?: Options<ImportH5pData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).post<
-    ImportH5pResponse,
-    ImportH5pError,
+    ImportH5pResponses,
+    ImportH5pErrors,
     ThrowOnError
   >({
     url: '/items/h5p-import',
@@ -2295,15 +2339,15 @@ export const createEtherpad = <ThrowOnError extends boolean = false>(
   options: Options<CreateEtherpadData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    CreateEtherpadResponse,
-    CreateEtherpadError,
+    CreateEtherpadResponses,
+    CreateEtherpadErrors,
     ThrowOnError
   >({
     url: '/items/etherpad/create',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -2316,15 +2360,15 @@ export const updateEtherpad = <ThrowOnError extends boolean = false>(
   options: Options<UpdateEtherpadData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).patch<
-    UpdateEtherpadResponse,
-    UpdateEtherpadError,
+    UpdateEtherpadResponses,
+    UpdateEtherpadErrors,
     ThrowOnError
   >({
     url: '/items/etherpad/{id}',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -2337,8 +2381,8 @@ export const getEtherpadFromItem = <ThrowOnError extends boolean = false>(
   options: Options<GetEtherpadFromItemData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetEtherpadFromItemResponse,
-    GetEtherpadFromItemError,
+    GetEtherpadFromItemResponses,
+    GetEtherpadFromItemErrors,
     ThrowOnError
   >({
     url: '/items/etherpad/view/{itemId}',
@@ -2354,8 +2398,8 @@ export const importZip = <ThrowOnError extends boolean = false>(
   options?: Options<ImportZipData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).post<
-    unknown,
-    ImportZipError,
+    ImportZipResponses,
+    ImportZipErrors,
     ThrowOnError
   >({
     url: '/items/zip-import',
@@ -2364,15 +2408,32 @@ export const importZip = <ThrowOnError extends boolean = false>(
 };
 
 /**
- * Export content
- * Export content. Return raw file for single item, or a ZIP with structure and items for a folder.
+ * Download non-folder content
+ * Download non-folder content. Return raw file for single item.
+ */
+export const downloadFile = <ThrowOnError extends boolean = false>(
+  options: Options<DownloadFileData, ThrowOnError>,
+) => {
+  return (options.client ?? _heyApiClient).post<
+    DownloadFileResponses,
+    DownloadFileErrors,
+    ThrowOnError
+  >({
+    url: '/items/{itemId}/download-file',
+    ...options,
+  });
+};
+
+/**
+ * Export folder content as zip archive
+ * Export the folder's content as a ZIP archive. The user will receive an email with a link to download the ZIP archive.
  */
 export const exportZip = <ThrowOnError extends boolean = false>(
   options: Options<ExportZipData, ThrowOnError>,
 ) => {
-  return (options.client ?? _heyApiClient).get<
-    unknown,
-    ExportZipError,
+  return (options.client ?? _heyApiClient).post<
+    ExportZipResponses,
+    ExportZipErrors,
     ThrowOnError
   >({
     url: '/items/{itemId}/export',
@@ -2387,9 +2448,9 @@ export const exportZip = <ThrowOnError extends boolean = false>(
 export const graaspZipExport = <ThrowOnError extends boolean = false>(
   options: Options<GraaspZipExportData, ThrowOnError>,
 ) => {
-  return (options.client ?? _heyApiClient).get<
-    unknown,
-    GraaspZipExportError,
+  return (options.client ?? _heyApiClient).post<
+    GraaspZipExportResponses,
+    GraaspZipExportErrors,
     ThrowOnError
   >({
     url: '/items/{itemId}/graasp-export',
@@ -2405,8 +2466,8 @@ export const getLinkMetadata = <ThrowOnError extends boolean = false>(
   options: Options<GetLinkMetadataData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetLinkMetadataResponse,
-    GetLinkMetadataError,
+    GetLinkMetadataResponses,
+    GetLinkMetadataErrors,
     ThrowOnError
   >({
     url: '/items/embedded-links/metadata',
@@ -2422,15 +2483,15 @@ export const createLink = <ThrowOnError extends boolean = false>(
   options: Options<CreateLinkData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    CreateLinkResponse,
-    CreateLinkError,
+    CreateLinkResponses,
+    CreateLinkErrors,
     ThrowOnError
   >({
     url: '/items/embedded-links/',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -2443,15 +2504,15 @@ export const updateLink = <ThrowOnError extends boolean = false>(
   options: Options<UpdateLinkData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).patch<
-    UpdateLinkResponse,
-    UpdateLinkError,
+    UpdateLinkResponses,
+    UpdateLinkErrors,
     ThrowOnError
   >({
     url: '/items/embedded-links/{id}',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -2464,15 +2525,15 @@ export const createDocument = <ThrowOnError extends boolean = false>(
   options: Options<CreateDocumentData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    CreateDocumentResponse,
-    CreateDocumentError,
+    CreateDocumentResponses,
+    CreateDocumentErrors,
     ThrowOnError
   >({
     url: '/items/documents/',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -2485,15 +2546,15 @@ export const updateDocument = <ThrowOnError extends boolean = false>(
   options: Options<UpdateDocumentData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).patch<
-    UpdateDocumentResponse,
-    UpdateDocumentError,
+    UpdateDocumentResponses,
+    UpdateDocumentErrors,
     ThrowOnError
   >({
     url: '/items/documents/{id}',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -2506,8 +2567,8 @@ export const getInvitationById = <ThrowOnError extends boolean = false>(
   options: Options<GetInvitationByIdData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetInvitationByIdResponse,
-    GetInvitationByIdError,
+    GetInvitationByIdResponses,
+    GetInvitationByIdErrors,
     ThrowOnError
   >({
     url: '/items/invitations/{id}',
@@ -2523,15 +2584,15 @@ export const createInvitation = <ThrowOnError extends boolean = false>(
   options: Options<CreateInvitationData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    CreateInvitationResponse,
-    CreateInvitationError,
+    CreateInvitationResponses,
+    CreateInvitationErrors,
     ThrowOnError
   >({
     url: '/items/{id}/invite',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -2544,8 +2605,8 @@ export const getInvitationForItem = <ThrowOnError extends boolean = false>(
   options: Options<GetInvitationForItemData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetInvitationForItemResponse,
-    GetInvitationForItemError,
+    GetInvitationForItemResponses,
+    GetInvitationForItemErrors,
     ThrowOnError
   >({
     url: '/items/{id}/invitations',
@@ -2561,8 +2622,8 @@ export const deleteInvitation = <ThrowOnError extends boolean = false>(
   options: Options<DeleteInvitationData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).delete<
-    DeleteInvitationResponse,
-    DeleteInvitationError,
+    DeleteInvitationResponses,
+    DeleteInvitationErrors,
     ThrowOnError
   >({
     url: '/items/{id}/invitations/{invitationId}',
@@ -2578,15 +2639,15 @@ export const updateInvitation = <ThrowOnError extends boolean = false>(
   options: Options<UpdateInvitationData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).patch<
-    UpdateInvitationResponse,
-    UpdateInvitationError,
+    UpdateInvitationResponses,
+    UpdateInvitationErrors,
     ThrowOnError
   >({
     url: '/items/{id}/invitations/{invitationId}',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -2599,8 +2660,8 @@ export const sendInvitation = <ThrowOnError extends boolean = false>(
   options: Options<SendInvitationData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    SendInvitationResponse,
-    SendInvitationError,
+    SendInvitationResponses,
+    SendInvitationErrors,
     ThrowOnError
   >({
     url: '/items/{id}/invitations/{invitationId}/send',
@@ -2616,8 +2677,8 @@ export const inviteFromCsvWithTemplate = <ThrowOnError extends boolean = false>(
   options: Options<InviteFromCsvWithTemplateData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    InviteFromCsvWithTemplateResponse,
-    InviteFromCsvWithTemplateError,
+    InviteFromCsvWithTemplateResponses,
+    InviteFromCsvWithTemplateErrors,
     ThrowOnError
   >({
     url: '/items/{id}/invitations/upload-csv-template',
@@ -2633,8 +2694,8 @@ export const inviteFromCsv = <ThrowOnError extends boolean = false>(
   options: Options<InviteFromCsvData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    InviteFromCsvResponse,
-    InviteFromCsvError,
+    InviteFromCsvResponses,
+    InviteFromCsvErrors,
     ThrowOnError
   >({
     url: '/items/{id}/invitations/upload-csv',
@@ -2651,7 +2712,7 @@ export const enroll = <ThrowOnError extends boolean = false>(
   options: Options<EnrollData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    EnrollResponse,
+    EnrollResponses,
     unknown,
     ThrowOnError
   >({
@@ -2668,8 +2729,8 @@ export const getFlagTypes = <ThrowOnError extends boolean = false>(
   options?: Options<GetFlagTypesData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).get<
-    GetFlagTypesResponse,
-    GetFlagTypesError,
+    GetFlagTypesResponses,
+    GetFlagTypesErrors,
     ThrowOnError
   >({
     url: '/items/flags',
@@ -2685,15 +2746,15 @@ export const createItemFlag = <ThrowOnError extends boolean = false>(
   options: Options<CreateItemFlagData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    CreateItemFlagResponse,
-    CreateItemFlagError,
+    CreateItemFlagResponses,
+    CreateItemFlagErrors,
     ThrowOnError
   >({
     url: '/items/{itemId}/flags',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -2706,8 +2767,8 @@ export const getOwnRecycledItems = <ThrowOnError extends boolean = false>(
   options: Options<GetOwnRecycledItemsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetOwnRecycledItemsResponse,
-    GetOwnRecycledItemsError,
+    GetOwnRecycledItemsResponses,
+    GetOwnRecycledItemsErrors,
     ThrowOnError
   >({
     url: '/items/recycled',
@@ -2723,8 +2784,8 @@ export const recycleManyItems = <ThrowOnError extends boolean = false>(
   options: Options<RecycleManyItemsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    RecycleManyItemsResponse,
-    RecycleManyItemsError,
+    RecycleManyItemsResponses,
+    RecycleManyItemsErrors,
     ThrowOnError
   >({
     url: '/items/recycle',
@@ -2740,8 +2801,8 @@ export const restoreManyItems = <ThrowOnError extends boolean = false>(
   options: Options<RestoreManyItemsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    RestoreManyItemsResponse,
-    RestoreManyItemsError,
+    RestoreManyItemsResponses,
+    RestoreManyItemsErrors,
     ThrowOnError
   >({
     url: '/items/restore',
@@ -2759,8 +2820,8 @@ export const getLatestItemValidationGroup = <
   options: Options<GetLatestItemValidationGroupData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetLatestItemValidationGroupResponse,
-    GetLatestItemValidationGroupError,
+    GetLatestItemValidationGroupResponses,
+    GetLatestItemValidationGroupErrors,
     ThrowOnError
   >({
     url: '/items/{itemId}/validations/latest',
@@ -2776,8 +2837,8 @@ export const validateItem = <ThrowOnError extends boolean = false>(
   options: Options<ValidateItemData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    ValidateItemResponse,
-    ValidateItemError,
+    ValidateItemResponses,
+    ValidateItemErrors,
     ThrowOnError
   >({
     url: '/items/{itemId}/validate',
@@ -2793,8 +2854,8 @@ export const getLikesForCurrentMember = <ThrowOnError extends boolean = false>(
   options?: Options<GetLikesForCurrentMemberData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).get<
-    GetLikesForCurrentMemberResponse,
-    GetLikesForCurrentMemberError,
+    GetLikesForCurrentMemberResponses,
+    GetLikesForCurrentMemberErrors,
     ThrowOnError
   >({
     url: '/items/liked',
@@ -2810,8 +2871,8 @@ export const getLikesForItem = <ThrowOnError extends boolean = false>(
   options: Options<GetLikesForItemData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetLikesForItemResponse,
-    GetLikesForItemError,
+    GetLikesForItemResponses,
+    GetLikesForItemErrors,
     ThrowOnError
   >({
     url: '/items/{itemId}/likes',
@@ -2827,8 +2888,8 @@ export const deleteItemLike = <ThrowOnError extends boolean = false>(
   options: Options<DeleteItemLikeData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).delete<
-    DeleteItemLikeResponse,
-    DeleteItemLikeError,
+    DeleteItemLikeResponses,
+    DeleteItemLikeErrors,
     ThrowOnError
   >({
     url: '/items/{itemId}/like',
@@ -2844,8 +2905,8 @@ export const createItemLike = <ThrowOnError extends boolean = false>(
   options: Options<CreateItemLikeData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    CreateItemLikeResponse,
-    CreateItemLikeError,
+    CreateItemLikeResponses,
+    CreateItemLikeErrors,
     ThrowOnError
   >({
     url: '/items/{itemId}/like',
@@ -2861,8 +2922,8 @@ export const clearAllMentions = <ThrowOnError extends boolean = false>(
   options?: Options<ClearAllMentionsData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).delete<
-    ClearAllMentionsResponse,
-    ClearAllMentionsError,
+    ClearAllMentionsResponses,
+    ClearAllMentionsErrors,
     ThrowOnError
   >({
     url: '/items/mentions',
@@ -2878,8 +2939,8 @@ export const getOwnMentions = <ThrowOnError extends boolean = false>(
   options?: Options<GetOwnMentionsData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).get<
-    GetOwnMentionsResponse,
-    GetOwnMentionsError,
+    GetOwnMentionsResponses,
+    GetOwnMentionsErrors,
     ThrowOnError
   >({
     url: '/items/mentions',
@@ -2895,8 +2956,8 @@ export const deleteMention = <ThrowOnError extends boolean = false>(
   options: Options<DeleteMentionData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).delete<
-    DeleteMentionResponse,
-    DeleteMentionError,
+    DeleteMentionResponses,
+    DeleteMentionErrors,
     ThrowOnError
   >({
     url: '/items/mentions/{mentionId}',
@@ -2912,15 +2973,15 @@ export const patchMention = <ThrowOnError extends boolean = false>(
   options: Options<PatchMentionData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).patch<
-    PatchMentionResponse,
-    PatchMentionError,
+    PatchMentionResponses,
+    PatchMentionErrors,
     ThrowOnError
   >({
     url: '/items/mentions/{mentionId}',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -2933,8 +2994,8 @@ export const clearChatMessage = <ThrowOnError extends boolean = false>(
   options: Options<ClearChatMessageData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).delete<
-    ClearChatMessageResponse,
-    ClearChatMessageError,
+    ClearChatMessageResponses,
+    ClearChatMessageErrors,
     ThrowOnError
   >({
     url: '/items/{itemId}/chat',
@@ -2950,8 +3011,8 @@ export const getChat = <ThrowOnError extends boolean = false>(
   options: Options<GetChatData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetChatResponse,
-    GetChatError,
+    GetChatResponses,
+    GetChatErrors,
     ThrowOnError
   >({
     url: '/items/{itemId}/chat',
@@ -2967,15 +3028,15 @@ export const createChatMessage = <ThrowOnError extends boolean = false>(
   options: Options<CreateChatMessageData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    CreateChatMessageResponse,
-    CreateChatMessageError,
+    CreateChatMessageResponses,
+    CreateChatMessageErrors,
     ThrowOnError
   >({
     url: '/items/{itemId}/chat',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -2988,8 +3049,8 @@ export const deleteChatMessage = <ThrowOnError extends boolean = false>(
   options: Options<DeleteChatMessageData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).delete<
-    DeleteChatMessageResponse,
-    DeleteChatMessageError,
+    DeleteChatMessageResponses,
+    DeleteChatMessageErrors,
     ThrowOnError
   >({
     url: '/items/{itemId}/chat/{messageId}',
@@ -3005,15 +3066,15 @@ export const patchChatMessage = <ThrowOnError extends boolean = false>(
   options: Options<PatchChatMessageData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).patch<
-    PatchChatMessageResponse,
-    PatchChatMessageError,
+    PatchChatMessageResponses,
+    PatchChatMessageErrors,
     ThrowOnError
   >({
     url: '/items/{itemId}/chat/{messageId}',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -3026,15 +3087,15 @@ export const postAction = <ThrowOnError extends boolean = false>(
   options: Options<PostActionData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    PostActionResponse,
-    PostActionError,
+    PostActionResponses,
+    PostActionErrors,
     ThrowOnError
   >({
     url: '/items/{id}/actions',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -3047,8 +3108,8 @@ export const exportActions = <ThrowOnError extends boolean = false>(
   options: Options<ExportActionsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    ExportActionsResponse,
-    ExportActionsError,
+    ExportActionsResponses,
+    ExportActionsErrors,
     ThrowOnError
   >({
     url: '/items/{id}/actions/export',
@@ -3064,8 +3125,8 @@ export const getItemActionsByDay = <ThrowOnError extends boolean = false>(
   options: Options<GetItemActionsByDayData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetItemActionsByDayResponse,
-    GetItemActionsByDayError,
+    GetItemActionsByDayResponses,
+    GetItemActionsByDayErrors,
     ThrowOnError
   >({
     url: '/items/{id}/actions/actions-by-day',
@@ -3081,8 +3142,8 @@ export const getItemActionsByHour = <ThrowOnError extends boolean = false>(
   options: Options<GetItemActionsByHourData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetItemActionsByHourResponse,
-    GetItemActionsByHourError,
+    GetItemActionsByHourResponses,
+    GetItemActionsByHourErrors,
     ThrowOnError
   >({
     url: '/items/{id}/actions/actions-by-hour',
@@ -3098,8 +3159,8 @@ export const getItemActionsByWeekday = <ThrowOnError extends boolean = false>(
   options: Options<GetItemActionsByWeekdayData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetItemActionsByWeekdayResponse,
-    GetItemActionsByWeekdayError,
+    GetItemActionsByWeekdayResponses,
+    GetItemActionsByWeekdayErrors,
     ThrowOnError
   >({
     url: '/items/{id}/actions/actions-by-weekday',
@@ -3115,8 +3176,8 @@ export const deleteGeolocation = <ThrowOnError extends boolean = false>(
   options: Options<DeleteGeolocationData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).delete<
-    DeleteGeolocationResponse,
-    DeleteGeolocationError,
+    DeleteGeolocationResponses,
+    DeleteGeolocationErrors,
     ThrowOnError
   >({
     url: '/items/{id}/geolocation',
@@ -3132,8 +3193,8 @@ export const getGeolocationByItem = <ThrowOnError extends boolean = false>(
   options: Options<GetGeolocationByItemData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetGeolocationByItemResponse,
-    GetGeolocationByItemError,
+    GetGeolocationByItemResponses,
+    GetGeolocationByItemErrors,
     ThrowOnError
   >({
     url: '/items/{id}/geolocation',
@@ -3149,15 +3210,15 @@ export const putGeolocation = <ThrowOnError extends boolean = false>(
   options: Options<PutGeolocationData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).put<
-    PutGeolocationResponse,
-    PutGeolocationError,
+    PutGeolocationResponses,
+    PutGeolocationErrors,
     ThrowOnError
   >({
     url: '/items/{id}/geolocation',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -3170,8 +3231,8 @@ export const getItemsInBox = <ThrowOnError extends boolean = false>(
   options: Options<GetItemsInBoxData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetItemsInBoxResponse,
-    GetItemsInBoxError,
+    GetItemsInBoxResponses,
+    GetItemsInBoxErrors,
     ThrowOnError
   >({
     url: '/items/geolocation',
@@ -3187,8 +3248,8 @@ export const geolocationReverse = <ThrowOnError extends boolean = false>(
   options: Options<GeolocationReverseData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GeolocationReverseResponse,
-    GeolocationReverseError,
+    GeolocationReverseResponses,
+    GeolocationReverseErrors,
     ThrowOnError
   >({
     url: '/items/geolocation/reverse',
@@ -3204,8 +3265,8 @@ export const geolocationSearch = <ThrowOnError extends boolean = false>(
   options: Options<GeolocationSearchData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GeolocationSearchResponse,
-    GeolocationSearchError,
+    GeolocationSearchResponses,
+    GeolocationSearchErrors,
     ThrowOnError
   >({
     url: '/items/geolocation/search',
@@ -3221,8 +3282,8 @@ export const getTagsForItem = <ThrowOnError extends boolean = false>(
   options: Options<GetTagsForItemData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetTagsForItemResponse,
-    GetTagsForItemError,
+    GetTagsForItemResponses,
+    GetTagsForItemErrors,
     ThrowOnError
   >({
     url: '/items/{itemId}/tags',
@@ -3238,15 +3299,15 @@ export const createTagForItem = <ThrowOnError extends boolean = false>(
   options: Options<CreateTagForItemData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    CreateTagForItemResponse,
-    CreateTagForItemError,
+    CreateTagForItemResponses,
+    CreateTagForItemErrors,
     ThrowOnError
   >({
     url: '/items/{itemId}/tags',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -3259,8 +3320,8 @@ export const deleteTagForItem = <ThrowOnError extends boolean = false>(
   options: Options<DeleteTagForItemData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).delete<
-    DeleteTagForItemResponse,
-    DeleteTagForItemError,
+    DeleteTagForItemResponses,
+    DeleteTagForItemErrors,
     ThrowOnError
   >({
     url: '/items/{itemId}/tags/{tagId}',
@@ -3276,8 +3337,8 @@ export const deleteManyItems = <ThrowOnError extends boolean = false>(
   options: Options<DeleteManyItemsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).delete<
-    DeleteManyItemsResponse,
-    DeleteManyItemsError,
+    DeleteManyItemsResponses,
+    DeleteManyItemsErrors,
     ThrowOnError
   >({
     url: '/items/',
@@ -3293,8 +3354,8 @@ export const createItem = <ThrowOnError extends boolean = false>(
   options?: Options<CreateItemData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).post<
-    CreateItemResponse,
-    CreateItemError,
+    CreateItemResponses,
+    CreateItemErrors,
     ThrowOnError
   >({
     url: '/items/',
@@ -3314,8 +3375,8 @@ export const getItem = <ThrowOnError extends boolean = false>(
   options: Options<GetItemData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetItemResponse,
-    GetItemError,
+    GetItemResponses,
+    GetItemErrors,
     ThrowOnError
   >({
     url: '/items/{id}',
@@ -3331,15 +3392,15 @@ export const updateItem = <ThrowOnError extends boolean = false>(
   options: Options<UpdateItemData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).patch<
-    UpdateItemResponse,
-    UpdateItemError,
+    UpdateItemResponses,
+    UpdateItemErrors,
     ThrowOnError
   >({
     url: '/items/{id}',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -3352,8 +3413,8 @@ export const getAccessibleItems = <ThrowOnError extends boolean = false>(
   options: Options<GetAccessibleItemsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetAccessibleItemsResponse,
-    GetAccessibleItemsError,
+    GetAccessibleItemsResponses,
+    GetAccessibleItemsErrors,
     ThrowOnError
   >({
     url: '/items/accessible',
@@ -3369,8 +3430,8 @@ export const getChildren = <ThrowOnError extends boolean = false>(
   options: Options<GetChildrenData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetChildrenResponse,
-    GetChildrenError,
+    GetChildrenResponses,
+    GetChildrenErrors,
     ThrowOnError
   >({
     url: '/items/{id}/children',
@@ -3386,8 +3447,8 @@ export const getDescendantItems = <ThrowOnError extends boolean = false>(
   options: Options<GetDescendantItemsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetDescendantItemsResponse,
-    GetDescendantItemsError,
+    GetDescendantItemsResponses,
+    GetDescendantItemsErrors,
     ThrowOnError
   >({
     url: '/items/{id}/descendants',
@@ -3403,8 +3464,8 @@ export const getParentItems = <ThrowOnError extends boolean = false>(
   options: Options<GetParentItemsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetParentItemsResponse,
-    GetParentItemsError,
+    GetParentItemsResponses,
+    GetParentItemsErrors,
     ThrowOnError
   >({
     url: '/items/{id}/parents',
@@ -3420,15 +3481,15 @@ export const reorderItem = <ThrowOnError extends boolean = false>(
   options: Options<ReorderItemData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).patch<
-    ReorderItemResponse,
-    ReorderItemError,
+    ReorderItemResponses,
+    ReorderItemErrors,
     ThrowOnError
   >({
     url: '/items/{id}/reorder',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -3441,15 +3502,15 @@ export const moveManyItems = <ThrowOnError extends boolean = false>(
   options: Options<MoveManyItemsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    MoveManyItemsResponse,
-    MoveManyItemsError,
+    MoveManyItemsResponses,
+    MoveManyItemsErrors,
     ThrowOnError
   >({
     url: '/items/move',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -3462,15 +3523,15 @@ export const copyManyItems = <ThrowOnError extends boolean = false>(
   options: Options<CopyManyItemsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    CopyManyItemsResponse,
-    CopyManyItemsError,
+    CopyManyItemsResponses,
+    CopyManyItemsErrors,
     ThrowOnError
   >({
     url: '/items/copy',
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...options.headers,
     },
   });
 };
@@ -3483,8 +3544,8 @@ export const createItemWithThumbnail = <ThrowOnError extends boolean = false>(
   options?: Options<CreateItemWithThumbnailData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).post<
-    CreateItemWithThumbnailResponse,
-    CreateItemWithThumbnailError,
+    CreateItemWithThumbnailResponses,
+    CreateItemWithThumbnailErrors,
     ThrowOnError
   >({
     url: '/items/with-thumbnail',
@@ -3500,8 +3561,8 @@ export const getCountForTags = <ThrowOnError extends boolean = false>(
   options: Options<GetCountForTagsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetCountForTagsResponse,
-    GetCountForTagsError,
+    GetCountForTagsResponses,
+    GetCountForTagsErrors,
     ThrowOnError
   >({
     url: '/tags/',

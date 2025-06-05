@@ -1,24 +1,35 @@
-import { Stack, Typography } from '@mui/material';
+import { Suspense } from 'react';
+
+import { Skeleton, Stack, Typography } from '@mui/material';
 
 import { ThumbnailSize } from '@graasp/sdk';
 
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { Link } from '@tanstack/react-router';
 
-import Avatar from '~/components/ui/Avatar/Avatar';
+import { Avatar } from '~/components/ui/Avatar/Avatar';
 import { useMobileView } from '~/components/ui/hooks/useMobileView';
 
 import { downloadAvatarOptions } from '../../../openapi/client/@tanstack/react-query.gen';
 
-export function MemberAvatar({
-  name,
-  id,
-}: Readonly<{
-  name: string;
-  id: string;
-}>) {
+type Props = { name: string; id: string };
+
+// public component
+export function AuthorAvatar(props: Props) {
+  return (
+    <Suspense fallback={<LoadingAuthorAvatar />}>
+      <MemberAvatar {...props} />
+    </Suspense>
+  );
+}
+
+function LoadingAuthorAvatar() {
+  return <Skeleton variant="rounded" />;
+}
+
+function MemberAvatar({ name, id }: Readonly<Props>) {
   const { isMobile } = useMobileView();
-  const { data: authorAvatarUrl, isPending: isPendingAvatar } = useQuery(
+  const { data: authorAvatarUrl } = useSuspenseQuery(
     downloadAvatarOptions({
       path: { id, size: ThumbnailSize.Small },
     }),
@@ -42,14 +53,13 @@ export function MemberAvatar({
         minWidth={0}
       >
         <Avatar
-          component="avatar"
+          id={name}
           alt={`${name} avatar`}
           sx={{ fontSize: '14px' }}
           maxHeight={24}
           maxWidth={24}
           // use broken path to show first letter because we use ui avatar wrapper
           url={authorAvatarUrl}
-          isLoading={isPendingAvatar}
         />
         {!isMobile && (
           <Typography

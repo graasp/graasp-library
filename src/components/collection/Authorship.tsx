@@ -10,7 +10,6 @@ import {
 import { useQuery } from '@tanstack/react-query';
 
 import { PackedItem } from '~/openapi/client';
-import { m } from '~/paraglide/messages';
 
 import { SUMMARY_AUTHOR_CONTAINER_ID } from '../../config/selectors';
 import {
@@ -18,7 +17,7 @@ import {
   getItemMembershipsForItemOptions,
 } from '../../openapi/client/@tanstack/react-query.gen';
 import { TypographyLink } from '../common/links/TypographyLink';
-import Avatar from '../ui/Avatar/Avatar';
+import { Avatar } from '../ui/Avatar/Avatar';
 import Contributors from './Contributors';
 
 const Author = ({ author }: { author: Member }) => {
@@ -35,13 +34,11 @@ const Author = ({ author }: { author: Member }) => {
     return (
       <>
         <Avatar
+          id={author.id}
           url={authorUrl}
-          alt={m.AVATAR_ALT({ name: author.name })}
-          isLoading={isPendingAuthorAvatar}
-          component="avatar"
+          alt={author.name}
           maxWidth={30}
           maxHeight={30}
-          variant="circular"
           sx={{ maxWidth: 30, maxHeight: 30 }}
         />
         <TypographyLink

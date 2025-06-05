@@ -14,7 +14,7 @@ import {
 import { m } from '~/paraglide/messages';
 
 import { SMALL_AVATAR_ICON_SIZE } from '../../config/constants';
-import Avatar from '../ui/Avatar/Avatar';
+import { Avatar } from '../ui/Avatar/Avatar';
 
 type Props = {
   id?: string;
@@ -28,16 +28,10 @@ const MemberAvatar = React.forwardRef<HTMLDivElement, Props>(
     { id, memberId, size = SMALL_AVATAR_ICON_SIZE, ...otherProps },
     ref,
   ): JSX.Element => {
-    const {
-      data: member,
-      isPending,
-      isFetching,
-    } = useQuery(getOneMemberOptions({ path: { id: memberId } }));
-    const {
-      data: avatarUrl,
-      isPending: isPendingAvatar,
-      isFetching: isFetchingAvatar,
-    } = useQuery(
+    const { data: member } = useQuery(
+      getOneMemberOptions({ path: { id: memberId } }),
+    );
+    const { data: avatarUrl } = useQuery(
       downloadAvatarOptions({
         path: {
           id: memberId,
@@ -49,18 +43,15 @@ const MemberAvatar = React.forwardRef<HTMLDivElement, Props>(
     return (
       <Box id={id} ref={ref} {...otherProps}>
         <Avatar
-          isLoading={
-            isPending || isPendingAvatar || isFetchingAvatar || isFetching
-          }
           url={avatarUrl}
           alt={member && avatarUrl ? m.AVATAR_ALT({ name: member?.name }) : ''}
-          component="avatar"
           maxWidth={size}
           maxHeight={size}
           sx={{
             maxWidth: size,
             maxHeight: size,
           }}
+          id={`avatar-${member?.id}`}
         />
       </Box>
     );

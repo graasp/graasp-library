@@ -1,0 +1,28 @@
+{
+  "id": "76e78a41-df6d-4bbd-8303-a1992bbee928",
+  "item": {
+    "id": "47238afb-5e21-4cf8-b2b1-5904af82a155",
+    "name": "Geogebra",
+    "type": "folder",
+    "path": "47238afb_5e21_4cf8_b2b1_5904af82a155",
+    "lang": "en",
+    "extra": {},
+    "settings": {
+      "showChatbox": false
+    },
+    "createdAt": "2021-10-20 13:12:47.821784+00",
+    "updatedAt": "2021-10-23 09:25:39.798976+00",
+    "description": "<p>Interactive tools from <a href=\"https://www.geogebra.org/?lang=en\" rel=\"noopener noreferrer\" target=\"_blank\">geogebra</a> for mathematics.</p>",
+    "creator": {
+      "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+      "name": "Graasper"
+    }
+  },
+  "creator": {
+    "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+    "name": "Graasper",
+    "email": "graasper@gmail.com"
+  },
+  "createdAt": "2021-10-23 09:38:38.780221+00",
+  "totalViews": 550
+}

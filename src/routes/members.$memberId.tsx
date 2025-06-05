@@ -20,7 +20,7 @@ import { SocialLinks } from 'social-links';
 import { HighlightCollectionSection } from '~/components/collection/HighlightCollectionSection';
 import BackButton from '~/components/common/BackButton';
 import ShowLessAndMoreContent from '~/components/common/ShowLessAndMoreContent';
-import Avatar from '~/components/ui/Avatar/Avatar';
+import { Avatar } from '~/components/ui/Avatar/Avatar';
 import { CollectionItem } from '~/components/ui/CollectionItem';
 import {
   DEFAULT_MEMBER_THUMBNAIL,
@@ -47,7 +47,7 @@ function RouteComponent() {
   const { data: member } = useQuery(
     getOneMemberOptions({ path: { id: memberId } }),
   );
-  const { data: authorUrl, isLoading: isLoadingAuthorAvatar } = useQuery(
+  const { data: authorUrl } = useQuery(
     downloadAvatarOptions({
       path: {
         id: memberId,
@@ -76,17 +76,15 @@ function RouteComponent() {
             direction={{ sm: 'column', md: 'row' }}
           >
             <Avatar
-              alt={m.AVATAR_ALT({ name: member?.name ?? '' })}
+              id={`member-avatar-${memberId}`}
+              alt={m.AVATAR_ALT({ name: member ?? '' })}
               maxWidth={120}
               maxHeight={120}
-              variant="circular"
               sx={{
                 width: MEMBER_AVATAR_MAIN_SIZE,
                 height: MEMBER_AVATAR_MAIN_SIZE,
               }}
               url={authorUrl ?? DEFAULT_MEMBER_THUMBNAIL}
-              isLoading={isLoadingAuthorAvatar}
-              component="avatar"
             />
             <Stack id="memberData" spacing={2} width="100%" flexGrow={1}>
               <Stack

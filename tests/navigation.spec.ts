@@ -5,11 +5,6 @@ test.use({
 });
 
 test('Simple user flow', async ({ page }) => {
-  await page.routeFromHAR('./tests/fixtures/nav.har.zip', {
-    url: 'http://localhost:3000/**',
-    update: Boolean(process.env.UPDATE_HAR ?? false),
-  });
-
   await page.goto('/');
 
   // check title and subtitle are displayed
@@ -24,20 +19,17 @@ test('Simple user flow', async ({ page }) => {
   // expect title of the page
   await expect(
     page.getByRole('heading', { name: 'Search among' }),
-  ).toContainText('Search among 991 resources');
+  ).toContainText('Search among 958 resources');
 
+  const geogebraLocator = page.locator('a').filter({ hasText: 'Geogebra' });
   // expect first collection to have card title text
-  await expect(
-    page.locator('a').filter({ hasText: 'Virus SARS' }),
-  ).toBeVisible();
+  await expect(geogebraLocator).toBeVisible();
 
   // navigate to collection page
-  await page.locator('a').filter({ hasText: 'Virus SARS' }).click();
+  await geogebraLocator.click();
 
   // expect collection title to be displayed
-  await expect(page.locator('#summaryTitle')).toContainText(
-    'Virus SARS-CoV-2, observation et représentation de',
-  );
+  await expect(page.locator('#summaryTitle')).toContainText('Geogebra');
 
   // go back
   await page.getByRole('button', { name: 'Back' }).click();

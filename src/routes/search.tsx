@@ -27,7 +27,10 @@ import {
   SEARCH_ERROR_MESSAGE_ID,
 } from '~/config/selectors';
 import { useDebounce } from '~/hooks/useDebounce';
-import { collectionSearchInfiniteOptions } from '~/openapi/client/@tanstack/react-query.gen';
+import {
+  collectionSearchInfiniteOptions,
+  getFacetsForNameOptions,
+} from '~/openapi/client/@tanstack/react-query.gen';
 import { m } from '~/paraglide/messages';
 import { locales } from '~/paraglide/runtime';
 
@@ -44,6 +47,47 @@ const schema = z.object({
 
 export const Route = createFileRoute('/search')({
   validateSearch: zodValidator(schema),
+  loader: async ({ context }) => {
+    const body = {
+      query: '',
+      tags: { level: [], discipline: [], 'resource-type': [] },
+      langs: [],
+      isPublishedRoot: true,
+    };
+    await context.queryClient.ensureInfiniteQueryData(
+      collectionSearchInfiniteOptions({
+        body: {
+          page: 1,
+          ...body,
+          hitsPerPage: PAGE_SIZE,
+        },
+      }),
+    );
+    await context.queryClient.ensureQueryData(
+      getFacetsForNameOptions({
+        query: { facetName: 'langs' },
+        body,
+      }),
+    );
+    await context.queryClient.ensureQueryData(
+      getFacetsForNameOptions({
+        query: { facetName: 'discipline' },
+        body,
+      }),
+    );
+    await context.queryClient.ensureQueryData(
+      getFacetsForNameOptions({
+        query: { facetName: 'resource-type' },
+        body,
+      }),
+    );
+    await context.queryClient.ensureQueryData(
+      getFacetsForNameOptions({
+        query: { facetName: 'level' },
+        body,
+      }),
+    );
+  },
   component: RouteComponent,
 });
 
@@ -71,7 +115,7 @@ function RouteComponent() {
         },
         langs: search.langs,
         isPublishedRoot: rootOnly,
-        limit: PAGE_SIZE,
+        hitsPerPage: PAGE_SIZE,
       },
     }),
     initialPageParam: 1,

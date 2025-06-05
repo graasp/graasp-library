@@ -6,11 +6,7 @@ import type { MenuItemProps } from '@mui/material';
 
 import { ThumbnailSize } from '@graasp/sdk';
 
-import {
-  useQuery,
-  useQueryClient,
-  useSuspenseQuery,
-} from '@tanstack/react-query';
+import { useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 import { createLink, useLoaderData } from '@tanstack/react-router';
 import type { LinkComponent } from '@tanstack/react-router';
 
@@ -23,7 +19,7 @@ import { m } from '~/paraglide/messages';
 
 import { useCurrentLocation } from '../common/ShareButtons';
 import { ButtonLink } from '../common/links/ButtonLink';
-import Avatar from '../ui/Avatar/Avatar';
+import { Avatar } from '../ui/Avatar/Avatar';
 
 // User avatar component that uses suspense for loading
 export function UserAvatar() {
@@ -102,13 +98,13 @@ export function SuspendedUserAvatar() {
 }
 
 function AvatarDisplay({ currentUserId }: Readonly<{ currentUserId: string }>) {
-  const { data: avatarUrl } = useQuery({
+  const { data: avatarUrl } = useSuspenseQuery({
     ...downloadAvatarOptions({
       path: { id: currentUserId, size: ThumbnailSize.Small },
     }),
     retry: 0,
   });
-  return <Avatar alt={currentUserId} url={avatarUrl} />;
+  return <Avatar id={currentUserId} alt={currentUserId} url={avatarUrl} />;
 }
 
 export function LoadingUserAvatar() {

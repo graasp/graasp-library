@@ -6,7 +6,7 @@ import { buildCollectionRoute } from '../../../config/routes';
 import { downloadItemThumbnailOptions } from '../../../openapi/client/@tanstack/react-query.gen';
 import { ItemOrSearchedItem } from '../../../utils/types';
 import { BigCard } from '../../common/Card/BigCard';
-import { MemberAvatar } from '../../common/Card/MemberAvatar';
+import { AuthorAvatar } from '../../common/Card/MemberAvatar';
 import { ItemTag } from './ItemTag';
 
 type Props = {
@@ -51,7 +51,7 @@ export const CollectionCard = ({
   const likes = 'likes' in collection ? collection.likes : 0;
 
   const creatorContent = creator ? (
-    <MemberAvatar id={creator.id} name={creator.name} />
+    <AuthorAvatar id={creator.id} name={creator.name} />
   ) : null;
 
   return (

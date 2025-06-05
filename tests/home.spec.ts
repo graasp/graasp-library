@@ -2,12 +2,6 @@ import { expect, test } from '@playwright/test';
 
 test.describe('Home page', () => {
   test.beforeEach(async ({ page }) => {
-    // load fixtures from HAR file
-    await page.routeFromHAR('./tests/fixtures/home.har.zip', {
-      url: 'http://localhost:3000/**',
-      update: Boolean(process.env.UPDATE_HAR ?? false),
-    });
-    // navigate to home page
     await page.goto('/');
   });
 
@@ -25,6 +19,8 @@ test.describe('Home page', () => {
       page.getByRole('link', { name: 'OER', exact: true }),
     ).toBeVisible();
 
+    // wait for page to stabilise
+    await page.waitForTimeout(2000);
     // change language
     await page
       .getByRole('banner')
@@ -98,7 +94,8 @@ test.describe('Home page', () => {
       name: 'Search collections…',
     });
     await searchInput.click();
-    await searchInput.fill('geogebra');
+    await page.waitForTimeout(4000);
+    await searchInput.pressSequentially('geogebra', { delay: 500 });
     const geogebraResult = page
       .locator('#searchResultsList')
       .getByRole('link', { name: 'Geogebra Geogebra Interactive' })

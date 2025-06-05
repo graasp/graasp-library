@@ -2,11 +2,14 @@ import { Box, Stack } from '@mui/material';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Avatar from './Avatar.js';
+import { Avatar } from './Avatar.js';
 import { getColorFromId, stringToColor } from './stringToColor.js';
 
 const meta = {
   title: 'Images/Avatar',
+  args: {
+    id: 'testId',
+  },
   component: Avatar,
 } satisfies Meta<typeof Avatar>;
 
@@ -16,8 +19,8 @@ type Story = StoryObj<typeof meta>;
 
 export const DefaultAvatar = {
   args: {
+    id: 'testId',
     alt: 'myname',
-    component: 'avatar',
   },
 } satisfies Story;
 
@@ -26,7 +29,6 @@ export const AvatarImage = {
     alt: 'Avatar',
     maxHeight: 100,
     maxWidth: 100,
-    component: 'avatar',
     url: 'https://picsum.photos/100',
   },
 } satisfies Story;
@@ -34,7 +36,6 @@ export const AvatarImage = {
 export const Loading = {
   args: {
     alt: 'Loading Avatar',
-    isLoading: true,
     maxHeight: 100,
     maxWidth: 100,
   },
@@ -43,7 +44,6 @@ export const Loading = {
 export const ItemThumbnail = {
   args: {
     alt: 'Item thumbnail',
-    component: 'img',
     maxHeight: 100,
     maxWidth: 100,
     url: 'https://picsum.photos/100',
@@ -52,7 +52,6 @@ export const ItemThumbnail = {
 
 export const ColoredAvatars = {
   args: {
-    component: 'avatar',
     alt: 'user',
   },
   render: (props) => {
@@ -92,7 +91,6 @@ const gradientIds = Array.from(Array(64)).map(
 );
 export const ColoredIdAvatars = {
   args: {
-    component: 'avatar',
     alt: 'user',
   },
   render: (props) => {
@@ -117,7 +115,6 @@ export const ColoredIdAvatars = {
 
 export const Colors = {
   args: {
-    component: 'avatar',
     alt: 'user',
   },
   render: () => {

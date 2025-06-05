@@ -13,7 +13,7 @@ import { getLocale } from '~/paraglide/runtime';
 import { Item, PackedItem } from '../../../openapi/client';
 import BackButton from '../../common/BackButton';
 import { ChildrenItems } from '../ChildrenItems';
-import ItemBreadcrumb from '../ItemBreadcrumb';
+import { ItemBreadcrumb } from '../ItemBreadcrumb';
 import { SummaryDetails } from './SummaryDetails';
 import { SummaryHeader } from './SummaryHeader';
 
