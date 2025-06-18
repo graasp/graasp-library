@@ -146,7 +146,8 @@
     "onlyBuiltDependencies": [
       "@parcel/watcher",
       "cypress",
-      "esbuild"
+      "esbuild",
+      "unrs-resolver"
     ]
   },
   "volta": {
