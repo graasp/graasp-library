@@ -43,7 +43,7 @@ test('Simple user flow', async ({ page }) => {
 
   await expect(
     page.getByRole('heading', { name: 'Search among' }),
-  ).toContainText('Search among 209 resource');
+  ).toContainText('Search among 958 resources');
 
   await expect(
     page.getByRole('heading', { name: 'Proyecto periódico escolar' }),

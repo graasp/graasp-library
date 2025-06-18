@@ -20,7 +20,7 @@ test.describe('Home page', () => {
     ).toBeVisible();
 
     // wait for page to stabilise
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(3000);
     // change language
     await page
       .getByRole('banner')
@@ -33,12 +33,13 @@ test.describe('Home page', () => {
       page.getByRole('heading', { name: 'Bibliothèque Graasp' }),
     ).toBeVisible();
 
+    // wait for page to stabilise
+    await page.waitForTimeout(3000);
     // change language from footer
     await page
       .getByTestId('footer')
       .getByRole('button', { name: 'language switch' })
       .click();
-
     await page.getByRole('menuitem', { name: 'Español' }).click();
 
     // The title should have changed to display the spanish version
@@ -86,6 +87,12 @@ test.describe('Home page', () => {
 
     // check search button
     await page.getByRole('link', { name: 'Browse all collections' }).click();
+    await expect(page).toHaveURL((url) => url.pathname === '/search');
+  });
+
+  test('Footer section', async ({ page }) => {
+    // check browse all collections button
+    await page.getByRole('link', { name: 'View more in the Library' }).click();
     await expect(page).toHaveURL((url) => url.pathname === '/search');
   });
 

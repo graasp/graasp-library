@@ -109,8 +109,12 @@ function RootDocument({ children }: Readonly<{ children: React.ReactNode }>) {
           </Stack>
         </Providers>
 
-        <TanStackRouterDevtools position="bottom-right" />
-        <ReactQueryDevtools buttonPosition="bottom-left" />
+        {import.meta.env.MODE === 'development' && (
+          <>
+            <TanStackRouterDevtools position="bottom-right" />
+            <ReactQueryDevtools buttonPosition="bottom-left" />
+          </>
+        )}
 
         <Scripts />
       </body>

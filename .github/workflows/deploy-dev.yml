@@ -60,7 +60,7 @@ jobs:
           --build-arg BUILD_TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%S) \
           --build-arg VITE_API_HOST=${{ vars.VITE_API_HOST }} \
           --build-arg VITE_CLIENT_HOST=${{ vars.VITE_CLIENT_HOST }} \
-          --build-arg VITE_GRAASPER_ID=${{ vars.VITE_GRAASPER_ID }} \
+          --build-arg VITE_CURRENT_HOST=${{ vars.VITE_CURRENT_HOST }} \
           .
         shell: bash
 

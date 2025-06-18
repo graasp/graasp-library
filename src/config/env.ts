@@ -10,9 +10,6 @@ export const CURRENT_HOST =
 export const API_HOST =
   process.env.VITE_API_HOST ?? import.meta.env.VITE_API_HOST; // ?? 'http://localhost:3000';
 
-// FIXME: may be we should have a specific endpoint for the graasper collections so we do not rely on this env var
-export const GRAASPER_ID = import.meta.env.VITE_GRAASPER_ID;
-
 // TODO: NOT USED anymore, remove
 export const SHOW_NOTIFICATIONS =
   import.meta.env.VITE_SHOW_NOTIFICATIONS === 'true' || false;

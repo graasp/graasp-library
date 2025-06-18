@@ -36,8 +36,8 @@ Download or clone the repository to your local machine, preferably using [Git](h
     # VITE_CLIENT_HOST=http://localhost:3114
     # VITE_CURRENT_HOST=http://localhost:3002
 
-    # The id of the Graasper user to show collections on the home page
-    # VITE_GRAASPER_ID=
+    # for tests
+    # VITE_PORT=3002
 
     # Uncomment to use Sentry locally (not recommended)
     # SENTRY_DSN=
@@ -68,6 +68,29 @@ pnpm vinxi dev --port <other-port>
 
 Unit tests are performed with [`vitest`](https://vitest.dev/).
 Start tests with `pnpm vitest`
+
+### Integration tests
+
+We run integration tests with Playwright.
+Create a `.env.test` file with the following content:
+
+    ```dotenv
+    # URL of the backend server. Uncomment to override the default value
+    VITE_API_HOST=http://localhost:3000
+    VITE_CLIENT_HOST=http://localhost:3114
+    VITE_CURRENT_HOST=http://localhost:3002
+
+    # for tests
+    VITE_PORT=3002
+
+    # Uncomment to use Sentry locally (not recommended)
+    # SENTRY_DSN=
+    # SENTRY_ENV=local-dev
+
+    # These are usually set by the docker build stage, but you can provide them
+    # APP_VERSION=local-dev
+    # BUILD_TIMESTAMP=latest
+    ```
 
 ## Technology stack
 

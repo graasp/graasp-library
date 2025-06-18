@@ -18,8 +18,6 @@ import search from './search.json' with { type: 'json' };
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-console.debug(process.env.VITE_API_HOST);
-
 // define the app
 const app = new Hono();
 
@@ -58,6 +56,12 @@ app.get('/members/current', (c) =>
 app.get('/members/:memberId/avatar/:size', (c) =>
   c.text('http://localhost:3000/static/mr-bean.png'),
 );
+
+app.get('/items/:itemId/thumbnails/:size', (c) => {
+  // c.text(`http://localhost:3000/static/${c.req.param('itemId')}.png`),
+  c.status(404);
+  return c.text('No thumbnail found');
+});
 
 app.get('/items/collections/featured', (c) => {
   const limitParam = c.req.query('hitsPerPage');

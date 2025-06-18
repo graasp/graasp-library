@@ -7,9 +7,6 @@ import dotenv from 'dotenv';
 
 dotenv.config({ path: '.env.test' });
 
-const serverStartCmd = process.env.CI
-  ? `pnpm vinxi build --mode test && pnpm vinxi start --mode test --port ${process.env.VITE_PORT}`
-  : `pnpm vinxi dev --mode test --port ${process.env.VITE_PORT}`;
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
