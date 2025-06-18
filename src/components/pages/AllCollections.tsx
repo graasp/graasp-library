@@ -61,6 +61,7 @@ const AllCollectionsContent = (): ReactNode => {
     langs: langsForFilter,
     page,
     isPublishedRoot,
+    hitsPerPage: 24,
   });
 
   useEffect(() => {
