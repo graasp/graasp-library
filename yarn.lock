@@ -2675,9 +2675,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/query-client@npm:5.8.0":
+"@graasp/query-client@github:graasp/graasp-query-client#use-hitsPerPage":
   version: 5.8.0
-  resolution: "@graasp/query-client@npm:5.8.0"
+  resolution: "@graasp/query-client@https://github.com/graasp/graasp-query-client.git#commit=72bc2e16c44bf930c49aeee5f188c6dd6488875b"
   dependencies:
     "@tanstack/react-query": "npm:5.66.0"
     "@tanstack/react-query-devtools": "npm:5.66.0"
@@ -2687,7 +2687,7 @@ __metadata:
     "@graasp/sdk": ^4.0.0 || ^5.0.0
     "@graasp/translations": "*"
     react: ^18.0.0
-  checksum: 10/c7b7aa8c08010a2f3417f977b9344aecdee6abb985051d981ffae430215e8bcd52f678df9097d6a6c485e94e40b5837b0a9720bbd519a85db1956765e2d18fc4
+  checksum: 10/17afc1549acfbae85998393a3570cda5362420eea9c5597d8a9a451808efc4a8e8a7e018d1fd5377e33aa37f8c5036c33d7199f75a9d02fef2e51daf3c299057
   languageName: node
   linkType: hard
 
@@ -11074,7 +11074,7 @@ __metadata:
     "@emotion/react": "npm:11.14.0"
     "@emotion/server": "npm:11.11.0"
     "@emotion/styled": "npm:11.14.0"
-    "@graasp/query-client": "npm:5.8.0"
+    "@graasp/query-client": "github:graasp/graasp-query-client#use-hitsPerPage"
     "@graasp/sdk": "npm:5.11.0"
     "@graasp/stylis-plugin-rtl": "npm:2.2.0"
     "@graasp/translations": "npm:1.43.0"
