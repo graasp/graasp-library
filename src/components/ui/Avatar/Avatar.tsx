@@ -20,7 +20,7 @@ export function Avatar({
   maxWidth = '40px',
   maxHeight = '40px',
   url,
-}: AvatarProps): JSX.Element | null {
+}: Readonly<AvatarProps>): JSX.Element | null {
   // check if the url is a string and is not empty
   return (
     <AvatarComponent

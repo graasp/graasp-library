@@ -1,7 +1,10 @@
 import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
-import { configDefaults, defineConfig } from 'vitest/config';
+import tsConfigPaths from 'vite-tsconfig-paths';
+import { configDefaults, mergeConfig } from 'vitest/config';
 
-export default defineConfig({
+import viteConfig from './vite.config.js';
+
+export default mergeConfig(viteConfig, {
   test: {
     projects: [
       {
@@ -13,12 +16,16 @@ export default defineConfig({
       },
       {
         plugins: [
+          tsConfigPaths({
+            projects: ['./tsconfig.json'],
+          }),
           // See options at: https://storybook.js.org/docs/writing-tests/vitest-plugin#storybooktest
           storybookTest({ configDir: '.storybook' }),
         ],
         optimizeDeps: {
           entries: ['src/**/*.stories.tsx', '.storybook/preview.tsx'],
           include: [
+            'react/jsx-dev-runtime',
             'react-dom/client',
             '@graasp/stylis-plugin-rtl',
             '@emotion/cache',
@@ -34,7 +41,6 @@ export default defineConfig({
           ],
         },
         test: {
-          include: ['src/**/*.stories.tsx'],
           name: 'storybook',
           retry: 1,
           browser: {
