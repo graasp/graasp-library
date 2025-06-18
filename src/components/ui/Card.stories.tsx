@@ -1,8 +1,8 @@
 import { Box, IconButton, Stack } from '@mui/material';
 
 import type { Meta, StoryObj } from '@storybook/react';
-import { fn } from '@storybook/test';
 import { Grip, Snowflake } from 'lucide-react';
+import { fn } from 'storybook/test';
 
 import Card from './Card.js';
 

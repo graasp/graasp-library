@@ -101,7 +101,7 @@ export function SearchResults({
     collectionSearchOptions({
       body: {
         page: 1,
-        limit: MAX_RESULTS_TO_SHOW,
+        hitsPerPage: MAX_RESULTS_TO_SHOW,
         query: debouncedQuery,
         isPublishedRoot,
         cropLength: 10,

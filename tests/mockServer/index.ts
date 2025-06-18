@@ -18,6 +18,8 @@ import search from './search.json' with { type: 'json' };
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+console.debug(process.env.VITE_API_HOST);
+
 // define the app
 const app = new Hono();
 

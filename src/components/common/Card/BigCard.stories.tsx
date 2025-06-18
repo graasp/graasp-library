@@ -3,7 +3,7 @@ import { Avatar, Chip, Grid, Typography } from '@mui/material';
 import { ItemType } from '@graasp/sdk';
 
 import type { Meta, StoryObj } from '@storybook/react';
-import { expect, within } from '@storybook/test';
+import { expect, within } from 'storybook/test';
 import { v4 } from 'uuid';
 
 import { BigCard } from './BigCard';
