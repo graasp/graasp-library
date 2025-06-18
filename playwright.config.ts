@@ -75,7 +75,7 @@ export default defineConfig({
     // The command to start the webserver does 2 things:
     // - build the server in test mode
     // - serve the build assets in test mode exposing it on the port that is defined in the .env.test file
-    command: `concurrently "pnpm mockserver" "pnpm vinxi dev --mode test --port ${process.env.VITE_PORT}"`,
+    command: `concurrently "pnpm mockserver" "pnpm start:test --port ${process.env.VITE_PORT}"`,
     timeout: 120 * 1000, // 2 minutes (default 60 seconds)
     url: `http://localhost:${process.env.VITE_PORT}`,
     reuseExistingServer: !process.env.CI,

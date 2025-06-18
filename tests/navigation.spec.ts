@@ -33,6 +33,8 @@ test('Simple user flow', async ({ page }) => {
 
   // go back
   await page.getByRole('button', { name: 'Back' }).click();
+
+  await page.waitForTimeout(3000);
   // filter by language
   await page.locator('#searchFilterButton-lang').click();
   await page.getByRole('checkbox', { name: 'Español' }).click();

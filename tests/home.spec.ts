@@ -91,6 +91,7 @@ test.describe('Home page', () => {
   });
 
   test('Footer section', async ({ page }) => {
+    await page.waitForTimeout(3000);
     // check browse all collections button
     await page.getByRole('link', { name: 'View more in the Library' }).click();
     await expect(page).toHaveURL((url) => url.pathname === '/search');
