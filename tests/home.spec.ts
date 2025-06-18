@@ -28,6 +28,7 @@ test.describe('Home page', () => {
       .click();
     await page.getByRole('menuitem', { name: 'Français' }).click();
 
+    await page.waitForTimeout(2000);
     // The title should have changed to display the french version
     await expect(
       page.getByRole('heading', { name: 'Bibliothèque Graasp' }),
@@ -42,6 +43,7 @@ test.describe('Home page', () => {
       .click();
     await page.getByRole('menuitem', { name: 'Español' }).click();
 
+    await page.waitForTimeout(2000);
     // The title should have changed to display the spanish version
     await expect(
       page.getByRole('heading', { name: 'Biblioteca Graasp' }),
