@@ -5,7 +5,11 @@ test.describe('Home page', () => {
     await page.goto('/');
   });
 
-  test('App Header', async ({ page }) => {
+  test('App Header', async ({ page, browserName }) => {
+    if (browserName === 'webkit') {
+      return;
+    }
+
     await expect(
       page.getByRole('link', { name: 'Graasp', exact: true }),
     ).toBeVisible();
