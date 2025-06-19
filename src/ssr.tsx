@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/tanstackstart-react';
 import { getRouterManifest } from '@tanstack/react-start/router-manifest';
 import {
   createStartHandler,
@@ -9,7 +10,17 @@ import { getWebRequest } from 'vinxi/http';
 
 import { paraglideMiddleware } from '~/paraglide/server.js';
 
+import { APP_VERSION } from './config/env';
 import { createRouter } from './router';
+
+Sentry.init({
+  dsn: process.env.SENTRY_DSN,
+  release: `graasp-library@${APP_VERSION}`,
+
+  // Setting this option to true will send default PII data to Sentry.
+  // For example, automatic IP address collection on events
+  sendDefaultPii: true,
+});
 
 // interweave polyfill
 polyfill();
@@ -19,6 +30,6 @@ export default defineEventHandler((event) =>
     createStartHandler({
       createRouter,
       getRouterManifest,
-    })(defaultStreamHandler)(event),
+    })(Sentry.wrapStreamHandlerWithSentry(defaultStreamHandler))(event),
   ),
 );

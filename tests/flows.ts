@@ -1,10 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-test.use({
-  serviceWorkers: 'block',
-});
-
-test('Simple user flow', async ({ page }) => {
+test('Search flow', async ({ page }) => {
   await page.goto('/');
 
   // check title and subtitle are displayed
@@ -50,4 +46,15 @@ test('Simple user flow', async ({ page }) => {
   await expect(
     page.getByRole('heading', { name: 'Proyecto periódico escolar' }),
   ).toBeVisible();
+});
+
+test('Like a collection', async ({ page }) => {
+  // got to the collection page
+  await page.goto('/collections/47238afb-5e21-4cf8-b2b1-5904af82a155');
+
+  // check collection is correct
+  await expect(page.getByRole('heading', { name: 'Geogebra' })).toBeVisible();
+
+  // like the collection
+  await page.getByRole('button', { name: 'like' }).click();
 });

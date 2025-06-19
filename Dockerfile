@@ -20,12 +20,16 @@ ARG VITE_API_HOST
 ENV VITE_API_HOST=${VITE_API_HOST}
 ARG VITE_CLIENT_HOST
 ENV VITE_CLIENT_HOST=${VITE_CLIENT_HOST}
+ARG SENTRY_DSN
+ENV VITE_SENTRY_DSN=${SENTRY_DSN}
+ARG SENTRY_ENV
+ENV VITE_SENTRY_ENV=${SENTRY_ENV}
 
 # Install pnpm in the builder stage
 RUN npm install -g pnpm
 
 # Build the application
-RUN pnpm build
+RUN --mount=type=secret,id=SENTRY_AUTH_TOKEN,env=SENTRY_AUTH_TOKEN pnpm build
 
 # -------------------------------------------------------
 # Production image, copy all the files and run the server
@@ -38,6 +42,10 @@ ARG APP_VERSION
 ENV APP_VERSION=${APP_VERSION:-latest}
 ARG BUILD_TIMESTAMP
 ENV BUILD_TIMESTAMP=${BUILD_TIMESTAMP:-not-provided}
+ARG SENTRY_DSN
+ENV SENTRY_DSN=${SENTRY_DSN}
+ARG SENTRY_ENV
+ENV SENTRY_ENV=${SENTRY_ENV}
 
 # Create a non-root user
 RUN addgroup --system --gid 1001 nodejs && \

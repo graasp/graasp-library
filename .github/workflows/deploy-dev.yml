@@ -61,8 +61,13 @@ jobs:
           --build-arg VITE_API_HOST=${{ vars.VITE_API_HOST }} \
           --build-arg VITE_CLIENT_HOST=${{ vars.VITE_CLIENT_HOST }} \
           --build-arg VITE_CURRENT_HOST=${{ vars.VITE_CURRENT_HOST }} \
+          --build-arg SENTRY_DSN=${{ secrets.VITE_SENTRY_DSN }} \
+          --build-arg SENTRY_ENV=${{ inputs.environment || 'dev' }} \
+          --secret id=SENTRY_AUTH_TOKEN \
           .
         shell: bash
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
       # push image to ECR
       - name: Push image

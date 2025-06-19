@@ -9,6 +9,7 @@ import rtlPlugin from '@graasp/stylis-plugin-rtl';
 import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import fontsourceVariableNunitoCss from '@fontsource-variable/nunito?url';
+import { wrapCreateRootRouteWithSentry } from '@sentry/tanstackstart-react';
 import { QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import {
@@ -29,28 +30,28 @@ import { getClientOriginFn, getCurrentLocationFn } from '~/lib/routes';
 import { getLocale } from '~/paraglide/runtime';
 import { getDirectionFromLocale } from '~/utils/locale';
 
-export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
-  {
-    head: () => ({
-      meta: [
-        { title: 'Graasp Library' },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      ],
-      links: [
-        { rel: 'stylesheet', href: fontsourceVariableNunitoCss },
-        { rel: 'stylesheet', href: reactQuillCSS },
-        { rel: 'stylesheet', href: katexCSS },
-      ],
-    }),
-    loader: async () => {
-      const clientOrigin = await getClientOriginFn();
-      const currentLocation = await getCurrentLocationFn();
-      return { clientOrigin, currentLocation };
-    },
-    component: RootComponent,
-    errorComponent: ErrorComponent,
+export const Route = wrapCreateRootRouteWithSentry(
+  createRootRouteWithContext<{ queryClient: QueryClient }>,
+)()({
+  head: () => ({
+    meta: [
+      { title: 'Graasp Library' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+    ],
+    links: [
+      { rel: 'stylesheet', href: fontsourceVariableNunitoCss },
+      { rel: 'stylesheet', href: reactQuillCSS },
+      { rel: 'stylesheet', href: katexCSS },
+    ],
+  }),
+  loader: async () => {
+    const clientOrigin = await getClientOriginFn();
+    const currentLocation = await getCurrentLocationFn();
+    return { clientOrigin, currentLocation };
   },
-);
+  component: RootComponent,
+  errorComponent: ErrorComponent,
+});
 
 function RootComponent() {
   return (
