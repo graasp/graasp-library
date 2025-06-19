@@ -1,9 +1,9 @@
 import { json } from '@tanstack/react-start';
-import { createAPIFileRoute } from '@tanstack/react-start/api';
+import { createServerFileRoute } from '@tanstack/react-start/server';
 
 import { APP_VERSION, BUILD_TIMESTAMP } from '~/config/env';
 
-export const APIRoute = createAPIFileRoute('/api/version')({
+export const ServerRoute = createServerFileRoute('/api/version').methods({
   GET: () => {
     return json({ version: APP_VERSION, build_timestamp: BUILD_TIMESTAMP });
   },

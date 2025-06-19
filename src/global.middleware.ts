@@ -7,12 +7,10 @@ import {
 import { localeMiddleware } from './utils/locale-middleware';
 
 registerGlobalMiddleware({
-  middleware: [localeMiddleware],
-});
-
-registerGlobalMiddleware({
   middleware: [
     localeMiddleware,
-    createMiddleware().server(Sentry.sentryGlobalServerMiddlewareHandler()),
+    createMiddleware({ type: 'function' }).server(
+      Sentry.sentryGlobalServerMiddlewareHandler(),
+    ),
   ],
 });

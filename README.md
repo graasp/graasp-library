@@ -59,7 +59,7 @@ If you update env variables you will have to restart the server.
 If you wish to run the application on a different port, use the following command (replace `<other-port>` with e.g. `3333` for the app to be accessible at `http://localhost:3333`):
 
 ```sh
-pnpm vinxi dev --port <other-port>
+pnpm vite dev --port <other-port>
 ```
 
 ## Testing

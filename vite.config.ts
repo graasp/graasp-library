@@ -1,14 +1,18 @@
 import { paraglideVitePlugin } from '@inlang/paraglide-js';
-import type { UserConfig } from 'vite';
-import tsConfigPaths from 'vite-tsconfig-paths';
+import { sentryVitePlugin } from '@sentry/vite-plugin';
+import { tanstackStart } from '@tanstack/react-start/plugin/vite';
+import { defineConfig } from 'vite';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
-export default {
+export default defineConfig({
+  build: {
+    sourcemap: true, // Source map generation must be turned on
+  },
   ssr: {
     noExternal: ['@mui/*'],
   },
-
   plugins: [
-    tsConfigPaths({
+    tsconfigPaths({
       projects: ['./tsconfig.json'],
     }),
     paraglideVitePlugin({
@@ -20,5 +24,15 @@ export default {
       // fallback to the base locale: en
       strategy: ['cookie', 'preferredLanguage', 'baseLocale'],
     }),
+    tanstackStart(),
+    sentryVitePlugin({
+      // disable sentry telemetry
+      telemetry: false,
+      org: process.env.SENTRY_ORG,
+      project: process.env.SENTRY_PROJECT,
+
+      // Auth tokens can be obtained from https://sentry.io/orgredirect/organizations/:orgslug/settings/auth-tokens/
+      authToken: process.env.SENTRY_AUTH_TOKEN,
+    }),
   ],
-} satisfies UserConfig;
+});

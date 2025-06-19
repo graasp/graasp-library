@@ -8,118 +8,66 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-// Import Routes
+import { createServerRootRoute } from '@tanstack/react-start/server'
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as SearchImport } from './routes/search'
-import { Route as OerImport } from './routes/oer'
-import { Route as LikedImport } from './routes/liked'
-import { Route as AllCollectionsImport } from './routes/all-collections'
-import { Route as IndexImport } from './routes/index'
-import { Route as MembersMemberIdImport } from './routes/members.$memberId'
-import { Route as CollectionsIdImport } from './routes/collections.$id'
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as SearchRouteImport } from './routes/search'
+import { Route as OerRouteImport } from './routes/oer'
+import { Route as LikedRouteImport } from './routes/liked'
+import { Route as AllCollectionsRouteImport } from './routes/all-collections'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as MembersMemberIdRouteImport } from './routes/members.$memberId'
+import { Route as CollectionsIdRouteImport } from './routes/collections.$id'
+import { ServerRoute as ApiVersionServerRouteImport } from './routes/api/version'
+import { ServerRoute as ApiStatusServerRouteImport } from './routes/api/status'
 
-// Create/Update Routes
+const rootServerRouteImport = createServerRootRoute()
 
-const SearchRoute = SearchImport.update({
+const SearchRoute = SearchRouteImport.update({
   id: '/search',
   path: '/search',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const OerRoute = OerImport.update({
+const OerRoute = OerRouteImport.update({
   id: '/oer',
   path: '/oer',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const LikedRoute = LikedImport.update({
+const LikedRoute = LikedRouteImport.update({
   id: '/liked',
   path: '/liked',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AllCollectionsRoute = AllCollectionsImport.update({
+const AllCollectionsRoute = AllCollectionsRouteImport.update({
   id: '/all-collections',
   path: '/all-collections',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const IndexRoute = IndexImport.update({
+const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const MembersMemberIdRoute = MembersMemberIdImport.update({
+const MembersMemberIdRoute = MembersMemberIdRouteImport.update({
   id: '/members/$memberId',
   path: '/members/$memberId',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const CollectionsIdRoute = CollectionsIdImport.update({
+const CollectionsIdRoute = CollectionsIdRouteImport.update({
   id: '/collections/$id',
   path: '/collections/$id',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-// Populate the FileRoutesByPath interface
-
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/all-collections': {
-      id: '/all-collections'
-      path: '/all-collections'
-      fullPath: '/all-collections'
-      preLoaderRoute: typeof AllCollectionsImport
-      parentRoute: typeof rootRoute
-    }
-    '/liked': {
-      id: '/liked'
-      path: '/liked'
-      fullPath: '/liked'
-      preLoaderRoute: typeof LikedImport
-      parentRoute: typeof rootRoute
-    }
-    '/oer': {
-      id: '/oer'
-      path: '/oer'
-      fullPath: '/oer'
-      preLoaderRoute: typeof OerImport
-      parentRoute: typeof rootRoute
-    }
-    '/search': {
-      id: '/search'
-      path: '/search'
-      fullPath: '/search'
-      preLoaderRoute: typeof SearchImport
-      parentRoute: typeof rootRoute
-    }
-    '/collections/$id': {
-      id: '/collections/$id'
-      path: '/collections/$id'
-      fullPath: '/collections/$id'
-      preLoaderRoute: typeof CollectionsIdImport
-      parentRoute: typeof rootRoute
-    }
-    '/members/$memberId': {
-      id: '/members/$memberId'
-      path: '/members/$memberId'
-      fullPath: '/members/$memberId'
-      preLoaderRoute: typeof MembersMemberIdImport
-      parentRoute: typeof rootRoute
-    }
-  }
-}
-
-// Create and export the route tree
+const ApiVersionServerRoute = ApiVersionServerRouteImport.update({
+  id: '/api/version',
+  path: '/api/version',
+  getParentRoute: () => rootServerRouteImport,
+} as any)
+const ApiStatusServerRoute = ApiStatusServerRouteImport.update({
+  id: '/api/status',
+  path: '/api/status',
+  getParentRoute: () => rootServerRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -130,7 +78,6 @@ export interface FileRoutesByFullPath {
   '/collections/$id': typeof CollectionsIdRoute
   '/members/$memberId': typeof MembersMemberIdRoute
 }
-
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/all-collections': typeof AllCollectionsRoute
@@ -140,9 +87,8 @@ export interface FileRoutesByTo {
   '/collections/$id': typeof CollectionsIdRoute
   '/members/$memberId': typeof MembersMemberIdRoute
 }
-
 export interface FileRoutesById {
-  __root__: typeof rootRoute
+  __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/all-collections': typeof AllCollectionsRoute
   '/liked': typeof LikedRoute
@@ -151,7 +97,6 @@ export interface FileRoutesById {
   '/collections/$id': typeof CollectionsIdRoute
   '/members/$memberId': typeof MembersMemberIdRoute
 }
-
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
@@ -182,7 +127,6 @@ export interface FileRouteTypes {
     | '/members/$memberId'
   fileRoutesById: FileRoutesById
 }
-
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AllCollectionsRoute: typeof AllCollectionsRoute
@@ -191,6 +135,103 @@ export interface RootRouteChildren {
   SearchRoute: typeof SearchRoute
   CollectionsIdRoute: typeof CollectionsIdRoute
   MembersMemberIdRoute: typeof MembersMemberIdRoute
+}
+export interface FileServerRoutesByFullPath {
+  '/api/status': typeof ApiStatusServerRoute
+  '/api/version': typeof ApiVersionServerRoute
+}
+export interface FileServerRoutesByTo {
+  '/api/status': typeof ApiStatusServerRoute
+  '/api/version': typeof ApiVersionServerRoute
+}
+export interface FileServerRoutesById {
+  __root__: typeof rootServerRouteImport
+  '/api/status': typeof ApiStatusServerRoute
+  '/api/version': typeof ApiVersionServerRoute
+}
+export interface FileServerRouteTypes {
+  fileServerRoutesByFullPath: FileServerRoutesByFullPath
+  fullPaths: '/api/status' | '/api/version'
+  fileServerRoutesByTo: FileServerRoutesByTo
+  to: '/api/status' | '/api/version'
+  id: '__root__' | '/api/status' | '/api/version'
+  fileServerRoutesById: FileServerRoutesById
+}
+export interface RootServerRouteChildren {
+  ApiStatusServerRoute: typeof ApiStatusServerRoute
+  ApiVersionServerRoute: typeof ApiVersionServerRoute
+}
+
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/oer': {
+      id: '/oer'
+      path: '/oer'
+      fullPath: '/oer'
+      preLoaderRoute: typeof OerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/liked': {
+      id: '/liked'
+      path: '/liked'
+      fullPath: '/liked'
+      preLoaderRoute: typeof LikedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/all-collections': {
+      id: '/all-collections'
+      path: '/all-collections'
+      fullPath: '/all-collections'
+      preLoaderRoute: typeof AllCollectionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/members/$memberId': {
+      id: '/members/$memberId'
+      path: '/members/$memberId'
+      fullPath: '/members/$memberId'
+      preLoaderRoute: typeof MembersMemberIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/collections/$id': {
+      id: '/collections/$id'
+      path: '/collections/$id'
+      fullPath: '/collections/$id'
+      preLoaderRoute: typeof CollectionsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+  }
+}
+declare module '@tanstack/react-start/server' {
+  interface ServerFileRoutesByPath {
+    '/api/version': {
+      id: '/api/version'
+      path: '/api/version'
+      fullPath: '/api/version'
+      preLoaderRoute: typeof ApiVersionServerRouteImport
+      parentRoute: typeof rootServerRouteImport
+    }
+    '/api/status': {
+      id: '/api/status'
+      path: '/api/status'
+      fullPath: '/api/status'
+      preLoaderRoute: typeof ApiStatusServerRouteImport
+      parentRoute: typeof rootServerRouteImport
+    }
+  }
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -202,47 +243,13 @@ const rootRouteChildren: RootRouteChildren = {
   CollectionsIdRoute: CollectionsIdRoute,
   MembersMemberIdRoute: MembersMemberIdRoute,
 }
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/",
-        "/all-collections",
-        "/liked",
-        "/oer",
-        "/search",
-        "/collections/$id",
-        "/members/$memberId"
-      ]
-    },
-    "/": {
-      "filePath": "index.tsx"
-    },
-    "/all-collections": {
-      "filePath": "all-collections.tsx"
-    },
-    "/liked": {
-      "filePath": "liked.tsx"
-    },
-    "/oer": {
-      "filePath": "oer.tsx"
-    },
-    "/search": {
-      "filePath": "search.tsx"
-    },
-    "/collections/$id": {
-      "filePath": "collections.$id.tsx"
-    },
-    "/members/$memberId": {
-      "filePath": "members.$memberId.tsx"
-    }
-  }
+const rootServerRouteChildren: RootServerRouteChildren = {
+  ApiStatusServerRoute: ApiStatusServerRoute,
+  ApiVersionServerRoute: ApiVersionServerRoute,
 }
-ROUTE_MANIFEST_END */
+export const serverRouteTree = rootServerRouteImport
+  ._addFileChildren(rootServerRouteChildren)
+  ._addFileTypes<FileServerRouteTypes>()

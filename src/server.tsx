@@ -1,16 +1,14 @@
 import * as Sentry from '@sentry/tanstackstart-react';
-import { getRouterManifest } from '@tanstack/react-start/router-manifest';
 import {
   createStartHandler,
   defaultStreamHandler,
-  defineEventHandler,
+  getWebRequest,
 } from '@tanstack/react-start/server';
 import { polyfill } from 'interweave-ssr';
-import { getWebRequest } from 'vinxi/http';
-
-import { paraglideMiddleware } from '~/paraglide/server.js';
 
 import { APP_VERSION } from './config/env';
+import { overwriteGetLocale } from './paraglide/runtime';
+import { paraglideMiddleware } from './paraglide/server';
 import { createRouter } from './router';
 
 Sentry.init({
@@ -24,12 +22,13 @@ Sentry.init({
 
 // interweave polyfill
 polyfill();
+
 // we need to change a bit how the ssr endpoint is handled in order to inject the paraglideJS middleware for i18n
-export default defineEventHandler((event) =>
-  paraglideMiddleware(getWebRequest(event), async () =>
-    createStartHandler({
-      createRouter,
-      getRouterManifest,
-    })(Sentry.wrapStreamHandlerWithSentry(defaultStreamHandler))(event),
-  ),
+export default createStartHandler({
+  createRouter,
+})((event) =>
+  paraglideMiddleware(getWebRequest(), ({ locale }) => {
+    overwriteGetLocale(() => locale);
+    return Sentry.wrapStreamHandlerWithSentry(defaultStreamHandler(event));
+  }),
 );

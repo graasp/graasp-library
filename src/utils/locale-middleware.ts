@@ -9,7 +9,7 @@ import {
 
 import { resolveLocale } from './resolve-locale';
 
-export const localeMiddleware = createMiddleware()
+export const localeMiddleware = createMiddleware({ type: 'function' })
   .client(async (context) => {
     return await context.next({
       sendContext: {

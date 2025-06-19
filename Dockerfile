@@ -25,6 +25,10 @@ ENV VITE_SENTRY_DSN=${SENTRY_DSN}
 ARG SENTRY_ENV
 ENV VITE_SENTRY_ENV=${SENTRY_ENV}
 
+# vars only necessary during build
+ARG SENTRY_ORG
+ARG SENTRY_PROJECT
+
 # Install pnpm in the builder stage
 RUN npm install -g pnpm
 

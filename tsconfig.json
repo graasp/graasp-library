@@ -25,5 +25,5 @@
     "playwright.config.ts",
     "vite.config.js"
   ],
-  "exclude": ["node_modules", "public", ".output", ".vinxi", "cypress"]
+  "exclude": ["node_modules", "public", ".output", "cypress"]
 }
