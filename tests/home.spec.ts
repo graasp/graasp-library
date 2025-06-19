@@ -20,7 +20,7 @@ test.describe('Home page', () => {
     ).toBeVisible();
 
     // wait for page to stabilise
-    await page.waitForTimeout(3000);
+    await page.waitForTimeout(10000);
     // change language
     await page
       .getByRole('banner')
