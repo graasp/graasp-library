@@ -136,6 +136,9 @@
       "cypress",
       "esbuild",
       "unrs-resolver"
+    ],
+    "ignoredBuiltDependencies": [
+      "@sentry/cli"
     ]
   },
   "volta": {
