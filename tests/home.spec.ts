@@ -20,7 +20,7 @@ test.describe('Home page', () => {
     ).toBeVisible();
 
     // wait for page to stabilise
-    await page.waitForTimeout(10000);
+    await page.waitForTimeout(3000);
     // change language
     await page
       .getByRole('banner')
@@ -28,7 +28,7 @@ test.describe('Home page', () => {
       .click();
     await page.getByRole('menuitem', { name: 'Français' }).click();
 
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(10000);
     // The title should have changed to display the french version
     await expect(
       page.getByRole('heading', { name: 'Bibliothèque Graasp' }),
