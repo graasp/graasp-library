@@ -323,7 +323,6 @@ import type {
   DownloadAvatarData,
   DownloadFileData,
   DownloadFileError,
-  DownloadFileResponse,
   DownloadItemThumbnailData,
   EnrollData,
   EnrollResponse,
@@ -4257,12 +4256,12 @@ export const downloadFileOptions = (options: Options<DownloadFileData>) => {
 export const downloadFileMutation = (
   options?: Partial<Options<DownloadFileData>>,
 ): UseMutationOptions<
-  DownloadFileResponse,
+  unknown,
   DownloadFileError,
   Options<DownloadFileData>
 > => {
   const mutationOptions: UseMutationOptions<
-    DownloadFileResponse,
+    unknown,
     DownloadFileError,
     Options<DownloadFileData>
   > = {

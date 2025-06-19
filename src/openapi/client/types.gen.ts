@@ -1545,7 +1545,7 @@ export type ExportMemberDataError =
 
 export type ExportMemberDataResponses = {
   /**
-   * Default Response
+   * Successful Response
    */
   204: void;
 };
@@ -4396,13 +4396,8 @@ export type DownloadFileResponses = {
   /**
    * a stream of data for the export zip content
    */
-  200: {
-    data: string;
-  };
+  200: unknown;
 };
-
-export type DownloadFileResponse =
-  DownloadFileResponses[keyof DownloadFileResponses];
 
 export type ExportZipData = {
   body?: never;

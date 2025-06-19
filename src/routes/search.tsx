@@ -65,7 +65,7 @@ export const Route = createFileRoute('/search')({
     );
     await context.queryClient.ensureQueryData(
       getFacetsForNameOptions({
-        query: { facetName: 'langs' },
+        query: { facetName: 'lang' },
         body,
       }),
     );

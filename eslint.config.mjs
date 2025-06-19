@@ -29,7 +29,6 @@ export default [
       'playwright-report',
       'build',
       '.yarn/*',
-      '.vinxi',
       '.output',
       'coverage/*',
       'src/openapi/client',
