@@ -1,5 +1,4 @@
 import { Suspense } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
 
 import {
   Alert,
@@ -12,6 +11,7 @@ import {
 
 import { getIdsFromPath } from '@graasp/sdk';
 
+import { ErrorBoundary } from '@sentry/tanstackstart-react';
 import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
 
 import {
@@ -27,7 +27,7 @@ type ItemBreadcrumbProps = {
   itemId: string;
 };
 
-export function ItemBreadcrumb({ itemId }: ItemBreadcrumbProps) {
+export function ItemBreadcrumb({ itemId }: Readonly<ItemBreadcrumbProps>) {
   return (
     <ErrorBoundary fallback={<BreadcrumbError />}>
       <Suspense fallback={<LoadingBreadcrumbs />}>
@@ -37,7 +37,7 @@ export function ItemBreadcrumb({ itemId }: ItemBreadcrumbProps) {
   );
 }
 
-function SuspendedItemBreadcrumbs({ itemId }: ItemBreadcrumbProps) {
+function SuspendedItemBreadcrumbs({ itemId }: Readonly<ItemBreadcrumbProps>) {
   const { data: item } = useQuery(getItemOptions({ path: { id: itemId } }));
   const { data: allParents } = useSuspenseQuery(
     getParentItemsOptions({ path: { id: itemId } }),

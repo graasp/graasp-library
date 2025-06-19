@@ -1,11 +1,11 @@
 import React, { Suspense } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
 
 import { Divider, IconButton, Menu, MenuItem, Skeleton } from '@mui/material';
 import type { MenuItemProps } from '@mui/material';
 
 import { ThumbnailSize } from '@graasp/sdk';
 
+import { ErrorBoundary } from '@sentry/tanstackstart-react';
 import { useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 import { createLink, useLoaderData } from '@tanstack/react-router';
 import type { LinkComponent } from '@tanstack/react-router';

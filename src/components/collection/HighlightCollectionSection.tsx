@@ -1,5 +1,4 @@
 import { ReactNode, Suspense } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
 
 import {
   Alert,
@@ -10,6 +9,8 @@ import {
   Theme,
   Typography,
 } from '@mui/material';
+
+import { ErrorBoundary } from '@sentry/tanstackstart-react';
 
 import { m } from '~/paraglide/messages';
 
