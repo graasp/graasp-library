@@ -25,8 +25,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: `http://127.0.0.1:${process.env.VITE_PORT}`,
-    baseURL: `http://localhost:${process.env.VITE_PORT}`,
+    baseURL: `http://localhost:${process.env.PORT}`,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
@@ -75,9 +74,9 @@ export default defineConfig({
     // The command to start the webserver does 2 things:
     // - build the server in test mode
     // - serve the build assets in test mode exposing it on the port that is defined in the .env.test file
-    command: `concurrently "pnpm mockserver" "pnpm start:test --port ${process.env.VITE_PORT}"`,
+    command: `concurrently "pnpm mockserver" "pnpm build:test && PORT=${process.env.PORT} node .output/server/index.mjs"`,
     timeout: 120 * 1000, // 2 minutes (default 60 seconds)
-    url: `http://localhost:${process.env.VITE_PORT}`,
+    url: `http://localhost:${process.env.PORT}`,
     reuseExistingServer: !process.env.CI,
   },
 });

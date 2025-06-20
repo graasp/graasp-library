@@ -1,5 +1,7 @@
 import { expect, test } from '@playwright/test';
 
+const geogebraId = '47238afb-5e21-4cf8-b2b1-5904af82a155';
+
 test('Search flow', async ({ page }) => {
   await page.goto('/');
 
@@ -50,11 +52,47 @@ test('Search flow', async ({ page }) => {
 
 test('Like a collection', async ({ page }) => {
   // got to the collection page
-  await page.goto('/collections/47238afb-5e21-4cf8-b2b1-5904af82a155');
+  await page.goto(`/collections/${geogebraId}`);
 
   // check collection is correct
   await expect(page.getByRole('heading', { name: 'Geogebra' })).toBeVisible();
 
   // like the collection
+  const likePromise = page.waitForResponse(`**/items/${geogebraId}/like`);
   await page.getByRole('button', { name: 'like' }).click();
+  // expect the page to get a response to the like action
+  const _ = await likePromise;
+});
+
+test('Play a collection', async ({ page, context }) => {
+  const playerPage = `${process.env.VITE_CLIENT_HOST}/player/${geogebraId}/${geogebraId}`;
+
+  // mock the response to the player page
+  await context.route(playerPage, (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: 'text/html',
+      body: `
+        <html>
+          <head><title>Player page for Geogebra</title></head>
+          <body>
+            <h1>Hello from geogebra player page</h1>
+          </body>
+        </html>
+      `,
+    }),
+  );
+  // got to the collection page
+  await page.goto(`/collections/${geogebraId}`);
+
+  // check collection is correct
+  await expect(page.getByRole('heading', { name: 'Geogebra' })).toBeVisible();
+
+  // open the collection in a new tab
+  const newTabPromise = page.waitForEvent('popup');
+  await page.getByRole('link', { name: 'Preview' }).click();
+  const newTab = await newTabPromise;
+  await newTab.waitForLoadState();
+
+  await expect(newTab).toHaveURL(playerPage);
 });

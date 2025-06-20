@@ -42,6 +42,7 @@ export default [
       'prettier',
       'plugin:@typescript-eslint/recommended',
       'plugin:react-hooks/recommended',
+      'plugin:storybook/recommended',
       'eslint:recommended',
     ),
   ),

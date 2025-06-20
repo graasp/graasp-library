@@ -1,4 +1,4 @@
-import type { StoryObj } from '@storybook/react';
+import type { StoryObj } from '@storybook/react-vite';
 
 import { ColorVariants } from '../types.js';
 import LikeButton from './LikeButton.js';

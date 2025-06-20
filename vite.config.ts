@@ -25,14 +25,15 @@ export default defineConfig({
       strategy: ['cookie', 'preferredLanguage', 'baseLocale'],
     }),
     tanstackStart(),
-    sentryVitePlugin({
-      // disable sentry telemetry
-      telemetry: false,
-      org: process.env.SENTRY_ORG,
-      project: process.env.SENTRY_PROJECT,
+    process.env.SENTRY_AUTH_TOKEN &&
+      sentryVitePlugin({
+        // disable sentry telemetry
+        telemetry: false,
+        org: process.env.SENTRY_ORG,
+        project: process.env.SENTRY_PROJECT,
 
-      // Auth tokens can be obtained from https://sentry.io/orgredirect/organizations/:orgslug/settings/auth-tokens/
-      authToken: process.env.SENTRY_AUTH_TOKEN,
-    }),
+        // Auth tokens can be obtained from https://sentry.io/orgredirect/organizations/:orgslug/settings/auth-tokens/
+        authToken: process.env.SENTRY_AUTH_TOKEN,
+      }),
   ],
 });

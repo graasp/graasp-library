@@ -1,7 +1,7 @@
 import { Box, IconButton, Stack } from '@mui/material';
 
-import type { Meta, StoryObj } from '@storybook/react';
-import { Grip, Snowflake } from 'lucide-react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { GripIcon, SnowflakeIcon } from 'lucide-react';
 import { fn } from 'storybook/test';
 
 import Card from './Card.js';
@@ -35,17 +35,17 @@ export const Example: Story = {
       >
         <Box>
           <IconButton>
-            <Snowflake />
+            <SnowflakeIcon />
           </IconButton>
           <IconButton>
-            <Snowflake />
+            <SnowflakeIcon />
           </IconButton>
           <IconButton>
-            <Snowflake />
+            <SnowflakeIcon />
           </IconButton>
         </Box>
         <IconButton>
-          <Grip />
+          <GripIcon />
         </IconButton>
       </Stack>
     ),
@@ -65,19 +65,19 @@ export const Dense = {
     footer: (
       <>
         <IconButton>
-          <Snowflake />
+          <SnowflakeIcon />
         </IconButton>
         <IconButton>
-          <Snowflake />
+          <SnowflakeIcon />
         </IconButton>
         <IconButton>
-          <Snowflake />
+          <SnowflakeIcon />
         </IconButton>
       </>
     ),
     menu: (
       <IconButton>
-        <Snowflake />
+        <SnowflakeIcon />
       </IconButton>
     ),
   },
@@ -106,13 +106,13 @@ export const FullWidth = {
       >
         <Box>
           <IconButton>
-            <Snowflake />
+            <SnowflakeIcon />
           </IconButton>
           <IconButton>
-            <Snowflake />
+            <SnowflakeIcon />
           </IconButton>
           <IconButton>
-            <Snowflake />
+            <SnowflakeIcon />
           </IconButton>
         </Box>
       </Stack>
@@ -157,13 +157,13 @@ export const TallCard: Story = {
       >
         <Box>
           <IconButton>
-            <Snowflake />
+            <SnowflakeIcon />
           </IconButton>
           <IconButton>
-            <Snowflake />
+            <SnowflakeIcon />
           </IconButton>
           <IconButton>
-            <Snowflake />
+            <SnowflakeIcon />
           </IconButton>
         </Box>
       </Stack>

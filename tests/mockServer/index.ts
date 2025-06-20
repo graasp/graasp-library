@@ -59,7 +59,7 @@ app.get('/members/:memberId/avatar/:size', (c) =>
 
 app.get('/items/:itemId/thumbnails/:size', (c) => {
   // c.text(`http://localhost:3000/static/${c.req.param('itemId')}.png`),
-  c.status(404);
+  c.status(204); // no content
   return c.text('No thumbnail found');
 });
 
@@ -118,6 +118,16 @@ app.get(
     return c.json(geogebraCollectionInformations);
   },
 );
+
+app.post('/items/47238afb-5e21-4cf8-b2b1-5904af82a155/like', async (c) =>
+  c.json({
+    id: '07322d2c-dcf0-46b8-be5f-1bc5341ebb8c',
+    itemId: '47238afb-5e21-4cf8-b2b1-5904af82a155',
+    creatorId: 'f86535b1-0dfe-4b3d-83fb-be80e530c568',
+    createdAt: new Date().toISOString(),
+  }),
+);
+
 // eslint-disable-next-line no-console
 console.log('Mock server running on port 3000');
 
