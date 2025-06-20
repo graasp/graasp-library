@@ -17,11 +17,11 @@ import { m } from '~/paraglide/messages';
 const references = [
   {
     href: 'https://www.bpb.de/mediathek/video/234994/oer-erklaert-die-grundlagen/',
-    name: 'OER erklärt – die Grundlagen',
+    name: 'OER erklärt - die Grundlagen',
   },
   {
     href: 'https://www.bpb.de/mediathek/video/234998/oer-erklaert-ueber-die-qualitaet-der-materialien/',
-    name: 'OER erklärt – über die Qualität der Materialien',
+    name: 'OER erklärt - über die Qualität der Materialien',
   },
 ] as const;
 

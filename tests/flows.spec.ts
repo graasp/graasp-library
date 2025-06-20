@@ -32,10 +32,12 @@ test('Search flow', async ({ page }) => {
   // go back
   await page.getByRole('button', { name: 'Back' }).click();
 
-  await page.waitForTimeout(3000);
   // filter by language
   await page.locator('#searchFilterButton-lang').click();
   await page.getByRole('checkbox', { name: 'Español' }).click();
+
+  // page should "reload"
+  await page.waitForLoadState();
   await expect(page).toHaveURL((url) => {
     const params = url.searchParams;
     return params.has('langs') && params.get('langs') === '["es"]';
