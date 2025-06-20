@@ -1,0 +1,259 @@
+{
+  "processingTimeMs": 0,
+  "query": "",
+  "hits": [
+    {
+      "name": "Geogebra",
+      "description": "Interactive tools from geogebra for mathematics.",
+      "content": "",
+      "creator": {
+        "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+        "name": "Graasper"
+      },
+      "level": [],
+      "discipline": [],
+      "resource-type": [],
+      "id": "47238afb-5e21-4cf8-b2b1-5904af82a155",
+      "type": "folder",
+      "isPublishedRoot": true,
+      "isHidden": false,
+      "createdAt": "2021-10-20 13:12:47.821784+00",
+      "updatedAt": "2021-10-23 09:25:39.798976+00",
+      "publicationUpdatedAt": "2021-10-23 09:38:38.780221+00",
+      "lang": "en",
+      "likes": 10,
+      "_formatted": {
+        "name": "Geogebra",
+        "description": "Interactive tools from geogebra for mathematics.",
+        "content": "",
+        "creator": {
+          "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+          "name": "Graasper"
+        },
+        "level": [],
+        "discipline": [],
+        "resource-type": [],
+        "id": "47238afb-5e21-4cf8-b2b1-5904af82a155",
+        "type": "folder",
+        "isPublishedRoot": true,
+        "publicationUpdatedAt": "2021-10-23 09:38:38.780221+00",
+        "isHidden": false,
+        "createdAt": "2021-10-20 13:12:47.821784+00",
+        "updatedAt": "2021-10-23 09:25:39.798976+00",
+        "lang": "en",
+        "likes": 10
+      }
+    },
+    {
+      "name": "Climate",
+      "description": "Interactive educational simulations about climate change. See https://climate.graasp.org for details.These simulations are officially endorsed&nbsp;by the International Year of Basic Sciences for Sustainable Development IYSSD2022.",
+      "content": "",
+      "creator": {
+        "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+        "name": "Graasper"
+      },
+      "level": [],
+      "discipline": [],
+      "resource-type": [],
+      "id": "665f2269-2fde-4984-b151-88fba3b55bf5",
+      "type": "folder",
+      "isPublishedRoot": true,
+      "isHidden": false,
+      "createdAt": "2021-10-19 12:25:17.377931+00",
+      "updatedAt": "2023-11-01 15:52:21.038572+00",
+      "publicationUpdatedAt": "2021-10-19 12:25:39.954315+00",
+      "lang": "en",
+      "likes": 10,
+      "_formatted": {
+        "name": "Climate",
+        "description": "Interactive educational simulations about climate change. See https://climate.graasp.org for details.These simulations are officially endorsed&nbsp;by the International Year of Basic Sciences for Sustainable Development IYSSD2022.",
+        "content": "",
+        "creator": {
+          "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+          "name": "Graasper"
+        },
+        "level": [],
+        "discipline": [],
+        "resource-type": [],
+        "id": "665f2269-2fde-4984-b151-88fba3b55bf5",
+        "type": "folder",
+        "isPublishedRoot": true,
+        "publicationUpdatedAt": "2021-10-19 12:25:39.954315+00",
+        "isHidden": false,
+        "createdAt": "2021-10-19 12:25:17.377931+00",
+        "updatedAt": "2023-11-01 15:52:21.038572+00",
+        "lang": "en",
+        "likes": 10
+      }
+    },
+    {
+      "name": "PhET",
+      "description": "Selected interactive simulations from PhET (https://phet.colorado.edu/).",
+      "content": "",
+      "creator": {
+        "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+        "name": "Graasper"
+      },
+      "level": [],
+      "discipline": [],
+      "resource-type": [],
+      "id": "c273525a-791c-40f7-a9c2-88d2ee103cd4",
+      "type": "folder",
+      "isPublishedRoot": true,
+      "isHidden": false,
+      "createdAt": "2021-10-20 13:03:42.712617+00",
+      "updatedAt": "2021-11-10 10:49:39.296667+00",
+      "publicationUpdatedAt": "2021-10-20 13:08:50.098824+00",
+      "lang": "en",
+      "likes": 7,
+      "_formatted": {
+        "name": "PhET",
+        "description": "Selected interactive simulations from PhET (https://phet.colorado.edu/).",
+        "content": "",
+        "creator": {
+          "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+          "name": "Graasper"
+        },
+        "level": [],
+        "discipline": [],
+        "resource-type": [],
+        "id": "c273525a-791c-40f7-a9c2-88d2ee103cd4",
+        "type": "folder",
+        "isPublishedRoot": true,
+        "publicationUpdatedAt": "2021-10-20 13:08:50.098824+00",
+        "isHidden": false,
+        "createdAt": "2021-10-20 13:03:42.712617+00",
+        "updatedAt": "2021-11-10 10:49:39.296667+00",
+        "lang": "en",
+        "likes": 7
+      }
+    },
+    {
+      "name": "H5P",
+      "description": "See H5P for details on how to create or personalized your own apps.You can use Lumi to create or personalize your own H5P apps before adding them in Graasp.",
+      "content": "",
+      "creator": {
+        "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+        "name": "Graasper"
+      },
+      "level": [],
+      "discipline": ["Apps"],
+      "resource-type": [],
+      "id": "9c385d59-3bbb-46e2-8168-496bd463753b",
+      "type": "folder",
+      "isPublishedRoot": true,
+      "isHidden": false,
+      "createdAt": "2021-10-20 13:11:22.352819+00",
+      "updatedAt": "2023-02-12 08:43:38.777598+00",
+      "publicationUpdatedAt": "2022-05-17 14:42:07.782435+00",
+      "lang": "en",
+      "likes": 6,
+      "_formatted": {
+        "name": "H5P",
+        "description": "See H5P for details on how to create or personalized your own apps.You can use Lumi to create or personalize your own H5P apps before adding them in Graasp.",
+        "content": "",
+        "creator": {
+          "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+          "name": "Graasper"
+        },
+        "level": [],
+        "discipline": ["Apps"],
+        "resource-type": [],
+        "id": "9c385d59-3bbb-46e2-8168-496bd463753b",
+        "type": "folder",
+        "isPublishedRoot": true,
+        "publicationUpdatedAt": "2022-05-17 14:42:07.782435+00",
+        "isHidden": false,
+        "createdAt": "2021-10-20 13:11:22.352819+00",
+        "updatedAt": "2023-02-12 08:43:38.777598+00",
+        "lang": "en",
+        "likes": 6
+      }
+    },
+    {
+      "name": "Educational Chatbots (Sample Study)",
+      "description": "This is a sample collection that includes the learning activity, visualizations, and anonymized data from a study on the use of educational chatbots on Graasp. The focus of the study was to better understand the effect that educational chatbots had on a software engineering lesson.",
+      "content": "",
+      "creator": {
+        "id": "cd3ba705-9ed6-429b-892d-207a35848322",
+        "name": "Juan Carlos Farah"
+      },
+      "level": [],
+      "discipline": ["Computer Science"],
+      "resource-type": [],
+      "id": "abf2db9a-99ad-4865-b700-e621f556f41c",
+      "type": "folder",
+      "isPublishedRoot": true,
+      "isHidden": false,
+      "createdAt": "2023-05-11 19:37:11.909009+00",
+      "updatedAt": "2023-05-11 19:59:50.278621+00",
+      "publicationUpdatedAt": "2023-05-11 19:44:27.534777+00",
+      "lang": "en",
+      "likes": 6,
+      "_formatted": {
+        "name": "Educational Chatbots (Sample Study)",
+        "description": "This is a sample collection that includes the learning activity, visualizations, and anonymized data from a study on the use of educational chatbots on Graasp. The focus of the study was to better understand the effect that educational chatbots had on a software engineering lesson.",
+        "content": "",
+        "creator": {
+          "id": "cd3ba705-9ed6-429b-892d-207a35848322",
+          "name": "Juan Carlos Farah"
+        },
+        "level": [],
+        "discipline": ["Computer Science"],
+        "resource-type": [],
+        "id": "abf2db9a-99ad-4865-b700-e621f556f41c",
+        "type": "folder",
+        "isPublishedRoot": true,
+        "publicationUpdatedAt": "2023-05-11 19:44:27.534777+00",
+        "isHidden": false,
+        "createdAt": "2023-05-11 19:37:11.909009+00",
+        "updatedAt": "2023-05-11 19:59:50.278621+00",
+        "lang": "en",
+        "likes": 6
+      }
+    },
+    {
+      "name": "Photographs of Space",
+      "description": "Here I store a collection of photographs of space that can be useful for teaching students about astronomy. These photographs have been collected from open image banks and are free to use, but it's always nice to cite the provenance. I've added the source.",
+      "content": "",
+      "creator": {
+        "id": "04eb1c4b-6a44-4f26-ae7f-f38acf32140c",
+        "name": "Juan Carlos Farah"
+      },
+      "level": [],
+      "discipline": ["astronomy", "space", "stars"],
+      "resource-type": [],
+      "id": "a3624ded-e13b-44a2-a84e-370e09cabcef",
+      "type": "folder",
+      "isPublishedRoot": true,
+      "isHidden": false,
+      "createdAt": "2022-04-08 11:59:57.897628+00",
+      "updatedAt": "2022-04-08 12:32:29.331146+00",
+      "publicationUpdatedAt": "2022-04-08 12:16:12.596591+00",
+      "lang": "en",
+      "likes": 5,
+      "_formatted": {
+        "name": "Photographs of Space",
+        "description": "Here I store a collection of photographs of space that can be useful for teaching students about astronomy. These photographs have been collected from open image banks and are free to use, but it's always nice to cite the provenance. I've added the source.",
+        "content": "",
+        "creator": {
+          "id": "04eb1c4b-6a44-4f26-ae7f-f38acf32140c",
+          "name": "Juan Carlos Farah"
+        },
+        "level": [],
+        "discipline": ["astronomy", "space", "stars"],
+        "resource-type": [],
+        "id": "a3624ded-e13b-44a2-a84e-370e09cabcef",
+        "type": "folder",
+        "isPublishedRoot": true,
+        "publicationUpdatedAt": "2022-04-08 12:16:12.596591+00",
+        "isHidden": false,
+        "createdAt": "2022-04-08 11:59:57.897628+00",
+        "updatedAt": "2022-04-08 12:32:29.331146+00",
+        "lang": "en",
+        "likes": 5
+      }
+    }
+  ],
+  "estimatedTotalHits": 958
+}

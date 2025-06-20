@@ -1,12 +1,8 @@
-import React from 'react';
-
-import { styled } from '@mui/material';
-
 import { TagCategory, ThumbnailSize } from '@graasp/sdk';
 
 import { useQuery } from '@tanstack/react-query';
 
-import { buildCollectionRoute, buildMemberRoute } from '../../../config/routes';
+import { buildCollectionRoute } from '../../../config/routes';
 import { downloadItemThumbnailOptions } from '../../../openapi/client/@tanstack/react-query.gen';
 import { ItemOrSearchedItem } from '../../../utils/types';
 import { BigCard } from '../../common/Card/BigCard';
@@ -18,12 +14,6 @@ type Props = {
   showIsContentTag?: boolean;
   height: number;
 };
-// necessary wrapper to force cursor pointer on ql editor
-const StyledWrapper = styled('div')(() => ({
-  '.ql-editor > *': {
-    cursor: 'pointer !important',
-  },
-}));
 
 export const CollectionCard = ({
   collection,
@@ -45,13 +35,13 @@ export const CollectionCard = ({
   );
 
   const link = buildCollectionRoute(id);
-  const memberPageLink = buildMemberRoute(creator?.id);
 
   const tags = Object.values(TagCategory)
-    .flatMap((category: string) => {
+    .flatMap((category) => {
       if (`${category}` in collection) {
-        // @ts-expect-error category exist in collection
-        return collection[category] ?? [];
+        return (
+          collection[category].map((c) => ({ id: c, category, name: c })) ?? []
+        );
       }
       return [];
     })
@@ -61,32 +51,30 @@ export const CollectionCard = ({
   const likes = 'likes' in collection ? collection.likes : 0;
 
   const creatorContent = creator ? (
-    <MemberAvatar id={creator.id} link={memberPageLink} name={creator.name} />
+    <MemberAvatar author={creator} size={24} />
   ) : null;
 
   return (
-    <StyledWrapper>
-      <BigCard
-        height={height}
-        link={link}
-        name={name}
-        id={id}
-        type={type}
-        image={thumbnailUrl}
-        tags={tags}
-        likeCount={likes}
-        creator={creatorContent}
-        description={description}
-        contentOverImage={
-          <ItemTag
-            isChild={!isPublishedRoot}
-            createdAt={createdAt}
-            updatedAt={updatedAt}
-            showIsContentTag={showIsContentTag}
-          />
-        }
-      />
-    </StyledWrapper>
+    <BigCard
+      height={height}
+      link={link}
+      name={name}
+      id={id}
+      type={type}
+      image={thumbnailUrl}
+      tags={tags}
+      likeCount={likes}
+      creator={creatorContent}
+      description={description}
+      contentOverImage={
+        <ItemTag
+          isChild={!isPublishedRoot}
+          createdAt={createdAt}
+          updatedAt={updatedAt}
+          showIsContentTag={showIsContentTag}
+        />
+      }
+    />
   );
 };
 

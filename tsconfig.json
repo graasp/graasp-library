@@ -1,36 +1,29 @@
 {
   "compilerOptions": {
-    "allowJs": true,
-    "checkJs": false,
-    "target": "es6",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "skipLibCheck": true,
     "strict": true,
-    "strictPropertyInitialization": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
     "esModuleInterop": true,
-    "module": "esnext",
+    "jsx": "react-jsx",
+    "module": "ESNext",
     "moduleResolution": "Bundler",
-    "resolveJsonModule": true,
+    "lib": ["DOM", "DOM.Iterable", "ES2023"],
     "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "sourceMap": true,
-    "inlineSources": true,
-    "sourceRoot": "/",
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "target": "ES2022",
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./src/*"]
+    },
+    "noEmit": true
   },
   "include": [
-    "next-env.d.ts",
-    "**/*.js",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    "public/script*.js",
+    "playwright.config.ts",
+    "vite.config.js"
   ],
-  "exclude": ["node_modules", "public", ".next"]
+  "exclude": ["node_modules", "public", ".output", "cypress"]
 }

@@ -1,4 +1,4 @@
-name: Cypress CI
+name: Test
 
 on:
   push:
@@ -11,61 +11,54 @@ concurrency:
   group: ${{ github.ref }}
   cancel-in-progress: true
 
-# Set environment variables that are available to the steps of all jobs in the workflow
-# env:
-# Allows to increase Node's max heap size
-# NODE_OPTIONS: '--max_old_space_size=8192'
-
 jobs:
-  cypress:
-    name: Cypress
-    # The type of runner that the job will run on
+  test:
+    name: Test Unit
     runs-on: ubuntu-latest
     steps:
-      # Check-out repository under $GITHUB_WORKSPACE, so the job can access it
-      - name: Check out code
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Yarn install and Cache dependencies
-        uses: graasp/graasp-deploy/.github/actions/yarn-install-and-cache@v1
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
         with:
-          cypress: true
+          version: 10
+          run_install: false
 
-      # lint
-      - name: Lint and Type checks
-        run: yarn next lint
-
-      #  use the Cypress GitHub Action to run Cypress tests within the chrome browser
-      - name: Cypress run
-        uses: cypress-io/github-action@v6
+      - name: Install Node.js
+        uses: actions/setup-node@v4
         with:
-          install: false
-          config: baseUrl=http://localhost:3000
-          build: yarn build
-          start: yarn start:next
-          wait-on: 'http://localhost:3000'
-          wait-on-timeout: 250
-          browser: chrome
-          quiet: true
-          cache-key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+          node-version-file: "package.json"
+          cache: "pnpm"
+          cache-dependency-path: "pnpm-lock.yaml"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm build
         env:
-          NEXT_PUBLIC_API_HOST: http://localhost:3000
-          NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: G-H48F1X7SWK
-          NEXT_PUBLIC_GRAASP_ANALYTICS_HOST: http://localhost:3003
-          NEXT_PUBLIC_GRAASP_AUTH_HOST: http://localhost:3001
-          NEXT_PUBLIC_GRAASP_PERFORM_HOST: http://localhost:3112
-          NEXT_PUBLIC_GRAASPER_ID: 12345678-dead-beef-cafe-123456789abc
-          NEXT_PUBLIC_NODE_ENV: test
+          VITE_API_HOST: http://localhost:4000
+          VITE_CLIENT_HOST: http://client.mock.com
 
-      # after the test run completes
-      # store any screenshots
-      # NOTE: screenshots will be generated only if E2E test failed
-      # thus we store screenshots only on failures
-      - uses: actions/upload-artifact@v4
-        if: failure()
+      # we need the build step before in order to generate the paraglide runtime files
+      - name: Type-check
+        run: pnpm check
+
+      - name: Get Latest playwright version
+        run: echo "PLAYWRIGHT_VERSION=$(pnpm show playwright version)" >> $GITHUB_ENV
+      - name: Cache playwright binaries
+        uses: actions/cache@v4
+        id: playwright-cache
         with:
-          name: cypress-screenshots
-          path: cypress/screenshots
+          path: |
+            ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
+      - name: Install playwright with deps
+        run: pnpm exec playwright install --with-deps
 
-      # - name: coverage report
-      #   run: npx nyc report --reporter=text-summary
+      - name: Unit tests
+        run: pnpm test:unit
+
+      - name: Component tests
+        run: pnpm test:component

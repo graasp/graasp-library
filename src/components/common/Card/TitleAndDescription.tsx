@@ -1,8 +1,4 @@
-import React from 'react';
-
-import { Stack } from '@mui/material';
-
-import Link from 'next/link';
+import { Box } from '@mui/material';
 
 import { CollapsibleText } from '../CollapsibleText/CollapsibleText';
 
@@ -14,43 +10,27 @@ type TitleAndDescriptionProps = Readonly<{
   link: string;
 }>;
 
-function TitleAndDescription({
-  name,
-  description,
-  link,
-}: TitleAndDescriptionProps) {
+function TitleAndDescription({ name, description }: TitleAndDescriptionProps) {
   // merge name and description together
   // so we can count name and description in the same line count
   // it will take advantage of showing the full title if there's space from no description
   const text = `<h3>${name}</h3>${description ?? ''}`;
 
   return (
-    <Stack
+    <Box
       sx={{
         '&:hover': {
-          cursor: 'pointer',
           opacity: 0.7,
         },
       }}
     >
-      <Link
-        href={link}
-        style={{
-          textDecoration: 'unset',
-          color: 'unset',
-          cursor: 'pointer !important',
-          height: '100%',
-          display: 'block',
-        }}
-      >
-        <CollapsibleText
-          collapsed
-          numberOfLinesToShow={MAX_NUMBER_OF_LINES}
-          content={text}
-          style={{ cursor: 'pointer' }}
-        />
-      </Link>
-    </Stack>
+      <CollapsibleText
+        collapsed
+        numberOfLinesToShow={MAX_NUMBER_OF_LINES}
+        content={text}
+        style={{ cursor: 'pointer' }}
+      />
+    </Box>
   );
 }
 
