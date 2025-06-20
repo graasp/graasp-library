@@ -68,7 +68,6 @@ const CardThumbnail = ({
       <ItemIcon
         mimetype={mimetype}
         type={type}
-        alt={alt}
         color={getColorFromId(id, 0.5)}
       />
     </Stack>

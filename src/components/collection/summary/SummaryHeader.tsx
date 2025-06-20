@@ -111,7 +111,7 @@ export function SummaryHeader({
     length: MAX_COLLECTION_NAME_LENGTH,
     separator: /,? +/,
   });
-
+  console.log(collection.creator);
   return (
     <Stack
       direction={{ xs: 'column', sm: 'row' }}

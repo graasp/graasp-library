@@ -187,7 +187,6 @@ export const FileChildrenCard: React.FC<FileChildrenCardProps> = ({
   ) : (
     <div style={THUMBNAIL_DIMENSIONS}>
       <ItemIcon
-        alt={item.type}
         type={item.type}
         mimetype={getMimetype(item.extra as SDKPackedItem['extra'])}
         color={theme.palette.primary.main}

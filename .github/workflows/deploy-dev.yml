@@ -60,7 +60,7 @@ jobs:
           --build-arg BUILD_TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%S) \
           --build-arg VITE_API_HOST=${{ vars.VITE_API_HOST }} \
           --build-arg VITE_CLIENT_HOST=${{ vars.VITE_CLIENT_HOST }} \
-          --build-arg VITE_CURRENT_HOST=${{ vars.VITE_CURRENT_HOST }} \
+          --build-arg VITE_HOST=${{ vars.VITE_CURRENT_HOST }} \
           --build-arg SENTRY_DSN=${{ secrets.VITE_SENTRY_DSN }} \
           --build-arg SENTRY_ORG=graasp \
           --build-arg SENTRY_PROJECT=library \

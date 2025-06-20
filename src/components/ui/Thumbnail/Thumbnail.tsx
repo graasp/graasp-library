@@ -46,7 +46,7 @@ const Thumbnail = ({
   variant = Variant.RECT,
   isLoading = false,
 }: ThumbnailProps): JSX.Element | null => {
-  if (url) {
+  if (typeof url === 'string' && url !== '') {
     return (
       <StyledImage
         src={url}

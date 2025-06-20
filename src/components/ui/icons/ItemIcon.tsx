@@ -16,14 +16,12 @@ import {
   TextIcon,
 } from 'lucide-react';
 
-import { StyledImage } from '../StyledImage.js';
 import EtherpadIcon from './EtherpadIcon.js';
 import H5PIcon from './H5PIcon.js';
 
 const MAX_ICON_SIZE = '25px';
 
 export type ItemIconProps = {
-  alt: string;
   /**
    * item type
    */
@@ -33,36 +31,15 @@ export type ItemIconProps = {
    */
   color?: string;
   mimetype?: string;
-  iconSrc?: string;
   size?: string;
 };
 
 export function ItemIcon({
   color,
   mimetype,
-  iconSrc,
-  alt = '',
   size = MAX_ICON_SIZE,
   type,
 }: Readonly<ItemIconProps>): JSX.Element {
-  if (iconSrc) {
-    return (
-      <StyledImage
-        sx={{
-          // icons should be squared
-          maxHeight: size,
-          maxWidth: size,
-          height: size,
-          width: size,
-          objectFit: 'cover',
-          borderRadius: 1,
-        }}
-        alt={alt}
-        src={iconSrc}
-      />
-    );
-  }
-
   let Icon: ({
     size,
     color,

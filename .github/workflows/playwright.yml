@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version-file: 'package.json'
+          node-version-file: "package.json"
       - name: Install dependencies
         run: npm install -g pnpm && pnpm install
       - name: Install Playwright Browsers
@@ -25,7 +25,7 @@ jobs:
           VITE_PORT: 3002
           VITE_API_HOST: http://localhost:3000
           VITE_CLIENT_HOST: http://localhost:3114
-          VITE_CURRENT_HOST: http://localhost:3002
+          VITE_HOST: http://localhost:3002
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:

@@ -26,7 +26,9 @@ export function Avatar({
     <AvatarComponent
       id={id}
       alt={alt}
-      src={url ?? DEFAULT_MEMBER_THUMBNAIL}
+      src={
+        typeof url === 'string' ? (url ?? DEFAULT_MEMBER_THUMBNAIL) : undefined
+      }
       sx={{
         width: maxWidth,
         height: maxHeight,

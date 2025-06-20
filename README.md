@@ -34,7 +34,7 @@ Download or clone the repository to your local machine, preferably using [Git](h
     # URL of the backend server. Uncomment to override the default value
     # VITE_API_HOST=http://localhost:3000
     # VITE_CLIENT_HOST=http://localhost:3114
-    # VITE_CURRENT_HOST=http://localhost:3002
+    # VITE_HOST=http://localhost:3002
 
     # for tests
     # VITE_PORT=3002
@@ -78,7 +78,7 @@ Create a `.env.test` file with the following content:
     # URL of the backend server. Uncomment to override the default value
     VITE_API_HOST=http://localhost:3000
     VITE_CLIENT_HOST=http://localhost:3114
-    VITE_CURRENT_HOST=http://localhost:3002
+    VITE_HOST=http://localhost:3002
 
     # for tests
     VITE_PORT=3002
