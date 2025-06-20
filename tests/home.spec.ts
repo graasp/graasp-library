@@ -119,10 +119,14 @@ test.describe('Home', () => {
 
   test('Graasper collections', async ({ page }) => {
     await expect(
-      page.getByRole('link', { name: 'Geogebra', exact: true }),
+      page
+        .locator('#graasperCollectionsGrid')
+        .getByRole('link', { name: 'Geogebra', exact: true }),
     ).toBeVisible();
     await expect(
-      page.getByRole('link', { name: 'Templates', exact: true }),
+      page
+        .locator('#graasperCollectionsGrid')
+        .getByRole('link', { name: 'Templates', exact: true }),
     ).toBeVisible();
   });
 
