@@ -29,14 +29,12 @@ export const Folder: Story = {
 export const Default: Story = {
   args: {
     type: ItemType.FOLDER,
-    iconSrc: 'https://picsum.photos/100',
   },
 };
 
 export const ImageWithStyle: Story = {
   args: {
     type: ItemType.FOLDER,
-    iconSrc: 'https://picsum.photos/200/100',
     size: '100px',
   },
 };

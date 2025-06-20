@@ -1,48 +1,15 @@
-import { Suspense } from 'react';
+import { Stack } from '@mui/material';
 
-import { Avatar as MuiAvatar, Skeleton, Stack } from '@mui/material';
+import { PermissionLevel, PermissionLevelCompare } from '@graasp/sdk';
 
-import {
-  Account,
-  PermissionLevel,
-  PermissionLevelCompare,
-  ThumbnailSize,
-} from '@graasp/sdk';
-
-import { ErrorBoundary } from '@sentry/tanstackstart-react';
-import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import { PackedItem } from '~/openapi/client';
 
 import { SUMMARY_AUTHOR_CONTAINER_ID } from '../../config/selectors';
-import {
-  downloadAvatarOptions,
-  getItemMembershipsForItemOptions,
-} from '../../openapi/client/@tanstack/react-query.gen';
+import { getItemMembershipsForItemOptions } from '../../openapi/client/@tanstack/react-query.gen';
 import { MemberAvatar } from '../common/Card/MemberAvatar';
-import { TypographyLink } from '../common/links/TypographyLink';
-import { Avatar } from '../ui/Avatar/Avatar';
-import { stringToColor } from '../ui/Avatar/stringToColor';
 import Contributors from './Contributors';
-
-const SuspendableAuthorAvatar = ({ author }: { author: Account }) => {
-  const { data: authorUrl } = useSuspenseQuery(
-    downloadAvatarOptions({
-      path: { id: author.id, size: ThumbnailSize.Small },
-    }),
-  );
-
-  return (
-    <Avatar
-      id={author.id}
-      url={authorUrl}
-      alt={author.name}
-      maxWidth={30}
-      maxHeight={30}
-      sx={{ maxWidth: 30, maxHeight: 30 }}
-    />
-  );
-};
 
 type Props = {
   itemId: PackedItem['id'];

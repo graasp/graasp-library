@@ -1,5 +1,7 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
+  "GRAASP_LIBRARY": "Graasp Library",
+  "GRAASP_LIBRARY_DESCRIPTION": "Graasp Library is a platform for sharing free and open source educational resources.",
   "SHARE_TWITTER_MESSAGE": "Check out {name} on Graasp",
   "ERROR_LOADING_BREADCRUMBS": "There was an error loading the breadcrumbs",
   "SHARE_FACEBOOK_SUBJECT": "Check out {name} on Graasp",

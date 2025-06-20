@@ -34,6 +34,27 @@ export type ItemIconProps = {
   size?: string;
 };
 
+function getIconFromMimetype(mimetype: string | undefined) {
+  if (mimetype) {
+    if (MimeTypes.isImage(mimetype)) {
+      return ImageIcon;
+    }
+    if (MimeTypes.isVideo(mimetype)) {
+      return ClapperboardIcon;
+    }
+    if (MimeTypes.isAudio(mimetype)) {
+      return Music2Icon;
+    }
+    if (MimeTypes.isPdf(mimetype)) {
+      return FileTextIcon;
+    }
+    if (MimeTypes.isZip(mimetype)) {
+      return FolderArchiveIcon;
+    }
+  }
+  return FileIcon;
+}
+
 export function ItemIcon({
   color,
   mimetype,
@@ -59,30 +80,7 @@ export function ItemIcon({
       break;
     }
     case ItemType.FILE: {
-      if (mimetype) {
-        if (MimeTypes.isImage(mimetype)) {
-          Icon = ImageIcon;
-          break;
-        }
-        if (MimeTypes.isVideo(mimetype)) {
-          Icon = ClapperboardIcon;
-          break;
-        }
-        if (MimeTypes.isAudio(mimetype)) {
-          Icon = Music2Icon;
-          break;
-        }
-        if (MimeTypes.isPdf(mimetype)) {
-          Icon = FileTextIcon;
-          break;
-        }
-        if (MimeTypes.isZip(mimetype)) {
-          Icon = FolderArchiveIcon;
-          break;
-        }
-      }
-
-      Icon = FileIcon;
+      Icon = getIconFromMimetype(mimetype);
       break;
     }
     case ItemType.LINK: {

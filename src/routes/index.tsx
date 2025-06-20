@@ -27,6 +27,7 @@ export const Route = createFileRoute('/')({
     meta: [
       {
         title: m.GRAASP_LIBRARY(),
+        description: m.GRAASP_LIBRARY_DESCRIPTION(),
       },
     ],
   }),
