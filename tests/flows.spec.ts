@@ -66,7 +66,11 @@ test('Like a collection', async ({ page }) => {
   const _ = await likePromise;
 });
 
-test('Play a collection', async ({ page, context }) => {
+test('Play a collection', async ({ page, context, browserName }) => {
+  test.skip(
+    browserName === 'webkit',
+    'Webkit does not handle opening the page in a new tab',
+  );
   const playerPage = `${process.env.VITE_CLIENT_HOST}/player/${geogebraId}/${geogebraId}`;
 
   // mock the response to the player page

@@ -1,12 +1,9 @@
 import { getRouteApi } from '@tanstack/react-router';
 
 import { Langs } from '~/config/constants';
+import { m } from '~/paraglide/messages';
 import { Locale, isLocale } from '~/paraglide/runtime';
 
-import {
-  SEARCH_FILTER_LANG_ID,
-  buildSearchFilterPopperButtonId,
-} from '../../config/selectors';
 import { Filter } from './Filter';
 import { useSearchFacets } from './useSearchFacets';
 
@@ -76,14 +73,13 @@ export function LangFilter({ title }: Readonly<LangFilterProps>) {
   const selectedLangs = langs.map((l) => Langs[l]);
   return (
     <Filter
-      id={SEARCH_FILTER_LANG_ID}
       title={title}
       options={langOptions}
       selectedOptions={selectedLangs}
       onOptionChange={toggleLang}
       onClearOptions={clearLangs}
-      buttonId={buildSearchFilterPopperButtonId('lang')}
       isLoading={isFetching}
+      placeholder={m.FILTER_DROPDOWN_NO_LANG()}
     />
   );
 }

@@ -1,9 +1,7 @@
 import { getRouteApi } from '@tanstack/react-router';
 
-import {
-  buildSearchFilterPopperButtonId,
-  buildSearchFilterTagCategoryId,
-} from '../../config/selectors';
+import { m } from '~/paraglide/messages';
+
 import { Filter } from './Filter';
 import { queryParamsToCategory } from './constants';
 import { useSearchFacets } from './useSearchFacets';
@@ -52,16 +50,19 @@ export function CategoryFilter({
       search: (prev) => ({ ...prev, [category]: [] }),
     });
   };
-
+  const placeholders = {
+    disciplines: m.FILTER_DROPDOWN_NO_DISCIPLINE(),
+    levels: m.FILTER_DROPDOWN_NO_LEVEL(),
+    resourceTypes: m.FILTER_DROPDOWN_NO_RESOURCE_TYPE(),
+  };
   return (
     <Filter
-      id={buildSearchFilterTagCategoryId(category)}
-      buttonId={buildSearchFilterPopperButtonId(category)}
       title={title}
       options={options ?? {}}
       selectedOptions={search[category]}
       onOptionChange={toggleCategory}
       onClearOptions={clearCategory}
+      placeholder={placeholders[category]}
     />
   );
 }

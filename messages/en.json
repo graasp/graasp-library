@@ -18,6 +18,10 @@
   "COPY_BUTTON_TOOLTIP": "Copy",
   "COPY_BUTTON_MODAL_DESCRIPTION": "Select one folder from the list below",
   "UNEXPECTED_ERROR_MESSAGE": "An error has occurred",
+  "FILTER_DROPDOWN_NO_LANG": "No language filter…",
+  "FILTER_DROPDOWN_NO_DISCIPLINE": "No discipline filter…",
+  "FILTER_DROPDOWN_NO_LEVEL": "No level filter…",
+  "FILTER_DROPDOWN_NO_RESOURCE_TYPE": "No type filter…",
   "SEARCH_PAGE_TITLE": [
     {
       "declarations": ["input count", "local countPlural = count: plural"],

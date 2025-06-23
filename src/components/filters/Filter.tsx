@@ -9,20 +9,17 @@ import {
   useAutocomplete,
 } from '@mui/material';
 
-import { m } from '~/paraglide/messages';
-
 import { FILTER_CHIP_CY } from '../../config/selectors';
 import { FilterPopper, FilterPopperProps } from './FilterPopper';
 
 export type FilterProps = {
-  id: string;
-  buttonId: string;
   title: string;
   isLoading?: boolean;
   selectedOptions: FilterPopperProps['selectedOptions'];
   onClearOptions: FilterPopperProps['onClearOptions'];
   onOptionChange: FilterPopperProps['onOptionChange'];
   options?: { [key: string]: number };
+  placeholder: string;
 };
 
 const InputWrapper = styled(Stack)(({ theme }) => ({
@@ -58,10 +55,9 @@ export const Filter = ({
   selectedOptions,
   onClearOptions,
   onOptionChange,
-  id,
-  buttonId,
   isLoading = false,
   options = {},
+  placeholder,
 }: FilterProps) => {
   const [showPopper, setShowPopper] = useState<boolean>(false);
 
@@ -87,7 +83,7 @@ export const Filter = ({
   const { getRootProps, getInputProps, getTagProps, groupedOptions } =
     useAutocomplete({
       options: Object.keys(options),
-      id: buttonId,
+      // id: buttonId,
       multiple: true,
       value: selectedOptions,
       clearOnBlur: false,
@@ -137,9 +133,7 @@ export const Filter = ({
             onClick={() => {
               setShowPopper(true);
             }}
-            placeholder={
-              selectedOptions.length ? undefined : m.FILTER_DROPDOWN_NO_FILTER()
-            }
+            placeholder={selectedOptions.length ? undefined : placeholder}
             {...getInputProps()}
           />
         </div>
@@ -155,7 +149,7 @@ export const Filter = ({
   );
 
   return (
-    <Stack id={id} flexGrow={1} flex={1} flexBasis={0} width={0}>
+    <Stack flexGrow={1} flex={1} flexBasis={0} width={0}>
       <Typography variant="body2" color="#7A7A7A">
         {title}
       </Typography>

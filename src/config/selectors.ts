@@ -39,10 +39,7 @@ export const HOME_SEARCH_ID = 'homeSearch';
 export const HOME_SEARCH_BUTTON_ID = 'homeSearchButton';
 export const ALL_COLLECTIONS_GRID_ID = 'allCollectionsGrid';
 export const SEARCH_RESULTS_GRID_ID = 'searchResultsGrid';
-export const buildSearchFilterTagCategoryId = (category: string) =>
-  `searchFilter-${category}`;
-export const buildSearchFilterPopperButtonId = (category: string) =>
-  `searchFilterButton-${category}`;
+
 export const FILTER_POPPER_ID = 'filterPopper';
 
 export const MY_LIKES_COLLECTIONS_ID = 'likedCollectionsGrid';
@@ -78,10 +75,7 @@ export const LIBRARY_ACTION_GROUP_POP_UP_BUTTONS_ID =
 export const CHILD_CARD_COPY_BUTTON_ID = 'childCardCopyButton';
 export const buildCollectionCardCopyButtonId = (id: string) =>
   `collectionCardCopyButton-${id}`;
-export const SEARCH_FILTER_LANG_ID = 'searchFilterLang';
 export const SEARCH_FILTER_POPPER_LANG_ID = 'searchFilterPopperLang';
 export const FILTER_CHIP_CY = `filterChip`;
-export const buildFilterInputSelector = (category: string) =>
-  `#not-sticky input#${buildSearchFilterPopperButtonId(category)}`;
 export const LIKE_COUNTER_CY = 'likeCounter';
 export const dataCyWrapper = (selector: string) => `[data-cy="${selector}"]`;

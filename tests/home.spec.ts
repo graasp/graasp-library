@@ -21,7 +21,6 @@ test.describe('Home', () => {
     await expect(
       page.getByRole('banner').getByRole('button', { name: 'language switch' }),
     ).toBeVisible();
-    // await expect(page.getByRole())
   });
 
   test('Language change', async ({ page, browserName }) => {
