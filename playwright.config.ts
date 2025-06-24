@@ -74,7 +74,7 @@ export default defineConfig({
     // The command to start the webserver does 2 things:
     // - build the server in test mode
     // - serve the build assets in test mode exposing it on the port that is defined in the .env.test file
-    command: `concurrently "pnpm build:test && PORT=${process.env.PORT} node .output/server/index.mjs"`,
+    command: `concurrently "pnpm mockserver" "pnpm build:test && PORT=${process.env.PORT} node .output/server/index.mjs"`,
     timeout: 120 * 1000, // 2 minutes (default 60 seconds)
     url: `http://localhost:${process.env.PORT}`,
     reuseExistingServer: !process.env.CI,
