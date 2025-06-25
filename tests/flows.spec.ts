@@ -33,7 +33,7 @@ test('Search flow', async ({ page }) => {
   await page.getByRole('button', { name: 'Back' }).click();
 
   // filter by language
-  await page.getByRole('combobox', { name: 'No language filter…' }).click();
+  await page.getByRole('combobox', { name: 'Languages' }).click();
   await page.getByRole('checkbox', { name: 'Español' }).click();
 
   // page should "reload"

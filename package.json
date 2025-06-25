@@ -25,7 +25,8 @@
     "test": "pnpm run \"/^test:.*/\"",
     "client:generate": "openapi-ts",
     "machine-translate": "inlang machine translate --project project.inlang",
-    "mockserver": "tsx watch tests/mockServer/index.ts"
+    "mockserver": "tsx tests/mockServer/index.ts",
+    "mockserver:watch": "tsx watch tests/mockServer/index.ts"
   },
   "dependencies": {
     "@emotion/cache": "11.14.0",

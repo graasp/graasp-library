@@ -10,12 +10,14 @@ test.describe('Search', () => {
       .getByRole('textbox', { name: 'Search collections…' })
       .fill('Geogebra');
 
+    await page.waitForLoadState();
     await expect(page).toHaveURL(
       (url) => url.searchParams.get('s') === 'Geogebra',
     );
 
     // open languages filter
-    await page.getByRole('combobox', { name: 'No language filter…' }).click();
+    const languageCombobox = page.getByRole('combobox', { name: 'Languages' });
+    await languageCombobox.click();
     // select a language
     await page.getByText('Español').click();
     // check it is saved in url
@@ -23,6 +25,7 @@ test.describe('Search', () => {
       (url) => url.searchParams.get('langs') === '["es"]',
     );
     // clear the languages
+    await languageCombobox.click();
     await page.getByRole('button', { name: 'Clear' }).click();
     // check the url is clean
     await expect(page).toHaveURL(
@@ -30,7 +33,10 @@ test.describe('Search', () => {
     );
 
     // open disciplines filter
-    await page.getByRole('combobox', { name: 'No discipline filter…' }).click();
+    const disciplineCombobox = page.getByRole('combobox', {
+      name: 'Disciplines',
+    });
+    await disciplineCombobox.click();
     // select a discipline
     await page.getByText('Maths').click();
     // check it is saved in url
@@ -38,6 +44,7 @@ test.describe('Search', () => {
       (url) => url.searchParams.get('disciplines') === '["Maths"]',
     );
     // clear the disciplines
+    await disciplineCombobox.click();
     await page.getByRole('button', { name: 'Clear' }).click();
     // check the url is clean
     await expect(page).toHaveURL(
@@ -45,7 +52,10 @@ test.describe('Search', () => {
     );
 
     // open levels filter
-    await page.getByRole('combobox', { name: 'No level filter…' }).click();
+    const levelsCombobox = page.getByRole('combobox', {
+      name: 'Levels',
+    });
+    await levelsCombobox.click();
     // select a level
     await page.getByText('Lycee').click();
     // check it is saved in url
@@ -53,6 +63,7 @@ test.describe('Search', () => {
       (url) => url.searchParams.get('levels') === '["Lycee"]',
     );
     // clear the levels
+    await levelsCombobox.click();
     await page.getByRole('button', { name: 'Clear' }).click();
     // check the url is clean
     await expect(page).toHaveURL(
@@ -60,7 +71,10 @@ test.describe('Search', () => {
     );
 
     // open resourceTypes filter
-    await page.getByRole('combobox', { name: 'No type filter…' }).click();
+    const resourceTypesCombobox = page.getByRole('combobox', {
+      name: 'Resource Types',
+    });
+    await resourceTypesCombobox.click();
     // select a resourceType
     await page.getByText('Exercises').click();
     // check it is saved in url
@@ -68,11 +82,13 @@ test.describe('Search', () => {
       (url) => url.searchParams.get('resourceTypes') === '["Exercises"]',
     );
     // clear the resourceTypes
+    await resourceTypesCombobox.click();
     await page.getByRole('button', { name: 'Clear' }).click();
     // check the url is clean
     await expect(page).toHaveURL(
       (url) => url.searchParams.get('resourceTypes') === '[]',
     );
+
     // close the popper
     await page.getByText('Found ').click();
 

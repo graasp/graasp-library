@@ -1,5 +1,6 @@
 import { serve } from '@hono/node-server';
 import { serveStatic } from '@hono/node-server/serve-static';
+import { config } from 'dotenv';
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import path, { dirname } from 'path';
@@ -18,6 +19,9 @@ import search from './search.json' with { type: 'json' };
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+// pull the .env file for tests
+config({ path: path.resolve(process.cwd(), '.env.test') });
+
 // define the app
 const app = new Hono();
 
@@ -25,7 +29,7 @@ const app = new Hono();
 app.use(
   '*',
   cors({
-    origin: 'http://localhost:3002',
+    origin: `http://localhost:${process.env.VITE_PORT}`,
     credentials: true,
     allowHeaders: ['content-type'],
   }),
@@ -140,8 +144,40 @@ app.post('/items/47238afb-5e21-4cf8-b2b1-5904af82a155/like', async (c) =>
   }),
 );
 
-// eslint-disable-next-line no-console
-console.log('Mock server running on port 3000');
+const backendServerURL = new URL(
+  process.env.VITE_API_HOST ?? 'http://localhost:3000',
+);
+const port = Number.parseInt(backendServerURL.port) ?? 3000;
+const server = serve({
+  fetch: app.fetch,
+  port,
+});
 
-// Override the port to match what the app expects
-serve({ fetch: app.fetch, port: 3000 });
+// eslint-disable-next-line no-console
+console.log(`Mock server running on ${backendServerURL}`);
+
+// Handle server errors (e.g., EADDRINUSE)
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.error('Port is already in use. Please use a different port.');
+    process.exit(1);
+  } else {
+    console.error('Server error:', err);
+    process.exit(1);
+  }
+});
+
+// graceful shutdown
+process.on('SIGINT', () => {
+  server.close();
+  process.exit(0);
+});
+process.on('SIGTERM', () => {
+  server.close((err) => {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+    process.exit(0);
+  });
+});

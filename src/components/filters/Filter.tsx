@@ -13,6 +13,7 @@ import { FILTER_CHIP_CY } from '../../config/selectors';
 import { FilterPopper, FilterPopperProps } from './FilterPopper';
 
 export type FilterProps = {
+  id: string;
   title: string;
   isLoading?: boolean;
   selectedOptions: FilterPopperProps['selectedOptions'];
@@ -51,6 +52,7 @@ const StyledInput = styled('input')(({ theme }) => ({
 }));
 
 export const Filter = ({
+  id,
   title,
   selectedOptions,
   onClearOptions,
@@ -130,9 +132,12 @@ export const Filter = ({
             );
           })}
           <StyledInput
+            id={id}
             onClick={() => {
               setShowPopper(true);
             }}
+            // for accessibility purposes
+            title={title}
             placeholder={selectedOptions.length ? undefined : placeholder}
             {...getInputProps()}
           />
@@ -150,7 +155,7 @@ export const Filter = ({
 
   return (
     <Stack flexGrow={1} flex={1} flexBasis={0} width={0}>
-      <Typography variant="body2" color="#7A7A7A">
+      <Typography variant="body2" color="#7A7A7A" component="label">
         {title}
       </Typography>
       <Stack direction="row" alignItems="center" ref={popperAnchor}>

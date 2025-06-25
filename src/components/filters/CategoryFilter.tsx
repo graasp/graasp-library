@@ -57,6 +57,7 @@ export function CategoryFilter({
   };
   return (
     <Filter
+      id={`combobox-${category}`}
       title={title}
       options={options ?? {}}
       selectedOptions={search[category]}

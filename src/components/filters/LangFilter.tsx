@@ -73,6 +73,7 @@ export function LangFilter({ title }: Readonly<LangFilterProps>) {
   const selectedLangs = langs.map((l) => Langs[l]);
   return (
     <Filter
+      id="combobox-langs"
       title={title}
       options={langOptions}
       selectedOptions={selectedLangs}

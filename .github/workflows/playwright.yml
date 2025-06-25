@@ -22,7 +22,7 @@ jobs:
         run: pnpm exec playwright test
         env:
           CI: true
-          PORT: 3002
+          VITE_PORT: 3002
           VITE_API_HOST: http://localhost:3000
           VITE_CLIENT_HOST: http://localhost:3114
           VITE_HOST: http://localhost:3002
