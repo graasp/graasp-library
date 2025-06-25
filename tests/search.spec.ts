@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { type Locator, type Page, expect, test } from '@playwright/test';
 
 test.describe('Search', () => {
   test.beforeEach(async ({ page }) => {
@@ -19,6 +19,8 @@ test.describe('Search', () => {
       (url) => url.searchParams.get('s') === 'Geogebra',
     );
 
+    // clear button selector
+
     // open languages filter
     const languageCombobox = page.getByRole('combobox', { name: 'Languages' });
     await languageCombobox.click();
@@ -29,9 +31,7 @@ test.describe('Search', () => {
       (url) => url.searchParams.get('langs') === '["es"]',
     );
     // clear the languages
-    // await languageCombobox.click();
-    await page.getByRole('button', { name: 'Clear' }).click();
-    // check the url is clean
+    await clearSelection(page, languageCombobox);
     await expect(page).toHaveURL(
       (url) => url.searchParams.get('langs') === '[]',
     );
@@ -48,8 +48,7 @@ test.describe('Search', () => {
       (url) => url.searchParams.get('disciplines') === '["Maths"]',
     );
     // clear the disciplines
-    // await disciplineCombobox.click();
-    await page.getByRole('button', { name: 'Clear' }).click();
+    await clearSelection(page, disciplineCombobox);
     // check the url is clean
     await expect(page).toHaveURL(
       (url) => url.searchParams.get('disciplines') === '[]',
@@ -67,8 +66,7 @@ test.describe('Search', () => {
       (url) => url.searchParams.get('levels') === '["Lycee"]',
     );
     // clear the levels
-    // await levelsCombobox.click();
-    await page.getByRole('button', { name: 'Clear' }).click();
+    await clearSelection(page, levelsCombobox);
     // check the url is clean
     await expect(page).toHaveURL(
       (url) => url.searchParams.get('levels') === '[]',
@@ -86,8 +84,7 @@ test.describe('Search', () => {
       (url) => url.searchParams.get('resourceTypes') === '["Exercises"]',
     );
     // clear the resourceTypes
-    // await resourceTypesCombobox.click();
-    await page.getByRole('button', { name: 'Clear' }).click();
+    await clearSelection(page, resourceTypesCombobox);
     // check the url is clean
     await expect(page).toHaveURL(
       (url) => url.searchParams.get('resourceTypes') === '[]',
@@ -105,3 +102,12 @@ test.describe('Search', () => {
     );
   });
 });
+
+async function clearSelection(page: Page, popperSelector: Locator) {
+  const clearButton = page.getByRole('button', { name: 'Clear' });
+  const isButtonVisible = await clearButton.isVisible();
+  if (!isButtonVisible) {
+    await popperSelector.click();
+  }
+  await page.getByRole('button', { name: 'Clear' }).click();
+}
