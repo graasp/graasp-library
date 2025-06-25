@@ -6,6 +6,10 @@ test.describe('Search', () => {
   });
 
   test('Filters', async ({ page }) => {
+    await page.waitForLoadState();
+    await expect(
+      page.getByRole('heading', { name: 'Search among 958' }),
+    ).toBeVisible();
     await page
       .getByRole('textbox', { name: 'Search collections…' })
       .fill('Geogebra');
@@ -25,7 +29,7 @@ test.describe('Search', () => {
       (url) => url.searchParams.get('langs') === '["es"]',
     );
     // clear the languages
-    await languageCombobox.click();
+    // await languageCombobox.click();
     await page.getByRole('button', { name: 'Clear' }).click();
     // check the url is clean
     await expect(page).toHaveURL(
@@ -44,7 +48,7 @@ test.describe('Search', () => {
       (url) => url.searchParams.get('disciplines') === '["Maths"]',
     );
     // clear the disciplines
-    await disciplineCombobox.click();
+    // await disciplineCombobox.click();
     await page.getByRole('button', { name: 'Clear' }).click();
     // check the url is clean
     await expect(page).toHaveURL(
@@ -63,7 +67,7 @@ test.describe('Search', () => {
       (url) => url.searchParams.get('levels') === '["Lycee"]',
     );
     // clear the levels
-    await levelsCombobox.click();
+    // await levelsCombobox.click();
     await page.getByRole('button', { name: 'Clear' }).click();
     // check the url is clean
     await expect(page).toHaveURL(
@@ -82,12 +86,13 @@ test.describe('Search', () => {
       (url) => url.searchParams.get('resourceTypes') === '["Exercises"]',
     );
     // clear the resourceTypes
-    await resourceTypesCombobox.click();
+    // await resourceTypesCombobox.click();
     await page.getByRole('button', { name: 'Clear' }).click();
     // check the url is clean
     await expect(page).toHaveURL(
       (url) => url.searchParams.get('resourceTypes') === '[]',
     );
+    await resourceTypesCombobox.click();
 
     // close the popper
     await page.getByText('Found ').click();
