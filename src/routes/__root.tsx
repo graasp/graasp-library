@@ -2,7 +2,13 @@ import React from 'react';
 import reactQuillCSS from 'react-quill/dist/quill.snow.css?url';
 import { ToastContainer } from 'react-toastify';
 
-import { Box, CssBaseline, Stack, ThemeProvider } from '@mui/material';
+import {
+  Box,
+  CssBaseline,
+  GlobalStyles,
+  Stack,
+  ThemeProvider,
+} from '@mui/material';
 
 import rtlPlugin from '@graasp/stylis-plugin-rtl';
 
@@ -78,6 +84,10 @@ function Providers({
         })}
       >
         <CssBaseline />
+        {import.meta.env.MODE === 'test' && (
+          // small transition override used to make testing more stable
+          <GlobalStyles styles={{ html: { transition: 'none !important' } }} />
+        )}
         {children}
       </ThemeProvider>
     </CacheProvider>
