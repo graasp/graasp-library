@@ -28,14 +28,10 @@ import { m } from '~/paraglide/messages';
 
 import { COLLECTION_CARD_BORDER_RADIUS } from '../../config/cssStyles';
 import { buildCollectionRoute } from '../../config/routes';
-import {
-  getChildrenOptions,
-  getCurrentAccountOptions,
-} from '../../openapi/client/@tanstack/react-query.gen';
+import { getChildrenOptions } from '../../openapi/client/@tanstack/react-query.gen';
 import Thumbnail from '../ui/Thumbnail/Thumbnail';
 import { ItemIcon } from '../ui/icons/ItemIcon';
 import CopyLinkButton from './CopyLinkButton';
-import DownloadButton from './DownloadButton';
 
 const StyledCardBox = styled(Card)(() => ({
   border: '1px solid #ddd',
@@ -107,7 +103,7 @@ export const SubItemCard: React.FC<SubItemCardProps> = ({
   thumbnail,
   subtext,
 }) => {
-  const { data: member } = useQuery(getCurrentAccountOptions());
+  // const { data: member } = useQuery(getCurrentAccountOptions());
 
   const { name, id } = item;
 
@@ -120,11 +116,11 @@ export const SubItemCard: React.FC<SubItemCardProps> = ({
       actions={
         <>
           {
-            member?.id && 'Copy button'
+            // member?.id &&
             // <CopyButton id={CHILD_CARD_COPY_BUTTON_ID} itemId={id} />
           }
           <CopyLinkButton itemId={item.id} />
-          <DownloadButton id={id} />
+          {/* <DownloadButton id={id} /> */}
         </>
       }
     >

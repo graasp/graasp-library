@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import type { JSX } from 'react';
 
-import { Code, Download, MoreVert } from '@mui/icons-material';
+import { Code, MoreVert } from '@mui/icons-material';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import {
   Button,
@@ -24,9 +24,10 @@ import {
   LIBRARY_ACTION_GROUP_BUTTON_ID,
   LIBRARY_ACTION_GROUP_POP_UP_BUTTONS_ID,
 } from '../../../config/selectors';
-// import { useCopyAction } from '../CopyButton';
 import { useEmbedAction } from '../CopyLinkButton';
-import { useDownloadAction } from '../DownloadButton';
+
+// import { useCopyAction } from '../CopyButton';
+// import { useDownloadAction } from '../DownloadButton';
 
 type SummaryActionButtonsProps = {
   item: PackedItem;
@@ -40,7 +41,7 @@ const SummaryActionButtons = ({
   const { clientOrigin } = useLoaderData({ from: '__root__' });
   // const { treeModal, startCopy } = useCopyAction(item.id);
 
-  const { startDownload } = useDownloadAction(item.id);
+  // const { startDownload } = useDownloadAction(item.id);
 
   const { startEmbed } = useEmbedAction(item.id);
 
@@ -113,12 +114,12 @@ const SummaryActionButtons = ({
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList id={LIBRARY_ACTION_GROUP_POP_UP_BUTTONS_ID}>
-                  <MenuItem onClick={startDownload}>
+                  {/* <MenuItem onClick={startDownload}>
                     <Stack direction="row" gap={1}>
                       <Download />
                       {m.SUMMARY_ACTIONS_DOWNLOAD()}
                     </Stack>
-                  </MenuItem>
+                  </MenuItem> */}
                   {/* {isLogged && (
                     // <MenuItem
                     //   onClick={startCopy}
