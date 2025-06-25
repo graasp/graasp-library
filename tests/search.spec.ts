@@ -73,11 +73,11 @@ test.describe('Search', () => {
     await expect(page).toHaveURL(
       (url) => url.searchParams.get('resourceTypes') === '[]',
     );
-    // close the poper
+    // close the popper
     await page.getByText('Found ').click();
 
     // enable in depth search
-    await page.getByText('Enable in-depth Search').click();
+    await page.getByText('Enable in-depth Search', { exact: true }).click();
     // check the url contains rootOnly=false
     await expect(page).toHaveURL(
       (url) => url.searchParams.get('rootOnly') === 'false',
