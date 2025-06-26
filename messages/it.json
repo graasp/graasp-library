@@ -32,6 +32,7 @@
   "ALL_COLLECTIONS_CLEAR_SELECTION_BUTTON": "Cancella selezione",
   "ALL_COLLECTIONS_SELECTION_BY_CATEGORIES_TITLE": "Raccolte in categorie selezionate",
   "HEADER_MY_LISTS": "Le mie liste",
+  "SEARCH_PAGE_TITLE": "Cerca tra {{count}} collezioni",
   "SEARCH_PAGE_TITLE_CONTENT": "Cerca tra {{count}} risorse",
   "SEARCH_PAGE_TITLE_CONTENT_many": "Cerca tra {{count}} risorse",
   "SEARCH_PAGE_TITLE_CONTENT_other": "Cerca tra più di {{count}} risorse",
