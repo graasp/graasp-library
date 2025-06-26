@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/graasp/graasp-library/compare/v1.16.0...v2.0.0) (2025-06-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to tanstack start ([#772](https://github.com/graasp/graasp-library/issues/772))
+
+### Features
+
+* migrate to tanstack start ([#772](https://github.com/graasp/graasp-library/issues/772)) ([a211e88](https://github.com/graasp/graasp-library/commit/a211e88ded692aaebab285224de6bccc9a2962ae))
+
+
+### Bug Fixes
+
+* add manual deploy ([8ac2ed1](https://github.com/graasp/graasp-library/commit/8ac2ed17b9517986490ea2f00efb6cd3fc1bbea1))
+* readme to add precisions ([#787](https://github.com/graasp/graasp-library/issues/787)) ([0ce4177](https://github.com/graasp/graasp-library/commit/0ce4177a16d03bcd09cd94a71cb5d72488a046f6))
+* remove cypress and dependencies ([#778](https://github.com/graasp/graasp-library/issues/778)) ([e5eaf7f](https://github.com/graasp/graasp-library/commit/e5eaf7fe316e5b9dcd1f592887ada5d443540d16))
+* update docs ([#771](https://github.com/graasp/graasp-library/issues/771)) ([f3d4e3f](https://github.com/graasp/graasp-library/commit/f3d4e3fe5700faebd7657685713eafba1ca1b966))
+* upgrade screenshot of home page in readme ([#780](https://github.com/graasp/graasp-library/issues/780)) ([42217d4](https://github.com/graasp/graasp-library/commit/42217d44490bba6b5cd8ad203f033374c129817d))
+
 ## [1.16.0](https://github.com/graasp/graasp-library/compare/v1.15.2...v1.16.0) (2025-04-17)
 
 
