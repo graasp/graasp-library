@@ -102,4 +102,4 @@ We use:
 - Material UI for the UI components
 - Inlang ParaglideJS for translations
 - Storybook and Vitest for design library and unit testing
-- Cypress for end to end testing
+- Playwright for end to end testing

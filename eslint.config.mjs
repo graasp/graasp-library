@@ -59,8 +59,6 @@ export default [
         ...globals.node,
         ...globals.mocha,
         ...globals.jest,
-        cy: true,
-        Cypress: true,
         JSX: 'readonly',
       },
 
