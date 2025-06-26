@@ -1,4 +1,4 @@
-FROM node:22.15-bookworm-slim AS base
+FROM node:24.3.0-bookworm-slim AS base
 
 # -------------------------------------------------------
 # Install dependencies only when needed
@@ -39,7 +39,7 @@ RUN --mount=type=secret,id=SENTRY_AUTH_TOKEN,env=SENTRY_AUTH_TOKEN pnpm build
 
 # -------------------------------------------------------
 # Production image, copy all the files and run the server
-FROM node:22.15-bookworm-slim AS runner
+FROM node:24.3.0-bookworm-slim AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
