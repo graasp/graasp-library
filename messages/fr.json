@@ -1,5 +1,4 @@
 {
-  "$schema": "https://inlang.com/schema/inlang-message-format",
   "GRAASP_LIBRARY": "Graasp Library",
   "GRAASP_LIBRARY_DESCRIPTION": "Graasp Library est une plateforme de partage de ressources éducatives libres.",
   "GUEST": "Invité",
@@ -33,17 +32,16 @@
   "ALL_COLLECTIONS_CLEAR_SELECTION_BUTTON": "Effacer la sélection",
   "ALL_COLLECTIONS_SELECTION_BY_CATEGORIES_TITLE": "Collections dans certaines catégories",
   "HEADER_MY_LISTS": "Mes Listes",
-  "SEARCH_PAGE_TITLE_one": "Rechercher une collection",
-  "SEARCH_PAGE_TITLE_other": "Rechercher parmi {count} collections",
-  "SEARCH_PAGE_TITLE_CONTENT_one": "Rechercher une {count} ressource",
+  "SEARCH_PAGE_TITLE": "Rechercher parmi {{count}} collections",
+  "SEARCH_PAGE_TITLE_CONTENT": "Rechercher parmi {{count}} ressources",
+  "SEARCH_PAGE_TITLE_CONTENT_many": "Rechercher parmi les {count} ressources ",
   "SEARCH_PAGE_TITLE_CONTENT_other": "Rechercher parmi {count} ressources",
-  "SEARCH_PAGE_TITLE_MORE_CONTENT": "Rechercher parmi plus de {count} ressources",
   "SEARCH_RANGE_LABEL": "Champ de recherche",
   "SEARCH_RANGES_TITLE": "Titre",
   "SEARCH_RANGES_TAGS": "Tag",
   "SEARCH_RANGES_AUTHOR": "Auteur",
-  "SEARCH_FILTER_EMPTY": "Aucun filtre correspondant",
   "SEARCH_BUTTON_ARIA_LABEL": "recherche",
+  "SEARCH_FILTER_EMPTY": "Aucun filtre correspondant",
   "SEARCH_ARIA_LABEL": "Rechercher des collections",
   "SEARCH_PLACEHOLDER": "Rechercher dans les collections…",
   "SEARCH_RESULTS_FOR_TEXT_one": "{count} Résultat de recherche pour: {search}",
@@ -60,6 +58,7 @@
   "CREATE_BUTTON_TOOLTIP": "Créez votre propre collection",
   "COLLECTION_TAGS_TITLE": "Tags",
   "COLLECTION_LANGUAGE_TITLE": "Langue",
+  "SEARCH_FILTER_LANG_TITLE": "Langues",
   "PROFILE_BUTTON": "Compte",
   "COLLECTIONS_COUNT_MESSAGE_one": "{count} collection disponible",
   "COLLECTIONS_COUNT_MESSAGE_other": "{count} collections disponibles",
@@ -85,7 +84,6 @@
   "COPY_ITEM_TOASTR_LINK": "Cliquez ici pour ouvrir l'élément sur Graasp.",
   "COPY_LINK_SUCCESS_MESSAGE": "Le lien de la ressource a été copié avec succès.",
   "COPY_LINK_FAILURE_MESSAGE": "Une erreur s'est produite lors de la copie du lien vers la ressource.",
-  "COPY_MODAL_MY_GRAASP_BREADCRUMB": "Mon Graasp",
   "AVATAR_ALT": "Avatar de {name}",
   "COLLECTION_EMPTY_DESCRIPTION_TEXT": "Cet élément n'a pas de description.",
   "COLLECTION_INFO_BUTTON": "Information",
@@ -128,35 +126,6 @@
   "PROFILE_SETTINGS": "Profil",
   "EDIT": "Modifier",
   "SOCIAL_PROFILES": "Profils sociaux",
-  "COPY_MODAL_EMPTY_FOLDER": "Le dossier est vide.",
-  "COPY_MODAL_HOME_TITLE": "Accueil",
-  "COPY_MODAL_RECENT_TITLE": "Éléments récents",
-  "COPY_MODAL_SUBMIT_BUTTON": "Valider",
-  "SEARCH_FILTER_LANG_TITLE": "Langues",
-  "SEARCH_PAGE_TITLE": [
-    {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "selectors": ["countPlural"],
-      "match": {
-        "countPlural=one": "Rechercher parmi la ressource",
-        "countPlural=other": "Rechercher parmi les {count} ressources"
-      }
-    }
-  ],
-  "SEARCH_PAGE_TITLE_CONTENT": [
-    {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "selectors": ["count", "countPlural"],
-      "match": {
-        "count=*": "Rechercher parmi les {count} ressources ",
-        "countPlural=one": "Rechercher parmi la ressource",
-        "countPlural=other": "Rechercher parmi les {count} ressources",
-        "countPlural=many": "Rechercher parmi les ressources {count}",
-        "countPlural=zero": "Aucune collection disponible pour la recherche"
-      }
-    }
-  ],
-  "SEARCH_PAGE_TITLE_CONTENT_many": "Rechercher parmi les {count} ressources ",
   "DRAWER_AUTHENTICATED_USER_LINKS_SECTION": "Mes liens",
   "DRAWER_ALL_COLLECTIONS_TEXT": "Recherche",
   "DRAWER_OER_INFORMATION_TEXT": "Informations sur les REL",
@@ -166,6 +135,11 @@
   "PREVIEW_ALERT_ADMIN_ACTION": "Si vous souhaitez partager cette collection avec tout le monde, vous pouvez publier cet élément dans le Builder en utilisant le lien ci-dessous.",
   "PUBLISH_ITEM_BUTTON": "Publier maintenant",
   "LOADING_TEXT": "Chargement",
+  "COPY_MODAL_EMPTY_FOLDER": "Le dossier est vide.",
+  "COPY_MODAL_HOME_TITLE": "Accueil",
+  "COPY_MODAL_RECENT_TITLE": "Éléments récents",
+  "COPY_MODAL_SUBMIT_BUTTON": "Valider",
+  "COPY_MODAL_MY_GRAASP_BREADCRUMB": "Mon Graasp",
   "OER_INFORMATION_BASICS_TEXT": "Votre préparation de cours est en cours et le manuel est obsolète ? REL, ou Ressources éducatives libres Sur le web, les ressources pédagogiques peuvent constituer une excellente alternative. Qu'il s'agisse de fiches d'exercices, de photos ou d'illustrations : selon la licence, les enseignants peuvent non seulement utiliser les ressources, mais aussi les adapter directement à leur classe. Cette vidéo explique précisément comment procéder.",
   "OER_INFORMATION_QUALITY_TEXT": "Jusqu'à présent, il n'existe aucun label de qualité pour les ressources REL. De nombreux enseignants trouvent cela inquiétant. Cependant, à l'instar de Wikipédia, les membres de communautés en ligne supervisent les ressources REL. Et à mesure que ces communautés s'agrandissent, davantage d'expertise thématique et de connaissances pédagogiques se conjuguent.",
   "OER_INFORMATION_PAGE_TITLE": "Que sont les REL ?",
@@ -181,70 +155,9 @@
   "OER_INFORMATION_VIDEO_DESCRIPTION_PRODUCTION": "Production",
   "OER_INFORMATION_VIDEO_DESCRIPTION_DURATION": "Durée",
   "OER_INFORMATION_VIDEO_DESCRIPTION_EDITION": "Édition",
-  "DURATION_IN_MINUTES": [
-    {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "selectors": ["countPlural"],
-      "match": {
-        "countPlural=one": "{count} minute",
-        "countPlural=other": "{count} minutes"
-      }
-    }
-  ],
+  "DURATION_IN_MINUTES_one": "{{count}} minute",
+  "DURATION_IN_MINUTES_other": "{{count}} minutes",
   "START_COPY_SUCCESS_MESSAGE": "Les éléments sont copiés...",
   "COPY_ITEM_PAGINATION_NEXT": "Suivant",
-  "COPY_ITEM_PAGINATION_PREV": "Précédent",
-  "SEARCH_RESULTS_FOR_TEXT": [
-    {
-      "declarations": [
-        "input count",
-        "input search",
-        "local countPlural = count: plural"
-      ],
-      "selectors": ["count", "countPlural", "search"],
-      "match": {
-        "count=*, search=*": "Résultat {count} trouvé pour : {search}",
-        "countPlural=one": "Résultat {count} trouvé pour : {search}",
-        "countPlural=other": "Résultats trouvés pour : {count} {search}"
-      }
-    }
-  ],
-  "CANCEL_BUTTON": "Annuler",
-  "COPY_ITEM_SUCCESS": "L'élément a été copié avec succès",
-  "BACK": "Retour",
-  "SUMMARY_ITEMS_SHOW_LESS": "Masquer l'élément {count}",
-  "DISCIPLINES_LABEL": "Disciplines",
-  "LEVEL_LABEL": "Niveaux",
-  "RESOURCE_TYPE_LABEL": "Types de ressources",
-  "COLLECTION_NOT_FOUND": "Collection non trouvée",
-  "RESET": "Réinitialiser",
-  "COLLECTION_ERROR_TITLE": "Erreur lors du chargement de la collection",
-  "HEADER_INDEX": "Bibliothèque",
-  "HEADER_SEARCH": "Recherche",
-  "HEADER_OER": "REL",
-  "COPY_ITEM_TO_CLIPBOARD_SUCCESS": "L'élément a été copié avec succès dans le presse-papiers",
-  "COPY_ITEM_TO_CLIPBOARD_ERROR": "Une erreur s'est produite lors de la copie de l'élément dans le presse-papiers",
-  "SUMMARY_BROWSE_FOLDER_CONTAINS": [
-    {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "selectors": ["countPlural"],
-      "match": {
-        "countPlural=zero": "Dossier vide",
-        "countPlural=one": "{count} Fichier",
-        "countPlural=other": "{count}"
-      }
-    }
-  ],
-  "COLLECTIONS_COUNT_MESSAGE": [
-    {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "selectors": ["count", "countPlural"],
-      "match": {
-        "count=*": "{count} collection disponible",
-        "countPlural=one": "{count} collection disponible",
-        "countPlural=other": "{count} collections disponibles"
-      }
-    }
-  ],
-  "LOGIN_REQUIRED": "Vous devez être connecté pour effectuer cette action"
+  "COPY_ITEM_PAGINATION_PREV": "Précédent"
 }
