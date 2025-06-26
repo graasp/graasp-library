@@ -29,9 +29,6 @@ importers:
       '@graasp/stylis-plugin-rtl':
         specifier: 2.2.0
         version: 2.2.0(stylis@4.3.6)
-      '@hey-api/client-fetch':
-        specifier: 0.12.0
-        version: 0.12.0(@hey-api/openapi-ts@0.77.0(magicast@0.3.5)(typescript@5.8.3))
       '@mui/icons-material':
         specifier: 7.1.2
         version: 7.1.2(@mui/material@7.1.2(@emotion/react@11.14.0(@types/react@19.1.8)(react@19.1.0))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.8)(react@19.1.0))(@types/react@19.1.8)(react@19.1.0))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@types/react@19.1.8)(react@19.1.0)
@@ -863,11 +860,6 @@ packages:
     resolution: {integrity: sha512-h1yIL3+iLdCBM4u//HP1AMKF/T/YnCgE6gMQg7V6GRvdnyrK9VxdNep3ru2Eqbn/fB/WNbd9LLdkQh8NuzMFyg==}
     peerDependencies:
       stylis: 4.x
-
-  '@hey-api/client-fetch@0.12.0':
-    resolution: {integrity: sha512-/iZ6dhs39N0kjzCa9tlNeLNufVUd8zzv/wI1ewQt5AEHaVuDnAxvuQT+fRIPYkfIWKR3gVZKRp5mcCo29voYzQ==}
-    peerDependencies:
-      '@hey-api/openapi-ts': < 2
 
   '@hey-api/json-schema-ref-parser@1.0.6':
     resolution: {integrity: sha512-yktiFZoWPtEW8QKS65eqKwA5MTKp88CyiL8q72WynrBs/73SAaxlSWlA2zW/DZlywZ5hX1OYzrCC0wFdvO9c2w==}
@@ -2126,9 +2118,6 @@ packages:
 
   '@types/mysql@2.15.26':
     resolution: {integrity: sha512-DSLCOXhkvfS5WNNPbfn2KdICAmk8lLc+/PNvnPnF7gOdMZCxopXduqv0OQ13y/yA/zXTSikZZqVgybUxOEg6YQ==}
-
-  '@types/node@22.15.29':
-    resolution: {integrity: sha512-LNdjOkUDlU1RZb8e1kOIUpN1qQUlzGkEtbVNo53vbrwDg5om6oduhm4SiUaPW5ASTXhAiP0jInWG8Qx9fVlOeQ==}
 
   '@types/node@24.0.4':
     resolution: {integrity: sha512-ulyqAkrhnuNq9pB76DRBTkcS6YsmDALy6Ua63V8OhrOBgbcYt6IOdzpw5P1+dyRIyMerzLkeYWBeOXPpA9GMAA==}
@@ -5941,9 +5930,6 @@ packages:
   unctx@2.4.1:
     resolution: {integrity: sha512-AbaYw0Nm4mK4qjhns67C+kgxR2YWiwlDBPzxrN8h8C6VtAdCgditAY5Dezu3IJy4XVqAnbrXt9oQJvsn3fyozg==}
 
-  undici-types@6.21.0:
-    resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
-
   undici-types@7.8.0:
     resolution: {integrity: sha512-9UJ2xGDvQ43tYyVMpuHlsgApydB8ZKfVYTsLDhXkFL/6gfkp+U8xTGdh8pMJv1SpZna0zxG1DwsKZsreLbXBxw==}
 
@@ -7074,10 +7060,6 @@ snapshots:
     dependencies:
       cssjanus: 2.3.0
       stylis: 4.3.6
-
-  '@hey-api/client-fetch@0.12.0(@hey-api/openapi-ts@0.77.0(magicast@0.3.5)(typescript@5.8.3))':
-    dependencies:
-      '@hey-api/openapi-ts': 0.77.0(magicast@0.3.5)(typescript@5.8.3)
 
   '@hey-api/json-schema-ref-parser@1.0.6':
     dependencies:
@@ -8654,11 +8636,6 @@ snapshots:
   '@types/mysql@2.15.26':
     dependencies:
       '@types/node': 24.0.4
-
-  '@types/node@22.15.29':
-    dependencies:
-      undici-types: 6.21.0
-    optional: true
 
   '@types/node@24.0.4':
     dependencies:
@@ -11354,7 +11331,7 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 22.15.29
+      '@types/node': 24.0.4
       merge-stream: 2.0.0
       supports-color: 8.1.1
     optional: true
@@ -13014,9 +12991,6 @@ snapshots:
       estree-walker: 3.0.3
       magic-string: 0.30.17
       unplugin: 2.3.5
-
-  undici-types@6.21.0:
-    optional: true
 
   undici-types@7.8.0: {}
 
