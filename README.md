@@ -1,9 +1,3 @@
-<p align="center">
-  <a href="https://library.graasp.org/">
-    <img alt="Graasp" src="https://avatars3.githubusercontent.com/u/43075056" width="300">
-  </a>
-</p>
-
 # Graasp Library
 
 ![GitHub Release](https://img.shields.io/github/release/graasp/graasp-library)
@@ -74,23 +68,28 @@ Start tests with `pnpm vitest`
 We run integration tests with Playwright.
 Create a `.env.test` file with the following content:
 
-    ```dotenv
-    # URL of the backend server. Uncomment to override the default value
-    VITE_API_HOST=http://localhost:3000
-    VITE_CLIENT_HOST=http://localhost:3114
-    VITE_HOST=http://localhost:3002
+```dotenv
+# URL of the backend server. Uncomment to override the default value
+VITE_API_HOST=http://localhost:3000
+VITE_CLIENT_HOST=http://localhost:3114
+VITE_HOST=http://localhost:3002
 
-    # for tests
-    VITE_PORT=3002
+# for tests
+VITE_PORT=3002
 
-    # Uncomment to use Sentry locally (not recommended)
-    # SENTRY_DSN=
-    # SENTRY_ENV=local-dev
+# Uncomment to use Sentry locally (not recommended)
+# SENTRY_DSN=
+# SENTRY_ENV=local-dev
 
-    # These are usually set by the docker build stage, but you can provide them
-    # APP_VERSION=local-dev
-    # BUILD_TIMESTAMP=latest
-    ```
+# These are usually set by the docker build stage, but you can provide them
+# APP_VERSION=local-dev
+# BUILD_TIMESTAMP=latest
+```
+
+Start tests with `pnpm playwright test --ui` to open an interactive interface.
+To run the tests in the command line: `pnpm playwright test`. To mimic the CI behavior: `CI=true pnpm playwright test` (will run the tests with a single worker -> slower).
+
+You can open a trace from the CI locally with playwright using `pnpm playwright show-report <path-to-extracted-report-file>` this will allow you to explore the report and view execution as it happened in the CI (very useful).
 
 ## Technology stack
 
