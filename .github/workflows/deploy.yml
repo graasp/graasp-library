@@ -1,4 +1,4 @@
-name: Deploy to development environment
+name: Deploy to environment
 
 on:
   push:
