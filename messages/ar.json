@@ -1,5 +1,4 @@
 {
-  "$schema": "https://inlang.com/schema/inlang-message-format",
   "GRAASP_LIBRARY": "مكتبة چراسپ",
   "GRAASP_LIBRARY_DESCRIPTION": "مكتبة چراسپ عبارة عن منصّة مفتوحة المصدر التي توفر موارد تعليمية كمجموعات.",
   "GUEST": "زائر",
@@ -33,25 +32,16 @@
   "ALL_COLLECTIONS_CLEAR_SELECTION_BUTTON": "إزالة الإختيار",
   "ALL_COLLECTIONS_SELECTION_BY_CATEGORIES_TITLE": "المجموعات في الفئات المختارة",
   "HEADER_MY_LISTS": "قوائمي",
-  "SEARCH_PAGE_TITLE": [
-    {
-      "declarations": [
-        "input count",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [],
-      "match": {
-        "count=*": "ابحث بين {count} مجموعات",
-        "countPlural=other": "ابحث بين {count} الموارد",
-        "countPlural=one": "ابحث بين الموارد {count}"
-      }
-    }
-  ],
+  "SEARCH_PAGE_TITLE": "البحث بين {{count}} مجموعة",
+  "SEARCH_PAGE_TITLE_CONTENT": "البحث بين {{count}} من الموارد",
+  "SEARCH_PAGE_TITLE_CONTENT_many": "ابحث بين {count} } الموارد",
+  "SEARCH_PAGE_TITLE_CONTENT_other": "ابحث بين أكثر من {count} } من الموارد",
   "SEARCH_RANGE_LABEL": "نطاق البحث",
   "SEARCH_RANGES_TITLE": "عنوان",
   "SEARCH_RANGES_TAGS": "علامة",
   "SEARCH_RANGES_AUTHOR": "مؤلف",
   "SEARCH_BUTTON_ARIA_LABEL": "بحث",
+  "SEARCH_FILTER_EMPTY": "لا يوجد مرشح مماثل",
   "SEARCH_ARIA_LABEL": "البحث في المجموعات ",
   "SEARCH_PLACEHOLDER": "البحث في المجموعات...",
   "SEARCH_RESULTS_FOR_TEXT_one": "تم العثور على نتيجة {count} لـ: {search}",
@@ -68,6 +58,7 @@
   "CREATE_BUTTON_TOOLTIP": "إنشاء مجموعتك الخاصة",
   "COLLECTION_TAGS_TITLE": "العلامات",
   "COLLECTION_LANGUAGE_TITLE": "اللغات",
+  "SEARCH_FILTER_LANG_TITLE": "اللغات",
   "PROFILE_BUTTON": "حساب",
   "COLLECTIONS_COUNT_MESSAGE_one": "مجمواعات متوفّرة {count}",
   "COLLECTIONS_COUNT_MESSAGE_other": "مجمواعات متوفّرة {count}",
@@ -166,111 +157,7 @@
   "OER_INFORMATION_VIDEO_DESCRIPTION_EDITION": "طبعة",
   "DURATION_IN_MINUTES_one": "{count} دقيقة",
   "DURATION_IN_MINUTES_other": "{count} دقيقة",
-  "SEARCH_PAGE_TITLE_CONTENT": [
-    {
-      "declarations": [
-        "input count",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [
-        "count"
-      ],
-      "match": {
-        "count=*": "ابحث بين {count} } الموارد",
-        "countPlural=one": "ابحث بين {count} الموارد",
-        "countPlural=many": "ابحث بين {count} الموارد",
-        "countPlural=other": "ابحث بين أكثر من {count} من الموارد",
-        "countPlural=zero": "لا توجد مجموعات متاحة للبحث"
-      }
-    }
-  ],
-  "SEARCH_PAGE_TITLE_CONTENT_many": "ابحث بين {count} } الموارد",
-  "SEARCH_PAGE_TITLE_CONTENT_other": "ابحث بين أكثر من {count} } من الموارد",
-  "SEARCH_FILTER_EMPTY": "لا يوجد مرشح مماثل",
-  "SEARCH_FILTER_LANG_TITLE": "اللغات",
-  "DURATION_IN_MINUTES": [
-    {
-      "declarations": [
-        "input count",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [
-        "countPlural"
-      ],
-      "match": {
-        "countPlural=one": "{count} دقيقة",
-        "countPlural=other": "{count} دقيقة"
-      }
-    }
-  ],
   "START_COPY_SUCCESS_MESSAGE": "يتم نسخ العناصر...",
   "COPY_ITEM_PAGINATION_NEXT": "التالي",
-  "COPY_ITEM_PAGINATION_PREV": "سابق",
-  "SEARCH_RESULTS_FOR_TEXT": [
-    {
-      "declarations": [
-        "input count",
-        "input search",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [
-        "count",
-        "countPlural",
-        "search"
-      ],
-      "match": {
-        "count=*, search=*": "تم العثور على نتيجة {count} لـ: {search}",
-        "countPlural=one": "تم العثور على نتيجة {count} لـ: {search}",
-        "countPlural=other": "تم العثور على {count} نتيجة لـ: {search}"
-      }
-    }
-  ],
-  "CANCEL_BUTTON": "يلغي",
-  "COPY_ITEM_SUCCESS": "تم نسخ العنصر بنجاح",
-  "BACK": "خلف",
-  "SUMMARY_ITEMS_SHOW_LESS": "إخفاء عنصر {count}",
-  "DISCIPLINES_LABEL": "التخصصات",
-  "LEVEL_LABEL": "المستويات",
-  "RESOURCE_TYPE_LABEL": "أنواع الموارد",
-  "COLLECTION_NOT_FOUND": "لم يتم العثور على المجموعة",
-  "RESET": "إعادة ضبط",
-  "COLLECTION_ERROR_TITLE": "خطأ في تحميل المجموعة",
-  "HEADER_INDEX": "مكتبة",
-  "HEADER_SEARCH": "يبحث",
-  "COPY_ITEM_TO_CLIPBOARD_SUCCESS": "تم نسخ العنصر إلى الحافظة بنجاح",
-  "COPY_ITEM_TO_CLIPBOARD_ERROR": "تم مواجهة خطأ أثناء نسخ العنصر إلى الحافظة",
-  "SUMMARY_BROWSE_FOLDER_CONTAINS": [
-    {
-      "declarations": [
-        "input count",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [
-        "countPlural"
-      ],
-      "match": {
-        "countPlural=zero": "مجلد فارغ",
-        "countPlural=one": "{count}",
-        "countPlural=other": "{count} ملفات"
-      }
-    }
-  ],
-  "COLLECTIONS_COUNT_MESSAGE": [
-    {
-      "declarations": [
-        "input count",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [
-        "count",
-        "countPlural"
-      ],
-      "match": {
-        "count=*": "{count} متاحة",
-        "countPlural=one": "{count} متاحة",
-        "countPlural=other": "{count} مجموعة متاحة"
-      }
-    }
-  ],
-  "LOGIN_REQUIRED": "يجب عليك تسجيل الدخول للقيام بهذا الإجراء"
+  "COPY_ITEM_PAGINATION_PREV": "سابق"
 }
