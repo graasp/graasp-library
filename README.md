@@ -13,7 +13,7 @@
 <p align="center">
   <img
     alt="Screenshot"
-    src="https://raw.githubusercontent.com/graasp/graasp-library/main/docs/assets/screenshot.png"
+    src="https://raw.githubusercontent.com/graasp/graasp-library/main/docs/assets/screenshot.v2.png"
     width="900"
   >
 </p>
