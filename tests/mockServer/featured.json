@@ -1,0 +1,511 @@
+{
+  "processingTimeMs": 1,
+  "query": "",
+  "hits": [
+    {
+      "name": "Geogebra",
+      "description": "Interactive tools from geogebra for mathematics.",
+      "content": "",
+      "creator": {
+        "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+        "name": "Graasper"
+      },
+      "level": [],
+      "discipline": [],
+      "resource-type": [],
+      "id": "47238afb-5e21-4cf8-b2b1-5904af82a155",
+      "type": "folder",
+      "isPublishedRoot": true,
+      "isHidden": false,
+      "createdAt": "2021-10-20 13:12:47.821784+00",
+      "updatedAt": "2021-10-23 09:25:39.798976+00",
+      "publicationUpdatedAt": "2021-10-23 09:38:38.780221+00",
+      "lang": "en",
+      "likes": 10,
+      "_formatted": {
+        "name": "Geogebra",
+        "description": "Interactive tools from geogebra for mathematics.",
+        "content": "",
+        "creator": {
+          "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+          "name": "Graasper"
+        },
+        "level": [],
+        "discipline": [],
+        "resource-type": [],
+        "id": "47238afb-5e21-4cf8-b2b1-5904af82a155",
+        "type": "folder",
+        "isPublishedRoot": true,
+        "publicationUpdatedAt": "2021-10-23 09:38:38.780221+00",
+        "isHidden": false,
+        "createdAt": "2021-10-20 13:12:47.821784+00",
+        "updatedAt": "2021-10-23 09:25:39.798976+00",
+        "lang": "en",
+        "likes": 10
+      }
+    },
+    {
+      "name": "Templates",
+      "description": "Pedagogical templates with predefined phases that can be personalized.",
+      "content": "",
+      "creator": {
+        "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+        "name": "Graasper"
+      },
+      "level": [],
+      "discipline": [],
+      "resource-type": [],
+      "id": "dc4738b8-c4c4-4c5d-a732-b29e676b0474",
+      "type": "folder",
+      "isPublishedRoot": true,
+      "isHidden": false,
+      "createdAt": "2021-10-19 12:24:53.181229+00",
+      "updatedAt": "2021-11-10 10:51:18.981944+00",
+      "publicationUpdatedAt": "2021-10-19 12:26:07.910155+00",
+      "lang": "en",
+      "likes": 2,
+      "_formatted": {
+        "name": "Templates",
+        "description": "Pedagogical templates with predefined phases that can be personalized.",
+        "content": "",
+        "creator": {
+          "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+          "name": "Graasper"
+        },
+        "level": [],
+        "discipline": [],
+        "resource-type": [],
+        "id": "dc4738b8-c4c4-4c5d-a732-b29e676b0474",
+        "type": "folder",
+        "isPublishedRoot": true,
+        "publicationUpdatedAt": "2021-10-19 12:26:07.910155+00",
+        "isHidden": false,
+        "createdAt": "2021-10-19 12:24:53.181229+00",
+        "updatedAt": "2021-11-10 10:51:18.981944+00",
+        "lang": "en",
+        "likes": 2
+      }
+    },
+    {
+      "name": "PhET",
+      "description": "Selected interactive simulations from PhET (https://phet.colorado.edu/).",
+      "content": "",
+      "creator": {
+        "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+        "name": "Graasper"
+      },
+      "level": [],
+      "discipline": [],
+      "resource-type": [],
+      "id": "c273525a-791c-40f7-a9c2-88d2ee103cd4",
+      "type": "folder",
+      "isPublishedRoot": true,
+      "isHidden": false,
+      "createdAt": "2021-10-20 13:03:42.712617+00",
+      "updatedAt": "2021-11-10 10:49:39.296667+00",
+      "publicationUpdatedAt": "2021-10-20 13:08:50.098824+00",
+      "lang": "en",
+      "likes": 7,
+      "_formatted": {
+        "name": "PhET",
+        "description": "Selected interactive simulations from PhET (https://phet.colorado.edu/).",
+        "content": "",
+        "creator": {
+          "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+          "name": "Graasper"
+        },
+        "level": [],
+        "discipline": [],
+        "resource-type": [],
+        "id": "c273525a-791c-40f7-a9c2-88d2ee103cd4",
+        "type": "folder",
+        "isPublishedRoot": true,
+        "publicationUpdatedAt": "2021-10-20 13:08:50.098824+00",
+        "isHidden": false,
+        "createdAt": "2021-10-20 13:03:42.712617+00",
+        "updatedAt": "2021-11-10 10:49:39.296667+00",
+        "lang": "en",
+        "likes": 7
+      }
+    },
+    {
+      "name": "H5P",
+      "description": "See H5P for details on how to create or personalized your own apps.You can use Lumi to create or personalize your own H5P apps before adding them in Graasp.",
+      "content": "",
+      "creator": {
+        "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+        "name": "Graasper"
+      },
+      "level": [],
+      "discipline": ["Apps"],
+      "resource-type": [],
+      "id": "9c385d59-3bbb-46e2-8168-496bd463753b",
+      "type": "folder",
+      "isPublishedRoot": true,
+      "isHidden": false,
+      "createdAt": "2021-10-20 13:11:22.352819+00",
+      "updatedAt": "2023-02-12 08:43:38.777598+00",
+      "publicationUpdatedAt": "2022-05-17 14:42:07.782435+00",
+      "lang": "en",
+      "likes": 6,
+      "_formatted": {
+        "name": "H5P",
+        "description": "See H5P for details on how to create or personalized your own apps.You can use Lumi to create or personalize your own H5P apps before adding them in Graasp.",
+        "content": "",
+        "creator": {
+          "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+          "name": "Graasper"
+        },
+        "level": [],
+        "discipline": ["Apps"],
+        "resource-type": [],
+        "id": "9c385d59-3bbb-46e2-8168-496bd463753b",
+        "type": "folder",
+        "isPublishedRoot": true,
+        "publicationUpdatedAt": "2022-05-17 14:42:07.782435+00",
+        "isHidden": false,
+        "createdAt": "2021-10-20 13:11:22.352819+00",
+        "updatedAt": "2023-02-12 08:43:38.777598+00",
+        "lang": "en",
+        "likes": 6
+      }
+    },
+    {
+      "name": "Tutoriels (FR)",
+      "description": "Guides d'utilisation de graasp.org",
+      "content": "",
+      "creator": {
+        "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+        "name": "Graasper"
+      },
+      "level": [],
+      "discipline": [],
+      "resource-type": [],
+      "id": "bd918837-5f57-49d2-8867-1d3438377842",
+      "type": "folder",
+      "isPublishedRoot": true,
+      "isHidden": false,
+      "createdAt": "2022-06-10 12:49:09.954508+00",
+      "updatedAt": "2023-11-01 16:11:31.867465+00",
+      "publicationUpdatedAt": "2022-06-10 14:07:36.80243+00",
+      "lang": "fr",
+      "likes": 2,
+      "_formatted": {
+        "name": "Tutoriels (FR)",
+        "description": "Guides d'utilisation de graasp.org",
+        "content": "",
+        "creator": {
+          "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+          "name": "Graasper"
+        },
+        "level": [],
+        "discipline": [],
+        "resource-type": [],
+        "id": "bd918837-5f57-49d2-8867-1d3438377842",
+        "type": "folder",
+        "isPublishedRoot": true,
+        "publicationUpdatedAt": "2022-06-10 14:07:36.80243+00",
+        "isHidden": false,
+        "createdAt": "2022-06-10 12:49:09.954508+00",
+        "updatedAt": "2023-11-01 16:11:31.867465+00",
+        "lang": "fr",
+        "likes": 2
+      }
+    },
+    {
+      "name": "Climate",
+      "description": "Interactive educational simulations about climate change. See https://climate.graasp.org for details.These simulations are officially endorsed&nbsp;by the International Year of Basic Sciences for Sustainable Development IYSSD2022.",
+      "content": "",
+      "creator": {
+        "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+        "name": "Graasper"
+      },
+      "level": [],
+      "discipline": [],
+      "resource-type": [],
+      "id": "665f2269-2fde-4984-b151-88fba3b55bf5",
+      "type": "folder",
+      "isPublishedRoot": true,
+      "isHidden": false,
+      "createdAt": "2021-10-19 12:25:17.377931+00",
+      "updatedAt": "2023-11-01 15:52:21.038572+00",
+      "publicationUpdatedAt": "2021-10-19 12:25:39.954315+00",
+      "lang": "en",
+      "likes": 10,
+      "_formatted": {
+        "name": "Climate",
+        "description": "Interactive educational simulations about climate change. See https://climate.graasp.org for details.These simulations are officially endorsed&nbsp;by the International Year of Basic Sciences for Sustainable Development IYSSD2022.",
+        "content": "",
+        "creator": {
+          "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+          "name": "Graasper"
+        },
+        "level": [],
+        "discipline": [],
+        "resource-type": [],
+        "id": "665f2269-2fde-4984-b151-88fba3b55bf5",
+        "type": "folder",
+        "isPublishedRoot": true,
+        "publicationUpdatedAt": "2021-10-19 12:25:39.954315+00",
+        "isHidden": false,
+        "createdAt": "2021-10-19 12:25:17.377931+00",
+        "updatedAt": "2023-11-01 15:52:21.038572+00",
+        "lang": "en",
+        "likes": 10
+      }
+    },
+    {
+      "name": "iHub4Schools",
+      "description": "Supporting digital innovation in schoolsDigital innovation plays a central role in education to support young generations in entering the new digital era. The EU-funded iHub4Schools project aims to propose acceleration mechanisms for the adoption of digital innovation in and across schools. The project will support a minimum of 75 European schools and 600 teachers to establish Regional Innovation Hubs through different mechanisms. These mechanisms will focus on the collaboration between digitally advanced and less advanced teachers and schools and develop a locally, methodologically and technologically adaptable whole-school mentoring model. iHub4Schools will cover inter- and intra-school levels and integrate innovative assessment methods and the Learning Analytics Toolbox as a permanent monitoring method.Source: iHub4Schools and project partners.",
+      "content": "",
+      "creator": {
+        "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+        "name": "Graasper"
+      },
+      "level": [],
+      "discipline": ["Practices"],
+      "resource-type": [],
+      "id": "af3cf3c1-fca3-499b-9db6-1a4745edeb96",
+      "type": "folder",
+      "isPublishedRoot": true,
+      "isHidden": false,
+      "createdAt": "2022-09-14 08:44:42.278015+00",
+      "updatedAt": "2023-11-01 15:52:31.691933+00",
+      "publicationUpdatedAt": "2022-09-14 08:50:04.564112+00",
+      "lang": "en",
+      "likes": 0,
+      "_formatted": {
+        "name": "iHub4Schools",
+        "description": "Supporting digital innovation in schoolsDigital innovation plays a central role in education to support young generations in entering the new digital era. The EU-funded iHub4Schools project aims to propose acceleration mechanisms for the adoption of digital innovation in and across schools. The project will support a minimum of 75 European schools and 600 teachers to establish Regional Innovation Hubs through different mechanisms. These mechanisms will focus on the collaboration between digitally advanced and less advanced teachers and schools and develop a locally, methodologically and technologically adaptable whole-school mentoring model. iHub4Schools will cover inter- and intra-school levels and integrate innovative assessment methods and the Learning Analytics Toolbox as a permanent monitoring method.Source: iHub4Schools and project partners.",
+        "content": "",
+        "creator": {
+          "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+          "name": "Graasper"
+        },
+        "level": [],
+        "discipline": ["Practices"],
+        "resource-type": [],
+        "id": "af3cf3c1-fca3-499b-9db6-1a4745edeb96",
+        "type": "folder",
+        "isPublishedRoot": true,
+        "publicationUpdatedAt": "2022-09-14 08:50:04.564112+00",
+        "isHidden": false,
+        "createdAt": "2022-09-14 08:44:42.278015+00",
+        "updatedAt": "2023-11-01 15:52:31.691933+00",
+        "lang": "en",
+        "likes": 0
+      }
+    },
+    {
+      "name": "Tutorials (EN)",
+      "description": "Get started with Graasp.org",
+      "content": "",
+      "creator": {
+        "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+        "name": "Graasper"
+      },
+      "level": [],
+      "discipline": [],
+      "resource-type": [],
+      "id": "9d80d81f-ec9d-4bfb-836a-1c6b125aef2f",
+      "type": "folder",
+      "isPublishedRoot": true,
+      "isHidden": false,
+      "createdAt": "2022-06-02 09:44:05.134326+00",
+      "updatedAt": "2023-11-01 16:11:53.242153+00",
+      "publicationUpdatedAt": "2022-06-10 14:07:57.790935+00",
+      "lang": "en",
+      "likes": 2,
+      "_formatted": {
+        "name": "Tutorials (EN)",
+        "description": "Get started with Graasp.org",
+        "content": "",
+        "creator": {
+          "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+          "name": "Graasper"
+        },
+        "level": [],
+        "discipline": [],
+        "resource-type": [],
+        "id": "9d80d81f-ec9d-4bfb-836a-1c6b125aef2f",
+        "type": "folder",
+        "isPublishedRoot": true,
+        "publicationUpdatedAt": "2022-06-10 14:07:57.790935+00",
+        "isHidden": false,
+        "createdAt": "2022-06-02 09:44:05.134326+00",
+        "updatedAt": "2023-11-01 16:11:53.242153+00",
+        "lang": "en",
+        "likes": 2
+      }
+    },
+    {
+      "name": "Tutorials (DE)",
+      "description": "",
+      "content": "",
+      "creator": {
+        "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+        "name": "Graasper"
+      },
+      "level": [],
+      "discipline": [],
+      "resource-type": [],
+      "id": "07773683-c882-48b5-961e-1fe54833b58c",
+      "type": "folder",
+      "isPublishedRoot": true,
+      "isHidden": false,
+      "createdAt": "2023-11-01 15:45:49.921146+00",
+      "updatedAt": "2023-11-01 16:12:24.537569+00",
+      "publicationUpdatedAt": "2023-11-01 16:09:59.561837+00",
+      "lang": "en",
+      "likes": 0,
+      "_formatted": {
+        "name": "Tutorials (DE)",
+        "description": "",
+        "content": "",
+        "creator": {
+          "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+          "name": "Graasper"
+        },
+        "level": [],
+        "discipline": [],
+        "resource-type": [],
+        "id": "07773683-c882-48b5-961e-1fe54833b58c",
+        "type": "folder",
+        "isPublishedRoot": true,
+        "publicationUpdatedAt": "2023-11-01 16:09:59.561837+00",
+        "isHidden": false,
+        "createdAt": "2023-11-01 15:45:49.921146+00",
+        "updatedAt": "2023-11-01 16:12:24.537569+00",
+        "lang": "en",
+        "likes": 0
+      }
+    },
+    {
+      "name": "Apps",
+      "description": "Internal apps that provide additional interactive features, proposed directly by the Graasp team.They can also be added using the + New Item button in Graasp",
+      "content": "",
+      "creator": {
+        "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+        "name": "Graasper"
+      },
+      "level": [],
+      "discipline": [],
+      "resource-type": [],
+      "id": "ec9314de-5c29-471a-9132-19baa2c8a398",
+      "type": "folder",
+      "isPublishedRoot": true,
+      "isHidden": false,
+      "createdAt": "2021-10-19 12:25:07.133696+00",
+      "updatedAt": "2023-02-12 08:41:17.272375+00",
+      "publicationUpdatedAt": "2023-11-21 09:21:21.876117+00",
+      "lang": "en",
+      "likes": 4,
+      "_formatted": {
+        "name": "Apps",
+        "description": "Internal apps that provide additional interactive features, proposed directly by the Graasp team.They can also be added using the + New Item button in Graasp",
+        "content": "",
+        "creator": {
+          "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+          "name": "Graasper"
+        },
+        "level": [],
+        "discipline": [],
+        "resource-type": [],
+        "id": "ec9314de-5c29-471a-9132-19baa2c8a398",
+        "type": "folder",
+        "isPublishedRoot": true,
+        "publicationUpdatedAt": "2023-11-21 09:21:21.876117+00",
+        "isHidden": false,
+        "createdAt": "2021-10-19 12:25:07.133696+00",
+        "updatedAt": "2023-02-12 08:41:17.272375+00",
+        "lang": "en",
+        "likes": 4
+      }
+    },
+    {
+      "name": "Twente Apps",
+      "description": "Support apps from University of Twente, based on previous versions developed in the framework of the Go-Lab EU initiative.",
+      "content": "",
+      "creator": {
+        "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+        "name": "Graasper"
+      },
+      "level": [],
+      "discipline": [],
+      "resource-type": [],
+      "id": "7e2b417c-b65b-4857-89a3-2b99d2bf1d7a",
+      "type": "folder",
+      "isPublishedRoot": true,
+      "isHidden": false,
+      "createdAt": "2021-10-20 13:02:31.074857+00",
+      "updatedAt": "2023-12-17 03:37:11.624559+00",
+      "publicationUpdatedAt": "2023-12-17 03:37:49.778516+00",
+      "lang": "en",
+      "likes": 4,
+      "_formatted": {
+        "name": "Twente Apps",
+        "description": "Support apps from University of Twente, based on previous versions developed in the framework of the Go-Lab EU initiative.",
+        "content": "",
+        "creator": {
+          "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+          "name": "Graasper"
+        },
+        "level": [],
+        "discipline": [],
+        "resource-type": [],
+        "id": "7e2b417c-b65b-4857-89a3-2b99d2bf1d7a",
+        "type": "folder",
+        "isPublishedRoot": true,
+        "publicationUpdatedAt": "2023-12-17 03:37:49.778516+00",
+        "isHidden": false,
+        "createdAt": "2021-10-20 13:02:31.074857+00",
+        "updatedAt": "2023-12-17 03:37:11.624559+00",
+        "lang": "en",
+        "likes": 4
+      }
+    },
+    {
+      "name": "Highlights",
+      "description": "Examples of learning capsules, open educational resources, and digital education content implemented with Graasp.You need to sign up and log in Graasp to use the interactive apps supporting inputs from the users.",
+      "content": "",
+      "creator": {
+        "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+        "name": "Graasper"
+      },
+      "level": [],
+      "discipline": [],
+      "resource-type": [],
+      "id": "366f3298-6340-4c46-930b-e88548fcc8c9",
+      "type": "folder",
+      "isPublishedRoot": true,
+      "isHidden": false,
+      "createdAt": "2024-02-13 11:24:58.701296+00",
+      "updatedAt": "2024-07-15 08:33:58.220108+00",
+      "publicationUpdatedAt": "2024-02-13 13:39:45.072926+00",
+      "lang": "en",
+      "likes": 1,
+      "_formatted": {
+        "name": "Highlights",
+        "description": "Examples of learning capsules, open educational resources, and digital education content implemented with Graasp.You need to sign up and log in Graasp to use the interactive apps supporting inputs from the users.",
+        "content": "",
+        "creator": {
+          "id": "049b4f35-f12e-4ec6-8958-586113bbd241",
+          "name": "Graasper"
+        },
+        "level": [],
+        "discipline": [],
+        "resource-type": [],
+        "id": "366f3298-6340-4c46-930b-e88548fcc8c9",
+        "type": "folder",
+        "isPublishedRoot": true,
+        "publicationUpdatedAt": "2024-02-13 13:39:45.072926+00",
+        "isHidden": false,
+        "createdAt": "2024-02-13 11:24:58.701296+00",
+        "updatedAt": "2024-07-15 08:33:58.220108+00",
+        "lang": "en",
+        "likes": 1
+      }
+    }
+  ],
+  "estimatedTotalHits": 12
+}

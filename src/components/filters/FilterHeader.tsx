@@ -1,24 +1,21 @@
-import React, { ReactNode, useEffect, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-
 import {
-  Box,
   Checkbox,
-  Container,
   Divider,
   FormControlLabel,
   Stack,
+  TextField,
   styled,
 } from '@mui/material';
 
 import { TagCategory } from '@graasp/sdk';
-import { namespaces } from '@graasp/translations';
 
-import { useLibraryTranslation } from '../../config/i18n';
+import { getRouteApi, useNavigate } from '@tanstack/react-router';
+import { SearchIcon } from 'lucide-react';
+
+import { m } from '~/paraglide/messages';
+
 import { ENABLE_IN_DEPTH_SEARCH_CHECKBOX_ID } from '../../config/selectors';
-import LIBRARY from '../../langs/constants';
-import { useSearchFiltersContext } from '../pages/SearchFiltersContext';
-import Search from '../search/Search';
+import { DEFAULT_TEXT_SECONDARY_COLOR } from '../ui/theme';
 import { CategoryFilter } from './CategoryFilter';
 import { LangFilter } from './LangFilter';
 
@@ -28,63 +25,15 @@ const StyledFilterContainer = styled(Stack)(() => ({
   padding: '10px 20px',
 }));
 
-const StyledStickyFilters = styled(Box)(() => ({
-  width: '100%',
-  position: 'fixed',
-  top: -70,
-  opacity: 0,
-  left: 0,
-  zIndex: 3,
-  transform: 'scale(1.01)',
-
-  transition: '0.25s ease-in-out',
-
-  '&.sticky': {
-    top: 80,
-    opacity: 1,
-  },
-
-  '&:hover': {
-    transform: 'scale(1.02)',
-  },
-}));
-
-type FilterHeaderProps = Readonly<{
-  isLoadingResults: boolean;
-}>;
-
 export function FilterHeader({
-  isLoadingResults,
-}: FilterHeaderProps): ReactNode {
-  const { t: translateEnums } = useTranslation(namespaces.enums);
-  const { t } = useLibraryTranslation();
-  const {
-    searchKeywords,
-    shouldIncludeContent,
-    setShouldIncludeContent,
-    setSearchKeywords,
-  } = useSearchFiltersContext();
-  // filters are of the form ["a1,a2", "b1"] where the items wanted should have (a1 OR a2) AND b1
-  const filterContainer = useRef<HTMLDivElement>(null);
-  const [sticky, setSticky] = useState<boolean>(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (filterContainer.current == null) {
-        return;
-      }
-
-      const scroll = filterContainer.current.getBoundingClientRect().y;
-      if (scroll > -10) {
-        setSticky(() => false);
-      } else {
-        setSticky(() => true);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  searchKeywords,
+  onChangeKeywords,
+}: Readonly<{
+  searchKeywords: string;
+  onChangeKeywords: (newValue: string) => void;
+}>) {
+  const navigate = useNavigate();
+  const { rootOnly } = getRouteApi('/search').useSearch();
 
   const filterDivider = (
     <Divider
@@ -96,24 +45,21 @@ export function FilterHeader({
   );
 
   const categoryFilters = [
-    <LangFilter key="language" title={t(LIBRARY.SEARCH_FILTER_LANG_TITLE)} />,
+    <LangFilter key="language" title={m.SEARCH_FILTER_LANG_TITLE()} />,
     <CategoryFilter
       key={TagCategory.Discipline}
-      category={TagCategory.Discipline}
-      // show plural
-      title={translateEnums(TagCategory.Discipline, { count: 2 })}
+      category="disciplines"
+      title={m.DISCIPLINES_LABEL()}
     />,
     <CategoryFilter
       key={TagCategory.Level}
-      category={TagCategory.Level}
-      // show plural
-      title={translateEnums(TagCategory.Level, { count: 2 })}
+      category="levels"
+      title={m.LEVEL_LABEL()}
     />,
     <CategoryFilter
       key={TagCategory.ResourceType}
-      category={TagCategory.ResourceType}
-      // show plural
-      title={translateEnums(TagCategory.ResourceType, { count: 2 })}
+      category="resourceTypes"
+      title={m.RESOURCE_TYPE_LABEL()}
     />,
   ];
 
@@ -122,7 +68,7 @@ export function FilterHeader({
       direction="column"
       style={{ display: 'unset', position: 'relative' }}
     >
-      <StyledStickyFilters className={sticky ? 'sticky' : ''}>
+      {/* <StyledStickyFilters className={sticky ? 'sticky' : ''}>
         <Container maxWidth="xl">
           <Stack
             sx={{
@@ -140,7 +86,7 @@ export function FilterHeader({
             {categoryFilters}
           </Stack>
         </Container>
-      </StyledStickyFilters>
+      </StyledStickyFilters> */}
 
       <Stack
         direction="row"
@@ -148,16 +94,40 @@ export function FilterHeader({
         justifyContent="space-between"
         width="100%"
       >
-        <Search
-          isLoading={isLoadingResults}
-          onChange={setSearchKeywords}
-          handleClick={setSearchKeywords}
-          searchPreset={searchKeywords}
+        <TextField
+          sx={{
+            boxShadow: 'none',
+            // py: 1,
+            // pl: 2,
+            display: 'flex',
+            alignItems: 'center',
+            width: '100%',
+            // my: 1,
+            borderRadius: 2,
+            outline: '1px solid transparent',
+            transition: 'all 0.3s ease-in-out',
+            '&:hover, &:has(.Mui-focused)': {
+              outline: '1px solid #5050d230',
+              boxShadow: '0px 0px 30px 2px #5050d230',
+            },
+          }}
+          value={searchKeywords}
+          onChange={({ target: { value } }) => onChangeKeywords(value)}
+          placeholder={m.SEARCH_PLACEHOLDER()}
+          fullWidth
+          slotProps={{
+            input: {
+              'aria-label': m.SEARCH_ARIA_LABEL(),
+              startAdornment: (
+                <Stack alignItems="center" paddingInlineEnd={1}>
+                  <SearchIcon size={20} color={DEFAULT_TEXT_SECONDARY_COLOR} />
+                </Stack>
+              ),
+            },
+          }}
         />
       </Stack>
       <StyledFilterContainer
-        id="not-sticky"
-        ref={filterContainer}
         mt={2}
         spacing={2}
         direction="row"
@@ -171,14 +141,24 @@ export function FilterHeader({
           control={
             <Checkbox
               id={ENABLE_IN_DEPTH_SEARCH_CHECKBOX_ID}
-              checked={shouldIncludeContent}
+              checked={
+                // invert value from url since we store it as "only roots" but the label is "include non-roots"
+                !rootOnly
+              }
               size="small"
               onChange={(e) => {
-                setShouldIncludeContent(e.target.checked);
+                navigate({
+                  to: '/search',
+                  search: (prev) => ({
+                    ...prev,
+                    // invert value of the checkbox because we store it as "only roots" and the label is "include non-root"
+                    rootOnly: !e.target.checked,
+                  }),
+                });
               }}
             />
           }
-          label={t(LIBRARY.ENABLE_IN_DEPTH_SEARCH_LABEL)}
+          label={m.ENABLE_IN_DEPTH_SEARCH_LABEL()}
         />
       </Stack>
     </Stack>

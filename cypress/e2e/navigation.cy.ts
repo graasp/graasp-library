@@ -1,5 +1,4 @@
 import {
-  ALL_COLLECTIONS_ROUTE,
   HOME_ROUTE,
   MY_LIKED_ITEMS_ROUTE,
   buildMemberRoute,
@@ -15,6 +14,7 @@ import {
   RECENT_PUBLICATIONS_TITLE_ID,
   SEARCH_ALL_COLLECTIONS_DRAWER_ITEM_ID,
 } from '../../src/config/selectors';
+import { ALL_COLLECTIONS_ROUTE } from '../fixtures/constants';
 import { PUBLISHED_ITEMS } from '../fixtures/items';
 import { CURRENT_USER } from '../fixtures/members';
 

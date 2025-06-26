@@ -1,31 +1,13 @@
-/* eslint-disable prefer-destructuring */
-export const SENTRY_DSN = process.env.NEXT_PUBLIC_SENTRY_DSN;
+export const CLIENT_HOST =
+  process.env.VITE_CLIENT_HOST ?? import.meta.env.VITE_CLIENT_HOST; // ?? 'http://localhost:3114';
 
-export const SENTRY_ENV = process.env.NEXT_PUBLIC_SENTRY_ENV;
-export const GRAASP_AUTH_HOST =
-  process.env.NEXT_PUBLIC_GRAASP_AUTH_HOST ?? 'http://localhost:3114/auth';
-export const GRAASP_API_HOST =
-  process.env.NEXT_PUBLIC_API_HOST || 'http://localhost:3000';
-export const GRAASP_PLAYER_HOST =
-  process.env.NEXT_PUBLIC_GRAASP_PERFORM_HOST || 'http://localhost:3114/player';
-export const GRAASP_BUILDER_HOST =
-  process.env.NEXT_PUBLIC_GRAASP_BUILDER_HOST ||
-  'http://localhost:3114/builder';
-export const GRAASP_ANALYTICS_HOST =
-  process.env.NEXT_PUBLIC_GRAASP_ANALYTICS_HOST ||
-  'http://localhost:3114/analytics';
-export const GRAASP_ACCOUNT_HOST =
-  process.env.NEXT_PUBLIC_GRAASP_ACCOUNT_HOST ||
-  'http://localhost:3114/account';
+export const CURRENT_HOST = process.env.VITE_HOST ?? import.meta.env.VITE_HOST; // ?? 'http://localhost:3114';
+export const API_HOST =
+  process.env.VITE_API_HOST ?? import.meta.env.VITE_API_HOST; // ?? 'http://localhost:3000';
 
-export const NODE_ENV = process.env.NODE_ENV;
-export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
-export const GRAASPER_ID = process.env.NEXT_PUBLIC_GRAASPER_ID;
-export const SHOW_NOTIFICATIONS =
-  process.env.NEXT_PUBLIC_SHOW_NOTIFICATIONS === 'true' || false;
+// runtime env vars that should be accessed only on the server side
+export const APP_VERSION =
+  process.env.APP_VERSION ?? import.meta.env.VITE_APP_VERSION ?? 'not-defined';
+export const BUILD_TIMESTAMP = process.env.BUILD_TIMESTAMP ?? 'not-defined';
 
-export const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN ?? 'localhost';
-
-export const APP_VERSION = process.env.NEXT_PUBLIC_APP_VERSION;
-const projectName = 'graasp-library';
-export const SENTRY_RELEASE = `${projectName}@${APP_VERSION}`;
+export const SENTRY_RELEASE = `graasp-library@${APP_VERSION}`;

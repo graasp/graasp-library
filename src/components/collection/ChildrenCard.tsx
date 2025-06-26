@@ -1,44 +1,70 @@
-import React, { useContext } from 'react';
+import React, { forwardRef } from 'react';
+import type { JSX } from 'react';
 
 import { Folder } from '@mui/icons-material';
 import {
   Card,
   CardActionArea,
+  CardActionAreaProps,
   CardActions,
   CardContent,
-  Grid2 as Grid,
+  Grid,
   styled,
   useTheme,
 } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
 import {
-  DiscriminatedItem,
-  ItemType,
-  ThumbnailSize,
+  PackedItem as SDKPackedItem,
   formatDate,
+  getMimetype,
 } from '@graasp/sdk';
-import { ItemIcon, Thumbnail } from '@graasp/ui';
 
 import { useQuery } from '@tanstack/react-query';
-import Link from 'next/link';
+import { LinkComponent, createLink } from '@tanstack/react-router';
+
+import { PackedItem } from '~/openapi/client';
+import { m } from '~/paraglide/messages';
 
 import { COLLECTION_CARD_BORDER_RADIUS } from '../../config/cssStyles';
-import { useLibraryTranslation } from '../../config/i18n';
 import { buildCollectionRoute } from '../../config/routes';
-import { CHILD_CARD_COPY_BUTTON_ID } from '../../config/selectors';
-import LIBRARY from '../../langs/constants';
 import { getChildrenOptions } from '../../openapi/client/@tanstack/react-query.gen';
-import { QueryClientContext } from '../QueryClientContext';
-import CopyButton from './CopyButton';
+import Thumbnail from '../ui/Thumbnail/Thumbnail';
+import { ItemIcon } from '../ui/icons/ItemIcon';
 import CopyLinkButton from './CopyLinkButton';
-import DownloadButton from './DownloadButton';
 
 const StyledCardBox = styled(Card)(() => ({
   border: '1px solid #ddd',
   borderRadius: COLLECTION_CARD_BORDER_RADIUS,
   overflow: 'hidden',
 }));
+
+interface MUICardActionAreaProps extends Omit<CardActionAreaProps, 'href'> {
+  onClick?: () => void;
+}
+
+const MUICardActionAreaComponent = forwardRef<
+  HTMLAnchorElement,
+  MUICardActionAreaProps
+>((props, ref) => {
+  const { onClick, ...restProps } = props;
+  return (
+    <CardActionArea
+      component={'a'}
+      ref={ref}
+      onClick={onClick}
+      {...restProps}
+    />
+  );
+});
+
+const CreatedLinkComponent = createLink(MUICardActionAreaComponent);
+
+export const CardActionAreaLink: LinkComponent<
+  typeof MUICardActionAreaComponent
+> = (props) => {
+  return <CreatedLinkComponent preload="intent" {...props} />;
+};
 
 const ChildrenCard = ({
   children,
@@ -52,14 +78,13 @@ const ChildrenCard = ({
   href: string;
 }): JSX.Element => (
   <StyledCardBox id={id} elevation={0}>
-    <CardActionArea
-      component={Link}
-      href={href}
+    <CardActionAreaLink
+      to={href}
       // remove border radius from card action
       style={{ borderRadius: 'unset' }}
     >
       <CardContent>{children}</CardContent>
-    </CardActionArea>
+    </CardActionAreaLink>
     <CardActions disableSpacing>{actions}</CardActions>
   </StyledCardBox>
 );
@@ -68,7 +93,7 @@ const THUMBNAIL_SIZE = 50;
 const THUMBNAIL_DIMENSIONS = { width: THUMBNAIL_SIZE, height: THUMBNAIL_SIZE };
 
 type SubItemCardProps = {
-  item: DiscriminatedItem;
+  item: PackedItem;
   thumbnail: React.ReactNode;
   subtext: string;
 };
@@ -78,9 +103,7 @@ export const SubItemCard: React.FC<SubItemCardProps> = ({
   thumbnail,
   subtext,
 }) => {
-  const { hooks } = useContext(QueryClientContext);
-
-  const { data: member } = hooks.useCurrentMember();
+  // const { data: member } = useQuery(getCurrentAccountOptions());
 
   const { name, id } = item;
 
@@ -92,21 +115,17 @@ export const SubItemCard: React.FC<SubItemCardProps> = ({
       href={link}
       actions={
         <>
-          {member?.id && (
-            <CopyButton id={CHILD_CARD_COPY_BUTTON_ID} itemId={id} />
-          )}
+          {
+            // member?.id &&
+            // <CopyButton id={CHILD_CARD_COPY_BUTTON_ID} itemId={id} />
+          }
           <CopyLinkButton itemId={item.id} />
-          <DownloadButton id={id} />
+          {/* <DownloadButton id={id} /> */}
         </>
       }
     >
-      <Grid container>
-        <Grid
-          size={12}
-          display="flex"
-          alignItems="center"
-          justifyContent="space-between"
-        >
+      <Grid container size={12}>
+        <Grid display="flex" alignItems="center" justifyContent="space-between">
           {thumbnail}
         </Grid>
         <Grid size={12}>
@@ -132,7 +151,7 @@ export const SubItemCard: React.FC<SubItemCardProps> = ({
 };
 
 type FileChildrenCardProps = {
-  item: DiscriminatedItem;
+  item: PackedItem;
   lang: string;
 };
 
@@ -140,74 +159,54 @@ export const FileChildrenCard: React.FC<FileChildrenCardProps> = ({
   item,
   lang,
 }) => {
-  const { t } = useLibraryTranslation();
   const theme = useTheme();
   const { name } = item;
 
-  const { hooks } = useContext(QueryClientContext);
-
-  const { data: thumbnailUrl } = hooks.useItemThumbnailUrl({
-    id: item.id,
-    size: ThumbnailSize.Small,
-  });
-
   const subtext = item.updatedAt
-    ? t(LIBRARY.SUMMARY_BROWSE_FILE_UPDATED, {
+    ? m.SUMMARY_BROWSE_FILE_UPDATED({
         date: formatDate(item.updatedAt, { locale: lang }),
       })
     : '...';
-
-  const thumbnail = React.useMemo(
-    () =>
-      thumbnailUrl ? (
-        <Thumbnail
-          alt={name}
-          id={item.id}
-          url={thumbnailUrl}
-          sx={{
-            objectFit: 'cover',
-            overflow: 'hidden',
-            borderRadius: 1,
-            ...THUMBNAIL_DIMENSIONS,
-          }}
-        />
-      ) : (
-        <div style={THUMBNAIL_DIMENSIONS}>
-          <ItemIcon
-            alt={item.type}
-            type={item.type}
-            extra={
-              item.type === ItemType.LOCAL_FILE ||
-              item.type === ItemType.S3_FILE
-                ? item.extra
-                : undefined
-            }
-            color={theme.palette.primary.main}
-            size="2.1875rem"
-          />
-        </div>
-      ),
-    [thumbnailUrl],
+  const thumbnailUrl = item.thumbnails?.small;
+  const thumbnail = thumbnailUrl ? (
+    <Thumbnail
+      alt={name}
+      id={item.id}
+      url={thumbnailUrl}
+      sx={{
+        objectFit: 'cover',
+        overflow: 'hidden',
+        borderRadius: 1,
+        ...THUMBNAIL_DIMENSIONS,
+      }}
+    />
+  ) : (
+    <div style={THUMBNAIL_DIMENSIONS}>
+      <ItemIcon
+        type={item.type}
+        mimetype={getMimetype(item.extra as SDKPackedItem['extra'])}
+        color={theme.palette.primary.main}
+        size="2.1875rem"
+      />
+    </div>
   );
 
   return <SubItemCard item={item} thumbnail={thumbnail} subtext={subtext} />;
 };
 
 type FolderChildrenCardProps = {
-  item: DiscriminatedItem;
+  item: PackedItem;
 };
 
 export const FolderChildrenCard: React.FC<FolderChildrenCardProps> = ({
   item,
 }) => {
-  const { t } = useLibraryTranslation();
-
   const { id } = item;
 
   const { data: items } = useQuery(getChildrenOptions({ path: { id } }));
 
   const subtext = items
-    ? t(LIBRARY.SUMMARY_BROWSE_FOLDER_CONTAINS, { count: items.length })
+    ? m.SUMMARY_BROWSE_FOLDER_CONTAINS({ count: items.length })
     : '...';
 
   const thumbnail = (

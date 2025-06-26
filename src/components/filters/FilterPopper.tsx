@@ -17,13 +17,13 @@ import {
 } from '@mui/material';
 import { TransitionProps as MUITransitionProps } from '@mui/material/transitions';
 
-import { useLibraryTranslation } from '../../config/i18n';
+import { m } from '~/paraglide/messages';
+
 import {
   CLEAR_FILTER_POPPER_BUTTON_ID,
   FILTER_POPPER_ID,
   buildCategoryOptionId,
 } from '../../config/selectors';
-import LIBRARY from '../../langs/constants';
 
 const StyledPopper = styled(Stack)(() => ({
   background: 'white',
@@ -58,7 +58,6 @@ export const FilterPopper = React.forwardRef<HTMLDivElement, FilterPopperProps>(
     },
     ref,
   ) => {
-    const { t } = useLibraryTranslation();
     return (
       <ClickAwayListener onClickAway={handleClose}>
         <Popper
@@ -126,7 +125,7 @@ export const FilterPopper = React.forwardRef<HTMLDivElement, FilterPopperProps>(
                         variant="body2"
                         color="grey"
                       >
-                        {t(LIBRARY.SEARCH_FILTER_EMPTY)}
+                        {m.SEARCH_FILTER_EMPTY()}
                       </Typography>
                     )}
                   </Box>
@@ -138,7 +137,7 @@ export const FilterPopper = React.forwardRef<HTMLDivElement, FilterPopperProps>(
                   onClick={onClearOptions}
                   sx={{ mt: 2 }}
                 >
-                  {t(LIBRARY.FILTER_DROPDOWN_CLEAR_FILTERS)}
+                  {m.FILTER_DROPDOWN_CLEAR_FILTERS()}
                 </Button>
               </StyledPopper>
             </Grow>

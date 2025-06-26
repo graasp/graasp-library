@@ -1,25 +1,41 @@
+import { useEffect, useState } from 'react';
+
 import { ArrowBack } from '@mui/icons-material';
 import { Button } from '@mui/material';
 
-import { COMMON } from '@graasp/translations';
+import { useCanGoBack, useRouter } from '@tanstack/react-router';
 
-import { useRouter } from 'next/navigation';
+import { m } from '~/paraglide/messages';
 
-import { useCommonTranslation } from '../../config/i18n';
+const useSafeCanGoBack = () => {
+  const tsrCanGoBack = useCanGoBack();
+  const [canGoBack, setCanGoBack] = useState(false);
+  useEffect(
+    () => {
+      // eslint-disable-next-line @eslint-react/hooks-extra/no-direct-set-state-in-use-effect
+      setCanGoBack(tsrCanGoBack);
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  );
+  return canGoBack;
+};
 
 const BackButton = () => {
-  const { t } = useCommonTranslation();
   const router = useRouter();
+  const canGoBack = useSafeCanGoBack();
   return (
-    <Button
-      startIcon={<ArrowBack />}
-      onClick={() =>
-        // check if history is empty (length == 1) and close the tab instead of going back
-        window && window.history.length > 1 ? router.back() : window.close()
-      }
-    >
-      {t(COMMON.BACK_BUTTON)}
-    </Button>
+    <span suppressHydrationWarning>
+      {canGoBack ? (
+        <Button
+          id="backButton"
+          startIcon={<ArrowBack />}
+          onClick={() => router.history.back()}
+        >
+          {m.BACK()}
+        </Button>
+      ) : null}
+    </span>
   );
 };
 export default BackButton;

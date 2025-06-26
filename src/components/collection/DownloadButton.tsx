@@ -1,42 +1,45 @@
-'use client';
+import { CircularProgress, IconButton, Tooltip } from '@mui/material';
 
-import { useContext, useEffect } from 'react';
+import { DownloadIcon } from 'lucide-react';
 
-import { DownloadButton as GraaspDownloadButton } from '@graasp/ui';
+import { m } from '~/paraglide/messages';
 
-import { useLibraryTranslation } from '../../config/i18n';
-import LIBRARY from '../../langs/constants';
-import { QueryClientContext } from '../QueryClientContext';
+import { useButtonColor } from '../ui/hooks/useButtonColor';
 
-export const useDownloadAction = (itemId?: string) => {
-  const { mutations } = useContext(QueryClientContext);
-  const {
-    mutate: exportZip,
-    data,
-    isSuccess,
-    isPending: isLoading,
-  } = mutations.useExportItem();
+export const useDownloadAction = (itemId: string) => {
+  // const exportZip = exportZipOptions({ path: { itemId } });
+  // const {
+  //   mutate: exportZipMutate,
+  //   data,
+  //   isSuccess,
+  //   isPending: isLoading,
+  // } = useMutation({ mutationFn: exportZip });
 
-  useEffect(() => {
-    if (isSuccess) {
-      const url = window.URL.createObjectURL(new Blob([data.data]));
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', data.name);
-      document.body.appendChild(link);
-      link.click();
-    }
-  }, [data, isSuccess]);
+  // useEffect(() => {
+  //   if (isSuccess) {
+  //     const url = window.URL.createObjectURL(new Blob([data.data]));
+  //     const link = document.createElement('a');
+  //     link.href = url;
+  //     link.setAttribute('download', data.name);
+  //     document.body.appendChild(link);
+  //     link.click();
+  //   }
+  // }, [data, isSuccess]);
 
-  const startDownload = () => {
+  const startDownload = async () => {
     if (itemId) {
-      exportZip({ id: itemId });
+      // FIXME: allow to download
+      // eslint-disable-next-line no-console
+      console.log('Download', itemId);
+      // const { data } = await exportZip({ path: { itemId } });
+      // return data;
     }
   };
 
   return {
     startDownload,
-    isDownloading: isLoading,
+    // FIXME: use the real progress
+    isDownloading: false,
   };
 };
 
@@ -45,19 +48,24 @@ type Props = {
 };
 
 const DownloadButton = ({ id }: Props) => {
-  const { t } = useLibraryTranslation();
-
   const { isDownloading, startDownload } = useDownloadAction(id);
+  const { color } = useButtonColor('primary');
+  const icon = <DownloadIcon color={color} />;
 
+  const isLoading = isDownloading;
   return (
-    <GraaspDownloadButton
-      isLoading={isDownloading}
-      handleDownload={startDownload}
-      title={t(LIBRARY.DOWNLOAD_BUTTON_TOOLTIP)}
-      ariaLabel={t(LIBRARY.DOWNLOAD_BUTTON_TOOLTIP)}
-      color="primary"
-      loaderSize={20}
-    />
+    <Tooltip title={m.DOWNLOAD_BUTTON_TOOLTIP()} placement={'bottom'}>
+      <span>
+        <IconButton
+          disabled={isLoading}
+          color="primary"
+          onClick={startDownload}
+          aria-label={m.DOWNLOAD_BUTTON_TOOLTIP()}
+        >
+          {isLoading ? <CircularProgress color="primary" size={20} /> : icon}
+        </IconButton>
+      </span>
+    </Tooltip>
   );
 };
 

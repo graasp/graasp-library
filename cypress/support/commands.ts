@@ -7,11 +7,13 @@ import {
   mockGetAvatarUrl,
   mockGetChildren,
   mockGetCurrentMember,
+  mockGetFeaturedCollections,
   mockGetItem,
   mockGetItemMembershipsForItem,
   mockGetItemThumbnailUrl,
   mockGetLikedItems,
   mockGetMember,
+  mockGetMostLikedCollections,
   mockGetPublishItemInformations,
   mockGetRecentCollections,
   mockGetTagsByItem,
@@ -19,6 +21,7 @@ import {
   mockSignInRedirection,
   mockSignOut,
 } from './server';
+import { MockItem, MockItemLike, MockMember } from './types';
 
 Cypress.Commands.add(
   'setUpApi',
@@ -27,6 +30,8 @@ Cypress.Commands.add(
     members = Object.values(MEMBERS),
     currentMember,
     recentCollections = [],
+    mostLikedCollections = [],
+    featuredCollections = [],
     accessibleItems = [],
     getCurrentMemberError = false,
     searchResultItems = PUBLISHED_ITEMS,
@@ -41,6 +46,8 @@ Cypress.Commands.add(
     mockGetAccessibleItems(accessibleItems);
 
     mockGetRecentCollections(recentCollections);
+    mockGetMostLikedCollections(mostLikedCollections);
+    mockGetFeaturedCollections(featuredCollections);
 
     mockGetChildren({ items, currentMember });
 
@@ -71,3 +78,31 @@ Cypress.Commands.add(
     mockCopyItems();
   },
 );
+
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      setUpApi(arg: {
+        items: MockItem[];
+        recentCollections?: MockItem[];
+        mostLikedCollections?: MockItem[];
+        featuredCollections?: MockItem[];
+        accessibleItems?: MockItem[];
+        members?: MockMember[];
+        currentMember?: MockMember;
+        getCurrentMemberError?: boolean;
+        getCategoriesError?: boolean;
+        getItemCategoriesError?: boolean;
+        searchResultItems?: MockItem[];
+        searchError?: boolean;
+        itemLikes?: MockItemLike[];
+        getLikedItemsError?: boolean;
+        getItemError?: boolean;
+        getItemThumbnailError?: boolean;
+        getPublishedItemsInCategoriesError?: boolean;
+        tags?: { id: string; name: string }[];
+        // eslint-disable-next-line
+      }): Chainable<JQuery<HTMLElement>>;
+    }
+  }
+}

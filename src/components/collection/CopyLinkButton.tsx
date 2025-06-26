@@ -1,48 +1,51 @@
-import React, { useContext } from 'react';
+import { useCallback } from 'react';
+import { toast } from 'react-toastify';
 
 import CodeIcon from '@mui/icons-material/Code';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
-import { ActionTriggers, DiscriminatedItem } from '@graasp/sdk';
+import { DiscriminatedItem } from '@graasp/sdk';
 
-import { useLibraryTranslation } from '../../config/i18n';
-import notifier, {
-  COPY_RESOURCE_LINK_TO_CLIPBOARD,
-} from '../../config/notifier';
+import { useMutation } from '@tanstack/react-query';
+
+import { postActionMutation } from '~/openapi/client/@tanstack/react-query.gen';
+import { m } from '~/paraglide/messages';
+
 import { buildPlayerViewItemRoute } from '../../config/paths';
-import LIBRARY from '../../langs/constants';
 import { copyToClipboard } from '../../utils/clipboard';
-import { QueryClientContext } from '../QueryClientContext';
 
-export const useEmbedAction = (itemId?: DiscriminatedItem['id']) => {
-  const startEmbed = () => {
+export const useEmbedAction = (itemId: DiscriminatedItem['id']) => {
+  const { mutate: triggerAction } = useMutation(
+    postActionMutation({
+      body: { type: 'item-embed' },
+      path: {
+        id: itemId,
+      },
+    }),
+  );
+  const startEmbed = useCallback(() => {
     const link = buildPlayerViewItemRoute(itemId);
-    const { mutations } = useContext(QueryClientContext);
 
-    const { mutate: triggerAction } = mutations.usePostItemAction();
     copyToClipboard(link, {
       onSuccess: () => {
         if (itemId) {
           triggerAction({
-            itemId,
-            payload: { type: ActionTriggers.ItemEmbed },
+            body: { type: 'item-embed' },
+            path: {
+              id: itemId,
+            },
           });
         }
 
-        notifier({
-          type: COPY_RESOURCE_LINK_TO_CLIPBOARD.SUCCESS,
-          payload: {},
-        });
+        toast(m.COPY_ITEM_TO_CLIPBOARD_SUCCESS(), { type: 'success' });
       },
       onError: () => {
-        notifier({
-          type: COPY_RESOURCE_LINK_TO_CLIPBOARD.FAILURE,
-          payload: {},
-        });
+        toast(m.COPY_ITEM_TO_CLIPBOARD_ERROR(), { type: 'error' });
       },
     });
-  };
+  }, [itemId, triggerAction]);
+
   return {
     startEmbed,
   };
@@ -50,15 +53,13 @@ export const useEmbedAction = (itemId?: DiscriminatedItem['id']) => {
 type CopyLinkButtonProps = { itemId: DiscriminatedItem['id'] };
 
 const CopyLinkButton = ({ itemId }: CopyLinkButtonProps) => {
-  const { t } = useLibraryTranslation();
-
   const { startEmbed } = useEmbedAction(itemId);
 
   return (
-    <Tooltip title={t(LIBRARY.COPY_LINK_BUTTON_TOOLTIP)}>
+    <Tooltip title={m.COPY_LINK_BUTTON_TOOLTIP()}>
       <IconButton
         onClick={startEmbed}
-        aria-label={t(LIBRARY.COPY_LINK_BUTTON_TOOLTIP)}
+        aria-label={m.COPY_LINK_BUTTON_TOOLTIP()}
       >
         <CodeIcon />
       </IconButton>

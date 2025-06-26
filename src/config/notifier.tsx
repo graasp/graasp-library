@@ -1,78 +1,72 @@
-import React from 'react';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 
-import { Notifier, routines } from '@graasp/query-client';
-import { DiscriminatedItem } from '@graasp/sdk';
-import { FAILURE_MESSAGES, SUCCESS_MESSAGES } from '@graasp/translations';
+// import { DiscriminatedItem } from '@graasp/sdk';
 
-import ToastrWithLink from '../components/common/ToastrWithLink';
-import LIBRARY from '../langs/constants';
-import { SHOW_NOTIFICATIONS } from './env';
-import { appI18n } from './i18n';
-import { buildPlayerViewItemRoute } from './paths';
+// import { m } from '~/paraglide/messages';
 
-const t = (value: string) => appI18n.t(value, { ns: 'messages' });
-const libraryT = (value: string) => appI18n.t(value);
+// import ToastrWithLink from '../components/common/ToastrWithLink';
+// import { SHOW_NOTIFICATIONS } from './env';
+// import { buildPlayerViewItemRoute } from './paths';
 
-export const COPY_RESOURCE_LINK_TO_CLIPBOARD = {
-  SUCCESS: 'success',
-  FAILURE: 'failure',
-};
+// export const COPY_RESOURCE_LINK_TO_CLIPBOARD = {
+//   SUCCESS: 'success',
+//   FAILURE: 'failure',
+// };
 
-// TODO: use a universal notifier
-// TODO: improve the type when upgrading query-client
-const notifier: Notifier = ({ type, payload }) => {
-  if (!SHOW_NOTIFICATIONS) {
-    return;
-  }
+// // TODO: use a universal notifier
+// // TODO: improve the type when upgrading query-client
+// const notifier: Notifier = ({ type, payload }) => {
+//   if (!SHOW_NOTIFICATIONS) {
+//     return;
+//   }
 
-  let message = '';
+//   let message = '';
 
-  switch (type) {
-    // copy notification won't work until websockets are enabled
-    case routines.postItemFlagRoutine.FAILURE:
-    case routines.exportItemRoutine.FAILURE:
-    case routines.copyItemsRoutine.FAILURE: {
-      message =
-        (
-          payload?.error as
-            | { response: { data: { message: string } } }
-            | undefined
-        )?.response?.data?.message ?? FAILURE_MESSAGES.DEFAULT_FAILURE;
-      break;
-    }
-    case routines.postItemFlagRoutine.SUCCESS: {
-      // todo: factor out string
-      message = payload?.message ?? SUCCESS_MESSAGES.DEFAULT_SUCCESS;
-      break;
-    }
-    case routines.copyItemsRoutine.SUCCESS:
-      toast.success(
-        <ToastrWithLink
-          link={buildPlayerViewItemRoute(
-            (payload?.newItem as DiscriminatedItem | undefined)?.id,
-          )}
-          text={t(SUCCESS_MESSAGES.COPY_ITEM)}
-          linkText={libraryT(LIBRARY.COPY_ITEM_TOASTR_LINK)}
-        />,
-      );
-      break;
-    case COPY_RESOURCE_LINK_TO_CLIPBOARD.SUCCESS:
-      toast.success(libraryT(LIBRARY.COPY_LINK_SUCCESS_MESSAGE));
-      break;
-    case COPY_RESOURCE_LINK_TO_CLIPBOARD.FAILURE:
-      toast.error(libraryT(LIBRARY.COPY_LINK_FAILURE_MESSAGE));
-      break;
-    default:
-  }
+//   switch (type) {
+//     // copy notification won't work until websockets are enabled
+//     case routines.postItemFlagRoutine.FAILURE:
+//     case routines.exportItemRoutine.FAILURE:
+//     case routines.copyItemsRoutine.FAILURE: {
+//       message =
+//         (
+//           payload?.error as
+//             | { response: { data: { message: string } } }
+//             | undefined
+//         )?.response?.data?.message ?? 'Failure';
+//       break;
+//     }
+//     case routines.postItemFlagRoutine.SUCCESS: {
+//       // todo: factor out string
+//       message = payload?.message ?? 'Success';
+//       break;
+//     }
+//     case routines.copyItemsRoutine.SUCCESS:
+//       toast.success(
+//         <ToastrWithLink
+//           link={buildPlayerViewItemRoute(
+//             (payload?.newItem as DiscriminatedItem | undefined)?.id,
+//           )}
+//           text={m.COPY_ITEM_SUCCESS()}
+//           linkText={m.COPY_ITEM_TOASTR_LINK()}
+//         />,
+//       );
+//       break;
+//     case COPY_RESOURCE_LINK_TO_CLIPBOARD.SUCCESS:
+//       toast.success(m.COPY_LINK_SUCCESS_MESSAGE());
+//       break;
+//     case COPY_RESOURCE_LINK_TO_CLIPBOARD.FAILURE:
+//       toast.error(m.COPY_LINK_FAILURE_MESSAGE());
+//       break;
+//     default:
+//   }
 
-  // error notification
-  if (payload?.error && message) {
-    toast.error(t(message));
-  }
-  // success notification
-  else if (message) {
-    toast.success(t(message));
-  }
-};
-export default notifier;
+//   // error notification
+//   if (payload?.error && message) {
+//     toast.error(message);
+//   }
+//   // success notification
+//   else if (message) {
+//     toast.success(message);
+//   }
+// };
+// export default notifier;

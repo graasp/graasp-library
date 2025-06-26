@@ -1,0 +1,259 @@
+{
+  "processingTimeMs": 0,
+  "query": "",
+  "hits": [
+    {
+      "name": "ehlllo",
+      "description": "",
+      "content": "",
+      "creator": {
+        "id": "f86535b1-0dfe-4b3d-83fb-be80e530c568",
+        "name": "basile"
+      },
+      "level": ["Premier degré, Second degré, Université"],
+      "discipline": ["History", "Maths", "Test"],
+      "resource-type": ["test", "text", "video"],
+      "id": "aaef89f2-aa90-4514-899b-799fda68a45d",
+      "type": "folder",
+      "isPublishedRoot": true,
+      "isHidden": false,
+      "createdAt": "2025-04-23 13:29:54.403523+00",
+      "updatedAt": "2025-05-13 07:34:16.013487+00",
+      "publicationUpdatedAt": "2025-05-13 07:34:32.60826+00",
+      "lang": "en",
+      "likes": 0,
+      "_formatted": {
+        "name": "ehlllo",
+        "description": "",
+        "content": "",
+        "creator": {
+          "id": "f86535b1-0dfe-4b3d-83fb-be80e530c568",
+          "name": "basile"
+        },
+        "level": ["Premier degré, Second degré, Université"],
+        "discipline": ["History", "Maths", "Test"],
+        "resource-type": ["test", "text", "video"],
+        "id": "aaef89f2-aa90-4514-899b-799fda68a45d",
+        "type": "folder",
+        "isPublishedRoot": true,
+        "publicationUpdatedAt": "2025-05-13 07:34:32.60826+00",
+        "isHidden": false,
+        "createdAt": "2025-04-23 13:29:54.403523+00",
+        "updatedAt": "2025-05-13 07:34:16.013487+00",
+        "lang": "en",
+        "likes": 0
+      }
+    },
+    {
+      "name": "test read",
+      "description": "",
+      "content": "",
+      "creator": {
+        "id": "589efade-b88b-4809-a892-ec39843489e7",
+        "name": "kim"
+      },
+      "level": [],
+      "discipline": [],
+      "resource-type": [],
+      "id": "73707e3f-3ac7-4b1e-8a2b-2a319d7231ea",
+      "type": "folder",
+      "isPublishedRoot": true,
+      "isHidden": false,
+      "createdAt": "2025-01-30 15:59:02.99154+00",
+      "updatedAt": "2025-01-30 15:59:02.99154+00",
+      "publicationUpdatedAt": "2025-04-24 14:26:28.144455+00",
+      "lang": "fr",
+      "likes": 0,
+      "_formatted": {
+        "name": "test read",
+        "description": "",
+        "content": "",
+        "creator": {
+          "id": "589efade-b88b-4809-a892-ec39843489e7",
+          "name": "kim"
+        },
+        "level": [],
+        "discipline": [],
+        "resource-type": [],
+        "id": "73707e3f-3ac7-4b1e-8a2b-2a319d7231ea",
+        "type": "folder",
+        "isPublishedRoot": true,
+        "publicationUpdatedAt": "2025-04-24 14:26:28.144455+00",
+        "isHidden": false,
+        "createdAt": "2025-01-30 15:59:02.99154+00",
+        "updatedAt": "2025-01-30 15:59:02.99154+00",
+        "lang": "fr",
+        "likes": 0
+      }
+    },
+    {
+      "name": "Nain",
+      "description": "88888888888",
+      "content": "",
+      "creator": {
+        "id": "adef19cb-04a8-4c40-b3d0-286ac4122bab",
+        "name": "Diana"
+      },
+      "level": [],
+      "discipline": [],
+      "resource-type": [],
+      "id": "607a2c0a-1893-4f5b-b0ec-c16e6f4b15ff",
+      "type": "folder",
+      "isPublishedRoot": true,
+      "isHidden": false,
+      "createdAt": "2025-02-19 13:49:48.011371+00",
+      "updatedAt": "2025-02-19 13:51:58.584058+00",
+      "publicationUpdatedAt": "2025-02-19 13:58:08.855999+00",
+      "lang": "en",
+      "likes": 0,
+      "_formatted": {
+        "name": "Nain",
+        "description": "88888888888",
+        "content": "",
+        "creator": {
+          "id": "adef19cb-04a8-4c40-b3d0-286ac4122bab",
+          "name": "Diana"
+        },
+        "level": [],
+        "discipline": [],
+        "resource-type": [],
+        "id": "607a2c0a-1893-4f5b-b0ec-c16e6f4b15ff",
+        "type": "folder",
+        "isPublishedRoot": true,
+        "publicationUpdatedAt": "2025-02-19 13:58:08.855999+00",
+        "isHidden": false,
+        "createdAt": "2025-02-19 13:49:48.011371+00",
+        "updatedAt": "2025-02-19 13:51:58.584058+00",
+        "lang": "en",
+        "likes": 0
+      }
+    },
+    {
+      "name": "Підсумок уроку",
+      "description": "«Наука складається з фактів, як будинок із каменів, але набір фактів ще не наука, так само, як купа каміння ще не будинок».                      Пуанкаре (французький математик, фізик, філософ)",
+      "content": "",
+      "creator": {
+        "id": "87962032-b605-4d6b-9718-c94fdbdb89f5",
+        "name": "Руслана Владика"
+      },
+      "level": [],
+      "discipline": [],
+      "resource-type": [],
+      "id": "d724a389-789e-4459-a385-c8e2c507326e",
+      "type": "folder",
+      "isPublishedRoot": true,
+      "isHidden": false,
+      "createdAt": "2025-02-18 13:14:22.827293+00",
+      "updatedAt": "2025-02-18 14:52:45.866805+00",
+      "publicationUpdatedAt": "2025-02-18 15:09:51.978775+00",
+      "lang": "en",
+      "likes": 0,
+      "_formatted": {
+        "name": "Підсумок уроку",
+        "description": "«Наука складається з фактів, як будинок із каменів, але набір фактів ще не наука, так само, як купа каміння ще не будинок».                      Пуанкаре (французький математик, фізик, філософ)",
+        "content": "",
+        "creator": {
+          "id": "87962032-b605-4d6b-9718-c94fdbdb89f5",
+          "name": "Руслана Владика"
+        },
+        "level": [],
+        "discipline": [],
+        "resource-type": [],
+        "id": "d724a389-789e-4459-a385-c8e2c507326e",
+        "type": "folder",
+        "isPublishedRoot": true,
+        "publicationUpdatedAt": "2025-02-18 15:09:51.978775+00",
+        "isHidden": false,
+        "createdAt": "2025-02-18 13:14:22.827293+00",
+        "updatedAt": "2025-02-18 14:52:45.866805+00",
+        "lang": "en",
+        "likes": 0
+      }
+    },
+    {
+      "name": "TAREA FINAL",
+      "description": "",
+      "content": "",
+      "creator": {
+        "id": "ab357cf2-d75a-4153-9094-de77aa7a4c76",
+        "name": "Miriam"
+      },
+      "level": [],
+      "discipline": [],
+      "resource-type": [],
+      "id": "c07dcd9f-f054-4ad5-8ed9-4c422df05f6a",
+      "type": "folder",
+      "isPublishedRoot": true,
+      "isHidden": false,
+      "createdAt": "2025-02-14 17:41:19.677749+00",
+      "updatedAt": "2025-02-14 17:41:19.677749+00",
+      "publicationUpdatedAt": "2025-02-14 17:46:05.871889+00",
+      "lang": "es",
+      "likes": 0,
+      "_formatted": {
+        "name": "TAREA FINAL",
+        "description": "",
+        "content": "",
+        "creator": {
+          "id": "ab357cf2-d75a-4153-9094-de77aa7a4c76",
+          "name": "Miriam"
+        },
+        "level": [],
+        "discipline": [],
+        "resource-type": [],
+        "id": "c07dcd9f-f054-4ad5-8ed9-4c422df05f6a",
+        "type": "folder",
+        "isPublishedRoot": true,
+        "publicationUpdatedAt": "2025-02-14 17:46:05.871889+00",
+        "isHidden": false,
+        "createdAt": "2025-02-14 17:41:19.677749+00",
+        "updatedAt": "2025-02-14 17:41:19.677749+00",
+        "lang": "es",
+        "likes": 0
+      }
+    },
+    {
+      "name": "Comprendre l'effet de serre climatique (4)",
+      "description": "Pour mieux voir le contenu de l'activité, mettez votre Navigateur en mode Plein écran (bouton vert en haut à gauche), et cachez la barre de navigation en cliquant sur le symbole à trois barres en haut à gauche de l'activité. Lorsque vous finissez un onglet, affichez à nouveau la barre de navigation pour aller à l'onglet suivant.",
+      "content": "",
+      "creator": {
+        "id": "62460d8c-7fc5-473b-9688-fc3ed9dbc4a7",
+        "name": "PhilZiK (Philippe Kobel)"
+      },
+      "level": [],
+      "discipline": [],
+      "resource-type": [],
+      "id": "765de178-ff6c-41e7-aaa3-9689a59b5c3d",
+      "type": "folder",
+      "isPublishedRoot": true,
+      "isHidden": false,
+      "createdAt": "2025-02-13 08:54:04.98482+00",
+      "updatedAt": "2025-02-13 08:54:56.42357+00",
+      "publicationUpdatedAt": "2025-02-13 08:55:33.696115+00",
+      "lang": "fr",
+      "likes": 0,
+      "_formatted": {
+        "name": "Comprendre l'effet de serre climatique (4)",
+        "description": "Pour mieux voir le contenu de l'activité, mettez votre Navigateur en mode Plein écran (bouton vert en haut à gauche), et cachez la barre de navigation en cliquant sur le symbole à trois barres en haut à gauche de l'activité. Lorsque vous finissez un onglet, affichez à nouveau la barre de navigation pour aller à l'onglet suivant.",
+        "content": "",
+        "creator": {
+          "id": "62460d8c-7fc5-473b-9688-fc3ed9dbc4a7",
+          "name": "PhilZiK (Philippe Kobel)"
+        },
+        "level": [],
+        "discipline": [],
+        "resource-type": [],
+        "id": "765de178-ff6c-41e7-aaa3-9689a59b5c3d",
+        "type": "folder",
+        "isPublishedRoot": true,
+        "publicationUpdatedAt": "2025-02-13 08:55:33.696115+00",
+        "isHidden": false,
+        "createdAt": "2025-02-13 08:54:04.98482+00",
+        "updatedAt": "2025-02-13 08:54:56.42357+00",
+        "lang": "fr",
+        "likes": 0
+      }
+    }
+  ],
+  "estimatedTotalHits": 958
+}

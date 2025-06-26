@@ -1,60 +1,86 @@
-import { useContext } from 'react';
+import { getRouteApi } from '@tanstack/react-router';
 
-import { langs } from '@graasp/translations';
+import { Langs } from '~/config/constants';
+import { m } from '~/paraglide/messages';
+import { Locale, isLocale } from '~/paraglide/runtime';
 
-import {
-  SEARCH_FILTER_LANG_ID,
-  buildSearchFilterPopperButtonId,
-} from '../../config/selectors';
-import { QueryClientContext } from '../QueryClientContext';
-import { useSearchFiltersContext } from '../pages/SearchFiltersContext';
 import { Filter } from './Filter';
+import { useSearchFacets } from './useSearchFacets';
 
 type LangFilterProps = {
   title: string;
 };
 
-export function LangFilter({ title }: LangFilterProps) {
-  const {
-    tags,
-    langs: selectedOptions,
-    toggleLang,
-    clearLang,
-    searchKeywords,
-    isPublishedRoot,
-  } = useSearchFiltersContext();
+const SearchRoute = getRouteApi('/search');
 
-  const { hooks } = useContext(QueryClientContext);
-
-  const { data: options, isFetching } = hooks.useSearchFacets({
+export function LangFilter({ title }: Readonly<LangFilterProps>) {
+  const { s, langs, levels, disciplines, resourceTypes, rootOnly } =
+    SearchRoute.useSearch();
+  const navigate = SearchRoute.useNavigate();
+  const { data: options, isFetching } = useSearchFacets({
     facetName: 'lang',
-    query: searchKeywords,
-    tags,
-    isPublishedRoot,
+    keywordSearch: s,
+    tags: {
+      level: levels,
+      discipline: disciplines,
+      'resource-type': resourceTypes,
+    },
+    isPublishedRoot: rootOnly,
   });
+
+  const toggleLang = (newLang: string, newSelected: boolean) => {
+    // convert lang from nice text to locale string
+    const lang = Object.entries(Langs).find(
+      ([_, langLabel]) => langLabel === newLang,
+    );
+    const langKey = lang?.[0] as Locale | undefined;
+    navigate({
+      from: '/search',
+      search: (prev) => ({
+        ...prev,
+        langs: newSelected
+          ? // add the lang in the array
+            ([...prev.langs, langKey] as Locale[])
+          : // remove the lang from the array
+            prev.langs.filter((l) => l !== langKey),
+      }),
+    });
+  };
+
+  const clearLangs = () => {
+    navigate({
+      from: '/search',
+      search: (prev) => ({
+        ...prev,
+        langs: [] as Locale[],
+      }),
+    });
+  };
 
   // received langs contain slugs, eg: fr
   // transform from fr -> Français
   const langOptions = options
-    ? Object.keys(options).reduce((acc, key) => {
-        const k = key as `${keyof typeof langs}`;
-        return {
-          ...acc,
-          ...{ [langs[k] || k]: options[k] },
-        };
-      }, {})
+    ? Object.fromEntries(
+        Object.entries(options).map(([langKey, count]) => {
+          if (isLocale(langKey)) {
+            return [Langs[langKey], count];
+          }
+          return [langKey, count];
+        }, []),
+      )
     : {};
 
+  const selectedLangs = langs.map((l) => Langs[l]);
   return (
     <Filter
-      id={SEARCH_FILTER_LANG_ID}
+      id="combobox-langs"
       title={title}
       options={langOptions}
-      selectedOptions={selectedOptions}
+      selectedOptions={selectedLangs}
       onOptionChange={toggleLang}
-      onClearOptions={clearLang}
-      buttonId={buildSearchFilterPopperButtonId('lang')}
+      onClearOptions={clearLangs}
       isLoading={isFetching}
+      placeholder={m.FILTER_DROPDOWN_NO_LANG()}
     />
   );
 }

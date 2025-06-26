@@ -1,13 +1,14 @@
-import React, { useContext } from 'react';
-
 import { ThumbnailSize } from '@graasp/sdk';
-import { Thumbnail } from '@graasp/ui';
+
+import { useQuery } from '@tanstack/react-query';
+
+import { downloadItemThumbnailOptions } from '~/openapi/client/@tanstack/react-query.gen';
 
 import {
   DEFAULT_ITEM_IMAGE_PATH,
   DEFAULT_THUMBNAIL_ALT_TEXT,
 } from '../../config/constants';
-import { QueryClientContext } from '../QueryClientContext';
+import Thumbnail from '../ui/Thumbnail/Thumbnail';
 
 const SearchThumbnail = ({
   itemId,
@@ -16,9 +17,11 @@ const SearchThumbnail = ({
   name: string;
   itemId: string;
 }) => {
-  const { hooks } = useContext(QueryClientContext);
-  const { data: thumbnailUrl, isLoading: isThumbnailLoading } =
-    hooks.useItemThumbnailUrl({ id: itemId, size: ThumbnailSize.Small });
+  const { data: thumbnailUrl, isLoading: isThumbnailLoading } = useQuery(
+    downloadItemThumbnailOptions({
+      path: { id: itemId, size: ThumbnailSize.Small },
+    }),
+  );
 
   return (
     <Thumbnail

@@ -1,24 +1,22 @@
-import { Context } from '@graasp/sdk';
+import { ClientManager, Context } from '@graasp/sdk';
 
-import {
-  GRAASP_ACCOUNT_HOST,
-  GRAASP_ANALYTICS_HOST,
-  GRAASP_AUTH_HOST,
-  GRAASP_BUILDER_HOST,
-  GRAASP_PLAYER_HOST,
-} from './env';
+import { CLIENT_HOST } from './env';
 
-export const SIGN_IN_ROUTE = `${GRAASP_AUTH_HOST}/signin`;
-export const SIGN_UP_ROUTE = `${GRAASP_AUTH_HOST}/signup`;
+const clientManager = ClientManager.getInstance().setHost(CLIENT_HOST);
+export const LOGIN_ROUTE_URL = clientManager.getURLByContext(
+  Context.Auth,
+  'login',
+);
+export const REGISTER_ROUTE = clientManager
+  .getURLByContext(Context.Auth, 'register')
+  .toString();
+export const CLIENT_HOME_ROUTE = clientManager
+  .getURLByContext(Context.Home)
+  .toString();
 
 export const buildPlayerViewItemRoute = (id = ':id') =>
-  `${GRAASP_PLAYER_HOST}/${id}`;
+  clientManager.getItemLink(Context.Auth, id);
 
-export const publicProfileAccountPath = `${GRAASP_ACCOUNT_HOST}/public-profile`;
-
-export const HOST_MAP = {
-  [Context.Builder]: GRAASP_BUILDER_HOST,
-  [Context.Library]: '/',
-  [Context.Analytics]: GRAASP_ANALYTICS_HOST,
-  [Context.Player]: GRAASP_PLAYER_HOST,
-};
+export const publicProfileAccountPath = clientManager
+  .getURLByContext(Context.Account, 'settings')
+  .toString();

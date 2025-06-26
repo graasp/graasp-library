@@ -9,20 +9,18 @@ import {
   useAutocomplete,
 } from '@mui/material';
 
-import { useLibraryTranslation } from '../../config/i18n';
 import { FILTER_CHIP_CY } from '../../config/selectors';
-import LIBRARY from '../../langs/constants';
 import { FilterPopper, FilterPopperProps } from './FilterPopper';
 
 export type FilterProps = {
   id: string;
-  buttonId: string;
   title: string;
   isLoading?: boolean;
   selectedOptions: FilterPopperProps['selectedOptions'];
   onClearOptions: FilterPopperProps['onClearOptions'];
   onOptionChange: FilterPopperProps['onOptionChange'];
   options?: { [key: string]: number };
+  placeholder: string;
 };
 
 const InputWrapper = styled(Stack)(({ theme }) => ({
@@ -54,16 +52,15 @@ const StyledInput = styled('input')(({ theme }) => ({
 }));
 
 export const Filter = ({
+  id,
   title,
   selectedOptions,
   onClearOptions,
   onOptionChange,
-  id,
-  buttonId,
   isLoading = false,
   options = {},
+  placeholder,
 }: FilterProps) => {
-  const { t } = useLibraryTranslation();
   const [showPopper, setShowPopper] = useState<boolean>(false);
 
   const [inputValue, setInputValue] = useState('');
@@ -88,7 +85,7 @@ export const Filter = ({
   const { getRootProps, getInputProps, getTagProps, groupedOptions } =
     useAutocomplete({
       options: Object.keys(options),
-      id: buttonId,
+      // id: buttonId,
       multiple: true,
       value: selectedOptions,
       clearOnBlur: false,
@@ -135,25 +132,30 @@ export const Filter = ({
             );
           })}
           <StyledInput
+            id={id}
             onClick={() => {
               setShowPopper(true);
             }}
-            placeholder={
-              selectedOptions.length
-                ? undefined
-                : t(LIBRARY.FILTER_DROPDOWN_NO_FILTER)
-            }
+            // for accessibility purposes
+            title={title}
+            placeholder={selectedOptions.length ? undefined : placeholder}
             {...getInputProps()}
           />
         </div>
-        <ExpandMoreRounded color="primary" sx={{ mt: 1 }} />
+        <ExpandMoreRounded
+          color="primary"
+          sx={{ mt: 1 }}
+          onClick={() => {
+            setShowPopper(true);
+          }}
+        />
       </InputWrapper>
     </div>
   );
 
   return (
-    <Stack id={id} flexGrow={1} flex={1} flexBasis={0} width={0}>
-      <Typography variant="body2" color="#7A7A7A">
+    <Stack flexGrow={1} flex={1} flexBasis={0} width={0}>
+      <Typography variant="body2" color="#7A7A7A" component="label">
         {title}
       </Typography>
       <Stack direction="row" alignItems="center" ref={popperAnchor}>

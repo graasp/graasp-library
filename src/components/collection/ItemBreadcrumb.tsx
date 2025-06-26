@@ -1,80 +1,100 @@
-import { useContext } from 'react';
+import { Suspense } from 'react';
 
-import { Box, Breadcrumbs, Button, Skeleton, Typography } from '@mui/material';
+import {
+  Alert,
+  Box,
+  Breadcrumbs,
+  Button,
+  Skeleton,
+  Typography,
+} from '@mui/material';
 
 import { getIdsFromPath } from '@graasp/sdk';
 
-import Link from 'next/link';
+import { ErrorBoundary } from '@sentry/tanstackstart-react';
+import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
 
-import { useLibraryTranslation } from '../../config/i18n';
-import { buildCollectionRoute } from '../../config/routes';
-import LIBRARY from '../../langs/constants';
-import { QueryClientContext } from '../QueryClientContext';
+import {
+  getCollectionInformationsOptions,
+  getItemOptions,
+  getParentItemsOptions,
+} from '~/openapi/client/@tanstack/react-query.gen';
+import { m } from '~/paraglide/messages';
+
+import { ButtonLink } from '../common/links/ButtonLink';
 
 type ItemBreadcrumbProps = {
-  itemId?: string;
+  itemId: string;
 };
 
-const ItemBreadcrumb = ({
-  itemId,
-}: ItemBreadcrumbProps): JSX.Element | null => {
-  const { hooks } = useContext(QueryClientContext);
-  const { t } = useLibraryTranslation();
+export function ItemBreadcrumb({ itemId }: Readonly<ItemBreadcrumbProps>) {
+  return (
+    <ErrorBoundary fallback={<BreadcrumbError />}>
+      <Suspense fallback={<LoadingBreadcrumbs />}>
+        <SuspendedItemBreadcrumbs itemId={itemId} />
+      </Suspense>
+    </ErrorBoundary>
+  );
+}
 
-  const { data: item } = hooks.useItem(itemId);
+function SuspendedItemBreadcrumbs({ itemId }: Readonly<ItemBreadcrumbProps>) {
+  const { data: item } = useQuery(getItemOptions({ path: { id: itemId } }));
+  const { data: allParents } = useSuspenseQuery(
+    getParentItemsOptions({ path: { id: itemId } }),
+  );
+  const { data: publishedInformation } = useSuspenseQuery(
+    getCollectionInformationsOptions({ path: { itemId } }),
+  );
+  if (publishedInformation == null) {
+    return null;
+  }
+  const publishedParentId = publishedInformation.item.id;
 
-  const { data: allParents, isLoading: isLoadingParents } = hooks.useParents({
-    id: itemId,
-  });
-  const { data: publishedInformation, isLoading: isLoadingInformation } =
-    hooks.useItemPublishedInformation({
-      itemId,
-    });
+  // filter parents to keep only the ones that are children of the published item
+  const parents = allParents?.filter((p) =>
+    getIdsFromPath(p.path).includes(publishedParentId),
+  );
 
-  if (publishedInformation && allParents) {
-    const publishedParentId = publishedInformation.item.id;
-
-    // filter parents to keep only the ones that are children of the published item
-    const parents = allParents?.filter((p) =>
-      getIdsFromPath(p.path).includes(publishedParentId),
-    );
-
-    if (parents.length === 0) {
-      // this component is used to occupy the space normal taken by the breadcrumbs
-      // the purpose here is to remove layout shifting when navigating between parent (no breadcrumbs visible)
-      // and child (breadcrumbs visible). This takes the exact same height as the breadcrumbs, removing layout shift.
-      return (
-        <Box visibility="hidden">
-          <Breadcrumbs>
-            <Button>{t(LIBRARY.LOADING_TEXT)}</Button>
-          </Breadcrumbs>
-        </Box>
-      );
-    }
-
+  if (parents.length === 0) {
+    // this component is used to occupy the space normal taken by the breadcrumbs
+    // the purpose here is to remove layout shifting when navigating between parent (no breadcrumbs visible)
+    // and child (breadcrumbs visible). This takes the exact same height as the breadcrumbs, removing layout shift.
     return (
-      <Breadcrumbs>
-        {parents?.map((parent) => (
-          <Button component={Link} href={buildCollectionRoute(parent.id)}>
-            {parent.name}
-          </Button>
-        ))}
-        <Typography color="text.primary">{item?.name}</Typography>
-      </Breadcrumbs>
+      <Box visibility="hidden">
+        <Breadcrumbs>
+          <Button>{m.LOADING_TEXT()}</Button>
+        </Breadcrumbs>
+      </Box>
     );
   }
 
-  if (isLoadingParents || isLoadingInformation) {
-    return (
-      <Breadcrumbs>
-        <Skeleton variant="text">
-          {/* This text is not show, it is just used to size the skeleton above */}
-          <Button>{t(LIBRARY.LOADING_TEXT)}</Button>
-        </Skeleton>
-      </Breadcrumbs>
-    );
-  }
-  return null;
-};
+  return (
+    <Breadcrumbs>
+      {parents?.map((parent) => (
+        <ButtonLink
+          key={parent.id}
+          to="/collections/$id"
+          params={{ id: parent.id }}
+        >
+          {parent.name}
+        </ButtonLink>
+      ))}
+      <Typography color="text.primary">{item?.name}</Typography>
+    </Breadcrumbs>
+  );
+}
 
-export default ItemBreadcrumb;
+function LoadingBreadcrumbs() {
+  return (
+    <Breadcrumbs>
+      <Skeleton variant="text">
+        {/* This text is not show, it is just used to size the skeleton above */}
+        <Button>{m.LOADING_TEXT()}</Button>
+      </Skeleton>
+    </Breadcrumbs>
+  );
+}
+
+function BreadcrumbError() {
+  return <Alert severity="error">{m.ERROR_LOADING_BREADCRUMBS()}</Alert>;
+}

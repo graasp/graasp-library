@@ -1,109 +1,109 @@
-import React, { useContext } from 'react';
+import { toast } from 'react-toastify';
 
 import { Favorite, Visibility } from '@mui/icons-material';
-import {
-  Alert,
-  Box,
-  Container,
-  Divider,
-  Skeleton,
-  Snackbar,
-  Stack,
-  Tooltip,
-  Typography,
-} from '@mui/material';
+import { Box, Divider, Stack, Tooltip, Typography } from '@mui/material';
 
-import { DiscriminatedItem, ThumbnailSize } from '@graasp/sdk';
-import { LikeButton } from '@graasp/ui';
-
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import truncate from 'lodash.truncate';
 
+import { categoryToQueryParams } from '~/components/filters/constants';
+import LikeButton from '~/components/ui/LikeButton/LikeButton';
+import Thumbnail from '~/components/ui/Thumbnail/Thumbnail';
+import { PackedItem } from '~/openapi/client';
 import {
+  createItemLikeMutation,
+  deleteItemLikeMutation,
+  getLikesForCurrentMemberOptions,
+  getLikesForItemOptions,
+  getTagsForItemOptions,
+} from '~/openapi/client/@tanstack/react-query.gen';
+import { m } from '~/paraglide/messages';
+
+import {
+  DEFAULT_ITEM_IMAGE_PATH,
+  DEFAULT_THUMBNAIL_ALT_TEXT,
   MAX_COLLECTION_NAME_LENGTH,
-  UrlSearch,
 } from '../../../config/constants';
-import { useLibraryTranslation } from '../../../config/i18n';
-import { ALL_COLLECTIONS_ROUTE } from '../../../config/routes';
 import {
   ITEM_SUMMARY_TITLE_ID,
-  LIKE_COLLECTION_NOT_LOGGED_ID,
   SUMMARY_TAGS_CONTAINER_ID,
 } from '../../../config/selectors';
-import LIBRARY from '../../../langs/constants';
-import { QueryClientContext } from '../../QueryClientContext';
-import CardMedia from '../../common/CardMediaComponent';
 import { StyledCard } from '../../common/StyledCard';
+import { ChipLink } from '../../common/links/ChipLink';
 import Authorship from '../Authorship';
 import Badges from '../Badges';
-import { StyledChip } from './StyledChip';
 import SummaryActionButtons from './SummaryActionButtons';
 import { Description } from './SummaryDescription';
 
-type SummaryHeaderProps = {
-  collection: DiscriminatedItem;
-  isLoading: boolean;
+type Props = {
+  collection: PackedItem;
   isLogged: boolean;
   totalViews: number;
 };
 
-const SummaryHeader: React.FC<SummaryHeaderProps> = ({
+export function SummaryHeader({
   collection,
   isLogged,
-  isLoading,
   totalViews,
-}) => {
-  const { t } = useLibraryTranslation();
+}: Readonly<Props>) {
+  const queryClient = useQueryClient();
+  const { data: likedItems } = useQuery(getLikesForCurrentMemberOptions());
+  const { data: itemLikesForItem } = useQuery(
+    getLikesForItemOptions({ path: { itemId: collection.id } }),
+  );
 
-  const [open, setOpen] = React.useState(false);
-
-  const { hooks, mutations } = useContext(QueryClientContext);
-
-  const { data: member } = hooks.useCurrentMember();
-  const { data: likedItems } = hooks.useLikesForMember(member?.id);
-  const { data: itemLikesForItem } = hooks.useLikesForItem(collection?.id);
   const likes = itemLikesForItem?.length;
-  const { data: tags } = hooks.useTagsByItem({ itemId: collection?.id });
+  const { data: tags } = useQuery(
+    getTagsForItemOptions({ path: { itemId: collection.id } }),
+  );
 
-  const { mutate: postItemLike } = mutations.usePostItemLike();
-  const { mutate: deleteItemLike } = mutations.useDeleteItemLike();
+  const { mutate: postItemLike } = useMutation({
+    ...createItemLikeMutation({ path: { itemId: collection.id } }),
+    onSettled: () => {
+      queryClient.invalidateQueries({
+        queryKey: getLikesForCurrentMemberOptions().queryKey,
+      });
+      queryClient.invalidateQueries({
+        queryKey: getLikesForItemOptions({ path: { itemId: collection.id } })
+          .queryKey,
+      });
+    },
+  });
+
+  const { mutate: deleteItemLike } = useMutation({
+    ...deleteItemLikeMutation({ path: { itemId: collection.id } }),
+    onSettled: () => {
+      queryClient.invalidateQueries({
+        queryKey: getLikesForCurrentMemberOptions().queryKey,
+      });
+      queryClient.invalidateQueries({
+        queryKey: getLikesForItemOptions({ path: { itemId: collection.id } })
+          .queryKey,
+      });
+    },
+  });
 
   const likeEntry = likedItems?.find(
     (itemLike) => itemLike?.item.id === collection?.id,
   );
 
-  const openLoginSnackbarMessage = () => {
-    setOpen(true);
-  };
-
-  const handleCloseSnackBarMessage = (
-    _event: React.SyntheticEvent | Event,
-    reason?: string,
-  ) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpen(false);
-  };
   const handleLike = () => {
-    if (!member?.id) {
-      openLoginSnackbarMessage();
+    if (isLogged) {
+      postItemLike({ path: { itemId: collection.id } });
     } else {
-      postItemLike({
-        itemId: collection?.id,
-        memberId: member.id,
-      });
+      toast.info(m.LOGIN_REQUIRED());
     }
   };
 
   const handleUnlike = () => {
-    if (!member?.id) {
-      openLoginSnackbarMessage();
-    } else {
+    if (isLogged) {
       deleteItemLike({
-        itemId: collection.id,
-        memberId: member.id,
+        path: {
+          itemId: collection.id,
+        },
       });
+    } else {
+      toast.info(m.LOGIN_REQUIRED());
     }
   };
 
@@ -113,136 +113,131 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
   });
 
   return (
-    <Container maxWidth="lg">
-      <Stack
-        direction={{ xs: 'column', sm: 'row' }}
-        spacing={{ xs: 2, sm: 6 }}
-        alignItems={{ xs: 'center', sm: 'start' }}
+    <Stack
+      direction={{ xs: 'column', sm: 'row' }}
+      spacing={{ xs: 2, sm: 6 }}
+      alignItems={{ xs: 'center', sm: 'start' }}
+      width="100%"
+    >
+      <Box
+        sx={{
+          '& .MuiPaper-root': {
+            border: '1px solid #ddd',
+            boxShadow: 'none',
+          },
+        }}
+        width={{ xs: '90%', sm: '30%' }}
       >
-        <Box
-          sx={{
-            '& .MuiPaper-root': {
-              border: '1px solid #ddd',
-              boxShadow: 'none',
-            },
-          }}
-          width={{ xs: '90%', sm: '30%' }}
+        <StyledCard id={collection.id}>
+          <Box
+            overflow="hidden"
+            lineHeight={0}
+            sx={{
+              aspectRatio: '1 / 1',
+              '& img[src$=".svg"]': {
+                maxHeight: `100%`,
+                maxWidth: `100%`,
+                padding: `15%`,
+              },
+              justifyContent: 'center',
+              alignItems: 'center',
+              display: 'flex',
+            }}
+          >
+            <Thumbnail
+              url={collection.thumbnails?.medium ?? DEFAULT_ITEM_IMAGE_PATH}
+              alt={collection.name ?? DEFAULT_THUMBNAIL_ALT_TEXT}
+              id={collection.id}
+              sx={{
+                width: '100%',
+                objectFit: 'cover',
+              }}
+            />
+          </Box>
+        </StyledCard>
+      </Box>
+      <Stack direction="column" spacing={1} width={{ xs: '90%', sm: '70%' }}>
+        <Stack
+          justifyContent="space-between"
+          direction="row"
+          flexWrap="wrap"
+          alignItems={{ xs: 'start', sm: 'start' }}
         >
-          <StyledCard id={collection.id}>
-            {isLoading ? (
-              <Skeleton variant="rectangular" width="100%">
-                <CardMedia name={collection.name} />
-              </Skeleton>
-            ) : (
-              <CardMedia
-                itemId={collection.id}
-                name={collection.name}
-                size={ThumbnailSize.Medium}
-              />
-            )}
-          </StyledCard>
-        </Box>
-        <Stack direction="column" spacing={1} width={{ xs: '90%', sm: '70%' }}>
+          <Stack direction="row" alignItems="center" spacing={1} minWidth={0}>
+            <Typography
+              variant="h3"
+              component="h1"
+              noWrap
+              id={ITEM_SUMMARY_TITLE_ID}
+              // allow to see full text on mouse hover
+              title={collection.name}
+            >
+              {truncatedName}
+            </Typography>
+            <LikeButton
+              ariaLabel="like"
+              color="primary"
+              isLiked={Boolean(likeEntry)}
+              handleLike={handleLike}
+              handleUnlike={handleUnlike}
+            />
+          </Stack>
+          <SummaryActionButtons item={collection} isLogged={isLogged} />
+        </Stack>
+        {tags?.length ? (
           <Stack
-            justifyContent="space-between"
+            id={SUMMARY_TAGS_CONTAINER_ID}
             direction="row"
             flexWrap="wrap"
-            alignItems={{ xs: 'start', sm: 'start' }}
+            gap={1}
           >
-            <Stack direction="row" alignItems="center" spacing={1} minWidth={0}>
-              <Typography
-                variant="h3"
-                component="h1"
-                noWrap
-                id={ITEM_SUMMARY_TITLE_ID}
-              >
-                {isLoading ? <Skeleton width="10ch" /> : truncatedName}
-              </Typography>
-              {isLoading ? (
-                <Skeleton variant="circular">
-                  <LikeButton
-                    ariaLabel=""
-                    handleLike={() => null}
-                    handleUnlike={() => null}
-                  />
-                </Skeleton>
-              ) : (
-                <LikeButton
-                  ariaLabel="like"
-                  color="primary"
-                  isLiked={Boolean(likeEntry)}
-                  handleLike={handleLike}
-                  handleUnlike={handleUnlike}
-                />
-              )}
-            </Stack>
-            <SummaryActionButtons item={collection} isLogged={isLogged} />
+            {tags.map(({ name: text, category }) => (
+              <ChipLink
+                key={text}
+                label={text}
+                to="/search"
+                search={{ [categoryToQueryParams[category]]: [text] }}
+                sx={{
+                  '&:hover': {
+                    cursor: 'pointer',
+                    background: 'primary.main',
+                    color: 'white',
+                  },
+                }}
+              />
+            ))}
           </Stack>
-          {tags?.length ? (
-            <Stack
-              id={SUMMARY_TAGS_CONTAINER_ID}
-              direction="row"
-              flexWrap="wrap"
-              spacing={1}
-            >
-              {tags.map(({ name: text }) => (
-                <StyledChip
-                  href={{
-                    pathname: ALL_COLLECTIONS_ROUTE,
-                    query: { [UrlSearch.KeywordSearch]: text },
-                  }}
-                  key={text}
-                  label={text}
-                />
-              ))}
-            </Stack>
-          ) : null}
-          <Description
-            isLoading={isLoading}
-            description={collection.description ?? ''}
+        ) : null}
+        <Description description={collection.description ?? ''} />
+        <Stack
+          spacing={{ xs: 1, md: 2 }}
+          useFlexGap
+          flexWrap="wrap"
+          direction="row"
+          divider={<Divider orientation="vertical" flexItem />}
+        >
+          <Authorship
+            itemId={collection.id}
+            author={collection.creator}
+            // FIXME: update the type in the backend to have better typing here
+            displayCoEditors={collection.settings.displayCoEditors as boolean}
           />
           <Stack
-            spacing={{ xs: 1, md: 2 }}
-            useFlexGap
-            flexWrap="wrap"
             direction="row"
-            divider={<Divider orientation="vertical" flexItem />}
+            alignItems="center"
+            px={1}
+            divider={
+              <Divider
+                flexItem
+                variant="middle"
+                orientation="vertical"
+                sx={{ margin: 1 }}
+              />
+            }
           >
-            <Authorship
-              itemId={collection.id}
-              author={collection.creator}
-              displayCoEditors={collection.settings.displayCoEditors}
-            />
-            <Stack
-              direction="row"
-              alignItems="center"
-              px={1}
-              divider={
-                <Divider
-                  flexItem
-                  variant="middle"
-                  orientation="vertical"
-                  sx={{ margin: 1 }}
-                />
-              }
-            >
-              {/* display only when there's a views */}
-              {totalViews ? (
-                <Tooltip title="Views" arrow placement="bottom">
-                  <Stack direction="row" alignItems="center">
-                    <Typography
-                      fontWeight="bold"
-                      display="flex"
-                      alignItems="center"
-                      color="primary"
-                    >
-                      {totalViews}
-                    </Typography>
-                    <Visibility color="primary" style={{ marginLeft: 5 }} />
-                  </Stack>
-                </Tooltip>
-              ) : null}
-              <Tooltip title="Likes" arrow placement="bottom">
+            {/* display only when there are views */}
+            {totalViews ? (
+              <Tooltip title="Views" arrow placement="bottom">
                 <Stack direction="row" alignItems="center">
                   <Typography
                     fontWeight="bold"
@@ -250,35 +245,29 @@ const SummaryHeader: React.FC<SummaryHeaderProps> = ({
                     alignItems="center"
                     color="primary"
                   >
-                    {likes}
+                    {totalViews}
                   </Typography>
-                  <Favorite color="primary" style={{ marginLeft: 5 }} />
+                  <Visibility color="primary" style={{ marginLeft: 5 }} />
                 </Stack>
               </Tooltip>
-            </Stack>
-            <Badges
-              name={collection.name}
-              description={collection.description}
-            />
+            ) : null}
+            <Tooltip title="Likes" arrow placement="bottom">
+              <Stack direction="row" alignItems="center">
+                <Typography
+                  fontWeight="bold"
+                  display="flex"
+                  alignItems="center"
+                  color="primary"
+                >
+                  {likes}
+                </Typography>
+                <Favorite color="primary" style={{ marginLeft: 5 }} />
+              </Stack>
+            </Tooltip>
           </Stack>
+          <Badges name={collection.name} description={collection.description} />
         </Stack>
       </Stack>
-      <Snackbar
-        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-        open={open}
-        autoHideDuration={6000}
-        onClose={handleCloseSnackBarMessage}
-      >
-        <Alert
-          id={LIKE_COLLECTION_NOT_LOGGED_ID}
-          onClose={handleCloseSnackBarMessage}
-          severity="error"
-        >
-          {t(LIBRARY.SIGNIN_MESSAGE)}
-        </Alert>
-      </Snackbar>
-    </Container>
+    </Stack>
   );
-};
-
-export default SummaryHeader;
+}

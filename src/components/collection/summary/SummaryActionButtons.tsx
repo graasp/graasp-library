@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import type { JSX } from 'react';
 
-import { Code, CopyAll, Download, MoreVert } from '@mui/icons-material';
+import { Code, MoreVert } from '@mui/icons-material';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import {
   Button,
@@ -14,37 +15,35 @@ import {
   Stack,
 } from '@mui/material';
 
-import { DiscriminatedItem } from '@graasp/sdk';
+import { useLoaderData } from '@tanstack/react-router';
 
-import { useLibraryTranslation } from '../../../config/i18n';
-import { buildPlayerViewItemRoute } from '../../../config/paths';
+import { PackedItem } from '~/openapi/client';
+import { m } from '~/paraglide/messages';
+
 import {
   LIBRARY_ACTION_GROUP_BUTTON_ID,
-  LIBRARY_ACTION_GROUP_COPY_BUTTON_ID,
   LIBRARY_ACTION_GROUP_POP_UP_BUTTONS_ID,
 } from '../../../config/selectors';
-import LIBRARY from '../../../langs/constants';
-import { openInNewTab } from '../../../utils/helpers';
-import { useCopyAction } from '../CopyButton';
 import { useEmbedAction } from '../CopyLinkButton';
-import { useDownloadAction } from '../DownloadButton';
+
+// import { useCopyAction } from '../CopyButton';
+// import { useDownloadAction } from '../DownloadButton';
 
 type SummaryActionButtonsProps = {
-  item?: DiscriminatedItem;
+  item: PackedItem;
   isLogged: boolean;
 };
 
 const SummaryActionButtons = ({
   item,
-  isLogged,
+  // isLogged,
 }: SummaryActionButtonsProps): JSX.Element => {
-  const { t } = useLibraryTranslation();
+  const { clientOrigin } = useLoaderData({ from: '__root__' });
+  // const { treeModal, startCopy } = useCopyAction(item.id);
 
-  const { treeModal, startCopy } = useCopyAction(item?.id);
+  // const { startDownload } = useDownloadAction(item.id);
 
-  const { startDownload } = useDownloadAction(item?.id);
-
-  const { startEmbed } = useEmbedAction(item?.id);
+  const { startEmbed } = useEmbedAction(item.id);
 
   const [open, setOpen] = useState(false);
   const anchorRef = React.useRef<HTMLDivElement>(null);
@@ -64,10 +63,6 @@ const SummaryActionButtons = ({
     setOpen(false);
   };
 
-  const handlePlay = () => {
-    openInNewTab(buildPlayerViewItemRoute(item?.id));
-  };
-
   return (
     <>
       <ButtonGroup
@@ -76,13 +71,15 @@ const SummaryActionButtons = ({
         ref={anchorRef}
       >
         <Button
+          component="a"
+          target="_blank"
+          href={`${clientOrigin}/player/${item.id}/${item.id}`}
           size="large"
           color="primary"
           startIcon={<PlayCircleOutlineIcon />}
           sx={{ display: 'flex', mx: 'auto' }}
-          onClick={handlePlay}
         >
-          {t(LIBRARY.SUMMARY_ACTIONS_PREVIEW_CONTENT)}
+          {m.SUMMARY_ACTIONS_PREVIEW_CONTENT()}
         </Button>
         <Button
           size="small"
@@ -117,27 +114,27 @@ const SummaryActionButtons = ({
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList id={LIBRARY_ACTION_GROUP_POP_UP_BUTTONS_ID}>
-                  <MenuItem onClick={startDownload}>
+                  {/* <MenuItem onClick={startDownload}>
                     <Stack direction="row" gap={1}>
                       <Download />
-                      {t(LIBRARY.SUMMARY_ACTIONS_DOWNLOAD)}
+                      {m.SUMMARY_ACTIONS_DOWNLOAD()}
                     </Stack>
-                  </MenuItem>
-                  {isLogged && (
-                    <MenuItem
-                      onClick={startCopy}
-                      id={LIBRARY_ACTION_GROUP_COPY_BUTTON_ID}
-                    >
-                      <Stack direction="row" gap={1}>
-                        <CopyAll />
-                        {t(LIBRARY.SUMMARY_ACTIONS_COPY)}
-                      </Stack>
-                    </MenuItem>
-                  )}
+                  </MenuItem> */}
+                  {/* {isLogged && (
+                    // <MenuItem
+                    //   onClick={startCopy}
+                    //   id={LIBRARY_ACTION_GROUP_COPY_BUTTON_ID}
+                    // >
+                    //   <Stack direction="row" gap={1}>
+                    //     <CopyAll />
+                    //     {m.SUMMARY_ACTIONS_COPY()}
+                    //   </Stack>
+                    // </MenuItem>
+                  // )*/}
                   <MenuItem onClick={startEmbed}>
                     <Stack direction="row" gap={1}>
                       <Code />
-                      {t(LIBRARY.SUMMARY_ACTIONS_EMBED)}
+                      {m.SUMMARY_ACTIONS_EMBED()}
                     </Stack>
                   </MenuItem>
                 </MenuList>
@@ -146,7 +143,7 @@ const SummaryActionButtons = ({
           </Grow>
         )}
       </Popper>
-      {treeModal}
+      {/* {treeModal} */}
     </>
   );
 };

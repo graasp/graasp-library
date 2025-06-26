@@ -1,7 +1,8 @@
+import type { JSX } from 'react';
+
 import { Box, Typography, styled, useTheme } from '@mui/material';
 
-import { useLibraryTranslation } from '../../../config/i18n';
-import LIBRARY from '../../../langs/constants';
+import { m } from '~/paraglide/messages';
 
 type ItemTagProps = Readonly<{
   createdAt: string;
@@ -13,7 +14,9 @@ type ItemTagProps = Readonly<{
 const MS_PER_DAY = 1000 * 60 * 60 * 24;
 const RECENT_DAYS = 4;
 
-const StyledItemTag = styled(Box)(({ tagColor }: { tagColor: string }) => ({
+const StyledItemTag = styled(Box, {
+  shouldForwardProp: (props) => props !== 'tagColor',
+})(({ tagColor }: { tagColor: string }) => ({
   position: 'absolute',
   m: 1,
   alignItems: 'center',
@@ -38,13 +41,12 @@ export function ItemTag({
   updatedAt,
   showIsContentTag = false,
 }: ItemTagProps): JSX.Element | null {
-  const { t } = useLibraryTranslation();
   const theme = useTheme();
   if (showIsContentTag && isChild) {
     return (
       <StyledItemTag tagColor={theme.palette.primary.main}>
         <Typography variant="body2" fontSize={13}>
-          {t(LIBRARY.CONTENT_CHIP).toUpperCase()}
+          {m.CONTENT_CHIP().toUpperCase()}
         </Typography>
       </StyledItemTag>
     );
@@ -57,8 +59,8 @@ export function ItemTag({
 
   const color = recentlyCreated ? '#84F05E' : '#F08D55';
   const text = recentlyCreated
-    ? t(LIBRARY.COLLECTION_CARD_TAG_NEW)
-    : t(LIBRARY.COLLECTION_CARD_TAG_UPDATED);
+    ? m.COLLECTION_CARD_TAG_NEW()
+    : m.COLLECTION_CARD_TAG_UPDATED();
 
   if (recentlyCreated || recentlyUpdated) {
     return (

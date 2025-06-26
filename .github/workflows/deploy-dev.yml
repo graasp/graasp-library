@@ -1,12 +1,9 @@
 name: Deploy to development environment
 
-# Controls when the action will run.
 on:
-  # Triggers the workflow on push events only for the main branch
   push:
     branches:
       - main
-      - master
 
   # Allows to run the workflow manually from the Actions tab
   workflow_dispatch:
@@ -20,38 +17,65 @@ on:
         type: "string"
         required: true
 
-# This workflow is made up of one job that calls the reusable workflow in graasp-deploy
+permissions:
+  id-token: write # This is required for requesting the JWT to auth via OIDC
+  contents: read # This is required for actions/checkout
+
+concurrency:
+  group: deploy-${{ inputs.environment }}
+  cancel-in-progress: false
+
 jobs:
-  graasp-deploy-ecs-workflow:
-    name: Graasp Library
-    # Reference reusable workflow file. Using the commit SHA is the safest for stability and security
-    uses: graasp/graasp-deploy/.github/workflows/library-deploy-dev.yml@v1
-    # abort previous deployment if a newer one is in progress
-    concurrency:
-      group: deploy-development
-      cancel-in-progress: true
-    with:
-      app-name: graasp-library
-      app-version: ${{ github.sha }}
-      next-public-graasp-account-host: ${{ vars.NEXT_PUBLIC_GRAASP_ACCOUNT_HOST_DEV }}
-      ecs-task-definition: '.aws/graasp-library-dev.json'
-    secrets:
-      aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
-      aws-region: ${{ secrets.AWS_REGION_DEV }}
-      aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
-      container-name-library: ${{ secrets.CONTAINER_NAME_GRAASP_EXPLORE_DEV }}
-      ecr-repository: ${{ secrets.ECR_REPOSITORY_GRAASP_EXPLORE_DEV }}
-      ecs-cluster: ${{ secrets.ECS_CLUSTER_GRAASP_EXPLORE_DEV }}
-      ecs-service: ${{ secrets.ECS_SERVICE_GRAASP_EXPLORE_DEV }}
-      next-public-api-host: ${{ secrets.NEXT_PUBLIC_API_HOST_DEV }}
-      next-public-domain: ${{ secrets.REACT_APP_DOMAIN_DEV }}
-      next-public-ga-measurement-id: ${{ secrets.REACT_APP_GA_MEASUREMENT_ID_DEV }}
-      next-public-graasp-analytics-host: ${{ secrets.ANALYZER_CLIENT_HOST_DEV }}
-      next-public-graasp-auth-host: ${{ secrets.NEXT_PUBLIC_GRAASP_AUTH_HOST_DEV }}
-      next-public-graasp-builder-host: ${{ secrets.BUILDER_CLIENT_HOST_DEV }}
-      next-public-graasp-perform-host: ${{ secrets.PLAYER_CLIENT_HOST_DEV }}
-      next-public-graasper-id: ${{ secrets.NEXT_PUBLIC_GRAASPER_ID }}
-      next-public-show-notifications: ${{ secrets.NEXT_PUBLIC_SHOW_NOTIFICATIONS }}
-      next-public-sentry-dsn: ${{ secrets.SENTRY_DSN }}
-      next-public-sentry-env: development
-      port: ${{ secrets.PORT }}
+  deploy:
+    name: Deploy to ${{ inputs.environment || 'dev' }}
+    environment: ${{ inputs.environment || 'dev' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.version || 'main' }}
+
+      # auth to aws
+      - name: Configure AWS Credentials to assume deployment Role
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE }}
+          role-session-name: GitHub_Action_deploy_library
+          aws-region: ${{ vars.AWS_REGION }}
+
+      # auth docker to ECR registry
+      - name: Auth Docker to AWS ECR
+        run: bash ./docker/auth.sh ${{ vars.AWS_ECR_URI }} ${{ vars.AWS_REGION }}
+        shell: bash
+
+      - name: Build image
+        run: |
+          docker build \
+          -t ${{ vars.AWS_ECR_URI }}:latest \
+          -f Dockerfile \
+          --platform linux/amd64 \
+          --build-arg APP_VERSION=${{ inputs.version || 'main' }} \
+          --build-arg BUILD_TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%S) \
+          --build-arg VITE_API_HOST=${{ vars.VITE_API_HOST }} \
+          --build-arg VITE_CLIENT_HOST=${{ vars.VITE_CLIENT_HOST }} \
+          --build-arg VITE_HOST=${{ vars.VITE_CURRENT_HOST }} \
+          --build-arg SENTRY_DSN=${{ secrets.VITE_SENTRY_DSN }} \
+          --build-arg SENTRY_ORG=graasp \
+          --build-arg SENTRY_PROJECT=library \
+          --build-arg SENTRY_ENV=${{ inputs.environment || 'dev' }} \
+          --secret id=SENTRY_AUTH_TOKEN \
+          .
+        shell: bash
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+
+      # push image to ECR
+      - name: Push image
+        run: docker push ${{ vars.AWS_ECR_URI }}:latest
+
+      # trigger service re-deployment
+      - name: Force new deployment of library service
+        run: |
+          aws ecs update-service --cluster graasp-${{ inputs.environment || 'dev' }} --service graasp-library --force-new-deployment
