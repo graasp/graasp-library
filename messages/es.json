@@ -32,6 +32,7 @@
   "ALL_COLLECTIONS_CLEAR_SELECTION_BUTTON": "Selección clara",
   "ALL_COLLECTIONS_SELECTION_BY_CATEGORIES_TITLE": "Colecciones en categorías seleccionadas",
   "HEADER_MY_LISTS": "Mis listas",
+  "SEARCH_PAGE_TITLE": "Buscar entre {{count}} colecciones",
   "SEARCH_PAGE_TITLE_CONTENT": "Buscar entre {{count}} recursos",
   "SEARCH_PAGE_TITLE_CONTENT_many": "Buscar entre {{count}} recursos",
   "SEARCH_PAGE_TITLE_CONTENT_other": "Busque entre más de {{count}} recursos",
