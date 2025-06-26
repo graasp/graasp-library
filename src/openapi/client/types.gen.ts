@@ -2136,7 +2136,12 @@ export type CreateChatbotCompletionPromptData = {
     /**
      * Model to use
      */
-    gptVersion?: 'gpt-3.5-turbo-0125' | 'gpt-4' | 'gpt-4-turbo' | 'gpt-4o';
+    gptVersion?:
+      | 'gpt-3.5-turbo-0125'
+      | 'gpt-4-turbo'
+      | 'gpt-4o'
+      | 'gpt-4o-mini'
+      | 'gpt-4.1-nano';
     temperature?: number;
   };
   url: '/app-items/{itemId}/chat-bot';
@@ -2609,7 +2614,16 @@ export type GetFacetsForNameData = {
     query?: string;
     langs?: Array<string>;
     isPublishedRoot?: boolean;
-    facets?: Array<string>;
+    facets?: Array<
+      | 'isPublishedRoot'
+      | 'isHidden'
+      | 'lang'
+      | 'likes'
+      | 'creator'
+      | 'level'
+      | 'discipline'
+      | 'resource-type'
+    >;
     tags?: {
       level?: Array<string>;
       discipline?: Array<string>;
@@ -2618,7 +2632,15 @@ export type GetFacetsForNameData = {
   };
   path?: never;
   query: {
-    facetName: string;
+    facetName:
+      | 'isPublishedRoot'
+      | 'isHidden'
+      | 'lang'
+      | 'likes'
+      | 'creator'
+      | 'level'
+      | 'discipline'
+      | 'resource-type';
   };
   url: '/items/collections/facets';
 };
