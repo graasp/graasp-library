@@ -1,5 +1,4 @@
 {
-  "$schema": "https://inlang.com/schema/inlang-message-format",
   "GRAASP_LIBRARY": "Graasp Library",
   "GRAASP_LIBRARY_DESCRIPTION": "Graasp Library ist eine Open-Source-Plattform, die Lernressourcen als Sammlungen bereitstellt.",
   "GUEST": "Gast",
@@ -33,25 +32,16 @@
   "ALL_COLLECTIONS_CLEAR_SELECTION_BUTTON": "Auswahl löschen",
   "ALL_COLLECTIONS_SELECTION_BY_CATEGORIES_TITLE": "Sammlungen in ausgewählten Kategorien",
   "HEADER_MY_LISTS": "Meine Listen",
-  "SEARCH_PAGE_TITLE": [
-    {
-      "declarations": [
-        "input count",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [],
-      "match": {
-        "count=*": "Suche in {count} Sammlungen",
-        "countPlural=other": "Suche unter {count} Ressourcen",
-        "countPlural=one": "Suche unter {count} Ressourcen"
-      }
-    }
-  ],
+  "SEARCH_PAGE_TITLE": "Suche in {{count}} Sammlungen",
+  "SEARCH_PAGE_TITLE_CONTENT": "Suche unter {{count}} Ressourcen",
+  "SEARCH_PAGE_TITLE_CONTENT_many": "Suche unter {count} } Ressourcen",
+  "SEARCH_PAGE_TITLE_CONTENT_other": "Suche unter mehr als {count} } Ressourcen",
   "SEARCH_RANGE_LABEL": "Suchbereich",
   "SEARCH_RANGES_TITLE": "Titel",
   "SEARCH_RANGES_TAGS": "Tag",
   "SEARCH_RANGES_AUTHOR": "Autor",
   "SEARCH_BUTTON_ARIA_LABEL": "Suche",
+  "SEARCH_FILTER_EMPTY": "Kein entsprechender Filter",
   "SEARCH_ARIA_LABEL": "Sammlungen durchsuchen",
   "SEARCH_PLACEHOLDER": "Sammlungen durchsuchen…",
   "SEARCH_RESULTS_FOR_TEXT_one": "{count} Suchergebniss für: {search}",
@@ -68,6 +58,7 @@
   "CREATE_BUTTON_TOOLTIP": "Erstellen Sie Ihre eigene Sammlung",
   "COLLECTION_TAGS_TITLE": "Tags",
   "COLLECTION_LANGUAGE_TITLE": "Sprache",
+  "SEARCH_FILTER_LANG_TITLE": "Sprachen",
   "PROFILE_BUTTON": "Konto",
   "COLLECTIONS_COUNT_MESSAGE_one": "{count} Sammlung verfügbar",
   "COLLECTIONS_COUNT_MESSAGE_other": "{count} Sammlungen verfügbar",
@@ -93,7 +84,6 @@
   "COPY_ITEM_TOASTR_LINK": "Klicken Sie hier, um den Artikel auf Graasp zu öffnen.",
   "COPY_LINK_SUCCESS_MESSAGE": "Der Link wurde erfolgreich kopiert.",
   "COPY_LINK_FAILURE_MESSAGE": "Beim Kopieren des Links ist ein Fehler aufgetreten.",
-  "COPY_MODAL_MY_GRAASP_BREADCRUMB": "Mein Graasp",
   "AVATAR_ALT": "Avatar von {name}",
   "COLLECTION_EMPTY_DESCRIPTION_TEXT": "Dieses Element hat keine Beschreibung.",
   "COLLECTION_INFO_BUTTON": "Information",
@@ -136,28 +126,6 @@
   "PROFILE_SETTINGS": "Profil",
   "EDIT": "Bearbeiten",
   "SOCIAL_PROFILES": "Profile in sozialen Netzwerken",
-  "SEARCH_PAGE_TITLE_CONTENT": [
-    {
-      "declarations": [
-        "input count",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [
-        "count"
-      ],
-      "match": {
-        "count=*": "Suche unter {count} } Ressourcen",
-        "countPlural=one": "Suche unter {count} Ressourcen",
-        "countPlural=many": "Suche unter {count} Ressourcen",
-        "countPlural=other": "Suchen Sie unter mehr als {count} Ressourcen",
-        "countPlural=zero": "Keine Sammlungen zum Durchsuchen verfügbar"
-      }
-    }
-  ],
-  "SEARCH_PAGE_TITLE_CONTENT_many": "Suche unter {count} } Ressourcen",
-  "SEARCH_PAGE_TITLE_CONTENT_other": "Suche unter mehr als {count} } Ressourcen",
-  "SEARCH_FILTER_EMPTY": "Kein entsprechender Filter",
-  "SEARCH_FILTER_LANG_TITLE": "Sprachen",
   "DRAWER_AUTHENTICATED_USER_LINKS_SECTION": "Meine Links",
   "DRAWER_ALL_COLLECTIONS_TEXT": "Suchen",
   "DRAWER_OER_INFORMATION_TEXT": "Informationen zu OER",
@@ -171,6 +139,7 @@
   "COPY_MODAL_HOME_TITLE": "Heim",
   "COPY_MODAL_RECENT_TITLE": "Aktuelle Artikel",
   "COPY_MODAL_SUBMIT_BUTTON": "Einreichen",
+  "COPY_MODAL_MY_GRAASP_BREADCRUMB": "Mein Graasp",
   "OER_INFORMATION_BASICS_TEXT": "Ihre Unterrichtsvorbereitung ist in vollem Gange und das Lehrbuch veraltet?<bold> OER</bold> , oder<bold> Offene Bildungsressourcen</bold> im Web kann eine tolle Alternative sein. Ob Arbeitsblätter, Fotos oder Grafiken: Je nach Lizenz können Lehrkräfte die Materialien nicht nur nutzen, sondern auch direkt für ihren Unterricht anpassen. Wie das genau funktioniert, erklärt dieses Video.",
   "OER_INFORMATION_QUALITY_TEXT": "Bisher gibt es kein Qualitätssiegel für OER-Materialien. Viele Pädagogen empfinden das als beunruhigend. Ähnlich wie bei Wikipedia betreuen jedoch Mitglieder von Online-Communitys OER-Materialien. Und je größer diese Communities werden, desto mehr Fachwissen und pädagogisches Wissen fließen zusammen.",
   "OER_INFORMATION_PAGE_TITLE": "Was sind OER?",
@@ -186,89 +155,9 @@
   "OER_INFORMATION_VIDEO_DESCRIPTION_PRODUCTION": "Produktion",
   "OER_INFORMATION_VIDEO_DESCRIPTION_DURATION": "Dauer",
   "OER_INFORMATION_VIDEO_DESCRIPTION_EDITION": "Ausgabe",
-  "DURATION_IN_MINUTES": [
-    {
-      "declarations": [
-        "input count",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [
-        "countPlural"
-      ],
-      "match": {
-        "countPlural=one": "{count} Minute",
-        "countPlural=other": "{count} Minuten"
-      }
-    }
-  ],
+  "DURATION_IN_MINUTES_one": "{{count}} Minute",
+  "DURATION_IN_MINUTES_other": "{{count}} Minuten",
   "START_COPY_SUCCESS_MESSAGE": "Die Elemente werden kopiert...",
   "COPY_ITEM_PAGINATION_NEXT": "Nächste",
-  "COPY_ITEM_PAGINATION_PREV": "Vorherige",
-  "SEARCH_RESULTS_FOR_TEXT": [
-    {
-      "declarations": [
-        "input count",
-        "input search",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [
-        "count",
-        "countPlural",
-        "search"
-      ],
-      "match": {
-        "count=*, search=*": "{count} Ergebnis gefunden für: {search}",
-        "countPlural=one": "{count} Ergebnis gefunden für: {search}",
-        "countPlural=other": "Es wurden {count} Ergebnisse gefunden für: {search}"
-      }
-    }
-  ],
-  "CANCEL_BUTTON": "Stornieren",
-  "COPY_ITEM_SUCCESS": "Der Artikel wurde erfolgreich kopiert",
-  "BACK": "Zurück",
-  "SUMMARY_ITEMS_SHOW_LESS": "{count} Element ausblenden",
-  "DISCIPLINES_LABEL": "Disziplinen",
-  "LEVEL_LABEL": "Ebenen",
-  "RESOURCE_TYPE_LABEL": "Ressourcentypen",
-  "COLLECTION_NOT_FOUND": "Sammlung nicht gefunden",
-  "RESET": "Zurücksetzen",
-  "COLLECTION_ERROR_TITLE": "Fehler beim Laden der Sammlung",
-  "HEADER_INDEX": "Bibliothek",
-  "HEADER_SEARCH": "Suchen",
-  "COPY_ITEM_TO_CLIPBOARD_SUCCESS": "Das Element wurde erfolgreich in die Zwischenablage kopiert",
-  "COPY_ITEM_TO_CLIPBOARD_ERROR": "Beim Kopieren des Elements in die Zwischenablage ist ein Fehler aufgetreten",
-  "SUMMARY_BROWSE_FOLDER_CONTAINS": [
-    {
-      "declarations": [
-        "input count",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [
-        "countPlural"
-      ],
-      "match": {
-        "countPlural=zero": "Ordner leeren",
-        "countPlural=one": "{count}",
-        "countPlural=other": "{count} Dateien"
-      }
-    }
-  ],
-  "COLLECTIONS_COUNT_MESSAGE": [
-    {
-      "declarations": [
-        "input count",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [
-        "count",
-        "countPlural"
-      ],
-      "match": {
-        "count=*": "{count} Sammlung verfügbar",
-        "countPlural=one": "{count} Sammlung verfügbar",
-        "countPlural=other": "{count} Sammlungen verfügbar"
-      }
-    }
-  ],
-  "LOGIN_REQUIRED": "Sie müssen angemeldet sein, um diese Aktion auszuführen"
+  "COPY_ITEM_PAGINATION_PREV": "Vorherige"
 }
