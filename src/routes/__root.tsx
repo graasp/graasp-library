@@ -1,5 +1,4 @@
 import React from 'react';
-import reactQuillCSS from 'react-quill/dist/quill.snow.css?url';
 import { ToastContainer } from 'react-toastify';
 
 import {
@@ -46,7 +45,10 @@ export const Route = wrapCreateRootRouteWithSentry(
     ],
     links: [
       { rel: 'stylesheet', href: fontsourceVariableNunitoCss },
-      { rel: 'stylesheet', href: reactQuillCSS },
+      {
+        rel: 'stylesheet',
+        href: 'https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css',
+      },
       { rel: 'stylesheet', href: katexCSS },
     ],
   }),
