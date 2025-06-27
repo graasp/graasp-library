@@ -2609,7 +2609,16 @@ export type GetFacetsForNameData = {
     query?: string;
     langs?: Array<string>;
     isPublishedRoot?: boolean;
-    facets?: Array<string>;
+    facets?: Array<
+      | 'isPublishedRoot'
+      | 'isHidden'
+      | 'lang'
+      | 'likes'
+      | 'creator'
+      | 'level'
+      | 'discipline'
+      | 'resource-type'
+    >;
     tags?: {
       level?: Array<string>;
       discipline?: Array<string>;
@@ -2618,7 +2627,15 @@ export type GetFacetsForNameData = {
   };
   path?: never;
   query: {
-    facetName: string;
+    facetName:
+      | 'isPublishedRoot'
+      | 'isHidden'
+      | 'lang'
+      | 'likes'
+      | 'creator'
+      | 'level'
+      | 'discipline'
+      | 'resource-type';
   };
   url: '/items/collections/facets';
 };
