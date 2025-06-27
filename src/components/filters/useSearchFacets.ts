@@ -6,7 +6,7 @@ import { getFacetsForNameOptions } from '~/openapi/client/@tanstack/react-query.
 
 export const useSearchFacets = (
   args: {
-    facetName: string;
+    facetName: GetFacetsForNameData['query']['facetName'];
     keywordSearch: string;
   } & GetFacetsForNameData['body'],
 ) => {
