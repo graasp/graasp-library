@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.1](https://github.com/graasp/graasp-library/compare/v2.0.0...v2.0.1) (2025-07-03)
+
+
+### Bug Fixes
+
+* remove trim on home page header ([acdecb0](https://github.com/graasp/graasp-library/commit/acdecb01d8f8eecf5fd8dce8eadcbdb88a5d7845))
+
 ## [2.0.0](https://github.com/graasp/graasp-library/compare/v1.16.0...v2.0.0) (2025-06-26)
 
 
