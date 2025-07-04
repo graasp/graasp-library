@@ -4028,14 +4028,14 @@ export const getItemsH5pAssetsIntegrationHtmlOptions = (
   });
 };
 
-export const importH5PQueryKey = (options?: Options<ImportH5pData>) =>
+export const importH5pQueryKey = (options?: Options<ImportH5pData>) =>
   createQueryKey('importH5P', options);
 
 /**
  * Import H5P file
  * Import H5P file and create corresponding item.
  */
-export const importH5POptions = (options?: Options<ImportH5pData>) => {
+export const importH5pOptions = (options?: Options<ImportH5pData>) => {
   return queryOptions({
     queryFn: async ({ queryKey, signal }) => {
       const { data } = await importH5P({
@@ -4046,7 +4046,7 @@ export const importH5POptions = (options?: Options<ImportH5pData>) => {
       });
       return data;
     },
-    queryKey: importH5PQueryKey(options),
+    queryKey: importH5pQueryKey(options),
   });
 };
 
@@ -4054,7 +4054,7 @@ export const importH5POptions = (options?: Options<ImportH5pData>) => {
  * Import H5P file
  * Import H5P file and create corresponding item.
  */
-export const importH5PMutation = (
+export const importH5pMutation = (
   options?: Partial<Options<ImportH5pData>>,
 ): UseMutationOptions<
   ImportH5pResponse,
