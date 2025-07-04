@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.2](https://github.com/graasp/graasp-library/compare/v2.0.1...v2.0.2) (2025-07-04)
+
+
+### Bug Fixes
+
+* **deps:** update mui (non-major) to v7.2.0 ([#792](https://github.com/graasp/graasp-library/issues/792)) ([00c529c](https://github.com/graasp/graasp-library/commit/00c529c9a2ed05e85f4cfd881c99f70c5d9f9d36))
+* upgrade hey-api and remove hey-api/client-fetch ([#786](https://github.com/graasp/graasp-library/issues/786)) ([0ddfb7b](https://github.com/graasp/graasp-library/commit/0ddfb7bbfaf8b67cfd13a99abf64bf4e0f28a237))
+
 ## [2.0.1](https://github.com/graasp/graasp-library/compare/v2.0.0...v2.0.1) (2025-07-03)
 
 
