@@ -11,6 +11,8 @@ const StyledCustomLink = styled(CustomLink)(({ theme }) => ({
   color: theme.palette.common.white,
 }));
 
+const activeLinkProps = () => ({ style: { textDecoration: 'underline' } });
+
 export function Header({ clientOrigin }: Readonly<{ clientOrigin: string }>) {
   const homeLink = `${clientOrigin}/home`;
   return (
@@ -33,11 +35,15 @@ export function Header({ clientOrigin }: Readonly<{ clientOrigin: string }>) {
                 to={homeLink}
                 marginInlineEnd={{ xs: 0, md: 6 }}
               />
-              <StyledCustomLink to="/">{m.HEADER_INDEX()}</StyledCustomLink>
-              <StyledCustomLink to="/search">
+              <StyledCustomLink activeProps={activeLinkProps} to="/">
+                {m.HEADER_INDEX()}
+              </StyledCustomLink>
+              <StyledCustomLink activeProps={activeLinkProps} to="/search">
                 {m.HEADER_SEARCH()}
               </StyledCustomLink>
-              <StyledCustomLink to="/oer">{m.HEADER_OER()}</StyledCustomLink>
+              <StyledCustomLink activeProps={activeLinkProps} to="/oer">
+                {m.HEADER_OER()}
+              </StyledCustomLink>
             </Stack>
             <Stack direction="row" gap={2} color="white" alignItems="center">
               <LanguageSwitch iconColor="white" />
