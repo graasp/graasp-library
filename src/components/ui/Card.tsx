@@ -19,20 +19,19 @@ import { PRIMARY_COLOR } from './theme.js';
 
 const DEFAULT_CARD_HEIGHT = 130;
 
-const PROPS_TO_FORWARD = ['elevation', 'fullWidth', 'isSelected', 'isOver'];
+const PROPS_TO_FORWARD = ['raised', 'fullWidth', 'isSelected'];
 const StyledCard = styled(MuiCard, {
   shouldForwardProp: (prop: string) => !PROPS_TO_FORWARD.includes(prop),
 })<{
-  isOver: boolean;
   fullWidth?: boolean;
-  elevation?: boolean;
+  raised?: boolean;
   isSelected?: boolean;
-}>(({ theme, elevation, fullWidth, isOver, isSelected }) => ({
+}>(({ theme, raised, fullWidth, isSelected }) => ({
   borderRadius: theme.spacing(1),
-  boxShadow: elevation ? theme.shadows[2] : '0px 2px 2px #eeeeee',
+  boxShadow: raised ? theme.shadows[2] : '0px 2px 2px #eeeeee',
   width: fullWidth ? '100%' : 'max-content',
   maxWidth: '100%',
-  outline: isOver || isSelected ? `2px solid ${PRIMARY_COLOR}` : 'none',
+  outline: isSelected ? `2px solid ${PRIMARY_COLOR}` : 'none',
 }));
 
 type CardProps = {
@@ -122,15 +121,12 @@ const Card = ({
   if (dense) {
     return (
       <StyledCard
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        elevation={elevation}
+        raised={elevation}
         // && !isDragging}
         id={id}
         className={className}
         sx={sx}
         fullWidth={fullWidth}
-        // isOver={isOver}
         isSelected={isSelected}
       >
         <Stack
@@ -217,14 +213,7 @@ const Card = ({
   }
 
   return (
-    <StyledCard
-      // isOver={isOver}
-      isOver={false}
-      id={id}
-      sx={sx}
-      fullWidth={fullWidth}
-      className={className}
-    >
+    <StyledCard id={id} sx={sx} fullWidth={fullWidth} className={className}>
       <Stack sx={{ height, boxSizing: 'border-box' }} direction="row" gap={2}>
         {/* <CardThumbnail
           width={height}
