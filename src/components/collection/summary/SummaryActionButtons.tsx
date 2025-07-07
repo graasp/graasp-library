@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
 import type { JSX } from 'react';
 
-import { Code, MoreVert } from '@mui/icons-material';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import {
   Button,
   ButtonGroup,
   ClickAwayListener,
   Grow,
+  ListItemIcon,
+  ListItemText,
   MenuItem,
   MenuList,
   Paper,
   Popper,
-  Stack,
 } from '@mui/material';
 
 import { useLoaderData } from '@tanstack/react-router';
+import { LinkIcon, MoreVerticalIcon } from 'lucide-react';
 
 import { PackedItem } from '~/openapi/client';
 import { m } from '~/paraglide/messages';
@@ -85,12 +86,12 @@ const SummaryActionButtons = ({
           size="small"
           aria-controls={open ? 'split-button-menu' : undefined}
           aria-expanded={open ? 'true' : undefined}
-          aria-label="select merge strategy"
+          aria-label={m.PREVIEW_BUTTON_MORE_ACTIONS()}
           aria-haspopup="menu"
           onClick={handleToggle}
           id={LIBRARY_ACTION_GROUP_BUTTON_ID}
         >
-          <MoreVert />
+          <MoreVerticalIcon />
         </Button>
       </ButtonGroup>
       <Popper
@@ -132,10 +133,10 @@ const SummaryActionButtons = ({
                     // </MenuItem>
                   // )*/}
                   <MenuItem onClick={startEmbed}>
-                    <Stack direction="row" gap={1}>
-                      <Code />
-                      {m.SUMMARY_ACTIONS_EMBED()}
-                    </Stack>
+                    <ListItemIcon>
+                      <LinkIcon />
+                    </ListItemIcon>
+                    <ListItemText>{m.SUMMARY_ACTIONS_EMBED()}</ListItemText>
                   </MenuItem>
                 </MenuList>
               </ClickAwayListener>

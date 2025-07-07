@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test';
 
 const geogebraId = '47238afb-5e21-4cf8-b2b1-5904af82a155';
+const CLIENT_HOST = process.env.VITE_CLIENT_HOST;
 
 test('Search flow', async ({ page }) => {
   await page.goto('/');
@@ -64,6 +65,27 @@ test('Like a collection', async ({ page }) => {
   await page.getByRole('button', { name: 'like' }).click();
   // expect the page to get a response to the like action
   const _ = await likePromise;
+});
+
+test('Copy a collection embedding link', async ({ page, browserName }) => {
+  test.skip(
+    browserName === 'webkit',
+    'Webkit does not allow checking the clipboard in tests',
+  );
+  // got to the collection page
+  await page.goto(`/collections/${geogebraId}`);
+
+  await page.getByRole('button', { name: 'More actions' }).click();
+  await page.getByRole('menuitem', { name: 'Copy link to content' }).click();
+
+  // Read clipboard content
+  const embeddedLink = await page.evaluate(async () => {
+    return await navigator.clipboard.readText();
+  });
+
+  expect(embeddedLink).toBe(
+    `${CLIENT_HOST}/player/${geogebraId}/${geogebraId}`,
+  );
 });
 
 test('Play a collection', async ({ page, context, browserName }) => {

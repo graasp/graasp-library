@@ -117,7 +117,7 @@
   "SUMMARY_ACTIONS_PREVIEW_CONTENT": "Preview",
   "SUMMARY_ACTIONS_DOWNLOAD": "Download",
   "SUMMARY_ACTIONS_COPY": "Copy",
-  "SUMMARY_ACTIONS_EMBED": "Embed",
+  "SUMMARY_ACTIONS_EMBED": "Copy link to content",
   "FILTER_DROPDOWN_NO_FILTER": "No filter…",
   "FILTER_DROPDOWN_CLEAR_FILTERS": "Clear",
   "FILTER_DROPDOWN_NO_CATEGORIES_AVAILABLE": "No categories available",
@@ -218,5 +218,6 @@
       }
     }
   ],
-  "LOGIN_REQUIRED": "You need to be logged in to perform this action"
+  "LOGIN_REQUIRED": "You need to be logged in to perform this action",
+  "PREVIEW_BUTTON_MORE_ACTIONS": "More actions"
 }
