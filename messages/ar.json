@@ -124,7 +124,7 @@
   "FILTER_DROPDOWN_NO_CATEGORIES_AVAILABLE": "لا توجد فئات متاحة",
   "ENABLE_IN_DEPTH_SEARCH_LABEL": "تمكين البحث المتعمق",
   "SEE_MORE_RESULTS_SEARCH": "شاهد {total} المزيد من النتائج",
-  "SUGGESTION_TO_ENABLE_IN_DEPTH_SEARCH_TEXT": "ألا يمكنك العثور على ما بحثت عنه؟<br/>حاول تمكين البحث المتعمق لتضمين المحتوى",
+  "SUGGESTION_TO_ENABLE_IN_DEPTH_SEARCH_TEXT": "ألا يمكنك العثور على ما بحثت عنه؟حاول تمكين البحث المتعمق لتضمين المحتوى",
   "SEARCH_NO_RESULTS": "لا شيء يتوافق مع بحثك",
   "SEARCH_RESULTS_LOAD_MORE": "تحميل المزيد",
   "CONTENT_CHIP": "محتوى",

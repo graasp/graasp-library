@@ -123,7 +123,7 @@
   "FILTER_DROPDOWN_NO_CATEGORIES_AVAILABLE": "No categories available",
   "ENABLE_IN_DEPTH_SEARCH_LABEL": "Enable in-depth Search",
   "SEE_MORE_RESULTS_SEARCH": "See {total} more results",
-  "SUGGESTION_TO_ENABLE_IN_DEPTH_SEARCH_TEXT": "Cannot find what you looked for?<br/>Try to enable in-depth search to include content",
+  "SUGGESTION_TO_ENABLE_IN_DEPTH_SEARCH_TEXT": "Cannot find what you looked for? Try to enable in-depth search to include content",
   "SEARCH_NO_RESULTS": "Nothing corresponds to your search",
   "SEARCH_RESULTS_LOAD_MORE": "Load more",
   "CONTENT_CHIP": "Content",
