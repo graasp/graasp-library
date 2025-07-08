@@ -27,22 +27,15 @@ import {
 } from '../../../config/selectors';
 import { useEmbedAction } from '../CopyLinkButton';
 
-// import { useCopyAction } from '../CopyButton';
-// import { useDownloadAction } from '../DownloadButton';
-
 type SummaryActionButtonsProps = {
   item: PackedItem;
   isLogged: boolean;
 };
 
-const SummaryActionButtons = ({
+export function SummaryActionButtons({
   item,
-  // isLogged,
-}: SummaryActionButtonsProps): JSX.Element => {
+}: Readonly<SummaryActionButtonsProps>): JSX.Element {
   const { clientOrigin } = useLoaderData({ from: '__root__' });
-  // const { treeModal, startCopy } = useCopyAction(item.id);
-
-  // const { startDownload } = useDownloadAction(item.id);
 
   const { startEmbed } = useEmbedAction(item.id);
 
@@ -54,10 +47,7 @@ const SummaryActionButtons = ({
   };
 
   const handleClose = (event: Event) => {
-    if (
-      anchorRef.current &&
-      anchorRef.current.contains(event.target as HTMLElement)
-    ) {
+    if (anchorRef.current?.contains(event.target as HTMLElement)) {
       return;
     }
 
@@ -115,23 +105,6 @@ const SummaryActionButtons = ({
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList id={LIBRARY_ACTION_GROUP_POP_UP_BUTTONS_ID}>
-                  {/* <MenuItem onClick={startDownload}>
-                    <Stack direction="row" gap={1}>
-                      <Download />
-                      {m.SUMMARY_ACTIONS_DOWNLOAD()}
-                    </Stack>
-                  </MenuItem> */}
-                  {/* {isLogged && (
-                    // <MenuItem
-                    //   onClick={startCopy}
-                    //   id={LIBRARY_ACTION_GROUP_COPY_BUTTON_ID}
-                    // >
-                    //   <Stack direction="row" gap={1}>
-                    //     <CopyAll />
-                    //     {m.SUMMARY_ACTIONS_COPY()}
-                    //   </Stack>
-                    // </MenuItem>
-                  // )*/}
                   <MenuItem onClick={startEmbed}>
                     <ListItemIcon>
                       <LinkIcon />
@@ -144,9 +117,6 @@ const SummaryActionButtons = ({
           </Grow>
         )}
       </Popper>
-      {/* {treeModal} */}
     </>
   );
-};
-
-export default SummaryActionButtons;
+}
