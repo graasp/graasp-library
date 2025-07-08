@@ -4,7 +4,6 @@ import { Favorite, Visibility } from '@mui/icons-material';
 import { Box, Divider, Stack, Tooltip, Typography } from '@mui/material';
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import truncate from 'lodash.truncate';
 
 import { categoryToQueryParams } from '~/components/filters/constants';
 import LikeButton from '~/components/ui/LikeButton/LikeButton';
@@ -22,7 +21,6 @@ import { m } from '~/paraglide/messages';
 import {
   DEFAULT_ITEM_IMAGE_PATH,
   DEFAULT_THUMBNAIL_ALT_TEXT,
-  MAX_COLLECTION_NAME_LENGTH,
 } from '../../../config/constants';
 import {
   ITEM_SUMMARY_TITLE_ID,
@@ -32,7 +30,7 @@ import { StyledCard } from '../../common/StyledCard';
 import { ChipLink } from '../../common/links/ChipLink';
 import Authorship from '../Authorship';
 import Badges from '../Badges';
-import SummaryActionButtons from './SummaryActionButtons';
+import { SummaryActionButtons } from './SummaryActionButtons';
 import { Description } from './SummaryDescription';
 
 type Props = {
@@ -107,11 +105,6 @@ export function SummaryHeader({
     }
   };
 
-  const truncatedName = truncate(collection.name, {
-    length: MAX_COLLECTION_NAME_LENGTH,
-    separator: /,? +/,
-  });
-
   return (
     <Stack
       direction={{ xs: 'column', sm: 'row' }}
@@ -163,17 +156,25 @@ export function SummaryHeader({
           flexWrap="wrap"
           alignItems={{ xs: 'start', sm: 'start' }}
         >
-          <Stack direction="row" alignItems="center" spacing={1} minWidth={0}>
+          <Stack
+            direction="row"
+            alignItems="center"
+            spacing={1}
+            minWidth={0}
+            flex={1}
+          >
             <Typography
               variant="h3"
               component="h1"
-              noWrap
+              sx={{ wordBreak: 'break-word' }}
               id={ITEM_SUMMARY_TITLE_ID}
               // allow to see full text on mouse hover
               title={collection.name}
             >
-              {truncatedName}
+              {collection.name}
             </Typography>
+          </Stack>
+          <Stack direction="row" gap={1}>
             <LikeButton
               ariaLabel="like"
               color="primary"
@@ -181,8 +182,8 @@ export function SummaryHeader({
               handleLike={handleLike}
               handleUnlike={handleUnlike}
             />
+            <SummaryActionButtons item={collection} isLogged={isLogged} />
           </Stack>
-          <SummaryActionButtons item={collection} isLogged={isLogged} />
         </Stack>
         {tags?.length ? (
           <Stack
