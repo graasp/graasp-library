@@ -9,9 +9,14 @@ import { UserAvatar } from './header/UserAvatar';
 
 const StyledCustomLink = styled(CustomLink)(({ theme }) => ({
   color: theme.palette.common.white,
+  fontWeight: 'bold',
 }));
 
-const activeLinkProps = () => ({ style: { textDecoration: 'underline' } });
+const activeLinkProps = () => ({
+  style: {
+    borderBottom: '1px solid currentColor',
+  },
+});
 
 export function Header({ clientOrigin }: Readonly<{ clientOrigin: string }>) {
   const homeLink = `${clientOrigin}/home`;
