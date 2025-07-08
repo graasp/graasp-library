@@ -86,7 +86,7 @@ export function BigCard({
                 textDecoration: 'unset',
                 color: 'unset',
                 cursor: 'pointer',
-                wordBreak: 'break-all',
+                wordBreak: 'break-word',
               }}
             >
               <TitleAndDescription
