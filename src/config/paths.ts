@@ -15,7 +15,7 @@ export const CLIENT_HOME_ROUTE = clientManager
   .toString();
 
 export const buildPlayerViewItemRoute = (id = ':id') =>
-  clientManager.getItemLink(Context.Auth, id);
+  clientManager.getItemLink(Context.Player, id);
 
 export const publicProfileAccountPath = clientManager
   .getURLByContext(Context.Account, 'settings')
