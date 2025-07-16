@@ -10,11 +10,18 @@ import { UserAvatar } from './header/UserAvatar';
 const StyledCustomLink = styled(CustomLink)(({ theme }) => ({
   color: theme.palette.common.white,
   fontWeight: 'bold',
+  '&:not(:hover)': {
+    borderBottom: '2px solid transparent',
+  },
+  '&:hover': {
+    textDecoration: 'none',
+    borderBottom: '2px solid currentColor',
+  },
 }));
 
 const activeLinkProps = () => ({
   style: {
-    borderBottom: '1px solid currentColor',
+    borderBottom: '2px solid currentColor',
   },
 });
 
