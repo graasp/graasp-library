@@ -76,7 +76,7 @@ test('Copy a collection embedding link', async ({ page, browserName }) => {
   await page.goto(`/collections/${geogebraId}`);
 
   await page.getByRole('button', { name: 'More actions' }).click();
-  await page.getByRole('menuitem', { name: 'Copy link to content' }).click();
+  await page.getByRole('menuitem', { name: 'Copy link' }).click();
 
   // Read clipboard content
   const embeddedLink = await page.evaluate(async () => {
