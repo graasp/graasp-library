@@ -35,7 +35,14 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome'],
+        permissions: [
+          /* Allow copy paste from browser context */
+          'clipboard-read',
+          'clipboard-write',
+        ],
+      },
     },
 
     {
