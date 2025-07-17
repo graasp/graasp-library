@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev --port 3002",
-    "start": "vite start",
+    "start": "pnpm dev",
     "build": "vite build",
     "build:test": "vite build --mode test",
     "start:test": "vite build --mode test && vite preview",
