@@ -53,6 +53,16 @@ test('Search flow', async ({ page }) => {
   ).toBeVisible();
 });
 
+test('All collections forwards search params', async ({ page }) => {
+  await page.goto('/all-collections?s=geogebra');
+  // url should be from search page and contain the search query
+  await expect(page).toHaveURL((url) => {
+    return (
+      url.pathname === '/search' && url.searchParams.get('s') === 'geogebra'
+    );
+  });
+});
+
 test('Like a collection', async ({ page }) => {
   // got to the collection page
   await page.goto(`/collections/${geogebraId}`);
