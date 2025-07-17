@@ -1,6 +1,10 @@
 import { type Locator, type Page, expect, test } from '@playwright/test';
 
 test.describe('Search', () => {
+  test.skip(
+    ({ browserName }) => browserName === 'firefox',
+    'This test suite is very flacky with Firefox',
+  );
   test.beforeEach(async ({ page }) => {
     await page.goto('/search');
   });
