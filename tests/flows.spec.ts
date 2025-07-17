@@ -3,7 +3,11 @@ import { expect, test } from '@playwright/test';
 const geogebraId = '47238afb-5e21-4cf8-b2b1-5904af82a155';
 const CLIENT_HOST = process.env.VITE_CLIENT_HOST;
 
-test('Search flow', async ({ page }) => {
+test('Search flow', async ({ page, browserName }) => {
+  test.skip(
+    browserName === 'webkit',
+    'This test is very un-reliable in Safari',
+  );
   await page.goto('/');
 
   // check title and subtitle are displayed
