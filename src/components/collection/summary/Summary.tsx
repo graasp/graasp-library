@@ -33,6 +33,7 @@ const Summary = ({
   return (
     <Stack
       maxWidth="lg"
+      width="100%"
       margin="auto"
       alignItems="flex-start"
       justifyItems="flex-start"
