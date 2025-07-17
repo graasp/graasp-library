@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.2](https://github.com/graasp/graasp-library/compare/v2.0.1...v2.0.2) (2025-07-17)
+
+
+### Bug Fixes
+
+* add active link styling on header ([#800](https://github.com/graasp/graasp-library/issues/800)) ([503d712](https://github.com/graasp/graasp-library/commit/503d71252feb118e8ab2ba4c2fc393968b7c1f42))
+* add all-collections param redirection and test ([#810](https://github.com/graasp/graasp-library/issues/810)) ([917cc44](https://github.com/graasp/graasp-library/commit/917cc4459ded2e916e75beee803098b856feac38))
+* **ci:** remove tests that are often flacky in safari ([#811](https://github.com/graasp/graasp-library/issues/811)) ([960000d](https://github.com/graasp/graasp-library/commit/960000d10e93232b7701c8a9a1efbc2847294751))
+* **deps:** update mui (non-major) to v7.2.0 ([#792](https://github.com/graasp/graasp-library/issues/792)) ([00c529c](https://github.com/graasp/graasp-library/commit/00c529c9a2ed05e85f4cfd881c99f70c5d9f9d36))
+* **deps:** update sentry packages ([#791](https://github.com/graasp/graasp-library/issues/791)) ([30f50f7](https://github.com/graasp/graasp-library/commit/30f50f789f79eeb756a0052e48435616e4455d2e))
+* **deps:** upgrade storybook dependencies ([#812](https://github.com/graasp/graasp-library/issues/812)) ([99c26c8](https://github.com/graasp/graasp-library/commit/99c26c8fd310715b11eecaa8b97b2f25c8190a94))
+* **deps:** upgrade tanstack dependencies ([#813](https://github.com/graasp/graasp-library/issues/813)) ([da2bfa6](https://github.com/graasp/graasp-library/commit/da2bfa60d694499d26deb1014201b383d9c5efa3))
+* embedded link in collection view ([#801](https://github.com/graasp/graasp-library/issues/801)) ([7702a09](https://github.com/graasp/graasp-library/commit/7702a09b8e6c72abb8cbf755e30ac32af6414ef1))
+* make title full-width and no ellipsis ([#803](https://github.com/graasp/graasp-library/issues/803)) ([cc0bfed](https://github.com/graasp/graasp-library/commit/cc0bfeda7375ca6e151a811aa23f548515a67175))
+* remove br tag in translations ([#804](https://github.com/graasp/graasp-library/issues/804)) ([0146dd3](https://github.com/graasp/graasp-library/commit/0146dd37730b3a4bbf50fbadb5f86b6c3aea6947))
+* update favicon to use purple one ([#809](https://github.com/graasp/graasp-library/issues/809)) ([24789fb](https://github.com/graasp/graasp-library/commit/24789fbe729d24c6add508e1b429f16c00454bc7))
+* upgrade hey-api and remove hey-api/client-fetch ([#786](https://github.com/graasp/graasp-library/issues/786)) ([0ddfb7b](https://github.com/graasp/graasp-library/commit/0ddfb7bbfaf8b67cfd13a99abf64bf4e0f28a237))
+* use sort instead of toSorted for compatibility ([#808](https://github.com/graasp/graasp-library/issues/808)) ([706ec1d](https://github.com/graasp/graasp-library/commit/706ec1d43546ef28cfe21df295c0c6ba9a4a1933))
+* word break on cards ([#802](https://github.com/graasp/graasp-library/issues/802)) ([bd8d7d1](https://github.com/graasp/graasp-library/commit/bd8d7d1dbc632544389f0b2b271763bdc0eb13b3))
+
 ## [2.0.1](https://github.com/graasp/graasp-library/compare/v2.0.0...v2.0.1) (2025-07-03)
 
 
