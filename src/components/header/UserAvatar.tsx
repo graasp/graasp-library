@@ -10,7 +10,7 @@ import { useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 import { createLink, useLoaderData } from '@tanstack/react-router';
 import type { LinkComponent } from '@tanstack/react-router';
 
-import { getCurrentAccount, getLogout } from '~/openapi/client';
+import { getCurrentAccount, signOut } from '~/openapi/client';
 import {
   downloadAvatarOptions,
   getCurrentAccountOptions,
@@ -81,7 +81,7 @@ export function SuspendedUserAvatar() {
           <Divider flexItem />
           <MenuItem
             onClick={async () => {
-              await getLogout();
+              await signOut();
               // force-reload of queries
               queryClient.resetQueries();
             }}

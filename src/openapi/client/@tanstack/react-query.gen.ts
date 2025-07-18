@@ -37,6 +37,7 @@ import {
   createLink,
   createMembershipRequest,
   createOwnProfile,
+  createPassword,
   createShortLink,
   createShortcut,
   createTagForItem,
@@ -106,10 +107,8 @@ import {
   getLikesForCurrentMember,
   getLikesForItem,
   getLinkMetadata,
-  getLogout,
   getMemberProfile,
   getMembersActions,
-  getMembersCurrentPasswordStatus,
   getMembershipRequestsByItemId,
   getMostLikedCollections,
   getMostRecentCollections,
@@ -119,6 +118,7 @@ import {
   getOwnMembershipRequestByItemId,
   getOwnMentions,
   getOwnMostUsedApps,
+  getOwnPasswordStatus,
   getOwnProfile,
   getOwnRecycledItems,
   getParentItems,
@@ -144,22 +144,21 @@ import {
   patchChangeEmail,
   patchChatMessage,
   patchMention,
-  patchPassword,
-  patchPasswordReset,
   postAction,
   postChangeEmail,
   postItemsByIdThumbnails,
-  postLoginPassword,
   postMembersAvatar,
-  postPassword,
-  postPasswordReset,
   publishItem,
   putGeolocation,
   recycleManyItems,
   register,
   reorderItem,
+  requestPasswordResetLink,
+  resetPassword,
   restoreManyItems,
   sendInvitation,
+  signInWithPassword,
+  signOut,
   unpublishItem,
   updateApp,
   updateAppData,
@@ -175,6 +174,7 @@ import {
   updateItemMembership,
   updateLink,
   updateOwnProfile,
+  updatePassword,
   updateShortLink,
   updateShortcut,
   uploadFile,
@@ -258,6 +258,9 @@ import type {
   CreateOwnProfileData,
   CreateOwnProfileError,
   CreateOwnProfileResponse,
+  CreatePasswordData,
+  CreatePasswordError,
+  CreatePasswordResponse,
   CreateShortLinkData,
   CreateShortLinkError,
   CreateShortLinkResponse,
@@ -378,10 +381,8 @@ import type {
   GetLikesForCurrentMemberData,
   GetLikesForItemData,
   GetLinkMetadataData,
-  GetLogoutData,
   GetMemberProfileData,
   GetMembersActionsData,
-  GetMembersCurrentPasswordStatusData,
   GetMembershipRequestsByItemIdData,
   GetMostLikedCollectionsData,
   GetMostRecentCollectionsData,
@@ -391,6 +392,7 @@ import type {
   GetOwnMembershipRequestByItemIdData,
   GetOwnMentionsData,
   GetOwnMostUsedAppsData,
+  GetOwnPasswordStatusData,
   GetOwnProfileData,
   GetOwnRecycledItemsData,
   GetOwnRecycledItemsError,
@@ -440,10 +442,6 @@ import type {
   PatchMentionData,
   PatchMentionError,
   PatchMentionResponse,
-  PatchPasswordData,
-  PatchPasswordError,
-  PatchPasswordResetData,
-  PatchPasswordResponse,
   PostActionData,
   PostActionError,
   PostActionResponse,
@@ -453,13 +451,8 @@ import type {
   PostItemsByIdThumbnailsData,
   PostItemsByIdThumbnailsError,
   PostItemsByIdThumbnailsResponse,
-  PostLoginPasswordData,
   PostMembersAvatarData,
   PostMembersAvatarResponse,
-  PostPasswordData,
-  PostPasswordError,
-  PostPasswordResetData,
-  PostPasswordResponse,
   PublishItemData,
   PublishItemError,
   PublishItemResponse,
@@ -475,12 +468,20 @@ import type {
   ReorderItemData,
   ReorderItemError,
   ReorderItemResponse,
+  RequestPasswordResetLinkData,
+  ResetPasswordData,
   RestoreManyItemsData,
   RestoreManyItemsError,
   RestoreManyItemsResponse,
   SendInvitationData,
   SendInvitationError,
   SendInvitationResponse,
+  SignInWithPasswordData,
+  SignInWithPasswordError,
+  SignInWithPasswordResponse,
+  SignOutData,
+  SignOutError,
+  SignOutResponse,
   UnpublishItemData,
   UnpublishItemError,
   UnpublishItemResponse,
@@ -524,6 +525,9 @@ import type {
   UpdateOwnProfileData,
   UpdateOwnProfileError,
   UpdateOwnProfileResponse,
+  UpdatePasswordData,
+  UpdatePasswordError,
+  UpdatePasswordResponse,
   UpdateShortLinkData,
   UpdateShortLinkError,
   UpdateShortLinkResponse,
@@ -773,13 +777,17 @@ export const authenticateOptions = (options: Options<AuthenticateData>) => {
   });
 };
 
-export const getLogoutQueryKey = (options?: Options<GetLogoutData>) =>
-  createQueryKey('getLogout', options);
+export const signOutQueryKey = (options?: Options<SignOutData>) =>
+  createQueryKey('signOut', options);
 
-export const getLogoutOptions = (options?: Options<GetLogoutData>) => {
+/**
+ * Log out
+ * Log out from current session
+ */
+export const signOutOptions = (options?: Options<SignOutData>) => {
   return queryOptions({
     queryFn: async ({ queryKey, signal }) => {
-      const { data } = await getLogout({
+      const { data } = await signOut({
         ...options,
         ...queryKey[0],
         signal,
@@ -787,24 +795,48 @@ export const getLogoutOptions = (options?: Options<GetLogoutData>) => {
       });
       return data;
     },
-    queryKey: getLogoutQueryKey(options),
+    queryKey: signOutQueryKey(options),
   });
 };
 
-export const postLoginPasswordQueryKey = (
-  options: Options<PostLoginPasswordData>,
-) => createQueryKey('postLoginPassword', options);
+/**
+ * Log out
+ * Log out from current session
+ */
+export const signOutMutation = (
+  options?: Partial<Options<SignOutData>>,
+): UseMutationOptions<SignOutResponse, SignOutError, Options<SignOutData>> => {
+  const mutationOptions: UseMutationOptions<
+    SignOutResponse,
+    SignOutError,
+    Options<SignOutData>
+  > = {
+    mutationFn: async (localOptions) => {
+      const { data } = await signOut({
+        ...options,
+        ...localOptions,
+        throwOnError: true,
+      });
+      return data;
+    },
+  };
+  return mutationOptions;
+};
+
+export const signInWithPasswordQueryKey = (
+  options: Options<SignInWithPasswordData>,
+) => createQueryKey('signInWithPassword', options);
 
 /**
  * Log in with email and password
  * Log in with email and password. The user must provide a valid email, password, and captcha. The captcha is used to prevent brute force attacks.
  */
-export const postLoginPasswordOptions = (
-  options: Options<PostLoginPasswordData>,
+export const signInWithPasswordOptions = (
+  options: Options<SignInWithPasswordData>,
 ) => {
   return queryOptions({
     queryFn: async ({ queryKey, signal }) => {
-      const { data } = await postLoginPassword({
+      const { data } = await signInWithPassword({
         ...options,
         ...queryKey[0],
         signal,
@@ -812,7 +844,7 @@ export const postLoginPasswordOptions = (
       });
       return data;
     },
-    queryKey: postLoginPasswordQueryKey(options),
+    queryKey: signInWithPasswordQueryKey(options),
   });
 };
 
@@ -820,20 +852,20 @@ export const postLoginPasswordOptions = (
  * Log in with email and password
  * Log in with email and password. The user must provide a valid email, password, and captcha. The captcha is used to prevent brute force attacks.
  */
-export const postLoginPasswordMutation = (
-  options?: Partial<Options<PostLoginPasswordData>>,
+export const signInWithPasswordMutation = (
+  options?: Partial<Options<SignInWithPasswordData>>,
 ): UseMutationOptions<
-  unknown,
-  DefaultError,
-  Options<PostLoginPasswordData>
+  SignInWithPasswordResponse,
+  SignInWithPasswordError,
+  Options<SignInWithPasswordData>
 > => {
   const mutationOptions: UseMutationOptions<
-    unknown,
-    DefaultError,
-    Options<PostLoginPasswordData>
+    SignInWithPasswordResponse,
+    SignInWithPasswordError,
+    Options<SignInWithPasswordData>
   > = {
     mutationFn: async (localOptions) => {
-      const { data } = await postLoginPassword({
+      const { data } = await signInWithPassword({
         ...options,
         ...localOptions,
         throwOnError: true,
@@ -848,20 +880,20 @@ export const postLoginPasswordMutation = (
  * Update the password of the authenticated member
  * Update the password of the authenticated member. The user must provide the current password and the new password.
  */
-export const patchPasswordMutation = (
-  options?: Partial<Options<PatchPasswordData>>,
+export const updatePasswordMutation = (
+  options?: Partial<Options<UpdatePasswordData>>,
 ): UseMutationOptions<
-  PatchPasswordResponse,
-  PatchPasswordError,
-  Options<PatchPasswordData>
+  UpdatePasswordResponse,
+  UpdatePasswordError,
+  Options<UpdatePasswordData>
 > => {
   const mutationOptions: UseMutationOptions<
-    PatchPasswordResponse,
-    PatchPasswordError,
-    Options<PatchPasswordData>
+    UpdatePasswordResponse,
+    UpdatePasswordError,
+    Options<UpdatePasswordData>
   > = {
     mutationFn: async (localOptions) => {
-      const { data } = await patchPassword({
+      const { data } = await updatePassword({
         ...options,
         ...localOptions,
         throwOnError: true,
@@ -872,17 +904,17 @@ export const patchPasswordMutation = (
   return mutationOptions;
 };
 
-export const postPasswordQueryKey = (options: Options<PostPasswordData>) =>
-  createQueryKey('postPassword', options);
+export const createPasswordQueryKey = (options: Options<CreatePasswordData>) =>
+  createQueryKey('createPassword', options);
 
 /**
  * Set a password for the authenticated member
  * Set a password for the authenticated member. This is only possible if the member does not have a password set already.
  */
-export const postPasswordOptions = (options: Options<PostPasswordData>) => {
+export const createPasswordOptions = (options: Options<CreatePasswordData>) => {
   return queryOptions({
     queryFn: async ({ queryKey, signal }) => {
-      const { data } = await postPassword({
+      const { data } = await createPassword({
         ...options,
         ...queryKey[0],
         signal,
@@ -890,7 +922,7 @@ export const postPasswordOptions = (options: Options<PostPasswordData>) => {
       });
       return data;
     },
-    queryKey: postPasswordQueryKey(options),
+    queryKey: createPasswordQueryKey(options),
   });
 };
 
@@ -898,20 +930,20 @@ export const postPasswordOptions = (options: Options<PostPasswordData>) => {
  * Set a password for the authenticated member
  * Set a password for the authenticated member. This is only possible if the member does not have a password set already.
  */
-export const postPasswordMutation = (
-  options?: Partial<Options<PostPasswordData>>,
+export const createPasswordMutation = (
+  options?: Partial<Options<CreatePasswordData>>,
 ): UseMutationOptions<
-  PostPasswordResponse,
-  PostPasswordError,
-  Options<PostPasswordData>
+  CreatePasswordResponse,
+  CreatePasswordError,
+  Options<CreatePasswordData>
 > => {
   const mutationOptions: UseMutationOptions<
-    PostPasswordResponse,
-    PostPasswordError,
-    Options<PostPasswordData>
+    CreatePasswordResponse,
+    CreatePasswordError,
+    Options<CreatePasswordData>
   > = {
     mutationFn: async (localOptions) => {
-      const { data } = await postPassword({
+      const { data } = await createPassword({
         ...options,
         ...localOptions,
         throwOnError: true,
@@ -926,20 +958,16 @@ export const postPasswordMutation = (
  * Confirm the reset password request
  * Confirm the reset password request. This will change the password of the member associated with the reset password request.
  */
-export const patchPasswordResetMutation = (
-  options?: Partial<Options<PatchPasswordResetData>>,
-): UseMutationOptions<
-  unknown,
-  DefaultError,
-  Options<PatchPasswordResetData>
-> => {
+export const resetPasswordMutation = (
+  options?: Partial<Options<ResetPasswordData>>,
+): UseMutationOptions<unknown, DefaultError, Options<ResetPasswordData>> => {
   const mutationOptions: UseMutationOptions<
     unknown,
     DefaultError,
-    Options<PatchPasswordResetData>
+    Options<ResetPasswordData>
   > = {
     mutationFn: async (localOptions) => {
-      const { data } = await patchPasswordReset({
+      const { data } = await resetPassword({
         ...options,
         ...localOptions,
         throwOnError: true,
@@ -950,20 +978,20 @@ export const patchPasswordResetMutation = (
   return mutationOptions;
 };
 
-export const postPasswordResetQueryKey = (
-  options: Options<PostPasswordResetData>,
-) => createQueryKey('postPasswordReset', options);
+export const requestPasswordResetLinkQueryKey = (
+  options: Options<RequestPasswordResetLinkData>,
+) => createQueryKey('requestPasswordResetLink', options);
 
 /**
  * Create a reset password request
  * Create a reset password request. This will send an email to the member in his language with a link to reset the password. The link will be valid for a limited time.
  */
-export const postPasswordResetOptions = (
-  options: Options<PostPasswordResetData>,
+export const requestPasswordResetLinkOptions = (
+  options: Options<RequestPasswordResetLinkData>,
 ) => {
   return queryOptions({
     queryFn: async ({ queryKey, signal }) => {
-      const { data } = await postPasswordReset({
+      const { data } = await requestPasswordResetLink({
         ...options,
         ...queryKey[0],
         signal,
@@ -971,7 +999,7 @@ export const postPasswordResetOptions = (
       });
       return data;
     },
-    queryKey: postPasswordResetQueryKey(options),
+    queryKey: requestPasswordResetLinkQueryKey(options),
   });
 };
 
@@ -979,20 +1007,20 @@ export const postPasswordResetOptions = (
  * Create a reset password request
  * Create a reset password request. This will send an email to the member in his language with a link to reset the password. The link will be valid for a limited time.
  */
-export const postPasswordResetMutation = (
-  options?: Partial<Options<PostPasswordResetData>>,
+export const requestPasswordResetLinkMutation = (
+  options?: Partial<Options<RequestPasswordResetLinkData>>,
 ): UseMutationOptions<
   unknown,
   DefaultError,
-  Options<PostPasswordResetData>
+  Options<RequestPasswordResetLinkData>
 > => {
   const mutationOptions: UseMutationOptions<
     unknown,
     DefaultError,
-    Options<PostPasswordResetData>
+    Options<RequestPasswordResetLinkData>
   > = {
     mutationFn: async (localOptions) => {
-      const { data } = await postPasswordReset({
+      const { data } = await requestPasswordResetLink({
         ...options,
         ...localOptions,
         throwOnError: true,
@@ -1003,20 +1031,20 @@ export const postPasswordResetMutation = (
   return mutationOptions;
 };
 
-export const getMembersCurrentPasswordStatusQueryKey = (
-  options?: Options<GetMembersCurrentPasswordStatusData>,
-) => createQueryKey('getMembersCurrentPasswordStatus', options);
+export const getOwnPasswordStatusQueryKey = (
+  options?: Options<GetOwnPasswordStatusData>,
+) => createQueryKey('getOwnPasswordStatus', options);
 
 /**
  * Get the current password status of the authenticated member
  * Return whether the authenticated member has a password defined.
  */
-export const getMembersCurrentPasswordStatusOptions = (
-  options?: Options<GetMembersCurrentPasswordStatusData>,
+export const getOwnPasswordStatusOptions = (
+  options?: Options<GetOwnPasswordStatusData>,
 ) => {
   return queryOptions({
     queryFn: async ({ queryKey, signal }) => {
-      const { data } = await getMembersCurrentPasswordStatus({
+      const { data } = await getOwnPasswordStatus({
         ...options,
         ...queryKey[0],
         signal,
@@ -1024,7 +1052,7 @@ export const getMembersCurrentPasswordStatusOptions = (
       });
       return data;
     },
-    queryKey: getMembersCurrentPasswordStatusQueryKey(options),
+    queryKey: getOwnPasswordStatusQueryKey(options),
   });
 };
 
@@ -4282,7 +4310,7 @@ export const exportZipQueryKey = (options: Options<ExportZipData>) =>
 
 /**
  * Export folder content as zip archive
- * Export the folder's content as a ZIP archive. The user will receive an email with a link to download the ZIP archive.
+ * Export the folder's content as a ZIP archive. The user will receive an email with a link to download the ZIP archive. Users can download any resource they can access.
  */
 export const exportZipOptions = (options: Options<ExportZipData>) => {
   return queryOptions({
@@ -4301,7 +4329,7 @@ export const exportZipOptions = (options: Options<ExportZipData>) => {
 
 /**
  * Export folder content as zip archive
- * Export the folder's content as a ZIP archive. The user will receive an email with a link to download the ZIP archive.
+ * Export the folder's content as a ZIP archive. The user will receive an email with a link to download the ZIP archive. Users can download any resource they can access.
  */
 export const exportZipMutation = (
   options?: Partial<Options<ExportZipData>>,
