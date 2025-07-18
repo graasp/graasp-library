@@ -81,6 +81,9 @@ import type {
   CreateOwnProfileData,
   CreateOwnProfileErrors,
   CreateOwnProfileResponses,
+  CreatePasswordData,
+  CreatePasswordErrors,
+  CreatePasswordResponses,
   CreateShortLinkData,
   CreateShortLinkErrors,
   CreateShortLinkResponses,
@@ -280,16 +283,12 @@ import type {
   GetLinkMetadataData,
   GetLinkMetadataErrors,
   GetLinkMetadataResponses,
-  GetLogoutData,
-  GetLogoutResponses,
   GetMemberProfileData,
   GetMemberProfileErrors,
   GetMemberProfileResponses,
   GetMembersActionsData,
   GetMembersActionsErrors,
   GetMembersActionsResponses,
-  GetMembersCurrentPasswordStatusData,
-  GetMembersCurrentPasswordStatusResponses,
   GetMembershipRequestsByItemIdData,
   GetMembershipRequestsByItemIdResponses,
   GetMostLikedCollectionsData,
@@ -315,6 +314,8 @@ import type {
   GetOwnMostUsedAppsData,
   GetOwnMostUsedAppsErrors,
   GetOwnMostUsedAppsResponses,
+  GetOwnPasswordStatusData,
+  GetOwnPasswordStatusResponses,
   GetOwnProfileData,
   GetOwnProfileErrors,
   GetOwnProfileResponses,
@@ -385,12 +386,6 @@ import type {
   PatchMentionData,
   PatchMentionErrors,
   PatchMentionResponses,
-  PatchPasswordData,
-  PatchPasswordErrors,
-  PatchPasswordResetData,
-  PatchPasswordResetErrors,
-  PatchPasswordResetResponses,
-  PatchPasswordResponses,
   PostActionData,
   PostActionErrors,
   PostActionResponses,
@@ -400,16 +395,8 @@ import type {
   PostItemsByIdThumbnailsData,
   PostItemsByIdThumbnailsErrors,
   PostItemsByIdThumbnailsResponses,
-  PostLoginPasswordData,
-  PostLoginPasswordResponses,
   PostMembersAvatarData,
   PostMembersAvatarResponses,
-  PostPasswordData,
-  PostPasswordErrors,
-  PostPasswordResetData,
-  PostPasswordResetErrors,
-  PostPasswordResetResponses,
-  PostPasswordResponses,
   PublishItemData,
   PublishItemErrors,
   PublishItemResponses,
@@ -425,12 +412,24 @@ import type {
   ReorderItemData,
   ReorderItemErrors,
   ReorderItemResponses,
+  RequestPasswordResetLinkData,
+  RequestPasswordResetLinkErrors,
+  RequestPasswordResetLinkResponses,
+  ResetPasswordData,
+  ResetPasswordErrors,
+  ResetPasswordResponses,
   RestoreManyItemsData,
   RestoreManyItemsErrors,
   RestoreManyItemsResponses,
   SendInvitationData,
   SendInvitationErrors,
   SendInvitationResponses,
+  SignInWithPasswordData,
+  SignInWithPasswordErrors,
+  SignInWithPasswordResponses,
+  SignOutData,
+  SignOutErrors,
+  SignOutResponses,
   UnpublishItemData,
   UnpublishItemErrors,
   UnpublishItemResponses,
@@ -476,6 +475,9 @@ import type {
   UpdateOwnProfileData,
   UpdateOwnProfileErrors,
   UpdateOwnProfileResponses,
+  UpdatePasswordData,
+  UpdatePasswordErrors,
+  UpdatePasswordResponses,
   UpdateShortLinkData,
   UpdateShortLinkErrors,
   UpdateShortLinkResponses,
@@ -626,12 +628,16 @@ export const authenticate = <ThrowOnError extends boolean = false>(
   });
 };
 
-export const getLogout = <ThrowOnError extends boolean = false>(
-  options?: Options<GetLogoutData, ThrowOnError>,
+/**
+ * Log out
+ * Log out from current session
+ */
+export const signOut = <ThrowOnError extends boolean = false>(
+  options?: Options<SignOutData, ThrowOnError>,
 ) => {
-  return (options?.client ?? _heyApiClient).get<
-    GetLogoutResponses,
-    unknown,
+  return (options?.client ?? _heyApiClient).post<
+    SignOutResponses,
+    SignOutErrors,
     ThrowOnError
   >({
     url: '/logout',
@@ -643,12 +649,12 @@ export const getLogout = <ThrowOnError extends boolean = false>(
  * Log in with email and password
  * Log in with email and password. The user must provide a valid email, password, and captcha. The captcha is used to prevent brute force attacks.
  */
-export const postLoginPassword = <ThrowOnError extends boolean = false>(
-  options: Options<PostLoginPasswordData, ThrowOnError>,
+export const signInWithPassword = <ThrowOnError extends boolean = false>(
+  options: Options<SignInWithPasswordData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    PostLoginPasswordResponses,
-    unknown,
+    SignInWithPasswordResponses,
+    SignInWithPasswordErrors,
     ThrowOnError
   >({
     url: '/login-password',
@@ -664,12 +670,12 @@ export const postLoginPassword = <ThrowOnError extends boolean = false>(
  * Update the password of the authenticated member
  * Update the password of the authenticated member. The user must provide the current password and the new password.
  */
-export const patchPassword = <ThrowOnError extends boolean = false>(
-  options: Options<PatchPasswordData, ThrowOnError>,
+export const updatePassword = <ThrowOnError extends boolean = false>(
+  options: Options<UpdatePasswordData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).patch<
-    PatchPasswordResponses,
-    PatchPasswordErrors,
+    UpdatePasswordResponses,
+    UpdatePasswordErrors,
     ThrowOnError
   >({
     url: '/password',
@@ -685,12 +691,12 @@ export const patchPassword = <ThrowOnError extends boolean = false>(
  * Set a password for the authenticated member
  * Set a password for the authenticated member. This is only possible if the member does not have a password set already.
  */
-export const postPassword = <ThrowOnError extends boolean = false>(
-  options: Options<PostPasswordData, ThrowOnError>,
+export const createPassword = <ThrowOnError extends boolean = false>(
+  options: Options<CreatePasswordData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    PostPasswordResponses,
-    PostPasswordErrors,
+    CreatePasswordResponses,
+    CreatePasswordErrors,
     ThrowOnError
   >({
     url: '/password',
@@ -706,12 +712,12 @@ export const postPassword = <ThrowOnError extends boolean = false>(
  * Confirm the reset password request
  * Confirm the reset password request. This will change the password of the member associated with the reset password request.
  */
-export const patchPasswordReset = <ThrowOnError extends boolean = false>(
-  options: Options<PatchPasswordResetData, ThrowOnError>,
+export const resetPassword = <ThrowOnError extends boolean = false>(
+  options: Options<ResetPasswordData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).patch<
-    PatchPasswordResetResponses,
-    PatchPasswordResetErrors,
+    ResetPasswordResponses,
+    ResetPasswordErrors,
     ThrowOnError
   >({
     url: '/password/reset',
@@ -727,12 +733,12 @@ export const patchPasswordReset = <ThrowOnError extends boolean = false>(
  * Create a reset password request
  * Create a reset password request. This will send an email to the member in his language with a link to reset the password. The link will be valid for a limited time.
  */
-export const postPasswordReset = <ThrowOnError extends boolean = false>(
-  options: Options<PostPasswordResetData, ThrowOnError>,
+export const requestPasswordResetLink = <ThrowOnError extends boolean = false>(
+  options: Options<RequestPasswordResetLinkData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<
-    PostPasswordResetResponses,
-    PostPasswordResetErrors,
+    RequestPasswordResetLinkResponses,
+    RequestPasswordResetLinkErrors,
     ThrowOnError
   >({
     url: '/password/reset',
@@ -748,13 +754,11 @@ export const postPasswordReset = <ThrowOnError extends boolean = false>(
  * Get the current password status of the authenticated member
  * Return whether the authenticated member has a password defined.
  */
-export const getMembersCurrentPasswordStatus = <
-  ThrowOnError extends boolean = false,
->(
-  options?: Options<GetMembersCurrentPasswordStatusData, ThrowOnError>,
+export const getOwnPasswordStatus = <ThrowOnError extends boolean = false>(
+  options?: Options<GetOwnPasswordStatusData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).get<
-    GetMembersCurrentPasswordStatusResponses,
+    GetOwnPasswordStatusResponses,
     unknown,
     ThrowOnError
   >({
@@ -2421,7 +2425,7 @@ export const downloadFile = <ThrowOnError extends boolean = false>(
 
 /**
  * Export folder content as zip archive
- * Export the folder's content as a ZIP archive. The user will receive an email with a link to download the ZIP archive.
+ * Export the folder's content as a ZIP archive. The user will receive an email with a link to download the ZIP archive. Users can download any resource they can access.
  */
 export const exportZip = <ThrowOnError extends boolean = false>(
   options: Options<ExportZipData, ThrowOnError>,
