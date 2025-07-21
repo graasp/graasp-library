@@ -2,7 +2,7 @@ import { Alert, AlertTitle, Stack, Typography } from '@mui/material';
 
 import { Link } from '@tanstack/react-router';
 
-import { NullableCurrentAccountSchemaRef } from '~/openapi/client';
+import { NullableCurrentAccount } from '~/openapi/client';
 import { m } from '~/paraglide/messages';
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
   canRead: boolean;
   canPublish: boolean;
   isPublished: boolean;
-  currentMember?: NullableCurrentAccountSchemaRef;
+  currentMember?: NullableCurrentAccount;
 };
 const UnpublishedItemAlert = ({
   itemId: _itemId,
