@@ -115,13 +115,19 @@ app.get(
 );
 app.post('/items/collections/facets', async (c) => {
   const facetName = c.req.query('facetName');
+  const { langs } = await c.req.json();
   switch (facetName) {
     case 'lang':
       return c.json({ Español: 5, Français: 2, English: 1, Deutsch: 1 });
     case 'discipline':
       return c.json({ Lecture: 200, Maths: 57, English: 12, Biologie: 4 });
-    case 'level':
-      return c.json({ Secondary: 24, Primary: 76, Lycee: 12 });
+    case 'level': {
+      if (langs.includes('de')) {
+        // return only german levels
+        return c.json({ Zyclus1: 13 });
+      }
+      return c.json({ Secondary: 24, Primary: 16, Lycee: 12 });
+    }
     case 'resource-type':
       return c.json({ Mooc: 24, Exercises: 76, Lycee: 12 });
     default:
