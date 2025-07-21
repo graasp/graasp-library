@@ -18,11 +18,12 @@ export function CategoryFilter({
   title,
 }: Readonly<CategoryFilterProps>) {
   const search = SearchRoute.useSearch();
-  const { s, levels, disciplines, resourceTypes, rootOnly } = search;
+  const { s, levels, disciplines, resourceTypes, rootOnly, langs } = search;
   const navigate = SearchRoute.useNavigate();
   const { data: options } = useSearchFacets({
     facetName: queryParamsToCategory[category],
     keywordSearch: s,
+    langs,
     tags: {
       // we should not search over the selected category in order to have accurate facets for the current category
       level: category !== 'levels' ? levels : undefined,

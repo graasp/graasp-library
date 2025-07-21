@@ -64,6 +64,21 @@ test.describe('Search', () => {
       (url) => url.searchParams.get('rootOnly') === 'false',
     );
   });
+
+  test('facets are linked', async ({ page }) => {
+    // open filter
+    await page.getByRole('combobox', { name: 'Languages' }).click();
+
+    // select a value
+    const locator = page.getByText('Deutsch1');
+    await locator.waitFor({ state: 'visible' });
+    await page.getByText('Deutsch1').click();
+
+    // expect the levels select to contain the german levels only
+    await page.getByRole('combobox', { name: 'Levels' }).click();
+    // this value is returned only when the languages are also passed to the levels, disciplines and resource-type filters
+    await expect(page.getByText('Zyclus1')).toBeVisible();
+  });
 });
 
 async function clearSelection(page: Page, popperLocator: Locator) {
@@ -85,23 +100,13 @@ async function checkFilter(
   selection: { label: string; value: string },
   queryParamKey: string,
 ) {
-  // open languages filter
+  // open filter
   await page.getByRole('combobox', { name }).click();
 
-  // select a language
+  // select a value
   const locator = page.getByText(selection.label);
   await locator.waitFor({ state: 'visible' });
   await page.getByText(selection.label).click();
-
-  // open the dialog back if it closed
-  // if (
-  //   !(await page.getByRole('checkbox', { name: selection.label }).isVisible())
-  // ) {
-  //   await page.getByRole('combobox', { name }).click();
-  // }
-  // await expect(
-  //   page.getByRole('checkbox', { name: selection.label }),
-  // ).toBeChecked();
 
   const filledUrl = (url: URL) =>
     url.searchParams.get(queryParamKey) === `["${selection.value}"]`;
