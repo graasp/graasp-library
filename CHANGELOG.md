@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/graasp/graasp-library/compare/v2.0.2...v2.1.0) (2025-07-21)
+
+
+### Features
+
+* update client, fix sign out ([#816](https://github.com/graasp/graasp-library/issues/816)) ([7dcec7b](https://github.com/graasp/graasp-library/commit/7dcec7b6673176c94252ea4c6968b6185f3efb08))
+
+
+### Bug Fixes
+
+* add width 100% to summary section ([#815](https://github.com/graasp/graasp-library/issues/815)) ([d5171c2](https://github.com/graasp/graasp-library/commit/d5171c23d5b0b513decaad419d2949f635ae5a5e))
+* include lang in the facets search for deisciplines, levels and resource-types ([#818](https://github.com/graasp/graasp-library/issues/818)) ([6b82b00](https://github.com/graasp/graasp-library/commit/6b82b00389a48a92ea9c29ef01ad51b0becb509f))
+
 ## [2.0.2](https://github.com/graasp/graasp-library/compare/v2.0.1...v2.0.2) (2025-07-17)
 
 
