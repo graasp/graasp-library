@@ -16,7 +16,7 @@ import {
 } from '@mui/material';
 
 import { useLoaderData } from '@tanstack/react-router';
-import { LinkIcon, MoreVerticalIcon } from 'lucide-react';
+import { CopyIcon, LinkIcon, MoreVerticalIcon } from 'lucide-react';
 
 import { PackedItem } from '~/openapi/client';
 import { m } from '~/paraglide/messages';
@@ -91,7 +91,7 @@ export function SummaryActionButtons({
         anchorEl={anchorRef.current}
         open={open}
         role={undefined}
-        placement="bottom"
+        placement="bottom-end"
         transition
         disablePortal
       >
@@ -110,6 +110,16 @@ export function SummaryActionButtons({
                       <LinkIcon />
                     </ListItemIcon>
                     <ListItemText>{m.SUMMARY_ACTIONS_EMBED()}</ListItemText>
+                  </MenuItem>
+                  <MenuItem
+                    component="a"
+                    href={`${clientOrigin}/builder/items/${item.id}?copyOpen=true`}
+                    target="_blank"
+                  >
+                    <ListItemIcon>
+                      <CopyIcon />
+                    </ListItemIcon>
+                    <ListItemText>{m.SUMMARY_ACTIONS_COPY()}</ListItemText>
                   </MenuItem>
                 </MenuList>
               </ClickAwayListener>

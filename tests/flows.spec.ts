@@ -124,7 +124,7 @@ test('Play a collection', async ({ page, context, browserName }) => {
       `,
     }),
   );
-  // got to the collection page
+  // go to the collection page
   await page.goto(`/collections/${geogebraId}`);
 
   // check collection is correct
@@ -137,4 +137,43 @@ test('Play a collection', async ({ page, context, browserName }) => {
   await newTab.waitForLoadState();
 
   await expect(newTab).toHaveURL(playerPage);
+});
+
+test('Copy a collection', async ({ page, context, browserName }) => {
+  test.skip(
+    browserName === 'webkit',
+    'Webkit does not handle opening the page in a new tab',
+  );
+  const builderPage = `${process.env.VITE_CLIENT_HOST}/builder/items/${geogebraId}`;
+
+  // mock the response to the builder page
+  await context.route(builderPage, (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: 'text/html',
+      body: `
+        <html>
+          <head><title>Builder page for Geogebra</title></head>
+          <body>
+            <h1>Hello from geogebra builder page</h1>
+          </body>
+        </html>
+      `,
+    }),
+  );
+  // go to the collection page
+  await page.goto(`/collections/${geogebraId}`);
+
+  // check collection is correct
+  await expect(page.getByRole('heading', { name: 'Geogebra' })).toBeVisible();
+
+  // open the collection in builder when copy
+  const newTabPromise = page.waitForEvent('popup');
+  await page.getByLabel('More actions').click();
+  await page.getByLabel('More actions').click();
+  await page.getByRole('menuitem', { name: 'Copy' }).click();
+  const newTab = await newTabPromise;
+  await newTab.waitForLoadState();
+
+  await expect(newTab).toHaveURL(builderPage);
 });
