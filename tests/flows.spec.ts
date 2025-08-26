@@ -171,7 +171,7 @@ test('Copy a collection', async ({ page, context, browserName }) => {
   const newTabPromise = page.waitForEvent('popup');
   await page.getByLabel('More actions').click();
   await page.getByLabel('More actions').click();
-  await page.getByRole('menuitem', { name: 'Copy' }).click();
+  await page.getByRole('menuitem', { name: 'Copy', exact: true }).click();
   const newTab = await newTabPromise;
   await newTab.waitForLoadState();
 
