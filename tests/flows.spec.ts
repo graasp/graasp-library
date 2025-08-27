@@ -144,10 +144,10 @@ test('Copy a collection', async ({ page, context, browserName }) => {
     browserName === 'webkit',
     'Webkit does not handle opening the page in a new tab',
   );
-  const builderPage = `${process.env.VITE_CLIENT_HOST}/builder/items/${geogebraId}`;
+  const builderPage = `${process.env.VITE_CLIENT_HOST}/builder/items/${geogebraId}?copyOpen=true`;
 
   // mock the response to the builder page
-  await context.route(builderPage, (route) =>
+  await context.route('**/builder/items/*', (route) =>
     route.fulfill({
       status: 200,
       contentType: 'text/html',
@@ -169,7 +169,6 @@ test('Copy a collection', async ({ page, context, browserName }) => {
 
   // open the collection in builder when copy
   const newTabPromise = page.waitForEvent('popup');
-  await page.getByLabel('More actions').click();
   await page.getByLabel('More actions').click();
   await page.getByRole('menuitem', { name: 'Copy', exact: true }).click();
   const newTab = await newTabPromise;
