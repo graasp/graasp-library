@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/graasp/graasp-library/compare/v2.1.0...v2.2.0) (2025-08-27)
+
+
+### Features
+
+* add copy to builder option ([#826](https://github.com/graasp/graasp-library/issues/826)) ([ec0b3d8](https://github.com/graasp/graasp-library/commit/ec0b3d87c3bb5cbb8ec005ee64448b872a7720e6))
+
 ## [2.1.0](https://github.com/graasp/graasp-library/compare/v2.0.2...v2.1.0) (2025-07-21)
 
 
