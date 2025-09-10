@@ -12,8 +12,7 @@ import {
 } from '@mui/material';
 
 import { keepPreviousData, useInfiniteQuery } from '@tanstack/react-query';
-import { createFileRoute } from '@tanstack/react-router';
-import { fallback, zodValidator } from '@tanstack/zod-adapter';
+import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { z } from 'zod';
 
 import { ButtonLink } from '~/components/common/links/ButtonLink';
@@ -37,16 +36,16 @@ import { locales } from '~/paraglide/runtime';
 const PAGE_SIZE = 24; // multiple of 3 and 2
 
 const schema = z.object({
-  s: fallback(z.string().optional(), '').default(''),
-  langs: fallback(z.array(z.enum(locales)).optional(), []).default([]),
-  levels: fallback(z.array(z.string()).optional(), []).default([]),
-  disciplines: fallback(z.array(z.string()).optional(), []).default([]),
-  resourceTypes: fallback(z.array(z.string()).optional(), []).default([]),
-  rootOnly: fallback(z.boolean().optional(), true).default(true),
+  s: z.string().default('').catch(''),
+  langs: z.array(z.enum(locales)).optional().default([]).catch([]),
+  levels: z.array(z.string()).optional().default([]).catch([]),
+  disciplines: z.array(z.string()).optional().default([]).catch([]),
+  resourceTypes: z.array(z.string()).optional().default([]).catch([]),
+  rootOnly: z.boolean().optional().default(true).catch(true),
 });
 
 export const Route = createFileRoute('/search')({
-  validateSearch: zodValidator(schema),
+  validateSearch: schema,
   loader: async ({ context }) => {
     const body = {
       query: '',
@@ -94,7 +93,7 @@ export const Route = createFileRoute('/search')({
 function RouteComponent() {
   const search = Route.useSearch();
   const { rootOnly } = search;
-  const navigate = Route.useNavigate();
+  const navigate = useNavigate({ from: Route.fullPath });
   // local state to keep input fluid
   const [searchKeywords, setSearchKeywords] = useState(search.s);
   const debouncedSearch = useDebounce(searchKeywords, 500);
@@ -129,7 +128,7 @@ function RouteComponent() {
 
   const onChangeKeywords = (newSearch: string) => {
     setSearchKeywords(newSearch);
-    navigate({ to: '/search', search: (prev) => ({ ...prev, s: newSearch }) });
+    navigate({ search: (prev) => ({ ...prev, s: newSearch }) });
   };
 
   const hitsNumber =
