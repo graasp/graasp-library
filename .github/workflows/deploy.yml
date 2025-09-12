@@ -9,12 +9,12 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: "Target environment"
+        description: 'Target environment'
         type: environment
         required: true
       version:
-        description: "Version to deploy"
-        type: "string"
+        description: 'Version to deploy'
+        type: 'string'
         required: true
 
 permissions:
@@ -39,7 +39,7 @@ jobs:
 
       # auth to aws
       - name: Configure AWS Credentials to assume deployment Role
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@a03048d87541d1d9fcf2ecf528a4a65ba9bd7838
         with:
           role-to-assume: ${{ secrets.AWS_ROLE }}
           role-session-name: GitHub_Action_deploy_library
@@ -61,7 +61,7 @@ jobs:
           --build-arg VITE_API_HOST=${{ vars.VITE_API_HOST }} \
           --build-arg VITE_CLIENT_HOST=${{ vars.VITE_CLIENT_HOST }} \
           --build-arg VITE_HOST=${{ vars.VITE_CURRENT_HOST }} \
-          --build-arg SENTRY_DSN=${{ secrets.VITE_SENTRY_DSN }} \
+          --build-arg SENTRY_DSN=$SENTRY_DSN \
           --build-arg SENTRY_ORG=graasp \
           --build-arg SENTRY_PROJECT=library \
           --build-arg SENTRY_ENV=${{ inputs.environment || 'dev' }} \
@@ -70,6 +70,7 @@ jobs:
         shell: bash
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_DSN: ${{ secrets.VITE_SENTRY_DSN }}
 
       # push image to ECR
       - name: Push image
