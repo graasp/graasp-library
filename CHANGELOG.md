@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.1](https://github.com/graasp/graasp-library/compare/v2.2.0...v2.2.1) (2025-09-12)
+
+
+### Bug Fixes
+
+* **deps:** refresh deps to mitigate supply chain attack ([49e50a1](https://github.com/graasp/graasp-library/commit/49e50a11c70322dc9195c702445fd983da938503))
+* update deps ([#830](https://github.com/graasp/graasp-library/issues/830)) ([f38242e](https://github.com/graasp/graasp-library/commit/f38242e6bcfe7d13d379a20c765e5002571f3ce3))
+
 ## [2.2.0](https://github.com/graasp/graasp-library/compare/v2.1.0...v2.2.0) (2025-08-27)
 
 
