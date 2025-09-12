@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { type JSX } from 'react';
 import { ToastContainer } from 'react-toastify';
 
 import {
@@ -74,7 +74,7 @@ export const Route = wrapCreateRootRouteWithSentry(
   errorComponent: ErrorComponent,
 });
 
-function RootComponent() {
+function RootComponent(): JSX.Element {
   return (
     <RootDocument>
       <Outlet />
