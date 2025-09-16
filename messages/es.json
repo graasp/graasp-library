@@ -35,8 +35,14 @@
   "HEADER_MY_LISTS": "Mis listas",
   "SEARCH_PAGE_TITLE": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "selectors": ["count", "countPlural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "count",
+        "countPlural"
+      ],
       "match": {
         "count=*": "Buscar entre {count} colecciones",
         "countPlural=other": "Buscar entre {count} recursos",
@@ -71,8 +77,8 @@
   "HOME_SUBTITLE": "Explore y descubra recursos educativos abiertos",
   "HOME_POPULAR_SEARCHES_TITLE": "Búsquedas populares",
   "HOME_MORE_COLLECTIONS_TITLE": "Descubrir",
-  "HOME_GRAASPER_COLLECTIONS_TITLE": "Selección de agarre",
   "HOME_POPULAR_THIS_WEEK_COLLECTIONS_TITLE": "Popular esta semana",
+  "HOME_RECENT_COLLECTIONS_TITLE": "Recientemente creado",
   "HOME_MOST_LIKED_COLLECTIONS_TITLE": "El mas gustado",
   "HOME_VIEW_MORE_IN_LIBRARY_BUTTON": "Ver más en la Biblioteca",
   "HOME_BROWSE_ALL_COLLECTIONS": "Explorar todas las colecciones",
@@ -163,8 +169,14 @@
   "DURATION_IN_MINUTES_other": "{count} minutos",
   "SEARCH_PAGE_TITLE_CONTENT": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "selectors": ["count", "countPlural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "count",
+        "countPlural"
+      ],
       "match": {
         "count=*": "Buscar entre {count} recursos",
         "countPlural=one": "Buscar entre {count} recursos",
@@ -179,8 +191,13 @@
   "SEARCH_FILTER_LANG_TITLE": "Idiomas",
   "DURATION_IN_MINUTES": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "selectors": ["countPlural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "countPlural"
+      ],
       "match": {
         "countPlural=one": "{count} minutos",
         "countPlural=other": "{count} minutos"
@@ -197,7 +214,11 @@
         "input search",
         "local countPlural = count: plural"
       ],
-      "selectors": ["count", "countPlural", "search"],
+      "selectors": [
+        "count",
+        "countPlural",
+        "search"
+      ],
       "match": {
         "count=*, search=*": "Se encontró el resultado {count} para: {search}",
         "countPlural=one": "Se encontró el resultado {count} para: {search}",
@@ -221,8 +242,13 @@
   "COPY_ITEM_TO_CLIPBOARD_ERROR": "Se encontró un error al copiar el elemento al portapapeles",
   "SUMMARY_BROWSE_FOLDER_CONTAINS": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "selectors": ["countPlural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "countPlural"
+      ],
       "match": {
         "countPlural=zero": "Carpeta vacía",
         "countPlural=one": "{count}",
@@ -232,8 +258,14 @@
   ],
   "COLLECTIONS_COUNT_MESSAGE": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "selectors": ["count", "countPlural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "count",
+        "countPlural"
+      ],
       "match": {
         "count=*": "Colección disponible {count}",
         "countPlural=one": "Colección disponible {count}",

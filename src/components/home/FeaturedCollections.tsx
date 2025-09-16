@@ -5,7 +5,6 @@ import {
   Box,
   Button,
   Card,
-  Container,
   Grid,
   Skeleton,
   Stack,
@@ -21,7 +20,6 @@ import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
 import { Link } from '@tanstack/react-router';
 
 import { buildCollectionRoute } from '~/config/routes';
-import { GRAASP_SELECTION_TITLE_ID } from '~/config/selectors';
 import {
   downloadItemThumbnailOptions,
   getFeaturedCollectionsOptions,
@@ -32,7 +30,7 @@ import { ItemOrSearchedItem } from '~/utils/types';
 
 import CardThumbnail from '../common/Card/CardThumbnail';
 import { TagList } from '../common/Card/TagList';
-import StyledContainer from '../layout/StyledContainer';
+import { ButtonLink } from '../common/links/ButtonLink';
 
 const CARD_HEIGHT = 120;
 const GRID_SIZE = { xs: 12, sm: 6, md: 6, lg: 4, xl: 4 };
@@ -44,54 +42,46 @@ export function FeaturedCollections() {
   const [nbToShow, setNbToShow] = useState(minimalNbToShow);
 
   return (
-    <StyledContainer id={GRAASP_SELECTION_TITLE_ID}>
-      <Container>
-        <Stack gap={5}>
-          <Stack>
-            <Typography variant="h3">
-              {m.HOME_GRAASPER_COLLECTIONS_TITLE()}
-            </Typography>
-            <Typography variant="subtitle1">
-              Latest collections published and share by the community
-            </Typography>
-          </Stack>
-          <Grid container spacing={3}>
-            <Suspense
-              fallback={
-                // use 6 elements since the possible combinations are 1, 2 and 3 per row, so we always have full rows
-                Array.from({ length: nbToShow }, (_k, x) => x).map((elem) => (
-                  <Grid key={elem} size={GRID_SIZE}>
-                    <Skeleton
-                      variant="rounded"
-                      width="100%"
-                      height={CARD_HEIGHT}
-                    />
-                  </Grid>
-                ))
-              }
-            >
-              <ErrorBoundary fallback={<ErrorLoadingCollections />}>
-                <HighlightedCollections limit={nbToShow} />
-              </ErrorBoundary>
-            </Suspense>
-          </Grid>
-          <Stack direction="row" justifyContent="center" gap={3}>
-            <Button
-              fullWidth={false}
-              variant="outlined"
-              onClick={() => {
-                setNbToShow((nb) => nb + minimalNbToShow);
-              }}
-            >
-              View {minimalNbToShow} more
-            </Button>
-            <Button fullWidth={false} variant="contained">
-              View all collections
-            </Button>
-          </Stack>
-        </Stack>
-      </Container>
-    </StyledContainer>
+    <Stack gap={5}>
+      <Stack>
+        <Typography variant="h3">
+          {m.HOME_GRAASPER_COLLECTIONS_TITLE()}
+        </Typography>
+        <Typography variant="subtitle1">
+          {m.HOME_FEATURED_DESCRIPTION()}
+        </Typography>
+      </Stack>
+      <Grid container spacing={3}>
+        <Suspense
+          fallback={
+            // use 6 elements since the possible combinations are 1, 2 and 3 per row, so we always have full rows
+            Array.from({ length: nbToShow }, (_k, x) => x).map((elem) => (
+              <Grid key={elem} size={GRID_SIZE}>
+                <Skeleton variant="rounded" width="100%" height={CARD_HEIGHT} />
+              </Grid>
+            ))
+          }
+        >
+          <ErrorBoundary fallback={<ErrorLoadingCollections />}>
+            <HighlightedCollections limit={nbToShow} />
+          </ErrorBoundary>
+        </Suspense>
+      </Grid>
+      <Stack direction="row" justifyContent="center" gap={3}>
+        <Button
+          fullWidth={false}
+          variant="outlined"
+          onClick={() => {
+            setNbToShow((nb) => nb + minimalNbToShow);
+          }}
+        >
+          {m.HOME_VIEW_MORE_BUTTON({ count: minimalNbToShow })}
+        </Button>
+        <ButtonLink fullWidth={false} variant="contained" to="/search">
+          {m.HOME_VIEW_ALL_COLLECTIONS_BUTTON()}
+        </ButtonLink>
+      </Stack>
+    </Stack>
   );
 }
 
@@ -106,17 +96,13 @@ function HighlightedCollections({ limit }: Readonly<{ limit: number }>) {
     }),
   );
   return data.hits.map((collection) => (
-    <Grid size={GRID_SIZE}>
-      <HighlightCard
-        key={collection.id}
-        height={CARD_HEIGHT}
-        collection={collection}
-      />
+    <Grid size={GRID_SIZE} key={collection.id}>
+      <FeaturedCard height={CARD_HEIGHT} collection={collection} />
     </Grid>
   ));
 }
 
-const HighlightCard = ({
+const FeaturedCard = ({
   collection,
   height,
 }: Readonly<{ collection: ItemOrSearchedItem; height: number }>) => {

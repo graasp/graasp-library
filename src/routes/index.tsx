@@ -1,14 +1,16 @@
-import { Box } from '@mui/material';
+import { Box, Container, Stack } from '@mui/material';
 
 import { createFileRoute } from '@tanstack/react-router';
 
-import { DiscoverButton } from '~/components/common/DiscoverButton';
 import { FeaturedCollections } from '~/components/home/FeaturedCollections';
-import { KPI } from '~/components/home/KPI';
+import { HomeFooter } from '~/components/home/HomeFooter';
+import { Kpi } from '~/components/home/Kpi';
+import { LikedCollections } from '~/components/home/LikedCollections';
 import { PopularDisciplines } from '~/components/home/PopularDisciplines';
 import { RecentPublished } from '~/components/home/RecentPublished';
 import { HomeHeader } from '~/components/layout/HomeHeader';
 import StyledBackgroundContainer from '~/components/layout/StyledBackgroundContainer';
+import StyledContainer from '~/components/layout/StyledContainer';
 import { m } from '~/paraglide/messages';
 
 export const Route = createFileRoute('/')({
@@ -25,36 +27,46 @@ export const Route = createFileRoute('/')({
 
 function RouteComponent() {
   return (
-    <StyledBackgroundContainer>
-      <HomeHeader />
+    <Stack>
+      <StyledBackgroundContainer py={5}>
+        <HomeHeader />
+      </StyledBackgroundContainer>
 
-      <FeaturedCollections />
-      {/* <HighlightCollectionSection
-        id={MOST_LIKED_TITLE_ID}
-        title={m.HOME_MOST_LIKED_COLLECTIONS_TITLE()}
-      >
-        <LikedCollections />
-      </HighlightCollectionSection> */}
+      <StyledContainer>
+        <Container>
+          <FeaturedCollections />
+        </Container>
+      </StyledContainer>
 
-      <KPI />
-      <PopularDisciplines />
+      <StyledContainer sx={{ py: 5 }}>
+        <Container>
+          <Kpi />
+        </Container>
+      </StyledContainer>
 
-      <RecentPublished />
+      <StyledBackgroundContainer sx={{ py: 5 }}>
+        <Container>
+          <PopularDisciplines />
+        </Container>
+      </StyledBackgroundContainer>
 
-      <Box textAlign="center" py={20}>
-        <DiscoverButton message={m.HOME_VIEW_MORE_IN_LIBRARY_BUTTON()} />
-      </Box>
-    </StyledBackgroundContainer>
+      <StyledContainer>
+        <Container>
+          <LikedCollections />
+        </Container>
+      </StyledContainer>
+
+      <StyledContainer>
+        <Container>
+          <RecentPublished />
+        </Container>
+      </StyledContainer>
+
+      <StyledBackgroundContainer>
+        <Box textAlign="center" py={20}>
+          <HomeFooter />
+        </Box>
+      </StyledBackgroundContainer>
+    </Stack>
   );
 }
-
-// function LikedCollections() {
-//   const { data } = useSuspenseQuery(
-//     getMostLikedCollectionsOptions({
-//       query: { limit: HOMEPAGE_NB_ELEMENTS_TO_SHOW },
-//     }),
-//   );
-//   return data.hits.map((collection) => (
-//     <CollectionItem key={collection.id} collection={collection} />
-//   ));
-// }

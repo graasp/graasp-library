@@ -77,7 +77,6 @@
       }
     }
   ],
-  "COLLECTION_PLAYER_BUTTON": "View item in player",
   "ERROR_TITLE": "Error",
   "ERROR_RETURN_TO_HOME": "Return to Home",
   "CONTRIBUTORS_TITLE": "with",
@@ -89,11 +88,11 @@
   "HOME_SUBTITLE": "Browse and Discover Open Educational Resources",
   "HOME_POPULAR_SEARCHES_TITLE": "Popular Searches",
   "HOME_MORE_COLLECTIONS_TITLE": "Discover",
-  "HOME_GRAASPER_COLLECTIONS_TITLE": "Graasp Selection",
+  "HOME_GRAASPER_COLLECTIONS_TITLE": "Featured Collections",
   "HOME_POPULAR_THIS_WEEK_COLLECTIONS_TITLE": "Popular this Week",
   "HOME_RECENT_COLLECTIONS_TITLE": "Recently published",
-  "HOME_MOST_LIKED_COLLECTIONS_TITLE": "Most liked",
-  "HOME_VIEW_MORE_IN_LIBRARY_BUTTON": "View more in the Library",
+  "HOME_MOST_LIKED_COLLECTIONS_TITLE": "Liked by the community",
+  "HOME_VIEW_MORE_IN_LIBRARY_BUTTON": "Join the community and share on the Library",
   "HOME_BROWSE_ALL_COLLECTIONS": "Browse All Collections",
   "MY_LISTS_MY_FAVORITES_TAB": "My Favorites",
   "MY_LISTS_MY_PUBLISHMENTS_TAB": "My Publishments",
@@ -249,5 +248,16 @@
     }
   ],
   "LOGIN_REQUIRED": "You need to be logged in to perform this action",
-  "PREVIEW_BUTTON_MORE_ACTIONS": "More actions"
+  "PREVIEW_BUTTON_MORE_ACTIONS": "More actions",
+  "HOME_FOOTER_START_BUTTON": "Start Here",
+  "HOME_FEATURED_DESCRIPTION": "Curated resources available on the Library",
+  "HOME_VIEW_ALL_COLLECTIONS_BUTTON": "View all collections",
+  "HOME_VIEW_MORE_BUTTON": "View {count} more",
+  "HOME_RECENT_COLLECTIONS_DESCRIPTION": "Latest collections published and share by the community",
+  "HOME_MOST_LIKED_COLLECTIONS_DESCRIPTION": "Collections liked by the community",
+  "HOME_POPULAR_DISCIPLINES_TITLE": "Popular Disciplines",
+  "KPI_DISCIPLINES": "Disciplines",
+  "KPI_PUBLISHERS": "Publishers",
+  "KPI_COLLECTIONS": "Collections",
+  "POPULAR_DISCIPLINES_COMPUTER_SCIENCES": "Computer Sciences"
 }

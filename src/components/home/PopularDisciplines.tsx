@@ -1,100 +1,157 @@
 import { ReactNode } from 'react';
 
 import {
-  Button,
+  Box,
   Card,
-  Container,
+  CardActionArea,
   Grid,
   Stack,
   Typography,
+  styled,
 } from '@mui/material';
-import CardContent from '@mui/material/CardContent';
 
+import { Link } from '@tanstack/react-router';
 import {
   AtomIcon,
-  CastleIcon,
   CpuIcon,
   DivideIcon,
   FlaskConicalIcon,
   MicroscopeIcon,
   MountainSnowIcon,
   UserSearchIcon,
+  VolleyballIcon,
 } from 'lucide-react';
+
+import { UrlSearch } from '~/config/constants';
+import { m } from '~/paraglide/messages';
+
+import { ButtonLink } from '../common/links/ButtonLink';
 
 const ICON_SIZE = 40;
 
-function DisciplineCard({ icon, title }: { icon: ReactNode; title: string }) {
+const ActionButton = styled(ButtonLink)(() => ({
+  borderColor: 'white',
+  color: 'white',
+  transition: 'all 0.5s',
+  '&:hover': {
+    backgroundColor: 'rgba(255,255,255,0.2)',
+  },
+}));
+
+function DisciplineCard({
+  icon,
+  title,
+  disciplines,
+}: Readonly<{ icon: ReactNode; title: string; disciplines: string[] }>) {
   return (
-    <Card sx={{ width: '100%', textAlign: 'center', py: 2 }}>
-      <CardContent>
-        <Typography color="primary">{icon}</Typography>
-        <Typography variant="h4" component="h5" noWrap>
-          {title}
-        </Typography>
-      </CardContent>
+    <Card>
+      <Link
+        to="/search"
+        search={{ [UrlSearch.DisciplineTagSearch]: disciplines }}
+        style={{ color: 'unset', textDecoration: 'none' }}
+      >
+        <CardActionArea
+          sx={{
+            width: '100%',
+            textAlign: 'center',
+            py: { xs: 1, sm: 2, md: 4 },
+            px: 3,
+          }}
+        >
+          <Stack
+            direction={{ xs: 'row', sm: 'column' }}
+            alignItems="center"
+            gap={{ xs: 2, sm: 0 }}
+          >
+            <Typography color="primary">{icon}</Typography>
+            <Typography variant="h4" component="h5" noWrap>
+              {title}
+            </Typography>
+          </Stack>
+        </CardActionArea>
+      </Link>
     </Card>
   );
 }
 
+const GRID_SIZE = { xs: 12, sm: 6, md: 4, lg: 3 };
+
 export function PopularDisciplines() {
   return (
-    <Container>
-      <Typography variant="h4">Popular Disciplines</Typography>
-      <Grid container spacing={5} py={5}>
-        <Grid size={{ xs: 6, md: 3 }}>
-          <DisciplineCard
-            icon={<MicroscopeIcon size={ICON_SIZE} />}
-            title="Biology"
-          />
-        </Grid>
-        <Grid size={{ xs: 6, md: 3 }}>
-          <DisciplineCard
-            icon={<AtomIcon size={ICON_SIZE} />}
-            title="Physics"
-          />
-        </Grid>
-        <Grid size={{ xs: 6, md: 3 }}>
-          <DisciplineCard
-            icon={<FlaskConicalIcon size={ICON_SIZE} />}
-            title="Chemistry"
-          />
-        </Grid>
-        <Grid size={{ xs: 6, md: 3 }}>
-          <DisciplineCard
-            icon={<UserSearchIcon size={ICON_SIZE} />}
-            title="Social Sciences"
-          />
-        </Grid>
-        <Grid size={{ xs: 6, md: 3 }}>
-          <DisciplineCard
-            icon={<DivideIcon size={ICON_SIZE} />}
-            title="Mathematics"
-          />
-        </Grid>
-        <Grid size={{ xs: 6, md: 3 }}>
-          <DisciplineCard
-            icon={<MountainSnowIcon size={ICON_SIZE} />}
-            title="Geography"
-          />
-        </Grid>
-        <Grid size={{ xs: 6, md: 3 }}>
-          <DisciplineCard
-            icon={<CastleIcon size={ICON_SIZE} />}
-            title="History"
-          />
-        </Grid>
-        <Grid size={{ xs: 6, md: 3 }}>
+    <Box sx={{ py: 5 }}>
+      <Typography variant="h4" color="white">
+        {m.HOME_POPULAR_DISCIPLINES_TITLE()}
+      </Typography>
+      <Grid container spacing={{ xs: 2, sm: 3, md: 5 }} py={5}>
+        <Grid size={GRID_SIZE}>
           <DisciplineCard
             icon={<CpuIcon size={ICON_SIZE} />}
-            title="Computer Sciences"
+            title={m.POPULAR_DISCIPLINES_COMPUTER_SCIENCES()}
+            disciplines={[
+              'Technology',
+              'Programmation',
+              'AI',
+              'python',
+              'Computer Science',
+            ]}
+          />
+        </Grid>
+        <Grid size={GRID_SIZE}>
+          <DisciplineCard
+            icon={<AtomIcon size={ICON_SIZE} />}
+            title={m.POPULAR_DISCIPLINES_PHYSICS()}
+            disciplines={['Science', 'Physics', 'Physik']}
+          />
+        </Grid>
+        <Grid size={GRID_SIZE}>
+          <DisciplineCard
+            icon={<MicroscopeIcon size={ICON_SIZE} />}
+            title={m.POPULAR_DISCIPLINES_BIOLOGY()}
+            disciplines={['Science', 'Biology', 'Biologie']}
+          />
+        </Grid>
+
+        <Grid size={GRID_SIZE}>
+          <DisciplineCard
+            icon={<FlaskConicalIcon size={ICON_SIZE} />}
+            title={m.POPULAR_DISCIPLINES_LANGUAGES()}
+            disciplines={['English', 'Spanish']}
+          />
+        </Grid>
+        <Grid size={GRID_SIZE}>
+          <DisciplineCard
+            icon={<UserSearchIcon size={ICON_SIZE} />}
+            title={m.POPULAR_DISCIPLINES_SOCIAL_SCIENCES()}
+            disciplines={['Psychology']}
+          />
+        </Grid>
+        <Grid size={GRID_SIZE}>
+          <DisciplineCard
+            icon={<DivideIcon size={ICON_SIZE} />}
+            title={m.POPULAR_DISCIPLINES_MATHEMATICS()}
+            disciplines={['Mathematics', 'Maths', 'math']}
+          />
+        </Grid>
+        <Grid size={GRID_SIZE}>
+          <DisciplineCard
+            icon={<MountainSnowIcon size={ICON_SIZE} />}
+            title={m.POPULAR_DISCIPLINES_GEOGRAPHY()}
+            disciplines={['Geography']}
+          />
+        </Grid>
+        <Grid size={GRID_SIZE}>
+          <DisciplineCard
+            icon={<VolleyballIcon size={ICON_SIZE} />}
+            title={m.POPULAR_DISCIPLINES_SPORT()}
+            disciplines={['Sport']}
           />
         </Grid>
       </Grid>
       <Stack direction="row" justifyContent="center">
-        <Button fullWidth={false} variant="outlined">
-          View more disciplines
-        </Button>
+        <ActionButton fullWidth={false} variant="outlined" to="/search">
+          {m.HOME_VIEW_ALL_COLLECTIONS_BUTTON()}
+        </ActionButton>
       </Stack>
-    </Container>
+    </Box>
   );
 }

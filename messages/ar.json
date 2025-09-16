@@ -35,8 +35,14 @@
   "HEADER_MY_LISTS": "قوائمي",
   "SEARCH_PAGE_TITLE": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "selectors": ["count", "countPlural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "count",
+        "countPlural"
+      ],
       "match": {
         "count=*": "ابحث بين {count} مجموعات",
         "countPlural=other": "ابحث بين {count} الموارد",
@@ -72,8 +78,8 @@
   "HOME_SUBTITLE": "تصفح واكتشف الموارد التعليمية المفتوحة",
   "HOME_POPULAR_SEARCHES_TITLE": "عمليات البحث الشعبية",
   "HOME_MORE_COLLECTIONS_TITLE": "إكتشف",
-  "HOME_GRAASPER_COLLECTIONS_TITLE": "اختيارات چراسپ ",
   "HOME_POPULAR_THIS_WEEK_COLLECTIONS_TITLE": "شعبية هذا الأسبوع",
+  "HOME_RECENT_COLLECTIONS_TITLE": "تم إنشاؤها مؤخرًا",
   "HOME_MOST_LIKED_COLLECTIONS_TITLE": "الأكثر إعجابا",
   "HOME_VIEW_MORE_IN_LIBRARY_BUTTON": "شاهد المزيد في المكتبة",
   "HOME_BROWSE_ALL_COLLECTIONS": "تصفح جميع المجموعات",
@@ -164,8 +170,14 @@
   "DURATION_IN_MINUTES_other": "{count} دقيقة",
   "SEARCH_PAGE_TITLE_CONTENT": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "selectors": ["count", "countPlural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "count",
+        "countPlural"
+      ],
       "match": {
         "count=*": "ابحث بين {count} } الموارد",
         "countPlural=one": "ابحث بين {count} الموارد",
@@ -181,8 +193,13 @@
   "SEARCH_FILTER_LANG_TITLE": "اللغات",
   "DURATION_IN_MINUTES": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "selectors": ["countPlural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "countPlural"
+      ],
       "match": {
         "countPlural=one": "{count} دقيقة",
         "countPlural=other": "{count} دقيقة"
@@ -199,7 +216,11 @@
         "input search",
         "local countPlural = count: plural"
       ],
-      "selectors": ["count", "countPlural", "search"],
+      "selectors": [
+        "count",
+        "countPlural",
+        "search"
+      ],
       "match": {
         "count=*, search=*": "تم العثور على نتيجة {count} لـ: {search}",
         "countPlural=one": "تم العثور على نتيجة {count} لـ: {search}",
@@ -223,8 +244,13 @@
   "COPY_ITEM_TO_CLIPBOARD_ERROR": "تم مواجهة خطأ أثناء نسخ العنصر إلى الحافظة",
   "SUMMARY_BROWSE_FOLDER_CONTAINS": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "selectors": ["countPlural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "countPlural"
+      ],
       "match": {
         "countPlural=zero": "مجلد فارغ",
         "countPlural=one": "{count}",
@@ -234,8 +260,14 @@
   ],
   "COLLECTIONS_COUNT_MESSAGE": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "selectors": ["count", "countPlural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "count",
+        "countPlural"
+      ],
       "match": {
         "count=*": "{count} متاحة",
         "countPlural=one": "{count} متاحة",

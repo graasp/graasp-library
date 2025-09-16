@@ -60,8 +60,8 @@
   "HOME_SUBTITLE": "Sfoglia e scopri risorse educative aperte",
   "HOME_POPULAR_SEARCHES_TITLE": "Ricerche popolari",
   "HOME_MORE_COLLECTIONS_TITLE": "Scoprire",
-  "HOME_GRAASPER_COLLECTIONS_TITLE": "Selezione Graasp",
   "HOME_POPULAR_THIS_WEEK_COLLECTIONS_TITLE": "Popolare questa settimana",
+  "HOME_RECENT_COLLECTIONS_TITLE": "Creato di recente",
   "HOME_MOST_LIKED_COLLECTIONS_TITLE": "Mi è piaciuto di più",
   "HOME_VIEW_MORE_IN_LIBRARY_BUTTON": "Visualizza altro nella Biblioteca",
   "HOME_BROWSE_ALL_COLLECTIONS": "Sfoglia tutte le collezioni",
@@ -152,8 +152,14 @@
   "DURATION_IN_MINUTES_other": "{count} minuti",
   "SEARCH_PAGE_TITLE_CONTENT": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "selectors": ["count", "countPlural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "count",
+        "countPlural"
+      ],
       "match": {
         "count=*": "Cerca tra {count} risorse",
         "countPlural=one": "Cerca tra {count} risorse",
@@ -169,8 +175,13 @@
   "SEARCH_FILTER_LANG_TITLE": "Lingue",
   "DURATION_IN_MINUTES": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "selectors": ["countPlural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "countPlural"
+      ],
       "match": {
         "countPlural=one": "{count} minuto",
         "countPlural=other": "{count} minuti"
@@ -187,7 +198,11 @@
         "input search",
         "local countPlural = count: plural"
       ],
-      "selectors": ["count", "countPlural", "search"],
+      "selectors": [
+        "count",
+        "countPlural",
+        "search"
+      ],
       "match": {
         "count=*, search=*": "Trovati {count} risultati per: {search}",
         "countPlural=one": "Trovati {count} risultati per: {search}",
@@ -211,8 +226,13 @@
   "COPY_ITEM_TO_CLIPBOARD_ERROR": "Si è verificato un errore durante la copia dell'elemento negli appunti",
   "SUMMARY_BROWSE_FOLDER_CONTAINS": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "selectors": ["countPlural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "countPlural"
+      ],
       "match": {
         "countPlural=zero": "Cartella vuota",
         "countPlural=one": "{count}",
@@ -222,8 +242,14 @@
   ],
   "COLLECTIONS_COUNT_MESSAGE": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "selectors": ["count", "countPlural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "count",
+        "countPlural"
+      ],
       "match": {
         "count=*": "Raccolta disponibile {count}",
         "countPlural=one": "Raccolta disponibile {count}",
@@ -233,8 +259,13 @@
   ],
   "SEARCH_PAGE_TITLE": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "selectors": ["countPlural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "countPlural"
+      ],
       "match": {
         "countPlural=other": "Cerca tra {count} risorse",
         "countPlural=one": "Cerca tra le risorse {count}"

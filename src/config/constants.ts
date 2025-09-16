@@ -19,9 +19,9 @@ export const MEMBER_AVATAR_MAIN_SIZE = 256;
 
 export const UrlSearch = {
   KeywordSearch: 's',
-  DisciplineTagSearch: 'discipline',
-  LevelTagSearch: 'level',
-  ResourceTypeTagSearch: 'resourceType',
+  DisciplineTagSearch: 'disciplines',
+  LevelTagSearch: 'levels',
+  ResourceTypeTagSearch: 'resourceTypes',
   GACrossDomainKey: '_gl',
 } as const;
 

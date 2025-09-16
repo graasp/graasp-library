@@ -67,11 +67,11 @@
   "HOME_SUBTITLE": "Explorez et découvrez des ressources libres pour l'éducation",
   "HOME_POPULAR_SEARCHES_TITLE": "Recherches populaires",
   "HOME_MORE_COLLECTIONS_TITLE": "Découvrir",
-  "HOME_GRAASPER_COLLECTIONS_TITLE": "Selection Graasp",
+  "HOME_GRAASPER_COLLECTIONS_TITLE": "Collections mises en avant",
   "HOME_POPULAR_THIS_WEEK_COLLECTIONS_TITLE": "Populaires cette semaine",
   "HOME_RECENT_COLLECTIONS_TITLE": "Récemment publiés",
   "HOME_MOST_LIKED_COLLECTIONS_TITLE": "Aimées par la communauté",
-  "HOME_VIEW_MORE_IN_LIBRARY_BUTTON": "Voir plus dans la Bibliothèque",
+  "HOME_VIEW_MORE_IN_LIBRARY_BUTTON": "Rejoindre la communauté et partager sur la Bibliothèque",
   "HOME_BROWSE_ALL_COLLECTIONS": "Découvrir toutes les collections",
   "MY_LISTS_MY_FAVORITES_TAB": "Mes favoris",
   "MY_LISTS_MY_PUBLISHMENTS_TAB": "Mes publications",
@@ -277,5 +277,23 @@
       }
     }
   ],
-  "LOGIN_REQUIRED": "Vous devez être connecté pour effectuer cette action"
+  "LOGIN_REQUIRED": "Vous devez être connecté pour effectuer cette action",
+  "HOME_FOOTER_START_BUTTON": "Commencer ici",
+  "HOME_FEATURED_DESCRIPTION": "Les ressources star sur la Librarie",
+  "HOME_VIEW_ALL_COLLECTIONS_BUTTON": "Voir toutes les collections",
+  "HOME_VIEW_MORE_BUTTON": "Voir {count} de plus",
+  "HOME_RECENT_COLLECTIONS_DESCRIPTION": "Les dernières collections publiées et partagées par la communauté",
+  "HOME_MOST_LIKED_COLLECTIONS_DESCRIPTION": "Collections aimées par la communité",
+  "HOME_POPULAR_DISCIPLINES_TITLE": "Disciplines Populaires",
+  "KPI_DISCIPLINES": "Disciplines",
+  "KPI_PUBLISHERS": "Créateurs",
+  "KPI_COLLECTIONS": "Collections",
+  "POPULAR_DISCIPLINES_COMPUTER_SCIENCES": "Informatique",
+  "POPULAR_DISCIPLINES_PHYSICS": "Physique",
+  "POPULAR_DISCIPLINES_BIOLOGY": "Biologie",
+  "POPULAR_DISCIPLINES_LANGUAGES": "Languages",
+  "POPULAR_DISCIPLINES_SOCIAL_SCIENCES": "Sciences Sociales",
+  "POPULAR_DISCIPLINES_MATHEMATICS": "Mathematiques",
+  "POPULAR_DISCIPLINES_GEOGRAPHY": "Géographie",
+  "POPULAR_DISCIPLINES_SPORT": "Sport"
 }

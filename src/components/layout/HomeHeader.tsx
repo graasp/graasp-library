@@ -81,6 +81,7 @@ export function HomeHeader() {
             color="white"
             variant="display"
             marginLeft={2}
+            lineHeight={1}
           >
             {m.HOME_TITLE()}
           </Typography>
@@ -97,10 +98,11 @@ export function HomeHeader() {
         </Box>
         <HomeSearchBox />
         <Stack
-          direction="row"
+          direction={{ xs: 'column', sm: 'row' }}
           width="100%"
+          spacing={{ xs: 4, sm: 1 }}
           justifyContent="space-between"
-          alignItems="end"
+          // alignItems="end"
         >
           <Box data-testid="popularSearches">
             <Typography color="white" variant="h6" gutterBottom>
