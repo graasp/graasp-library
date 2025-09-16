@@ -1,6 +1,6 @@
 import { Box, Container, Stack } from '@mui/material';
 
-import { createFileRoute } from '@tanstack/react-router';
+import { ClientOnly, createFileRoute } from '@tanstack/react-router';
 
 import { FeaturedCollections } from '~/components/home/FeaturedCollections';
 import { HomeFooter } from '~/components/home/HomeFooter';
@@ -40,7 +40,9 @@ function RouteComponent() {
 
       <StyledContainer sx={{ py: 5 }}>
         <Container>
-          <Kpi />
+          <ClientOnly>
+            <Kpi />
+          </ClientOnly>
         </Container>
       </StyledContainer>
 
