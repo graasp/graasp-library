@@ -36,9 +36,13 @@ function TagComponent({ tag }: Readonly<{ tag: TagInfo }>): JSX.Element {
 
 export type TagListProps = Readonly<{
   tags?: TagInfo[];
+  maxNbOfLines?: number;
 }>;
 
-export function TagList({ tags }: TagListProps): JSX.Element | null {
+export function TagList({
+  tags,
+  maxNbOfLines = 2,
+}: TagListProps): JSX.Element | null {
   if (!tags?.length) {
     return null;
   }
@@ -50,7 +54,7 @@ export function TagList({ tags }: TagListProps): JSX.Element | null {
       flexWrap="wrap"
       gap="4px"
       overflow="hidden"
-      maxHeight="2lh" // display maximum 2 lines
+      maxHeight={`${maxNbOfLines}lh`} // display maximum x lines
     >
       {tags.map((t) => (
         <TagComponent key={`${t.category}-${t.name}`} tag={t} />

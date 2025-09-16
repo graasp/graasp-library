@@ -36,7 +36,7 @@
   "SEARCH_PAGE_TITLE": [
     {
       "declarations": ["input count", "local countPlural = count: plural"],
-      "selectors": [],
+      "selectors": ["count", "countPlural"],
       "match": {
         "count=*": "Buscar entre {count} colecciones",
         "countPlural=other": "Buscar entre {count} recursos",
@@ -73,7 +73,6 @@
   "HOME_MORE_COLLECTIONS_TITLE": "Descubrir",
   "HOME_GRAASPER_COLLECTIONS_TITLE": "Selección de agarre",
   "HOME_POPULAR_THIS_WEEK_COLLECTIONS_TITLE": "Popular esta semana",
-  "HOME_RECENT_COLLECTIONS_TITLE": "Recientemente creado",
   "HOME_MOST_LIKED_COLLECTIONS_TITLE": "El mas gustado",
   "HOME_VIEW_MORE_IN_LIBRARY_BUTTON": "Ver más en la Biblioteca",
   "HOME_BROWSE_ALL_COLLECTIONS": "Explorar todas las colecciones",
@@ -165,7 +164,7 @@
   "SEARCH_PAGE_TITLE_CONTENT": [
     {
       "declarations": ["input count", "local countPlural = count: plural"],
-      "selectors": ["count"],
+      "selectors": ["count", "countPlural"],
       "match": {
         "count=*": "Buscar entre {count} recursos",
         "countPlural=one": "Buscar entre {count} recursos",

@@ -69,7 +69,7 @@
   "HOME_MORE_COLLECTIONS_TITLE": "Découvrir",
   "HOME_GRAASPER_COLLECTIONS_TITLE": "Selection Graasp",
   "HOME_POPULAR_THIS_WEEK_COLLECTIONS_TITLE": "Populaires cette semaine",
-  "HOME_RECENT_COLLECTIONS_TITLE": "Récemment créées",
+  "HOME_RECENT_COLLECTIONS_TITLE": "Récemment publiés",
   "HOME_MOST_LIKED_COLLECTIONS_TITLE": "Aimées par la communauté",
   "HOME_VIEW_MORE_IN_LIBRARY_BUTTON": "Voir plus dans la Bibliothèque",
   "HOME_BROWSE_ALL_COLLECTIONS": "Découvrir toutes les collections",
@@ -135,8 +135,13 @@
   "SEARCH_FILTER_LANG_TITLE": "Langues",
   "SEARCH_PAGE_TITLE": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "selectors": ["countPlural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "countPlural"
+      ],
       "match": {
         "countPlural=one": "Rechercher parmi la ressource",
         "countPlural=other": "Rechercher parmi les {count} ressources"
@@ -145,8 +150,14 @@
   ],
   "SEARCH_PAGE_TITLE_CONTENT": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "selectors": ["count", "countPlural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "count",
+        "countPlural"
+      ],
       "match": {
         "count=*": "Rechercher parmi les {count} ressources ",
         "countPlural=one": "Rechercher parmi la ressource",
@@ -183,8 +194,13 @@
   "OER_INFORMATION_VIDEO_DESCRIPTION_EDITION": "Édition",
   "DURATION_IN_MINUTES": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "selectors": ["countPlural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "countPlural"
+      ],
       "match": {
         "countPlural=one": "{count} minute",
         "countPlural=other": "{count} minutes"
@@ -201,7 +217,11 @@
         "input search",
         "local countPlural = count: plural"
       ],
-      "selectors": ["count", "countPlural", "search"],
+      "selectors": [
+        "count",
+        "countPlural",
+        "search"
+      ],
       "match": {
         "count=*, search=*": "Résultat {count} trouvé pour : {search}",
         "countPlural=one": "Résultat {count} trouvé pour : {search}",
@@ -226,8 +246,13 @@
   "COPY_ITEM_TO_CLIPBOARD_ERROR": "Une erreur s'est produite lors de la copie de l'élément dans le presse-papiers",
   "SUMMARY_BROWSE_FOLDER_CONTAINS": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "selectors": ["countPlural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "countPlural"
+      ],
       "match": {
         "countPlural=zero": "Dossier vide",
         "countPlural=one": "{count} Fichier",
@@ -237,8 +262,14 @@
   ],
   "COLLECTIONS_COUNT_MESSAGE": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "selectors": ["count", "countPlural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "count",
+        "countPlural"
+      ],
       "match": {
         "count=*": "{count} collection disponible",
         "countPlural=one": "{count} collection disponible",

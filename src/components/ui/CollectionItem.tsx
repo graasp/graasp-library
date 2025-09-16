@@ -15,7 +15,7 @@ export function CollectionItem({
       gridAutoColumns={{ xs: '50%', sm: '33%', md: '25%' }}
       gridAutoRows={3}
     >
-      <CollectionCard height={230} showIsContentTag collection={collection} />
+      <CollectionCard height={210} showIsContentTag collection={collection} />
     </Box>
   );
 }
@@ -37,7 +37,7 @@ export function CollectionContainer({
       gridTemplateColumns={{
         xs: '1fr',
         md: 'repeat(2, 1fr)',
-        lg: 'repeat(3, 1fr)',
+        lg: 'repeat(2, 1fr)',
       }}
     >
       {children}

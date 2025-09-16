@@ -35,11 +35,8 @@
   "HEADER_MY_LISTS": "Meine Listen",
   "SEARCH_PAGE_TITLE": [
     {
-      "declarations": [
-        "input count",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [],
+      "declarations": ["input count", "local countPlural = count: plural"],
+      "selectors": ["count", "countPlural"],
       "match": {
         "count=*": "Suche in {count} Sammlungen",
         "countPlural=other": "Suche unter {count} Ressourcen",
@@ -77,7 +74,6 @@
   "HOME_MORE_COLLECTIONS_TITLE": "Entdecken",
   "HOME_GRAASPER_COLLECTIONS_TITLE": "Graasp Auswahl",
   "HOME_POPULAR_THIS_WEEK_COLLECTIONS_TITLE": "Beliebt diese Woche",
-  "HOME_RECENT_COLLECTIONS_TITLE": "Kürzlich erstellt",
   "HOME_MOST_LIKED_COLLECTIONS_TITLE": "Beliebteste",
   "HOME_VIEW_MORE_IN_LIBRARY_BUTTON": "Mehr in der Bibliothek ansehen",
   "HOME_BROWSE_ALL_COLLECTIONS": "Erweiterte Suche",
@@ -138,13 +134,8 @@
   "SOCIAL_PROFILES": "Profile in sozialen Netzwerken",
   "SEARCH_PAGE_TITLE_CONTENT": [
     {
-      "declarations": [
-        "input count",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [
-        "count"
-      ],
+      "declarations": ["input count", "local countPlural = count: plural"],
+      "selectors": ["count", "countPlural"],
       "match": {
         "count=*": "Suche unter {count} } Ressourcen",
         "countPlural=one": "Suche unter {count} Ressourcen",
@@ -188,13 +179,8 @@
   "OER_INFORMATION_VIDEO_DESCRIPTION_EDITION": "Ausgabe",
   "DURATION_IN_MINUTES": [
     {
-      "declarations": [
-        "input count",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [
-        "countPlural"
-      ],
+      "declarations": ["input count", "local countPlural = count: plural"],
+      "selectors": ["countPlural"],
       "match": {
         "countPlural=one": "{count} Minute",
         "countPlural=other": "{count} Minuten"
@@ -211,11 +197,7 @@
         "input search",
         "local countPlural = count: plural"
       ],
-      "selectors": [
-        "count",
-        "countPlural",
-        "search"
-      ],
+      "selectors": ["count", "countPlural", "search"],
       "match": {
         "count=*, search=*": "{count} Ergebnis gefunden für: {search}",
         "countPlural=one": "{count} Ergebnis gefunden für: {search}",
@@ -239,13 +221,8 @@
   "COPY_ITEM_TO_CLIPBOARD_ERROR": "Beim Kopieren des Elements in die Zwischenablage ist ein Fehler aufgetreten",
   "SUMMARY_BROWSE_FOLDER_CONTAINS": [
     {
-      "declarations": [
-        "input count",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [
-        "countPlural"
-      ],
+      "declarations": ["input count", "local countPlural = count: plural"],
+      "selectors": ["countPlural"],
       "match": {
         "countPlural=zero": "Ordner leeren",
         "countPlural=one": "{count}",
@@ -255,14 +232,8 @@
   ],
   "COLLECTIONS_COUNT_MESSAGE": [
     {
-      "declarations": [
-        "input count",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [
-        "count",
-        "countPlural"
-      ],
+      "declarations": ["input count", "local countPlural = count: plural"],
+      "selectors": ["count", "countPlural"],
       "match": {
         "count=*": "{count} Sammlung verfügbar",
         "countPlural=one": "{count} Sammlung verfügbar",

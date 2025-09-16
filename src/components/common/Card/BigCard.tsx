@@ -1,10 +1,22 @@
 import type { JSX, ReactNode } from 'react';
+import { Suspense } from 'react';
 
-import { Box, Card as MuiCard, Stack } from '@mui/material';
+import {
+  Alert,
+  Box,
+  Grid,
+  Card as MuiCard,
+  Skeleton,
+  Stack,
+} from '@mui/material';
 
 import { DiscriminatedItem } from '@graasp/sdk';
 
+import { ErrorBoundary } from '@sentry/tanstackstart-react';
 import { Link } from '@tanstack/react-router';
+
+import { CollectionContainer } from '~/components/ui/CollectionItem';
+import { m } from '~/paraglide/messages';
 
 import CardThumbnail from './CardThumbnail';
 import { LikeCounter } from './LikeCounter';
@@ -73,7 +85,7 @@ export function BigCard({
         <Stack
           flex={2}
           gap={1}
-          p={{ xs: 1, sm: 2 }}
+          p={2}
           minWidth={0}
           justifyContent="space-between"
           height="100%"
@@ -114,4 +126,31 @@ export function BigCard({
       </Stack>
     </MuiCard>
   );
+}
+
+type Props = {
+  children: ReactNode;
+  id?: string;
+};
+
+export function BigCardGrid({ id, children }: Readonly<Props>) {
+  return (
+    <CollectionContainer id={id}>
+      <Suspense
+        fallback={['1', '2', '3', '4'].map((elem) => (
+          <Grid key={elem} size={{ xs: 12, sm: 12, md: 6, lg: 6, xl: 6 }}>
+            <Skeleton variant="rounded" width="100%" height="230px" />
+          </Grid>
+        ))}
+      >
+        <ErrorBoundary fallback={<ErrorLoadingCollections />}>
+          {children}
+        </ErrorBoundary>
+      </Suspense>
+    </CollectionContainer>
+  );
+}
+
+function ErrorLoadingCollections() {
+  return <Alert severity="error">{m.ERROR_LOADING_COLLECTIONS()}</Alert>;
 }

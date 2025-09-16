@@ -33,8 +33,6 @@ export const ENV = {
 
 export const TREE_VIEW_MAX_WIDTH = 400;
 
-export const HOMEPAGE_NB_ELEMENTS_TO_SHOW = 6;
-
 export const BACKGROUND_COLOR = 'rgb(248, 247, 254)';
 
 export const MAX_RESULTS_TO_SHOW = 5;
