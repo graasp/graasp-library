@@ -8,6 +8,8 @@ import {
   Stack,
   Typography,
   styled,
+  useMediaQuery,
+  useTheme,
 } from '@mui/material';
 
 import { Link } from '@tanstack/react-router';
@@ -76,76 +78,75 @@ function DisciplineCard({
 
 const GRID_SIZE = { xs: 12, sm: 6, md: 4, lg: 3 };
 
+const DISCIPLINES = [
+  {
+    icon: <CpuIcon size={ICON_SIZE} />,
+    title: m.POPULAR_DISCIPLINES_COMPUTER_SCIENCES(),
+    disciplines: [
+      'Technology',
+      'Programmation',
+      'AI',
+      'python',
+      'Computer Science',
+    ],
+  },
+  {
+    icon: <AtomIcon size={ICON_SIZE} />,
+    title: m.POPULAR_DISCIPLINES_PHYSICS(),
+    disciplines: ['Science', 'Physics', 'Physik'],
+  },
+  {
+    icon: <MicroscopeIcon size={ICON_SIZE} />,
+    title: m.POPULAR_DISCIPLINES_BIOLOGY(),
+    disciplines: ['Science', 'Biology', 'Biologie'],
+  },
+  {
+    icon: <FlaskConicalIcon size={ICON_SIZE} />,
+    title: m.POPULAR_DISCIPLINES_LANGUAGES(),
+    disciplines: ['English', 'Spanish'],
+  },
+  {
+    icon: <UserSearchIcon size={ICON_SIZE} />,
+    title: m.POPULAR_DISCIPLINES_SOCIAL_SCIENCES(),
+    disciplines: ['Psychology'],
+  },
+  {
+    icon: <DivideIcon size={ICON_SIZE} />,
+    title: m.POPULAR_DISCIPLINES_MATHEMATICS(),
+    disciplines: ['Mathematics', 'Maths', 'math'],
+  },
+  {
+    icon: <MountainSnowIcon size={ICON_SIZE} />,
+    title: m.POPULAR_DISCIPLINES_GEOGRAPHY(),
+    disciplines: ['Geography'],
+  },
+  {
+    icon: <VolleyballIcon size={ICON_SIZE} />,
+    title: m.POPULAR_DISCIPLINES_SPORT(),
+    disciplines: ['Sport'],
+  },
+];
+
 export function PopularDisciplines() {
+  const theme = useTheme();
+  const isLg = useMediaQuery(theme.breakpoints.up('lg'));
+  const nbToShow = isLg ? 8 : 6;
+
   return (
     <Box sx={{ py: 5 }}>
       <Typography variant="h4" color="white">
         {m.HOME_POPULAR_DISCIPLINES_TITLE()}
       </Typography>
       <Grid container spacing={{ xs: 2, sm: 3, md: 5 }} py={5}>
-        <Grid size={GRID_SIZE}>
-          <DisciplineCard
-            icon={<CpuIcon size={ICON_SIZE} />}
-            title={m.POPULAR_DISCIPLINES_COMPUTER_SCIENCES()}
-            disciplines={[
-              'Technology',
-              'Programmation',
-              'AI',
-              'python',
-              'Computer Science',
-            ]}
-          />
-        </Grid>
-        <Grid size={GRID_SIZE}>
-          <DisciplineCard
-            icon={<AtomIcon size={ICON_SIZE} />}
-            title={m.POPULAR_DISCIPLINES_PHYSICS()}
-            disciplines={['Science', 'Physics', 'Physik']}
-          />
-        </Grid>
-        <Grid size={GRID_SIZE}>
-          <DisciplineCard
-            icon={<MicroscopeIcon size={ICON_SIZE} />}
-            title={m.POPULAR_DISCIPLINES_BIOLOGY()}
-            disciplines={['Science', 'Biology', 'Biologie']}
-          />
-        </Grid>
-
-        <Grid size={GRID_SIZE}>
-          <DisciplineCard
-            icon={<FlaskConicalIcon size={ICON_SIZE} />}
-            title={m.POPULAR_DISCIPLINES_LANGUAGES()}
-            disciplines={['English', 'Spanish']}
-          />
-        </Grid>
-        <Grid size={GRID_SIZE}>
-          <DisciplineCard
-            icon={<UserSearchIcon size={ICON_SIZE} />}
-            title={m.POPULAR_DISCIPLINES_SOCIAL_SCIENCES()}
-            disciplines={['Psychology']}
-          />
-        </Grid>
-        <Grid size={GRID_SIZE}>
-          <DisciplineCard
-            icon={<DivideIcon size={ICON_SIZE} />}
-            title={m.POPULAR_DISCIPLINES_MATHEMATICS()}
-            disciplines={['Mathematics', 'Maths', 'math']}
-          />
-        </Grid>
-        <Grid size={GRID_SIZE}>
-          <DisciplineCard
-            icon={<MountainSnowIcon size={ICON_SIZE} />}
-            title={m.POPULAR_DISCIPLINES_GEOGRAPHY()}
-            disciplines={['Geography']}
-          />
-        </Grid>
-        <Grid size={GRID_SIZE}>
-          <DisciplineCard
-            icon={<VolleyballIcon size={ICON_SIZE} />}
-            title={m.POPULAR_DISCIPLINES_SPORT()}
-            disciplines={['Sport']}
-          />
-        </Grid>
+        {DISCIPLINES.slice(0, nbToShow).map(({ icon, title, disciplines }) => (
+          <Grid size={GRID_SIZE}>
+            <DisciplineCard
+              icon={icon}
+              title={title}
+              disciplines={disciplines}
+            />
+          </Grid>
+        ))}
       </Grid>
       <Stack direction="row" justifyContent="center">
         <ActionButton fullWidth={false} variant="outlined" to="/search">
