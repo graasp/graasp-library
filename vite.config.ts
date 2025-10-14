@@ -9,7 +9,7 @@ export default defineConfig({
   build: {
     sourcemap: true, // Source map generation must be turned on
     rollupOptions: {
-      external: ['@gsap/react'],
+      external: ['@gsap/react', 'gsap'],
     },
   },
   ssr: {
