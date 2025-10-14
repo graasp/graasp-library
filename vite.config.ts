@@ -8,6 +8,9 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 export default defineConfig({
   build: {
     sourcemap: true, // Source map generation must be turned on
+    rollupOptions: {
+      external: ['@gsap/react'],
+    },
   },
   ssr: {
     noExternal: ['@mui/*'],
