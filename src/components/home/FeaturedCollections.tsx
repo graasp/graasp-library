@@ -51,7 +51,7 @@ export function FeaturedCollections() {
           {m.HOME_FEATURED_DESCRIPTION()}
         </Typography>
       </Stack>
-      <Grid container spacing={3}>
+      <Grid id="featuredCollectionsGrid" container spacing={3}>
         <Suspense
           fallback={
             // use 6 elements since the possible combinations are 1, 2 and 3 per row, so we always have full rows

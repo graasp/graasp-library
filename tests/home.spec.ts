@@ -13,10 +13,10 @@ test.describe('Home', () => {
       page.getByRole('link', { name: 'Library', exact: true }),
     ).toBeVisible();
     await expect(
-      page.getByRole('link', { name: 'Search', exact: true }),
+      page.getByRole('link', { name: 'Discover', exact: true }),
     ).toBeVisible();
     await expect(
-      page.getByRole('link', { name: 'OER', exact: true }),
+      page.getByRole('link', { name: 'What are OER?', exact: true }),
     ).toBeVisible();
     await expect(
       page.getByRole('banner').getByRole('button', { name: 'language switch' }),
@@ -94,13 +94,13 @@ test.describe('Home', () => {
     await page.getByRole('link', { name: 'Library', exact: true }).click();
 
     // check search button
-    await page.getByRole('link', { name: 'Browse all collections' }).click();
+    await page.getByRole('link', { name: 'Browse All Resources' }).click();
     await expect(page).toHaveURL((url) => url.pathname === '/search');
   });
 
   test('Search Bar', async ({ page }) => {
     const searchInput = page.getByRole('textbox', {
-      name: 'Search collections…',
+      name: 'Search resources…',
     });
     await searchInput.click();
     await page.waitForTimeout(4000);
@@ -119,20 +119,43 @@ test.describe('Home', () => {
   test('Graasper collections', async ({ page }) => {
     await expect(
       page
-        .locator('#graasperCollectionsGrid')
-        .getByRole('link', { name: 'Geogebra', exact: true }),
+        .locator('#featuredCollectionsGrid')
+        .getByRole('link', { name: 'Geogebra', exact: true })
+        .getByText('Geogebra'),
     ).toBeVisible();
     await expect(
       page
-        .locator('#graasperCollectionsGrid')
-        .getByRole('link', { name: 'Templates', exact: true }),
+        .locator('#featuredCollectionsGrid')
+        .getByRole('link', { name: 'Templates', exact: true })
+        .getByText('Templates'),
     ).toBeVisible();
   });
 
-  test('Footer', async ({ page }) => {
-    await page.waitForTimeout(3000);
+  test('Footer', async ({ page, context }) => {
+    const clientPage = `${process.env.VITE_CLIENT_HOST}/home/`;
+
+    // mock the response to the client
+    await context.route('**/home/*', (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: 'text/html',
+        body: `
+          <html>
+            <head><title>Client page</title></head>
+            <body>
+              <h1>Hello from the client</h1>
+            </body>
+          </html>
+        `,
+      }),
+    );
     // check browse all collections button
-    await page.getByRole('link', { name: 'View more in the Library' }).click();
-    await expect(page).toHaveURL((url) => url.pathname === '/search');
+    await page
+      .getByRole('link', {
+        name: 'Start Here',
+        exact: true,
+      })
+      .click();
+    await expect(page).toHaveURL(clientPage);
   });
 });

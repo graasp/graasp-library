@@ -24,13 +24,8 @@
   "FILTER_DROPDOWN_NO_RESOURCE_TYPE": "No type filter…",
   "SEARCH_PAGE_TITLE": [
     {
-      "declarations": [
-        "input count",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [
-        "countPlural"
-      ],
+      "declarations": ["input count", "local countPlural = count: plural"],
+      "selectors": ["countPlural"],
       "match": {
         "countPlural=other": "Search among {count} resources",
         "countPlural=one": "Search among {count} resource"
@@ -39,13 +34,8 @@
   ],
   "SEARCH_PAGE_TITLE_CONTENT": [
     {
-      "declarations": [
-        "input count",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [
-        "countPlural"
-      ],
+      "declarations": ["input count", "local countPlural = count: plural"],
+      "selectors": ["countPlural"],
       "match": {
         "countPlural=one": "Search among {count} resources",
         "countPlural=many": "Search among {count} resources",
@@ -56,8 +46,8 @@
   ],
   "SEARCH_BUTTON_ARIA_LABEL": "search",
   "SEARCH_FILTER_EMPTY": "No corresponding filter",
-  "SEARCH_ARIA_LABEL": "Search collections",
-  "SEARCH_PLACEHOLDER": "Search collections…",
+  "SEARCH_ARIA_LABEL": "Search resources",
+  "SEARCH_PLACEHOLDER": "Search resources…",
   "SEARCH_RESULTS_FOR_TEXT": [
     {
       "declarations": [
@@ -65,11 +55,7 @@
         "input search",
         "local countPlural = count: plural"
       ],
-      "selectors": [
-        "count",
-        "countPlural",
-        "search"
-      ],
+      "selectors": ["count", "countPlural", "search"],
       "match": {
         "count=*, search=*": "Found {count} result for: {search}",
         "countPlural=one": "Found {count} result for: {search}",
@@ -175,13 +161,8 @@
   "OER_INFORMATION_VIDEO_DESCRIPTION_EDITION": "Edition",
   "DURATION_IN_MINUTES": [
     {
-      "declarations": [
-        "input count",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [
-        "countPlural"
-      ],
+      "declarations": ["input count", "local countPlural = count: plural"],
+      "selectors": ["countPlural"],
       "match": {
         "countPlural=one": "{count} minute",
         "countPlural=other": "{count} minutes"
@@ -212,13 +193,8 @@
   "COPY_ITEM_TO_CLIPBOARD_ERROR": "An error was encountered while copying item to clipboard",
   "SUMMARY_BROWSE_FOLDER_CONTAINS": [
     {
-      "declarations": [
-        "input count",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [
-        "countPlural"
-      ],
+      "declarations": ["input count", "local countPlural = count: plural"],
+      "selectors": ["countPlural"],
       "match": {
         "countPlural=zero": "Empty Folder",
         "countPlural=one": "{count} File",
@@ -228,14 +204,8 @@
   ],
   "COLLECTIONS_COUNT_MESSAGE": [
     {
-      "declarations": [
-        "input count",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [
-        "count",
-        "countPlural"
-      ],
+      "declarations": ["input count", "local countPlural = count: plural"],
+      "selectors": ["count", "countPlural"],
       "match": {
         "count=*": "{count} collection available",
         "countPlural=one": "{count} collection available",
