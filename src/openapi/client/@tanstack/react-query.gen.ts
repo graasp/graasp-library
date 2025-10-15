@@ -37,6 +37,7 @@ import {
   createLink,
   createMembershipRequest,
   createOwnProfile,
+  createPage,
   createPassword,
   createShortLink,
   createShortcut,
@@ -141,6 +142,8 @@ import {
   login,
   loginOrRegisterAsGuest,
   moveManyItems,
+  pagesWebsockets,
+  pagesWebsockets2,
   patchChangeEmail,
   patchChatMessage,
   patchMention,
@@ -202,6 +205,7 @@ import type {
   CreateAppDataError,
   CreateAppDataFileData,
   CreateAppDataFileError,
+  CreateAppDataFileResponse,
   CreateAppDataResponse,
   CreateAppError,
   CreateAppResponse,
@@ -258,6 +262,9 @@ import type {
   CreateOwnProfileData,
   CreateOwnProfileError,
   CreateOwnProfileResponse,
+  CreatePageData,
+  CreatePageError,
+  CreatePageResponse,
   CreatePasswordData,
   CreatePasswordError,
   CreatePasswordResponse,
@@ -433,6 +440,8 @@ import type {
   MoveManyItemsData,
   MoveManyItemsError,
   MoveManyItemsResponse,
+  PagesWebsockets2Data,
+  PagesWebsocketsData,
   PatchChangeEmailData,
   PatchChangeEmailError,
   PatchChangeEmailResponse,
@@ -1945,7 +1954,7 @@ export const createAppDataFileQueryKey = (
 
 /**
  * Create app data file
- * Upload a file to create a corresponding app data. The created app data will be "file" and visibility member. The data property will contain the file properties.
+ * Upload a file to create a corresponding app data. The created app data will have a type file and visibility member. The data property will contain the file properties.
  */
 export const createAppDataFileOptions = (
   options?: Options<CreateAppDataFileData>,
@@ -1966,17 +1975,17 @@ export const createAppDataFileOptions = (
 
 /**
  * Create app data file
- * Upload a file to create a corresponding app data. The created app data will be "file" and visibility member. The data property will contain the file properties.
+ * Upload a file to create a corresponding app data. The created app data will have a type file and visibility member. The data property will contain the file properties.
  */
 export const createAppDataFileMutation = (
   options?: Partial<Options<CreateAppDataFileData>>,
 ): UseMutationOptions<
-  unknown,
+  CreateAppDataFileResponse,
   CreateAppDataFileError,
   Options<CreateAppDataFileData>
 > => {
   const mutationOptions: UseMutationOptions<
-    unknown,
+    CreateAppDataFileResponse,
     CreateAppDataFileError,
     Options<CreateAppDataFileData>
   > = {
@@ -6099,6 +6108,106 @@ export const deleteTagForItemMutation = (
     },
   };
   return mutationOptions;
+};
+
+export const createPageQueryKey = (options: Options<CreatePageData>) =>
+  createQueryKey('createPage', options);
+
+/**
+ * Create page
+ * Create page and its content.
+ */
+export const createPageOptions = (options: Options<CreatePageData>) => {
+  return queryOptions({
+    queryFn: async ({ queryKey, signal }) => {
+      const { data } = await createPage({
+        ...options,
+        ...queryKey[0],
+        signal,
+        throwOnError: true,
+      });
+      return data;
+    },
+    queryKey: createPageQueryKey(options),
+  });
+};
+
+/**
+ * Create page
+ * Create page and its content.
+ */
+export const createPageMutation = (
+  options?: Partial<Options<CreatePageData>>,
+): UseMutationOptions<
+  CreatePageResponse,
+  CreatePageError,
+  Options<CreatePageData>
+> => {
+  const mutationOptions: UseMutationOptions<
+    CreatePageResponse,
+    CreatePageError,
+    Options<CreatePageData>
+  > = {
+    mutationFn: async (localOptions) => {
+      const { data } = await createPage({
+        ...options,
+        ...localOptions,
+        throwOnError: true,
+      });
+      return data;
+    },
+  };
+  return mutationOptions;
+};
+
+export const pagesWebsocketsQueryKey = (
+  options: Options<PagesWebsocketsData>,
+) => createQueryKey('pagesWebsockets', options);
+
+/**
+ * Connect to websockets for a page
+ * Connect to websockets for a page and allow collaboration through yjs.
+ */
+export const pagesWebsocketsOptions = (
+  options: Options<PagesWebsocketsData>,
+) => {
+  return queryOptions({
+    queryFn: async ({ queryKey, signal }) => {
+      const { data } = await pagesWebsockets({
+        ...options,
+        ...queryKey[0],
+        signal,
+        throwOnError: true,
+      });
+      return data;
+    },
+    queryKey: pagesWebsocketsQueryKey(options),
+  });
+};
+
+export const pagesWebsockets2QueryKey = (
+  options: Options<PagesWebsockets2Data>,
+) => createQueryKey('pagesWebsockets2', options);
+
+/**
+ * Connect to websockets for a page
+ * Connect to websockets for a page and allow collaboration through yjs.
+ */
+export const pagesWebsockets2Options = (
+  options: Options<PagesWebsockets2Data>,
+) => {
+  return queryOptions({
+    queryFn: async ({ queryKey, signal }) => {
+      const { data } = await pagesWebsockets2({
+        ...options,
+        ...queryKey[0],
+        signal,
+        throwOnError: true,
+      });
+      return data;
+    },
+    queryKey: pagesWebsockets2QueryKey(options),
+  });
 };
 
 /**

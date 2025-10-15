@@ -177,8 +177,12 @@ export type CurrentAccount =
       lang: string;
       lastAuthenticatedAt: null | string;
       type: AccountTypeGuest;
-      extra: {
-        [key: string]: unknown;
+      itemLoginSchema: {
+        item: {
+          id: string;
+          name: string;
+          path: string;
+        };
       };
     };
 
@@ -211,8 +215,12 @@ export type NullableCurrentAccount =
       lang: string;
       lastAuthenticatedAt: null | string;
       type: AccountTypeGuest;
-      extra: {
-        [key: string]: unknown;
+      itemLoginSchema: {
+        item: {
+          id: string;
+          name: string;
+          path: string;
+        };
       };
     });
 
@@ -244,7 +252,8 @@ export type PackedItem = {
     | 'file'
     | 'shortcut'
     | 'h5p'
-    | 'etherpad';
+    | 'etherpad'
+    | 'page';
   path: string;
   lang: string;
   extra: {
@@ -603,7 +612,8 @@ export type SearchHit = {
     | 'file'
     | 'shortcut'
     | 'h5p'
-    | 'etherpad';
+    | 'etherpad'
+    | 'page';
   isPublishedRoot: boolean;
   isHidden: boolean;
   createdAt: string;
@@ -611,6 +621,10 @@ export type SearchHit = {
   publicationUpdatedAt: string;
   lang: string;
   likes: number;
+  thumbnails?: {
+    small: string;
+    medium: string;
+  };
   _formatted: {
     name: string;
     description: string;
@@ -1606,9 +1620,7 @@ export type GetAppListResponses = {
     name: string;
     description: string;
     url: string;
-    extra: {
-      [key: string]: unknown;
-    };
+    thumbnail: string;
   }>;
 };
 
@@ -1855,10 +1867,13 @@ export type CreateAppDataFileError =
 
 export type CreateAppDataFileResponses = {
   /**
-   * Default Response
+   * App Data with support for returning legacy properties for older implementations of the apps API. Returns a copy of the `account` property as the `member` property.
    */
-  200: unknown;
+  200: AppDataWithLegacyProps;
 };
+
+export type CreateAppDataFileResponse =
+  CreateAppDataFileResponses[keyof CreateAppDataFileResponses];
 
 export type DownloadAppDataFileData = {
   body?: never;
@@ -2170,7 +2185,10 @@ export type CreateChatbotCompletionPromptData = {
       | 'gpt-4-turbo'
       | 'gpt-4o'
       | 'gpt-4o-mini'
-      | 'gpt-4.1-nano';
+      | 'gpt-4.1-nano'
+      | 'gpt-5'
+      | 'gpt-5-nano'
+      | 'gpt-5-mini';
     temperature?: number;
   };
   url: '/app-items/{itemId}/chat-bot';
@@ -6418,6 +6436,153 @@ export type DeleteTagForItemResponses = {
 export type DeleteTagForItemResponse =
   DeleteTagForItemResponses[keyof DeleteTagForItemResponses];
 
+export type CreatePageData = {
+  body: {
+    name: string;
+    lang?: string;
+    /**
+     * Item settings
+     * Parameters, mostly visual, common to all types of items.
+     */
+    settings?: {
+      /**
+       * @deprecated
+       */
+      lang?: string;
+      isPinned?: boolean;
+      /**
+       * @deprecated
+       */
+      tags?: Array<string>;
+      showChatbox?: boolean;
+      isResizable?: boolean;
+      hasThumbnail?: boolean;
+      ccLicenseAdaption?:
+        | 'CC BY'
+        | 'CC BY-NC'
+        | 'CC BY-SA'
+        | 'CC BY-NC-SA'
+        | 'CC BY-ND'
+        | 'CC BY-NC-ND'
+        | 'CC0';
+      displayCoEditors?: boolean;
+      descriptionPlacement?: 'above' | 'below';
+      isCollapsible?: boolean;
+      enableSaveActions?: boolean;
+      showLinkIframe?: boolean;
+      showLinkButton?: boolean;
+      maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+      alignment?: 'center' | 'left' | 'right';
+    };
+    geolocation?: GeoCoordinate;
+  };
+  path?: never;
+  query?: {
+    parentId?: string;
+    previousItemId?: string;
+  };
+  url: '/items/pages';
+};
+
+export type CreatePageErrors = {
+  /**
+   * Error object with useful information about the unexpected behavior that occured
+   */
+  '4XX': _Error;
+};
+
+export type CreatePageError = CreatePageErrors[keyof CreatePageErrors];
+
+export type CreatePageResponses = {
+  /**
+   * Default Response
+   */
+  201: {
+    id: string;
+    name: string;
+    description?: null | string;
+    type: string;
+    path: string;
+    lang: string;
+    extra: {
+      [key: string]: unknown;
+    } & {
+      [key: string]: never;
+    };
+    /**
+     * Item settings
+     * Parameters, mostly visual, common to all types of items.
+     */
+    settings: {
+      /**
+       * @deprecated
+       */
+      lang?: string;
+      isPinned?: boolean;
+      /**
+       * @deprecated
+       */
+      tags?: Array<string>;
+      showChatbox?: boolean;
+      isResizable?: boolean;
+      hasThumbnail?: boolean;
+      ccLicenseAdaption?:
+        | 'CC BY'
+        | 'CC BY-NC'
+        | 'CC BY-SA'
+        | 'CC BY-NC-SA'
+        | 'CC BY-ND'
+        | 'CC BY-NC-ND'
+        | 'CC0';
+      displayCoEditors?: boolean;
+      descriptionPlacement?: 'above' | 'below';
+      isCollapsible?: boolean;
+      enableSaveActions?: boolean;
+      showLinkIframe?: boolean;
+      showLinkButton?: boolean;
+      maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+      alignment?: 'center' | 'left' | 'right';
+    };
+    creator?: NullableMinimalAccount;
+    createdAt: string;
+    updatedAt: string;
+  };
+};
+
+export type CreatePageResponse = CreatePageResponses[keyof CreatePageResponses];
+
+export type PagesWebsocketsData = {
+  body?: never;
+  path: {
+    id: string;
+  };
+  query?: never;
+  url: '/items/pages/{id}/ws/read';
+};
+
+export type PagesWebsocketsResponses = {
+  /**
+   * Default Response
+   */
+  200: unknown;
+};
+
+export type PagesWebsockets2Data = {
+  body?: never;
+  path: {
+    id: string;
+  };
+  query?: never;
+  url: '/items/pages/{id}/ws';
+};
+
+export type PagesWebsockets2Responses = {
+  /**
+   * Default Response
+   */
+  200: unknown;
+};
+
 export type DeleteManyItemsData = {
   body?: never;
   path?: never;
@@ -6990,6 +7155,7 @@ export type GetAccessibleItemsData = {
       | 'shortcut'
       | 'h5p'
       | 'etherpad'
+      | 'page'
     >;
     keywords?: Array<string>;
     sortBy?:
@@ -7045,6 +7211,7 @@ export type GetChildrenData = {
       | 'shortcut'
       | 'h5p'
       | 'etherpad'
+      | 'page'
     >;
   };
   url: '/items/{id}/children';
@@ -7085,6 +7252,7 @@ export type GetDescendantItemsData = {
       | 'shortcut'
       | 'h5p'
       | 'etherpad'
+      | 'page'
     >;
   };
   url: '/items/{id}/descendants';

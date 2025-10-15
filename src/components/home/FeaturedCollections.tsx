@@ -13,20 +13,15 @@ import {
   useTheme,
 } from '@mui/material';
 
-import { ThumbnailSize } from '@graasp/sdk';
-
 import { ErrorBoundary } from '@sentry/tanstackstart-react';
-import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { Link } from '@tanstack/react-router';
 
 import { buildCollectionRoute } from '~/config/routes';
-import {
-  downloadItemThumbnailOptions,
-  getFeaturedCollectionsOptions,
-} from '~/openapi/client/@tanstack/react-query.gen';
+import { getFeaturedCollectionsOptions } from '~/openapi/client/@tanstack/react-query.gen';
+import { SearchHit } from '~/openapi/client/types.gen';
 import { m } from '~/paraglide/messages';
 import { mapTags } from '~/utils/collections';
-import { ItemOrSearchedItem } from '~/utils/types';
 
 import CardThumbnail from '../common/Card/CardThumbnail';
 import { TagList } from '../common/Card/TagList';
@@ -105,11 +100,8 @@ function HighlightedCollections({ limit }: Readonly<{ limit: number }>) {
 const FeaturedCard = ({
   collection,
   height,
-}: Readonly<{ collection: ItemOrSearchedItem; height: number }>) => {
-  const { name, id, type } = collection;
-  const { data: thumbnailUrl } = useQuery(
-    downloadItemThumbnailOptions({ path: { id, size: ThumbnailSize.Medium } }),
-  );
+}: Readonly<{ collection: SearchHit; height: number }>) => {
+  const { name, id, type, thumbnails } = collection;
 
   const link = buildCollectionRoute(id);
 
@@ -136,7 +128,7 @@ const FeaturedCard = ({
             <CardThumbnail
               id={id}
               minHeight={height}
-              thumbnail={thumbnailUrl}
+              thumbnail={thumbnails?.medium}
               alt={`thumbnail for ${name}`}
               type={type}
             />
