@@ -7,7 +7,7 @@ import { getMostLikedCollectionsOptions } from '~/openapi/client/@tanstack/react
 import { m } from '~/paraglide/messages';
 
 import { SECTION_TITLE_ID } from '../../config/selectors';
-import { BigCardGrid } from '../common/Card/BigCard';
+import { BigCardGrid } from '../common/Card/BigCardGrid';
 import { ButtonLink } from '../common/links/ButtonLink';
 
 export function LikedCollections() {

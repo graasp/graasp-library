@@ -18,7 +18,7 @@ import { Link, createFileRoute } from '@tanstack/react-router';
 import { SocialLinks } from 'social-links';
 
 import BackButton from '~/components/common/BackButton';
-import { BigCardGrid } from '~/components/common/Card/BigCard';
+import { BigCardGrid } from '~/components/common/Card/BigCardGrid';
 import ShowLessAndMoreContent from '~/components/common/ShowLessAndMoreContent';
 import { Avatar } from '~/components/ui/Avatar/Avatar';
 import { CollectionItem } from '~/components/ui/CollectionItem';
