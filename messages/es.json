@@ -2,37 +2,26 @@
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "GRAASP_LIBRARY": "Biblioteca de Graasp",
   "GRAASP_LIBRARY_DESCRIPTION": "La Biblioteca de Graasp es una plataforma de código abierto que proporciona recursos de aprendizaje en forma de colecciones.",
-  "GUEST": "Invitado",
   "SHARE_TWITTER_MESSAGE": "Echa un vistazo a {name} en Graasp",
+  "ERROR_LOADING_BREADCRUMBS": "Se produjo un error al cargar las migas de pan.",
   "SHARE_FACEBOOK_SUBJECT": "Echa un vistazo a {name} en Graasp",
   "SHARE_FACEBOOK_MESSAGE": "Echa un vistazo a {name} en Graasp",
-  "AUTHORSHIP_AUTHOR_TITLE": "Autor",
   "COLLECTION_ITEMS_EMPTY_MESSAGE": "Esta colección está vacía.",
   "COLLECTION_ITEMS_EMPTY_FOLDER_MESSAGE": "Esta carpeta está vacía.",
   "COLLECTION_ITEMS_TITLE": "Elementos",
   "COLLECTION_ITEMS_TOOLTIP_MESSAGE": "Estos son los artículos de esta colección.",
   "COLLECTION_CARD_TAG_NEW": "Nuevo",
   "COLLECTION_CARD_TAG_UPDATED": "Actualizado",
-  "SIGN_IN_MODAL_SIGN_IN_BUTTON": "Iniciar sesión",
-  "SIGN_IN_MODAL_SIGN_UP_BUTTON": "Crea una cuenta",
   "COPY_BUTTON_MODAL_TITLE": "Copiar artículo",
-  "SIGN_IN_MODAL_TITLE": "Necesario iniciar sesión",
-  "SIGN_IN_MODAL_CONTENT": "Para continuar, debes iniciar sesión en Graasp.",
   "TREE_MODAL_CANCEL_BUTTON": "Cancelar",
   "TREE_MODAL_CONFIRM_BUTTON": "Confirmar",
   "COPY_BUTTON_TOOLTIP": "Copiar",
   "COPY_BUTTON_MODAL_DESCRIPTION": "Selecciona una carpeta de la lista a continuación",
-  "COMMENTS_TITLE": "Comentarios",
-  "COMMENT_NO_CONTENT_MESSAGE": "El comentario fue eliminado.",
-  "COMMENTS_TOOLTIP": "Estos son los comentarios de esta colección.",
   "UNEXPECTED_ERROR_MESSAGE": "Se ha producido un error",
-  "ALL_COLLECTIONS_RESET_ALL_BUTTON": "Todas las colecciones",
-  "ALL_COLLECTIONS_TITLE": "Todas las colecciones",
-  "HEADER_ALL_COLLECTIONS": "Todas las colecciones",
-  "ALL_COLLECTIONS_OPEN_MENU": "Menú abierto",
-  "ALL_COLLECTIONS_CLEAR_SELECTION_BUTTON": "Selección clara",
-  "ALL_COLLECTIONS_SELECTION_BY_CATEGORIES_TITLE": "Colecciones en categorías seleccionadas",
-  "HEADER_MY_LISTS": "Mis listas",
+  "FILTER_DROPDOWN_NO_LANG": "Sin filtro de idioma…",
+  "FILTER_DROPDOWN_NO_DISCIPLINE": "Sin filtro de disciplina…",
+  "FILTER_DROPDOWN_NO_LEVEL": "Sin filtro de nivel…",
+  "FILTER_DROPDOWN_NO_RESOURCE_TYPE": "Sin filtro de tipo…",
   "SEARCH_PAGE_TITLE": [
     {
       "declarations": [
@@ -40,46 +29,71 @@
         "local countPlural = count: plural"
       ],
       "selectors": [
-        "count",
-        "countPlural"
+        "count"
       ],
       "match": {
-        "count=*": "Buscar entre {count} colecciones",
         "countPlural=other": "Buscar entre {count} recursos",
         "countPlural=one": "Buscar entre los recursos {count}"
       }
     }
   ],
-  "SEARCH_RANGE_LABEL": "Rango de búsqueda",
-  "SEARCH_RANGES_TITLE": "Título",
-  "SEARCH_RANGES_TAGS": "Etiqueta",
-  "SEARCH_RANGES_AUTHOR": "Autor",
+  "SEARCH_PAGE_TITLE_CONTENT": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "count"
+      ],
+      "match": {
+        "countPlural=one": "Buscar entre {count} recursos",
+        "countPlural=many": "Buscar entre {count} recursos",
+        "countPlural=other": "Buscar entre más de {count} recursos",
+        "countPlural=zero": "No hay colecciones disponibles para buscar"
+      }
+    }
+  ],
   "SEARCH_BUTTON_ARIA_LABEL": "buscar",
+  "SEARCH_FILTER_EMPTY": "No hay filtro correspondiente",
   "SEARCH_ARIA_LABEL": "Buscar colecciones",
   "SEARCH_PLACEHOLDER": "Buscar colecciones…",
-  "SEARCH_RESULTS_FOR_TEXT_one": "Se encontró {count} resultado para: {search} ",
-  "SEARCH_RESULTS_FOR_TEXT_other": "Se encontraron {count} resultados para: {search} ",
-  "COLLECTION_PLAYER_BUTTON": "Ver elemento en el reproductor ",
+  "SEARCH_RESULTS_FOR_TEXT": [
+    {
+      "declarations": [
+        "input count",
+        "input search",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "count",
+        "countPlural",
+        "search"
+      ],
+      "match": {
+        "count=*, search=*": "Se encontró el resultado {count} para: {search}",
+        "countPlural=one": "Se encontró el resultado {count} para: {search}",
+        "countPlural=other": "Resultados encontrados para: {count} {search}"
+      }
+    }
+  ],
   "ERROR_TITLE": "Error",
   "ERROR_RETURN_TO_HOME": "Vuelve al inicio",
   "CONTRIBUTORS_TITLE": "con",
-  "CONTRIBUTORS_TOOLTIP": "Estas son colecciones similares.",
   "EMPTY_COLLECTION_MESSAGE": "No hay colecciones disponibles.",
-  "ALL_COLLECTIONS_CATEGORIES_TITLE": "Categorías",
-  "COLLECTION_CATEGORIES_TITLE": "Categorías",
-  "CREATE_BUTTON_TOOLTIP": "Crea tu propia colección",
-  "COLLECTION_TAGS_TITLE": "Etiquetas",
-  "PROFILE_BUTTON": "Cuenta",
-  "COLLECTIONS_COUNT_MESSAGE_one": "{count} colección disponible",
+  "COLLECTION_LANGUAGE_TITLE": "Idioma",
+  "SEARCH_FILTER_LANG_TITLE": "Idiomas",
   "COLLECTIONS_COUNT_MESSAGE_other": "{count} colecciones disponibles",
   "HOME_TITLE": "Biblioteca Graasp",
   "HOME_SUBTITLE": "Explore y descubra recursos educativos abiertos",
   "HOME_POPULAR_SEARCHES_TITLE": "Búsquedas populares",
   "HOME_MORE_COLLECTIONS_TITLE": "Descubrir",
+  "HOME_GRAASPER_COLLECTIONS_TITLE": "Recursos destacados",
   "HOME_POPULAR_THIS_WEEK_COLLECTIONS_TITLE": "Popular esta semana",
   "HOME_RECENT_COLLECTIONS_TITLE": "Recientemente creado",
   "HOME_MOST_LIKED_COLLECTIONS_TITLE": "El mas gustado",
   "HOME_VIEW_MORE_IN_LIBRARY_BUTTON": "Ver más en la Biblioteca",
+  "HOME_BROWSE_ALL_COLLECTIONS": "Explorar todos los recursos",
   "MY_LISTS_MY_FAVORITES_TAB": "Mis favoritos",
   "MY_LISTS_MY_PUBLISHMENTS_TAB": "Mis publicaciones",
   "MY_LISTS_MY_LIKES_TAB": "Colecciones que me gustan",
@@ -111,7 +125,6 @@
   "SUMMARY_BROWSE_FOLDER_CONTAINS_other": "Archivo {count}",
   "SUMMARY_DESCRIPTION_SHOW_MORE": "Mostrar más",
   "SUMMARY_DESCRIPTION_SHOW_LESS": "Mostrar menos",
-  "SUMMARY_ITEMS_SHOW_LESS_one": "Ocultar {count} elemento",
   "SUMMARY_ITEMS_SHOW_LESS_other": "Ocultar {count} elementos",
   "SUMMARY_ITEMS_SHOW_MORE": "Ver {count} más",
   "SUMMARY_ACTIONS_PREVIEW_CONTENT": "Previsualizar",
@@ -133,6 +146,7 @@
   "PUBLIC_PROFILE": "Mis colecciones",
   "PROFILE_SETTINGS": "Perfil",
   "EDIT": "Editar",
+  "CANCEL_BUTTON": "Cancelar",
   "SOCIAL_PROFILES": "Perfiles sociales",
   "PREVIEW_ALERT_TITLE": "Esta es una vista previa",
   "PREVIEW_ALERT_DESCRIPTION": "Este artículo no está publicado. Lo que estás viendo aquí es solo una vista previa. Puedes ver esto porque tienes acceso al artículo. No se puede ver públicamente.",
@@ -159,30 +173,6 @@
   "OER_INFORMATION_VIDEO_DESCRIPTION_PRODUCTION": "Producción",
   "OER_INFORMATION_VIDEO_DESCRIPTION_DURATION": "Duración",
   "OER_INFORMATION_VIDEO_DESCRIPTION_EDITION": "Edición",
-  "DURATION_IN_MINUTES_one": "{count} minuto",
-  "DURATION_IN_MINUTES_other": "{count} minutos",
-  "SEARCH_PAGE_TITLE_CONTENT": [
-    {
-      "declarations": [
-        "input count",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [
-        "count",
-        "countPlural"
-      ],
-      "match": {
-        "count=*": "Buscar entre {count} recursos",
-        "countPlural=one": "Buscar entre {count} recursos",
-        "countPlural=many": "Buscar entre {count} recursos",
-        "countPlural=other": "Buscar entre más de {count} recursos",
-        "countPlural=zero": "No hay colecciones disponibles para buscar"
-      }
-    }
-  ],
-  "SEARCH_FILTER_EMPTY": "No hay filtro correspondiente",
-  "COLLECTION_LANGUAGE_TITLE": "Idioma",
-  "SEARCH_FILTER_LANG_TITLE": "Idiomas",
   "DURATION_IN_MINUTES": [
     {
       "declarations": [
@@ -201,26 +191,6 @@
   "START_COPY_SUCCESS_MESSAGE": "Los elementos se están copiando...",
   "COPY_ITEM_PAGINATION_NEXT": "Próximo",
   "COPY_ITEM_PAGINATION_PREV": "Anterior",
-  "SEARCH_RESULTS_FOR_TEXT": [
-    {
-      "declarations": [
-        "input count",
-        "input search",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [
-        "count",
-        "countPlural",
-        "search"
-      ],
-      "match": {
-        "count=*, search=*": "Se encontró el resultado {count} para: {search}",
-        "countPlural=one": "Se encontró el resultado {count} para: {search}",
-        "countPlural=other": "Resultados encontrados para: {count} {search}"
-      }
-    }
-  ],
-  "CANCEL_BUTTON": "Cancelar",
   "COPY_ITEM_SUCCESS": "El artículo se copió correctamente",
   "BACK": "Atrás",
   "SUMMARY_ITEMS_SHOW_LESS": "Ocultar elemento {count}",
@@ -232,6 +202,12 @@
   "COLLECTION_ERROR_TITLE": "Error al cargar la colección",
   "HEADER_INDEX": "Biblioteca",
   "HEADER_SEARCH": "Buscar",
+  "HEADER_OER": "¿Qué son los REA?",
+  "USER_MENU_HOME": "Hogar",
+  "USER_MENU_SETTINGS": "Ajustes",
+  "LOG_OUT": "Finalizar la sesión",
+  "LOG_IN": "Acceso",
+  "ERROR_LOADING_COLLECTIONS": "Se produjo un error al cargar estas colecciones.",
   "COPY_ITEM_TO_CLIPBOARD_SUCCESS": "El elemento se copió correctamente al portapapeles.",
   "COPY_ITEM_TO_CLIPBOARD_ERROR": "Se encontró un error al copiar el elemento al portapapeles",
   "SUMMARY_BROWSE_FOLDER_CONTAINS": [
@@ -267,5 +243,24 @@
       }
     }
   ],
-  "LOGIN_REQUIRED": "Necesita iniciar sesión para realizar esta acción."
+  "LOGIN_REQUIRED": "Necesita iniciar sesión para realizar esta acción.",
+  "PREVIEW_BUTTON_MORE_ACTIONS": "Más acciones",
+  "HOME_FOOTER_START_BUTTON": "Empieza aquí",
+  "HOME_FEATURED_DESCRIPTION": "Recursos seleccionados disponibles en la Biblioteca",
+  "HOME_VIEW_ALL_COLLECTIONS_BUTTON": "Ver todos los recursos",
+  "HOME_VIEW_MORE_BUTTON": "Ver {count} más",
+  "HOME_RECENT_COLLECTIONS_DESCRIPTION": "Últimos recursos que te ofrece la comunidad",
+  "HOME_MOST_LIKED_COLLECTIONS_DESCRIPTION": "Los recursos más queridos por la comunidad",
+  "HOME_POPULAR_DISCIPLINES_TITLE": "Disciplinas populares",
+  "KPI_DISCIPLINES": "Disciplinas",
+  "KPI_PUBLISHERS": "Editores",
+  "KPI_COLLECTIONS": "Recursos",
+  "POPULAR_DISCIPLINES_COMPUTER_SCIENCES": "Ciencias de la Computación",
+  "POPULAR_DISCIPLINES_PHYSICS": "Física",
+  "POPULAR_DISCIPLINES_BIOLOGY": "Biología",
+  "POPULAR_DISCIPLINES_LANGUAGES": "Idiomas",
+  "POPULAR_DISCIPLINES_SOCIAL_SCIENCES": "Ciencias Sociales",
+  "POPULAR_DISCIPLINES_MATHEMATICS": "Matemáticas",
+  "POPULAR_DISCIPLINES_GEOGRAPHY": "Geografía",
+  "POPULAR_DISCIPLINES_SPORT": "Deporte"
 }
