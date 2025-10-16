@@ -18,6 +18,10 @@
   "COPY_BUTTON_TOOLTIP": "Copier",
   "COPY_BUTTON_MODAL_DESCRIPTION": "Sélectionnez un dossier dans la liste ci-dessous",
   "UNEXPECTED_ERROR_MESSAGE": "Une erreur s'est produite",
+  "FILTER_DROPDOWN_NO_LANG": "Pas de filtre de langue…",
+  "FILTER_DROPDOWN_NO_DISCIPLINE": "Aucun filtre de discipline…",
+  "FILTER_DROPDOWN_NO_LEVEL": "Pas de filtre de niveau…",
+  "FILTER_DROPDOWN_NO_RESOURCE_TYPE": "Aucun filtre de type…",
   "SEARCH_PAGE_TITLE": [
     {
       "declarations": [
@@ -199,6 +203,11 @@
   "HEADER_INDEX": "Bibliothèque",
   "HEADER_SEARCH": "Découvrir",
   "HEADER_OER": "REL",
+  "USER_MENU_HOME": "Maison",
+  "USER_MENU_SETTINGS": "Paramètres",
+  "LOG_OUT": "Se déconnecter",
+  "LOG_IN": "Se connecter",
+  "ERROR_LOADING_COLLECTIONS": "Une erreur s'est produite lors du chargement de ces collections.",
   "COPY_ITEM_TO_CLIPBOARD_SUCCESS": "L'élément a été copié avec succès dans le presse-papiers",
   "COPY_ITEM_TO_CLIPBOARD_ERROR": "Une erreur s'est produite lors de la copie de l'élément dans le presse-papiers",
   "SUMMARY_BROWSE_FOLDER_CONTAINS": [
@@ -235,6 +244,7 @@
     }
   ],
   "LOGIN_REQUIRED": "Vous devez être connecté pour effectuer cette action",
+  "PREVIEW_BUTTON_MORE_ACTIONS": "Plus d'actions",
   "HOME_FOOTER_START_BUTTON": "Commencer ici",
   "HOME_FEATURED_DESCRIPTION": "Les collections de ressources phares de la Bibliothèque",
   "HOME_VIEW_ALL_COLLECTIONS_BUTTON": "Voir toutes les ressources",
