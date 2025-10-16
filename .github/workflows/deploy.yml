@@ -39,7 +39,7 @@ jobs:
 
       # auth to aws
       - name: Configure AWS Credentials to assume deployment Role
-        uses: aws-actions/configure-aws-credentials@a03048d87541d1d9fcf2ecf528a4a65ba9bd7838
+        uses: aws-actions/configure-aws-credentials@5dc01dbae8049305b926bd46652e529e1d3c5285
         with:
           role-to-assume: ${{ secrets.AWS_ROLE }}
           role-session-name: GitHub_Action_deploy_library
