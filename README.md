@@ -24,23 +24,26 @@ Download or clone the repository to your local machine, preferably using [Git](h
 1. Inside the project directory, run `pnpm i` to install the project dependencies.
 1. Optionally create a `.env.development` file to override necessary settings. The content should be the following:
 
-    ```dotenv
-    # URL of the backend server. Uncomment to override the default value
-    # VITE_API_HOST=http://localhost:3000
-    # VITE_CLIENT_HOST=http://localhost:3114
-    # VITE_HOST=http://localhost:3002
+   ```dotenv
+   # URL of the backend server. Uncomment to override the default value
+   # VITE_API_HOST=http://localhost:3000
+   # VITE_CLIENT_HOST=http://localhost:3114
+   # VITE_HOST=http://localhost:3002
 
-    # for tests
-    # VITE_PORT=3002
+   # for tests
+   # VITE_PORT=3002
 
-    # Uncomment to use Sentry locally (not recommended)
-    # SENTRY_DSN=
-    # SENTRY_ENV=local-dev
+   # Uncomment to use Sentry locally (not recommended)
+   # SENTRY_DSN=
+   # SENTRY_ENV=local-dev
 
-    # These are usually set by the docker build stage, but you can provide them
-    # APP_VERSION=local-dev
-    # BUILD_TIMESTAMP=latest
-    ```
+   # These are usually set by the docker build stage, but you can provide them
+   # APP_VERSION=local-dev
+   # BUILD_TIMESTAMP=latest
+
+   # Silence dotenv log messages
+   DOTENV_CONFIG_QUIET=true
+   ```
 
 ### Running Locally
 

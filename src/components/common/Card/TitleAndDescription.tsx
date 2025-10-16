@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 
 import { CollapsibleText } from '../CollapsibleText/CollapsibleText';
 
-const MAX_NUMBER_OF_LINES = 4;
+const MAX_NUMBER_OF_LINES = 3;
 
 type TitleAndDescriptionProps = Readonly<{
   name: string;

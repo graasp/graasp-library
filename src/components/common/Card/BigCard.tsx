@@ -73,7 +73,7 @@ export function BigCard({
         <Stack
           flex={2}
           gap={1}
-          p={{ xs: 1, sm: 2 }}
+          p={2}
           minWidth={0}
           justifyContent="space-between"
           height="100%"

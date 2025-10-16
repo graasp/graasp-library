@@ -17,8 +17,8 @@ import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
 import { Link, createFileRoute } from '@tanstack/react-router';
 import { SocialLinks } from 'social-links';
 
-import { HighlightCollectionSection } from '~/components/collection/HighlightCollectionSection';
 import BackButton from '~/components/common/BackButton';
+import { BigCardGrid } from '~/components/common/Card/BigCardGrid';
 import ShowLessAndMoreContent from '~/components/common/ShowLessAndMoreContent';
 import { Avatar } from '~/components/ui/Avatar/Avatar';
 import { CollectionItem } from '~/components/ui/CollectionItem';
@@ -56,7 +56,7 @@ function RouteComponent() {
     }),
   );
   return (
-    <Container maxWidth="xl">
+    <Container>
       <Stack direction="column" paddingX={3} alignItems="flex-start">
         <BackButton />
         <Stack
@@ -112,12 +112,12 @@ function RouteComponent() {
         </Stack>
       </Stack>
 
-      <HighlightCollectionSection
-        id={MEMBER_COLLECTION_ID}
-        title={m.PUBLISHED_COLLECTIONS()}
-      >
-        <MemberCollections memberId={memberId} />
-      </HighlightCollectionSection>
+      <Stack gap={5} py={5}>
+        <Typography variant="h4">{m.PUBLISHED_COLLECTIONS()}</Typography>
+        <BigCardGrid id={MEMBER_COLLECTION_ID}>
+          <MemberCollections memberId={memberId} />
+        </BigCardGrid>
+      </Stack>
     </Container>
   );
 }

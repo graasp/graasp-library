@@ -14,7 +14,7 @@ test.describe('Search', () => {
       page.getByRole('heading', { name: 'Search among 958' }),
     ).toBeVisible();
     await page
-      .getByRole('textbox', { name: 'Search collections…' })
+      .getByRole('textbox', { name: 'Search resources…' })
       .fill('Geogebra');
 
     await page.waitForURL('**/search?**s=Geogebra**');

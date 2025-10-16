@@ -17,14 +17,6 @@ export const SMALL_AVATAR_ICON_SIZE = 30;
 export const MEMBER_AVATAR_ICON_SIZE = 40;
 export const MEMBER_AVATAR_MAIN_SIZE = 256;
 
-export const UrlSearch = {
-  KeywordSearch: 's',
-  DisciplineTagSearch: 'discipline',
-  LevelTagSearch: 'level',
-  ResourceTypeTagSearch: 'resourceType',
-  GACrossDomainKey: '_gl',
-} as const;
-
 export const ENV = {
   DEVELOPMENT: 'development',
   PRODUCTION: 'production',
@@ -32,8 +24,6 @@ export const ENV = {
 };
 
 export const TREE_VIEW_MAX_WIDTH = 400;
-
-export const HOMEPAGE_NB_ELEMENTS_TO_SHOW = 6;
 
 export const BACKGROUND_COLOR = 'rgb(248, 247, 254)';
 

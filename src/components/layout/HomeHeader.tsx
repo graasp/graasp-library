@@ -17,7 +17,6 @@ import { SearchIcon } from 'lucide-react';
 
 import { m } from '~/paraglide/messages';
 
-import { UrlSearch } from '../../config/constants';
 import {
   HOME_PAGE_TITLE_TEXT_ID,
   HOME_SEARCH_BUTTON_ID,
@@ -37,7 +36,7 @@ const PopularSearchItem = ({ text }: PopularSearchItemProps): JSX.Element => {
   return (
     <ChipLink
       to="/search"
-      search={{ [UrlSearch.KeywordSearch]: text }}
+      search={{ s: text }}
       variant="filled"
       sx={{
         color: theme.palette.primary.contrastText,
@@ -81,6 +80,7 @@ export function HomeHeader() {
             color="white"
             variant="display"
             marginLeft={2}
+            lineHeight={1}
           >
             {m.HOME_TITLE()}
           </Typography>
@@ -97,10 +97,10 @@ export function HomeHeader() {
         </Box>
         <HomeSearchBox />
         <Stack
-          direction="row"
+          direction={{ xs: 'column', sm: 'row' }}
           width="100%"
+          spacing={{ xs: 4, sm: 1 }}
           justifyContent="space-between"
-          alignItems="end"
         >
           <Box data-testid="popularSearches">
             <Typography color="white" variant="h6" gutterBottom>

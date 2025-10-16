@@ -17,7 +17,7 @@ test('Search flow', async ({ page, browserName }) => {
   );
 
   // navigate to search page
-  await page.getByRole('link', { name: 'Browse All Collections' }).click();
+  await page.getByRole('link', { name: 'Browse All Resources' }).click();
 
   // expect title of the page
   await expect(

@@ -39,7 +39,10 @@
         "input count",
         "local countPlural = count: plural"
       ],
-      "selectors": [],
+      "selectors": [
+        "count",
+        "countPlural"
+      ],
       "match": {
         "count=*": "Suche in {count} Sammlungen",
         "countPlural=other": "Suche unter {count} Ressourcen",
@@ -61,7 +64,6 @@
   "ERROR_RETURN_TO_HOME": "Zur Hauptseite zurückkehren",
   "CONTRIBUTORS_TITLE": "Mitwirkende",
   "CONTRIBUTORS_TOOLTIP": "Dies sind ähnliche Sammlungen.",
-  "SIMILAR_COLLECTIONS_TITLE": "Ähnliche Sammlungen",
   "EMPTY_COLLECTION_MESSAGE": "Es sind keine Sammlungen verfügbar.",
   "ALL_COLLECTIONS_CATEGORIES_TITLE": "Kategorien",
   "COLLECTION_CATEGORIES_TITLE": "Kategorien",
@@ -75,12 +77,10 @@
   "HOME_SUBTITLE": "Durchsuchen Sie Open Educational Resources",
   "HOME_POPULAR_SEARCHES_TITLE": "Häufige Suche",
   "HOME_MORE_COLLECTIONS_TITLE": "Entdecken",
-  "HOME_GRAASPER_COLLECTIONS_TITLE": "Graasp Auswahl",
   "HOME_POPULAR_THIS_WEEK_COLLECTIONS_TITLE": "Beliebt diese Woche",
   "HOME_RECENT_COLLECTIONS_TITLE": "Kürzlich erstellt",
   "HOME_MOST_LIKED_COLLECTIONS_TITLE": "Beliebteste",
   "HOME_VIEW_MORE_IN_LIBRARY_BUTTON": "Mehr in der Bibliothek ansehen",
-  "HOME_BROWSE_ALL_COLLECTIONS": "Erweiterte Suche",
   "MY_LISTS_MY_FAVORITES_TAB": "Meine Favoriten",
   "MY_LISTS_MY_PUBLISHMENTS_TAB": "Meine Veröffentlichungen",
   "MY_LISTS_MY_LIKES_TAB": "Meine Likes",
@@ -143,7 +143,8 @@
         "local countPlural = count: plural"
       ],
       "selectors": [
-        "count"
+        "count",
+        "countPlural"
       ],
       "match": {
         "count=*": "Suche unter {count} } Ressourcen",
@@ -158,10 +159,6 @@
   "SEARCH_PAGE_TITLE_CONTENT_other": "Suche unter mehr als {count} } Ressourcen",
   "SEARCH_FILTER_EMPTY": "Kein entsprechender Filter",
   "SEARCH_FILTER_LANG_TITLE": "Sprachen",
-  "DRAWER_AUTHENTICATED_USER_LINKS_SECTION": "Meine Links",
-  "DRAWER_ALL_COLLECTIONS_TEXT": "Suchen",
-  "DRAWER_OER_INFORMATION_TEXT": "Informationen zu OER",
-  "DRAWER_ARIA_OPEN": "Schublade öffnen",
   "PREVIEW_ALERT_TITLE": "Dies ist eine Vorschau",
   "PREVIEW_ALERT_DESCRIPTION": "Dieser Artikel ist nicht veröffentlicht. Was Sie hier sehen, ist lediglich eine Vorschau. Sie können diese sehen, da Sie Zugriff auf den Artikel haben. Er ist nicht öffentlich einsehbar.",
   "PREVIEW_ALERT_ADMIN_ACTION": "Wenn Sie diese Sammlung mit allen teilen möchten, können Sie diesen Artikel über den unten stehenden Link im Builder veröffentlichen.",
