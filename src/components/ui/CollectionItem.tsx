@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 import { Box } from '@mui/material';
 
-import { SearchHit } from '~/openapi/client';
+import { SearchHit } from '~/openapi/client/types.gen';
 
 import CollectionCard from '../collection/collectionCard/CollectionCard';
 

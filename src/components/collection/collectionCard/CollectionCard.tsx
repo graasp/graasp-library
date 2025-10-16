@@ -1,18 +1,13 @@
-import { ThumbnailSize } from '@graasp/sdk';
-
-import { useQuery } from '@tanstack/react-query';
-
+import { SearchHit } from '~/openapi/client/types.gen';
 import { mapTags } from '~/utils/collections';
 
 import { buildCollectionRoute } from '../../../config/routes';
-import { downloadItemThumbnailOptions } from '../../../openapi/client/@tanstack/react-query.gen';
-import { ItemOrSearchedItem } from '../../../utils/types';
 import { BigCard } from '../../common/Card/BigCard';
 import { MemberAvatar } from '../../common/Card/MemberAvatar';
 import { ItemTag } from './ItemTag';
 
 type Props = {
-  collection: ItemOrSearchedItem;
+  collection: SearchHit;
   showIsContentTag?: boolean;
   height: number;
 };
@@ -31,10 +26,8 @@ export const CollectionCard = ({
     updatedAt,
     isPublishedRoot,
     type,
+    thumbnails,
   } = collection;
-  const { data: thumbnailUrl } = useQuery(
-    downloadItemThumbnailOptions({ path: { id, size: ThumbnailSize.Medium } }),
-  );
 
   const link = buildCollectionRoute(id);
 
@@ -54,7 +47,7 @@ export const CollectionCard = ({
       name={name}
       id={id}
       type={type}
-      image={thumbnailUrl}
+      image={thumbnails?.medium}
       tags={tags}
       likeCount={likes}
       creator={creatorContent}

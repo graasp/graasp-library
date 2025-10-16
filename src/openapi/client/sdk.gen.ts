@@ -81,6 +81,9 @@ import type {
   CreateOwnProfileData,
   CreateOwnProfileErrors,
   CreateOwnProfileResponses,
+  CreatePageData,
+  CreatePageErrors,
+  CreatePageResponses,
   CreatePasswordData,
   CreatePasswordErrors,
   CreatePasswordResponses,
@@ -377,6 +380,10 @@ import type {
   MoveManyItemsData,
   MoveManyItemsErrors,
   MoveManyItemsResponses,
+  PagesWebsockets2Data,
+  PagesWebsockets2Responses,
+  PagesWebsocketsData,
+  PagesWebsocketsResponses,
   PatchChangeEmailData,
   PatchChangeEmailErrors,
   PatchChangeEmailResponses,
@@ -1225,7 +1232,7 @@ export const updateAppData = <ThrowOnError extends boolean = false>(
 
 /**
  * Create app data file
- * Upload a file to create a corresponding app data. The created app data will be "file" and visibility member. The data property will contain the file properties.
+ * Upload a file to create a corresponding app data. The created app data will have a type file and visibility member. The data property will contain the file properties.
  */
 export const createAppDataFile = <ThrowOnError extends boolean = false>(
   options?: Options<CreateAppDataFileData, ThrowOnError>,
@@ -3324,6 +3331,61 @@ export const deleteTagForItem = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     url: '/items/{itemId}/tags/{tagId}',
+    ...options,
+  });
+};
+
+/**
+ * Create page
+ * Create page and its content.
+ */
+export const createPage = <ThrowOnError extends boolean = false>(
+  options: Options<CreatePageData, ThrowOnError>,
+) => {
+  return (options.client ?? _heyApiClient).post<
+    CreatePageResponses,
+    CreatePageErrors,
+    ThrowOnError
+  >({
+    url: '/items/pages',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+  });
+};
+
+/**
+ * Connect to websockets for a page
+ * Connect to websockets for a page and allow collaboration through yjs.
+ */
+export const pagesWebsockets = <ThrowOnError extends boolean = false>(
+  options: Options<PagesWebsocketsData, ThrowOnError>,
+) => {
+  return (options.client ?? _heyApiClient).get<
+    PagesWebsocketsResponses,
+    unknown,
+    ThrowOnError
+  >({
+    url: '/items/pages/{id}/ws/read',
+    ...options,
+  });
+};
+
+/**
+ * Connect to websockets for a page
+ * Connect to websockets for a page and allow collaboration through yjs.
+ */
+export const pagesWebsockets2 = <ThrowOnError extends boolean = false>(
+  options: Options<PagesWebsockets2Data, ThrowOnError>,
+) => {
+  return (options.client ?? _heyApiClient).get<
+    PagesWebsockets2Responses,
+    unknown,
+    ThrowOnError
+  >({
+    url: '/items/pages/{id}/ws',
     ...options,
   });
 };

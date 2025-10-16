@@ -21,13 +21,17 @@ import { Interweave } from 'interweave';
 import { useDebounce } from '~/hooks/useDebounce';
 import { m } from '~/paraglide/messages';
 
-import { MAX_RESULTS_TO_SHOW } from '../../config/constants';
+import {
+  DEFAULT_ITEM_IMAGE_PATH,
+  DEFAULT_THUMBNAIL_ALT_TEXT,
+  MAX_RESULTS_TO_SHOW,
+} from '../../config/constants';
 import {
   SEARCH_RESULTS_LIST_ID,
   SEARCH_RESULTS_SHOW_MORE_BUTTON,
 } from '../../config/selectors';
 import { collectionSearchOptions } from '../../openapi/client/@tanstack/react-query.gen';
-import SearchThumbnail from './SearchThumbnail';
+import Thumbnail from '../ui/Thumbnail/Thumbnail';
 import { useOutsideClick } from './hooks';
 
 const MUIListItemButtonComponent = React.forwardRef<
@@ -145,7 +149,15 @@ export function SearchResults({
               <ListItemText>
                 <Stack direction="row" alignItems="center">
                   <Stack>
-                    <SearchThumbnail name={result.name} itemId={result.id} />
+                    <Thumbnail
+                      url={result.thumbnails?.small ?? DEFAULT_ITEM_IMAGE_PATH}
+                      alt={result.name ?? DEFAULT_THUMBNAIL_ALT_TEXT}
+                      sx={{
+                        width: '50px',
+                        objectFit: 'cover',
+                        marginRight: 1,
+                      }}
+                    />
                   </Stack>
                   <Stack>
                     <Stack direction="column">
