@@ -2,37 +2,26 @@
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "GRAASP_LIBRARY": "مكتبة چراسپ",
   "GRAASP_LIBRARY_DESCRIPTION": "مكتبة چراسپ عبارة عن منصّة مفتوحة المصدر التي توفر موارد تعليمية كمجموعات.",
-  "GUEST": "زائر",
   "SHARE_TWITTER_MESSAGE": "شاهد {name} على چراسپ ",
+  "ERROR_LOADING_BREADCRUMBS": "حدث خطأ أثناء تحميل فتات الخبز",
   "SHARE_FACEBOOK_SUBJECT": "شاهد {name} على چراسپ ",
   "SHARE_FACEBOOK_MESSAGE": "شاهد {name} على چراسپ ",
-  "AUTHORSHIP_AUTHOR_TITLE": "مؤلف",
   "COLLECTION_ITEMS_EMPTY_MESSAGE": "هذه المجموعة فارغة.",
   "COLLECTION_ITEMS_EMPTY_FOLDER_MESSAGE": "هذا المجلد فارغ.",
   "COLLECTION_ITEMS_TITLE": "عناصر",
   "COLLECTION_ITEMS_TOOLTIP_MESSAGE": "هذه هي العناصر الموجودة في هذه المجموعة.",
   "COLLECTION_CARD_TAG_NEW": "جديد",
   "COLLECTION_CARD_TAG_UPDATED": "محدث",
-  "SIGN_IN_MODAL_SIGN_IN_BUTTON": "تسجيل الدخول",
-  "SIGN_IN_MODAL_SIGN_UP_BUTTON": "قُم بإنشاء حساب",
   "COPY_BUTTON_MODAL_TITLE": "نسخ العنصر",
-  "SIGN_IN_MODAL_TITLE": "تسجيل الدخول مطلوب",
-  "SIGN_IN_MODAL_CONTENT": "للمتابعة ، تحتاج إلى تسجيل الدخول إلى چراسپ .",
   "TREE_MODAL_CANCEL_BUTTON": "إلغاء",
   "TREE_MODAL_CONFIRM_BUTTON": "إعتماد",
   "COPY_BUTTON_TOOLTIP": "نسخ",
   "COPY_BUTTON_MODAL_DESCRIPTION": "قم بإختيار مجلد واحد من القائمة أدناه",
-  "COMMENTS_TITLE": "تعليقات",
-  "COMMENT_NO_CONTENT_MESSAGE": "تم حذف التعليق.",
-  "COMMENTS_TOOLTIP": "هذه هي التعليقات الموجودة في هذه المجموعة.",
   "UNEXPECTED_ERROR_MESSAGE": "حدث خطأ.",
-  "ALL_COLLECTIONS_RESET_ALL_BUTTON": "كل المجموعات",
-  "ALL_COLLECTIONS_TITLE": "كل المجموعات",
-  "HEADER_ALL_COLLECTIONS": "كل المجموعات",
-  "ALL_COLLECTIONS_OPEN_MENU": "افتح القائمة",
-  "ALL_COLLECTIONS_CLEAR_SELECTION_BUTTON": "إزالة الإختيار",
-  "ALL_COLLECTIONS_SELECTION_BY_CATEGORIES_TITLE": "المجموعات في الفئات المختارة",
-  "HEADER_MY_LISTS": "قوائمي",
+  "FILTER_DROPDOWN_NO_LANG": "لا يوجد فلتر لغوي…",
+  "FILTER_DROPDOWN_NO_DISCIPLINE": "لا يوجد فلتر للانضباط…",
+  "FILTER_DROPDOWN_NO_LEVEL": "لا يوجد مرشح مستوى…",
+  "FILTER_DROPDOWN_NO_RESOURCE_TYPE": "لا يوجد مرشح نوع…",
   "SEARCH_PAGE_TITLE": [
     {
       "declarations": [
@@ -40,47 +29,71 @@
         "local countPlural = count: plural"
       ],
       "selectors": [
-        "count",
-        "countPlural"
+        "count"
       ],
       "match": {
-        "count=*": "ابحث بين {count} مجموعات",
         "countPlural=other": "ابحث بين {count} الموارد",
         "countPlural=one": "ابحث بين الموارد {count}"
       }
     }
   ],
-  "SEARCH_RANGE_LABEL": "نطاق البحث",
-  "SEARCH_RANGES_TITLE": "عنوان",
-  "SEARCH_RANGES_TAGS": "علامة",
-  "SEARCH_RANGES_AUTHOR": "مؤلف",
+  "SEARCH_PAGE_TITLE_CONTENT": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "count"
+      ],
+      "match": {
+        "countPlural=one": "ابحث بين {count} الموارد",
+        "countPlural=many": "ابحث بين {count} الموارد",
+        "countPlural=other": "ابحث بين أكثر من {count} من الموارد",
+        "countPlural=zero": "لا توجد مجموعات متاحة للبحث"
+      }
+    }
+  ],
   "SEARCH_BUTTON_ARIA_LABEL": "بحث",
+  "SEARCH_FILTER_EMPTY": "لا يوجد مرشح مماثل",
   "SEARCH_ARIA_LABEL": "البحث في المجموعات ",
   "SEARCH_PLACEHOLDER": "البحث في المجموعات...",
-  "SEARCH_RESULTS_FOR_TEXT_one": "تم العثور على نتيجة {count} لـ: {search}",
-  "SEARCH_RESULTS_FOR_TEXT_other": "تم العثور على {count} من النتائج لـ: {search}",
-  "COLLECTION_PLAYER_BUTTON": "عرض العنصر في المشغل",
+  "SEARCH_RESULTS_FOR_TEXT": [
+    {
+      "declarations": [
+        "input count",
+        "input search",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "count",
+        "countPlural",
+        "search"
+      ],
+      "match": {
+        "count=*, search=*": "تم العثور على نتيجة {count} لـ: {search}",
+        "countPlural=one": "تم العثور على نتيجة {count} لـ: {search}",
+        "countPlural=other": "تم العثور على {count} نتيجة لـ: {search}"
+      }
+    }
+  ],
   "ERROR_TITLE": "خطأ",
   "ERROR_RETURN_TO_HOME": "العودة إلى الصفحة الرئيسية",
   "CONTRIBUTORS_TITLE": "المساهمون",
-  "CONTRIBUTORS_TOOLTIP": "هذه مجموعات متشابهة.",
   "EMPTY_COLLECTION_MESSAGE": "لا توجد مجموعات متاحة.",
-  "ALL_COLLECTIONS_CATEGORIES_TITLE": "فئات",
-  "COLLECTION_CATEGORIES_TITLE": "فئات",
-  "CREATE_BUTTON_TOOLTIP": "إنشاء مجموعتك الخاصة",
-  "COLLECTION_TAGS_TITLE": "العلامات",
   "COLLECTION_LANGUAGE_TITLE": "اللغات",
-  "PROFILE_BUTTON": "حساب",
-  "COLLECTIONS_COUNT_MESSAGE_one": "مجمواعات متوفّرة {count}",
+  "SEARCH_FILTER_LANG_TITLE": "اللغات",
   "COLLECTIONS_COUNT_MESSAGE_other": "مجمواعات متوفّرة {count}",
   "HOME_TITLE": "تصفح المصادر التعليمية المفتوحة",
   "HOME_SUBTITLE": "تصفح واكتشف الموارد التعليمية المفتوحة",
   "HOME_POPULAR_SEARCHES_TITLE": "عمليات البحث الشعبية",
   "HOME_MORE_COLLECTIONS_TITLE": "إكتشف",
+  "HOME_GRAASPER_COLLECTIONS_TITLE": "الموارد المميزة",
   "HOME_POPULAR_THIS_WEEK_COLLECTIONS_TITLE": "شعبية هذا الأسبوع",
   "HOME_RECENT_COLLECTIONS_TITLE": "تم إنشاؤها مؤخرًا",
   "HOME_MOST_LIKED_COLLECTIONS_TITLE": "الأكثر إعجابا",
   "HOME_VIEW_MORE_IN_LIBRARY_BUTTON": "شاهد المزيد في المكتبة",
+  "HOME_BROWSE_ALL_COLLECTIONS": "تصفح جميع الموارد",
   "MY_LISTS_MY_FAVORITES_TAB": "قائمة المفضّلات الخاصّة بي",
   "MY_LISTS_MY_PUBLISHMENTS_TAB": "منشوراتي",
   "MY_LISTS_MY_LIKES_TAB": "إعجاباتي",
@@ -112,7 +125,6 @@
   "SUMMARY_BROWSE_FOLDER_CONTAINS_other": "{count} ملفات",
   "SUMMARY_DESCRIPTION_SHOW_MORE": "أظهر المزيد",
   "SUMMARY_DESCRIPTION_SHOW_LESS": "عرض أقل",
-  "SUMMARY_ITEMS_SHOW_LESS_one": "إخفاء {count} عنصر",
   "SUMMARY_ITEMS_SHOW_LESS_other": "إخفاء {count} عنصر",
   "SUMMARY_ITEMS_SHOW_MORE": "عرض {count} المزيد",
   "SUMMARY_ACTIONS_PREVIEW_CONTENT": "معاينة",
@@ -134,6 +146,7 @@
   "PUBLIC_PROFILE": "الحساب العام",
   "PROFILE_SETTINGS": "إعدادات الحساب الشخصي",
   "EDIT": "يحرر",
+  "CANCEL_BUTTON": "يلغي",
   "SOCIAL_PROFILES": "الملفات الاجتماعية",
   "PREVIEW_ALERT_TITLE": "هذه معاينة",
   "PREVIEW_ALERT_DESCRIPTION": "هذا العنصر غير منشور. ما تراه هنا هو مجرد معاينة. يمكنك رؤية هذا لأنه يمكنك الوصول إلى العنصر. لا يمكن عرضه علنًا.",
@@ -160,31 +173,6 @@
   "OER_INFORMATION_VIDEO_DESCRIPTION_PRODUCTION": "إنتاج",
   "OER_INFORMATION_VIDEO_DESCRIPTION_DURATION": "مدة",
   "OER_INFORMATION_VIDEO_DESCRIPTION_EDITION": "طبعة",
-  "DURATION_IN_MINUTES_one": "{count} دقيقة",
-  "DURATION_IN_MINUTES_other": "{count} دقيقة",
-  "SEARCH_PAGE_TITLE_CONTENT": [
-    {
-      "declarations": [
-        "input count",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [
-        "count",
-        "countPlural"
-      ],
-      "match": {
-        "count=*": "ابحث بين {count} } الموارد",
-        "countPlural=one": "ابحث بين {count} الموارد",
-        "countPlural=many": "ابحث بين {count} الموارد",
-        "countPlural=other": "ابحث بين أكثر من {count} من الموارد",
-        "countPlural=zero": "لا توجد مجموعات متاحة للبحث"
-      }
-    }
-  ],
-  "SEARCH_PAGE_TITLE_CONTENT_many": "ابحث بين {count} } الموارد",
-  "SEARCH_PAGE_TITLE_CONTENT_other": "ابحث بين أكثر من {count} } من الموارد",
-  "SEARCH_FILTER_EMPTY": "لا يوجد مرشح مماثل",
-  "SEARCH_FILTER_LANG_TITLE": "اللغات",
   "DURATION_IN_MINUTES": [
     {
       "declarations": [
@@ -203,26 +191,6 @@
   "START_COPY_SUCCESS_MESSAGE": "يتم نسخ العناصر...",
   "COPY_ITEM_PAGINATION_NEXT": "التالي",
   "COPY_ITEM_PAGINATION_PREV": "سابق",
-  "SEARCH_RESULTS_FOR_TEXT": [
-    {
-      "declarations": [
-        "input count",
-        "input search",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [
-        "count",
-        "countPlural",
-        "search"
-      ],
-      "match": {
-        "count=*, search=*": "تم العثور على نتيجة {count} لـ: {search}",
-        "countPlural=one": "تم العثور على نتيجة {count} لـ: {search}",
-        "countPlural=other": "تم العثور على {count} نتيجة لـ: {search}"
-      }
-    }
-  ],
-  "CANCEL_BUTTON": "يلغي",
   "COPY_ITEM_SUCCESS": "تم نسخ العنصر بنجاح",
   "BACK": "خلف",
   "SUMMARY_ITEMS_SHOW_LESS": "إخفاء عنصر {count}",
@@ -234,6 +202,12 @@
   "COLLECTION_ERROR_TITLE": "خطأ في تحميل المجموعة",
   "HEADER_INDEX": "مكتبة",
   "HEADER_SEARCH": "يبحث",
+  "HEADER_OER": "ما هي الموارد التعليمية المفتوحة؟",
+  "USER_MENU_HOME": "بيت",
+  "USER_MENU_SETTINGS": "إعدادات",
+  "LOG_OUT": "تسجيل الخروج",
+  "LOG_IN": "تسجيل الدخول",
+  "ERROR_LOADING_COLLECTIONS": "حدث خطأ أثناء تحميل هذه المجموعات.",
   "COPY_ITEM_TO_CLIPBOARD_SUCCESS": "تم نسخ العنصر إلى الحافظة بنجاح",
   "COPY_ITEM_TO_CLIPBOARD_ERROR": "تم مواجهة خطأ أثناء نسخ العنصر إلى الحافظة",
   "SUMMARY_BROWSE_FOLDER_CONTAINS": [
@@ -269,5 +243,24 @@
       }
     }
   ],
-  "LOGIN_REQUIRED": "يجب عليك تسجيل الدخول للقيام بهذا الإجراء"
+  "LOGIN_REQUIRED": "يجب عليك تسجيل الدخول للقيام بهذا الإجراء",
+  "PREVIEW_BUTTON_MORE_ACTIONS": "مزيد من الإجراءات",
+  "HOME_FOOTER_START_BUTTON": "ابدأ هنا",
+  "HOME_FEATURED_DESCRIPTION": "الموارد المنسقة المتاحة في المكتبة",
+  "HOME_VIEW_ALL_COLLECTIONS_BUTTON": "عرض جميع الموارد",
+  "HOME_VIEW_MORE_BUTTON": "عرض {count} المزيد",
+  "HOME_RECENT_COLLECTIONS_DESCRIPTION": "أحدث الموارد التي يقدمها لك المجتمع",
+  "HOME_MOST_LIKED_COLLECTIONS_DESCRIPTION": "الموارد الأكثر تفضيلاً من قبل المجتمع",
+  "HOME_POPULAR_DISCIPLINES_TITLE": "التخصصات الشعبية",
+  "KPI_DISCIPLINES": "التخصصات",
+  "KPI_PUBLISHERS": "الناشرون",
+  "KPI_COLLECTIONS": "موارد",
+  "POPULAR_DISCIPLINES_COMPUTER_SCIENCES": "علوم الحاسوب",
+  "POPULAR_DISCIPLINES_PHYSICS": "الفيزياء",
+  "POPULAR_DISCIPLINES_BIOLOGY": "علم الأحياء",
+  "POPULAR_DISCIPLINES_LANGUAGES": "اللغات",
+  "POPULAR_DISCIPLINES_SOCIAL_SCIENCES": "العلوم الاجتماعية",
+  "POPULAR_DISCIPLINES_MATHEMATICS": "الرياضيات",
+  "POPULAR_DISCIPLINES_GEOGRAPHY": "الجغرافيا",
+  "POPULAR_DISCIPLINES_SPORT": "رياضة"
 }
