@@ -24,7 +24,6 @@ import {
   VolleyballIcon,
 } from 'lucide-react';
 
-import { UrlSearch } from '~/config/constants';
 import { m } from '~/paraglide/messages';
 
 import { ButtonLink } from '../common/links/ButtonLink';
@@ -49,7 +48,7 @@ function DisciplineCard({
     <Card>
       <Link
         to="/search"
-        search={{ [UrlSearch.DisciplineTagSearch]: disciplines }}
+        search={{ disciplines }}
         style={{ color: 'unset', textDecoration: 'none' }}
       >
         <CardActionArea

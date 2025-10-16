@@ -17,14 +17,6 @@ export const SMALL_AVATAR_ICON_SIZE = 30;
 export const MEMBER_AVATAR_ICON_SIZE = 40;
 export const MEMBER_AVATAR_MAIN_SIZE = 256;
 
-export const UrlSearch = {
-  KeywordSearch: 's',
-  DisciplineTagSearch: 'disciplines',
-  LevelTagSearch: 'levels',
-  ResourceTypeTagSearch: 'resourceTypes',
-  GACrossDomainKey: '_gl',
-} as const;
-
 export const ENV = {
   DEVELOPMENT: 'development',
   PRODUCTION: 'production',

@@ -21,7 +21,7 @@ import { Interweave } from 'interweave';
 import { useDebounce } from '~/hooks/useDebounce';
 import { m } from '~/paraglide/messages';
 
-import { MAX_RESULTS_TO_SHOW, UrlSearch } from '../../config/constants';
+import { MAX_RESULTS_TO_SHOW } from '../../config/constants';
 import {
   SEARCH_RESULTS_LIST_ID,
   SEARCH_RESULTS_SHOW_MORE_BUTTON,
@@ -172,7 +172,7 @@ export function SearchResults({
             <ListItemLink
               id={SEARCH_RESULTS_SHOW_MORE_BUTTON}
               to="/all-collections"
-              search={{ [UrlSearch.KeywordSearch]: query }}
+              search={{ s: query }}
             >
               <LoadMoreResultsText>
                 {m.SEE_MORE_RESULTS_SEARCH({
