@@ -24,13 +24,8 @@
   "FILTER_DROPDOWN_NO_RESOURCE_TYPE": "No type filter…",
   "SEARCH_PAGE_TITLE": [
     {
-      "declarations": [
-        "input count",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [
-        "countPlural"
-      ],
+      "declarations": ["input count", "local countPlural = count: plural"],
+      "selectors": ["countPlural"],
       "match": {
         "countPlural=other": "Search among {count} resources",
         "countPlural=one": "Search among {count} resource"
@@ -39,13 +34,8 @@
   ],
   "SEARCH_PAGE_TITLE_CONTENT": [
     {
-      "declarations": [
-        "input count",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [
-        "countPlural"
-      ],
+      "declarations": ["input count", "local countPlural = count: plural"],
+      "selectors": ["countPlural"],
       "match": {
         "countPlural=one": "Search among {count} resources",
         "countPlural=many": "Search among {count} resources",
@@ -65,11 +55,7 @@
         "input search",
         "local countPlural = count: plural"
       ],
-      "selectors": [
-        "count",
-        "countPlural",
-        "search"
-      ],
+      "selectors": ["count", "countPlural", "search"],
       "match": {
         "count=*, search=*": "Found {count} result for: {search}",
         "countPlural=one": "Found {count} result for: {search}",
@@ -90,7 +76,7 @@
   "HOME_MORE_COLLECTIONS_TITLE": "Discover",
   "HOME_GRAASPER_COLLECTIONS_TITLE": "Featured Resources",
   "HOME_POPULAR_THIS_WEEK_COLLECTIONS_TITLE": "Popular this Week",
-  "HOME_RECENT_COLLECTIONS_TITLE": "Recently published",
+  "HOME_RECENT_COLLECTIONS_TITLE": "Recently shared",
   "HOME_MOST_LIKED_COLLECTIONS_TITLE": "Liked by the community",
   "HOME_VIEW_MORE_IN_LIBRARY_BUTTON": "Join the community and share on the Library",
   "HOME_BROWSE_ALL_COLLECTIONS": "Browse All Resources",
@@ -175,13 +161,8 @@
   "OER_INFORMATION_VIDEO_DESCRIPTION_EDITION": "Edition",
   "DURATION_IN_MINUTES": [
     {
-      "declarations": [
-        "input count",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [
-        "countPlural"
-      ],
+      "declarations": ["input count", "local countPlural = count: plural"],
+      "selectors": ["countPlural"],
       "match": {
         "countPlural=one": "{count} minute",
         "countPlural=other": "{count} minutes"
@@ -212,13 +193,8 @@
   "COPY_ITEM_TO_CLIPBOARD_ERROR": "An error was encountered while copying item to clipboard",
   "SUMMARY_BROWSE_FOLDER_CONTAINS": [
     {
-      "declarations": [
-        "input count",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [
-        "countPlural"
-      ],
+      "declarations": ["input count", "local countPlural = count: plural"],
+      "selectors": ["countPlural"],
       "match": {
         "countPlural=zero": "Empty Folder",
         "countPlural=one": "{count} File",
@@ -228,14 +204,8 @@
   ],
   "COLLECTIONS_COUNT_MESSAGE": [
     {
-      "declarations": [
-        "input count",
-        "local countPlural = count: plural"
-      ],
-      "selectors": [
-        "count",
-        "countPlural"
-      ],
+      "declarations": ["input count", "local countPlural = count: plural"],
+      "selectors": ["count", "countPlural"],
       "match": {
         "count=*": "{count} collection available",
         "countPlural=one": "{count} collection available",
@@ -249,8 +219,8 @@
   "HOME_FEATURED_DESCRIPTION": "Curated resources available on the Library",
   "HOME_VIEW_ALL_COLLECTIONS_BUTTON": "View all resources",
   "HOME_VIEW_MORE_BUTTON": "View {count} more",
-  "HOME_RECENT_COLLECTIONS_DESCRIPTION": "Latest resources published and share by the community",
-  "HOME_MOST_LIKED_COLLECTIONS_DESCRIPTION": "Resources liked by the community",
+  "HOME_RECENT_COLLECTIONS_DESCRIPTION": "Latest resources brought to you by the community",
+  "HOME_MOST_LIKED_COLLECTIONS_DESCRIPTION": "The resources most loved by the community",
   "HOME_POPULAR_DISCIPLINES_TITLE": "Popular Disciplines",
   "KPI_DISCIPLINES": "Disciplines",
   "KPI_PUBLISHERS": "Publishers",
