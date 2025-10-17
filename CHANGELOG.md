@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0](https://github.com/graasp/graasp-library/compare/v2.2.1...v2.3.0) (2025-10-17)
+
+
+### Features
+
+* improve homepage ([#833](https://github.com/graasp/graasp-library/issues/833)) ([74df9e4](https://github.com/graasp/graasp-library/commit/74df9e4209cd3092dafe98ccfe5c45e1e3999bd4))
+
+
+### Bug Fixes
+
+* **french:** update translations ([#842](https://github.com/graasp/graasp-library/issues/842)) ([dd90bc2](https://github.com/graasp/graasp-library/commit/dd90bc245f4c7aef20604507b8587a38842e5123))
+* sonarqube issues ([1cce788](https://github.com/graasp/graasp-library/commit/1cce788c0a57ed02a5c000acdae0a68a8b71bc0c))
+* use thumbnails from search results ([#838](https://github.com/graasp/graasp-library/issues/838)) ([a1aecec](https://github.com/graasp/graasp-library/commit/a1aecec03fe5d3026e7c8ffa40277d1fa5b24947))
+
 ## [2.2.1](https://github.com/graasp/graasp-library/compare/v2.2.0...v2.2.1) (2025-09-12)
 
 
