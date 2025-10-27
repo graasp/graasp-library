@@ -1,14 +1,12 @@
 import React, { Suspense } from 'react';
 
 import { Divider, IconButton, Menu, MenuItem, Skeleton } from '@mui/material';
-import type { MenuItemProps } from '@mui/material';
 
 import { ThumbnailSize } from '@graasp/sdk';
 
 import { ErrorBoundary } from '@sentry/tanstackstart-react';
 import { useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
-import { createLink, useLoaderData } from '@tanstack/react-router';
-import type { LinkComponent } from '@tanstack/react-router';
+import { useLoaderData } from '@tanstack/react-router';
 
 import { getCurrentAccount, signOut } from '~/openapi/client';
 import {
@@ -19,6 +17,7 @@ import { m } from '~/paraglide/messages';
 
 import { useCurrentLocation } from '../common/ShareButtons';
 import { ButtonLink } from '../common/links/ButtonLink';
+import { MenuItemLink } from '../common/links/MenuItemLink';
 import { Avatar } from '../ui/Avatar/Avatar';
 
 // User avatar component that uses suspense for loading
@@ -126,21 +125,3 @@ function LoggedOutUser() {
     </ButtonLink>
   );
 }
-
-// eslint complains about using an empty interface that extends another one, as they are equal.
-// use type alias when we do not have any additional props
-type MUIMenuItemProps = MenuItemProps;
-// use the interface extension when we want to add more props
-// interface MUILinkProps extends LinkProps {
-//   // Add any additional props you want to pass to the Link
-// }
-
-const MUILinkComponent = React.forwardRef<HTMLAnchorElement, MUIMenuItemProps>(
-  (props, ref) => <MenuItem ref={ref} component="a" {...props} />,
-);
-
-const CreatedLinkComponent = createLink(MUILinkComponent);
-
-const MenuItemLink: LinkComponent<typeof MUILinkComponent> = (props) => {
-  return <CreatedLinkComponent preload="intent" {...props} />;
-};

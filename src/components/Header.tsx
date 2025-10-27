@@ -1,9 +1,18 @@
-import { AppBar, Box, Stack, Toolbar, styled } from '@mui/material';
+import {
+  AppBar,
+  Box,
+  Stack,
+  Toolbar,
+  styled,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 
 import { m } from '~/paraglide/messages';
 
 import { CustomLink } from './CustomLink';
 import { LanguageSwitch } from './LanguageSwitch';
+import MobileMenu from './MobileMenu';
 import { LogoHeaderButton } from './header/LogoHeaderButton';
 import { UserAvatar } from './header/UserAvatar';
 
@@ -26,6 +35,9 @@ const activeLinkProps = () => ({
 });
 
 export function Header({ clientOrigin }: Readonly<{ clientOrigin: string }>) {
+  const theme = useTheme();
+  const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
+
   const homeLink = `${clientOrigin}/home`;
   return (
     <Box>
@@ -43,19 +55,24 @@ export function Header({ clientOrigin }: Readonly<{ clientOrigin: string }>) {
               alignItems="center"
               color="white"
             >
+              {isSmall ? <MobileMenu /> : null}
               <LogoHeaderButton
                 to={homeLink}
                 marginInlineEnd={{ xs: 0, md: 6 }}
               />
-              <StyledCustomLink activeProps={activeLinkProps} to="/">
-                {m.HEADER_INDEX()}
-              </StyledCustomLink>
-              <StyledCustomLink activeProps={activeLinkProps} to="/search">
-                {m.HEADER_SEARCH()}
-              </StyledCustomLink>
-              <StyledCustomLink activeProps={activeLinkProps} to="/oer">
-                {m.HEADER_OER()}
-              </StyledCustomLink>
+              {!isSmall ? (
+                <>
+                  <StyledCustomLink activeProps={activeLinkProps} to="/">
+                    {m.HEADER_INDEX()}
+                  </StyledCustomLink>
+                  <StyledCustomLink activeProps={activeLinkProps} to="/search">
+                    {m.HEADER_SEARCH()}
+                  </StyledCustomLink>
+                  <StyledCustomLink activeProps={activeLinkProps} to="/oer">
+                    {m.HEADER_OER()}
+                  </StyledCustomLink>
+                </>
+              ) : null}
             </Stack>
             <Stack direction="row" gap={2} color="white" alignItems="center">
               <LanguageSwitch iconColor="white" />
