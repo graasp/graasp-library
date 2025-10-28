@@ -2,17 +2,20 @@ import { Suspense } from 'react';
 
 import {
   Alert,
-  Box,
   Breadcrumbs,
   Button,
   Skeleton,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from '@mui/material';
 
 import { getIdsFromPath } from '@graasp/sdk';
 
 import { ErrorBoundary } from '@sentry/tanstackstart-react';
 import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
+import truncate from 'lodash.truncate';
+import { CornerLeftUpIcon } from 'lucide-react';
 
 import {
   getCollectionInformationsOptions,
@@ -38,6 +41,9 @@ export function ItemBreadcrumb({ itemId }: Readonly<ItemBreadcrumbProps>) {
 }
 
 function SuspendedItemBreadcrumbs({ itemId }: Readonly<ItemBreadcrumbProps>) {
+  const theme = useTheme();
+  const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
+
   const { data: item } = useQuery(getItemOptions({ path: { id: itemId } }));
   const { data: allParents } = useSuspenseQuery(
     getParentItemsOptions({ path: { id: itemId } }),
@@ -55,33 +61,51 @@ function SuspendedItemBreadcrumbs({ itemId }: Readonly<ItemBreadcrumbProps>) {
     getIdsFromPath(p.path).includes(publishedParentId),
   );
 
-  if (parents.length === 0) {
-    // this component is used to occupy the space normal taken by the breadcrumbs
-    // the purpose here is to remove layout shifting when navigating between parent (no breadcrumbs visible)
-    // and child (breadcrumbs visible). This takes the exact same height as the breadcrumbs, removing layout shift.
+  if (isSmall) {
+    // show direct parent on xs screens
+    if (parents.length) {
+      const parent = parents[parents.length - 1];
+      return (
+        <ButtonLink
+          to="/collections/$id"
+          params={{ id: parent.id }}
+          startIcon={<CornerLeftUpIcon size={15} />}
+        >
+          {truncate(parent.name, { length: 30 })}
+        </ButtonLink>
+      );
+    } else {
+      // show home button if no parent
+      return (
+        <ButtonLink
+          to="/all-collections"
+          startIcon={<CornerLeftUpIcon size={15} />}
+        >
+          {m.HEADER_SEARCH()}
+        </ButtonLink>
+      );
+    }
+  }
+
+  // show complete breadcrumbs on larger screens
+  if (parents.length) {
     return (
-      <Box visibility="hidden">
-        <Breadcrumbs>
-          <Button>{m.LOADING_TEXT()}</Button>
-        </Breadcrumbs>
-      </Box>
+      <Breadcrumbs>
+        {parents?.map((parent) => (
+          <ButtonLink
+            key={parent.id}
+            to="/collections/$id"
+            params={{ id: parent.id }}
+          >
+            {truncate(parent.name, { length: 30 })}
+          </ButtonLink>
+        ))}
+        <Typography color="text.primary">{item?.name}</Typography>
+      </Breadcrumbs>
     );
   }
 
-  return (
-    <Breadcrumbs>
-      {parents?.map((parent) => (
-        <ButtonLink
-          key={parent.id}
-          to="/collections/$id"
-          params={{ id: parent.id }}
-        >
-          {parent.name}
-        </ButtonLink>
-      ))}
-      <Typography color="text.primary">{item?.name}</Typography>
-    </Breadcrumbs>
-  );
+  return null;
 }
 
 function LoadingBreadcrumbs() {
