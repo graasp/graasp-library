@@ -152,29 +152,30 @@ export function SummaryHeader({
       <Stack direction="column" spacing={1} width={{ xs: '90%', sm: '70%' }}>
         <Stack
           justifyContent="space-between"
-          direction="row"
           flexWrap="wrap"
+          direction={{ xs: 'column', sm: 'row' }}
+          gap={{ xs: 0, sm: 1 }}
           alignItems={{ xs: 'start', sm: 'start' }}
         >
           <Stack
             direction="row"
-            alignItems="center"
             spacing={1}
             minWidth={0}
+            width="100%"
             flex={1}
+            justifyContent="space-between"
           >
             <Typography
               variant="h3"
               component="h1"
               sx={{ wordBreak: 'break-word' }}
+              // to match icon height
+              lineHeight="2.5rem"
               id={ITEM_SUMMARY_TITLE_ID}
-              // allow to see full text on mouse hover
               title={collection.name}
             >
               {collection.name}
             </Typography>
-          </Stack>
-          <Stack direction="row" gap={1}>
             <LikeButton
               ariaLabel="like"
               color="primary"
@@ -182,6 +183,13 @@ export function SummaryHeader({
               handleLike={handleLike}
               handleUnlike={handleUnlike}
             />
+          </Stack>
+          <Stack
+            direction="row"
+            width={{ xs: '100%', sm: 'auto' }}
+            justifyContent={{ xs: 'center', sm: 'flex-start' }}
+            my={{ xs: 2, sm: 0 }}
+          >
             <SummaryActionButtons item={collection} isLogged={isLogged} />
           </Stack>
         </Stack>
