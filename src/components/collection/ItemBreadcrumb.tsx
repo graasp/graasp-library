@@ -96,6 +96,7 @@ function SuspendedItemBreadcrumbs({ itemId }: Readonly<ItemBreadcrumbProps>) {
             key={parent.id}
             to="/collections/$id"
             params={{ id: parent.id }}
+            title={parent.name}
           >
             {truncate(parent.name, { length: 30 })}
           </ButtonLink>
