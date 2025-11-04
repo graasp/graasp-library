@@ -60,7 +60,7 @@ export function Header({ clientOrigin }: Readonly<{ clientOrigin: string }>) {
                 to={homeLink}
                 marginInlineEnd={{ xs: 0, md: 6 }}
               />
-              {!isSmall ? (
+              {isSmall ? null : (
                 <>
                   <StyledCustomLink activeProps={activeLinkProps} to="/">
                     {m.HEADER_INDEX()}
@@ -72,7 +72,7 @@ export function Header({ clientOrigin }: Readonly<{ clientOrigin: string }>) {
                     {m.HEADER_OER()}
                   </StyledCustomLink>
                 </>
-              ) : null}
+              )}
             </Stack>
             <Stack direction="row" gap={2} color="white" alignItems="center">
               <LanguageSwitch iconColor="white" />
