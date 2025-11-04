@@ -1,6 +1,6 @@
 import type { JSX } from 'react';
 
-import { Stack, Typography } from '@mui/material';
+import { Stack, Typography, useMediaQuery, useTheme } from '@mui/material';
 
 import { ItemType } from '@graasp/sdk';
 
@@ -28,6 +28,9 @@ const Summary = ({
   publishedRootItem,
   totalViews,
 }: SummaryProps): JSX.Element => {
+  const theme = useTheme();
+  const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
+
   const { data: member } = useQuery(getCurrentAccountOptions());
 
   return (
@@ -38,10 +41,11 @@ const Summary = ({
       alignItems="flex-start"
       justifyItems="flex-start"
       justifySelf="center"
-      gap={{ xs: 4, sm: 6 }}
+      gap={{ xs: 2, sm: 6 }}
     >
       <Stack direction="row" gap={2}>
-        <BackButton />
+        {/* show back button only on md and up */}
+        {isSmall ? null : <BackButton />}
         <ItemBreadcrumb itemId={collection.id} />
       </Stack>
       <SummaryHeader
