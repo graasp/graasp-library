@@ -234,7 +234,7 @@ export const createGraaspTheme = ({
       fontFamily:
         fontFamily ?? ['Nunito Variable', 'Roboto', 'sans-serif'].join(','),
       display: {
-        fontSize: '4.5rem',
+        fontSize: '3.6rem',
         fontWeight: 800,
       },
       h1: {
