@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.4.0](https://github.com/graasp/graasp-library/compare/v2.3.0...v2.4.0) (2025-11-04)
+
+
+### Features
+
+* improve general navigation menu for mobile ([#846](https://github.com/graasp/graasp-library/issues/846)) ([22a195e](https://github.com/graasp/graasp-library/commit/22a195e5ba0e98c8e910563723d7322045302cc3))
+
+
+### Bug Fixes
+
+* align back and breadcrumbs on mobile ([#850](https://github.com/graasp/graasp-library/issues/850)) ([88a06b4](https://github.com/graasp/graasp-library/commit/88a06b445051d4165441e28bc08c4efb7a6ce797))
+* align for mobile title, like button and preview button ([#848](https://github.com/graasp/graasp-library/issues/848)) ([2922a84](https://github.com/graasp/graasp-library/commit/2922a8486bb8b5013fe178f022e2c17a2b55c0e8))
+
 ## [2.3.0](https://github.com/graasp/graasp-library/compare/v2.2.1...v2.3.0) (2025-10-17)
 
 
