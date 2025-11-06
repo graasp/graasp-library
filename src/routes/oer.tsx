@@ -116,9 +116,9 @@ function OERInformation() {
             <Stack>
               {references.map(({ name, href }) => (
                 <Typography key={name} variant="subtitle1">
-                  <Link href={href} from="/oer">
+                  <a target="_blank" href={href}>
                     {name}
-                  </Link>
+                  </a>
                 </Typography>
               ))}
             </Stack>
