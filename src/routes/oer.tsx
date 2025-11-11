@@ -1,7 +1,7 @@
 import { ImportContacts } from '@mui/icons-material';
 import { Box, Container, Divider, Stack, Typography } from '@mui/material';
 
-import { Link, createFileRoute } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router';
 
 import VideoWithCC from '~/components/collection/oer/VideoWithCC';
 import { DiscoverButton } from '~/components/common/DiscoverButton';
@@ -116,9 +116,9 @@ function OERInformation() {
             <Stack>
               {references.map(({ name, href }) => (
                 <Typography key={name} variant="subtitle1">
-                  <Link href={href} from="/oer">
+                  <a target="_blank" href={href}>
                     {name}
-                  </Link>
+                  </a>
                 </Typography>
               ))}
             </Stack>
