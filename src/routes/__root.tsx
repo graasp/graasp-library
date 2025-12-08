@@ -64,6 +64,9 @@ export const Route = wrapCreateRootRouteWithSentry(
       },
       { rel: 'stylesheet', href: katexCSS },
     ],
+    scripts: [
+      { type: 'text/javascript', src: '/removeIncorrectParaglideCookie.js' },
+    ],
   }),
   loader: async () => {
     const clientOrigin = await getClientOriginFn();
