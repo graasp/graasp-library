@@ -21,8 +21,8 @@ importers:
         specifier: 11.14.1
         version: 11.14.1(@emotion/react@11.14.0(@types/react@19.2.2)(react@19.1.1))(@types/react@19.2.2)(react@19.1.1)
       '@fontsource-variable/nunito':
-        specifier: 5.2.6
-        version: 5.2.6
+        specifier: 5.2.7
+        version: 5.2.7
       '@graasp/sdk':
         specifier: 5.15.1
         version: 5.15.1(date-fns@4.1.0)(uuid@13.0.0)
@@ -983,8 +983,8 @@ packages:
     resolution: {integrity: sha512-aozo5vqjCmDoXLNUJarFZx2IN/GgGaogY4TMJ6so/WLZOWpSV7fvj2dmrV6sEAnUm1O7aCrhTibjpzeDFgNqbg==}
     engines: {node: '>=18.0.0', npm: '>=9.0.0'}
 
-  '@fontsource-variable/nunito@5.2.6':
-    resolution: {integrity: sha512-dGYTQ0Hl94jjfMraYefrURHGH8fk/vL/1zYAZGofiPJVs6C0OkM8T87Te5Gwrbe6HG/XEMm5lib8AqasTN3ucw==}
+  '@fontsource-variable/nunito@5.2.7':
+    resolution: {integrity: sha512-2N8QhatkyKgSUbAGZO2FYLioxA32+RyI1EplVLawbpkGjUeui9Qg9VMrpkCaik1ydjFjfLV+kzQ0cGEsMrMenQ==}
 
   '@graasp/sdk@5.15.1':
     resolution: {integrity: sha512-BgrJ/kfeJDqR7mfC6mQ7aVSXES+Q9EEae+GE14/oCsdz/TUpj3uXjmirO+HabU/ChxXHyC3YYAOIhom3hPjKmQ==}
@@ -6580,7 +6580,7 @@ snapshots:
 
   '@faker-js/faker@9.7.0': {}
 
-  '@fontsource-variable/nunito@5.2.6': {}
+  '@fontsource-variable/nunito@5.2.7': {}
 
   '@graasp/sdk@5.15.1(date-fns@4.1.0)(uuid@13.0.0)':
     dependencies:
