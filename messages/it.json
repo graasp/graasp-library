@@ -8,8 +8,6 @@
   "SHARE_FACEBOOK_MESSAGE": "Dai un'occhiata a {name} su Graasp",
   "COLLECTION_ITEMS_EMPTY_MESSAGE": "Questa raccolta è vuota.",
   "COLLECTION_ITEMS_EMPTY_FOLDER_MESSAGE": "Questa cartella è vuota.",
-  "COLLECTION_ITEMS_TITLE": "Elementi",
-  "COLLECTION_ITEMS_TOOLTIP_MESSAGE": "Questi sono gli articoli di questa collezione.",
   "COLLECTION_CARD_TAG_NEW": "Nuovo",
   "COLLECTION_CARD_TAG_UPDATED": "Aggiornato",
   "COPY_BUTTON_MODAL_TITLE": "Copia elemento",
@@ -44,7 +42,8 @@
         "local countPlural = count: plural"
       ],
       "selectors": [
-        "count"
+        "count",
+        "countPlural"
       ],
       "match": {
         "countPlural=one": "Cerca tra {count} risorse",
@@ -80,10 +79,8 @@
   "ERROR_TITLE": "Errore",
   "ERROR_RETURN_TO_HOME": "Tornare a casa",
   "CONTRIBUTORS_TITLE": "con",
-  "EMPTY_COLLECTION_MESSAGE": "Non ci sono collezioni disponibili.",
   "COLLECTION_LANGUAGE_TITLE": "Lingua",
   "SEARCH_FILTER_LANG_TITLE": "Lingue",
-  "COLLECTIONS_COUNT_MESSAGE_other": "{count} collezioni disponibili",
   "HOME_TITLE": "Biblioteca Graasp",
   "HOME_SUBTITLE": "Sfoglia e scopri risorse educative aperte",
   "HOME_POPULAR_SEARCHES_TITLE": "Ricerche popolari",
@@ -94,10 +91,6 @@
   "HOME_MOST_LIKED_COLLECTIONS_TITLE": "Mi è piaciuto di più",
   "HOME_VIEW_MORE_IN_LIBRARY_BUTTON": "Visualizza altro nella Biblioteca",
   "HOME_BROWSE_ALL_COLLECTIONS": "Sfoglia tutte le risorse",
-  "MY_LISTS_MY_FAVORITES_TAB": "I miei preferiti",
-  "MY_LISTS_MY_PUBLISHMENTS_TAB": "Le mie pubblicazioni",
-  "MY_LISTS_MY_LIKES_TAB": "Collezioni piaciute",
-  "MY_LISTS_TAB_ARIA_LABEL": "Schede dei miei elenchi",
   "COLLECTION_CC_LICENSE_TITLE": "Licenza Creative Commons",
   "COPY_LINK_BUTTON_TOOLTIP": "Incorporare",
   "SEARCH_NO_RESULT_MESSAGE": "Nessun risultato trovato.",

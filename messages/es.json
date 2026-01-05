@@ -1,15 +1,13 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "GRAASP_LIBRARY": "Biblioteca de Graasp",
-  "GRAASP_LIBRARY_DESCRIPTION": "La Biblioteca de Graasp es una plataforma de código abierto que proporciona recursos de aprendizaje en forma de colecciones.",
+  "GRAASP_LIBRARY_DESCRIPTION": "La Biblioteca de Graasp es una plataforma de código abierto que ofrece recursos educativos.",
   "SHARE_TWITTER_MESSAGE": "Echa un vistazo a {name} en Graasp",
   "ERROR_LOADING_BREADCRUMBS": "Se produjo un error al cargar las migas de pan.",
   "SHARE_FACEBOOK_SUBJECT": "Echa un vistazo a {name} en Graasp",
   "SHARE_FACEBOOK_MESSAGE": "Echa un vistazo a {name} en Graasp",
-  "COLLECTION_ITEMS_EMPTY_MESSAGE": "Esta colección está vacía.",
+  "COLLECTION_ITEMS_EMPTY_MESSAGE": "Este recurso está vacío.",
   "COLLECTION_ITEMS_EMPTY_FOLDER_MESSAGE": "Esta carpeta está vacía.",
-  "COLLECTION_ITEMS_TITLE": "Elementos",
-  "COLLECTION_ITEMS_TOOLTIP_MESSAGE": "Estos son los artículos de esta colección.",
   "COLLECTION_CARD_TAG_NEW": "Nuevo",
   "COLLECTION_CARD_TAG_UPDATED": "Actualizado",
   "COPY_BUTTON_MODAL_TITLE": "Copiar artículo",
@@ -29,11 +27,12 @@
         "local countPlural = count: plural"
       ],
       "selectors": [
-        "count"
+        "count",
+        "countPlural"
       ],
       "match": {
-        "countPlural=other": "Buscar entre {count} recursos",
-        "countPlural=one": "Buscar entre los recursos {count}"
+        "countPlural=other": "Buscar en más de {count} recursos",
+        "countPlural=one": "Buscar en más de {count} recurso"
       }
     }
   ],
@@ -44,20 +43,21 @@
         "local countPlural = count: plural"
       ],
       "selectors": [
-        "count"
+        "count",
+        "countPlural"
       ],
       "match": {
-        "countPlural=one": "Buscar entre {count} recursos",
-        "countPlural=many": "Buscar entre {count} recursos",
-        "countPlural=other": "Buscar entre más de {count} recursos",
-        "countPlural=zero": "No hay colecciones disponibles para buscar"
+        "countPlural=one": "Buscar en más de {count} recurso",
+        "countPlural=many": "Buscar en más de {count} recursos",
+        "countPlural=other": "Buscar en más de {count} recursos",
+        "countPlural=zero": "No hay recursos disponibles para buscar"
       }
     }
   ],
   "SEARCH_BUTTON_ARIA_LABEL": "buscar",
   "SEARCH_FILTER_EMPTY": "No hay filtro correspondiente",
-  "SEARCH_ARIA_LABEL": "Buscar colecciones",
-  "SEARCH_PLACEHOLDER": "Buscar colecciones…",
+  "SEARCH_ARIA_LABEL": "Buscar recursos",
+  "SEARCH_PLACEHOLDER": "Buscar recursos…",
   "SEARCH_RESULTS_FOR_TEXT": [
     {
       "declarations": [
@@ -80,10 +80,8 @@
   "ERROR_TITLE": "Error",
   "ERROR_RETURN_TO_HOME": "Vuelve al inicio",
   "CONTRIBUTORS_TITLE": "con",
-  "EMPTY_COLLECTION_MESSAGE": "No hay colecciones disponibles.",
   "COLLECTION_LANGUAGE_TITLE": "Idioma",
   "SEARCH_FILTER_LANG_TITLE": "Idiomas",
-  "COLLECTIONS_COUNT_MESSAGE_other": "{count} colecciones disponibles",
   "HOME_TITLE": "Biblioteca Graasp",
   "HOME_SUBTITLE": "Explore y descubra recursos educativos abiertos",
   "HOME_POPULAR_SEARCHES_TITLE": "Búsquedas populares",
@@ -91,25 +89,21 @@
   "HOME_GRAASPER_COLLECTIONS_TITLE": "Recursos destacados",
   "HOME_POPULAR_THIS_WEEK_COLLECTIONS_TITLE": "Popular esta semana",
   "HOME_RECENT_COLLECTIONS_TITLE": "Recientemente creado",
-  "HOME_MOST_LIKED_COLLECTIONS_TITLE": "El mas gustado",
+  "HOME_MOST_LIKED_COLLECTIONS_TITLE": "El más gustado",
   "HOME_VIEW_MORE_IN_LIBRARY_BUTTON": "Ver más en la Biblioteca",
   "HOME_BROWSE_ALL_COLLECTIONS": "Explorar todos los recursos",
-  "MY_LISTS_MY_FAVORITES_TAB": "Mis favoritos",
-  "MY_LISTS_MY_PUBLISHMENTS_TAB": "Mis publicaciones",
-  "MY_LISTS_MY_LIKES_TAB": "Colecciones que me gustan",
-  "MY_LISTS_TAB_ARIA_LABEL": "Mis pestañas de listas",
   "COLLECTION_CC_LICENSE_TITLE": "Licencia Creative Commons",
-  "COPY_LINK_BUTTON_TOOLTIP": "Incrustrar",
+  "COPY_LINK_BUTTON_TOOLTIP": "Insertar",
   "SEARCH_NO_RESULT_MESSAGE": "No se han encontrado resultados.",
   "SEARCH_RESULTS_TITLE": "Resultados de la búsqueda",
   "DOWNLOAD_BUTTON_TOOLTIP": "Descargar",
   "COPY_ITEM_TOASTR_LINK": "Haz clic aquí para abrir el artículo en Graasp.",
-  "COPY_LINK_SUCCESS_MESSAGE": "El enlace del recurso del artículo se copió correctamente.",
+  "COPY_LINK_SUCCESS_MESSAGE": "El enlace del recurso se copió correctamente.",
   "COPY_LINK_FAILURE_MESSAGE": "Se produjo un error al copiar el enlace del recurso.",
   "AVATAR_ALT": "Avatar de {name}",
   "COLLECTION_EMPTY_DESCRIPTION_TEXT": "Este artículo no tiene descripción.",
   "COLLECTION_INFO_BUTTON": "Información",
-  "SIGN_IN_MODAL_CLOSE_BUTTON_ARIA_LABEL": "Cerrar modal de iniciar de sesión ",
+  "SIGN_IN_MODAL_CLOSE_BUTTON_ARIA_LABEL": "Cerrar modal de inicio de sesión",
   "VIEW_BUTTON_TOOLTIP": "Ver ítem",
   "SUMMARY_CONTENT_TITLE": "Contenido",
   "SUMMARY_DETAILS_TITLE": "Detalles",
@@ -140,17 +134,17 @@
   "SEARCH_NO_RESULTS": "Nada corresponde a tu búsqueda",
   "SEARCH_RESULTS_LOAD_MORE": "Carga más",
   "CONTENT_CHIP": "Contenido",
-  "PUBLISHED_COLLECTIONS": "Colecciones publicadas",
+  "PUBLISHED_COLLECTIONS": "Recursos publicados",
   "LIKED_ITEMS": "Artículos que me gustan",
   "SIGNIN_MESSAGE": "Necesitas iniciar sesión primero",
-  "PUBLIC_PROFILE": "Mis colecciones",
+  "PUBLIC_PROFILE": "Mis recursos",
   "PROFILE_SETTINGS": "Perfil",
   "EDIT": "Editar",
   "CANCEL_BUTTON": "Cancelar",
   "SOCIAL_PROFILES": "Perfiles sociales",
   "PREVIEW_ALERT_TITLE": "Esta es una vista previa",
   "PREVIEW_ALERT_DESCRIPTION": "Este artículo no está publicado. Lo que estás viendo aquí es solo una vista previa. Puedes ver esto porque tienes acceso al artículo. No se puede ver públicamente.",
-  "PREVIEW_ALERT_ADMIN_ACTION": "Si desea compartir esta colección con todos, puede publicar este elemento en el Generador utilizando el siguiente enlace.",
+  "PREVIEW_ALERT_ADMIN_ACTION": "Si desea compartir este recurso con todos, puede publicarlo en el Generador utilizando el siguiente enlace.",
   "PUBLISH_ITEM_BUTTON": "Publicar ahora",
   "LOADING_TEXT": "Cargando",
   "COPY_MODAL_EMPTY_FOLDER": "La carpeta está vacía.",
@@ -158,7 +152,7 @@
   "COPY_MODAL_RECENT_TITLE": "Artículos recientes",
   "COPY_MODAL_SUBMIT_BUTTON": "Entregar",
   "COPY_MODAL_MY_GRAASP_BREADCRUMB": "Mi Graasp",
-  "OER_INFORMATION_BASICS_TEXT": "¿Está preparando su clase y el libro de texto está desactualizado? Los REA</bold>, o recursos educativos abiertos</bold> en la web, pueden ser una gran alternativa. Ya sean hojas de trabajo, fotos o gráficos: según la licencia, los docentes no solo pueden usar los materiales, sino también adaptarlos directamente para su clase. Este video explica exactamente cómo funciona.",
+  "OER_INFORMATION_BASICS_TEXT": "¿Está preparando su clase y el libro de texto está desactualizado? Los <bold>REA</bold>, o <bold>recursos educativos abiertos</bold>, en la web, pueden ser una gran alternativa. Ya sean hojas de trabajo, fotos o gráficos: según la licencia, los docentes no solo pueden usar los materiales, sino también adaptarlos directamente para su clase. Este video explica exactamente cómo funciona.",
   "OER_INFORMATION_QUALITY_TEXT": "Hasta el momento, no existe un sello de calidad para los materiales REA, lo que resulta desconcertante para muchos educadores. Sin embargo, al igual que en Wikipedia, los materiales REA están supervisados por miembros de comunidades en línea. Y a medida que estas comunidades crecen, se combinan más conocimientos especializados y pedagógicos.",
   "OER_INFORMATION_PAGE_TITLE": "¿Qué son los REA?",
   "OER_INFORMATION_PAGE_DESCRIPTION": "Información sobre Recursos Educativos Abiertos REA",
@@ -183,7 +177,7 @@
         "countPlural"
       ],
       "match": {
-        "countPlural=one": "{count} minutos",
+        "countPlural=one": "{count} minuto",
         "countPlural=other": "{count} minutos"
       }
     }
@@ -197,17 +191,17 @@
   "DISCIPLINES_LABEL": "Disciplinas",
   "LEVEL_LABEL": "Niveles",
   "RESOURCE_TYPE_LABEL": "Tipos de recursos",
-  "COLLECTION_NOT_FOUND": "Colección no encontrada",
+  "COLLECTION_NOT_FOUND": "Recurso no encontrado.",
   "RESET": "Reiniciar",
-  "COLLECTION_ERROR_TITLE": "Error al cargar la colección",
+  "COLLECTION_ERROR_TITLE": "Error al cargar el recurso.",
   "HEADER_INDEX": "Biblioteca",
   "HEADER_SEARCH": "Buscar",
   "HEADER_OER": "¿Qué son los REA?",
   "USER_MENU_HOME": "Hogar",
   "USER_MENU_SETTINGS": "Ajustes",
   "LOG_OUT": "Finalizar la sesión",
-  "LOG_IN": "Acceso",
-  "ERROR_LOADING_COLLECTIONS": "Se produjo un error al cargar estas colecciones.",
+  "LOG_IN": "Iniciar sesión",
+  "ERROR_LOADING_COLLECTIONS": "Se produjo un error al cargar estos recursos.",
   "COPY_ITEM_TO_CLIPBOARD_SUCCESS": "El elemento se copió correctamente al portapapeles.",
   "COPY_ITEM_TO_CLIPBOARD_ERROR": "Se encontró un error al copiar el elemento al portapapeles",
   "SUMMARY_BROWSE_FOLDER_CONTAINS": [
@@ -237,9 +231,9 @@
         "countPlural"
       ],
       "match": {
-        "count=*": "Colección disponible {count}",
-        "countPlural=one": "Colección disponible {count}",
-        "countPlural=other": "{count} colecciones disponibles"
+        "count=*": "Recurso disponible {count}",
+        "countPlural=one": "Recurso disponible {count}",
+        "countPlural=other": "{count} recursos disponibles"
       }
     }
   ],

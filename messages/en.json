@@ -6,10 +6,8 @@
   "ERROR_LOADING_BREADCRUMBS": "There was an error loading the breadcrumbs",
   "SHARE_FACEBOOK_SUBJECT": "Check out {name} on Graasp",
   "SHARE_FACEBOOK_MESSAGE": "Check out {name} on Graasp",
-  "COLLECTION_ITEMS_EMPTY_MESSAGE": "This collection is empty.",
+  "COLLECTION_ITEMS_EMPTY_MESSAGE": "This resource is empty.",
   "COLLECTION_ITEMS_EMPTY_FOLDER_MESSAGE": "This folder is empty.",
-  "COLLECTION_ITEMS_TITLE": "Items",
-  "COLLECTION_ITEMS_TOOLTIP_MESSAGE": "These are the items in this collection.",
   "COLLECTION_CARD_TAG_NEW": "New",
   "COLLECTION_CARD_TAG_UPDATED": "Updated",
   "COPY_BUTTON_MODAL_TITLE": "Copy Item",
@@ -24,23 +22,33 @@
   "FILTER_DROPDOWN_NO_RESOURCE_TYPE": "No type filter…",
   "SEARCH_PAGE_TITLE": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "selectors": ["countPlural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "countPlural"
+      ],
       "match": {
-        "countPlural=other": "Search among {count} resources",
+        "countPlural=other": "Search among more than {count} resources",
         "countPlural=one": "Search among {count} resource"
       }
     }
   ],
   "SEARCH_PAGE_TITLE_CONTENT": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "selectors": ["countPlural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "countPlural"
+      ],
       "match": {
         "countPlural=one": "Search among {count} resources",
-        "countPlural=many": "Search among {count} resources",
+        "countPlural=many": "Search among more than {count} resources",
         "countPlural=other": "Search among more than {count} resources",
-        "countPlural=zero": "No collections available to search"
+        "countPlural=zero": "No resources available to search"
       }
     }
   ],
@@ -55,7 +63,11 @@
         "input search",
         "local countPlural = count: plural"
       ],
-      "selectors": ["count", "countPlural", "search"],
+      "selectors": [
+        "count",
+        "countPlural",
+        "search"
+      ],
       "match": {
         "count=*, search=*": "Found {count} result for: {search}",
         "countPlural=one": "Found {count} result for: {search}",
@@ -66,10 +78,8 @@
   "ERROR_TITLE": "Error",
   "ERROR_RETURN_TO_HOME": "Return to Home",
   "CONTRIBUTORS_TITLE": "with",
-  "EMPTY_COLLECTION_MESSAGE": "There are no collections available.",
   "COLLECTION_LANGUAGE_TITLE": "Language",
   "SEARCH_FILTER_LANG_TITLE": "Languages",
-  "COLLECTIONS_COUNT_MESSAGE_other": "{count} collections available",
   "HOME_TITLE": "Graasp Library",
   "HOME_SUBTITLE": "Browse and Discover Open Educational Resources",
   "HOME_POPULAR_SEARCHES_TITLE": "Popular Searches",
@@ -80,10 +90,6 @@
   "HOME_MOST_LIKED_COLLECTIONS_TITLE": "Liked by the community",
   "HOME_VIEW_MORE_IN_LIBRARY_BUTTON": "Join the community and share on the Library",
   "HOME_BROWSE_ALL_COLLECTIONS": "Browse All Resources",
-  "MY_LISTS_MY_FAVORITES_TAB": "My Favorites",
-  "MY_LISTS_MY_PUBLISHMENTS_TAB": "My Publishments",
-  "MY_LISTS_MY_LIKES_TAB": "Liked Collections",
-  "MY_LISTS_TAB_ARIA_LABEL": "My lists tabs",
   "COLLECTION_CC_LICENSE_TITLE": "Creative Commons License",
   "COPY_LINK_BUTTON_TOOLTIP": "Embed",
   "SEARCH_NO_RESULT_MESSAGE": "No results found.",
@@ -126,17 +132,17 @@
   "SEARCH_NO_RESULTS": "Nothing corresponds to your search",
   "SEARCH_RESULTS_LOAD_MORE": "Load more",
   "CONTENT_CHIP": "Content",
-  "PUBLISHED_COLLECTIONS": "Published Collections",
+  "PUBLISHED_COLLECTIONS": "Published Resources",
   "LIKED_ITEMS": "Liked Items",
   "SIGNIN_MESSAGE": "You need to sign in First",
-  "PUBLIC_PROFILE": "My Collections",
+  "PUBLIC_PROFILE": "My Resources",
   "PROFILE_SETTINGS": "Profile",
   "EDIT": "Edit",
   "CANCEL_BUTTON": "Cancel",
   "SOCIAL_PROFILES": "Social Profiles",
   "PREVIEW_ALERT_TITLE": "This is a preview",
   "PREVIEW_ALERT_DESCRIPTION": "This item is not published. What you are seeing here is only a preview. You can see this because you have access to the item. It cannot be viewed publicly.",
-  "PREVIEW_ALERT_ADMIN_ACTION": "If you would like to share this collection with everyone, you can publish this item in the Builder using the link below.",
+  "PREVIEW_ALERT_ADMIN_ACTION": "If you would like to share this resource with everyone, you can publish this item in the Builder using the link below.",
   "PUBLISH_ITEM_BUTTON": "Publish Now",
   "LOADING_TEXT": "Loading",
   "COPY_MODAL_EMPTY_FOLDER": "The folder is empty.",
@@ -161,8 +167,13 @@
   "OER_INFORMATION_VIDEO_DESCRIPTION_EDITION": "Edition",
   "DURATION_IN_MINUTES": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "selectors": ["countPlural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "countPlural"
+      ],
       "match": {
         "countPlural=one": "{count} minute",
         "countPlural=other": "{count} minutes"
@@ -178,9 +189,9 @@
   "DISCIPLINES_LABEL": "Disciplines",
   "LEVEL_LABEL": "Levels",
   "RESOURCE_TYPE_LABEL": "Resource Types",
-  "COLLECTION_NOT_FOUND": "Collection not found",
+  "COLLECTION_NOT_FOUND": "Resource not found",
   "RESET": "Reset",
-  "COLLECTION_ERROR_TITLE": "Error loading the collection",
+  "COLLECTION_ERROR_TITLE": "Error loading the resource",
   "HEADER_INDEX": "Library",
   "HEADER_SEARCH": "Discover",
   "HEADER_OER": "What are OER?",
@@ -188,28 +199,22 @@
   "USER_MENU_SETTINGS": "Settings",
   "LOG_OUT": "Log out",
   "LOG_IN": "Log in",
-  "ERROR_LOADING_COLLECTIONS": "There was an error loading these collections.",
+  "ERROR_LOADING_COLLECTIONS": "There was an error loading these resources.",
   "COPY_ITEM_TO_CLIPBOARD_SUCCESS": "The item was successfully copied to the clipboard",
   "COPY_ITEM_TO_CLIPBOARD_ERROR": "An error was encountered while copying item to clipboard",
   "SUMMARY_BROWSE_FOLDER_CONTAINS": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "selectors": ["countPlural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "selectors": [
+        "countPlural"
+      ],
       "match": {
         "countPlural=zero": "Empty Folder",
         "countPlural=one": "{count} File",
         "countPlural=other": "{count} Files"
-      }
-    }
-  ],
-  "COLLECTIONS_COUNT_MESSAGE": [
-    {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "selectors": ["count", "countPlural"],
-      "match": {
-        "count=*": "{count} collection available",
-        "countPlural=one": "{count} collection available",
-        "countPlural=other": "{count} collections available"
       }
     }
   ],
