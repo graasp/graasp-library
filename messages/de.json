@@ -1,15 +1,13 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "GRAASP_LIBRARY": "Graasp Library",
-  "GRAASP_LIBRARY_DESCRIPTION": "Graasp Library ist eine Open-Source-Plattform, die Lernressourcen als Sammlungen bereitstellt.",
+  "GRAASP_LIBRARY_DESCRIPTION": "Graasp Library ist eine Open-Source-Plattform, die Lernressourcen als Ressourcen bereitstellt.",
   "SHARE_TWITTER_MESSAGE": "Schau dir {name} auf Graasp an",
   "ERROR_LOADING_BREADCRUMBS": "Beim Laden der Breadcrumbs ist ein Fehler aufgetreten",
   "SHARE_FACEBOOK_SUBJECT": "Schau dir {name} auf Graasp an",
   "SHARE_FACEBOOK_MESSAGE": "Schau dir {name} auf Graasp an",
-  "COLLECTION_ITEMS_EMPTY_MESSAGE": "Diese Sammlung ist leer.",
+  "COLLECTION_ITEMS_EMPTY_MESSAGE": "Diese Ressource ist leer.",
   "COLLECTION_ITEMS_EMPTY_FOLDER_MESSAGE": "Dieser Ordner ist leer.",
-  "COLLECTION_ITEMS_TITLE": "Element",
-  "COLLECTION_ITEMS_TOOLTIP_MESSAGE": "Dies sind die Elemente in dieser Sammlung.",
   "COLLECTION_CARD_TAG_NEW": "Neu",
   "COLLECTION_CARD_TAG_UPDATED": "Aktualisiert",
   "COPY_BUTTON_MODAL_TITLE": "Element kopieren",
@@ -29,11 +27,12 @@
         "local countPlural = count: plural"
       ],
       "selectors": [
-        "count"
+        "count",
+        "countPlural"
       ],
       "match": {
-        "countPlural=other": "Suche unter {count} Ressourcen",
-        "countPlural=one": "Suche unter {count} Ressourcen"
+        "countPlural=other": "Durchsuchen Sie über {count} Ressourcen",
+        "countPlural=one": "Durchsuchen Sie über {count} Ressource"
       }
     }
   ],
@@ -44,20 +43,21 @@
         "local countPlural = count: plural"
       ],
       "selectors": [
-        "count"
+        "count",
+        "countPlural"
       ],
       "match": {
-        "countPlural=one": "Suche unter {count} Ressourcen",
-        "countPlural=many": "Suche unter {count} Ressourcen",
-        "countPlural=other": "Suchen Sie unter mehr als {count} Ressourcen",
-        "countPlural=zero": "Keine Sammlungen zum Durchsuchen verfügbar"
+        "countPlural=one": "Durchsuchen Sie über {count} Ressource",
+        "countPlural=many": "Durchsuchen Sie über {count} Ressourcen",
+        "countPlural=other": "Durchsuchen Sie über {count} Ressourcen",
+        "countPlural=zero": "Keine Ressourcen zum Durchsuchen verfügbar"
       }
     }
   ],
   "SEARCH_BUTTON_ARIA_LABEL": "Suche",
   "SEARCH_FILTER_EMPTY": "Kein entsprechender Filter",
-  "SEARCH_ARIA_LABEL": "Sammlungen durchsuchen",
-  "SEARCH_PLACEHOLDER": "Sammlungen durchsuchen…",
+  "SEARCH_ARIA_LABEL": "Ressourcen durchsuchen",
+  "SEARCH_PLACEHOLDER": "Ressourcen durchsuchen…",
   "SEARCH_RESULTS_FOR_TEXT": [
     {
       "declarations": [
@@ -80,10 +80,8 @@
   "ERROR_TITLE": "Fehler",
   "ERROR_RETURN_TO_HOME": "Zur Hauptseite zurückkehren",
   "CONTRIBUTORS_TITLE": "Mitwirkende",
-  "EMPTY_COLLECTION_MESSAGE": "Es sind keine Sammlungen verfügbar.",
   "COLLECTION_LANGUAGE_TITLE": "Sprache",
   "SEARCH_FILTER_LANG_TITLE": "Sprachen",
-  "COLLECTIONS_COUNT_MESSAGE_other": "{count} Sammlungen verfügbar",
   "HOME_TITLE": "Graasp-Bibliothek",
   "HOME_SUBTITLE": "Durchsuchen Sie Open Educational Resources",
   "HOME_POPULAR_SEARCHES_TITLE": "Häufige Suche",
@@ -94,10 +92,6 @@
   "HOME_MOST_LIKED_COLLECTIONS_TITLE": "Beliebteste",
   "HOME_VIEW_MORE_IN_LIBRARY_BUTTON": "Mehr in der Bibliothek ansehen",
   "HOME_BROWSE_ALL_COLLECTIONS": "Alle Ressourcen durchsuchen",
-  "MY_LISTS_MY_FAVORITES_TAB": "Meine Favoriten",
-  "MY_LISTS_MY_PUBLISHMENTS_TAB": "Meine Veröffentlichungen",
-  "MY_LISTS_MY_LIKES_TAB": "Meine Likes",
-  "MY_LISTS_TAB_ARIA_LABEL": "Registerkarten Meine Listen",
   "COLLECTION_CC_LICENSE_TITLE": "Creative Commons License",
   "COPY_LINK_BUTTON_TOOLTIP": "Einbetten",
   "SEARCH_NO_RESULT_MESSAGE": "Keine Ergebnisse gefunden.",
@@ -140,17 +134,17 @@
   "SEARCH_NO_RESULTS": "Keine Ergebnisse für Ihre Suche",
   "SEARCH_RESULTS_LOAD_MORE": "Mehr laden",
   "CONTENT_CHIP": "Inhalt",
-  "PUBLISHED_COLLECTIONS": "Veröffentlichte Sammlungen",
+  "PUBLISHED_COLLECTIONS": "Veröffentlichte Ressourcen",
   "LIKED_ITEMS": "Gefallene Elemente",
   "SIGNIN_MESSAGE": "Sie müssen sich zuerst anmelden",
-  "PUBLIC_PROFILE": "Meine Sammlungen",
+  "PUBLIC_PROFILE": "Meine Ressourcen",
   "PROFILE_SETTINGS": "Profil",
   "EDIT": "Bearbeiten",
   "CANCEL_BUTTON": "Stornieren",
   "SOCIAL_PROFILES": "Profile in sozialen Netzwerken",
   "PREVIEW_ALERT_TITLE": "Dies ist eine Vorschau",
   "PREVIEW_ALERT_DESCRIPTION": "Dieser Artikel ist nicht veröffentlicht. Was Sie hier sehen, ist lediglich eine Vorschau. Sie können diese sehen, da Sie Zugriff auf den Artikel haben. Er ist nicht öffentlich einsehbar.",
-  "PREVIEW_ALERT_ADMIN_ACTION": "Wenn Sie diese Sammlung mit allen teilen möchten, können Sie diesen Artikel über den unten stehenden Link im Builder veröffentlichen.",
+  "PREVIEW_ALERT_ADMIN_ACTION": "Wenn Sie diese Ressource mit allen teilen möchten, können Sie diesen Artikel über den unten stehenden Link im Builder veröffentlichen.",
   "PUBLISH_ITEM_BUTTON": "Jetzt veröffentlichen",
   "LOADING_TEXT": "Laden",
   "COPY_MODAL_EMPTY_FOLDER": "Der Ordner ist leer.",
@@ -197,9 +191,9 @@
   "DISCIPLINES_LABEL": "Disziplinen",
   "LEVEL_LABEL": "Ebenen",
   "RESOURCE_TYPE_LABEL": "Ressourcentypen",
-  "COLLECTION_NOT_FOUND": "Sammlung nicht gefunden",
+  "COLLECTION_NOT_FOUND": "Ressource nicht gefunden",
   "RESET": "Zurücksetzen",
-  "COLLECTION_ERROR_TITLE": "Fehler beim Laden der Sammlung",
+  "COLLECTION_ERROR_TITLE": "Fehler beim Laden der Ressource",
   "HEADER_INDEX": "Bibliothek",
   "HEADER_SEARCH": "Suchen",
   "HEADER_OER": "Was sind OER?",
@@ -207,7 +201,7 @@
   "USER_MENU_SETTINGS": "Einstellungen",
   "LOG_OUT": "Ausloggen",
   "LOG_IN": "Einloggen",
-  "ERROR_LOADING_COLLECTIONS": "Beim Laden dieser Sammlungen ist ein Fehler aufgetreten.",
+  "ERROR_LOADING_COLLECTIONS": "Beim Laden dieser Ressource ist ein Fehler aufgetreten.",
   "COPY_ITEM_TO_CLIPBOARD_SUCCESS": "Das Element wurde erfolgreich in die Zwischenablage kopiert",
   "COPY_ITEM_TO_CLIPBOARD_ERROR": "Beim Kopieren des Elements in die Zwischenablage ist ein Fehler aufgetreten",
   "SUMMARY_BROWSE_FOLDER_CONTAINS": [
@@ -237,9 +231,9 @@
         "countPlural"
       ],
       "match": {
-        "count=*": "{count} Sammlung verfügbar",
-        "countPlural=one": "{count} Sammlung verfügbar",
-        "countPlural=other": "{count} Sammlungen verfügbar"
+        "count=*": "{count} Ressourcen verfügbar",
+        "countPlural=one": "{count} Ressource verfügbar",
+        "countPlural=other": "{count} Ressourcen verfügbar"
       }
     }
   ],

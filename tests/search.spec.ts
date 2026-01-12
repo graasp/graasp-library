@@ -11,7 +11,7 @@ test.describe('Search', () => {
 
   test('Query', async ({ page }) => {
     await expect(
-      page.getByRole('heading', { name: 'Search among 958' }),
+      page.getByRole('heading', { name: 'Search among more than 958' }),
     ).toBeVisible();
     await page
       .getByRole('textbox', { name: 'Search resources…' })

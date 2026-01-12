@@ -22,7 +22,7 @@ test('Search flow', async ({ page, browserName }) => {
   // expect title of the page
   await expect(
     page.getByRole('heading', { name: 'Search among' }),
-  ).toContainText('Search among 958 resources');
+  ).toContainText('Search among more than 958 resources');
 
   const geogebraLocator = page.locator('a').filter({ hasText: 'Geogebra' });
   // expect first collection to have card title text
@@ -50,7 +50,7 @@ test('Search flow', async ({ page, browserName }) => {
 
   await expect(
     page.getByRole('heading', { name: 'Search among' }),
-  ).toContainText('Search among 958 resources');
+  ).toContainText('Search among more than 958 resources');
 
   await expect(
     page.getByRole('heading', { name: 'Proyecto periódico escolar' }),

@@ -8,8 +8,6 @@
   "SHARE_FACEBOOK_MESSAGE": "شاهد {name} على چراسپ ",
   "COLLECTION_ITEMS_EMPTY_MESSAGE": "هذه المجموعة فارغة.",
   "COLLECTION_ITEMS_EMPTY_FOLDER_MESSAGE": "هذا المجلد فارغ.",
-  "COLLECTION_ITEMS_TITLE": "عناصر",
-  "COLLECTION_ITEMS_TOOLTIP_MESSAGE": "هذه هي العناصر الموجودة في هذه المجموعة.",
   "COLLECTION_CARD_TAG_NEW": "جديد",
   "COLLECTION_CARD_TAG_UPDATED": "محدث",
   "COPY_BUTTON_MODAL_TITLE": "نسخ العنصر",
@@ -29,7 +27,8 @@
         "local countPlural = count: plural"
       ],
       "selectors": [
-        "count"
+        "count",
+        "countPlural"
       ],
       "match": {
         "countPlural=other": "ابحث بين {count} الموارد",
@@ -44,7 +43,8 @@
         "local countPlural = count: plural"
       ],
       "selectors": [
-        "count"
+        "count",
+        "countPlural"
       ],
       "match": {
         "countPlural=one": "ابحث بين {count} الموارد",
@@ -80,10 +80,8 @@
   "ERROR_TITLE": "خطأ",
   "ERROR_RETURN_TO_HOME": "العودة إلى الصفحة الرئيسية",
   "CONTRIBUTORS_TITLE": "المساهمون",
-  "EMPTY_COLLECTION_MESSAGE": "لا توجد مجموعات متاحة.",
   "COLLECTION_LANGUAGE_TITLE": "اللغات",
   "SEARCH_FILTER_LANG_TITLE": "اللغات",
-  "COLLECTIONS_COUNT_MESSAGE_other": "مجمواعات متوفّرة {count}",
   "HOME_TITLE": "تصفح المصادر التعليمية المفتوحة",
   "HOME_SUBTITLE": "تصفح واكتشف الموارد التعليمية المفتوحة",
   "HOME_POPULAR_SEARCHES_TITLE": "عمليات البحث الشعبية",
@@ -94,10 +92,6 @@
   "HOME_MOST_LIKED_COLLECTIONS_TITLE": "الأكثر إعجابا",
   "HOME_VIEW_MORE_IN_LIBRARY_BUTTON": "شاهد المزيد في المكتبة",
   "HOME_BROWSE_ALL_COLLECTIONS": "تصفح جميع الموارد",
-  "MY_LISTS_MY_FAVORITES_TAB": "قائمة المفضّلات الخاصّة بي",
-  "MY_LISTS_MY_PUBLISHMENTS_TAB": "منشوراتي",
-  "MY_LISTS_MY_LIKES_TAB": "إعجاباتي",
-  "MY_LISTS_TAB_ARIA_LABEL": "علامات تبويب القوائم الخاصة بي",
   "COLLECTION_CC_LICENSE_TITLE": "رخصة المشاع الإبداعي",
   "COPY_LINK_BUTTON_TOOLTIP": "تضمين",
   "SEARCH_NO_RESULT_MESSAGE": "لم يتم العثور على نتائج.",
