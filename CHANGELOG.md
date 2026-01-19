@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.5.0](https://github.com/graasp/graasp-library/compare/v2.4.1...v2.5.0) (2026-01-12)
+
+
+### Features
+
+* update translations to use resources, search among more than ([#866](https://github.com/graasp/graasp-library/issues/866)) ([5f3d128](https://github.com/graasp/graasp-library/commit/5f3d128c3d1ec856bda38b34db71df0012906f5e))
+
+
+### Bug Fixes
+
+* **deps:** update dependency @fontsource-variable/nunito to v5.2.7 ([#860](https://github.com/graasp/graasp-library/issues/860)) ([6120a23](https://github.com/graasp/graasp-library/commit/6120a239ddbe2bc6f8c378dcf0b81e0b9b7b25d4))
+
 ## [2.4.1](https://github.com/graasp/graasp-library/compare/v2.4.0...v2.4.1) (2025-12-08)
 
 
