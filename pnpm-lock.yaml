@@ -128,7 +128,7 @@ importers:
         version: 0.86.1(magicast@0.3.5)(typescript@5.9.2)
       '@hono/node-server':
         specifier: ^1.14.4
-        version: 1.19.2(hono@4.10.3)
+        version: 1.19.2(hono@4.11.4)
       '@inlang/cli':
         specifier: ^3.0.12
         version: 3.0.12(babel-plugin-macros@3.1.0)
@@ -248,7 +248,7 @@ importers:
         version: 16.4.0
       hono:
         specifier: ^4.8.3
-        version: 4.10.3
+        version: 4.11.4
       husky:
         specifier: 9.1.7
         version: 9.1.7
@@ -3857,8 +3857,8 @@ packages:
   hoist-non-react-statics@3.3.2:
     resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
 
-  hono@4.10.3:
-    resolution: {integrity: sha512-2LOYWUbnhdxdL8MNbNg9XZig6k+cZXm5IjHn2Aviv7honhBMOHb+jxrKIeJRZJRmn+htUCKhaicxwXuUDlchRA==}
+  hono@4.11.4:
+    resolution: {integrity: sha512-U7tt8JsyrxSRKspfhtLET79pU8K+tInj5QZXs1jSugO1Vq5dFj3kmZsRldo29mTBfcjDRVRXrEZ6LS63Cog9ZA==}
     engines: {node: '>=16.9.0'}
 
   hookable@5.5.3:
@@ -5296,6 +5296,7 @@ packages:
   tar@7.4.3:
     resolution: {integrity: sha512-5S7Va8hKfV7W5U6g3aYxXmlPoZVAwUMy9AOKyF2fVuZa2UD3qZjg578OrLRt8PcNN1PleVaL/5/yYATNL0ICUw==}
     engines: {node: '>=18'}
+    deprecated: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exhorbitant rates) by contacting i@izs.me
 
   terser@5.44.0:
     resolution: {integrity: sha512-nIVck8DK+GM/0Frwd+nIhZ84pR/BX7rmXMfYwyg+Sri5oGVE99/E3KvXqpC2xHFxyqXyGHTKBSioxxplrO4I4w==}
@@ -6626,9 +6627,9 @@ snapshots:
     transitivePeerDependencies:
       - magicast
 
-  '@hono/node-server@1.19.2(hono@4.10.3)':
+  '@hono/node-server@1.19.2(hono@4.11.4)':
     dependencies:
-      hono: 4.10.3
+      hono: 4.11.4
 
   '@humanfs/core@0.19.1': {}
 
@@ -10026,7 +10027,7 @@ snapshots:
     dependencies:
       react-is: 16.13.1
 
-  hono@4.10.3: {}
+  hono@4.11.4: {}
 
   hookable@5.5.3: {}
 
