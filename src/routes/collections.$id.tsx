@@ -3,13 +3,18 @@ import { Alert, AlertTitle, Stack } from '@mui/material';
 import { ActionTriggers } from '@graasp/sdk';
 
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { ErrorComponentProps, createFileRoute } from '@tanstack/react-router';
+import {
+  ErrorComponentProps,
+  createFileRoute,
+  notFound,
+} from '@tanstack/react-router';
 
 import { CustomLink } from '~/components/CustomLink';
 import { Collection } from '~/components/collection/Collection';
 import { postAction } from '~/openapi/client';
 import {
   getChildrenOptions,
+  getCollectionInformationsOptions,
   getItemOptions,
   getTagsForItemOptions,
 } from '~/openapi/client/@tanstack/react-query.gen';
@@ -17,6 +22,14 @@ import { m } from '~/paraglide/messages';
 import { seo } from '~/utils/seo';
 
 export const Route = createFileRoute('/collections/$id')({
+  beforeLoad: async ({ context, params }) => {
+    const published_item = await context.queryClient.ensureQueryData(
+      getCollectionInformationsOptions({ path: { itemId: params.id } }),
+    );
+    if (!published_item) {
+      throw notFound();
+    }
+  },
   loader: async ({ context, params, preload }) => {
     // start loading children
     context.queryClient.prefetchQuery(
